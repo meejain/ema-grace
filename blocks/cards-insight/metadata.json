@@ -1,0 +1,38 @@
+{
+  "variantName": "cards-insight",
+  "baseBlock": "cards",
+  "version": "1.0.0",
+  "created": "2026-02-26T15:27:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://grace.com/",
+    "originPage": "homepage",
+    "blockPosition": "bottom"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "spacious",
+    "purpose": "blog-articles",
+    "imagePattern": "large"
+  },
+  "contentPattern": {
+    "structure": "image + category + title + read-more-link",
+    "buttonCount": 0,
+    "imageCount": 4
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "blog article listings",
+      "news and insights cards",
+      "content with category tags and read-more links"
+    ],
+    "notSuitableFor": [
+      "product cards without categories",
+      "simple image + title navigation cards"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["content/index"],
+    "reuseCount": 1,
+    "lastUsed": "2026-02-26T15:27:00.000Z"
+  }
+}

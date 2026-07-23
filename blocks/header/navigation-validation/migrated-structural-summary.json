@@ -1,0 +1,15 @@
+{
+  "rowCount": 2,
+  "rows": [
+    { "index": 0, "hasImages": false },
+    { "index": 1, "hasImages": true }
+  ],
+  "megamenu": {
+    "columnCount": 2,
+    "hasImages": true,
+    "columns": [
+      { "columnIndex": 0, "hasImages": false },
+      { "columnIndex": 1, "hasImages": true }
+    ]
+  }
+}

@@ -1,0 +1,148 @@
+{
+  "rows": [
+    {
+      "index": 0,
+      "elements": [
+        {
+          "id": "row-0-utility-link",
+          "type": "link",
+          "label": "Vendors and Suppliers",
+          "alignment": "right",
+          "hoverBehavior": {
+            "hasEffect": true,
+            "description": "text underline on hover"
+          },
+          "clickBehavior": {
+            "navigates": true,
+            "url": "/vendor-suppliers/",
+            "description": "navigates to Vendors and Suppliers page"
+          }
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "elements": [
+        {
+          "id": "row-1-logo",
+          "type": "image-link",
+          "label": "Grace Logo",
+          "alignment": "left",
+          "hoverBehavior": {
+            "hasEffect": false,
+            "description": "cursor pointer only"
+          },
+          "clickBehavior": {
+            "navigates": true,
+            "url": "/",
+            "description": "navigates to homepage"
+          }
+        },
+        {
+          "id": "row-1-nav-industries",
+          "type": "nav-link-with-dropdown",
+          "label": "Industries",
+          "alignment": "center",
+          "hoverBehavior": {
+            "hasEffect": true,
+            "description": "opens megamenu panel, text turns green"
+          },
+          "clickBehavior": {
+            "navigates": true,
+            "url": "/industries/",
+            "description": "navigates to industries page"
+          }
+        },
+        {
+          "id": "row-1-nav-products",
+          "type": "nav-link-with-dropdown",
+          "label": "Products",
+          "alignment": "center",
+          "hoverBehavior": {
+            "hasEffect": true,
+            "description": "opens simple dropdown list, text turns green"
+          },
+          "clickBehavior": {
+            "navigates": true,
+            "url": "/products/",
+            "description": "navigates to products page"
+          }
+        },
+        {
+          "id": "row-1-nav-resources",
+          "type": "nav-link-with-dropdown",
+          "label": "Resources",
+          "alignment": "center",
+          "hoverBehavior": {
+            "hasEffect": true,
+            "description": "opens simple dropdown list, text turns green"
+          },
+          "clickBehavior": {
+            "navigates": true,
+            "url": "/resources/",
+            "description": "navigates to resources page"
+          }
+        },
+        {
+          "id": "row-1-nav-people-careers",
+          "type": "nav-link-with-dropdown",
+          "label": "People and Careers",
+          "alignment": "center",
+          "hoverBehavior": {
+            "hasEffect": true,
+            "description": "opens simple dropdown list, text turns green"
+          },
+          "clickBehavior": {
+            "navigates": true,
+            "url": "/people-and-careers/",
+            "description": "navigates to people and careers page"
+          }
+        },
+        {
+          "id": "row-1-nav-about-grace",
+          "type": "nav-link-with-dropdown",
+          "label": "About Grace",
+          "alignment": "center",
+          "hoverBehavior": {
+            "hasEffect": true,
+            "description": "opens dropdown list, text turns green"
+          },
+          "clickBehavior": {
+            "navigates": true,
+            "url": "/about-grace/",
+            "description": "navigates to about grace page"
+          }
+        },
+        {
+          "id": "row-1-nav-contact-us",
+          "type": "nav-link",
+          "label": "Contact Us",
+          "alignment": "center",
+          "hoverBehavior": {
+            "hasEffect": true,
+            "description": "text turns green, no dropdown"
+          },
+          "clickBehavior": {
+            "navigates": true,
+            "url": "/contact-us/",
+            "description": "navigates to contact us page"
+          }
+        },
+        {
+          "id": "row-1-search",
+          "type": "button",
+          "label": "Search",
+          "alignment": "right",
+          "hoverBehavior": {
+            "hasEffect": true,
+            "description": "cursor pointer"
+          },
+          "clickBehavior": {
+            "navigates": false,
+            "description": "opens full-page search overlay"
+          }
+        }
+      ]
+    }
+  ]
+}

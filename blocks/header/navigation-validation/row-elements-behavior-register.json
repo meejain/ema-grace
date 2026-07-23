@@ -1,0 +1,172 @@
+{
+  "items": [
+    {
+      "id": "row-0-utility-link",
+      "label": "Vendors and Suppliers",
+      "type": "link",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "text underline on hover",
+        "migratedDescription": "text underline on hover"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to Vendors and Suppliers page",
+        "migratedDescription": "navigates to Vendors and Suppliers page",
+        "sourceUrl": "/vendor-suppliers/",
+        "migratedUrl": "/vendor-suppliers/"
+      },
+      "status": "validated"
+    },
+    {
+      "id": "row-1-logo",
+      "label": "Grace Logo",
+      "type": "image-link",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "cursor pointer only",
+        "migratedDescription": "cursor pointer only"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to homepage",
+        "migratedDescription": "navigates to homepage",
+        "sourceUrl": "/",
+        "migratedUrl": "/"
+      },
+      "status": "validated"
+    },
+    {
+      "id": "row-1-nav-industries",
+      "label": "Industries",
+      "type": "nav-link-with-dropdown",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "opens megamenu panel, text turns green",
+        "migratedDescription": "opens megamenu panel, text turns green"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to industries page",
+        "migratedDescription": "navigates to industries page",
+        "sourceUrl": "/industries/",
+        "migratedUrl": "/industries/"
+      },
+      "status": "validated"
+    },
+    {
+      "id": "row-1-nav-products",
+      "label": "Products",
+      "type": "nav-link-with-dropdown",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "opens simple dropdown list, text turns green",
+        "migratedDescription": "opens simple dropdown list, text turns green"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to products page",
+        "migratedDescription": "navigates to products page",
+        "sourceUrl": "/products/",
+        "migratedUrl": "/products/"
+      },
+      "status": "validated"
+    },
+    {
+      "id": "row-1-nav-resources",
+      "label": "Resources",
+      "type": "nav-link-with-dropdown",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "opens simple dropdown list, text turns green",
+        "migratedDescription": "opens simple dropdown list, text turns green"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to resources page",
+        "migratedDescription": "navigates to resources page",
+        "sourceUrl": "/resources/",
+        "migratedUrl": "/resources/"
+      },
+      "status": "validated"
+    },
+    {
+      "id": "row-1-nav-people-careers",
+      "label": "People and Careers",
+      "type": "nav-link-with-dropdown",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "opens simple dropdown list, text turns green",
+        "migratedDescription": "opens simple dropdown list, text turns green"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to people and careers page",
+        "migratedDescription": "navigates to people and careers page",
+        "sourceUrl": "/people-and-careers/",
+        "migratedUrl": "/people-and-careers/"
+      },
+      "status": "validated"
+    },
+    {
+      "id": "row-1-nav-about-grace",
+      "label": "About Grace",
+      "type": "nav-link-with-dropdown",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "opens dropdown list, text turns green",
+        "migratedDescription": "opens dropdown list, text turns green"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to about grace page",
+        "migratedDescription": "navigates to about grace page",
+        "sourceUrl": "/about-grace/",
+        "migratedUrl": "/about-grace/"
+      },
+      "status": "validated"
+    },
+    {
+      "id": "row-1-nav-contact-us",
+      "label": "Contact Us",
+      "type": "nav-link",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "text turns green, no dropdown",
+        "migratedDescription": "text turns green, no dropdown"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to contact us page",
+        "migratedDescription": "navigates to contact us page",
+        "sourceUrl": "/contact-us/",
+        "migratedUrl": "/contact-us/"
+      },
+      "status": "validated"
+    },
+    {
+      "id": "row-1-search",
+      "label": "Search",
+      "type": "button",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "cursor pointer",
+        "migratedDescription": "cursor pointer"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "opens full-page search overlay",
+        "migratedDescription": "opens full-page search overlay"
+      },
+      "status": "validated"
+    }
+  ],
+  "summary": {
+    "totalItems": 9,
+    "hoverMatches": 9,
+    "clickMatches": 9,
+    "totalValidated": 9,
+    "totalFailed": 0
+  },
+  "allValidated": true
+}

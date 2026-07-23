@@ -1,0 +1,38 @@
+{
+  "variantName": "embed-video",
+  "baseBlock": "embed",
+  "version": "1.0.0",
+  "created": "2026-02-26T15:27:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://grace.com/",
+    "originPage": "homepage",
+    "blockPosition": "middle"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "dark",
+    "density": "spacious",
+    "purpose": "video-embed",
+    "imagePattern": "large"
+  },
+  "contentPattern": {
+    "structure": "poster-image + youtube-url",
+    "buttonCount": 1,
+    "imageCount": 1
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "YouTube video embeds with poster images",
+      "corporate video showcases",
+      "marketing video sections"
+    ],
+    "notSuitableFor": [
+      "social media embeds",
+      "inline video without poster"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["content/index"],
+    "reuseCount": 1,
+    "lastUsed": "2026-02-26T15:27:00.000Z"
+  }
+}

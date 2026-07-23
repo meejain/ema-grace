@@ -1,0 +1,14 @@
+{
+  "componentId": "mobile-hamburger-cross-animation",
+  "similarity": 0.9951,
+  "status": "validated",
+  "iterations": 2,
+  "fixes": [
+    "Fixed closed-state bar thickness from 2px to 3px",
+    "Fixed closed-state bar border-radius from 2px to 0",
+    "Fixed open-state cross width from 24px to 20px",
+    "Fixed open-state cross height from 2px to 3px",
+    "Fixed open-state cross border-radius from 2px to 0"
+  ],
+  "remainingDifferences": "None significant. Score 99.51%."
+}

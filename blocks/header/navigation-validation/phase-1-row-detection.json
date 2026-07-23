@@ -1,0 +1,12 @@
+{
+  "rowCount": 2,
+  "rowDetection": {
+    "rowCount": 2,
+    "confidence": 0.95,
+    "uncertainty": false,
+    "notes": [
+      "Row 0: Utility bar - dark/black background strip at the very top with 'Vendors and Suppliers' link right-aligned",
+      "Row 1: Main navigation bar - white background with Grace logo on left, primary nav links (Industries, Products, Resources, People and Careers, About Grace, Contact Us) center-right, and a search icon on far right"
+    ]
+  }
+}

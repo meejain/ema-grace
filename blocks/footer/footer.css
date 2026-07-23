@@ -1,20 +1,73 @@
 footer {
-  background-color: var(--light-color);
-  font-size: var(--body-font-size-xs);
+  background-color: var(--dark-color);
+  color: var(--white);
+  font-size: var(--body-font-size-s);
 }
 
 footer .footer > div {
   margin: auto;
-  max-width: 1200px;
-  padding: 40px 24px 24px;
+  max-width: 827px;
+  padding: 55px 24px;
+  text-align: center;
 }
 
-footer .footer p {
-  margin: 0;
+/* Copyright line */
+footer .footer > div > .default-content-wrapper > p:first-child {
+  margin: 0 0 30px;
+  color: var(--white);
+  font-size: var(--body-font-size-s);
+  font-weight: 700;
+}
+
+footer .footer a:any-link {
+  color: var(--white);
+  text-decoration: none;
+  font-size: var(--body-font-size-s);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+footer .footer a:hover {
+  text-decoration: underline;
+}
+
+/* Quick links row */
+footer .footer ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 40px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 20px;
+}
+
+footer .footer ul li {
+  display: inline;
+}
+
+/* Trademark text */
+footer .footer > div > .default-content-wrapper > p:nth-child(3) {
+  margin: 40px 0 0;
+}
+
+footer .footer p strong {
+  font-size: var(--body-font-size-s);
+  font-weight: 700;
+  color: var(--light-color);
+}
+
+/* Standard Industries logo */
+footer .footer > div > .default-content-wrapper > p:last-child {
+  margin: 20px 0 0;
+}
+
+footer .footer p img {
+  max-width: 200px;
 }
 
 @media (width >= 900px) {
   footer .footer > div {
-    padding: 40px 32px 24px;
+    padding: 55px 32px;
   }
 }

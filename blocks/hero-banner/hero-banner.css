@@ -1,0 +1,115 @@
+.hero-banner-container .hero-banner-wrapper {
+  max-width: unset;
+  padding: 0;
+}
+
+.hero-banner {
+  position: relative;
+  padding: 60px 24px;
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.hero-banner::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgb(0 0 0 / 60%) 0%, rgb(0 0 0 / 20%) 50%, transparent 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* image container: first row of the block */
+.hero-banner > div:first-child {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.hero-banner > div:first-child img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* text container: second row of the block */
+.hero-banner > div:last-child {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.hero-banner h1,
+.hero-banner h2,
+.hero-banner h3,
+.hero-banner h4,
+.hero-banner h5,
+.hero-banner h6,
+.hero-banner p {
+  color: var(--white);
+}
+
+/* ensure intermediate wrappers stretch to fill the absolute container */
+.hero-banner > div:first-child > div,
+.hero-banner > div:first-child p {
+  height: 100%;
+  margin: 0;
+}
+
+.hero-banner h1 {
+  font-family: var(--heading-font-family);
+  font-weight: 100;
+  font-size: var(--heading-font-size-xxl);
+  line-height: 1.3;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero-banner.no-image * {
+  color: var(--text-color);
+}
+
+/* green CTA button in hero */
+.hero-banner a:any-link {
+  display: inline-block;
+  background-color: var(--accent-color);
+  color: var(--text-color);
+  padding: 18px 30px;
+  font-family: var(--heading-font-family);
+  font-size: var(--body-font-size-m);
+  font-weight: 600;
+  text-decoration: none;
+  border: 0;
+  border-radius: 0;
+  transition: all var(--transition-speed) ease;
+  margin-top: 10px;
+}
+
+.hero-banner a::after {
+  content: ' \203A';
+  font-size: 1.2em;
+}
+
+.hero-banner a:hover {
+  background-color: var(--accent-color-hover);
+  color: var(--white);
+}
+
+@media (width >= 900px) {
+  .hero-banner {
+    padding: 80px 32px;
+    min-height: 477px;
+  }
+
+  .hero-banner h1 {
+    font-size: 42px;
+  }
+}

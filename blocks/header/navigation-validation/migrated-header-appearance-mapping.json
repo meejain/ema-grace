@@ -1,0 +1,73 @@
+{
+  "headerBackgroundBehavior": {
+    "defaultState": "solid",
+    "defaultBackgroundColor": "rgb(255, 255, 255)",
+    "interactionState": "none",
+    "classToggle": {
+      "openClass": null,
+      "closedClass": null
+    },
+    "requiresBodyPaddingTop": false,
+    "textColorInversion": false
+  },
+  "hasChanges": false,
+  "triggers": [],
+  "utilityBar": null,
+  "mainNav": {
+    "backgroundColor": "rgb(255, 255, 255)",
+    "textColor": "rgb(0, 0, 0)",
+    "borderBottom": "1px solid rgb(230, 231, 232)",
+    "position": "relative"
+  },
+  "dropdownOverlay": {
+    "hasOverlay": false,
+    "overlayType": null,
+    "overlayOpacity": null,
+    "overlayDismisses": false,
+    "notes": "Migrated boilerplate header does not create a semi-transparent overlay behind dropdown panels"
+  },
+  "notes": [
+    "Header background remains solid white (#fff) in all states - matches original",
+    "No background change on hover or dropdown open - matches original",
+    "No utility bar exists in migrated version (original has black utility bar with Vendors and Suppliers link)",
+    "Migrated header has border-bottom: 1px solid #e6e7e8 (original has no border)",
+    "Desktop position is relative (original was static)",
+    "Mobile position is fixed (original behavior unknown from analysis)",
+    "No semi-transparent overlay behind dropdown panels (original has overlay with 0.5 opacity)",
+    "Dropdown panels use light-color (#e6e7e8) background, positioned absolute below nav item",
+    "Standard boilerplate click-to-toggle dropdown behavior (original uses hover-to-open)",
+    "No megamenu support in migrated header (original Industries has megamenu with two-column layout)"
+  ],
+  "parityGaps": [
+    {
+      "feature": "utilityBar",
+      "original": "Black background bar at top with Vendors and Suppliers link",
+      "migrated": "Not present",
+      "severity": "medium"
+    },
+    {
+      "feature": "dropdownOverlay",
+      "original": "Semi-transparent dark overlay (opacity 0.5) behind dropdown panels",
+      "migrated": "No overlay",
+      "severity": "medium"
+    },
+    {
+      "feature": "borderBottom",
+      "original": "No visible border on header",
+      "migrated": "1px solid #e6e7e8 border-bottom always present",
+      "severity": "low"
+    },
+    {
+      "feature": "dropdownTrigger",
+      "original": "Hover to open, hover-out to close",
+      "migrated": "Click to toggle open/close",
+      "severity": "high"
+    },
+    {
+      "feature": "megamenu",
+      "original": "Industries has two-column megamenu with categories + sub-panels",
+      "migrated": "Standard simple dropdown only",
+      "severity": "high"
+    }
+  ]
+}

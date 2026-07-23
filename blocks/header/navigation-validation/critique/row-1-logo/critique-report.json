@@ -1,0 +1,1 @@
+{"componentId":"row-1-logo","viewport":"1440x900","similarity":0.956,"status":"validated","iterations":1,"notes":"Grace logo left-aligned in nav bar. Logo SVG renders identically. Background and positioning match.","differences":["Slight background border difference in migrated"],"screenshotSource":"source.png","screenshotMigrated":"migrated.png"}

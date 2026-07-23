@@ -1,0 +1,109 @@
+{
+  "allValidated": true,
+  "items": [
+    {
+      "id": "mobile-hamburger",
+      "label": "Hamburger icon",
+      "tapMatch": { "matches": true, "description": "Opens mobile menu, aria-expanded set to true" },
+      "behaviorMatch": { "matches": true, "description": "Menu slides open showing nav items + utility section" },
+      "animationMatch": { "matches": true, "sourceSpeed": "0.3s", "migratedSpeed": "0.3s", "method": "css-transform", "details": "3 bars, ::before rotates +45deg, ::after rotates -45deg, middle fades" },
+      "status": "validated"
+    },
+    {
+      "id": "mobile-close-button",
+      "label": "Close button (×)",
+      "tapMatch": { "matches": true, "description": "Closes mobile menu, aria-expanded set to false" },
+      "behaviorMatch": { "matches": true, "description": "Menu closes, hamburger icon restores to ☰" },
+      "animationMatch": { "matches": true, "sourceSpeed": "0.3s", "migratedSpeed": "0.3s", "details": "Transforms reset to none (reverse of open)" },
+      "status": "validated"
+    },
+    {
+      "id": "mobile-search-icon",
+      "label": "Search icon in header bar",
+      "tapMatch": { "matches": true, "description": "Opens full-page search overlay with input field" },
+      "behaviorMatch": { "matches": true, "description": "Search overlay covers full viewport, input auto-focused" },
+      "animationMatch": { "matches": true },
+      "status": "validated"
+    },
+    {
+      "id": "mobile-heading-industries",
+      "label": "Industries",
+      "tapMatch": { "matches": true, "description": "Replaces root menu with Industries sub-panel" },
+      "behaviorMatch": { "matches": true, "pattern": "slide-in-panel", "subItemCount": 11 },
+      "animationMatch": { "matches": true },
+      "status": "validated"
+    },
+    {
+      "id": "mobile-heading-products",
+      "label": "Products",
+      "tapMatch": { "matches": true, "description": "Replaces root menu with Products sub-panel" },
+      "behaviorMatch": { "matches": true, "pattern": "slide-in-panel", "subItemCount": 6 },
+      "animationMatch": { "matches": true },
+      "status": "validated"
+    },
+    {
+      "id": "mobile-heading-resources",
+      "label": "Resources",
+      "tapMatch": { "matches": true, "description": "Replaces root menu with Resources sub-panel" },
+      "behaviorMatch": { "matches": true, "pattern": "slide-in-panel", "subItemCount": 3 },
+      "animationMatch": { "matches": true },
+      "status": "validated"
+    },
+    {
+      "id": "mobile-heading-people-careers",
+      "label": "People and Careers",
+      "tapMatch": { "matches": true, "description": "Replaces root menu with People and Careers sub-panel" },
+      "behaviorMatch": { "matches": true, "pattern": "slide-in-panel", "subItemCount": 5 },
+      "animationMatch": { "matches": true },
+      "status": "validated"
+    },
+    {
+      "id": "mobile-heading-about-grace",
+      "label": "About Grace",
+      "tapMatch": { "matches": true, "description": "Replaces root menu with About Grace sub-panel" },
+      "behaviorMatch": { "matches": true, "pattern": "slide-in-panel", "subItemCount": 8 },
+      "animationMatch": { "matches": true },
+      "status": "validated"
+    },
+    {
+      "id": "mobile-heading-contact-us",
+      "label": "Contact Us",
+      "tapMatch": { "matches": true, "description": "Leaf link, no sub-panel — navigates to /contact-us/" },
+      "behaviorMatch": { "matches": true, "pattern": "leaf-link" },
+      "animationMatch": { "matches": true },
+      "status": "validated"
+    },
+    {
+      "id": "mobile-back-button",
+      "label": "« MAIN MENU back button",
+      "tapMatch": { "matches": true, "description": "Returns to root level from any depth" },
+      "behaviorMatch": { "matches": true, "description": "All nav items restored at root level with utility section" },
+      "animationMatch": { "matches": true },
+      "status": "validated"
+    },
+    {
+      "id": "mobile-breadcrumb",
+      "label": "Breadcrumb navigation",
+      "tapMatch": { "matches": true, "description": "Each breadcrumb segment is clickable, navigates to that level" },
+      "behaviorMatch": { "matches": true, "description": "Clicking 'Refining Technologies' in breadcrumb returns to Industries > Refining Technologies level" },
+      "animationMatch": { "matches": true },
+      "status": "validated"
+    },
+    {
+      "id": "mobile-deep-drill-down",
+      "label": "3-level deep drill-down",
+      "tapMatch": { "matches": true, "description": "Industries > Refining Technologies > FCC Catalyst Solutions shows leaf items" },
+      "behaviorMatch": { "matches": true, "description": "Breadcrumb shows full path: Industries / Refining Technologies / FCC Catalyst Solutions" },
+      "animationMatch": { "matches": true },
+      "status": "validated"
+    },
+    {
+      "id": "mobile-utility-section",
+      "label": "Vendors and Suppliers (dark area)",
+      "tapMatch": { "matches": true, "description": "Link navigates to /vendor-suppliers/" },
+      "behaviorMatch": { "matches": true, "description": "White text on black background at bottom of root menu" },
+      "animationMatch": { "matches": true },
+      "status": "validated"
+    }
+  ]
+}

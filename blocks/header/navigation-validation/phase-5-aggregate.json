@@ -1,0 +1,54 @@
+{
+  "headerStructure": {
+    "rowCount": 2,
+    "rows": [
+      { "index": 0, "type": "utility-bar", "background": "rgb(0, 0, 0)", "height": "40px" },
+      { "index": 1, "type": "main-nav", "background": "rgb(255, 255, 255)", "height": "81px" }
+    ]
+  },
+  "desktopMapping": {
+    "utilityLinks": [{ "label": "Vendors and Suppliers", "href": "/vendor-suppliers/" }],
+    "logo": { "src": "images/grace-logo.png", "alt": "Grace Logo", "href": "/" },
+    "navItems": [
+      { "label": "Industries", "href": "/industries/", "hasDropdown": true, "dropdownType": "megamenu" },
+      { "label": "Products", "href": "/products/", "hasDropdown": true, "dropdownType": "simple" },
+      { "label": "Resources", "href": "/resources/", "hasDropdown": true, "dropdownType": "simple" },
+      { "label": "People and Careers", "href": "/people-and-careers/", "hasDropdown": true, "dropdownType": "simple" },
+      { "label": "About Grace", "href": "/about-grace/", "hasDropdown": true, "dropdownType": "simple-with-promo" },
+      { "label": "Contact Us", "href": "/contact-us/", "hasDropdown": false }
+    ],
+    "hasSearch": true,
+    "searchType": "full-page-overlay"
+  },
+  "megamenuMapping": "see megamenu-mapping.json",
+  "mobileMapping": {
+    "breakpointPx": 900,
+    "menuTrigger": "hamburger",
+    "openBehavior": "slide-in-panel",
+    "hamburgerAnimation": "morph-to-cross via CSS transform 0.3s",
+    "mobileMenuLayout": "slide-in-subpanel",
+    "navItems": 6,
+    "hasBackButton": true,
+    "maxDepth": 3
+  },
+  "validationReport": {
+    "desktopRegisters": {
+      "megamenuBehavior": "allValidated: true",
+      "rowElementsBehavior": "allValidated: true",
+      "headerAppearance": "allValidated: true",
+      "structuralSchema": "allValidated: true",
+      "styleRegister": "allValidated: true, 12 components, avg similarity: 97.0%"
+    },
+    "mobileRegisters": {
+      "mobileSchema": "allValidated: true",
+      "mobileHeadingCoverage": "allCovered: true, 6/6 headings",
+      "mobileBehavior": "allValidated: true",
+      "mobileStyleRegister": "allValidated: true, 10 components, avg similarity: 96.3%, all components at 95%+"
+    },
+    "navContentValidation": "PASSED - 12 images validated, all exist, all size > 0",
+    "linting": "header.js and header.css pass ESLint/Stylelint",
+    "viewportResize": "matchMedia handling present",
+    "combinedStyleSimilarity": "96.7% average across 22 components (12 desktop + 10 mobile)"
+  },
+  "status": "PASS"
+}

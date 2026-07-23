@@ -1,0 +1,36 @@
+{
+  "headerBackgroundBehavior": {
+    "defaultState": "solid",
+    "defaultBackgroundColor": "rgb(255, 255, 255)",
+    "interactionState": "none",
+    "classToggle": {
+      "openClass": null,
+      "closedClass": null
+    },
+    "requiresBodyPaddingTop": false,
+    "textColorInversion": false
+  },
+  "hasChanges": false,
+  "triggers": [],
+  "utilityBar": {
+    "backgroundColor": "rgb(0, 0, 0)",
+    "textColor": "rgb(255, 255, 255)"
+  },
+  "mainNav": {
+    "backgroundColor": "rgb(255, 255, 255)",
+    "textColor": "rgb(0, 0, 0)"
+  },
+  "dropdownOverlay": {
+    "hasOverlay": true,
+    "overlayType": "semi-transparent-dark",
+    "overlayOpacity": "0.5",
+    "overlayDismisses": true,
+    "notes": "Dark semi-transparent overlay covers the page content behind the dropdown panel"
+  },
+  "notes": [
+    "Header background remains solid white in all states",
+    "No background change on hover/dropdown open",
+    "Dropdown panels have a semi-transparent dark overlay behind them covering page content",
+    "Header position is static (not sticky/fixed)"
+  ]
+}

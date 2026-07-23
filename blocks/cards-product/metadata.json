@@ -1,0 +1,38 @@
+{
+  "variantName": "cards-product",
+  "baseBlock": "cards",
+  "version": "1.0.0",
+  "created": "2026-02-26T15:27:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://grace.com/",
+    "originPage": "homepage",
+    "blockPosition": "middle"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "spacious",
+    "purpose": "product-showcase",
+    "imagePattern": "large"
+  },
+  "contentPattern": {
+    "structure": "image + title + description",
+    "buttonCount": 0,
+    "imageCount": 4
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "product category listings",
+      "feature showcases with images",
+      "service offering grids"
+    ],
+    "notSuitableFor": [
+      "text-only card listings",
+      "blog article cards with categories"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["content/index"],
+    "reuseCount": 1,
+    "lastUsed": "2026-02-26T15:27:00.000Z"
+  }
+}

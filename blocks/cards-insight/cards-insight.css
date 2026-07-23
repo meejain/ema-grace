@@ -1,0 +1,149 @@
+/* Section heading */
+.cards-insight-container h2 {
+  text-align: center;
+}
+
+/* Card grid */
+.cards-insight > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+/* Individual cards – no border, transparent bg (blends with light-gray section) */
+.cards-insight > ul > li {
+  border: 0;
+  background-color: transparent;
+}
+
+/* Card image */
+.cards-insight .cards-insight-card-image {
+  line-height: 0;
+}
+
+.cards-insight > ul > li img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  display: block;
+}
+
+/* Card text */
+.cards-insight .cards-insight-card-body {
+  margin: 0;
+  padding: 16px 0;
+}
+
+/* Category label – Roboto 10px weight 500 uppercase */
+.cards-insight .cards-insight-card-body p strong {
+  font-family: var(--body-font-family);
+  font-size: var(--heading-font-size-xs);
+  font-weight: 500;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+/* Title / description text – Roboto 14px weight 400 */
+.cards-insight .cards-insight-card-body p {
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m);
+  font-weight: 400;
+  line-height: 1.7;
+  margin: 0 0 4px;
+  text-align: left;
+}
+
+/* Links */
+.cards-insight .cards-insight-card-body a:any-link {
+  color: var(--text-color);
+  text-decoration: none;
+  font-size: var(--body-font-size-m);
+  transition: color var(--transition-speed) ease;
+}
+
+.cards-insight .cards-insight-card-body a:hover {
+  color: var(--link-hover-color);
+}
+
+/* "Read more" bold link */
+.cards-insight .cards-insight-card-body p:last-child strong a:any-link {
+  font-weight: 700;
+  font-size: var(--body-font-size-m);
+}
+
+/* "View all insights" button – green accent */
+.cards-insight-container .button-wrapper a.button:any-link,
+.cards-insight-container > div > .default-content-wrapper:last-child p > strong > a:any-link {
+  background-color: var(--accent-color);
+  color: var(--text-color);
+  padding: 18px 30px;
+  font-family: var(--heading-font-family);
+  font-size: var(--body-font-size-m);
+  font-weight: 600;
+  display: inline-block;
+  text-decoration: none;
+}
+
+.cards-insight-container .button-wrapper a.button:hover,
+.cards-insight-container > div > .default-content-wrapper:last-child p > strong > a:hover {
+  background-color: var(--accent-color-hover);
+  color: var(--white);
+}
+
+/* Tablet: 2 columns */
+@media (width >= 600px) {
+  .cards-insight > ul {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Desktop: 2-column layout – big card left, 3 stacked cards right */
+@media (width >= 900px) {
+  .cards-insight > ul {
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  /* First card spans all rows in column 1 */
+  .cards-insight > ul > li:first-child {
+    grid-row: 1 / 4;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .cards-insight > ul > li:first-child .cards-insight-card-image {
+    flex: 1;
+  }
+
+  .cards-insight > ul > li:first-child img {
+    aspect-ratio: unset;
+    height: 100%;
+  }
+
+  /* Small cards (2nd–4th): horizontal layout, text LEFT image RIGHT */
+  .cards-insight > ul > li:not(:first-child) {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: 0;
+  }
+
+  /* Swap order: body (text) first, image second */
+  .cards-insight > ul > li:not(:first-child) .cards-insight-card-body {
+    order: -1;
+    padding: 0 16px 0 0;
+  }
+
+  .cards-insight > ul > li:not(:first-child) img {
+    aspect-ratio: unset;
+    height: 100%;
+  }
+
+  .cards-insight > ul > li:not(:first-child) .cards-insight-card-image {
+    height: 100%;
+  }
+}

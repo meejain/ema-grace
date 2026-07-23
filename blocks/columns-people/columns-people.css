@@ -1,0 +1,81 @@
+.columns-people-container {
+  padding: var(--spacing-l) 0;
+}
+
+.columns-people > div {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.columns-people > div > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.columns-people .columns-people-img-col {
+  line-height: 0;
+}
+
+.columns-people .columns-people-img-col img {
+  width: 100%;
+  display: block;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.columns-people .columns-people-text-col {
+  padding: var(--spacing-s);
+  text-align: center;
+}
+
+.columns-people .columns-people-text-col p {
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m);
+  font-weight: 400;
+  line-height: 1.7;
+  color: var(--text-color);
+  margin-bottom: 0;
+}
+
+.columns-people .columns-people-text-col a:any-link {
+  display: block;
+  font-family: var(--heading-font-family);
+  font-size: var(--body-font-size-m);
+  font-weight: 600;
+  color: var(--text-color);
+  text-decoration: none;
+  margin-top: var(--spacing-s);
+  padding-top: var(--spacing-s);
+  border-top: 1px solid #ccc;
+  transition: color var(--transition-speed) ease;
+}
+
+.columns-people .columns-people-text-col a:not(:has(img))::after {
+  content: ' \203A';
+  font-size: 1.2em;
+}
+
+.columns-people .columns-people-text-col a:hover {
+  color: var(--link-hover-color);
+}
+
+@media (width >= 900px) {
+  .columns-people > div {
+    flex-direction: row;
+    gap: 32px;
+  }
+
+  .columns-people > div > div {
+    flex: 1;
+  }
+
+  .columns-people .columns-people-img-col img {
+    aspect-ratio: auto;
+    height: auto;
+  }
+
+  .columns-people .columns-people-text-col {
+    padding: var(--spacing-m) 0;
+  }
+}

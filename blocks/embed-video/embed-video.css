@@ -1,0 +1,139 @@
+/* ===== Section-level overrides for video section ===== */
+
+/* Use `main .section` prefix to beat global `main .section.dark` specificity */
+
+/* Override full-width dark bg – original has white page bg around component */
+main .section.embed-video-container.dark {
+  background-color: transparent;
+  padding: var(--spacing-l) 0;
+  margin: 0;
+  text-align: center;
+}
+
+/* Left column: dark background with white text */
+main .section.embed-video-container.dark > .default-content-wrapper {
+  background-color: var(--dark-color);
+  padding: 40px 24px;
+  margin: 0;
+  max-width: none;
+}
+
+/* Subtitle paragraph – Roboto Slab, matches original subhead-large */
+main .section.embed-video-container.dark > .default-content-wrapper p:not(.button-wrapper) {
+  font-family: var(--heading-font-family);
+  font-size: var(--body-font-size-l);
+  font-weight: 300;
+  margin-bottom: 0;
+}
+
+/* Right column: video poster */
+main .section.embed-video-container.dark > .embed-video-wrapper {
+  max-width: none;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+}
+
+/* Desktop: side-by-side layout (text left ~30%, video right ~70%) */
+@media (width >= 900px) {
+  main .section.embed-video-container.dark {
+    display: grid;
+    grid-template-columns: 3fr 7fr;
+    padding-left: max(32px, 50% - 624px);
+    padding-right: max(32px, 50% - 624px);
+  }
+
+  main .section.embed-video-container.dark > .default-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 50px 30px;
+  }
+
+  /* Video poster drives the row height via its aspect-ratio */
+  main .section.embed-video-container.dark > .embed-video-wrapper {
+    overflow: hidden;
+  }
+
+  main .section.embed-video-container.dark .embed-video {
+    margin: 0;
+  }
+}
+
+/* ===== Block-level styles ===== */
+
+.embed-video {
+  width: 100%;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.embed-video > div {
+  display: flex;
+  justify-content: center;
+}
+
+.embed-video .embed-video-placeholder {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.embed-video .embed-video-placeholder > * {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  inset: 0;
+}
+
+/* poster image with hover zoom */
+.embed-video .embed-video-placeholder picture img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.embed-video .embed-video-placeholder:hover picture img {
+  transform: scale(1.05);
+}
+
+/* play button – large white solid circle */
+.embed-video .embed-video-placeholder-play button {
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+  width: 98px;
+  height: 98px;
+  border: 0;
+  border-radius: 50%;
+  padding: 0;
+  background: var(--white);
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.embed-video .embed-video-placeholder:hover .embed-video-placeholder-play button {
+  transform: scale(1.1);
+}
+
+/* play triangle inside button */
+.embed-video .embed-video-placeholder-play button::before {
+  content: "";
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-top: 16px solid transparent;
+  border-bottom: 16px solid transparent;
+  border-left: 26px solid var(--text-color);
+  top: 50%;
+  left: 54%;
+  transform: translate(-50%, -50%);
+}

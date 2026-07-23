@@ -1,0 +1,18 @@
+{
+  "componentId": "mobile-nav-items-root",
+  "similarity": 0.9766,
+  "status": "validated",
+  "iterations": 2,
+  "fixes": [
+    "Changed font-family from var(--heading-font-family) to var(--body-font-family) for Roboto sans-serif",
+    "Changed border from border-top 1px solid #e0e0e0 to border-bottom 1px solid #000",
+    "Changed link padding from 14px 0 to 13px 0",
+    "Added line-height: 1 to match source 14px/14px",
+    "Changed container padding from 0 24px to 0 10px",
+    "Hidden utility bar on mobile with display: none",
+    "Fixed utility section to only show Vendors and Suppliers via p > a selector",
+    "Changed utility font from heading to body font, size from 13px to 12px",
+    "Fixed utility section padding to 15px 10px 35px"
+  ],
+  "remainingDifferences": "Minor font rendering differences between CDN and local Roboto. Score 97.66%."
+}

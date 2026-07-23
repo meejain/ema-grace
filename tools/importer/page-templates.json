@@ -1,0 +1,50 @@
+{
+  "templates": [
+    {
+      "name": "grace-homepage",
+      "urls": ["https://grace.com/"],
+      "description": "Grace.com homepage with hero banner, product cards, people columns, industry cards, video embed, and insight cards sections",
+      "blocks": [
+        {
+          "name": "hero-banner",
+          "instances": [".hero__section"]
+        },
+        {
+          "name": "cards-product",
+          "instances": [".cmp-card.bio"]
+        },
+        {
+          "name": "columns-people",
+          "instances": [".cmp-image__link"]
+        },
+        {
+          "name": "cards-industry",
+          "instances": ["section.background-image .card-group"]
+        },
+        {
+          "name": "embed-video",
+          "instances": [".cmp-media-callout.slate-bkgd .media-video"]
+        },
+        {
+          "name": "cards-insight",
+          "instances": ["section#blogs .media-callout"]
+        },
+        {
+          "name": "section-about",
+          "instances": ["section#aboutgrace"],
+          "section": "light-gray"
+        },
+        {
+          "name": "section-video",
+          "instances": [".cmp-media-callout.slate-bkgd"],
+          "section": "dark"
+        },
+        {
+          "name": "section-insights",
+          "instances": ["section#blogs"],
+          "section": "light-gray"
+        }
+      ]
+    }
+  ]
+}

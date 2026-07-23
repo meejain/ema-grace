@@ -1,0 +1,15 @@
+{
+  "allValidated": true,
+  "components": [
+    { "id": "mobile-header-bar", "description": "Header bar layout: hamburger left, logo center, search right", "sourceMatch": true, "status": "validated" },
+    { "id": "mobile-hamburger", "description": "Hamburger icon present, morphs to \u00d7 cross", "sourceMatch": true, "status": "validated" },
+    { "id": "mobile-menu-structure", "description": "Slide-in panel with 6 nav items + utility section", "sourceMatch": true, "status": "validated" },
+    { "id": "mobile-nav-chevrons", "description": "5 items with chevrons (has sub-items), 1 without (Contact Us)", "sourceMatch": true, "status": "validated" },
+    { "id": "mobile-slide-panel", "description": "Slide-in sub-panel on category tap with back button and breadcrumb", "sourceMatch": true, "status": "validated" },
+    { "id": "mobile-depth-3", "description": "3-level deep navigation (Industries > Refining Tech > FCC Catalyst Solutions)", "sourceMatch": true, "status": "validated" },
+    { "id": "mobile-back-button", "description": "\u00ab MAIN MENU back button returns to root from any depth", "sourceMatch": true, "status": "validated" },
+    { "id": "mobile-breadcrumb", "description": "Clickable breadcrumb trail: Category / Subcategory / Sub-subcategory", "sourceMatch": true, "status": "validated" },
+    { "id": "mobile-utility-section", "description": "Vendors and Suppliers in dark area at bottom of root menu", "sourceMatch": true, "status": "validated" },
+    { "id": "mobile-search-icon", "description": "Search icon visible in header bar on right side", "sourceMatch": true, "status": "validated" }
+  ]
+}

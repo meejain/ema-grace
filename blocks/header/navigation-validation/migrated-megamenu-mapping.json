@@ -1,0 +1,1070 @@
+{
+  "navTriggers": [
+    {
+      "label": "Industries",
+      "index": 0,
+      "hoverBehavior": {
+        "opensPanel": true,
+        "description": "opens megamenu panel with left category list and right content pane"
+      },
+      "clickBehavior": {
+        "navigates": true,
+        "url": "/industries/",
+        "description": "navigates to industries section page"
+      },
+      "panelType": "megamenu",
+      "panelLayoutDetails": {
+        "viewportContained": true,
+        "widthType": "fixed",
+        "horizontalAlignment": "left-offset",
+        "overlayBehavior": "semi-transparent-dark",
+        "extendsBeyondViewport": false,
+        "obscuresPageContent": "intentional",
+        "measuredLeft": 202,
+        "measuredRight": 1302,
+        "measuredTop": 117.59,
+        "measuredWidth": 1100,
+        "measuredHeight": 468.06,
+        "viewportWidth": 1440,
+        "cssPosition": "absolute",
+        "cssLeft": "-100px",
+        "cssWidth": "1100px"
+      },
+      "panelItems": [
+        {
+          "label": "Refining Technologies",
+          "type": "category",
+          "hoverBehavior": {
+            "hasEffect": true,
+            "description": "highlights category and shows corresponding content pane with sub-groups and promo card"
+          },
+          "clickBehavior": {
+            "navigates": true,
+            "url": "/industries/refining-technologies/",
+            "description": "navigates to Refining Technologies category page"
+          },
+          "subItems": [
+            {
+              "label": "FCC Catalyst Solutions",
+              "type": "link",
+              "hoverBehavior": {
+                "hasEffect": false,
+                "description": "text highlight only"
+              },
+              "clickBehavior": {
+                "navigates": true,
+                "url": "/industries/refining-technologies/fcc-catalyst-application/",
+                "description": "navigates to FCC Catalyst Solutions page"
+              }
+            },
+            {
+              "label": "Maximize Propylene",
+              "type": "link",
+              "hoverBehavior": {
+                "hasEffect": false,
+                "description": "text highlight only"
+              },
+              "clickBehavior": {
+                "navigates": true,
+                "url": "/industries/refining-technologies/fcc-catalyst-application/maximize-propylene/",
+                "description": "navigates to Maximize Propylene page"
+              }
+            },
+            {
+              "label": "Butylene Selectivity",
+              "type": "link",
+              "hoverBehavior": {
+                "hasEffect": false,
+                "description": "text highlight only"
+              },
+              "clickBehavior": {
+                "navigates": true,
+                "url": "/industries/refining-technologies/fcc-catalyst-application/butylene-selectivity/",
+                "description": "navigates to Butylene Selectivity page"
+              }
+            },
+            {
+              "label": "Resid Conversion",
+              "type": "link",
+              "hoverBehavior": {
+                "hasEffect": false,
+                "description": "text highlight only"
+              },
+              "clickBehavior": {
+                "navigates": true,
+                "url": "/industries/refining-technologies/fcc-catalyst-application/resid-conversion/",
+                "description": "navigates to Resid Conversion page"
+              }
+            },
+            {
+              "label": "Light Feed Performance",
+              "type": "link",
+              "hoverBehavior": {
+                "hasEffect": false,
+                "description": "text highlight only"
+              },
+              "clickBehavior": {
+                "navigates": true,
+                "url": "/industries/refining-technologies/fcc-catalyst-application/light-feed-performance/",
+                "description": "navigates to Light Feed Performance page"
+              }
+            },
+            {
+              "label": "Value Creation",
+              "type": "link",
+              "hoverBehavior": {
+                "hasEffect": false,
+                "description": "text highlight only"
+              },
+              "clickBehavior": {
+                "navigates": true,
+                "url": "/industries/refining-technologies/value-creation/",
+                "description": "navigates to Value Creation page"
+              }
+            },
+            {
+              "label": "Technical Service Expertise",
+              "type": "link",
+              "hoverBehavior": {
+                "hasEffect": false,
+                "description": "text highlight only"
+              },
+              "clickBehavior": {
+                "navigates": true,
+                "url": "/industries/refining-technologies/value-creation/technical-service-expertise/",
+                "description": "navigates to Technical Service Expertise page"
+              }
+            },
+            {
+              "label": "Specialized Evaluation Tools",
+              "type": "link",
+              "hoverBehavior": {
+                "hasEffect": false,
+                "description": "text highlight only"
+              },
+              "clickBehavior": {
+                "navigates": true,
+                "url": "/industries/refining-technologies/value-creation/specialized-evaluation-tools/",
+                "description": "navigates to Specialized Evaluation Tools page"
+              }
+            },
+            {
+              "label": "Sustainable Solutions for FCC",
+              "type": "link",
+              "hoverBehavior": {
+                "hasEffect": false,
+                "description": "text highlight only"
+              },
+              "clickBehavior": {
+                "navigates": true,
+                "url": "/industries/refining-technologies/value-creation/sustainability/",
+                "description": "navigates to Sustainable Solutions for FCC page"
+              }
+            },
+            {
+              "label": "FCC Additive Solutions",
+              "type": "link",
+              "hoverBehavior": {
+                "hasEffect": false,
+                "description": "text highlight only"
+              },
+              "clickBehavior": {
+                "navigates": true,
+                "url": "/industries/refining-technologies/fcc-additive-solutions/",
+                "description": "navigates to FCC Additive Solutions page"
+              }
+            },
+            {
+              "label": "SOx Reduction",
+              "type": "link",
+              "hoverBehavior": {
+                "hasEffect": false,
+                "description": "text highlight only"
+              },
+              "clickBehavior": {
+                "navigates": true,
+                "url": "/industries/refining-technologies/fcc-additive-solutions/sox-reduction/",
+                "description": "navigates to SOx Reduction page"
+              }
+            },
+            {
+              "label": "Gasoline Sulphur Reduction",
+              "type": "link",
+              "hoverBehavior": {
+                "hasEffect": false,
+                "description": "text highlight only"
+              },
+              "clickBehavior": {
+                "navigates": true,
+                "url": "/industries/refining-technologies/fcc-additive-solutions/gasoline-sulphur-reduction/",
+                "description": "navigates to Gasoline Sulphur Reduction page"
+              }
+            },
+            {
+              "label": "Light Olefins",
+              "type": "link",
+              "hoverBehavior": {
+                "hasEffect": false,
+                "description": "text highlight only"
+              },
+              "clickBehavior": {
+                "navigates": true,
+                "url": "/industries/refining-technologies/fcc-additive-solutions/light-olefins/",
+                "description": "navigates to Light Olefins page"
+              }
+            },
+            {
+              "label": "NOx Reduction",
+              "type": "link",
+              "hoverBehavior": {
+                "hasEffect": false,
+                "description": "text highlight only"
+              },
+              "clickBehavior": {
+                "navigates": true,
+                "url": "/industries/refining-technologies/fcc-additive-solutions/nox-reduction/",
+                "description": "navigates to NOx Reduction page"
+              }
+            },
+            {
+              "label": "Combustion Promoter",
+              "type": "link",
+              "hoverBehavior": {
+                "hasEffect": false,
+                "description": "text highlight only"
+              },
+              "clickBehavior": {
+                "navigates": true,
+                "url": "/industries/refining-technologies/fcc-additive-solutions/combustion-promoter/",
+                "description": "navigates to Combustion Promoter page"
+              }
+            },
+            {
+              "label": "Hydroprocessing",
+              "type": "link",
+              "hoverBehavior": {
+                "hasEffect": false,
+                "description": "text highlight only"
+              },
+              "clickBehavior": {
+                "navigates": true,
+                "url": "/industries/refining-technologies/hydroprocessing/",
+                "description": "navigates to Hydroprocessing page"
+              }
+            },
+            {
+              "label": "Resid Hydrotreating Solutions",
+              "type": "link",
+              "hoverBehavior": {
+                "hasEffect": false,
+                "description": "text highlight only"
+              },
+              "clickBehavior": {
+                "navigates": true,
+                "url": "/industries/refining-technologies/hydroprocessing/resid-hydrotreating-solutions/",
+                "description": "navigates to Resid Hydrotreating Solutions page"
+              }
+            },
+            {
+              "label": "Resid Hydrocracking Solutions",
+              "type": "link",
+              "hoverBehavior": {
+                "hasEffect": false,
+                "description": "text highlight only"
+              },
+              "clickBehavior": {
+                "navigates": true,
+                "url": "/industries/refining-technologies/hydroprocessing/resid-hydrocracking-solutions/",
+                "description": "navigates to Resid Hydrocracking Solutions page"
+              }
+            },
+            {
+              "label": "Distillate Hydrotreating Solutions",
+              "type": "link",
+              "hoverBehavior": {
+                "hasEffect": false,
+                "description": "text highlight only"
+              },
+              "clickBehavior": {
+                "navigates": true,
+                "url": "/industries/refining-technologies/hydroprocessing/distillate-hydrotreating-solutions/",
+                "description": "navigates to Distillate Hydrotreating Solutions page"
+              }
+            },
+            {
+              "label": "Catalagram Archive",
+              "type": "promotional",
+              "hasImage": true,
+              "hoverBehavior": {
+                "hasEffect": false,
+                "description": "text highlight only"
+              },
+              "clickBehavior": {
+                "navigates": true,
+                "url": "/industries/refining-technologies/catalagram-archive/",
+                "description": "navigates to Catalagram Archive promo page"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Chemical Processing",
+          "type": "category",
+          "hoverBehavior": {
+            "hasEffect": true,
+            "description": "highlights category and shows corresponding content pane with sub-links and promo card"
+          },
+          "clickBehavior": {
+            "navigates": true,
+            "url": "/industries/chemical-processing/",
+            "description": "navigates to Chemical Processing category page"
+          },
+          "subItems": [
+            {
+              "label": "Hydrogenation Catalysts",
+              "type": "link",
+              "hoverBehavior": { "hasEffect": false, "description": "text highlight only" },
+              "clickBehavior": { "navigates": true, "url": "/industries/chemical-processing/hydrogenation-catalysts/", "description": "navigates to Hydrogenation Catalysts page" }
+            },
+            {
+              "label": "Catalyst Supports",
+              "type": "link",
+              "hoverBehavior": { "hasEffect": false, "description": "text highlight only" },
+              "clickBehavior": { "navigates": true, "url": "/industries/chemical-processing/catalyst-supports/", "description": "navigates to Catalyst Supports page" }
+            },
+            {
+              "label": "Custom Development",
+              "type": "link",
+              "hoverBehavior": { "hasEffect": false, "description": "text highlight only" },
+              "clickBehavior": { "navigates": true, "url": "/industries/chemical-processing/custom-development/", "description": "navigates to Custom Development page" }
+            }
+          ]
+        },
+        {
+          "label": "Plastics and Polymers",
+          "type": "category",
+          "hoverBehavior": {
+            "hasEffect": true,
+            "description": "highlights category and shows corresponding content pane with sub-groups and promo card"
+          },
+          "clickBehavior": {
+            "navigates": true,
+            "url": "/industries/plastics-and-polymers/",
+            "description": "navigates to Plastics and Polymers category page"
+          },
+          "subItems": [
+            {
+              "label": "Polyethylene Catalysts",
+              "type": "link",
+              "hoverBehavior": { "hasEffect": false, "description": "text highlight only" },
+              "clickBehavior": { "navigates": true, "url": "/industries/plastics-and-polymers/polyethylene-catalysts/", "description": "navigates to Polyethylene Catalysts page" }
+            },
+            {
+              "label": "PE Catalyst Components and Supports",
+              "type": "link",
+              "hoverBehavior": { "hasEffect": false, "description": "text highlight only" },
+              "clickBehavior": { "navigates": true, "url": "/industries/plastics-and-polymers/polyethylene-catalysts/pe-catalyst-components-and-supports/", "description": "navigates to PE Catalyst Components and Supports page" }
+            },
+            {
+              "label": "PE Slurry",
+              "type": "link",
+              "hoverBehavior": { "hasEffect": false, "description": "text highlight only" },
+              "clickBehavior": { "navigates": true, "url": "/industries/plastics-and-polymers/polyethylene-catalysts/pe-slurry/", "description": "navigates to PE Slurry page" }
+            },
+            {
+              "label": "PE Gas Phase",
+              "type": "link",
+              "hoverBehavior": { "hasEffect": false, "description": "text highlight only" },
+              "clickBehavior": { "navigates": true, "url": "/industries/plastics-and-polymers/polyethylene-catalysts/pe-gas-phase/", "description": "navigates to PE Gas Phase page" }
+            },
+            {
+              "label": "PE Solution",
+              "type": "link",
+              "hoverBehavior": { "hasEffect": false, "description": "text highlight only" },
+              "clickBehavior": { "navigates": true, "url": "/industries/plastics-and-polymers/polyethylene-catalysts/pe-solution/", "description": "navigates to PE Solution page" }
+            },
+            {
+              "label": "PE Hybrid",
+              "type": "link",
+              "hoverBehavior": { "hasEffect": false, "description": "text highlight only" },
+              "clickBehavior": { "navigates": true, "url": "/industries/plastics-and-polymers/polyethylene-catalysts/pe-hybrid/", "description": "navigates to PE Hybrid page" }
+            },
+            {
+              "label": "Polypropylene Catalysts",
+              "type": "link",
+              "hoverBehavior": { "hasEffect": false, "description": "text highlight only" },
+              "clickBehavior": { "navigates": true, "url": "/industries/plastics-and-polymers/polypropylene-catalysts/", "description": "navigates to Polypropylene Catalysts page" }
+            },
+            {
+              "label": "PP Bulk",
+              "type": "link",
+              "hoverBehavior": { "hasEffect": false, "description": "text highlight only" },
+              "clickBehavior": { "navigates": true, "url": "/industries/plastics-and-polymers/polypropylene-catalysts/pp-bulk/", "description": "navigates to PP Bulk page" }
+            },
+            {
+              "label": "PP Gas Phase",
+              "type": "link",
+              "hoverBehavior": { "hasEffect": false, "description": "text highlight only" },
+              "clickBehavior": { "navigates": true, "url": "/industries/plastics-and-polymers/polypropylene-catalysts/pp-gas-phase/", "description": "navigates to PP Gas Phase page" }
+            },
+            {
+              "label": "PP Slurry",
+              "type": "link",
+              "hoverBehavior": { "hasEffect": false, "description": "text highlight only" },
+              "clickBehavior": { "navigates": true, "url": "/industries/plastics-and-polymers/polypropylene-catalysts/pp-slurry/", "description": "navigates to PP Slurry page" }
+            }
+          ]
+        },
+        {
+          "label": "Coatings",
+          "type": "category",
+          "hoverBehavior": {
+            "hasEffect": true,
+            "description": "highlights category and shows corresponding content pane with sub-links and promo card"
+          },
+          "clickBehavior": {
+            "navigates": true,
+            "url": "/industries/coatings/",
+            "description": "navigates to Coatings category page"
+          },
+          "subItems": [
+            {
+              "label": "Wood",
+              "type": "link",
+              "hoverBehavior": { "hasEffect": false, "description": "text highlight only" },
+              "clickBehavior": { "navigates": true, "url": "/industries/coatings/wood/", "description": "navigates to Wood page" }
+            },
+            {
+              "label": "Coil",
+              "type": "link",
+              "hoverBehavior": { "hasEffect": false, "description": "text highlight only" },
+              "clickBehavior": { "navigates": true, "url": "/industries/coatings/coil/", "description": "navigates to Coil page" }
+            },
+            {
+              "label": "Architectural",
+              "type": "link",
+              "hoverBehavior": { "hasEffect": false, "description": "text highlight only" },
+              "clickBehavior": { "navigates": true, "url": "/industries/coatings/architectural/", "description": "navigates to Architectural page" }
+            },
+            {
+              "label": "Inks and Paper",
+              "type": "link",
+              "hoverBehavior": { "hasEffect": false, "description": "text highlight only" },
+              "clickBehavior": { "navigates": true, "url": "/industries/coatings/inks-paper/", "description": "navigates to Inks and Paper page" }
+            },
+            {
+              "label": "General Industrial Coatings",
+              "type": "link",
+              "hoverBehavior": { "hasEffect": false, "description": "text highlight only" },
+              "clickBehavior": { "navigates": true, "url": "/industries/coatings/general-industrial-coatings/", "description": "navigates to General Industrial Coatings page" }
+            }
+          ]
+        },
+        {
+          "label": "General Industrial",
+          "type": "category",
+          "hoverBehavior": {
+            "hasEffect": true,
+            "description": "highlights category and shows corresponding content pane with sub-links and promo card"
+          },
+          "clickBehavior": {
+            "navigates": true,
+            "url": "/industries/general-industrial/",
+            "description": "navigates to General Industrial category page"
+          },
+          "subItems": [
+            {
+              "label": "Process Adsorbents",
+              "type": "link",
+              "hoverBehavior": { "hasEffect": false, "description": "text highlight only" },
+              "clickBehavior": { "navigates": true, "url": "/industries/general-industrial/process-adsorbents/", "description": "navigates to Process Adsorbents page" }
+            },
+            {
+              "label": "Static Adsorbents",
+              "type": "link",
+              "hoverBehavior": { "hasEffect": false, "description": "text highlight only" },
+              "clickBehavior": { "navigates": true, "url": "/industries/general-industrial/static-adsorbents/", "description": "navigates to Static Adsorbents page" }
+            },
+            {
+              "label": "Colloidal Silica in Catalysts",
+              "type": "link",
+              "hoverBehavior": { "hasEffect": false, "description": "text highlight only" },
+              "clickBehavior": { "navigates": true, "url": "/industries/general-industrial/colloidal-silica-in-catalysts/", "description": "navigates to Colloidal Silica in Catalysts page" }
+            },
+            {
+              "label": "Investment Casting Binders",
+              "type": "link",
+              "hoverBehavior": { "hasEffect": false, "description": "text highlight only" },
+              "clickBehavior": { "navigates": true, "url": "/industries/general-industrial/investment-casting-binders/", "description": "navigates to Investment Casting Binders page" }
+            },
+            {
+              "label": "Refractory Additives",
+              "type": "link",
+              "hoverBehavior": { "hasEffect": false, "description": "text highlight only" },
+              "clickBehavior": { "navigates": true, "url": "/industries/general-industrial/refractory-additives/", "description": "navigates to Refractory Additives page" }
+            },
+            {
+              "label": "Construction",
+              "type": "link",
+              "hoverBehavior": { "hasEffect": false, "description": "text highlight only" },
+              "clickBehavior": { "navigates": true, "url": "/industries/general-industrial/construction/", "description": "navigates to Construction page" }
+            }
+          ]
+        },
+        {
+          "label": "Pharmaceutical Solutions",
+          "type": "category",
+          "hoverBehavior": {
+            "hasEffect": true,
+            "description": "highlights category and shows corresponding content pane with sub-groups and promo card"
+          },
+          "clickBehavior": {
+            "navigates": true,
+            "url": "/industries/pharmaceutical-solutions/",
+            "description": "navigates to Pharmaceutical Solutions category page"
+          },
+          "subItems": [
+            {
+              "label": "Fine Chemicals",
+              "type": "link",
+              "hoverBehavior": { "hasEffect": false, "description": "text highlight only" },
+              "clickBehavior": { "navigates": true, "url": "/industries/pharmaceutical-solutions/fine-chemicals/", "description": "navigates to Fine Chemicals page" }
+            },
+            {
+              "label": "Custom APIs",
+              "type": "link",
+              "hoverBehavior": { "hasEffect": false, "description": "text highlight only" },
+              "clickBehavior": { "navigates": true, "url": "/industries/pharmaceutical-solutions/fine-chemicals/custom-apis/", "description": "navigates to Custom APIs page" }
+            },
+            {
+              "label": "RSMs and Intermediates",
+              "type": "link",
+              "hoverBehavior": { "hasEffect": false, "description": "text highlight only" },
+              "clickBehavior": { "navigates": true, "url": "/industries/pharmaceutical-solutions/fine-chemicals/rsms-and-intermediates/", "description": "navigates to RSMs and Intermediates page" }
+            },
+            {
+              "label": "Generic APIs",
+              "type": "link",
+              "hoverBehavior": { "hasEffect": false, "description": "text highlight only" },
+              "clickBehavior": { "navigates": true, "url": "/industries/pharmaceutical-solutions/fine-chemicals/generic-apis/", "description": "navigates to Generic APIs page" }
+            },
+            {
+              "label": "Integrated Scale-Up",
+              "type": "link",
+              "hoverBehavior": { "hasEffect": false, "description": "text highlight only" },
+              "clickBehavior": { "navigates": true, "url": "/industries/pharmaceutical-solutions/fine-chemicals/integrated-scale-up/", "description": "navigates to Integrated Scale-Up page" }
+            },
+            {
+              "label": "Consultative Services",
+              "type": "link",
+              "hoverBehavior": { "hasEffect": false, "description": "text highlight only" },
+              "clickBehavior": { "navigates": true, "url": "/industries/pharmaceutical-solutions/fine-chemicals/consultative-services/", "description": "navigates to Consultative Services page" }
+            },
+            {
+              "label": "Facilities",
+              "type": "link",
+              "hoverBehavior": { "hasEffect": false, "description": "text highlight only" },
+              "clickBehavior": { "navigates": true, "url": "/industries/pharmaceutical-solutions/fine-chemicals/facilities/", "description": "navigates to Facilities page" }
+            },
+            {
+              "label": "Purification, Formulation and Delivery",
+              "type": "link",
+              "hoverBehavior": { "hasEffect": false, "description": "text highlight only" },
+              "clickBehavior": { "navigates": true, "url": "/industries/pharmaceutical-solutions/purification-formulation-delivery/", "description": "navigates to Purification, Formulation and Delivery page" }
+            },
+            {
+              "label": "Chromatography",
+              "type": "link",
+              "hoverBehavior": { "hasEffect": false, "description": "text highlight only" },
+              "clickBehavior": { "navigates": true, "url": "/industries/pharmaceutical-solutions/purification-formulation-delivery/chromatography/", "description": "navigates to Chromatography page" }
+            },
+            {
+              "label": "Excipients",
+              "type": "link",
+              "hoverBehavior": { "hasEffect": false, "description": "text highlight only" },
+              "clickBehavior": { "navigates": true, "url": "/industries/pharmaceutical-solutions/purification-formulation-delivery/excipients/", "description": "navigates to Excipients page" }
+            },
+            {
+              "label": "Active Ingredient Delivery",
+              "type": "link",
+              "hoverBehavior": { "hasEffect": false, "description": "text highlight only" },
+              "clickBehavior": { "navigates": true, "url": "/industries/pharmaceutical-solutions/purification-formulation-delivery/active-ingredient-delivery/", "description": "navigates to Active Ingredient Delivery page" }
+            },
+            {
+              "label": "Packaging Adsorbents",
+              "type": "link",
+              "hoverBehavior": { "hasEffect": false, "description": "text highlight only" },
+              "clickBehavior": { "navigates": true, "url": "/industries/pharmaceutical-solutions/packaging-adsorbents/", "description": "navigates to Packaging Adsorbents page" }
+            }
+          ]
+        },
+        {
+          "label": "Nutraceutical Solutions",
+          "type": "category",
+          "hoverBehavior": {
+            "hasEffect": true,
+            "description": "highlights category and shows corresponding content pane with sub-links and promo card"
+          },
+          "clickBehavior": {
+            "navigates": true,
+            "url": "/industries/nutraceutical-solutions/",
+            "description": "navigates to Nutraceutical Solutions category page"
+          },
+          "subItems": [
+            {
+              "label": "Vitamin Purification, Formulation and Delivery",
+              "type": "link",
+              "hoverBehavior": { "hasEffect": false, "description": "text highlight only" },
+              "clickBehavior": { "navigates": true, "url": "/industries/nutraceutical-solutions/vitamin-purification-formulation-delivery/", "description": "navigates to Vitamin Purification, Formulation and Delivery page" }
+            },
+            {
+              "label": "Lipid Purification, Formulation and Delivery",
+              "type": "link",
+              "hoverBehavior": { "hasEffect": false, "description": "text highlight only" },
+              "clickBehavior": { "navigates": true, "url": "/industries/nutraceutical-solutions/lipid-purification-formulation-delivery/", "description": "navigates to Lipid Purification, Formulation and Delivery page" }
+            },
+            {
+              "label": "CBD Purification, Formulation and Delivery",
+              "type": "link",
+              "hoverBehavior": { "hasEffect": false, "description": "text highlight only" },
+              "clickBehavior": { "navigates": true, "url": "/industries/nutraceutical-solutions/cbd-purification-formulation-delivery/", "description": "navigates to CBD Purification, Formulation and Delivery page" }
+            },
+            {
+              "label": "Nutraceutical CDMO",
+              "type": "link",
+              "hoverBehavior": { "hasEffect": false, "description": "text highlight only" },
+              "clickBehavior": { "navigates": true, "url": "/industries/nutraceutical-solutions/nutraceutical-cdmo/", "description": "navigates to Nutraceutical CDMO page" }
+            },
+            {
+              "label": "Traditional Herbal Medicine (THM) and Botanical Solutions",
+              "type": "link",
+              "hoverBehavior": { "hasEffect": false, "description": "text highlight only" },
+              "clickBehavior": { "navigates": true, "url": "/industries/nutraceutical-solutions/traditional-herbal-medicine/", "description": "navigates to THM and Botanical Solutions page" }
+            }
+          ]
+        },
+        {
+          "label": "Agriculture",
+          "type": "category",
+          "hoverBehavior": {
+            "hasEffect": true,
+            "description": "highlights category and shows corresponding content pane with sub-links and promo card"
+          },
+          "clickBehavior": {
+            "navigates": true,
+            "url": "/industries/agriculture/",
+            "description": "navigates to Agriculture category page"
+          },
+          "subItems": [
+            {
+              "label": "Agriculture CDMO",
+              "type": "link",
+              "hoverBehavior": { "hasEffect": false, "description": "text highlight only" },
+              "clickBehavior": { "navigates": true, "url": "/industries/agriculture/agriculture-cdmo/", "description": "navigates to Agriculture CDMO page" }
+            },
+            {
+              "label": "Animal Feed and Agricultural Active Solutions",
+              "type": "link",
+              "hoverBehavior": { "hasEffect": false, "description": "text highlight only" },
+              "clickBehavior": { "navigates": true, "url": "/industries/agriculture/animal-feed-agricultural-active-solutions/", "description": "navigates to Animal Feed and Agricultural Active Solutions page" }
+            }
+          ]
+        },
+        {
+          "label": "Personal Care",
+          "type": "category",
+          "hoverBehavior": {
+            "hasEffect": true,
+            "description": "highlights category and shows corresponding content pane with sub-links and promo card"
+          },
+          "clickBehavior": {
+            "navigates": true,
+            "url": "/industries/personal-care/",
+            "description": "navigates to Personal Care category page"
+          },
+          "subItems": [
+            {
+              "label": "Toothpaste",
+              "type": "link",
+              "hoverBehavior": { "hasEffect": false, "description": "text highlight only" },
+              "clickBehavior": { "navigates": true, "url": "/industries/personal-care/toothpaste/", "description": "navigates to Toothpaste page" }
+            },
+            {
+              "label": "Cosmetics",
+              "type": "link",
+              "hoverBehavior": { "hasEffect": false, "description": "text highlight only" },
+              "clickBehavior": { "navigates": true, "url": "/industries/personal-care/cosmetics/", "description": "navigates to Cosmetics page" }
+            }
+          ]
+        },
+        {
+          "label": "Food and Beverage",
+          "type": "category",
+          "hoverBehavior": {
+            "hasEffect": true,
+            "description": "highlights category and shows corresponding content pane with sub-links and promo card"
+          },
+          "clickBehavior": {
+            "navigates": true,
+            "url": "/industries/food-beverage/",
+            "description": "navigates to Food and Beverage category page"
+          },
+          "subItems": [
+            {
+              "label": "Beer",
+              "type": "link",
+              "hoverBehavior": { "hasEffect": false, "description": "text highlight only" },
+              "clickBehavior": { "navigates": true, "url": "/industries/food-beverage/beer/", "description": "navigates to Beer page" }
+            },
+            {
+              "label": "Edible Oil Refining",
+              "type": "link",
+              "hoverBehavior": { "hasEffect": false, "description": "text highlight only" },
+              "clickBehavior": { "navigates": true, "url": "/industries/food-beverage/edible-oil-refining/", "description": "navigates to Edible Oil Refining page" }
+            },
+            {
+              "label": "Food Processing",
+              "type": "link",
+              "hoverBehavior": { "hasEffect": false, "description": "text highlight only" },
+              "clickBehavior": { "navigates": true, "url": "/industries/food-beverage/food-processing/", "description": "navigates to Food Processing page" }
+            },
+            {
+              "label": "Beverage",
+              "type": "link",
+              "hoverBehavior": { "hasEffect": false, "description": "text highlight only" },
+              "clickBehavior": { "navigates": true, "url": "/industries/food-beverage/beverage/", "description": "navigates to Beverage page" }
+            }
+          ]
+        },
+        {
+          "label": "Biofuels",
+          "type": "category",
+          "hoverBehavior": {
+            "hasEffect": true,
+            "description": "highlights category and shows corresponding content pane with sub-groups and promo card"
+          },
+          "clickBehavior": {
+            "navigates": true,
+            "url": "/industries/biofuels/",
+            "description": "navigates to Biofuels category page"
+          },
+          "subItems": [
+            {
+              "label": "Biomass-based Diesel",
+              "type": "link",
+              "hoverBehavior": { "hasEffect": false, "description": "text highlight only" },
+              "clickBehavior": { "navigates": true, "url": "/industries/biofuels/biomass-based-diesel/", "description": "navigates to Biomass-based Diesel page" }
+            },
+            {
+              "label": "First Generation Biodiesel",
+              "type": "link",
+              "hoverBehavior": { "hasEffect": false, "description": "text highlight only" },
+              "clickBehavior": { "navigates": true, "url": "/industries/biofuels/biomass-based-diesel/first-generation-biodiesel/", "description": "navigates to First Generation Biodiesel page" }
+            },
+            {
+              "label": "Renewable Diesel",
+              "type": "link",
+              "hoverBehavior": { "hasEffect": false, "description": "text highlight only" },
+              "clickBehavior": { "navigates": true, "url": "/industries/biofuels/biomass-based-diesel/renewable-diesel/", "description": "navigates to Renewable Diesel page" }
+            },
+            {
+              "label": "Bioethanol",
+              "type": "link",
+              "hoverBehavior": { "hasEffect": false, "description": "text highlight only" },
+              "clickBehavior": { "navigates": true, "url": "/industries/biofuels/bioethanol/", "description": "navigates to Bioethanol page" }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Products",
+      "index": 1,
+      "hoverBehavior": {
+        "opensPanel": true,
+        "description": "opens simple dropdown list of product categories"
+      },
+      "clickBehavior": {
+        "navigates": true,
+        "url": "/products/",
+        "description": "navigates to products section page"
+      },
+      "panelType": "dropdown",
+      "panelLayoutDetails": {
+        "viewportContained": true,
+        "widthType": "auto",
+        "horizontalAlignment": "left-aligned",
+        "overlayBehavior": "none",
+        "extendsBeyondViewport": false,
+        "obscuresPageContent": "intentional",
+        "measuredLeft": 401.94,
+        "measuredRight": 745.94,
+        "measuredTop": 117.59,
+        "measuredWidth": 344,
+        "viewportWidth": 1440,
+        "cssPosition": "absolute",
+        "cssLeft": "0px",
+        "cssWidth": "280px"
+      },
+      "panelItems": [
+        {
+          "label": "Adsorbents",
+          "type": "link",
+          "hoverBehavior": { "hasEffect": false, "description": "text highlight only" },
+          "clickBehavior": { "navigates": true, "url": "/products/adsorbents/", "description": "navigates to Adsorbents page" }
+        },
+        {
+          "label": "Catalysts",
+          "type": "link",
+          "hoverBehavior": { "hasEffect": false, "description": "text highlight only" },
+          "clickBehavior": { "navigates": true, "url": "/products/catalysts/", "description": "navigates to Catalysts page" }
+        },
+        {
+          "label": "Fine Chemicals",
+          "type": "link",
+          "hoverBehavior": { "hasEffect": false, "description": "text highlight only" },
+          "clickBehavior": { "navigates": true, "url": "/products/fine-chemicals/", "description": "navigates to Fine Chemicals page" }
+        },
+        {
+          "label": "Synthetic Silicas",
+          "type": "link",
+          "hoverBehavior": { "hasEffect": false, "description": "text highlight only" },
+          "clickBehavior": { "navigates": true, "url": "/products/synthetic-silicas/", "description": "navigates to Synthetic Silicas page" }
+        },
+        {
+          "label": "Product Stewardship",
+          "type": "link",
+          "hoverBehavior": { "hasEffect": false, "description": "text highlight only" },
+          "clickBehavior": { "navigates": true, "url": "/products/product-stewardship/", "description": "navigates to Product Stewardship page" }
+        },
+        {
+          "label": "Quality",
+          "type": "link",
+          "hoverBehavior": { "hasEffect": false, "description": "text highlight only" },
+          "clickBehavior": { "navigates": true, "url": "/products/quality-management/", "description": "navigates to Quality page" }
+        }
+      ]
+    },
+    {
+      "label": "Resources",
+      "index": 2,
+      "hoverBehavior": {
+        "opensPanel": true,
+        "description": "opens simple dropdown list of resource links"
+      },
+      "clickBehavior": {
+        "navigates": true,
+        "url": "/resources/",
+        "description": "navigates to resources section page"
+      },
+      "panelType": "dropdown",
+      "panelLayoutDetails": {
+        "viewportContained": true,
+        "widthType": "auto",
+        "horizontalAlignment": "left-aligned",
+        "overlayBehavior": "none",
+        "extendsBeyondViewport": false,
+        "obscuresPageContent": "intentional",
+        "measuredLeft": 493.38,
+        "measuredRight": 837.38,
+        "measuredTop": 117.59,
+        "measuredWidth": 344,
+        "viewportWidth": 1440,
+        "cssPosition": "absolute",
+        "cssLeft": "0px",
+        "cssWidth": "280px"
+      },
+      "panelItems": [
+        {
+          "label": "Catalagram",
+          "type": "link",
+          "hoverBehavior": { "hasEffect": false, "description": "text highlight only" },
+          "clickBehavior": { "navigates": true, "url": "/resources/catalagram/", "description": "navigates to Catalagram page" }
+        },
+        {
+          "label": "Insights",
+          "type": "link",
+          "hoverBehavior": { "hasEffect": false, "description": "text highlight only" },
+          "clickBehavior": { "navigates": true, "url": "/resources/insights/", "description": "navigates to Insights page" }
+        },
+        {
+          "label": "Newsroom",
+          "type": "link",
+          "hoverBehavior": { "hasEffect": false, "description": "text highlight only" },
+          "clickBehavior": { "navigates": true, "url": "/resources/newsroom/", "description": "navigates to Newsroom page" }
+        }
+      ]
+    },
+    {
+      "label": "People and Careers",
+      "index": 3,
+      "hoverBehavior": {
+        "opensPanel": true,
+        "description": "opens simple dropdown list of career links"
+      },
+      "clickBehavior": {
+        "navigates": true,
+        "url": "/people-and-careers/",
+        "description": "navigates to people and careers section page"
+      },
+      "panelType": "dropdown",
+      "panelLayoutDetails": {
+        "viewportContained": true,
+        "widthType": "auto",
+        "horizontalAlignment": "left-aligned",
+        "overlayBehavior": "none",
+        "extendsBeyondViewport": false,
+        "obscuresPageContent": "intentional",
+        "measuredLeft": 593.81,
+        "measuredRight": 937.81,
+        "measuredTop": 117.59,
+        "measuredWidth": 344,
+        "viewportWidth": 1440,
+        "cssPosition": "absolute",
+        "cssLeft": "0px",
+        "cssWidth": "280px"
+      },
+      "panelItems": [
+        {
+          "label": "Early Career Programs",
+          "type": "link",
+          "hoverBehavior": { "hasEffect": false, "description": "text highlight only" },
+          "clickBehavior": { "navigates": true, "url": "/people-and-careers/early-career-programs/", "description": "navigates to Early Career Programs page" }
+        },
+        {
+          "label": "Germany Apprenticeships",
+          "type": "link",
+          "hoverBehavior": { "hasEffect": false, "description": "text highlight only" },
+          "clickBehavior": { "navigates": true, "url": "/people-and-careers/germany-apprenticeships/", "description": "navigates to Germany Apprenticeships page" }
+        },
+        {
+          "label": "Internships",
+          "type": "link",
+          "hoverBehavior": { "hasEffect": false, "description": "text highlight only" },
+          "clickBehavior": { "navigates": true, "url": "/people-and-careers/internships/", "description": "navigates to Internships page" }
+        },
+        {
+          "label": "Life at Grace",
+          "type": "link",
+          "hoverBehavior": { "hasEffect": false, "description": "text highlight only" },
+          "clickBehavior": { "navigates": true, "url": "/people-and-careers/life-at-grace/", "description": "navigates to Life at Grace page" }
+        },
+        {
+          "label": "Open Positions",
+          "type": "link",
+          "hoverBehavior": { "hasEffect": false, "description": "text highlight only" },
+          "clickBehavior": { "navigates": true, "url": "/people-and-careers/view-all-jobs/", "description": "navigates to Open Positions page" }
+        }
+      ]
+    },
+    {
+      "label": "About Grace",
+      "index": 4,
+      "hoverBehavior": {
+        "opensPanel": true,
+        "description": "opens dropdown list of about grace links"
+      },
+      "clickBehavior": {
+        "navigates": true,
+        "url": "/about-grace/",
+        "description": "navigates to about grace section page"
+      },
+      "panelType": "dropdown",
+      "panelLayoutDetails": {
+        "viewportContained": true,
+        "widthType": "auto",
+        "horizontalAlignment": "left-aligned",
+        "overlayBehavior": "none",
+        "extendsBeyondViewport": false,
+        "obscuresPageContent": "intentional",
+        "measuredLeft": 752.73,
+        "measuredRight": 1096.73,
+        "measuredTop": 117.59,
+        "measuredWidth": 344,
+        "viewportWidth": 1440,
+        "cssPosition": "absolute",
+        "cssLeft": "0px",
+        "cssWidth": "280px"
+      },
+      "panelItems": [
+        {
+          "label": "Awards and Recognition",
+          "type": "link",
+          "hoverBehavior": { "hasEffect": false, "description": "text highlight only" },
+          "clickBehavior": { "navigates": true, "url": "/about-grace/awards-and-recognition/", "description": "navigates to Awards and Recognition page" }
+        },
+        {
+          "label": "Community",
+          "type": "link",
+          "hoverBehavior": { "hasEffect": false, "description": "text highlight only" },
+          "clickBehavior": { "navigates": true, "url": "/about-grace/community/", "description": "navigates to Community page" }
+        },
+        {
+          "label": "Environmental, Health & Safety",
+          "type": "link",
+          "hoverBehavior": { "hasEffect": false, "description": "text highlight only" },
+          "clickBehavior": { "navigates": true, "url": "/about-grace/environmental-health-and-safety/", "description": "navigates to Environmental Health and Safety page" }
+        },
+        {
+          "label": "Leadership Team",
+          "type": "link",
+          "hoverBehavior": { "hasEffect": false, "description": "text highlight only" },
+          "clickBehavior": { "navigates": true, "url": "/about-grace/leadership-team/", "description": "navigates to Leadership Team page" }
+        },
+        {
+          "label": "Locations",
+          "type": "link",
+          "hoverBehavior": { "hasEffect": false, "description": "text highlight only" },
+          "clickBehavior": { "navigates": true, "url": "/about-grace/locations/", "description": "navigates to Locations page" }
+        },
+        {
+          "label": "Our History",
+          "type": "link",
+          "hoverBehavior": { "hasEffect": false, "description": "text highlight only" },
+          "clickBehavior": { "navigates": true, "url": "/about-grace/our-history/", "description": "navigates to Our History page" }
+        },
+        {
+          "label": "Sustainability",
+          "type": "link",
+          "hoverBehavior": { "hasEffect": false, "description": "text highlight only" },
+          "clickBehavior": { "navigates": true, "url": "/about-grace/sustainability/", "description": "navigates to Sustainability page" }
+        },
+        {
+          "label": "This is Grace",
+          "type": "link",
+          "hoverBehavior": { "hasEffect": false, "description": "text highlight only" },
+          "clickBehavior": { "navigates": true, "url": "/about-grace/this-is-grace/", "description": "navigates to This is Grace page" }
+        }
+      ]
+    },
+    {
+      "label": "Contact Us",
+      "index": 5,
+      "hoverBehavior": {
+        "opensPanel": false,
+        "description": "text highlight only, no dropdown panel"
+      },
+      "clickBehavior": {
+        "navigates": true,
+        "url": "/contact-us/",
+        "description": "navigates to contact us page"
+      },
+      "panelType": "none",
+      "panelItems": []
+    }
+  ],
+  "totalItemsAnalyzed": 145,
+  "confidence": 0.95,
+  "notes": [
+    "Industries megamenu has a two-column layout: left column with 11 category links, right column with context-sensitive content pane",
+    "All 11 industry categories have deep nesting with sub-links and a promotional card in the content pane",
+    "Hovering a category in the left column swaps the right-column content pane to show that category's sub-groups and promo card",
+    "Megamenu panel is 1100px wide, positioned absolute with left offset, fully contained within 1440px viewport",
+    "Products, Resources, People and Careers, and About Grace use simple vertical dropdown lists opened on hover",
+    "Contact Us has no dropdown and navigates directly to the contact page",
+    "All dropdown triggers use hover to open and hover-out to close",
+    "Clicking any top-level nav label navigates to the corresponding section landing page",
+    "Megamenu panel background is rgb(230, 231, 232) with absolute positioning",
+    "An overlay element is present behind the megamenu panel"
+  ]
+}

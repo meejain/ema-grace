@@ -1,0 +1,159 @@
+{
+  "rows": [
+    { "index": 0, "hasImages": false, "hasHamburgerIcon": false, "hasSearchForm": false, "hasLocaleSelector": false },
+    { "index": 1, "hasImages": true, "hasHamburgerIcon": false, "hasSearchForm": true, "hasLocaleSelector": false }
+  ],
+  "rowMapping": {
+    "rows": [
+      {
+        "index": 0,
+        "description": "Utility navigation bar - dark/black background strip at top",
+        "alignmentGroups": ["right"],
+        "spacing": "right-aligned single link",
+        "backgroundDifference": true,
+        "hasImages": false,
+        "hasHoverBehavior": true,
+        "hasClickBehavior": true,
+        "hasSearchForm": false,
+        "hasLocaleSelector": false,
+        "elements": [
+          {
+            "id": "row-0-utility-link",
+            "type": "link",
+            "label": "Vendors and Suppliers",
+            "href": "/content/grace/us/en/vendor-suppliers.html",
+            "alignment": "right",
+            "styles": {
+              "color": "rgb(255, 255, 255)",
+              "fontSize": "12px",
+              "fontWeight": "700"
+            }
+          }
+        ],
+        "styles": {
+          "backgroundColor": "rgb(0, 0, 0)",
+          "height": "40px"
+        }
+      },
+      {
+        "index": 1,
+        "description": "Main navigation bar - white background with logo, nav links, search icon",
+        "alignmentGroups": ["left", "center-right", "right"],
+        "spacing": "logo left, nav links center-right, search icon far right",
+        "backgroundDifference": true,
+        "hasImages": true,
+        "hasHoverBehavior": true,
+        "hasClickBehavior": true,
+        "hasSearchForm": true,
+        "searchFormDetails": {
+          "formType": "expandable-icon",
+          "inputPlaceholder": "Search our site",
+          "hasSubmitButton": true,
+          "hasAutocomplete": false,
+          "position": "far-right",
+          "opensFullPageOverlay": true,
+          "hasProductFilter": true,
+          "hasTopSearchedProducts": true
+        },
+        "hasLocaleSelector": false,
+        "hasHamburgerIcon": false,
+        "elements": [
+          {
+            "id": "row-1-logo",
+            "type": "image-link",
+            "label": "Grace Logo",
+            "href": "/content/grace/us/en.html",
+            "alignment": "left",
+            "imageSrc": "https://grace.scene7.com/is/image/grace/Grace-logo-COLOR",
+            "dimensions": { "width": 150, "height": 50 }
+          },
+          {
+            "id": "row-1-nav-industries",
+            "type": "nav-link-with-dropdown",
+            "label": "Industries",
+            "href": "/content/grace/us/en/industries.html",
+            "alignment": "center",
+            "hoverBehavior": "opens megamenu with left categories + right sub-panels + promotional block",
+            "clickBehavior": "navigates to industries page"
+          },
+          {
+            "id": "row-1-nav-products",
+            "type": "nav-link-with-dropdown",
+            "label": "Products",
+            "href": "/content/grace/us/en/products.html",
+            "alignment": "center",
+            "hoverBehavior": "opens simple dropdown list (Adsorbents, Catalysts, Fine Chemicals, Synthetic Silicas, Product Stewardship, Quality)",
+            "clickBehavior": "navigates to products page"
+          },
+          {
+            "id": "row-1-nav-resources",
+            "type": "nav-link-with-dropdown",
+            "label": "Resources",
+            "href": "/content/grace/us/en/resources.html",
+            "alignment": "center",
+            "hoverBehavior": "opens simple dropdown list (Catalagram, Insights, Newsroom)",
+            "clickBehavior": "navigates to resources page"
+          },
+          {
+            "id": "row-1-nav-people-careers",
+            "type": "nav-link-with-dropdown",
+            "label": "People and Careers",
+            "href": "/content/grace/us/en/people-and-careers.html",
+            "alignment": "center",
+            "hoverBehavior": "opens simple dropdown list (Early Career Programs, Germany Apprenticeships, Internships, Life at Grace, Open Positions)",
+            "clickBehavior": "navigates to people-and-careers page"
+          },
+          {
+            "id": "row-1-nav-about-grace",
+            "type": "nav-link-with-dropdown",
+            "label": "About Grace",
+            "href": "/content/grace/us/en/about-grace.html",
+            "alignment": "center",
+            "hoverBehavior": "opens dropdown with list + featured promotional block on hover of first item",
+            "clickBehavior": "navigates to about-grace page"
+          },
+          {
+            "id": "row-1-nav-contact-us",
+            "type": "nav-link",
+            "label": "Contact Us",
+            "href": "/content/grace/us/en/contact-us.html",
+            "alignment": "center",
+            "hoverBehavior": "no dropdown - text highlight only",
+            "clickBehavior": "navigates to contact-us page"
+          },
+          {
+            "id": "row-1-search",
+            "type": "button",
+            "label": "Search",
+            "alignment": "right",
+            "hoverBehavior": "cursor pointer",
+            "clickBehavior": "opens full-page search overlay with input, product filter checkbox, and top searched products"
+          }
+        ],
+        "styles": {
+          "backgroundColor": "rgb(255, 255, 255)",
+          "height": "81px",
+          "fontFamily": "Roboto Slab, serif",
+          "fontSize": "14px",
+          "fontWeight": "700",
+          "color": "rgb(0, 0, 0)"
+        }
+      }
+    ],
+    "confidence": 0.95,
+    "uncertainty": false,
+    "notes": [
+      "Row 0: Utility bar (.util-nav) with black background, 40px height, single right-aligned link",
+      "Row 1: Main nav with white background, ~81px height, contains logo (left), 6 nav links (center-right), search button (far right)",
+      "Industries has a complex megamenu with left category column + right sub-columns + promotional block with image",
+      "Products, Resources, People and Careers have simple dropdown lists",
+      "About Grace has a dropdown with a featured promotional block for the first item",
+      "Contact Us has no dropdown - direct link only",
+      "Search button opens a full-page overlay with search input, Show products only checkbox, and Top Searched Products section",
+      "Nav links use Roboto Slab serif font, 14px, bold, black color",
+      "No hamburger icon visible on desktop",
+      "No locale/language selector detected",
+      "Active/hovered nav link text turns green (#669900 or similar)"
+    ]
+  }
+}

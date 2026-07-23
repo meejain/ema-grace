@@ -1,0 +1,40 @@
+{
+  "viewport": { "width": 375, "height": 812 },
+  "breakpointPx": 900,
+  "headerBar": {
+    "left": "hamburger-icon",
+    "center": "logo",
+    "right": "search-icon"
+  },
+  "menuTrigger": "hamburger",
+  "hamburgerAnimation": {
+    "type": "morph-to-cross",
+    "method": "css-transform",
+    "transition": "0.3s"
+  },
+  "openBehavior": "slide-in-panel",
+  "navItems": [
+    { "label": "Industries", "hasChevron": true, "hasSubItems": true, "subItemCount": 11 },
+    { "label": "Products", "hasChevron": true, "hasSubItems": true, "subItemCount": 6 },
+    { "label": "Resources", "hasChevron": true, "hasSubItems": true },
+    { "label": "People and Careers", "hasChevron": true, "hasSubItems": true },
+    { "label": "About Grace", "hasChevron": true, "hasSubItems": true },
+    { "label": "Contact Us", "hasChevron": false, "hasSubItems": false }
+  ],
+  "slideInPanelBehavior": {
+    "direction": "instant-replace",
+    "hasBackButton": true,
+    "backButtonLabel": "\u00ab MAIN MENU",
+    "hasBreadcrumb": true,
+    "breadcrumbClickable": true,
+    "maxDepth": 3
+  },
+  "utilitySection": {
+    "position": "bottom",
+    "background": "dark",
+    "items": ["Vendors and Suppliers"]
+  },
+  "hasSearchForm": false,
+  "hasLocaleSelector": false,
+  "confidence": 0.95
+}

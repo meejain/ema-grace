@@ -1,0 +1,11 @@
+{
+  "allCovered": true,
+  "headings": [
+    { "label": "Industries", "clicked": true, "subItemCount": 11, "behaviorMatches": true, "pattern": "slide-in-panel", "notes": "Shows 11 industry categories with chevrons, 3-level deep drill-down verified" },
+    { "label": "Products", "clicked": true, "subItemCount": 6, "behaviorMatches": true, "pattern": "slide-in-panel", "notes": "Shows 6 product categories (Adsorbents, Catalysts, Fine Chemicals, Synthetic Silicas, Silica-Based Pharma Solutions, Custom Solutions)" },
+    { "label": "Resources", "clicked": true, "subItemCount": 3, "behaviorMatches": true, "pattern": "slide-in-panel", "notes": "Shows 3 leaf items: Catalagram, Insights, Newsroom" },
+    { "label": "People and Careers", "clicked": true, "subItemCount": 5, "behaviorMatches": true, "pattern": "slide-in-panel", "notes": "Shows 5 leaf items: Early Career Programs, Germany Apprenticeships, Internships, Life at Grace, Open Positions" },
+    { "label": "About Grace", "clicked": true, "subItemCount": 8, "behaviorMatches": true, "pattern": "slide-in-panel", "notes": "Shows 8 leaf items: Awards and Recognition, Community, Environmental Health & Safety, Leadership Team, Locations, Our History, Sustainability, This is Grace" },
+    { "label": "Contact Us", "clicked": true, "subItemCount": 0, "behaviorMatches": true, "pattern": "leaf-link", "notes": "No sub-items, no chevron — acts as direct link to /contact-us/" }
+  ]
+}

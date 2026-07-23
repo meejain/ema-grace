@@ -1,0 +1,67 @@
+{
+  "breakpointPx": 900,
+  "menuTrigger": "hamburger",
+  "openBehavior": "slide-in-panel",
+  "tapVsHover": "tap-only",
+  "nestedBehavior": "slide-in-subpanel",
+  "hasMegamenuOnMobile": false,
+  "hamburgerAnimation": {
+    "type": "morph-to-cross",
+    "method": "css-transform",
+    "transition": "0.3s",
+    "details": "3 bars (.top, .middle, .bottom), top rotates +45deg, bottom rotates -45deg, middle overlaps. Black (#000) bars, 20px x 3px."
+  },
+  "mobileMenuLayout": "slide-in-subpanel",
+  "slideInPanelBehavior": {
+    "direction": "left-to-right",
+    "hasBackButton": true,
+    "backButtonLabel": "« MAIN MENU",
+    "backButtonPosition": "top-left",
+    "transitionType": "css-transform-translateX",
+    "hasBreadcrumb": true,
+    "breadcrumbFormat": "Category / Subcategory / Sub-subcategory",
+    "breadcrumbClickable": true,
+    "maxDepth": 3
+  },
+  "mobileHeaderLayout": {
+    "left": "hamburger-icon",
+    "center": "logo",
+    "right": "search-icon"
+  },
+  "hasSearchForm": false,
+  "hasLocaleSelector": false,
+  "navItems": [
+    { "label": "Industries", "hasChevron": true, "hasSubItems": true, "subItemCount": 11 },
+    { "label": "Products", "hasChevron": true, "hasSubItems": true, "subItemCount": 6 },
+    { "label": "Resources", "hasChevron": true, "hasSubItems": true },
+    { "label": "People and Careers", "hasChevron": true, "hasSubItems": true },
+    { "label": "About Grace", "hasChevron": true, "hasSubItems": true },
+    { "label": "Contact Us", "hasChevron": false, "hasSubItems": false }
+  ],
+  "vendorsAndSuppliers": {
+    "position": "bottom",
+    "background": "dark",
+    "separateSection": true
+  },
+  "accordionBehavior": {
+    "type": "none",
+    "notes": "This site uses slide-in-panel pattern, NOT accordion. See slideInPanelBehavior for mobile menu behavior details."
+  },
+  "overlayBehavior": {
+    "hasOverlay": false,
+    "overlayType": "none"
+  },
+  "confidence": 0.95,
+  "uncertainty": false,
+  "notes": [
+    "Mobile uses slide-in-panel pattern, NOT accordion",
+    "Hamburger morphs to X via CSS transform rotation (0.3s transition)",
+    "Back link always shows « MAIN MENU regardless of depth",
+    "Breadcrumb trail shows navigation path (clickable links)",
+    "Items with sub-pages show right chevron (>), leaf items do not",
+    "Vendors and Suppliers shown in dark area at bottom of main menu level",
+    "No background overlay when menu is open",
+    "Up to 3 levels deep (e.g. Industries > Refining Technologies > FCC Catalyst Solutions > leaf items)",
+    "Search icon remains visible in header bar when menu is open"
+  ]
+}

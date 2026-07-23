@@ -1,0 +1,97 @@
+{
+  "columnCount": 2,
+  "hasImages": true,
+  "hasSearchForm": false,
+  "hasLocaleSelector": false,
+  "columns": [
+    { "columnIndex": 0, "hasImages": false },
+    { "columnIndex": 1, "hasImages": true }
+  ],
+  "megamenuAnalysis": {
+    "trigger": {
+      "navItem": "Industries",
+      "triggerType": "hover",
+      "hoverOpensPanel": true,
+      "hoverOutClosesPanel": true,
+      "clickNavigatesToPage": true,
+      "href": "/content/grace/us/en/industries.html"
+    },
+    "panel": {
+      "dimensions": {
+        "width": 1240,
+        "height": 507,
+        "top": 120,
+        "left": 100,
+        "right": 1340
+      },
+      "styles": {
+        "backgroundColor": "rgb(230, 231, 232)",
+        "position": "absolute",
+        "zIndex": "above-overlay"
+      },
+      "layout": {
+        "type": "two-column",
+        "leftColumn": {
+          "description": "Vertical list of 11 industry category links",
+          "itemCount": 11,
+          "categories": [
+            "Refining Technologies",
+            "Chemical Processing",
+            "Plastics and Polymers",
+            "Coatings",
+            "General Industrial",
+            "Pharmaceutical Solutions",
+            "Nutraceutical Solutions",
+            "Agriculture",
+            "Personal Care",
+            "Food and Beverage",
+            "Biofuels"
+          ],
+          "itemBehavior": {
+            "hover": "highlights category, shows corresponding right-panel content",
+            "click": "navigates to category page"
+          },
+          "itemStructure": {
+            "element": "a.image.dark-overlay",
+            "hasBackgroundImage": true,
+            "hasDarkOverlay": true,
+            "note": "Each category item uses a promotional background image via CSS background-image on an anchor with .image.dark-overlay class"
+          }
+        },
+        "rightColumn": {
+          "description": "Context-sensitive panel that changes based on hovered left-column category",
+          "defaultContent": "Promotional image card for the hovered category",
+          "deepNestedCategory": "Refining Technologies",
+          "deepNestedNote": "Only Refining Technologies has deep nested sub-groups (4 content groups + promo card). All other categories show a simple promotional image card."
+        }
+      }
+    },
+    "overlay": {
+      "type": "semi-transparent-dark",
+      "coversPageContent": true,
+      "dismissesOnClick": true,
+      "note": "Semi-transparent dark overlay behind the panel covering page content"
+    },
+    "animation": {
+      "type": "css-show-hide",
+      "slideEffect": false,
+      "fadeEffect": false,
+      "note": "No slide or fade animation observed; simple CSS display toggle"
+    },
+    "hasImages": true,
+    "hasSearchForm": false,
+    "hasLocaleSelector": false,
+    "confidence": 0.95,
+    "uncertainty": false,
+    "notes": [
+      "Industries megamenu is the only megamenu-style dropdown; other nav items use simple dropdowns",
+      "Panel is 1240px wide, ~507px tall, positioned below main nav bar",
+      "Light gray background (rgb(230, 231, 232)) for the panel",
+      "Left column has 11 industry categories, each with a promotional background image and dark overlay",
+      "Right column shows sub-categories for Refining Technologies (4 groups + promo card) or a promotional image card for all other categories",
+      "Hovering a left-column category swaps the right-column content",
+      "Semi-transparent dark overlay covers the page behind the panel",
+      "No search form or locale selector within the megamenu"
+    ]
+  }
+}

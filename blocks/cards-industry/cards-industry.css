@@ -1,0 +1,127 @@
+/* Industries section - light background with heading left, cards right */
+.cards-industry-container {
+  background-color: #e8eef2;
+  color: var(--text-color);
+  padding: var(--spacing-l) 0;
+  margin: 0;
+}
+
+.cards-industry-container h3 {
+  color: var(--text-color);
+  font-family: var(--heading-font-family);
+  font-size: var(--heading-font-size-l);
+  font-weight: 300;
+  line-height: 1.15;
+  margin-bottom: var(--spacing-s);
+}
+
+/* "View all Industries" button */
+.cards-industry-container .default-content-wrapper:last-child .button-wrapper {
+  margin-top: var(--spacing-s);
+}
+
+.cards-industry-container .default-content-wrapper:last-child a.button:any-link {
+  background-color: var(--white);
+  color: var(--text-color);
+  font-family: var(--heading-font-family);
+  font-size: var(--body-font-size-m);
+  font-weight: 600;
+  padding: 18px 30px;
+  border: 0;
+}
+
+.cards-industry-container .default-content-wrapper:last-child a.button:hover {
+  background-color: var(--accent-color-hover);
+  color: var(--white);
+}
+
+/* cards grid */
+.cards-industry > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.cards-industry > ul > li {
+  border: 0;
+  background-color: transparent;
+  position: relative;
+  overflow: hidden;
+}
+
+.cards-industry .cards-industry-card-image {
+  line-height: 0;
+}
+
+.cards-industry > ul > li img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  display: block;
+}
+
+/* green label banner below image */
+.cards-industry .cards-industry-card-body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--accent-color);
+  text-align: center;
+}
+
+.cards-industry .cards-industry-card-body a:any-link {
+  display: block;
+  font-family: var(--heading-font-family);
+  font-size: var(--body-font-size-m);
+  font-weight: 600;
+  color: var(--text-color);
+  text-decoration: none;
+  padding: 14px 25px;
+  transition: all var(--transition-speed) ease;
+}
+
+.cards-industry .cards-industry-card-body a::after {
+  content: ' \203A';
+  font-size: 1.2em;
+}
+
+.cards-industry .cards-industry-card-body a:hover {
+  background-color: var(--accent-color-hover);
+  color: var(--white);
+}
+
+@media (width >= 900px) {
+  .cards-industry-container {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 0 32px;
+    align-items: start;
+    padding-left: max(32px, 50% - 624px);
+    padding-right: max(32px, 50% - 624px);
+  }
+
+  .cards-industry-container > .default-content-wrapper,
+  .cards-industry-container > .cards-industry-wrapper {
+    max-width: none;
+    padding: 0;
+  }
+
+  .cards-industry-container > .default-content-wrapper:first-child {
+    grid-column: 1;
+    grid-row: 1 / 3;
+  }
+
+  .cards-industry-container > .cards-industry-wrapper {
+    grid-column: 2;
+  }
+
+  .cards-industry-container > .default-content-wrapper:last-child {
+    grid-column: 2;
+  }
+
+  .cards-industry > ul {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

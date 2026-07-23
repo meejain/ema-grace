@@ -1,0 +1,2894 @@
+{
+  "items": [
+    {
+      "id": "trigger-0",
+      "label": "Industries",
+      "type": "nav-trigger",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to industries section page",
+        "migratedDescription": "navigates to industries section page",
+        "sourceUrl": "/industries/",
+        "migratedUrl": "/industries/"
+      },
+      "stylingMatch": {
+        "matches": true
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-0-panel-layout",
+      "label": "Panel layout (Industries)",
+      "type": "panel-layout",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "N/A",
+        "migratedDescription": "N/A"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "N/A",
+        "migratedDescription": "N/A"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "sourceDescription": "{\"viewportContained\":true,\"widthType\":\"fixed\",\"horizontalAlignment\":\"left-offset\",\"overlayBehavior\":\"semi-transparent-dark\",\"extendsBeyondViewport\":false,\"obscuresPageContent\":\"intentional\",\"measuredLeft\":202,\"measuredRight\":1302,\"measuredTop\":117.59,\"measuredWidth\":1100,\"viewportWidth\":1440,\"cssPosition\":\"absolute\",\"cssLeft\":\"-100px\",\"cssWidth\":\"1100px\"}",
+        "migratedDescription": "{\"viewportContained\":true,\"widthType\":\"fixed\",\"horizontalAlignment\":\"left-offset\",\"overlayBehavior\":\"semi-transparent-dark\",\"extendsBeyondViewport\":false,\"obscuresPageContent\":\"intentional\",\"measuredLeft\":202,\"measuredRight\":1302,\"measuredTop\":117.59,\"measuredWidth\":1100,\"measuredHeight\":468.06,\"viewportWidth\":1440,\"cssPosition\":\"absolute\",\"cssLeft\":\"-100px\",\"cssWidth\":\"1100px\"}"
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-0-item-0",
+      "label": "Refining Technologies",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "highlights category and shows corresponding content pane with sub-groups and promo card",
+        "migratedDescription": "highlights category and shows corresponding content pane with sub-groups and promo card"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to Refining Technologies category page",
+        "migratedDescription": "navigates to Refining Technologies category page",
+        "sourceUrl": "/industries/refining-technologies/",
+        "migratedUrl": "/industries/refining-technologies/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-0-item-0-item-0",
+      "label": "FCC Catalyst Solutions",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to FCC Catalyst Solutions page",
+        "migratedDescription": "navigates to FCC Catalyst Solutions page",
+        "sourceUrl": "/industries/refining-technologies/fcc-catalyst-application/",
+        "migratedUrl": "/industries/refining-technologies/fcc-catalyst-application/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-0-item-0-item-1",
+      "label": "Maximize Propylene",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to Maximize Propylene page",
+        "migratedDescription": "navigates to Maximize Propylene page",
+        "sourceUrl": "/industries/refining-technologies/fcc-catalyst-application/maximize-propylene/",
+        "migratedUrl": "/industries/refining-technologies/fcc-catalyst-application/maximize-propylene/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-0-item-0-item-2",
+      "label": "Butylene Selectivity",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to Butylene Selectivity page",
+        "migratedDescription": "navigates to Butylene Selectivity page",
+        "sourceUrl": "/industries/refining-technologies/fcc-catalyst-application/butylene-selectivity/",
+        "migratedUrl": "/industries/refining-technologies/fcc-catalyst-application/butylene-selectivity/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-0-item-0-item-3",
+      "label": "Resid Conversion",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to Resid Conversion page",
+        "migratedDescription": "navigates to Resid Conversion page",
+        "sourceUrl": "/industries/refining-technologies/fcc-catalyst-application/resid-conversion/",
+        "migratedUrl": "/industries/refining-technologies/fcc-catalyst-application/resid-conversion/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-0-item-0-item-4",
+      "label": "Light Feed Performance",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to Light Feed Performance page",
+        "migratedDescription": "navigates to Light Feed Performance page",
+        "sourceUrl": "/industries/refining-technologies/fcc-catalyst-application/light-feed-performance/",
+        "migratedUrl": "/industries/refining-technologies/fcc-catalyst-application/light-feed-performance/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-0-item-0-item-5",
+      "label": "Value Creation",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to Value Creation page",
+        "migratedDescription": "navigates to Value Creation page",
+        "sourceUrl": "/industries/refining-technologies/value-creation/",
+        "migratedUrl": "/industries/refining-technologies/value-creation/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-0-item-0-item-6",
+      "label": "Technical Service Expertise",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to Technical Service Expertise page",
+        "migratedDescription": "navigates to Technical Service Expertise page",
+        "sourceUrl": "/industries/refining-technologies/value-creation/technical-service-expertise/",
+        "migratedUrl": "/industries/refining-technologies/value-creation/technical-service-expertise/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-0-item-0-item-7",
+      "label": "Specialized Evaluation Tools",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to Specialized Evaluation Tools page",
+        "migratedDescription": "navigates to Specialized Evaluation Tools page",
+        "sourceUrl": "/industries/refining-technologies/value-creation/specialized-evaluation-tools/",
+        "migratedUrl": "/industries/refining-technologies/value-creation/specialized-evaluation-tools/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-0-item-0-item-8",
+      "label": "Sustainable Solutions for FCC",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to Sustainable Solutions for FCC page",
+        "migratedDescription": "navigates to Sustainable Solutions for FCC page",
+        "sourceUrl": "/industries/refining-technologies/value-creation/sustainability/",
+        "migratedUrl": "/industries/refining-technologies/value-creation/sustainability/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-0-item-0-item-9",
+      "label": "FCC Additive Solutions",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to FCC Additive Solutions page",
+        "migratedDescription": "navigates to FCC Additive Solutions page",
+        "sourceUrl": "/industries/refining-technologies/fcc-additive-solutions/",
+        "migratedUrl": "/industries/refining-technologies/fcc-additive-solutions/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-0-item-0-item-10",
+      "label": "SOx Reduction",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to SOx Reduction page",
+        "migratedDescription": "navigates to SOx Reduction page",
+        "sourceUrl": "/industries/refining-technologies/fcc-additive-solutions/sox-reduction/",
+        "migratedUrl": "/industries/refining-technologies/fcc-additive-solutions/sox-reduction/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-0-item-0-item-11",
+      "label": "Gasoline Sulphur Reduction",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to Gasoline Sulphur Reduction page",
+        "migratedDescription": "navigates to Gasoline Sulphur Reduction page",
+        "sourceUrl": "/industries/refining-technologies/fcc-additive-solutions/gasoline-sulphur-reduction/",
+        "migratedUrl": "/industries/refining-technologies/fcc-additive-solutions/gasoline-sulphur-reduction/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-0-item-0-item-12",
+      "label": "Light Olefins",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to Light Olefins page",
+        "migratedDescription": "navigates to Light Olefins page",
+        "sourceUrl": "/industries/refining-technologies/fcc-additive-solutions/light-olefins/",
+        "migratedUrl": "/industries/refining-technologies/fcc-additive-solutions/light-olefins/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-0-item-0-item-13",
+      "label": "NOx Reduction",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to NOx Reduction page",
+        "migratedDescription": "navigates to NOx Reduction page",
+        "sourceUrl": "/industries/refining-technologies/fcc-additive-solutions/nox-reduction/",
+        "migratedUrl": "/industries/refining-technologies/fcc-additive-solutions/nox-reduction/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-0-item-0-item-14",
+      "label": "Combustion Promoter",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to Combustion Promoter page",
+        "migratedDescription": "navigates to Combustion Promoter page",
+        "sourceUrl": "/industries/refining-technologies/fcc-additive-solutions/combustion-promoter/",
+        "migratedUrl": "/industries/refining-technologies/fcc-additive-solutions/combustion-promoter/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-0-item-0-item-15",
+      "label": "Hydroprocessing",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to Hydroprocessing page",
+        "migratedDescription": "navigates to Hydroprocessing page",
+        "sourceUrl": "/industries/refining-technologies/hydroprocessing/",
+        "migratedUrl": "/industries/refining-technologies/hydroprocessing/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-0-item-0-item-16",
+      "label": "Resid Hydrotreating Solutions",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to Resid Hydrotreating Solutions page",
+        "migratedDescription": "navigates to Resid Hydrotreating Solutions page",
+        "sourceUrl": "/industries/refining-technologies/hydroprocessing/resid-hydrotreating-solutions/",
+        "migratedUrl": "/industries/refining-technologies/hydroprocessing/resid-hydrotreating-solutions/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-0-item-0-item-17",
+      "label": "Resid Hydrocracking Solutions",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to Resid Hydrocracking Solutions page",
+        "migratedDescription": "navigates to Resid Hydrocracking Solutions page",
+        "sourceUrl": "/industries/refining-technologies/hydroprocessing/resid-hydrocracking-solutions/",
+        "migratedUrl": "/industries/refining-technologies/hydroprocessing/resid-hydrocracking-solutions/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-0-item-0-item-18",
+      "label": "Distillate Hydrotreating Solutions",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to Distillate Hydrotreating Solutions page",
+        "migratedDescription": "navigates to Distillate Hydrotreating Solutions page",
+        "sourceUrl": "/industries/refining-technologies/hydroprocessing/distillate-hydrotreating-solutions/",
+        "migratedUrl": "/industries/refining-technologies/hydroprocessing/distillate-hydrotreating-solutions/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-0-item-0-item-19",
+      "label": "Catalagram Archive",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to Catalagram Archive promo page",
+        "migratedDescription": "navigates to Catalagram Archive promo page",
+        "sourceUrl": "/industries/refining-technologies/catalagram-archive/",
+        "migratedUrl": "/industries/refining-technologies/catalagram-archive/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": true,
+          "migrated": true
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-0-item-1",
+      "label": "Chemical Processing",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "highlights category and shows corresponding content pane with sub-links and promo card",
+        "migratedDescription": "highlights category and shows corresponding content pane with sub-links and promo card"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to Chemical Processing category page",
+        "migratedDescription": "navigates to Chemical Processing category page",
+        "sourceUrl": "/industries/chemical-processing/",
+        "migratedUrl": "/industries/chemical-processing/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-0-item-1-item-0",
+      "label": "Hydrogenation Catalysts",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to Hydrogenation Catalysts page",
+        "migratedDescription": "navigates to Hydrogenation Catalysts page",
+        "sourceUrl": "/industries/chemical-processing/hydrogenation-catalysts/",
+        "migratedUrl": "/industries/chemical-processing/hydrogenation-catalysts/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-0-item-1-item-1",
+      "label": "Catalyst Supports",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to Catalyst Supports page",
+        "migratedDescription": "navigates to Catalyst Supports page",
+        "sourceUrl": "/industries/chemical-processing/catalyst-supports/",
+        "migratedUrl": "/industries/chemical-processing/catalyst-supports/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-0-item-1-item-2",
+      "label": "Custom Development",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to Custom Development page",
+        "migratedDescription": "navigates to Custom Development page",
+        "sourceUrl": "/industries/chemical-processing/custom-development/",
+        "migratedUrl": "/industries/chemical-processing/custom-development/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-0-item-2",
+      "label": "Plastics and Polymers",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "highlights category and shows corresponding content pane with sub-groups and promo card",
+        "migratedDescription": "highlights category and shows corresponding content pane with sub-groups and promo card"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to Plastics and Polymers category page",
+        "migratedDescription": "navigates to Plastics and Polymers category page",
+        "sourceUrl": "/industries/plastics-and-polymers/",
+        "migratedUrl": "/industries/plastics-and-polymers/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-0-item-2-item-0",
+      "label": "Polyethylene Catalysts",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to Polyethylene Catalysts page",
+        "migratedDescription": "navigates to Polyethylene Catalysts page",
+        "sourceUrl": "/industries/plastics-and-polymers/polyethylene-catalysts/",
+        "migratedUrl": "/industries/plastics-and-polymers/polyethylene-catalysts/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-0-item-2-item-1",
+      "label": "PE Catalyst Components and Supports",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to PE Catalyst Components and Supports page",
+        "migratedDescription": "navigates to PE Catalyst Components and Supports page",
+        "sourceUrl": "/industries/plastics-and-polymers/polyethylene-catalysts/pe-catalyst-components-and-supports/",
+        "migratedUrl": "/industries/plastics-and-polymers/polyethylene-catalysts/pe-catalyst-components-and-supports/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-0-item-2-item-2",
+      "label": "PE Slurry",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to PE Slurry page",
+        "migratedDescription": "navigates to PE Slurry page",
+        "sourceUrl": "/industries/plastics-and-polymers/polyethylene-catalysts/pe-slurry/",
+        "migratedUrl": "/industries/plastics-and-polymers/polyethylene-catalysts/pe-slurry/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-0-item-2-item-3",
+      "label": "PE Gas Phase",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to PE Gas Phase page",
+        "migratedDescription": "navigates to PE Gas Phase page",
+        "sourceUrl": "/industries/plastics-and-polymers/polyethylene-catalysts/pe-gas-phase/",
+        "migratedUrl": "/industries/plastics-and-polymers/polyethylene-catalysts/pe-gas-phase/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-0-item-2-item-4",
+      "label": "PE Solution",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to PE Solution page",
+        "migratedDescription": "navigates to PE Solution page",
+        "sourceUrl": "/industries/plastics-and-polymers/polyethylene-catalysts/pe-solution/",
+        "migratedUrl": "/industries/plastics-and-polymers/polyethylene-catalysts/pe-solution/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-0-item-2-item-5",
+      "label": "PE Hybrid",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to PE Hybrid page",
+        "migratedDescription": "navigates to PE Hybrid page",
+        "sourceUrl": "/industries/plastics-and-polymers/polyethylene-catalysts/pe-hybrid/",
+        "migratedUrl": "/industries/plastics-and-polymers/polyethylene-catalysts/pe-hybrid/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-0-item-2-item-6",
+      "label": "Polypropylene Catalysts",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to Polypropylene Catalysts page",
+        "migratedDescription": "navigates to Polypropylene Catalysts page",
+        "sourceUrl": "/industries/plastics-and-polymers/polypropylene-catalysts/",
+        "migratedUrl": "/industries/plastics-and-polymers/polypropylene-catalysts/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-0-item-2-item-7",
+      "label": "PP Bulk",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to PP Bulk page",
+        "migratedDescription": "navigates to PP Bulk page",
+        "sourceUrl": "/industries/plastics-and-polymers/polypropylene-catalysts/pp-bulk/",
+        "migratedUrl": "/industries/plastics-and-polymers/polypropylene-catalysts/pp-bulk/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-0-item-2-item-8",
+      "label": "PP Gas Phase",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to PP Gas Phase page",
+        "migratedDescription": "navigates to PP Gas Phase page",
+        "sourceUrl": "/industries/plastics-and-polymers/polypropylene-catalysts/pp-gas-phase/",
+        "migratedUrl": "/industries/plastics-and-polymers/polypropylene-catalysts/pp-gas-phase/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-0-item-2-item-9",
+      "label": "PP Slurry",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to PP Slurry page",
+        "migratedDescription": "navigates to PP Slurry page",
+        "sourceUrl": "/industries/plastics-and-polymers/polypropylene-catalysts/pp-slurry/",
+        "migratedUrl": "/industries/plastics-and-polymers/polypropylene-catalysts/pp-slurry/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-0-item-3",
+      "label": "Coatings",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "highlights category and shows corresponding content pane with sub-links and promo card",
+        "migratedDescription": "highlights category and shows corresponding content pane with sub-links and promo card"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to Coatings category page",
+        "migratedDescription": "navigates to Coatings category page",
+        "sourceUrl": "/industries/coatings/",
+        "migratedUrl": "/industries/coatings/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-0-item-3-item-0",
+      "label": "Wood",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to Wood page",
+        "migratedDescription": "navigates to Wood page",
+        "sourceUrl": "/industries/coatings/wood/",
+        "migratedUrl": "/industries/coatings/wood/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-0-item-3-item-1",
+      "label": "Coil",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to Coil page",
+        "migratedDescription": "navigates to Coil page",
+        "sourceUrl": "/industries/coatings/coil/",
+        "migratedUrl": "/industries/coatings/coil/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-0-item-3-item-2",
+      "label": "Architectural",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to Architectural page",
+        "migratedDescription": "navigates to Architectural page",
+        "sourceUrl": "/industries/coatings/architectural/",
+        "migratedUrl": "/industries/coatings/architectural/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-0-item-3-item-3",
+      "label": "Inks and Paper",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to Inks and Paper page",
+        "migratedDescription": "navigates to Inks and Paper page",
+        "sourceUrl": "/industries/coatings/inks-paper/",
+        "migratedUrl": "/industries/coatings/inks-paper/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-0-item-3-item-4",
+      "label": "General Industrial Coatings",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to General Industrial Coatings page",
+        "migratedDescription": "navigates to General Industrial Coatings page",
+        "sourceUrl": "/industries/coatings/general-industrial-coatings/",
+        "migratedUrl": "/industries/coatings/general-industrial-coatings/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-0-item-4",
+      "label": "General Industrial",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "highlights category and shows corresponding content pane with sub-links and promo card",
+        "migratedDescription": "highlights category and shows corresponding content pane with sub-links and promo card"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to General Industrial category page",
+        "migratedDescription": "navigates to General Industrial category page",
+        "sourceUrl": "/industries/general-industrial/",
+        "migratedUrl": "/industries/general-industrial/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-0-item-4-item-0",
+      "label": "Process Adsorbents",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to Process Adsorbents page",
+        "migratedDescription": "navigates to Process Adsorbents page",
+        "sourceUrl": "/industries/general-industrial/process-adsorbents/",
+        "migratedUrl": "/industries/general-industrial/process-adsorbents/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-0-item-4-item-1",
+      "label": "Static Adsorbents",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to Static Adsorbents page",
+        "migratedDescription": "navigates to Static Adsorbents page",
+        "sourceUrl": "/industries/general-industrial/static-adsorbents/",
+        "migratedUrl": "/industries/general-industrial/static-adsorbents/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-0-item-4-item-2",
+      "label": "Colloidal Silica in Catalysts",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to Colloidal Silica in Catalysts page",
+        "migratedDescription": "navigates to Colloidal Silica in Catalysts page",
+        "sourceUrl": "/industries/general-industrial/colloidal-silica-in-catalysts/",
+        "migratedUrl": "/industries/general-industrial/colloidal-silica-in-catalysts/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-0-item-4-item-3",
+      "label": "Investment Casting Binders",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to Investment Casting Binders page",
+        "migratedDescription": "navigates to Investment Casting Binders page",
+        "sourceUrl": "/industries/general-industrial/investment-casting-binders/",
+        "migratedUrl": "/industries/general-industrial/investment-casting-binders/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-0-item-4-item-4",
+      "label": "Refractory Additives",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to Refractory Additives page",
+        "migratedDescription": "navigates to Refractory Additives page",
+        "sourceUrl": "/industries/general-industrial/refractory-additives/",
+        "migratedUrl": "/industries/general-industrial/refractory-additives/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-0-item-4-item-5",
+      "label": "Construction",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to Construction page",
+        "migratedDescription": "navigates to Construction page",
+        "sourceUrl": "/industries/general-industrial/construction/",
+        "migratedUrl": "/industries/general-industrial/construction/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-0-item-5",
+      "label": "Pharmaceutical Solutions",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "highlights category and shows corresponding content pane with sub-groups and promo card",
+        "migratedDescription": "highlights category and shows corresponding content pane with sub-groups and promo card"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to Pharmaceutical Solutions category page",
+        "migratedDescription": "navigates to Pharmaceutical Solutions category page",
+        "sourceUrl": "/industries/pharmaceutical-solutions/",
+        "migratedUrl": "/industries/pharmaceutical-solutions/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-0-item-5-item-0",
+      "label": "Fine Chemicals",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to Fine Chemicals page",
+        "migratedDescription": "navigates to Fine Chemicals page",
+        "sourceUrl": "/industries/pharmaceutical-solutions/fine-chemicals/",
+        "migratedUrl": "/industries/pharmaceutical-solutions/fine-chemicals/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-0-item-5-item-1",
+      "label": "Custom APIs",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to Custom APIs page",
+        "migratedDescription": "navigates to Custom APIs page",
+        "sourceUrl": "/industries/pharmaceutical-solutions/fine-chemicals/custom-apis/",
+        "migratedUrl": "/industries/pharmaceutical-solutions/fine-chemicals/custom-apis/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-0-item-5-item-2",
+      "label": "RSMs and Intermediates",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to RSMs and Intermediates page",
+        "migratedDescription": "navigates to RSMs and Intermediates page",
+        "sourceUrl": "/industries/pharmaceutical-solutions/fine-chemicals/rsms-and-intermediates/",
+        "migratedUrl": "/industries/pharmaceutical-solutions/fine-chemicals/rsms-and-intermediates/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-0-item-5-item-3",
+      "label": "Generic APIs",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to Generic APIs page",
+        "migratedDescription": "navigates to Generic APIs page",
+        "sourceUrl": "/industries/pharmaceutical-solutions/fine-chemicals/generic-apis/",
+        "migratedUrl": "/industries/pharmaceutical-solutions/fine-chemicals/generic-apis/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-0-item-5-item-4",
+      "label": "Integrated Scale-Up",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to Integrated Scale-Up page",
+        "migratedDescription": "navigates to Integrated Scale-Up page",
+        "sourceUrl": "/industries/pharmaceutical-solutions/fine-chemicals/integrated-scale-up/",
+        "migratedUrl": "/industries/pharmaceutical-solutions/fine-chemicals/integrated-scale-up/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-0-item-5-item-5",
+      "label": "Consultative Services",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to Consultative Services page",
+        "migratedDescription": "navigates to Consultative Services page",
+        "sourceUrl": "/industries/pharmaceutical-solutions/fine-chemicals/consultative-services/",
+        "migratedUrl": "/industries/pharmaceutical-solutions/fine-chemicals/consultative-services/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-0-item-5-item-6",
+      "label": "Facilities",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to Facilities page",
+        "migratedDescription": "navigates to Facilities page",
+        "sourceUrl": "/industries/pharmaceutical-solutions/fine-chemicals/facilities/",
+        "migratedUrl": "/industries/pharmaceutical-solutions/fine-chemicals/facilities/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-0-item-5-item-7",
+      "label": "Purification, Formulation and Delivery",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to Purification, Formulation and Delivery page",
+        "migratedDescription": "navigates to Purification, Formulation and Delivery page",
+        "sourceUrl": "/industries/pharmaceutical-solutions/purification-formulation-delivery/",
+        "migratedUrl": "/industries/pharmaceutical-solutions/purification-formulation-delivery/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-0-item-5-item-8",
+      "label": "Chromatography",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to Chromatography page",
+        "migratedDescription": "navigates to Chromatography page",
+        "sourceUrl": "/industries/pharmaceutical-solutions/purification-formulation-delivery/chromatography/",
+        "migratedUrl": "/industries/pharmaceutical-solutions/purification-formulation-delivery/chromatography/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-0-item-5-item-9",
+      "label": "Excipients",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to Excipients page",
+        "migratedDescription": "navigates to Excipients page",
+        "sourceUrl": "/industries/pharmaceutical-solutions/purification-formulation-delivery/excipients/",
+        "migratedUrl": "/industries/pharmaceutical-solutions/purification-formulation-delivery/excipients/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-0-item-5-item-10",
+      "label": "Active Ingredient Delivery",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to Active Ingredient Delivery page",
+        "migratedDescription": "navigates to Active Ingredient Delivery page",
+        "sourceUrl": "/industries/pharmaceutical-solutions/purification-formulation-delivery/active-ingredient-delivery/",
+        "migratedUrl": "/industries/pharmaceutical-solutions/purification-formulation-delivery/active-ingredient-delivery/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-0-item-5-item-11",
+      "label": "Packaging Adsorbents",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to Packaging Adsorbents page",
+        "migratedDescription": "navigates to Packaging Adsorbents page",
+        "sourceUrl": "/industries/pharmaceutical-solutions/packaging-adsorbents/",
+        "migratedUrl": "/industries/pharmaceutical-solutions/packaging-adsorbents/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-0-item-6",
+      "label": "Nutraceutical Solutions",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "highlights category and shows corresponding content pane with sub-links and promo card",
+        "migratedDescription": "highlights category and shows corresponding content pane with sub-links and promo card"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to Nutraceutical Solutions category page",
+        "migratedDescription": "navigates to Nutraceutical Solutions category page",
+        "sourceUrl": "/industries/nutraceutical-solutions/",
+        "migratedUrl": "/industries/nutraceutical-solutions/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-0-item-6-item-0",
+      "label": "Vitamin Purification, Formulation and Delivery",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to Vitamin Purification, Formulation and Delivery page",
+        "migratedDescription": "navigates to Vitamin Purification, Formulation and Delivery page",
+        "sourceUrl": "/industries/nutraceutical-solutions/vitamin-purification-formulation-delivery/",
+        "migratedUrl": "/industries/nutraceutical-solutions/vitamin-purification-formulation-delivery/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-0-item-6-item-1",
+      "label": "Lipid Purification, Formulation and Delivery",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to Lipid Purification, Formulation and Delivery page",
+        "migratedDescription": "navigates to Lipid Purification, Formulation and Delivery page",
+        "sourceUrl": "/industries/nutraceutical-solutions/lipid-purification-formulation-delivery/",
+        "migratedUrl": "/industries/nutraceutical-solutions/lipid-purification-formulation-delivery/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-0-item-6-item-2",
+      "label": "CBD Purification, Formulation and Delivery",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to CBD Purification, Formulation and Delivery page",
+        "migratedDescription": "navigates to CBD Purification, Formulation and Delivery page",
+        "sourceUrl": "/industries/nutraceutical-solutions/cbd-purification-formulation-delivery/",
+        "migratedUrl": "/industries/nutraceutical-solutions/cbd-purification-formulation-delivery/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-0-item-6-item-3",
+      "label": "Nutraceutical CDMO",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to Nutraceutical CDMO page",
+        "migratedDescription": "navigates to Nutraceutical CDMO page",
+        "sourceUrl": "/industries/nutraceutical-solutions/nutraceutical-cdmo/",
+        "migratedUrl": "/industries/nutraceutical-solutions/nutraceutical-cdmo/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-0-item-6-item-4",
+      "label": "Traditional Herbal Medicine (THM) and Botanical Solutions",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to THM and Botanical Solutions page",
+        "migratedDescription": "navigates to THM and Botanical Solutions page",
+        "sourceUrl": "/industries/nutraceutical-solutions/traditional-herbal-medicine/",
+        "migratedUrl": "/industries/nutraceutical-solutions/traditional-herbal-medicine/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-0-item-7",
+      "label": "Agriculture",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "highlights category and shows corresponding content pane with sub-links and promo card",
+        "migratedDescription": "highlights category and shows corresponding content pane with sub-links and promo card"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to Agriculture category page",
+        "migratedDescription": "navigates to Agriculture category page",
+        "sourceUrl": "/industries/agriculture/",
+        "migratedUrl": "/industries/agriculture/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-0-item-7-item-0",
+      "label": "Agriculture CDMO",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to Agriculture CDMO page",
+        "migratedDescription": "navigates to Agriculture CDMO page",
+        "sourceUrl": "/industries/agriculture/agriculture-cdmo/",
+        "migratedUrl": "/industries/agriculture/agriculture-cdmo/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-0-item-7-item-1",
+      "label": "Animal Feed and Agricultural Active Solutions",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to Animal Feed and Agricultural Active Solutions page",
+        "migratedDescription": "navigates to Animal Feed and Agricultural Active Solutions page",
+        "sourceUrl": "/industries/agriculture/animal-feed-agricultural-active-solutions/",
+        "migratedUrl": "/industries/agriculture/animal-feed-agricultural-active-solutions/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-0-item-8",
+      "label": "Personal Care",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "highlights category and shows corresponding content pane with sub-links and promo card",
+        "migratedDescription": "highlights category and shows corresponding content pane with sub-links and promo card"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to Personal Care category page",
+        "migratedDescription": "navigates to Personal Care category page",
+        "sourceUrl": "/industries/personal-care/",
+        "migratedUrl": "/industries/personal-care/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-0-item-8-item-0",
+      "label": "Toothpaste",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to Toothpaste page",
+        "migratedDescription": "navigates to Toothpaste page",
+        "sourceUrl": "/industries/personal-care/toothpaste/",
+        "migratedUrl": "/industries/personal-care/toothpaste/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-0-item-8-item-1",
+      "label": "Cosmetics",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to Cosmetics page",
+        "migratedDescription": "navigates to Cosmetics page",
+        "sourceUrl": "/industries/personal-care/cosmetics/",
+        "migratedUrl": "/industries/personal-care/cosmetics/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-0-item-9",
+      "label": "Food and Beverage",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "highlights category and shows corresponding content pane with sub-links and promo card",
+        "migratedDescription": "highlights category and shows corresponding content pane with sub-links and promo card"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to Food and Beverage category page",
+        "migratedDescription": "navigates to Food and Beverage category page",
+        "sourceUrl": "/industries/food-beverage/",
+        "migratedUrl": "/industries/food-beverage/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-0-item-9-item-0",
+      "label": "Beer",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to Beer page",
+        "migratedDescription": "navigates to Beer page",
+        "sourceUrl": "/industries/food-beverage/beer/",
+        "migratedUrl": "/industries/food-beverage/beer/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-0-item-9-item-1",
+      "label": "Edible Oil Refining",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to Edible Oil Refining page",
+        "migratedDescription": "navigates to Edible Oil Refining page",
+        "sourceUrl": "/industries/food-beverage/edible-oil-refining/",
+        "migratedUrl": "/industries/food-beverage/edible-oil-refining/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-0-item-9-item-2",
+      "label": "Food Processing",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to Food Processing page",
+        "migratedDescription": "navigates to Food Processing page",
+        "sourceUrl": "/industries/food-beverage/food-processing/",
+        "migratedUrl": "/industries/food-beverage/food-processing/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-0-item-9-item-3",
+      "label": "Beverage",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to Beverage page",
+        "migratedDescription": "navigates to Beverage page",
+        "sourceUrl": "/industries/food-beverage/beverage/",
+        "migratedUrl": "/industries/food-beverage/beverage/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-0-item-10",
+      "label": "Biofuels",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "highlights category and shows corresponding content pane with sub-groups and promo card",
+        "migratedDescription": "highlights category and shows corresponding content pane with sub-groups and promo card"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to Biofuels category page",
+        "migratedDescription": "navigates to Biofuels category page",
+        "sourceUrl": "/industries/biofuels/",
+        "migratedUrl": "/industries/biofuels/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-0-item-10-item-0",
+      "label": "Biomass-based Diesel",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to Biomass-based Diesel page",
+        "migratedDescription": "navigates to Biomass-based Diesel page",
+        "sourceUrl": "/industries/biofuels/biomass-based-diesel/",
+        "migratedUrl": "/industries/biofuels/biomass-based-diesel/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-0-item-10-item-1",
+      "label": "First Generation Biodiesel",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to First Generation Biodiesel page",
+        "migratedDescription": "navigates to First Generation Biodiesel page",
+        "sourceUrl": "/industries/biofuels/biomass-based-diesel/first-generation-biodiesel/",
+        "migratedUrl": "/industries/biofuels/biomass-based-diesel/first-generation-biodiesel/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-0-item-10-item-2",
+      "label": "Renewable Diesel",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to Renewable Diesel page",
+        "migratedDescription": "navigates to Renewable Diesel page",
+        "sourceUrl": "/industries/biofuels/biomass-based-diesel/renewable-diesel/",
+        "migratedUrl": "/industries/biofuels/biomass-based-diesel/renewable-diesel/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-0-item-10-item-3",
+      "label": "Bioethanol",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to Bioethanol page",
+        "migratedDescription": "navigates to Bioethanol page",
+        "sourceUrl": "/industries/biofuels/bioethanol/",
+        "migratedUrl": "/industries/biofuels/bioethanol/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-1",
+      "label": "Products",
+      "type": "nav-trigger",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to products section page",
+        "migratedDescription": "navigates to products section page",
+        "sourceUrl": "/products/",
+        "migratedUrl": "/products/"
+      },
+      "stylingMatch": {
+        "matches": true
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-1-panel-layout",
+      "label": "Panel layout (Products)",
+      "type": "panel-layout",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "N/A",
+        "migratedDescription": "N/A"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "N/A",
+        "migratedDescription": "N/A"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "sourceDescription": "{\"viewportContained\":true,\"widthType\":\"auto\",\"horizontalAlignment\":\"left-aligned\",\"overlayBehavior\":\"none\",\"extendsBeyondViewport\":false,\"obscuresPageContent\":\"intentional\",\"measuredLeft\":401.94,\"measuredRight\":745.94,\"measuredTop\":117.59,\"measuredWidth\":344,\"viewportWidth\":1440,\"cssPosition\":\"absolute\",\"cssLeft\":\"0px\",\"cssWidth\":\"280px\"}",
+        "migratedDescription": "{\"viewportContained\":true,\"widthType\":\"auto\",\"horizontalAlignment\":\"left-aligned\",\"overlayBehavior\":\"none\",\"extendsBeyondViewport\":false,\"obscuresPageContent\":\"intentional\",\"measuredLeft\":401.94,\"measuredRight\":745.94,\"measuredTop\":117.59,\"measuredWidth\":344,\"viewportWidth\":1440,\"cssPosition\":\"absolute\",\"cssLeft\":\"0px\",\"cssWidth\":\"280px\"}"
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-1-item-0",
+      "label": "Adsorbents",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to Adsorbents page",
+        "migratedDescription": "navigates to Adsorbents page",
+        "sourceUrl": "/products/adsorbents/",
+        "migratedUrl": "/products/adsorbents/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-1-item-1",
+      "label": "Catalysts",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to Catalysts page",
+        "migratedDescription": "navigates to Catalysts page",
+        "sourceUrl": "/products/catalysts/",
+        "migratedUrl": "/products/catalysts/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-1-item-2",
+      "label": "Fine Chemicals",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to Fine Chemicals page",
+        "migratedDescription": "navigates to Fine Chemicals page",
+        "sourceUrl": "/products/fine-chemicals/",
+        "migratedUrl": "/products/fine-chemicals/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-1-item-3",
+      "label": "Synthetic Silicas",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to Synthetic Silicas page",
+        "migratedDescription": "navigates to Synthetic Silicas page",
+        "sourceUrl": "/products/synthetic-silicas/",
+        "migratedUrl": "/products/synthetic-silicas/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-1-item-4",
+      "label": "Product Stewardship",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to Product Stewardship page",
+        "migratedDescription": "navigates to Product Stewardship page",
+        "sourceUrl": "/products/product-stewardship/",
+        "migratedUrl": "/products/product-stewardship/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-1-item-5",
+      "label": "Quality",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to Quality page",
+        "migratedDescription": "navigates to Quality page",
+        "sourceUrl": "/products/quality-management/",
+        "migratedUrl": "/products/quality-management/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-2",
+      "label": "Resources",
+      "type": "nav-trigger",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to resources section page",
+        "migratedDescription": "navigates to resources section page",
+        "sourceUrl": "/resources/",
+        "migratedUrl": "/resources/"
+      },
+      "stylingMatch": {
+        "matches": true
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-2-panel-layout",
+      "label": "Panel layout (Resources)",
+      "type": "panel-layout",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "N/A",
+        "migratedDescription": "N/A"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "N/A",
+        "migratedDescription": "N/A"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "sourceDescription": "{\"viewportContained\":true,\"widthType\":\"auto\",\"horizontalAlignment\":\"left-aligned\",\"overlayBehavior\":\"none\",\"extendsBeyondViewport\":false,\"obscuresPageContent\":\"intentional\",\"measuredLeft\":493.38,\"measuredRight\":837.38,\"measuredTop\":117.59,\"measuredWidth\":344,\"viewportWidth\":1440,\"cssPosition\":\"absolute\",\"cssLeft\":\"0px\",\"cssWidth\":\"280px\"}",
+        "migratedDescription": "{\"viewportContained\":true,\"widthType\":\"auto\",\"horizontalAlignment\":\"left-aligned\",\"overlayBehavior\":\"none\",\"extendsBeyondViewport\":false,\"obscuresPageContent\":\"intentional\",\"measuredLeft\":493.38,\"measuredRight\":837.38,\"measuredTop\":117.59,\"measuredWidth\":344,\"viewportWidth\":1440,\"cssPosition\":\"absolute\",\"cssLeft\":\"0px\",\"cssWidth\":\"280px\"}"
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-2-item-0",
+      "label": "Catalagram",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to Catalagram page",
+        "migratedDescription": "navigates to Catalagram page",
+        "sourceUrl": "/resources/catalagram/",
+        "migratedUrl": "/resources/catalagram/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-2-item-1",
+      "label": "Insights",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to Insights page",
+        "migratedDescription": "navigates to Insights page",
+        "sourceUrl": "/resources/insights/",
+        "migratedUrl": "/resources/insights/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-2-item-2",
+      "label": "Newsroom",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to Newsroom page",
+        "migratedDescription": "navigates to Newsroom page",
+        "sourceUrl": "/resources/newsroom/",
+        "migratedUrl": "/resources/newsroom/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-3",
+      "label": "People and Careers",
+      "type": "nav-trigger",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to people and careers section page",
+        "migratedDescription": "navigates to people and careers section page",
+        "sourceUrl": "/people-and-careers/",
+        "migratedUrl": "/people-and-careers/"
+      },
+      "stylingMatch": {
+        "matches": true
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-3-panel-layout",
+      "label": "Panel layout (People and Careers)",
+      "type": "panel-layout",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "N/A",
+        "migratedDescription": "N/A"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "N/A",
+        "migratedDescription": "N/A"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "sourceDescription": "{\"viewportContained\":true,\"widthType\":\"auto\",\"horizontalAlignment\":\"left-aligned\",\"overlayBehavior\":\"none\",\"extendsBeyondViewport\":false,\"obscuresPageContent\":\"intentional\",\"measuredLeft\":593.81,\"measuredRight\":937.81,\"measuredTop\":117.59,\"measuredWidth\":344,\"viewportWidth\":1440,\"cssPosition\":\"absolute\",\"cssLeft\":\"0px\",\"cssWidth\":\"280px\"}",
+        "migratedDescription": "{\"viewportContained\":true,\"widthType\":\"auto\",\"horizontalAlignment\":\"left-aligned\",\"overlayBehavior\":\"none\",\"extendsBeyondViewport\":false,\"obscuresPageContent\":\"intentional\",\"measuredLeft\":593.81,\"measuredRight\":937.81,\"measuredTop\":117.59,\"measuredWidth\":344,\"viewportWidth\":1440,\"cssPosition\":\"absolute\",\"cssLeft\":\"0px\",\"cssWidth\":\"280px\"}"
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-3-item-0",
+      "label": "Early Career Programs",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to Early Career Programs page",
+        "migratedDescription": "navigates to Early Career Programs page",
+        "sourceUrl": "/people-and-careers/early-career-programs/",
+        "migratedUrl": "/people-and-careers/early-career-programs/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-3-item-1",
+      "label": "Germany Apprenticeships",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to Germany Apprenticeships page",
+        "migratedDescription": "navigates to Germany Apprenticeships page",
+        "sourceUrl": "/people-and-careers/germany-apprenticeships/",
+        "migratedUrl": "/people-and-careers/germany-apprenticeships/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-3-item-2",
+      "label": "Internships",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to Internships page",
+        "migratedDescription": "navigates to Internships page",
+        "sourceUrl": "/people-and-careers/internships/",
+        "migratedUrl": "/people-and-careers/internships/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-3-item-3",
+      "label": "Life at Grace",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to Life at Grace page",
+        "migratedDescription": "navigates to Life at Grace page",
+        "sourceUrl": "/people-and-careers/life-at-grace/",
+        "migratedUrl": "/people-and-careers/life-at-grace/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-3-item-4",
+      "label": "Open Positions",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to Open Positions page",
+        "migratedDescription": "navigates to Open Positions page",
+        "sourceUrl": "/people-and-careers/view-all-jobs/",
+        "migratedUrl": "/people-and-careers/view-all-jobs/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-4",
+      "label": "About Grace",
+      "type": "nav-trigger",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to about grace section page",
+        "migratedDescription": "navigates to about grace section page",
+        "sourceUrl": "/about-grace/",
+        "migratedUrl": "/about-grace/"
+      },
+      "stylingMatch": {
+        "matches": true
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-4-panel-layout",
+      "label": "Panel layout (About Grace)",
+      "type": "panel-layout",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "N/A",
+        "migratedDescription": "N/A"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "N/A",
+        "migratedDescription": "N/A"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "sourceDescription": "{\"viewportContained\":true,\"widthType\":\"auto\",\"horizontalAlignment\":\"left-aligned\",\"overlayBehavior\":\"none\",\"extendsBeyondViewport\":false,\"obscuresPageContent\":\"intentional\",\"measuredLeft\":752.73,\"measuredRight\":1096.73,\"measuredTop\":117.59,\"measuredWidth\":344,\"viewportWidth\":1440,\"cssPosition\":\"absolute\",\"cssLeft\":\"0px\",\"cssWidth\":\"280px\"}",
+        "migratedDescription": "{\"viewportContained\":true,\"widthType\":\"auto\",\"horizontalAlignment\":\"left-aligned\",\"overlayBehavior\":\"none\",\"extendsBeyondViewport\":false,\"obscuresPageContent\":\"intentional\",\"measuredLeft\":752.73,\"measuredRight\":1096.73,\"measuredTop\":117.59,\"measuredWidth\":344,\"viewportWidth\":1440,\"cssPosition\":\"absolute\",\"cssLeft\":\"0px\",\"cssWidth\":\"280px\"}"
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-4-item-0",
+      "label": "Awards and Recognition",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to Awards and Recognition page",
+        "migratedDescription": "navigates to Awards and Recognition page",
+        "sourceUrl": "/about-grace/awards-and-recognition/",
+        "migratedUrl": "/about-grace/awards-and-recognition/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-4-item-1",
+      "label": "Community",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to Community page",
+        "migratedDescription": "navigates to Community page",
+        "sourceUrl": "/about-grace/community/",
+        "migratedUrl": "/about-grace/community/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-4-item-2",
+      "label": "Environmental, Health & Safety",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to Environmental Health and Safety page",
+        "migratedDescription": "navigates to Environmental Health and Safety page",
+        "sourceUrl": "/about-grace/environmental-health-and-safety/",
+        "migratedUrl": "/about-grace/environmental-health-and-safety/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-4-item-3",
+      "label": "Leadership Team",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to Leadership Team page",
+        "migratedDescription": "navigates to Leadership Team page",
+        "sourceUrl": "/about-grace/leadership-team/",
+        "migratedUrl": "/about-grace/leadership-team/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-4-item-4",
+      "label": "Locations",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to Locations page",
+        "migratedDescription": "navigates to Locations page",
+        "sourceUrl": "/about-grace/locations/",
+        "migratedUrl": "/about-grace/locations/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-4-item-5",
+      "label": "Our History",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to Our History page",
+        "migratedDescription": "navigates to Our History page",
+        "sourceUrl": "/about-grace/our-history/",
+        "migratedUrl": "/about-grace/our-history/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-4-item-6",
+      "label": "Sustainability",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to Sustainability page",
+        "migratedDescription": "navigates to Sustainability page",
+        "sourceUrl": "/about-grace/sustainability/",
+        "migratedUrl": "/about-grace/sustainability/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-4-item-7",
+      "label": "This is Grace",
+      "type": "panel-item",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to This is Grace page",
+        "migratedDescription": "navigates to This is Grace page",
+        "sourceUrl": "/about-grace/this-is-grace/",
+        "migratedUrl": "/about-grace/this-is-grace/"
+      },
+      "stylingMatch": {
+        "matches": true,
+        "hasImage": {
+          "source": false,
+          "migrated": false
+        }
+      },
+      "status": "validated"
+    },
+    {
+      "id": "trigger-5",
+      "label": "Contact Us",
+      "type": "nav-trigger",
+      "hoverMatch": {
+        "matches": true,
+        "sourceDescription": "no effect",
+        "migratedDescription": "no effect"
+      },
+      "clickMatch": {
+        "matches": true,
+        "sourceDescription": "navigates to contact us page",
+        "migratedDescription": "navigates to contact us page",
+        "sourceUrl": "/contact-us/",
+        "migratedUrl": "/contact-us/"
+      },
+      "stylingMatch": {
+        "matches": true
+      },
+      "status": "validated"
+    }
+  ],
+  "summary": {
+    "totalItems": 117,
+    "hoverMatches": 117,
+    "clickMatches": 117,
+    "stylingMatches": 117,
+    "totalValidated": 117,
+    "totalFailed": 0
+  },
+  "allValidated": true
+}
