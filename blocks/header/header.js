@@ -226,7 +226,7 @@ function buildMegamenuPanel(navDrop) {
           // Flat link without sub-groups — collect into a single flat links group
           if (!flatLinksGroup) {
             flatLinksGroup = document.createElement('div');
-            flatLinksGroup.className = 'megamenu-group';
+            flatLinksGroup.className = 'megamenu-group megamenu-group-flat';
             const flatItems = document.createElement('ul');
             flatItems.className = 'megamenu-group-items';
             flatLinksGroup.append(flatItems);
@@ -425,12 +425,17 @@ export default async function decorate(block) {
   const navTools = nav.querySelector('.nav-tools');
   const utilityBar = document.createElement('div');
   utilityBar.className = 'nav-utility';
+  // Inner wrapper shares the nav's centered max-width so utility links align
+  // above the main nav's right edge at any viewport width.
+  const utilityInner = document.createElement('div');
+  utilityInner.className = 'nav-utility-inner';
+  utilityBar.append(utilityInner);
   if (navTools) {
     const utilityLinks = navTools.querySelectorAll('p > a');
     utilityLinks.forEach((link) => {
       if (link.textContent.trim().toLowerCase() !== 'search') {
         const utilLink = link.cloneNode(true);
-        utilityBar.append(utilLink);
+        utilityInner.append(utilLink);
       }
     });
   }

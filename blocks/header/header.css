@@ -4,11 +4,22 @@
 header .nav-utility {
   background-color: #000;
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
-  padding: 0 100px;
   height: 40px;
   max-width: 100%;
+}
+
+/* Inner wrapper matches the main nav's centered container so utility links
+   align above the nav's right edge (and the search button) at any width. */
+header .nav-utility-inner {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  max-width: 1264px;
+  padding: 0 24px;
 }
 
 header .nav-utility a {
@@ -21,7 +32,7 @@ header .nav-utility a {
 }
 
 header .nav-utility a:hover {
-  text-decoration: underline;
+  color: #27853c;
 }
 
 header .nav-utility ul {
@@ -933,6 +944,18 @@ header .nav-search-suggestions-grid .chevron {
     margin: 0;
   }
 
+  /* Flat link panes (e.g. Industries) lay links out in two columns,
+     ordered row-major to match the original megamenu. */
+  header .megamenu-group-flat {
+    grid-column: 1 / -1;
+  }
+
+  header .megamenu-group-flat .megamenu-group-items {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px 32px;
+  }
+
   header .megamenu-group-items li {
     padding: 0;
     cursor: pointer;
@@ -998,17 +1021,19 @@ header .nav-search-suggestions-grid .chevron {
     font-weight: 700;
     color: #fff;
     line-height: 23.8px;
+    white-space: normal;
   }
 
   header .megamenu-promo-desc {
     position: relative;
     z-index: 2;
-    padding: 0 25px;
+    padding: 8px 25px 0;
     font-family: var(--heading-font-family);
     font-size: 14px;
     font-weight: 300;
     line-height: 23.8px;
     color: #fff;
     margin: 0;
+    white-space: normal;
   }
 }

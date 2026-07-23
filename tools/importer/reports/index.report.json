@@ -1,0 +1,23 @@
+{
+  "status": "success",
+  "url": "https://grace.com/",
+  "path": "index",
+  "timestamp": "2026-07-23T19:31:28.691Z",
+  "title": "Home",
+  "template": "grace-homepage",
+  "blocks": [
+    "hero-banner",
+    "cards-product",
+    "cards-product",
+    "cards-product",
+    "cards-product",
+    "columns-people",
+    "columns-people",
+    "cards-industry",
+    "embed-video",
+    "cards-insight",
+    "cards-insight",
+    "cards-insight",
+    "cards-insight"
+  ]
+}

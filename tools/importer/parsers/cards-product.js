@@ -101,6 +101,10 @@ export default function parse(element, { document }) {
   // Create block using WebImporter utility
   const block = WebImporter.Blocks.createBlock(document, { name: 'Cards-Product', cells });
 
-  // Replace original element with structured block table
-  element.replaceWith(block);
+  // Replace the whole card group (the .row containing all cards) once, so the
+  // selector matching each individual card does not create duplicate blocks and
+  // does not leave stray card markup behind. The import script skips elements
+  // already detached from the DOM on subsequent matches.
+  const groupContainer = element.closest('.row') || element.closest('article') || element.parentElement;
+  (groupContainer || element).replaceWith(block);
 }

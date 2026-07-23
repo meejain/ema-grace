@@ -38,13 +38,19 @@
  * Generated: 2026-02-26
  */
 export default function parse(element, { document }) {
-  // Find columns - navigate to the container with col-lg-6 children
-  // VALIDATED: Found two .col-lg-6 siblings at lines 393 and 424
+  // Find columns - navigate to the container that directly holds the two
+  // .col-lg-6 columns. The image link is nested inside its own inner .row,
+  // so closest('.row') returns the wrong (inner) container; walk up until we
+  // reach an ancestor containing 2+ .col-lg-6 columns.
+  // VALIDATED: two .col-lg-6 columns, each with image + rich-text + button.
   let container = element;
-
-  // If element is a link or image inside the columns, navigate up to row container
-  if (element.classList.contains('cmp-image__link') || element.tagName === 'A') {
-    container = element.closest('.row') || element.closest('article') || element.closest('section');
+  if (element.classList.contains('cmp-image__link') || element.tagName === 'A' || element.tagName === 'IMG') {
+    let ancestor = element.parentElement;
+    while (ancestor && ancestor.tagName !== 'BODY') {
+      if (ancestor.querySelectorAll('.col-lg-6').length >= 2) break;
+      ancestor = ancestor.parentElement;
+    }
+    container = ancestor || element.closest('.row') || element.closest('section') || element.parentElement;
   }
 
   // Find column containers
@@ -52,15 +58,10 @@ export default function parse(element, { document }) {
   if (!columns.length) {
     columns = Array.from(container.querySelectorAll('.col-lg-6'));
   }
-  if (!columns.length) {
-    // Fallback: look for .col-lg-6 in parent
-    const parentRow = container.closest('.row');
-    if (parentRow) {
-      columns = Array.from(parentRow.querySelectorAll(':scope > .col-lg-6'));
-    }
-  }
 
   // Build cells array - single row with N columns
+  // (createBlock prepends the "Columns-People" name row per EDS convention;
+  //  this content row has one cell per column, matching the columns block layout.)
   const row = [];
 
   columns.forEach((col) => {
@@ -72,7 +73,9 @@ export default function parse(element, { document }) {
       || col.querySelector('.cmp-image img')
       || col.querySelector('img');
     if (img) {
-      cellContent.push(img);
+      // Clone so replacing one instance's ancestor cannot detach nodes
+      // referenced while building the block table.
+      cellContent.push(img.cloneNode(true));
     }
 
     // Extract text paragraph
@@ -98,14 +101,26 @@ export default function parse(element, { document }) {
       cellContent.push(link);
     }
 
-    row.push(cellContent);
+    // Only add non-empty cells; guard against undefined entries that would
+    // crash WebImporter.createTable when it calls setAttribute.
+    row.push(cellContent.filter(Boolean));
   });
 
-  const cells = [row];
+  // Drop empty columns so we never emit a row of all-empty cells.
+  const cleanRow = row.filter((c) => c.length > 0);
+  if (!cleanRow.length) {
+    // Nothing usable found — leave original DOM untouched.
+    return;
+  }
+
+  const cells = [cleanRow];
 
   // Create block using WebImporter utility
   const block = WebImporter.Blocks.createBlock(document, { name: 'Columns-People', cells });
 
-  // Replace original element with structured block table
-  element.replaceWith(block);
+  // Replace the whole column group (the container holding both .col-lg-6
+  // columns) once, so the selector matching each column's image link does not
+  // create duplicate blocks and does not leave stray text/CTA markup behind.
+  // The import script skips elements already detached on subsequent matches.
+  (container && container !== element ? container : element).replaceWith(block);
 }

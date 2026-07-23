@@ -31,15 +31,26 @@
  * Generated: 2026-02-26
  */
 export default function parse(element, { document }) {
-  // Find all insight/blog card elements
-  // VALIDATED: Found .cmp-media-callout within section#blogs at lines 679, 733, 789, 846
-  let mediaCallouts = Array.from(element.querySelectorAll('.cmp-media-callout'));
-
-  if (!mediaCallouts.length) {
-    // If element itself is a media-callout
-    if (element.classList.contains('cmp-media-callout') || element.classList.contains('media-callout')) {
-      mediaCallouts = [element];
-    }
+  // Find all insight/blog card elements.
+  // The template selector matches each individual outer ".media-callout" (each
+  // of which wraps a nested ".cmp-media-callout"). When the element IS a
+  // callout, aggregate ALL sibling callouts from the containing blogs section
+  // and build one multi-row block (not one block per card).
+  // VALIDATED: Found 4 .media-callout within section#blogs.
+  let mediaCallouts;
+  let groupScope = null;
+  if (element.classList.contains('media-callout') || element.classList.contains('cmp-media-callout')) {
+    groupScope = element.closest('section#blogs')
+      || element.closest('#blogs')
+      || element.closest('section');
+    mediaCallouts = groupScope
+      ? Array.from(groupScope.querySelectorAll('.media-callout'))
+      : [element];
+    if (!mediaCallouts.length) mediaCallouts = [element];
+  } else {
+    // Element is a container - collect callouts within.
+    groupScope = element;
+    mediaCallouts = Array.from(element.querySelectorAll('.media-callout, .cmp-media-callout'));
   }
 
   // Build cells array - one row per card with 2 columns (image | content)
@@ -107,6 +118,23 @@ export default function parse(element, { document }) {
   // Create block using WebImporter utility
   const block = WebImporter.Blocks.createBlock(document, { name: 'Cards-Insight', cells });
 
-  // Replace original element with structured block table
-  element.replaceWith(block);
+  // Replace the whole card group once, so the selector matching each individual
+  // callout does not create duplicate blocks and does not leave stray markup
+  // behind. The import script skips elements already detached from the DOM on
+  // subsequent matches.
+  //
+  // Find the smallest ancestor that contains ALL collected callouts; that is the
+  // group container to replace. Fall back to the group scope, then the element.
+  let groupContainer = null;
+  if (mediaCallouts.length > 1) {
+    let ancestor = element.parentElement;
+    while (ancestor && ancestor.tagName !== 'BODY') {
+      if (ancestor.querySelectorAll('.media-callout').length >= mediaCallouts.length) {
+        groupContainer = ancestor;
+        break;
+      }
+      ancestor = ancestor.parentElement;
+    }
+  }
+  (groupContainer || groupScope || element).replaceWith(block);
 }
