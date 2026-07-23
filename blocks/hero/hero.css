@@ -5,33 +5,261 @@
 
 .hero {
   position: relative;
-  padding: 40px 24px;
-  min-height: 300px;
+  padding: 60px 24px;
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
 }
 
-.hero h1 {
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
-  color: var(--background-color);
-}
-
-.hero picture {
+.hero::after {
+  content: '';
   position: absolute;
-  z-index: -1;
   inset: 0;
-  object-fit: cover;
-  box-sizing: border-box;
+  background: linear-gradient(to top, rgb(0 0 0 / 60%) 0%, rgb(0 0 0 / 20%) 50%, transparent 100%);
+  z-index: 1;
+  pointer-events: none;
 }
 
-.hero img {
+/* image container: first row of the block */
+.hero > div:first-child {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.hero > div:first-child img {
   object-fit: cover;
   width: 100%;
   height: 100%;
+  display: block;
+}
+
+/* text container: second row of the block */
+.hero > div:last-child {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.hero h1,
+.hero h2,
+.hero h3,
+.hero h4,
+.hero h5,
+.hero h6,
+.hero p {
+  color: var(--white);
+}
+
+/* ensure intermediate wrappers stretch to fill the absolute container */
+.hero > div:first-child > div,
+.hero > div:first-child p {
+  height: 100%;
+  margin: 0;
+}
+
+.hero h1 {
+  font-family: var(--heading-font-family);
+  font-weight: 400;
+  font-size: var(--heading-font-size-xxl);
+  line-height: 1.3;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero.no-image * {
+  color: var(--text-color);
+}
+
+/* green CTA button in hero */
+.hero a:any-link {
+  display: inline-block;
+  background-color: var(--accent-color);
+  color: var(--text-color);
+  padding: 18px 30px;
+  font-family: var(--heading-font-family);
+  font-size: var(--body-font-size-m);
+  font-weight: 600;
+  text-decoration: none;
+  border: 0;
+  border-radius: 0;
+  transition: all var(--transition-speed) ease;
+  margin-top: 10px;
+}
+
+.hero a:not(.hero-breadcrumb a)::after {
+  content: ' \203A';
+  font-size: 1.2em;
+}
+
+.hero a:hover {
+  background-color: var(--accent-color-hover);
+  color: var(--white);
+}
+
+/* === Variant: cta === left-aligned heading with prominent button */
+.hero.cta > div:last-child {
+  text-align: left;
+  max-width: 1264px;
+  padding: 0 24px;
+}
+
+.hero.cta h1 {
+  align-items: flex-start;
+  text-align: left;
+}
+
+/* === Variant: campaign === promo hero, boxed content on a solid panel */
+.hero.campaign > div:last-child {
+  text-align: left;
+  max-width: 1264px;
+  padding: 0 24px;
+}
+
+.hero.campaign h1 {
+  align-items: flex-start;
+  text-align: left;
+}
+
+/* === Variant: campaign-immersive === taller hero with decorative overlay */
+.hero.campaign-immersive {
+  min-height: 520px;
+}
+
+.hero.campaign-immersive::after {
+  background: linear-gradient(to right, rgb(0 0 0 / 70%) 0%, rgb(0 0 0 / 30%) 60%, transparent 100%);
+}
+
+.hero.campaign-immersive > div:last-child {
+  text-align: left;
+  max-width: 1264px;
+  padding: 0 24px;
+}
+
+.hero.campaign-immersive h1 {
+  align-items: flex-start;
+  text-align: left;
+}
+
+/* === Variant: event === hero with date/location metadata line */
+.hero.event > div:last-child {
+  text-align: left;
+  max-width: 1264px;
+  padding: 0 24px;
+}
+
+.hero.event h1 {
+  align-items: flex-start;
+  text-align: left;
+}
+
+/* === Variant: overlay === centered text over a darkened image */
+.hero.overlay::after {
+  background: rgb(0 0 0 / 45%);
+}
+
+/* === Variant: banner === short, wide page banner with breadcrumb + title.
+   Source metrics (grace.com): container ~178px tall, padding 68px top / 30px
+   bottom, content top-aligned. */
+.hero.banner {
+  min-height: 178px;
+  padding: 30px 0;
+  align-items: center;
+}
+
+.hero.banner::after {
+  background: rgb(0 0 0 / 45%);
+}
+
+/* Mirror the header nav container exactly (max-width 1264 + 24px padding,
+   centered) so the breadcrumb and title align vertically with the Grace logo
+   above them at every viewport. */
+.hero.banner > div:last-child {
+  text-align: left;
+  max-width: 1264px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.hero.banner h1 {
+  align-items: flex-start;
+  text-align: left;
+  font-weight: 100;
+  margin-bottom: 0;
+}
+
+/* === Breadcrumb (rendered by hero.js from an authored "a / b / c" line) === */
+.hero-breadcrumb {
+  margin: 0 0 10px;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--body-font-family);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.hero-breadcrumb li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--white);
+}
+
+.hero-breadcrumb li:not(:last-child)::after {
+  content: '/';
+  opacity: 0.7;
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+.hero-breadcrumb a:any-link {
+  display: inline;
+  background: none;
+  color: var(--white);
+  padding: 0;
+  margin: 0;
+  font-family: var(--body-font-family);
+  font-size: 10px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.hero-breadcrumb a:hover {
+  text-decoration: underline;
 }
 
 @media (width >= 900px) {
   .hero {
-    padding: 40px 32px;
+    padding: 80px 32px;
+    min-height: 477px;
+  }
+
+  .hero h1 {
+    font-size: 42px;
+  }
+
+  /* Banner stays short; keep it vertically centered and mirror the header nav
+     container at desktop (max-width 1240, no side padding) so the breadcrumb
+     and title align with the Grace logo at every viewport >= 900px. */
+  .hero.banner {
+    min-height: 200px;
+    padding: 30px 0;
+  }
+
+  .hero.banner > div:last-child {
+    box-sizing: border-box;
+    max-width: 1280px;
+    padding: 0 20px;
   }
 }

@@ -103,6 +103,67 @@
   color: var(--white);
 }
 
+/* === Variant: cta === left-aligned heading with prominent button */
+.hero-banner.cta > div:last-child {
+  text-align: left;
+  max-width: 1264px;
+  padding: 0 24px;
+}
+
+.hero-banner.cta h1 {
+  align-items: flex-start;
+  text-align: left;
+}
+
+/* === Variant: campaign === promo hero, boxed content on a solid panel */
+.hero-banner.campaign > div:last-child {
+  text-align: left;
+  max-width: 1264px;
+  padding: 0 24px;
+}
+
+.hero-banner.campaign h1 {
+  align-items: flex-start;
+  text-align: left;
+}
+
+/* === Variant: campaign-immersive === taller hero with decorative overlay */
+.hero-banner.campaign-immersive {
+  min-height: 520px;
+}
+
+.hero-banner.campaign-immersive::after {
+  background: linear-gradient(to right, rgb(0 0 0 / 70%) 0%, rgb(0 0 0 / 30%) 60%, transparent 100%);
+}
+
+.hero-banner.campaign-immersive > div:last-child {
+  text-align: left;
+  max-width: 1264px;
+  padding: 0 24px;
+}
+
+.hero-banner.campaign-immersive h1 {
+  align-items: flex-start;
+  text-align: left;
+}
+
+/* === Variant: event === hero with date/location metadata line */
+.hero-banner.event > div:last-child {
+  text-align: left;
+  max-width: 1264px;
+  padding: 0 24px;
+}
+
+.hero-banner.event h1 {
+  align-items: flex-start;
+  text-align: left;
+}
+
+/* === Variant: overlay === centered text over a darkened image */
+.hero-banner.overlay::after {
+  background: rgb(0 0 0 / 45%);
+}
+
 @media (width >= 900px) {
   .hero-banner {
     padding: 80px 32px;
