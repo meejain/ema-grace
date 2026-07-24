@@ -100,8 +100,12 @@ body.appear {
   display: block;
 }
 
+/* The Grace header has two rows — a utility bar ("Vendors and Suppliers") above
+   the main nav — so it is taller than a single --nav-height row. Reserve space
+   with min-height and let the box grow to fit its content, otherwise the nav
+   overflows the fixed height and overlaps the page content below it. */
 header {
-  height: var(--nav-height);
+  min-height: var(--nav-height);
 }
 
 header .header,

@@ -199,7 +199,7 @@
 .hero.campaign {
   min-height: 0;
   align-items: flex-start;
-  padding: 40px 10px 170px;
+  padding: 40px 10px 130px;
 }
 
 .hero.campaign > div:last-child {
@@ -241,7 +241,7 @@
   right: 0;
   bottom: 0;
   left: 0;
-  height: 130px;
+  height: 90px;
   z-index: 3;
   pointer-events: none;
   background-image:
@@ -266,15 +266,17 @@
 }
 
 /* Black-to-transparent gradient over the blue base: solid black on the left
-   fading to reveal the blue toward the right (left-to-right at all sizes,
-   matching grace.com). */
+   fading to transparent across the full width, matching grace.com's
+   ".hero__section.black-text.gradient .overlay" rule
+   (linear-gradient(to right, #000 0, transparent 100%)). The fade runs to 100%,
+   not an earlier stop, so the panel stays darker further across. */
 .hero.event::before {
   content: '';
   position: absolute;
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  background-image: linear-gradient(to right, rgb(0 0 0) 0%, transparent 65%);
+  background-image: linear-gradient(to right, rgb(0 0 0) 0%, transparent 100%);
 }
 
 .hero.event::after {
@@ -301,10 +303,12 @@
   color: var(--white);
 }
 
+/* The source wraps the event title in <strong>, which renders it at weight 400
+   (the h2 base is 300, the strong bumps it to 400). Match that heavier weight. */
 .hero.event h1 {
   display: block;
   font-family: var(--heading-font-family);
-  font-weight: 300;
+  font-weight: 400;
   font-size: 24px;
   line-height: 1.425;
   color: var(--white);
@@ -332,11 +336,16 @@
   min-height: 178px;
   padding: 30px 0;
   align-items: center;
+  box-sizing: border-box;
 }
 
+/* Left-to-right dark gradient over the photo: solid black on the left fading to
+   transparent, matching grace.com's ".hero__section.black-text.gradient .overlay"
+   rule (linear-gradient(to right, #000 0, transparent 100%)). This keeps the
+   breadcrumb + title legible on the dark left while revealing the image right. */
 .hero.banner::after,
 .hero.overlay::after {
-  background: rgb(0 0 0 / 45%);
+  background: linear-gradient(to right, rgb(0 0 0) 0%, transparent 100%);
 }
 
 /* Mirror the header nav container exactly (max-width 1264 + 24px padding,
@@ -416,10 +425,12 @@
 
   /* Banner stays short; keep it vertically centered and mirror the header nav
      container at desktop (max-width 1240, no side padding) so the breadcrumb
-     and title align with the Grace logo at every viewport >= 900px. */
+     and title align with the Grace logo at every viewport >= 900px. Border-box
+     so the 178px total height matches grace.com (not 178 + padding). */
   .hero.banner {
-    min-height: 200px;
+    min-height: 178px;
     padding: 30px 0;
+    box-sizing: border-box;
   }
 
   .hero.banner > div:last-child {
@@ -438,14 +449,23 @@
      height (~451px at desktop), object-fit: cover over-zooms and crops the
      flange tops. Keeping the hero at ~504px crops only the sides, so the full
      vertical extent of the photo stays visible (matches grace.com). */
+
+  /* Source geometry (grace.com >= 900px): content is top-aligned (not centered),
+     h1 top ~91px, left inset 100px, then a ~35px gap to the CTA. The content
+     column mirrors the header nav container (max-width 1280 + 20px side padding,
+     hero side padding 0) so the h1's left edge lands at 100px. */
   .hero.campaign {
     min-height: 504px;
-    padding: 60px 32px;
-    align-items: center;
+    padding: 91px 0 0;
+    align-items: flex-start;
+    box-sizing: border-box;
   }
 
   .hero.campaign > div:last-child {
-    padding: 0 24px;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 20px;
+    box-sizing: border-box;
   }
 
   .hero.campaign h1 {
