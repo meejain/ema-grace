@@ -185,16 +185,21 @@
    column (~640px) inside the centered page container, h1 weight 100, and a
    left-to-right gradient keeps the copy legible over the background image. */
 .hero.campaign::after {
-  background: linear-gradient(to right, rgb(0 0 0 / 65%) 0%, rgb(0 0 0 / 30%) 55%, transparent 100%);
+  background: linear-gradient(to right, rgb(0 0 0) 0%, transparent 100%);
 }
 
 /* Mobile: tight 10px side gutters (matches grace.com). The base hero's 24px
    side padding plus a cell inset would over-indent the copy, so drop the cell
    padding and pull the hero gutters in to 10px. The large bottom padding
    reserves room for the hex band so the centered copy sits above it (source
-   uses 40px top / 130px bottom). */
+   uses 40px top / 130px bottom). The copy is top-aligned (not vertically
+   centered) so the heading sits directly under the header, and the hero is
+   content-sized — override the base 400px min-height and align-items:center,
+   which otherwise push the hero to 570px and drop the copy to the middle. */
 .hero.campaign {
-  padding: 40px 10px 130px;
+  min-height: 0;
+  align-items: flex-start;
+  padding: 40px 10px 170px;
 }
 
 .hero.campaign > div:last-child {
@@ -236,7 +241,7 @@
   right: 0;
   bottom: 0;
   left: 0;
-  height: 170px;
+  height: 130px;
   z-index: 3;
   pointer-events: none;
   background-image:
@@ -248,11 +253,11 @@
 }
 
 /* === Variant: event === left-aligned title + date/location band.
-   Source: grace.com/campaign/emea-fcc-workshop. A dark-blue panel (#004990)
-   with a black-to-transparent gradient overlay (dark on the left, fading to
-   reveal the blue on the right) and a left-aligned white heading with a
-   date/location line beneath. Content sits in a left column inside the centered
-   page container. Mobile: padding 42px 10px 80px, h1 24px, vertical gradient;
+   Source: grace.com/campaign/emea-fcc-workshop. A dark-blue panel (#004990) with
+   a black-to-transparent gradient overlay that darkens the left edge to solid
+   black and fades to reveal the blue on the right. A left-aligned white heading
+   sits top, then a gap, then a date/location line. Content sits in a left column
+   inside the centered page container. Mobile: padding 42px 10px 80px, h1 24px;
    desktop: padding 68px 0 30px, h1 30px, left-to-right gradient. */
 .hero.event {
   min-height: 0;
@@ -260,18 +265,24 @@
   background-color: #004990;
 }
 
-/* Gradient overlay: dark at the top on mobile (vertical), fading down. */
+/* Black-to-transparent gradient over the blue base: solid black on the left
+   fading to reveal the blue toward the right (left-to-right at all sizes,
+   matching grace.com). */
 .hero.event::before {
   content: '';
   position: absolute;
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  background-image: linear-gradient(to bottom, rgb(0 0 0) 70%, transparent 100%);
+  background-image: linear-gradient(to right, rgb(0 0 0) 0%, transparent 65%);
+}
+
+.hero.event::after {
+  display: none;
 }
 
 /* Content column mirrors the header nav container (max-width 1280 + 20px side
-   padding) so the heading's left edge aligns exactly with the Grace logo. */
+   padding) so the heading's left edge aligns with the Grace logo. */
 /* stylelint-disable-next-line no-descending-specificity */
 .hero.event > div {
   position: relative;
@@ -283,10 +294,6 @@
   padding: 0 20px;
   box-sizing: border-box;
   text-align: left;
-}
-
-.hero.event::after {
-  display: none;
 }
 
 .hero.event.no-image :not(a) {
@@ -301,7 +308,7 @@
   line-height: 1.425;
   color: var(--white);
   text-align: left;
-  margin: 0 0 72px;
+  margin: 0 0 18px;
 }
 
 /* Date / location line (authored as a paragraph beneath the heading). */
@@ -424,8 +431,16 @@
      page container, and the CTA reverts to an auto-width, left-aligned button
      (matches grace.com >= 900px). Restore the standard hero gutters and the
      container inset that the mobile rules dropped. */
+
+  /* Match the source hero height (~504px). The background image is short
+     (1600x501); if the hero grows much taller than the image's full-width
+     height (~451px at desktop), object-fit: cover over-zooms and crops the
+     flange tops. Keeping the hero at ~504px crops only the sides, so the full
+     vertical extent of the photo stays visible (matches grace.com). */
   .hero.campaign {
-    padding: 80px 32px;
+    min-height: 504px;
+    padding: 60px 32px;
+    align-items: center;
   }
 
   .hero.campaign > div:last-child {
@@ -472,14 +487,12 @@
   /* Desktop event band: taller top padding and a larger heading; content sits
      in a left column inside the centered container (matches grace.com >= 900px,
      h2 30px, date line 20px). */
+
+  /* Source geometry at desktop: hero 381px tall, content top-inset 68px, h1 to
+     date gap ~90px, and ~65px of space below the date line. */
   .hero.event {
     min-height: 0;
-    padding: 68px 0 30px;
-  }
-
-  /* Desktop: gradient runs left-to-right (dark left, transparent right). */
-  .hero.event::before {
-    background-image: linear-gradient(to right, rgb(0 0 0) 0%, transparent 100%);
+    padding: 68px 0 65px;
   }
 
   /* stylelint-disable-next-line no-descending-specificity */
@@ -490,8 +503,15 @@
   .hero.event h1 {
     font-size: 30px;
     line-height: 1.5;
-    margin-bottom: 141px;
+    margin-bottom: 90px;
     max-width: 620px;
+  }
+
+  /* Desktop date line uses the source's taller 34px (1.7) line-height; with the
+     line wrapping to two lines this restores the exact 381px hero height. */
+  /* stylelint-disable-next-line no-descending-specificity */
+  .hero.event > div p {
+    line-height: 1.7;
   }
 
   /* Desktop: the decoration spans the full hero and is scaled to fit the width
