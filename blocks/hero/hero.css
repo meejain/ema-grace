@@ -281,13 +281,14 @@
   display: none;
 }
 
-/* Content column mirrors the header nav container (max-width 1280 + 20px side
-   padding) so the heading's left edge aligns with the Grace logo. */
+/* Row 1 is the (optional) background image; row 2 is the content. The content
+   column mirrors the header nav container (max-width 1280 + 20px side padding)
+   so the heading's left edge aligns with the Grace logo. */
 /* stylelint-disable-next-line no-descending-specificity */
-.hero.event > div {
+.hero.event > div:last-child {
   position: relative;
   inset: auto;
-  z-index: 1;
+  z-index: 2;
   width: 100%;
   max-width: 1280px;
   margin: 0 auto;
@@ -313,7 +314,7 @@
 
 /* Date / location line (authored as a paragraph beneath the heading). */
 /* stylelint-disable-next-line no-descending-specificity */
-.hero.event > div p {
+.hero.event > div:last-child p {
   font-family: var(--heading-font-family);
   font-weight: 300;
   font-size: 20px;
@@ -496,7 +497,7 @@
   }
 
   /* stylelint-disable-next-line no-descending-specificity */
-  .hero.event > div {
+  .hero.event > div:last-child {
     padding: 0 20px;
   }
 
@@ -510,7 +511,7 @@
   /* Desktop date line uses the source's taller 34px (1.7) line-height; with the
      line wrapping to two lines this restores the exact 381px hero height. */
   /* stylelint-disable-next-line no-descending-specificity */
-  .hero.event > div p {
+  .hero.event > div:last-child p {
     line-height: 1.7;
   }
 
