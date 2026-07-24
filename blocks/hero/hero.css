@@ -103,91 +103,247 @@
   color: var(--white);
 }
 
-/* === Variant: cta === left-aligned heading with prominent button */
-.hero.cta > div:last-child {
-  text-align: left;
+/* === Variant: cta === centered "Request a sample" promo band.
+   Source: grace.com/campaign/chromatography (bottom band). A short, wide band
+   on a dark-blue panel (#004990) with a blue-tinted flasks photo, centered
+   white heading + subheading + green button. No authored image — the photo is
+   a CSS background. Mobile metrics: article padding 10px/25px, h2 24px, h4 16px,
+   full-width button; desktop: padding 50px 70px, h2 30px, h4 18px, auto button. */
+.hero.cta {
+  min-height: 0;
+  padding: 25px 10px;
+  background-color: #004990;
+  background-image: url('./hero-cta-flasks.jpg');
+  background-position: 50% 50%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  text-align: center;
+}
+
+/* No image row: the single content div flows normally (undo the base image
+   layer's absolute positioning) and centers its contents. */
+/* stylelint-disable-next-line no-descending-specificity */
+.hero.cta > div {
+  position: static;
+  inset: auto;
+  z-index: auto;
+  width: 100%;
   max-width: 1264px;
-  padding: 0 24px;
+  margin: 0 auto;
+  text-align: center;
 }
 
-.hero.cta h1 {
-  align-items: flex-start;
-  text-align: left;
+.hero.cta::after {
+  display: none;
 }
 
-/* === Variant: campaign === promo hero, boxed content on a solid panel */
+/* Force white copy even though the block is flagged no-image (but not the
+   green button, which keeps its dark label). */
+.hero.cta.no-image :not(a) {
+  color: var(--white);
+}
+
+.hero.cta h1,
+.hero.cta h2 {
+  display: block;
+  font-family: var(--heading-font-family);
+  font-weight: 300;
+  font-size: 24px;
+  line-height: 1.3;
+  color: var(--white);
+  margin: 0 0 10px;
+  text-align: center;
+}
+
+/* Scope through the child div so this beats the base
+   ".hero > div:first-child p { margin: 0 }" rule. The subheading carries the
+   30px gap above the button; the button's own paragraph wrapper stays flush. */
+.hero.cta > div p {
+  font-family: var(--heading-font-family);
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1.3;
+  color: var(--white);
+  margin: 0 0 30px;
+}
+
+.hero.cta > div p:last-child {
+  margin-bottom: 0;
+}
+
+.hero.cta a:any-link {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 13px;
+  text-align: center;
+  margin: 0 auto;
+}
+
+/* === Variant: campaign === promo hero, left-column content over a photo.
+   Source metrics (grace.com/campaign/chromatography): content sits in a left
+   column (~640px) inside the centered page container, h1 weight 100, and a
+   left-to-right gradient keeps the copy legible over the background image. */
+.hero.campaign::after {
+  background: linear-gradient(to right, rgb(0 0 0 / 65%) 0%, rgb(0 0 0 / 30%) 55%, transparent 100%);
+}
+
+/* Mobile: tight 10px side gutters (matches grace.com). The base hero's 24px
+   side padding plus a cell inset would over-indent the copy, so drop the cell
+   padding and pull the hero gutters in to 10px. The large bottom padding
+   reserves room for the hex band so the centered copy sits above it (source
+   uses 40px top / 130px bottom). */
+.hero.campaign {
+  padding: 40px 10px 130px;
+}
+
 .hero.campaign > div:last-child {
   text-align: left;
   max-width: 1264px;
-  padding: 0 24px;
+  padding: 0;
 }
 
 .hero.campaign h1 {
   align-items: flex-start;
   text-align: left;
+  font-weight: 100;
+  line-height: 1.14;
 }
 
-/* === Variant: campaign-immersive === taller hero with decorative overlay */
-.hero.campaign-immersive {
-  min-height: 520px;
+/* Mobile/tablet: the CTA spans the full content column with centered text
+   (matches grace.com below the desktop breakpoint). */
+.hero.campaign a:any-link {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 13px;
+  text-align: center;
+  margin-top: 20px;
 }
 
-.hero.campaign-immersive::after {
-  background: linear-gradient(to right, rgb(0 0 0 / 70%) 0%, rgb(0 0 0 / 30%) 60%, transparent 100%);
+/* Decorative "geo + hex" bottom edge (grace.com geoAndHexBottom): a faint
+   triangle line-network sits behind a white hexagon mask that fades the hero
+   image into the page below. Both are pinned to the hero's bottom edge and the
+   hexagons are white to blend into the light content section that follows.
+
+   Mobile/tablet: a short band anchored to the bottom with background-size:
+   cover, which crops the wide hex artwork so the hexagons stay large (matching
+   grace.com below the desktop breakpoint). Desktop switches to a full-width
+   contain fit — see the media query below. */
+.hero.campaign::before {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 170px;
+  z-index: 3;
+  pointer-events: none;
+  background-image:
+    url('./hero-hex-mask.png'),
+    url('./hero-geo-lines.png');
+  background-repeat: no-repeat, no-repeat;
+  background-position: 50% 100%, 50% 100%;
+  background-size: cover, cover;
 }
 
-.hero.campaign-immersive > div:last-child {
+/* === Variant: event === left-aligned title + date/location band.
+   Source: grace.com/campaign/emea-fcc-workshop. A dark-blue panel (#004990)
+   with a black-to-transparent gradient overlay (dark on the left, fading to
+   reveal the blue on the right) and a left-aligned white heading with a
+   date/location line beneath. Content sits in a left column inside the centered
+   page container. Mobile: padding 42px 10px 80px, h1 24px, vertical gradient;
+   desktop: padding 68px 0 30px, h1 30px, left-to-right gradient. */
+.hero.event {
+  min-height: 0;
+  padding: 42px 10px 80px;
+  background-color: #004990;
+}
+
+/* Gradient overlay: dark at the top on mobile (vertical), fading down. */
+.hero.event::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: linear-gradient(to bottom, rgb(0 0 0) 70%, transparent 100%);
+}
+
+/* Content column mirrors the header nav container (max-width 1280 + 20px side
+   padding) so the heading's left edge aligns exactly with the Grace logo. */
+/* stylelint-disable-next-line no-descending-specificity */
+.hero.event > div {
+  position: relative;
+  inset: auto;
+  z-index: 1;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 20px;
+  box-sizing: border-box;
   text-align: left;
-  max-width: 1264px;
-  padding: 0 24px;
 }
 
-.hero.campaign-immersive h1 {
-  align-items: flex-start;
-  text-align: left;
+.hero.event::after {
+  display: none;
 }
 
-/* === Variant: event === hero with date/location metadata line */
-.hero.event > div:last-child {
-  text-align: left;
-  max-width: 1264px;
-  padding: 0 24px;
+.hero.event.no-image :not(a) {
+  color: var(--white);
 }
 
 .hero.event h1 {
-  align-items: flex-start;
+  display: block;
+  font-family: var(--heading-font-family);
+  font-weight: 300;
+  font-size: 24px;
+  line-height: 1.425;
+  color: var(--white);
   text-align: left;
+  margin: 0 0 72px;
 }
 
-/* === Variant: overlay === centered text over a darkened image */
-.hero.overlay::after {
-  background: rgb(0 0 0 / 45%);
+/* Date / location line (authored as a paragraph beneath the heading). */
+/* stylelint-disable-next-line no-descending-specificity */
+.hero.event > div p {
+  font-family: var(--heading-font-family);
+  font-weight: 300;
+  font-size: 20px;
+  line-height: 1.3;
+  color: var(--white);
+  margin: 0;
 }
 
-/* === Variant: banner === short, wide page banner with breadcrumb + title.
-   Source metrics (grace.com): container ~178px tall, padding 68px top / 30px
-   bottom, content top-aligned. */
-.hero.banner {
+/* === Variant: banner (and its alias, overlay) === short, wide page banner
+   with breadcrumb + title. Source metrics (grace.com): container ~178px tall,
+   padding 68px top / 30px bottom, content top-aligned. The "overlay" variant is
+   an alias of "banner" — same short breadcrumb-header treatment. */
+.hero.banner,
+.hero.overlay {
   min-height: 178px;
   padding: 30px 0;
   align-items: center;
 }
 
-.hero.banner::after {
+.hero.banner::after,
+.hero.overlay::after {
   background: rgb(0 0 0 / 45%);
 }
 
 /* Mirror the header nav container exactly (max-width 1264 + 24px padding,
    centered) so the breadcrumb and title align vertically with the Grace logo
    above them at every viewport. */
-.hero.banner > div:last-child {
+.hero.banner > div:last-child,
+.hero.overlay > div:last-child {
   text-align: left;
   max-width: 1264px;
   margin: 0 auto;
   padding: 0 24px;
 }
 
-.hero.banner h1 {
+.hero.banner h1,
+.hero.overlay h1 {
   align-items: flex-start;
   text-align: left;
   font-weight: 100;
@@ -235,6 +391,7 @@
   text-decoration: none;
 }
 
+/* stylelint-disable-next-line no-descending-specificity */
 .hero-breadcrumb a:hover {
   text-decoration: underline;
 }
@@ -261,5 +418,88 @@
     box-sizing: border-box;
     max-width: 1280px;
     padding: 0 20px;
+  }
+
+  /* Desktop campaign: content collapses to a left column inside the centered
+     page container, and the CTA reverts to an auto-width, left-aligned button
+     (matches grace.com >= 900px). Restore the standard hero gutters and the
+     container inset that the mobile rules dropped. */
+  .hero.campaign {
+    padding: 80px 32px;
+  }
+
+  .hero.campaign > div:last-child {
+    padding: 0 24px;
+  }
+
+  .hero.campaign h1 {
+    max-width: 640px;
+    line-height: 1.07;
+  }
+
+  .hero.campaign a:any-link {
+    display: inline-block;
+    width: auto;
+    padding: 18px 30px;
+    text-align: left;
+    margin-top: 10px;
+  }
+
+  /* Desktop CTA band: taller padding, larger headings, and an auto-width
+     centered button (matches grace.com >= 900px). */
+  .hero.cta {
+    min-height: 0;
+    padding: 50px 70px;
+  }
+
+  .hero.cta h1,
+  .hero.cta h2 {
+    font-size: 30px;
+    line-height: 1.7;
+  }
+
+  .hero.cta p {
+    font-size: 18px;
+    line-height: 1.7;
+  }
+
+  .hero.cta a:any-link {
+    display: inline-block;
+    width: auto;
+    padding: 18px 30px;
+  }
+
+  /* Desktop event band: taller top padding and a larger heading; content sits
+     in a left column inside the centered container (matches grace.com >= 900px,
+     h2 30px, date line 20px). */
+  .hero.event {
+    min-height: 0;
+    padding: 68px 0 30px;
+  }
+
+  /* Desktop: gradient runs left-to-right (dark left, transparent right). */
+  .hero.event::before {
+    background-image: linear-gradient(to right, rgb(0 0 0) 0%, transparent 100%);
+  }
+
+  /* stylelint-disable-next-line no-descending-specificity */
+  .hero.event > div {
+    padding: 0 20px;
+  }
+
+  .hero.event h1 {
+    font-size: 30px;
+    line-height: 1.5;
+    margin-bottom: 141px;
+    max-width: 620px;
+  }
+
+  /* Desktop: the decoration spans the full hero and is scaled to fit the width
+     (contain), so the hexagon edge stretches edge to edge (matches grace.com
+     >= 900px). */
+  .hero.campaign::before {
+    top: 0;
+    height: auto;
+    background-size: contain, contain;
   }
 }

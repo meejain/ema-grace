@@ -1,0 +1,83 @@
+/* Columns Image Right — text left, image right (side-by-side on desktop) */
+
+.columns-image-right .columns-image-right-row {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.columns-image-right .columns-image-right-text-col,
+.columns-image-right .columns-image-right-img-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.columns-image-right .columns-image-right-img-col {
+  line-height: 0;
+}
+
+.columns-image-right .columns-image-right-img-col picture,
+.columns-image-right .columns-image-right-img-col img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 706 / 398;
+  object-fit: cover;
+}
+
+.columns-image-right .columns-image-right-text-col h2 {
+  font-family: var(--heading-font-family);
+  font-size: var(--heading-font-size-xxl);
+  font-weight: 100;
+  line-height: 1.3;
+  color: var(--text-color);
+  margin-top: 0;
+  margin-bottom: 7.5px;
+}
+
+.columns-image-right .columns-image-right-text-col p {
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m);
+  font-weight: 400;
+  line-height: 1.3;
+  color: var(--text-color);
+  margin-top: 0;
+  margin-bottom: 21px;
+}
+
+.columns-image-right .columns-image-right-text-col a:any-link {
+  color: var(--link-color);
+  font-weight: 600;
+  text-decoration: none;
+  transition: color var(--transition-speed) ease;
+}
+
+.columns-image-right .columns-image-right-text-col a:not(:has(img))::after {
+  content: ' \203A';
+  font-size: 1.2em;
+}
+
+.columns-image-right .columns-image-right-text-col a:hover {
+  color: var(--link-hover-color);
+}
+
+@media (width >= 900px) {
+  .columns-image-right .columns-image-right-row {
+    flex-direction: row;
+    align-items: center;
+    gap: 40px;
+  }
+
+  .columns-image-right .columns-image-right-text-col {
+    flex: 1 1 50%;
+  }
+
+  .columns-image-right .columns-image-right-img-col {
+    flex: 1 1 50%;
+  }
+
+  .columns-image-right .columns-image-right-text-col h2,
+  .columns-image-right .columns-image-right-text-col p {
+    line-height: 1.7;
+  }
+}

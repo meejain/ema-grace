@@ -1,0 +1,92 @@
+/* Section heading – Roboto Slab, centered (source: 24px mobile / 30px desktop, weight 300) */
+.cards-benefits-grid-container h2 {
+  font-family: var(--heading-font-family);
+  font-size: 24px;
+  font-weight: 300;
+  line-height: 1.3;
+  text-align: center;
+  margin: 0 0 10px;
+}
+
+/* Card grid – mobile: 1 column (source is single column until lg breakpoint) */
+.cards-benefits-grid > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+}
+
+/* Individual card – transparent, no border */
+.cards-benefits-grid > ul > li {
+  border: 0;
+  background-color: transparent;
+}
+
+/* Card image – square display, matches source (object-fit fill) */
+.cards-benefits-grid .cards-benefits-grid-card-image {
+  line-height: 0;
+}
+
+.cards-benefits-grid > ul > li img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: fill;
+  display: block;
+}
+
+/* Card text body – text sits below image */
+.cards-benefits-grid .cards-benefits-grid-card-body {
+  margin: 0;
+  padding: 0;
+}
+
+/* Card heading – Roboto Slab, 20px mobile (line-height 1.3), no top margin */
+.cards-benefits-grid .cards-benefits-grid-card-body h3 {
+  font-family: var(--heading-font-family);
+  font-size: var(--heading-font-size-l);
+  font-weight: 300;
+  line-height: 1.3;
+  color: var(--text-color);
+  margin: 0 0 20px;
+  text-align: left;
+}
+
+/* Card paragraph – Roboto 14px, line-height 1.3 mobile */
+.cards-benefits-grid .cards-benefits-grid-card-body p {
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m);
+  font-weight: 400;
+  line-height: 1.3;
+  color: var(--text-color);
+  margin: 0 0 21px;
+  text-align: left;
+}
+
+/* Tablet (>= 600px): heading grows to 30px (source) */
+@media (width >= 600px) {
+  .cards-benefits-grid-container h2 {
+    font-size: 30px;
+  }
+}
+
+/* Desktop (>= 900px, source lg breakpoint): 2 columns, larger heading */
+@media (width >= 900px) {
+  .cards-benefits-grid-container h2 {
+    line-height: 1.7;
+  }
+
+  .cards-benefits-grid > ul {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+  }
+
+  .cards-benefits-grid .cards-benefits-grid-card-body h3 {
+    line-height: 1.15;
+  }
+
+  .cards-benefits-grid .cards-benefits-grid-card-body p {
+    line-height: 1.7;
+  }
+}

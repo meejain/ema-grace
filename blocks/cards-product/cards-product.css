@@ -6,20 +6,23 @@
   text-align: center;
 }
 
+/* Mobile/tablet: the source product grid stacks to a single full-width
+   column; the 3-across grid only kicks in on desktop. */
 .cards-product > ul {
   list-style: none;
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
+  grid-template-columns: 1fr;
+  gap: 35px;
 }
 
 .cards-product > ul > li {
   position: relative;
   border: 0;
-  background-color: var(--background-color);
+  background-color: transparent;
   text-align: center;
+  padding-bottom: 30px;
 }
 
 .cards-product .cards-product-card-image {
@@ -28,19 +31,19 @@
 
 .cards-product > ul > li img {
   width: 100%;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 287 / 130;
   object-fit: cover;
 }
 
 .cards-product .cards-product-card-body {
   margin: 0;
-  padding: 16px 10px;
+  padding: 0 50px;
 }
 
 .cards-product .cards-product-card-body strong {
   display: block;
   font-family: var(--heading-font-family);
-  font-size: var(--heading-font-size-m);
+  font-size: 18px;
   font-weight: 600;
   color: var(--link-hover-color);
   margin-bottom: 4px;
@@ -67,6 +70,11 @@
 
 @media (width >= 900px) {
   .cards-product > ul {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+    gap: 35px 28px;
+  }
+
+  .cards-product > ul > li {
+    padding-bottom: 55px;
   }
 }

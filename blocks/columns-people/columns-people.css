@@ -45,9 +45,8 @@
   font-weight: 600;
   color: var(--text-color);
   text-decoration: none;
-  margin-top: var(--spacing-s);
-  padding-top: var(--spacing-s);
-  border-top: 1px solid #ccc;
+  margin-top: 0;
+  padding-top: 18px;
   transition: color var(--transition-speed) ease;
 }
 

@@ -1,0 +1,97 @@
+/* Icon card grid – centered icon + green label + short description.
+   Source: grace.com PP catalysts "Lighter/Cleaner/Clearer/Faster" cards
+   (a.cmp-card.generic, col-lg-6 → 2 cols at desktop). */
+
+/* Card grid – 1 column on mobile */
+.cards-icon-grid > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+
+/* Individual cards – transparent, no border, centered content.
+   Source card padding 30px 40px. */
+.cards-icon-grid > ul > li {
+  border: 0;
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 30px 40px;
+}
+
+/* Icon – centered. Source: 50px mobile, margin 0 auto 10px. */
+.cards-icon-grid .cards-icon-grid-card-image {
+  width: 50px;
+  margin: 0 auto 10px;
+  line-height: 0;
+}
+
+.cards-icon-grid .cards-icon-grid-card-image img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Text block */
+.cards-icon-grid .cards-icon-grid-card-body {
+  margin: 0;
+  padding: 0;
+}
+
+/* Title / label – Roboto 18px weight 600 green, centered.
+   Source: .cmp-card .title { font-size:18px; font-weight:600; color:#27853c }. */
+.cards-icon-grid .cards-icon-grid-card-body p:first-child {
+  font-family: var(--body-font-family);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--link-hover-color);
+  line-height: 1.3;
+  margin: 0 0 20px;
+  text-align: center;
+}
+
+/* Description – Roboto 14px black, centered.
+   Source: .spt-copy p. */
+.cards-icon-grid .cards-icon-grid-card-body p:last-child {
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m);
+  font-weight: 400;
+  color: var(--text-color);
+  line-height: 1.3;
+  margin: 0;
+  text-align: center;
+}
+
+/* Tablet (source ~576–991): icon 75px. */
+@media (width >= 600px) {
+  .cards-icon-grid .cards-icon-grid-card-image {
+    width: 75px;
+  }
+}
+
+/* Desktop (source col-lg-6 → 2 columns, col gap 40px). Icon 70px.
+   Title/desc line-height loosens to 1.7; title margin-bottom 15px. */
+@media (width >= 900px) {
+  .cards-icon-grid > ul {
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 40px;
+  }
+
+  .cards-icon-grid .cards-icon-grid-card-image {
+    width: 70px;
+  }
+
+  .cards-icon-grid .cards-icon-grid-card-body p:first-child {
+    line-height: 1.7;
+    margin: 0 0 15px;
+  }
+
+  .cards-icon-grid .cards-icon-grid-card-body p:last-child {
+    line-height: 1.7;
+  }
+}

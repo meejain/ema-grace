@@ -1,0 +1,174 @@
+/* Featured Horizontal — "Featured Products" band (grace.com feature-set tab variant) */
+
+.featured-horizontal {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Label block */
+.featured-horizontal .featured-horizontal-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 45px;
+  text-align: center;
+}
+
+.featured-horizontal .featured-horizontal-label span {
+  font-family: var(--heading-font-family);
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 30px;
+  color: var(--text-color);
+  margin-bottom: 40px;
+}
+
+/* Cards track */
+.featured-horizontal .featured-horizontal-track {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Card */
+.featured-horizontal .featured-horizontal-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 256px;
+  padding: 40px 20px;
+  background-color: var(--dark-color);
+  color: var(--white);
+  text-align: center;
+  text-decoration: none;
+  overflow: hidden;
+  transition: color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.featured-horizontal .featured-horizontal-card-media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  line-height: 0;
+}
+
+.featured-horizontal .featured-horizontal-card-media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: rgb(0 0 0 / 50%);
+}
+
+.featured-horizontal .featured-horizontal-card-media picture,
+.featured-horizontal .featured-horizontal-card-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.featured-horizontal .featured-horizontal-card-body {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.featured-horizontal .featured-horizontal-card-title {
+  font-family: var(--heading-font-family);
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 30.6px;
+  color: inherit;
+}
+
+.featured-horizontal .featured-horizontal-card-copy {
+  font-family: var(--body-font-family);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 25.2px;
+  color: inherit;
+}
+
+.featured-horizontal .featured-horizontal-card-cta {
+  font-family: var(--body-font-family);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 23.8px;
+  color: inherit;
+}
+
+.featured-horizontal .featured-horizontal-card-cta::after {
+  content: '\203A';
+  margin-left: 8px;
+}
+
+/* Tablet: cards side by side */
+@media (width >= 600px) {
+  .featured-horizontal .featured-horizontal-track {
+    flex-direction: row;
+  }
+
+  .featured-horizontal .featured-horizontal-card {
+    flex: 1 1 0;
+    border-right: 1px solid rgb(95 96 98);
+  }
+
+  .featured-horizontal .featured-horizontal-card:last-child {
+    border-right: 0;
+  }
+}
+
+/* Desktop: label block beside a horizontal row of cards; copy hidden until hover */
+@media (width >= 900px) {
+  .featured-horizontal {
+    flex-direction: row;
+    align-items: stretch;
+    min-height: 256px;
+  }
+
+  .featured-horizontal .featured-horizontal-label {
+    flex: 0 0 auto;
+    padding: 0 72px;
+    background-color: var(--white);
+    color: var(--text-color);
+    box-shadow: rgb(0 0 0 / 20%) 0 4px 8px 0, rgb(0 0 0 / 19%) 0 6px 20px 0;
+  }
+
+  .featured-horizontal .featured-horizontal-label span {
+    margin-bottom: 0;
+  }
+
+  .featured-horizontal .featured-horizontal-track {
+    flex: 1 1 auto;
+    flex-direction: row;
+  }
+
+  .featured-horizontal .featured-horizontal-card {
+    flex: 1 1 0;
+    padding: 20px;
+  }
+
+  .featured-horizontal .featured-horizontal-card-copy,
+  .featured-horizontal .featured-horizontal-card-cta {
+    display: none;
+  }
+
+  .featured-horizontal .featured-horizontal-card:hover {
+    color: var(--text-color);
+    background-color: var(--white);
+    box-shadow: rgb(0 0 0 / 20%) 0 0 12px 0;
+  }
+
+  .featured-horizontal .featured-horizontal-card.has-image:hover {
+    color: var(--white);
+  }
+
+  .featured-horizontal .featured-horizontal-card:hover .featured-horizontal-card-copy,
+  .featured-horizontal .featured-horizontal-card:hover .featured-horizontal-card-cta {
+    display: block;
+  }
+}

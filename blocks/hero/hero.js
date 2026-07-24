@@ -59,8 +59,9 @@ export default function decorate(block) {
     block.classList.add('no-image');
   }
 
-  // Banner variant: auto-generate the breadcrumb from the current URL path.
-  if (block.classList.contains('banner')) {
+  // Banner variant (and its alias, overlay): auto-generate the breadcrumb from
+  // the current URL path.
+  if (block.classList.contains('banner') || block.classList.contains('overlay')) {
     const textCell = block.querySelector(':scope > div:last-child');
     const breadcrumb = buildBreadcrumbFromPath();
     if (textCell && breadcrumb) textCell.prepend(breadcrumb);

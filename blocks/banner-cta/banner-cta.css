@@ -1,0 +1,88 @@
+/* Banner CTA - call-to-action on the brand green background.
+   Tokens re-verified against grace.com sustainability page green contact banner
+   (.contactus__content-desktop / green-bkgd):
+   background rgb(122,193,67) = #7ac143 (--accent-color); black text;
+   padding 20px; heading = body font (Roboto) 16px/700; body text 16px
+   (line-height 1.3 mobile -> 1.7 desktop); CTA buttons white bg / black text,
+   Roboto Slab 14px 600, padding 13px 10px, no radius, stacked. */
+
+/* Full-width: escape the section 1200px content wrapper. */
+.banner-cta-wrapper {
+  max-width: 100% !important;
+  padding: 0 !important;
+}
+
+.banner-cta {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-s);
+  background-color: var(--accent-color);
+  color: var(--text-color);
+  padding: var(--spacing-s);
+  text-align: left;
+}
+
+.banner-cta-content {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Heading uses the body (Roboto) font at 16px/700 on the source, not a
+   large serif display heading. */
+.banner-cta .banner-cta-heading {
+  margin: 0 0 var(--spacing-s);
+  font-family: var(--body-font-family);
+
+  /* source keeps heading + text at 16px on all breakpoints, so pin the size
+     rather than use --body-font-size-l (which grows to 20px at >=900px). */
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.7;
+  color: var(--text-color);
+}
+
+.banner-cta .banner-cta-text {
+  margin: 0;
+  font-family: var(--body-font-family);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.3;
+  color: var(--text-color);
+}
+
+/* Buttons stay stacked at every breakpoint (source keeps them in a column). */
+.banner-cta-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+/* CTA buttons: white background, black text (contrast on green banner).
+   Source padding is 13px 10px with no radius. */
+.banner-cta a.button.secondary:any-link {
+  margin: 0;
+  padding: 13px 10px;
+  border-radius: 0;
+  background-color: var(--white);
+  color: var(--text-color);
+  font-family: var(--heading-font-family);
+  font-size: var(--body-font-size-m);
+  font-weight: 600;
+  line-height: 1;
+  text-align: center;
+}
+
+.banner-cta a.button.secondary:hover,
+.banner-cta a.button.secondary:focus-visible {
+  background-color: var(--accent-color-hover);
+  color: var(--white);
+}
+
+@media (width >= 900px) {
+  .banner-cta .banner-cta-text {
+    line-height: 1.7;
+  }
+}

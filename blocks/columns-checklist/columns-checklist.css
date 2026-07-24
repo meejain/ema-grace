@@ -1,0 +1,155 @@
+.columns-checklist-container {
+  padding: var(--spacing-l) 0;
+}
+
+/* rows stack on mobile */
+.columns-checklist > div {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.columns-checklist > div > div {
+  display: block;
+}
+
+/* media / profile column */
+.columns-checklist .columns-checklist-media-col {
+  text-align: center;
+}
+
+.columns-checklist .columns-checklist-media-col picture {
+  display: block;
+  line-height: 0;
+}
+
+.columns-checklist .columns-checklist-media-col img {
+  width: 100%;
+  max-width: 387px;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  display: block;
+  margin: 0 auto;
+}
+
+.columns-checklist .columns-checklist-media-col p {
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m);
+  font-weight: 400;
+  line-height: 1.7;
+  color: rgb(0 73 144);
+  text-align: center;
+  margin: 0 0 3px;
+}
+
+/* the quote is the first paragraph after the image */
+.columns-checklist .columns-checklist-media-col .columns-checklist-quote {
+  font-family: var(--heading-font-family);
+  font-size: 26px;
+  font-weight: 100;
+  line-height: 1.4;
+  margin: 0 0 39px;
+}
+
+.columns-checklist .columns-checklist-media-col p:last-child {
+  margin-bottom: 0;
+}
+
+/* checklist column */
+.columns-checklist .columns-checklist-list-col h3 {
+  font-family: var(--heading-font-family);
+  font-size: 26px;
+  font-weight: 300;
+  line-height: 1.15;
+  color: var(--text-color);
+  text-align: left;
+  margin: 0 0 20px;
+}
+
+/* section heading rows - dark bar, centered like the source */
+.columns-checklist .columns-checklist-heading {
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m);
+  font-weight: 700;
+  line-height: 1.7;
+  color: var(--white);
+  background-color: var(--text-color);
+  border-bottom: 1px solid rgb(218 218 218);
+  margin: 0;
+  padding: 7px 10.5px;
+  text-align: center;
+}
+
+/* checklist items - light gray rows with a green check marker */
+.columns-checklist .columns-checklist-list {
+  list-style: none;
+  margin: 0 0 var(--spacing-m);
+  padding: 0;
+}
+
+.columns-checklist .columns-checklist-list li {
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m);
+  font-weight: 400;
+  line-height: 1.7;
+  color: var(--text-color);
+  background-color: rgb(244 244 244);
+  border-bottom: 1px solid rgb(218 218 218);
+  margin: 0;
+  padding: 7px 10.5px;
+}
+
+.columns-checklist .columns-checklist-list li strong {
+  font-weight: 700;
+}
+
+/* CTA - source renders a plain bold text link, so neutralise the EDS button */
+.columns-checklist .columns-checklist-list-col .button-wrapper {
+  margin-top: var(--spacing-m);
+}
+
+.columns-checklist .columns-checklist-list-col a.button:any-link {
+  display: inline;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background-color: transparent;
+  color: var(--link-color);
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m);
+  font-weight: 700;
+  line-height: 1.7;
+  white-space: normal;
+  overflow: visible;
+}
+
+.columns-checklist .columns-checklist-list-col a.button:any-link:hover {
+  background-color: transparent;
+  color: var(--link-hover-color);
+}
+
+.columns-checklist .columns-checklist-list-col a.button.primary::after {
+  content: none;
+}
+
+@media (width >= 900px) {
+  .columns-checklist > div {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 0;
+  }
+
+  /* 1 : 2 split matching the source (33% / 67%) */
+  .columns-checklist .columns-checklist-media-col {
+    flex: 0 0 33.333%;
+    max-width: 33.333%;
+    padding: 0 20px;
+  }
+
+  .columns-checklist .columns-checklist-list-col {
+    flex: 0 0 66.667%;
+    max-width: 66.667%;
+    padding: 0 20px;
+  }
+}

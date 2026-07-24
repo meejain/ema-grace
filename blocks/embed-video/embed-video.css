@@ -19,11 +19,30 @@ main .section.embed-video-container.dark > .default-content-wrapper {
 }
 
 /* Subtitle paragraph – Roboto Slab, matches original subhead-large */
-main .section.embed-video-container.dark > .default-content-wrapper p:not(.button-wrapper) {
+main .section.embed-video-container.dark > .default-content-wrapper p:not(.button-wrapper, .embed-video-watch) {
   font-family: var(--heading-font-family);
   font-size: var(--body-font-size-l);
   font-weight: 300;
   margin-bottom: 0;
+}
+
+/* "Watch the video" link beneath the subtitle (source shows a small white link
+   with a chevron). */
+main .section.embed-video-container.dark > .default-content-wrapper p.embed-video-watch {
+  margin: 16px 0 0;
+}
+
+main .section.embed-video-container.dark > .default-content-wrapper p.embed-video-watch a:any-link {
+  font-family: var(--heading-font-family);
+  font-size: var(--body-font-size-m);
+  font-weight: 600;
+  color: var(--white);
+  text-decoration: none;
+}
+
+main .section.embed-video-container.dark > .default-content-wrapper p.embed-video-watch a::after {
+  content: ' \203A';
+  font-size: 1.2em;
 }
 
 /* Right column: video poster */

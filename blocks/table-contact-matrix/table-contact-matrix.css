@@ -1,0 +1,161 @@
+/* Table Contact Matrix — contacts organized by industry/region.
+   Tokens extracted from grace.com/forms/contact-us-customer-service/
+   computed styles (390 / 768 / 1440):
+   header (Industries / Customer Service Number):
+     Roboto Slab / 300 / rgb(0,0,0) / margin-bottom 20px
+     mobile: 20px / line-height 26px   desktop: 26px / line-height 29.9px
+   body cell text: Roboto 14px / 400 / rgb(0,0,0) / margin-bottom 21px
+     mobile: line-height 18.2px         desktop: line-height 23.8px
+   row separator: 2px solid rgb(196,196,196)
+   column padding: 0 20px; columns 50/50, stacked below large desktop.
+   Links (tel/mailto) render as plain black text like the source. */
+
+.table-contact-matrix .table-contact-matrix-scroll {
+  width: 100%;
+}
+
+.table-contact-matrix table {
+  width: 100%;
+  margin: 0;
+  border-collapse: collapse;
+  table-layout: fixed;
+  background-color: transparent;
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m);
+  color: var(--text-color);
+  text-align: left;
+}
+
+/* mobile-first: source stacks the two columns full width, so the table,
+   its row groups, rows and cells all render as block-level elements */
+.table-contact-matrix table,
+.table-contact-matrix thead,
+.table-contact-matrix tbody,
+.table-contact-matrix tr,
+.table-contact-matrix th,
+.table-contact-matrix td {
+  display: block;
+  width: 100%;
+}
+
+/* each authored row keeps the source 2px divider between rows */
+.table-contact-matrix tr {
+  border-bottom: 2px solid rgb(196 196 196);
+}
+
+.table-contact-matrix tbody tr:last-child {
+  border-bottom: 0;
+}
+
+/* header row: Roboto Slab, light weight, black */
+.table-contact-matrix thead th {
+  padding: 0 20px 20px;
+  font-family: var(--heading-font-family);
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 26px;
+  color: var(--text-color);
+  text-align: left;
+}
+
+/* second stacked header ("Customer Service Number") sits directly below */
+.table-contact-matrix thead th + th {
+  padding-top: 0;
+}
+
+/* data cells: Roboto body, black text */
+.table-contact-matrix tbody td {
+  padding: 20px 20px 0;
+  font-size: var(--body-font-size-m);
+  font-weight: 400;
+  line-height: 18.2px;
+  color: var(--text-color);
+  text-align: left;
+}
+
+.table-contact-matrix tbody td:last-child {
+  padding-bottom: 20px;
+}
+
+/* paragraph rhythm inside cells: 21px between lines, none after the last */
+.table-contact-matrix th p,
+.table-contact-matrix td p {
+  margin: 0 0 21px;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  color: inherit;
+}
+
+.table-contact-matrix th p:last-child,
+.table-contact-matrix td p:last-child {
+  margin-bottom: 0;
+}
+
+/* phone / email links match source plain black text */
+.table-contact-matrix td a:any-link {
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+.table-contact-matrix td a:hover,
+.table-contact-matrix td a:focus {
+  color: var(--link-hover-color);
+  text-decoration: underline;
+}
+
+/* large desktop: source switches to a true 50/50 two-column layout */
+@media (width >= 900px) {
+  .table-contact-matrix table,
+  .table-contact-matrix thead,
+  .table-contact-matrix tbody {
+    display: table;
+    width: 100%;
+  }
+
+  .table-contact-matrix thead {
+    display: table-header-group;
+  }
+
+  .table-contact-matrix tbody {
+    display: table-row-group;
+  }
+
+  .table-contact-matrix tr {
+    display: table-row;
+    border-bottom: 0;
+  }
+
+  .table-contact-matrix th,
+  .table-contact-matrix td {
+    display: table-cell;
+    width: 50%;
+    vertical-align: top;
+    border-bottom: 2px solid rgb(196 196 196);
+  }
+
+  .table-contact-matrix thead th {
+    padding: 0 20px 20px;
+    font-size: 26px;
+    line-height: 29.9px;
+    vertical-align: bottom;
+  }
+
+  .table-contact-matrix thead th + th {
+    padding-top: 0;
+  }
+
+  .table-contact-matrix tbody td {
+    padding: 20px;
+    line-height: 23.8px;
+  }
+
+  .table-contact-matrix tbody td:last-child {
+    padding-bottom: 20px;
+  }
+
+  .table-contact-matrix tbody tr:last-child th,
+  .table-contact-matrix tbody tr:last-child td {
+    border-bottom: 0;
+  }
+}

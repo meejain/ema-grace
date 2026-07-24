@@ -1,0 +1,169 @@
+/* Banner Contact Split
+ * Full-width dark-blue contact banner split into two halves.
+ * Source tokens: bg #004990, accent #7ac143 (--accent-color), Roboto, white text.
+ * Mobile-first: stacked single column; 50/50 side-by-side from 900px up.
+ */
+
+/* Full-width background: escape the section max-width wrapper. */
+.banner-contact-split-wrapper {
+  max-width: 100% !important;
+  padding: 0 !important;
+}
+
+.banner-contact-split {
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0;
+  padding: 25px 10px;
+  background-color: #004990;
+  color: var(--white);
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m);
+  line-height: 1.3;
+  overflow: hidden;
+}
+
+/* Banner title */
+.banner-contact-split .banner-contact-split-title {
+  margin: 0 0 36px;
+  color: var(--white);
+  font-family: var(--body-font-family);
+  font-size: 24px;
+  font-weight: 300;
+  line-height: 1.3;
+  text-align: center;
+}
+
+/* Grid of the two halves — stacked on mobile, centred max-width container. */
+.banner-contact-split .banner-contact-split-grid {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.banner-contact-split .banner-contact-split-half {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0 10px;
+}
+
+/* Half headings */
+.banner-contact-split .banner-contact-split-half h3 {
+  margin: 0 0 15px;
+  color: var(--white);
+  font-family: var(--body-font-family);
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 1.3;
+  text-align: center;
+}
+
+/* CTA button — green, matches source .btn-primary-green.
+ * Full-width on mobile; centred content-width on desktop. */
+.banner-contact-split .banner-contact-split-cta-wrapper {
+  margin: 0;
+  text-align: center;
+}
+
+.banner-contact-split a.banner-contact-split-cta:any-link {
+  display: inline-block;
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  padding: 13px;
+  background-color: var(--accent-color);
+  color: var(--text-color);
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m);
+  font-weight: 600;
+  line-height: 1;
+  text-align: center;
+  text-decoration: none;
+  transition: all var(--transition-speed) ease;
+}
+
+.banner-contact-split a.banner-contact-split-cta:any-link::after {
+  content: ' \203A';
+  font-size: 1.2em;
+}
+
+.banner-contact-split a.banner-contact-split-cta:hover,
+.banner-contact-split a.banner-contact-split-cta:focus {
+  background-color: var(--accent-color-hover);
+  color: var(--white);
+}
+
+/* Descriptive paragraph */
+.banner-contact-split .banner-contact-split-half p:not(.banner-contact-split-cta-wrapper) {
+  margin: 0 0 var(--spacing-s);
+  color: var(--white);
+}
+
+/* Inquiry list — single column on mobile, custom white dot bullets. */
+.banner-contact-split .banner-contact-split-half ul {
+  margin: 0 0 21px;
+  padding: 0;
+  column-count: 1;
+  list-style: none;
+}
+
+.banner-contact-split .banner-contact-split-half ul li {
+  position: relative;
+  margin: 0;
+  padding-left: 14px;
+  font-size: var(--body-font-size-m);
+  line-height: 1.3;
+  list-style: none;
+}
+
+.banner-contact-split .banner-contact-split-half ul li::before {
+  content: '';
+  position: absolute;
+  top: 0.7em;
+  left: 0;
+  width: 4px;
+  height: 4px;
+  border-radius: 4px;
+  background-color: var(--white);
+}
+
+/* Tablet / desktop: side-by-side 50/50 split (matches source 992px switch). */
+@media (width >= 900px) {
+  .banner-contact-split {
+    padding: 70px 20px;
+  }
+
+  .banner-contact-split .banner-contact-split-title {
+    margin: 0 0 45px;
+    font-size: 30px;
+    line-height: 1.7;
+  }
+
+  .banner-contact-split .banner-contact-split-half {
+    width: 50%;
+    padding: 0 20px;
+  }
+
+  .banner-contact-split .banner-contact-split-half h3 {
+    margin: 0 0 19.5px;
+    font-size: 26px;
+    line-height: 1.15;
+  }
+
+  .banner-contact-split .banner-contact-split-half ul {
+    column-count: 2;
+  }
+
+  .banner-contact-split .banner-contact-split-half ul li {
+    line-height: 1.7;
+  }
+
+  /* Content-width, centred CTA on desktop. */
+  .banner-contact-split a.banner-contact-split-cta:any-link {
+    width: auto;
+    padding: 18px 30px;
+  }
+}

@@ -1,6 +1,13 @@
-/* Section heading */
+/* Section heading (source: centered, 24px mobile / 30px desktop). */
 .cards-insight-container h2 {
   text-align: center;
+  margin: 0 0 18px;
+}
+
+@media (width >= 900px) {
+  .cards-insight-container h2 {
+    margin: 0 0 22px;
+  }
 }
 
 /* Card grid */
@@ -37,8 +44,9 @@
   padding: 16px 0;
 }
 
-/* Category label – Roboto 10px weight 500 uppercase */
-.cards-insight .cards-insight-card-body p strong {
+/* Category label (eyebrow) – Roboto 10px weight 500, first strong only so the
+   "Read more" strong is not affected. */
+.cards-insight .cards-insight-card-body strong:first-child {
   font-family: var(--body-font-family);
   font-size: var(--heading-font-size-xs);
   font-weight: 500;
@@ -70,8 +78,15 @@
   color: var(--link-hover-color);
 }
 
-/* "Read more" bold link */
-.cards-insight .cards-insight-card-body p:last-child strong a:any-link {
+/* "Read more" bold link — on the source it sits on its own line beneath the
+   title (authored as a separate paragraph). Force the trailing strong onto a
+   new line to match. */
+.cards-insight .cards-insight-card-body strong:last-child {
+  display: block;
+  margin-top: 8px;
+}
+
+.cards-insight .cards-insight-card-body strong:last-child a:any-link {
   font-weight: 700;
   font-size: var(--body-font-size-m);
 }
@@ -81,11 +96,13 @@
 .cards-insight-container > div > .default-content-wrapper:last-child p > strong > a:any-link {
   background-color: var(--accent-color);
   color: var(--text-color);
-  padding: 18px 30px;
+  padding: 13px 20px;
+  border-radius: 0;
   font-family: var(--heading-font-family);
   font-size: var(--body-font-size-m);
   font-weight: 600;
   display: inline-block;
+  text-align: center;
   text-decoration: none;
 }
 
@@ -95,12 +112,7 @@
   color: var(--white);
 }
 
-/* Tablet: 2 columns */
-@media (width >= 600px) {
-  .cards-insight > ul {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
+/* Tablet (source keeps a single stacked column until the lg breakpoint). */
 
 /* Desktop: 2-column layout – big card left, 3 stacked cards right */
 @media (width >= 900px) {
@@ -125,25 +137,24 @@
     height: 100%;
   }
 
-  /* Small cards (2nd–4th): horizontal layout, text LEFT image RIGHT */
+  /* Small cards (2nd–4th): horizontal layout, text LEFT image RIGHT.
+     Image column is a fixed width so the picture keeps a strict 16:9 ratio
+     (source: 209×117), matching grace.com. */
   .cards-insight > ul > li:not(:first-child) {
     display: grid;
-    grid-template-columns: 3fr 2fr;
+    grid-template-columns: 1fr 209px;
+    align-items: start;
     gap: 0;
   }
 
   /* Swap order: body (text) first, image second */
   .cards-insight > ul > li:not(:first-child) .cards-insight-card-body {
     order: -1;
-    padding: 0 16px 0 0;
+    padding: 0 20px 0 0;
   }
 
   .cards-insight > ul > li:not(:first-child) img {
-    aspect-ratio: unset;
-    height: 100%;
-  }
-
-  .cards-insight > ul > li:not(:first-child) .cards-insight-card-image {
-    height: 100%;
+    aspect-ratio: 16 / 9;
+    height: auto;
   }
 }

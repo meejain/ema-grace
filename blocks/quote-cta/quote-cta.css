@@ -1,0 +1,95 @@
+/* Quote CTA block
+ * Tokens extracted from grace.com sustainability callout (title + statement + CTA):
+ *   container transparent bg, text-align start
+ *     padding 10px (mobile) -> 20px (>=900), max-width 1280px (>=900)
+ *   title    Roboto Slab, weight 300, #000, margin 0 0 20px
+ *            20px / 26px lh (mobile) -> 26px / 29.9px lh (>=900)
+ *   statement Roboto 14px, weight 400, #000, margin 0 0 21px
+ *            line-height 1.3 (mobile) -> 1.7 (>=900)
+ *   CTA       Roboto Slab 14px / 14px, weight 600, #000, bg accent green,
+ *            no border/radius, no arrow
+ *            padding 13px (mobile) -> 18px 30px (>=900)
+ */
+
+.quote-cta {
+  padding: 10px;
+  color: var(--text-color);
+  text-align: start;
+}
+
+.quote-cta .quote-cta-figure {
+  margin: 0;
+}
+
+.quote-cta .quote-cta-title {
+  margin: 0 0 20px;
+  font-family: var(--heading-font-family);
+  font-size: 20px;
+  font-weight: 300;
+  font-style: normal;
+  line-height: 26px;
+  color: var(--text-color);
+}
+
+.quote-cta .quote-cta-quote {
+  margin: 0 0 21px;
+  padding: 0;
+  border: 0;
+  quotes: none;
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m);
+  font-weight: 400;
+  font-style: normal;
+  line-height: 1.3;
+  color: var(--text-color);
+}
+
+.quote-cta .quote-cta-quote p {
+  margin: 0 0 var(--spacing-s);
+}
+
+.quote-cta .quote-cta-quote p:last-child {
+  margin-bottom: 0;
+}
+
+.quote-cta .quote-cta-action {
+  margin: 0;
+}
+
+/* CTA — matches primary green button but without the trailing arrow glyph
+ * present on the global button.primary style. */
+.quote-cta a.button.primary:any-link {
+  border-radius: 0;
+  padding: 13px;
+  font-family: var(--heading-font-family);
+  font-size: var(--body-font-size-m);
+  font-weight: 600;
+  line-height: 1;
+}
+
+.quote-cta a.button.primary::after {
+  content: none;
+}
+
+@media (width >= 900px) {
+  .quote-cta {
+    padding: 20px;
+  }
+
+  .quote-cta .quote-cta-figure {
+    max-width: 1280px;
+  }
+
+  .quote-cta .quote-cta-title {
+    font-size: 26px;
+    line-height: 29.9px;
+  }
+
+  .quote-cta .quote-cta-quote {
+    line-height: 1.7;
+  }
+
+  .quote-cta a.button.primary:any-link {
+    padding: 18px 30px;
+  }
+}

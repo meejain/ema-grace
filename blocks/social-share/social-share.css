@@ -1,0 +1,57 @@
+/* Social Share block
+ * Source tokens (grace.com insights share row):
+ *   circle: 28px (2.8rem @ 62.5% root) black #000, border-radius 50%
+ *   icon glyph: 12px white, centered; hover -> #27853c, glyph grows to 14px
+ *   spacing: 4px between buttons (margin-right on all but last)
+ *   container: centered (text-align: center)
+ */
+
+.social-share {
+  text-align: center;
+}
+
+.social-share .social-share-list {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.social-share .social-share-label {
+  display: inline-block;
+  margin-right: 8px;
+  font-size: var(--body-font-size-m);
+  color: var(--text-color);
+  vertical-align: middle;
+}
+
+.social-share .social-share-button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #000;
+  color: #fff;
+  text-decoration: none;
+}
+
+.social-share .social-share-button svg {
+  width: 12px;
+  height: 12px;
+  transition: width 0.2s ease-in-out, height 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+.social-share .social-share-button:hover,
+.social-share .social-share-button:focus {
+  color: var(--link-hover-color);
+}
+
+.social-share .social-share-button:hover svg,
+.social-share .social-share-button:focus svg {
+  width: 14px;
+  height: 14px;
+}
