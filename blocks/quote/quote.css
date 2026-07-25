@@ -1,0 +1,237 @@
+/* Consolidated quote block: variants scoped to .quote.{variant}. */
+/* stylelint-disable no-descending-specificity */
+
+/* ===================== Variant: cta ===================== */
+
+/* Quote CTA block
+ * Tokens extracted from grace.com sustainability callout (title + statement + CTA):
+ *   container transparent bg, text-align start
+ *     padding 10px (mobile) -> 20px (>=900), max-width 1280px (>=900)
+ *   title    Roboto Slab, weight 300, #000, margin 0 0 20px
+ *            20px / 26px lh (mobile) -> 26px / 29.9px lh (>=900)
+ *   statement Roboto 14px, weight 400, #000, margin 0 0 21px
+ *            line-height 1.3 (mobile) -> 1.7 (>=900)
+ *   CTA       Roboto Slab 14px / 14px, weight 600, #000, bg accent green,
+ *            no border/radius, no arrow
+ *            padding 13px (mobile) -> 18px 30px (>=900)
+ */
+
+.quote.cta {
+  padding: 10px;
+  color: var(--text-color);
+  text-align: start;
+}
+
+.quote.cta .quote-cta-figure {
+  margin: 0;
+}
+
+.quote.cta .quote-cta-title {
+  margin: 0 0 20px;
+  font-family: var(--heading-font-family);
+  font-size: 20px;
+  font-weight: 300;
+  font-style: normal;
+  line-height: 26px;
+  color: var(--text-color);
+}
+
+.quote.cta .quote-cta-quote {
+  margin: 0 0 21px;
+  padding: 0;
+  border: 0;
+  quotes: none;
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m);
+  font-weight: 400;
+  font-style: normal;
+  line-height: 1.3;
+  color: var(--text-color);
+}
+
+.quote.cta .quote-cta-quote p {
+  margin: 0 0 var(--spacing-s);
+}
+
+.quote.cta .quote-cta-quote p:last-child {
+  margin-bottom: 0;
+}
+
+.quote.cta .quote-cta-action {
+  margin: 0;
+}
+
+/* CTA — matches primary green button but without the trailing arrow glyph
+ * present on the global button.primary style. */
+.quote.cta a.button.primary:any-link {
+  border-radius: 0;
+  padding: 13px;
+  font-family: var(--heading-font-family);
+  font-size: var(--body-font-size-m);
+  font-weight: 600;
+  line-height: 1;
+}
+
+.quote.cta a.button.primary::after {
+  content: none;
+}
+
+@media (width >= 900px) {
+  .quote.cta {
+    padding: 20px;
+  }
+
+  .quote.cta .quote-cta-figure {
+    max-width: 1280px;
+  }
+
+  .quote.cta .quote-cta-title {
+    font-size: 26px;
+    line-height: 29.9px;
+  }
+
+  .quote.cta .quote-cta-quote {
+    line-height: 1.7;
+  }
+
+  .quote.cta a.button.primary:any-link {
+    padding: 18px 30px;
+  }
+}
+
+/* ===================== Variant: highlight ===================== */
+
+/* Quote Highlight - large emphasized pull-quote / highlighted statement.
+   Matches Grace centered blue Roboto Slab statement (no accent bar). */
+.quote.highlight {
+  max-width: 707px;
+  margin: 0 auto;
+}
+
+.quote.highlight blockquote {
+  margin: 0;
+  padding: 0;
+}
+
+.quote.highlight .quote-highlight-text {
+  margin: 0 0 20px;
+  color: #004990;
+  font-family: var(--heading-font-family);
+  font-size: 42px;
+  font-weight: 300;
+  font-style: normal;
+  line-height: 1.3;
+  text-align: center;
+}
+
+.quote.highlight .quote-highlight-citation {
+  display: block;
+  color: #004990;
+  font-style: normal;
+  text-align: center;
+}
+
+.quote.highlight .quote-highlight-author {
+  display: block;
+  margin-bottom: 3px;
+  color: #004990;
+  font-family: var(--heading-font-family);
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.3;
+}
+
+.quote.highlight .quote-highlight-role {
+  display: block;
+  color: #004990;
+  font-family: var(--heading-font-family);
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.3;
+}
+
+@media (width >= 600px) {
+  .quote.highlight .quote-highlight-text {
+    font-size: 46px;
+  }
+}
+
+@media (width >= 900px) {
+  .quote.highlight .quote-highlight-text {
+    font-size: 60px;
+    line-height: 1.7;
+  }
+}
+
+/* ===================== Variant: testimonial ===================== */
+.quote.testimonial {
+  position: relative;
+  margin: 0 auto;
+}
+
+.quote.testimonial blockquote {
+  margin: 0;
+  padding: 0;
+}
+
+.quote.testimonial .quote-testimonial-text {
+  margin: 0 0 30px;
+  color: #004990;
+  font-family: var(--heading-font-family);
+  font-size: 20px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 1.2;
+  text-align: left;
+}
+
+.quote.testimonial .quote-testimonial-citation {
+  display: block;
+  padding-top: 20px;
+  color: #004990;
+  font-style: normal;
+  text-align: center;
+}
+
+.quote.testimonial .quote-testimonial-author {
+  display: block;
+  margin-bottom: 8px;
+  color: #004990;
+  font-family: var(--heading-font-family);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.3;
+}
+
+.quote.testimonial .quote-testimonial-position {
+  display: block;
+  color: #004990;
+  font-family: var(--body-font-family);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.3;
+}
+
+@media (width >= 600px) {
+  .quote.testimonial {
+    max-width: 83%;
+  }
+
+  .quote.testimonial .quote-testimonial-text {
+    margin: 0 0 39px;
+    font-size: 26px;
+    font-weight: 100;
+    line-height: 1.4;
+  }
+
+  .quote.testimonial .quote-testimonial-author {
+    margin-bottom: 3px;
+  }
+}
+
+@media (width >= 900px) {
+  .quote.testimonial .quote-testimonial-author,
+  .quote.testimonial .quote-testimonial-position {
+    line-height: 1.7;
+  }
+}

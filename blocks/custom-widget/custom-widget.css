@@ -1,0 +1,582 @@
+/* Consolidated custom-widget block: variants scoped to .custom-widget.{variant}. */
+/* stylelint-disable no-descending-specificity */
+
+/* ===================== Variant: contact-panel ===================== */
+.custom-widget.contact-panel {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: none;
+  padding: 10px;
+  margin: 0;
+  background-color: transparent;
+  color: var(--text-color); /* #000 */
+  font-family: var(--body-font-family); /* Roboto */
+  font-size: var(--body-font-size-m); /* 14px */
+  font-weight: 400;
+  line-height: 1.3;
+  text-align: start;
+}
+
+.custom-widget.contact-panel .custom-widget-contact-panel-icon-wrap {
+  margin: 0 0 10px;
+  text-align: start;
+}
+
+.custom-widget.contact-panel .custom-widget-contact-panel-icon {
+  display: block;
+  width: 100%;
+  max-width: 340px;
+  height: auto;
+}
+
+.custom-widget.contact-panel .custom-widget-contact-panel-heading {
+  margin: 0 0 30px;
+  padding: 0;
+  color: var(--text-color); /* #000 */
+  font-family: var(--heading-font-family); /* Roboto Slab */
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.3;
+  text-align: center;
+}
+
+.custom-widget.contact-panel .custom-widget-contact-panel-list {
+  margin: 0 0 21px;
+  padding: 0;
+  list-style: none;
+}
+
+.custom-widget.contact-panel .custom-widget-contact-panel-list li {
+  margin: 0;
+  padding: 0 0 0 14px;
+  color: var(--text-color); /* #000 */
+  font-family: var(--body-font-family); /* Roboto */
+  font-size: var(--body-font-size-m); /* 14px */
+  font-weight: 400;
+  line-height: 1.3;
+  list-style: none;
+}
+
+.custom-widget.contact-panel .custom-widget-contact-panel-list li + li {
+  margin-top: 7px;
+}
+
+.custom-widget.contact-panel .custom-widget-contact-panel-list a {
+  color: var(--link-color); /* #000 */
+  font-weight: 400;
+  text-decoration: underline;
+}
+
+.custom-widget.contact-panel .custom-widget-contact-panel-list a:hover {
+  color: var(--link-hover-color);
+}
+
+@media (width >= 1200px) {
+  .custom-widget.contact-panel {
+    max-width: 373px;
+    padding: 20px;
+    line-height: 1.7;
+  }
+
+  .custom-widget.contact-panel .custom-widget-contact-panel-heading {
+    font-size: 18px;
+    line-height: 1.7;
+  }
+
+  .custom-widget.contact-panel .custom-widget-contact-panel-list li {
+    line-height: 1.7;
+  }
+}
+
+/* ===================== Variant: document-viewer ===================== */
+
+/*
+ * Custom Widget Document Viewer
+ * Responsive embedded document/flipbook viewer.
+ * Source: grace.com FlippingBook embed — 3:2 ratio, 100% width, light-gray section.
+ * Mobile-first; breakpoints at 600/900/1200 only.
+ */
+
+.custom-widget.document-viewer {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.custom-widget-document-viewer-title {
+  margin: 0 0 20px;
+  font-family: var(--heading-font-family);
+  font-size: var(--heading-font-size-l);
+  font-weight: 300;
+  line-height: 1.3;
+  color: var(--text-color);
+  text-align: center;
+}
+
+.custom-widget-document-viewer-cover {
+  margin: 0 auto 20px;
+  text-align: center;
+}
+
+.custom-widget-document-viewer-cover picture,
+.custom-widget-document-viewer-cover img {
+  display: inline-block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* responsive 3:2 aspect-ratio iframe wrapper (matches source data-fbo-ratio="3:2") */
+.custom-widget-document-viewer-embed {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 66.6667%; /* 3:2 => 2/3, matches source data-fbo-ratio="3:2" */
+  overflow: hidden;
+}
+
+.custom-widget-document-viewer-embed iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+
+@media (width >= 900px) {
+  .custom-widget-document-viewer-title {
+    font-size: var(--heading-font-size-xl);
+    margin-bottom: 30px;
+  }
+}
+
+/* ===================== Variant: news-archive ===================== */
+
+/* Custom Widget News Archive
+   Year-grouped press release accordion.
+   Tokens extracted from grace.com/newsroom/press-releases/ NEWS ARCHIVE widget:
+   - year label: Roboto Slab, 14px, 600, rgb(0,0,0), 17px vertical margin
+   - toggle button: flex, plus/minus icon = two 13x3px black bars
+   - release links: Roboto, 14px, 400, rgb(0,0,0), line-height 23.8px, underlined
+   - release paragraph: margin-bottom 21px; body dd: margin-bottom 21px
+*/
+
+.custom-widget.news-archive .custom-widget-news-archive-list {
+  margin: 0;
+  padding: 0;
+}
+
+/* Year heading row */
+.custom-widget.news-archive .custom-widget-news-archive-heading {
+  margin: 0;
+  padding: 0;
+}
+
+.custom-widget.news-archive .custom-widget-news-archive-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  width: auto;
+  margin: 0;
+  padding: 0;
+  background-color: transparent;
+  border: 0;
+  color: rgb(0 0 0);
+  font-family: var(--heading-font-family);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: normal;
+  text-align: left;
+  cursor: pointer;
+}
+
+.custom-widget.news-archive .custom-widget-news-archive-year {
+  display: block;
+  margin: 17px 17px 17px 0;
+  color: rgb(0 0 0);
+  font-family: var(--heading-font-family);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: normal;
+}
+
+/* Plus / minus indicator: two 13x3px black bars hanging 13px right of the
+   label, vertically centred on the row (source: right:-13px; top:26.5px) */
+.custom-widget.news-archive .custom-widget-news-archive-icon {
+  position: absolute;
+  top: 50%;
+  right: -13px;
+  width: 13px;
+  height: 3px;
+}
+
+.custom-widget.news-archive .custom-widget-news-archive-icon::before,
+.custom-widget.news-archive .custom-widget-news-archive-icon::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 13px;
+  height: 3px;
+  background-color: rgb(0 0 0);
+  transition: opacity var(--transition-speed);
+}
+
+/* vertical bar of the plus */
+.custom-widget.news-archive .custom-widget-news-archive-icon::after {
+  transform: rotate(90deg);
+}
+
+/* collapse the vertical bar to form a minus when expanded */
+.custom-widget.news-archive
+  .custom-widget-news-archive-btn[aria-expanded="true"]
+  .custom-widget-news-archive-icon::after {
+  opacity: 0;
+}
+
+/* Year body */
+.custom-widget.news-archive .custom-widget-news-archive-body {
+  margin: 0 0 21px;
+  padding: 0;
+}
+
+.custom-widget.news-archive .custom-widget-news-archive-body[hidden] {
+  display: none;
+}
+
+.custom-widget.news-archive .custom-widget-news-archive-body p {
+  margin: 0 0 21px;
+  color: rgb(0 0 0);
+  font-family: var(--body-font-family);
+  font-size: 14px;
+  line-height: 23.8px;
+}
+
+.custom-widget.news-archive .custom-widget-news-archive-body p:last-child {
+  margin-bottom: 0;
+}
+
+.custom-widget.news-archive .custom-widget-news-archive-body a {
+  color: rgb(0 0 0);
+  font-family: var(--body-font-family);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 23.8px;
+  text-decoration: underline;
+}
+
+.custom-widget.news-archive .custom-widget-news-archive-body a:hover,
+.custom-widget.news-archive .custom-widget-news-archive-body a:focus {
+  color: var(--link-hover-color);
+}
+
+/* ===================== Variant: search-filter ===================== */
+
+/* Custom Widget Search Filter
+   Tokens extracted from grace.com/insights/ search filter widget. */
+
+.custom-widget.search-filter {
+  --cwsf-tag-bg: rgb(0 0 0);
+  --cwsf-tag-color: rgb(255 255 255);
+  --cwsf-tag-active-bg: rgb(255 255 255);
+  --cwsf-tag-active-color: rgb(0 0 0);
+  --cwsf-all-bg: rgb(255 255 255);
+  --cwsf-placeholder-color: rgb(117 117 117);
+  --cwsf-shadow: rgb(0 0 0 / 20%) 0 4px 8px 0, rgb(0 0 0 / 19%) 0 6px 20px 0;
+
+  margin: 0 0 var(--spacing-m);
+}
+
+/* Search bar */
+.custom-widget-search-filter-bar {
+  width: 100%;
+}
+
+.custom-widget-search-filter-form {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+}
+
+.custom-widget-search-filter-input {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  margin: 0;
+  background-color: transparent;
+  color: var(--text-color);
+  font-family: var(--body-font-family);
+  font-size: 16px;
+  font-weight: 300;
+  line-height: normal;
+}
+
+.custom-widget-search-filter-input::placeholder {
+  color: var(--cwsf-placeholder-color);
+  opacity: 1;
+}
+
+.custom-widget-search-filter-input:focus {
+  outline: none;
+}
+
+.custom-widget-search-filter-search-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 31px;
+  height: 39px;
+  padding: 0;
+  border: 0;
+  background-color: transparent;
+  color: var(--text-color);
+  cursor: pointer;
+}
+
+.custom-widget-search-filter-search-icon {
+  width: 20px;
+  height: 20px;
+}
+
+/* Tag bar */
+.custom-widget-search-filter-tag-bar {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.custom-widget-search-filter-all,
+.custom-widget-search-filter-tag {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 60px;
+  padding: 0 10px;
+  border: 0;
+  margin: 0;
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-xs);
+  font-weight: 700;
+  line-height: normal;
+  text-align: center;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.custom-widget-search-filter-all {
+  background-color: var(--cwsf-tag-bg);
+  color: var(--cwsf-tag-color);
+}
+
+.custom-widget-search-filter-all.active {
+  background-color: var(--cwsf-tag-active-bg);
+  color: var(--cwsf-tag-active-color);
+  box-shadow: var(--cwsf-shadow);
+}
+
+.custom-widget-search-filter-tag {
+  background-color: var(--cwsf-tag-bg);
+  color: var(--cwsf-tag-color);
+}
+
+.custom-widget-search-filter-tag.active {
+  background-color: var(--cwsf-tag-active-bg);
+  color: var(--cwsf-tag-active-color);
+  box-shadow: var(--cwsf-shadow);
+}
+
+/* Mobile expand/collapse toggle */
+.custom-widget-search-filter-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 44px;
+  padding: 0 10px;
+  border: 0;
+  margin-top: 2px;
+  background-color: var(--cwsf-tag-bg);
+  color: var(--cwsf-tag-color);
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.custom-widget-search-filter-chevron {
+  width: 16px;
+  height: 16px;
+  transition: transform var(--transition-speed) ease;
+}
+
+.custom-widget-search-filter-tag-bar.is-open .custom-widget-search-filter-chevron {
+  transform: rotate(180deg);
+}
+
+.custom-widget-search-filter-tag-list {
+  display: none;
+  flex-direction: column;
+}
+
+.custom-widget-search-filter-tag-bar.is-open .custom-widget-search-filter-tag-list {
+  display: flex;
+}
+
+/* Tablet and up: hide the mobile toggle, show inline tag row */
+@media (width >= 900px) {
+  .custom-widget-search-filter-toggle {
+    display: none;
+  }
+
+  .custom-widget-search-filter-tag-bar {
+    flex-flow: row nowrap;
+  }
+
+  .custom-widget-search-filter-tag-list {
+    display: flex;
+    flex: 10 1 0;
+    flex-flow: row nowrap;
+  }
+
+  .custom-widget-search-filter-all {
+    flex: 1 1 0;
+  }
+
+  .custom-widget-search-filter-tag {
+    flex: 1 1 0;
+  }
+
+  .custom-widget-search-filter-all,
+  .custom-widget-search-filter-tag {
+    min-height: 84px;
+  }
+
+  .custom-widget-search-filter-input {
+    font-size: 30px;
+  }
+}
+
+/* ===================== Variant: search-results ===================== */
+
+/*
+ * Custom Widget: Search Results
+ * Tokens extracted from grace.com search-list clientlib (source root 1rem = 10px).
+ * Mobile-first; min-width breakpoints at 600/900/1200 only.
+ * Source desktop layout switches at ~992px; mapped to the 900 breakpoint.
+ */
+
+.custom-widget.search-results {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 20px 10px;
+}
+
+/* results-count header ("Showing 1-8 of 176") */
+.custom-widget.search-results .search-results-count {
+  margin: 0 0 var(--spacing-s);
+  font-family: var(--heading-font-family);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.3;
+  color: var(--text-color);
+}
+
+.custom-widget.search-results .search-results-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* one result */
+.custom-widget.search-results .search-results-item {
+  margin: 0;
+  padding: 20px 0;
+  border-bottom: 1px solid #c4c4c4;
+}
+
+.custom-widget.search-results .search-results-item:first-child {
+  border-top: 1px solid #c4c4c4;
+}
+
+.custom-widget.search-results .search-results-item::before {
+  display: none;
+}
+
+/* result link wraps the whole item */
+.custom-widget.search-results .search-results-link {
+  display: block;
+  background-color: var(--white);
+  text-decoration: none;
+  color: var(--text-color);
+}
+
+.custom-widget.search-results .search-results-link:hover,
+.custom-widget.search-results .search-results-link:focus {
+  background-color: transparent;
+  color: var(--text-color);
+}
+
+/* result title */
+.custom-widget.search-results .search-results-title {
+  display: block;
+  margin-bottom: 5px;
+  font-family: var(--heading-font-family);
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.3;
+  color: var(--text-color);
+}
+
+.custom-widget.search-results .search-results-link:hover .search-results-title,
+.custom-widget.search-results .search-results-link:focus .search-results-title {
+  color: #000;
+  text-decoration: underline;
+}
+
+/* snippet / description */
+.custom-widget.search-results .search-results-description {
+  display: block;
+  margin-bottom: 0;
+  font-family: var(--body-font-family);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.3;
+  color: var(--text-color);
+}
+
+.custom-widget.search-results .search-results-link:hover .search-results-description,
+.custom-widget.search-results .search-results-link:focus .search-results-description {
+  color: #000;
+}
+
+/* display URL / breadcrumb — source styles it as a plain result paragraph */
+.custom-widget.search-results .search-results-url {
+  display: block;
+  margin-bottom: 0;
+  font-family: var(--body-font-family);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.3;
+  color: var(--text-color);
+}
+
+@media (width >= 900px) {
+  /* match source content width of 1240px (calc(50% - 620px) gutters) */
+  main > .section > .custom-widget-search-results-wrapper {
+    max-width: 1240px;
+  }
+
+  .custom-widget.search-results {
+    padding: 10px 0;
+  }
+
+  .custom-widget.search-results .search-results-item {
+    padding: 35px 0;
+  }
+
+  .custom-widget.search-results .search-results-title {
+    font-size: 20px;
+  }
+}

@@ -1,0 +1,307 @@
+/* Consolidated video block: variants scoped to .video.{variant}. */
+/* stylelint-disable no-descending-specificity */
+
+/* ===================== Variant: grid ===================== */
+
+/*
+ * Video Grid Block
+ * Grid of video teasers: poster + dark overlay + centered play button + title.
+ * Tokens extracted from grace.com/ausbildung/.
+ */
+
+.video.grid .video-grid-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-s, 20px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.video.grid .video-grid-card {
+  position: relative;
+  margin: 0;
+  padding: 0;
+}
+
+.video.grid .video-grid-card-has-video {
+  cursor: pointer;
+}
+
+.video.grid .video-grid-media {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  background-color: var(--dark-color, #1e1e1e);
+}
+
+.video.grid .video-grid-poster,
+.video.grid .video-grid-poster img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* dark overlay so the white title and button stay legible */
+.video.grid .video-grid-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 20px;
+  text-align: center;
+  background-color: rgb(0 0 0 / 35%);
+  transition: background-color var(--transition-speed, 0.25s) ease;
+}
+
+.video.grid .video-grid-card-playing .video-grid-overlay {
+  display: none;
+}
+
+.video.grid .video-grid-card-has-video:hover .video-grid-overlay {
+  background-color: rgb(0 0 0 / 45%);
+}
+
+.video.grid .video-grid-title {
+  order: -1;
+  margin: 0;
+  max-width: 90%;
+  color: var(--white, #fff);
+  font-family: var(--heading-font-family, 'Roboto Slab', serif);
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 24px;
+  text-align: center;
+}
+
+/* white circular play button with a dark triangle */
+.video.grid .video-grid-play {
+  position: relative;
+  flex: 0 0 auto;
+  width: 60px;
+  height: 60px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background-color: var(--white, #fff);
+  cursor: pointer;
+  transition: transform var(--transition-speed, 0.25s) ease;
+}
+
+.video.grid .video-grid-play::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-40%, -50%);
+  border-style: solid;
+  border-width: 9px 0 9px 15px;
+  border-color: transparent transparent transparent var(--text-color, #000);
+}
+
+.video.grid .video-grid-play:focus-visible {
+  outline: none;
+  transform: scale(1.08);
+}
+
+.video.grid .video-grid-card-has-video:hover .video-grid-play {
+  transform: scale(1.08);
+}
+
+.video.grid .video-grid-watch {
+  margin: 0;
+  color: var(--white, #fff);
+  font-family: var(--body-font-family, 'Roboto', sans-serif);
+  font-size: var(--body-font-size-s, 12px);
+  font-weight: 400;
+  line-height: 1.3;
+  text-transform: none;
+}
+
+.video.grid .video-grid-watch::after {
+  content: ' \203A';
+  font-size: 1.2em;
+}
+
+/* inline iframe once a video plays */
+.video.grid .video-grid-iframe {
+  position: absolute;
+  inset: 0;
+}
+
+.video.grid .video-grid-iframe iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* tablet: larger play button to match source */
+@media (width >= 600px) {
+  .video.grid .video-grid-play {
+    width: 78px;
+    height: 78px;
+  }
+
+  .video.grid .video-grid-play::before {
+    border-width: 11px 0 11px 19px;
+  }
+}
+
+/* desktop and up: two-column grid, largest play button */
+@media (width >= 900px) {
+  .video.grid .video-grid-list {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-m, 30px);
+  }
+
+  .video.grid .video-grid-title {
+    line-height: 30px;
+  }
+
+  .video.grid .video-grid-play {
+    width: 98px;
+    height: 98px;
+  }
+
+  .video.grid .video-grid-play::before {
+    border-width: 14px 0 14px 24px;
+  }
+}
+
+/* ===================== Variant: overlay ===================== */
+
+/*
+ * Video Overlay Block
+ * Poster + white circular play button that swaps in an autoplay iframe.
+ * Tokens mirror Grace's cmp-media-callout: 16:9 poster (padding-top 56.25%),
+ * white circle play button (border-radius 50%), black play glyph, 0.3s transitions.
+ */
+
+.video.overlay {
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* 16:9 frame that holds either the poster or the loaded iframe */
+.video.overlay .video-overlay-frame {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%;
+  overflow: hidden;
+  background-color: var(--dark-color);
+}
+
+/* iframe fills the frame once loaded */
+.video.overlay .video-overlay-frame iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* poster overlay sits on top of the frame */
+.video.overlay .video-overlay-poster {
+  position: absolute;
+  inset: 0;
+  cursor: pointer;
+}
+
+.video.overlay .video-overlay-poster picture,
+.video.overlay .video-overlay-poster img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+}
+
+.video.overlay .video-overlay-poster img {
+  transition: transform 0.3s;
+}
+
+/* subtle dark tint that lifts on hover, echoing the source overlay */
+.video.overlay .video-overlay-poster::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgb(0 0 0 / 15%);
+  transition: background-color 0.3s;
+}
+
+.video.overlay .video-overlay-poster:hover img {
+  transform: scale(1.03);
+}
+
+.video.overlay .video-overlay-poster:hover::after {
+  background-color: rgb(0 0 0 / 5%);
+}
+
+/* white circular play button, centered */
+.video.overlay .video-overlay-play {
+  box-sizing: border-box;
+  position: absolute;
+  z-index: 10;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 96px;
+  height: 96px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background-color: var(--white);
+  cursor: pointer;
+  transition: width 0.3s, height 0.3s, transform 0.3s;
+}
+
+/* black play triangle (Font Awesome fa-play equivalent) */
+.video.overlay .video-overlay-play::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-top: 12px solid transparent;
+  border-bottom: 12px solid transparent;
+  border-left: 20px solid var(--text-color);
+  transform: translate(-40%, -50%);
+}
+
+.video.overlay .video-overlay-poster:hover .video-overlay-play {
+  transform: translate(-50%, -50%) scale(1.05);
+}
+
+/* tablet: larger button (source 7.8rem) */
+@media (width >= 600px) {
+  .video.overlay .video-overlay-play {
+    width: 125px;
+    height: 125px;
+  }
+
+  .video.overlay .video-overlay-play::before {
+    border-top: 15px solid transparent;
+    border-bottom: 15px solid transparent;
+    border-left: 26px solid var(--text-color);
+  }
+}
+
+/* desktop: largest button (source 9.8rem) */
+@media (width >= 900px) {
+  .video.overlay .video-overlay-play {
+    width: 157px;
+    height: 157px;
+  }
+
+  .video.overlay .video-overlay-play::before {
+    border-top: 18px solid transparent;
+    border-bottom: 18px solid transparent;
+    border-left: 32px solid var(--text-color);
+  }
+}

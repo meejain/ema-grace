@@ -25,3 +25,1332 @@
   aspect-ratio: 4 / 3;
   object-fit: cover;
 }
+
+
+/* Each variant below is scoped to its own .cards.{variant} class, so
+   same-specificity rules from different variants never actually cascade against
+   each other. Disable descending-specificity for the consolidated variants. */
+/* stylelint-disable no-descending-specificity */
+
+/* ===================== Variant: benefits-grid ===================== */
+
+/* Section heading – Roboto Slab, centered (source: 24px mobile / 30px desktop, weight 300) */
+.cards-container:has(.cards.benefits-grid) h2 {
+  font-family: var(--heading-font-family);
+  font-size: 24px;
+  font-weight: 300;
+  line-height: 1.3;
+  text-align: center;
+  margin: 0 0 10px;
+}
+
+/* Card grid – mobile: 1 column (source is single column until lg breakpoint) */
+.cards.benefits-grid > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+}
+
+/* Individual card – transparent, no border */
+.cards.benefits-grid > ul > li {
+  border: 0;
+  background-color: transparent;
+}
+
+/* Card image – square display, matches source (object-fit fill) */
+.cards.benefits-grid .cards-card-image {
+  line-height: 0;
+}
+
+.cards.benefits-grid > ul > li img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: fill;
+  display: block;
+}
+
+/* Card text body – text sits below image */
+.cards.benefits-grid .cards-card-body {
+  margin: 0;
+  padding: 0;
+}
+
+/* Card heading – Roboto Slab, 20px mobile (line-height 1.3), no top margin */
+.cards.benefits-grid .cards-card-body h3 {
+  font-family: var(--heading-font-family);
+  font-size: var(--heading-font-size-l);
+  font-weight: 300;
+  line-height: 1.3;
+  color: var(--text-color);
+  margin: 0 0 20px;
+  text-align: left;
+}
+
+/* Card paragraph – Roboto 14px, line-height 1.3 mobile */
+.cards.benefits-grid .cards-card-body p {
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m);
+  font-weight: 400;
+  line-height: 1.3;
+  color: var(--text-color);
+  margin: 0 0 21px;
+  text-align: left;
+}
+
+/* Tablet (>= 600px): heading grows to 30px (source) */
+@media (width >= 600px) {
+  .cards-container:has(.cards.benefits-grid) h2 {
+    font-size: 30px;
+  }
+}
+
+/* Desktop (>= 900px, source lg breakpoint): 2 columns, larger heading */
+@media (width >= 900px) {
+  .cards-container:has(.cards.benefits-grid) h2 {
+    line-height: 1.7;
+  }
+
+  .cards.benefits-grid > ul {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+  }
+
+  .cards.benefits-grid .cards-card-body h3 {
+    line-height: 1.15;
+  }
+
+  .cards.benefits-grid .cards-card-body p {
+    line-height: 1.7;
+  }
+}
+
+/* ===================== Variant: category-grid ===================== */
+
+/* Cards Category Grid - image cards with centered green title + "Learn more" CTA */
+.cards.category-grid > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+.cards.category-grid > ul > li {
+  border: 0;
+  background-color: var(--white);
+  overflow: hidden;
+}
+
+/* image */
+.cards.category-grid .cards-card-image {
+  line-height: 0;
+}
+
+.cards.category-grid .cards-card-image img {
+  width: 100%;
+  aspect-ratio: 11 / 5;
+  object-fit: cover;
+  display: block;
+}
+
+/* body: centered text under image */
+.cards.category-grid .cards-card-body {
+  margin: 0;
+  padding: 20px 50px 24px;
+  text-align: center;
+}
+
+/* category title */
+.cards.category-grid .cards-card-body p:first-child,
+.cards.category-grid .cards-card-body h3 {
+  margin: 0;
+  font-family: var(--heading-font-family);
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.7;
+  color: var(--accent-color-hover);
+}
+
+/* "Learn more" cta link */
+.cards.category-grid .cards-card-body a:any-link {
+  display: inline-block;
+  margin-top: 4px;
+  font-family: var(--heading-font-family);
+  font-size: var(--body-font-size-m);
+  font-weight: 400;
+  line-height: 1.7;
+  color: var(--text-color);
+  text-decoration: none;
+  transition: color var(--transition-speed) ease;
+}
+
+.cards.category-grid .cards-card-body a::after {
+  content: ' \203A';
+  font-size: 1.2em;
+}
+
+.cards.category-grid .cards-card-body a:hover {
+  color: var(--accent-color-hover);
+}
+
+@media (width >= 900px) {
+  .cards.category-grid > ul {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 35px 28px;
+  }
+}
+
+/* ===================== Variant: contact-options ===================== */
+
+/* Section heading – "How can we help you?" (Roboto Slab 30px, weight 300, centered) */
+.cards-container:has(.cards.contact-options) h2 {
+  text-align: center;
+  font-family: var(--heading-font-family);
+  font-size: var(--heading-font-size-xxl);
+  font-weight: 300;
+  color: var(--text-color);
+  line-height: 1.7;
+  margin: 0 0 10px;
+}
+
+/* Card grid – single column mobile-first */
+.cards.contact-options > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+
+/* Individual cards – transparent, no border, horizontal-only padding (source: 0 10px mobile) */
+.cards.contact-options > ul > li {
+  border: 0;
+  background-color: transparent;
+  padding: 0 10px;
+  text-align: left;
+}
+
+/* Card icon/banner image – full width, native ~2.27 aspect ratio */
+.cards.contact-options .cards-card-image {
+  line-height: 0;
+  margin-bottom: 20px;
+}
+
+.cards.contact-options .cards-card-image img {
+  width: 100%;
+  aspect-ratio: 340 / 150;
+  object-fit: fill;
+  display: block;
+}
+
+/* Card body */
+.cards.contact-options .cards-card-body {
+  margin: 0;
+  padding: 0;
+}
+
+/* Card title – Roboto Slab, weight 600, centered, black; 16px mobile → 18px desktop */
+.cards.contact-options .cards-card-body h4 {
+  font-family: var(--heading-font-family);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-color);
+  line-height: 1.7;
+  text-align: center;
+  margin: 0 0 30px;
+}
+
+/* List of options – no bullets, Roboto 14px, left aligned */
+.cards.contact-options .cards-card-body ul {
+  list-style: none;
+  margin: 0 0 21px;
+  padding: 0;
+  text-align: left;
+}
+
+.cards.contact-options .cards-card-body li {
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m);
+  font-weight: 400;
+  color: var(--text-color);
+  line-height: 1.7;
+  margin: 0;
+  padding: 0 0 0 14px;
+}
+
+/* Links inside list */
+.cards.contact-options .cards-card-body li a:any-link {
+  color: var(--text-color);
+  text-decoration: underline;
+  font-size: var(--body-font-size-m);
+  transition: color var(--transition-speed) ease;
+}
+
+.cards.contact-options .cards-card-body li a:hover {
+  color: var(--link-hover-color);
+}
+
+/* CTA link – plain underlined text link (reset EDS button auto-decoration) */
+.cards.contact-options .cards-card-body .button-container,
+.cards.contact-options .cards-card-body p {
+  margin: 0;
+  text-align: left;
+}
+
+.cards.contact-options .cards-card-body a.button:any-link,
+.cards.contact-options .cards-card-body p a:any-link {
+  display: inline;
+  box-sizing: border-box;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  background-color: transparent;
+  color: var(--text-color);
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m);
+  font-weight: 400;
+  line-height: 1.7;
+  text-align: left;
+  text-decoration: underline;
+  text-transform: none;
+  white-space: normal;
+  overflow: visible;
+  transition: color var(--transition-speed) ease;
+}
+
+.cards.contact-options .cards-card-body a.button:hover,
+.cards.contact-options .cards-card-body p a:hover {
+  background-color: transparent;
+  color: var(--link-hover-color);
+}
+
+/* Desktop: source keeps a single column until >1200px, then switches to 3 equal columns */
+@media (width >= 1200px) {
+  .cards.contact-options > ul {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .cards.contact-options > ul > li {
+    padding: 0 20px;
+  }
+
+  .cards.contact-options .cards-card-body h4 {
+    font-size: 18px;
+  }
+}
+
+/* ===================== Variant: featured-content ===================== */
+
+/* Section heading */
+.cards-container:has(.cards.featured-content) h2 {
+  text-align: center;
+}
+
+/* Card list */
+.cards.featured-content > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+
+/* Each featured card is a full-bleed image with overlaid text (mobile-first) */
+.cards.featured-content > ul > li {
+  position: relative;
+  display: flex;
+  border: 0;
+  background-color: #000;
+  overflow: hidden;
+}
+
+/* Background image fills the card */
+.cards.featured-content .cards-card-image {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  line-height: 0;
+}
+
+.cards.featured-content .cards-card-image picture,
+.cards.featured-content .cards-card-image img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+/* Dark gradient overlay + text — mobile: gradient top to bottom */
+.cards.featured-content .cards-card-body {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  margin: 0;
+  padding: 80px 20px 100px;
+  background-image: linear-gradient(rgb(0 0 0) 70%, rgb(0 0 0 / 0%) 100%);
+  color: var(--white);
+}
+
+/* Eyebrow / category label — Roboto 10px weight 500, uppercase content */
+.cards.featured-content .cards-card-body strong:first-child {
+  display: block;
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-xs);
+  font-weight: 500;
+  line-height: 13px;
+  color: var(--white);
+  margin-bottom: 7.5px;
+}
+
+/* Title — Roboto Slab 30px weight 100 (mobile/tablet) */
+.cards.featured-content .cards-card-body a:not(strong a) {
+  display: block;
+  font-family: var(--heading-font-family);
+  font-size: 30px;
+  font-weight: 100;
+  line-height: 34.2px;
+  color: var(--white);
+  text-decoration: none;
+  margin-bottom: 22.5px;
+}
+
+/* EDS wraps the body cell contents in a single <p>; reset it as a plain block */
+.cards.featured-content .cards-card-body > p {
+  margin: 0;
+  font: inherit;
+}
+
+/* Copy — Roboto Slab 20px weight 300 (the nested paragraph) */
+.cards.featured-content .cards-card-body p p {
+  font-family: var(--heading-font-family);
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 26px;
+  color: var(--white);
+  margin: 0 0 30px;
+  text-align: left;
+}
+
+/* Read more button — green accent, Roboto Slab 14px weight 600 */
+.cards.featured-content .cards-card-body strong:last-child {
+  display: block;
+}
+
+.cards.featured-content .cards-card-body strong:last-child a:any-link {
+  display: block;
+  font-family: var(--heading-font-family);
+  font-size: var(--body-font-size-m);
+  font-weight: 600;
+  line-height: 14px;
+  color: var(--text-color);
+  background-color: var(--accent-color);
+  padding: 13px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.cards.featured-content .cards-card-body strong:last-child a:hover {
+  background-color: var(--accent-color-hover);
+  color: var(--white);
+}
+
+/* Tablet keeps mobile padding/gradient in source; no override needed */
+
+/* Desktop: text pinned left at 50% width, gradient left to right */
+@media (width >= 900px) {
+  .cards.featured-content .cards-card-body {
+    width: 50%;
+    padding: 155px 0 135px 85px;
+    background-image: linear-gradient(to right, rgb(0 0 0) 0%, rgb(0 0 0 / 0%) 100%);
+  }
+
+  /* Title scales up to 42px weight 100 / line-height 45px on desktop */
+  .cards.featured-content .cards-card-body a:not(strong a) {
+    font-size: 42px;
+    line-height: 45px;
+    margin-bottom: 31.5px;
+  }
+
+  /* Eyebrow line-height loosens on desktop */
+  .cards.featured-content .cards-card-body strong:first-child {
+    line-height: 17px;
+  }
+
+  /* Copy line-height loosens on desktop */
+  .cards.featured-content .cards-card-body p p {
+    line-height: 34px;
+  }
+
+  /* Button reverts to auto-width, left-aligned pill on desktop */
+  .cards.featured-content .cards-card-body strong:last-child {
+    display: inline-block;
+  }
+
+  .cards.featured-content .cards-card-body strong:last-child a:any-link {
+    display: inline-block;
+    padding: 18px 30px;
+    text-align: left;
+  }
+}
+
+/* Large desktop: keep gradient covering wider viewports */
+@media (width >= 1200px) {
+  .cards.featured-content .cards-card-body {
+    padding-right: 40px;
+  }
+}
+
+/* ===================== Variant: icon-grid ===================== */
+
+/* Icon card grid – centered icon + green label + short description.
+   Source: grace.com PP catalysts "Lighter/Cleaner/Clearer/Faster" cards
+   (a.cmp-card.generic, col-lg-6 → 2 cols at desktop). */
+
+/* Card grid – 1 column on mobile */
+.cards.icon-grid > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+
+/* Individual cards – transparent, no border, centered content.
+   Source card padding 30px 40px. */
+.cards.icon-grid > ul > li {
+  border: 0;
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 30px 40px;
+}
+
+/* Icon – centered. Source: 50px mobile, margin 0 auto 10px. */
+.cards.icon-grid .cards-card-image {
+  width: 50px;
+  margin: 0 auto 10px;
+  line-height: 0;
+}
+
+.cards.icon-grid .cards-card-image img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Text block */
+.cards.icon-grid .cards-card-body {
+  margin: 0;
+  padding: 0;
+}
+
+/* Title / label – Roboto 18px weight 600 green, centered.
+   Source: .cmp-card .title { font-size:18px; font-weight:600; color:#27853c }. */
+.cards.icon-grid .cards-card-body p:first-child {
+  font-family: var(--body-font-family);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--link-hover-color);
+  line-height: 1.3;
+  margin: 0 0 20px;
+  text-align: center;
+}
+
+/* Description – Roboto 14px black, centered.
+   Source: .spt-copy p. */
+.cards.icon-grid .cards-card-body p:last-child {
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m);
+  font-weight: 400;
+  color: var(--text-color);
+  line-height: 1.3;
+  margin: 0;
+  text-align: center;
+}
+
+/* Tablet (source ~576–991): icon 75px. */
+@media (width >= 600px) {
+  .cards.icon-grid .cards-card-image {
+    width: 75px;
+  }
+}
+
+/* Desktop (source col-lg-6 → 2 columns, col gap 40px). Icon 70px.
+   Title/desc line-height loosens to 1.7; title margin-bottom 15px. */
+@media (width >= 900px) {
+  .cards.icon-grid > ul {
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 40px;
+  }
+
+  .cards.icon-grid .cards-card-image {
+    width: 70px;
+  }
+
+  .cards.icon-grid .cards-card-body p:first-child {
+    line-height: 1.7;
+    margin: 0 0 15px;
+  }
+
+  .cards.icon-grid .cards-card-body p:last-child {
+    line-height: 1.7;
+  }
+}
+
+/* ===================== Variant: image-text-grid ===================== */
+
+/* Cards Image Text Grid – image on top, lead-in bold + body text below.
+   Source: grace.com/about-grace/community/ (Bootstrap .row / .col-lg-6 layout:
+   1 column on mobile, 2 columns from the large breakpoint). */
+
+.cards.image-text-grid > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 30px 40px;
+}
+
+/* Individual card – no border/background, blends with the section */
+.cards.image-text-grid > ul > li {
+  border: 0;
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Card image – full column width, natural aspect ratio (source does not crop) */
+.cards.image-text-grid .cards-card-image {
+  line-height: 0;
+}
+
+.cards.image-text-grid > ul > li img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Card text */
+.cards.image-text-grid .cards-card-body {
+  margin: 0;
+  padding: 16px 0 0;
+}
+
+.cards.image-text-grid .cards-card-body p {
+  margin: 0;
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m);
+  font-weight: 400;
+  line-height: 1.3;
+  color: var(--text-color);
+  text-align: left;
+}
+
+/* Lead-in label – bold, same size/color as the body copy */
+.cards.image-text-grid .cards-card-body p strong {
+  font-weight: 700;
+  color: var(--text-color);
+}
+
+/* Large: 2 columns, wider line-height to match source desktop */
+@media (width >= 900px) {
+  .cards.image-text-grid > ul {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .cards.image-text-grid .cards-card-body p {
+    line-height: 1.7;
+  }
+}
+
+/* ===================== Variant: industry ===================== */
+
+/* Industries section - light background with heading left, cards right */
+.cards-container:has(.cards.industry) {
+  background-color: #e8eef2;
+  color: var(--text-color);
+  padding: var(--spacing-l) 0;
+  margin: 0;
+}
+
+.cards-container:has(.cards.industry) h3 {
+  color: var(--text-color);
+  font-family: var(--heading-font-family);
+  font-size: var(--heading-font-size-l);
+  font-weight: 300;
+  line-height: 1.15;
+  margin-bottom: var(--spacing-s);
+}
+
+/* "View all Industries" button */
+.cards-container:has(.cards.industry) .default-content-wrapper:last-child .button-wrapper {
+  margin-top: var(--spacing-s);
+}
+
+.cards-container:has(.cards.industry) .default-content-wrapper:last-child a.button:any-link {
+  background-color: var(--white);
+  color: var(--text-color);
+  font-family: var(--heading-font-family);
+  font-size: var(--body-font-size-m);
+  font-weight: 600;
+  padding: 18px 30px;
+  border: 0;
+}
+
+.cards-container:has(.cards.industry) .default-content-wrapper:last-child a.button:hover {
+  background-color: var(--accent-color-hover);
+  color: var(--white);
+}
+
+/* cards grid */
+.cards.industry > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.cards.industry > ul > li {
+  border: 0;
+  background-color: transparent;
+  position: relative;
+  overflow: hidden;
+}
+
+.cards.industry .cards-card-image {
+  line-height: 0;
+}
+
+.cards.industry > ul > li img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  display: block;
+}
+
+/* green label banner below image */
+.cards.industry .cards-card-body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--accent-color);
+  text-align: center;
+}
+
+.cards.industry .cards-card-body a:any-link {
+  display: block;
+  font-family: var(--heading-font-family);
+  font-size: var(--body-font-size-m);
+  font-weight: 600;
+  color: var(--text-color);
+  text-decoration: none;
+  padding: 14px 25px;
+  transition: all var(--transition-speed) ease;
+}
+
+.cards.industry .cards-card-body a::after {
+  content: ' \203A';
+  font-size: 1.2em;
+}
+
+.cards.industry .cards-card-body a:hover {
+  background-color: var(--accent-color-hover);
+  color: var(--white);
+}
+
+@media (width >= 900px) {
+  .cards-container:has(.cards.industry) {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 0 32px;
+    align-items: start;
+    padding-left: max(32px, 50% - 624px);
+    padding-right: max(32px, 50% - 624px);
+  }
+
+  .cards-container:has(.cards.industry) > .default-content-wrapper,
+  .cards-container:has(.cards.industry) > .cards.industry-wrapper {
+    max-width: none;
+    padding: 0;
+  }
+
+  .cards-container:has(.cards.industry) > .default-content-wrapper:first-child {
+    grid-column: 1;
+    grid-row: 1 / 3;
+  }
+
+  .cards-container:has(.cards.industry) > .cards.industry-wrapper {
+    grid-column: 2;
+  }
+
+  .cards-container:has(.cards.industry) > .default-content-wrapper:last-child {
+    grid-column: 2;
+  }
+
+  .cards.industry > ul {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ===================== Variant: insight ===================== */
+
+/* Section heading (source: centered, 24px mobile / 30px desktop). */
+.cards-container:has(.cards.insight) h2 {
+  text-align: center;
+  margin: 0 0 18px;
+}
+
+@media (width >= 900px) {
+  .cards-container:has(.cards.insight) h2 {
+    margin: 0 0 22px;
+  }
+}
+
+/* Card grid */
+.cards.insight > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+/* Individual cards – no border, transparent bg (blends with light-gray section) */
+.cards.insight > ul > li {
+  border: 0;
+  background-color: transparent;
+}
+
+/* Card image */
+.cards.insight .cards-card-image {
+  line-height: 0;
+}
+
+.cards.insight > ul > li img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  display: block;
+}
+
+/* Card text */
+.cards.insight .cards-card-body {
+  margin: 0;
+  padding: 16px 0;
+}
+
+/* Category label (eyebrow) – Roboto 10px weight 500, first strong only so the
+   "Read more" strong is not affected. */
+.cards.insight .cards-card-body strong:first-child {
+  font-family: var(--body-font-family);
+  font-size: var(--heading-font-size-xs);
+  font-weight: 500;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+/* Title / description text – Roboto 14px weight 400 */
+.cards.insight .cards-card-body p {
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m);
+  font-weight: 400;
+  line-height: 1.7;
+  margin: 0 0 4px;
+  text-align: left;
+}
+
+/* Links */
+.cards.insight .cards-card-body a:any-link {
+  color: var(--text-color);
+  text-decoration: none;
+  font-size: var(--body-font-size-m);
+  transition: color var(--transition-speed) ease;
+}
+
+.cards.insight .cards-card-body a:hover {
+  color: var(--link-hover-color);
+}
+
+/* "Read more" bold link — on the source it sits on its own line beneath the
+   title (authored as a separate paragraph). Force the trailing strong onto a
+   new line to match. */
+.cards.insight .cards-card-body strong:last-child {
+  display: block;
+  margin-top: 8px;
+}
+
+.cards.insight .cards-card-body strong:last-child a:any-link {
+  font-weight: 700;
+  font-size: var(--body-font-size-m);
+}
+
+/* "View all insights" button – green accent */
+.cards-container:has(.cards.insight) .button-wrapper a.button:any-link,
+.cards-container:has(.cards.insight) > div > .default-content-wrapper:last-child p > strong > a:any-link {
+  background-color: var(--accent-color);
+  color: var(--text-color);
+  padding: 13px 20px;
+  border-radius: 0;
+  font-family: var(--heading-font-family);
+  font-size: var(--body-font-size-m);
+  font-weight: 600;
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+}
+
+.cards-container:has(.cards.insight) .button-wrapper a.button:hover,
+.cards-container:has(.cards.insight) > div > .default-content-wrapper:last-child p > strong > a:hover {
+  background-color: var(--accent-color-hover);
+  color: var(--white);
+}
+
+/* Tablet (source keeps a single stacked column until the lg breakpoint). */
+
+/* Desktop: 2-column layout – big card left, 3 stacked cards right */
+@media (width >= 900px) {
+  .cards.insight > ul {
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  /* First card spans all rows in column 1 */
+  .cards.insight > ul > li:first-child {
+    grid-row: 1 / 4;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .cards.insight > ul > li:first-child .cards-card-image {
+    flex: 1;
+  }
+
+  .cards.insight > ul > li:first-child img {
+    aspect-ratio: unset;
+    height: 100%;
+  }
+
+  /* Small cards (2nd–4th): horizontal layout, text LEFT image RIGHT.
+     Image column is a fixed width so the picture keeps a strict 16:9 ratio
+     (source: 209×117), matching grace.com. */
+  .cards.insight > ul > li:not(:first-child) {
+    display: grid;
+    grid-template-columns: 1fr 209px;
+    align-items: start;
+    gap: 0;
+  }
+
+  /* Swap order: body (text) first, image second */
+  .cards.insight > ul > li:not(:first-child) .cards-card-body {
+    order: -1;
+    padding: 0 20px 0 0;
+  }
+
+  .cards.insight > ul > li:not(:first-child) img {
+    aspect-ratio: 16 / 9;
+    height: auto;
+  }
+}
+
+/* ===================== Variant: location-grid ===================== */
+
+/* Card grid – 1 column mobile */
+.cards.location-grid > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+/* Individual cards – no border, transparent bg */
+.cards.location-grid > ul > li {
+  border: 0;
+  background-color: transparent;
+}
+
+/* Card image – 16:9 to match source */
+.cards.location-grid .cards-card-image {
+  line-height: 0;
+}
+
+.cards.location-grid > ul > li img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: fill;
+  display: block;
+  margin-bottom: 11px;
+}
+
+/* Card text body */
+.cards.location-grid .cards-card-body,
+.cards.location-grid > ul > li > p {
+  margin: 0;
+  padding: 0;
+}
+
+/* Facility name – Roboto 14px weight 700, black */
+.cards.location-grid > ul > li strong {
+  display: block;
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m);
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--text-color);
+  margin: 0;
+}
+
+/* Facility name link – underlined, black */
+.cards.location-grid > ul > li strong a:any-link {
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m);
+  font-weight: 700;
+  color: var(--text-color);
+  text-decoration: underline;
+}
+
+.cards.location-grid > ul > li strong a:hover {
+  color: var(--link-hover-color);
+}
+
+/* Address paragraphs – Roboto 14px weight 400, black */
+.cards.location-grid > ul > li p {
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m);
+  font-weight: 400;
+  line-height: 1.3;
+  color: var(--text-color);
+  margin: 0 0 21px;
+  text-align: left;
+}
+
+/* Desktop: 3 columns, looser line-height matches source */
+@media (width >= 900px) {
+  .cards.location-grid > ul {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+  }
+
+  .cards.location-grid > ul > li strong,
+  .cards.location-grid > ul > li p {
+    line-height: 1.7;
+  }
+}
+
+/* ===================== Variant: product ===================== */
+.cards-container:has(.cards.product) {
+  padding: var(--spacing-l) 0;
+}
+
+.cards-container:has(.cards.product) h2 {
+  text-align: center;
+}
+
+/* Mobile/tablet: the source product grid stacks to a single full-width
+   column; the 3-across grid only kicks in on desktop. */
+.cards.product > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 35px;
+}
+
+.cards.product > ul > li {
+  position: relative;
+  border: 0;
+  background-color: transparent;
+  text-align: center;
+  padding-bottom: 30px;
+}
+
+.cards.product .cards-card-image {
+  line-height: 0;
+}
+
+.cards.product > ul > li img {
+  width: 100%;
+  aspect-ratio: 287 / 130;
+  object-fit: cover;
+}
+
+.cards.product .cards-card-body {
+  margin: 0;
+  padding: 0 50px;
+}
+
+.cards.product .cards-card-body strong {
+  display: block;
+  font-family: var(--heading-font-family);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--link-hover-color);
+  margin-bottom: 4px;
+}
+
+.cards.product .cards-card-body p {
+  margin: 0;
+  font-family: var(--heading-font-family);
+  font-size: var(--body-font-size-m);
+  font-weight: 400;
+  color: var(--text-color);
+  line-height: 1.7;
+}
+
+/* link covers entire card as clickable overlay */
+.cards.product .cards-card-body a:any-link {
+  position: absolute;
+  inset: 0;
+  color: transparent;
+  font-size: 0;
+  text-decoration: none;
+  z-index: 1;
+}
+
+@media (width >= 900px) {
+  .cards.product > ul {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 35px 28px;
+  }
+
+  .cards.product > ul > li {
+    padding-bottom: 55px;
+  }
+}
+
+/* ===================== Variant: profile-grid ===================== */
+
+/* Section heading (e.g. "Meet the Grace Leadership Team") */
+.cards-container:has(.cards.profile-grid) h2 {
+  text-align: center;
+}
+
+/* Card grid — mobile first: single column */
+.cards.profile-grid > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+}
+
+/* Individual profile card — no border/background, matches source card padding */
+.cards.profile-grid > ul > li {
+  border: 0;
+  background-color: transparent;
+  padding: 0 10px 10px;
+  text-align: center;
+}
+
+/* Headshot — 16:9 ratio (source .img padding-top:56.25%), cropped and centered */
+.cards.profile-grid .cards-card-image,
+.cards.profile-grid > ul > li > picture {
+  display: block;
+  line-height: 0;
+}
+
+.cards.profile-grid .cards-card-image picture {
+  display: block;
+  width: 100%;
+}
+
+.cards.profile-grid > ul > li img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+/* Text block — centered, spaced below the headshot */
+.cards.profile-grid .cards-card-body {
+  margin: 0;
+  padding: 25px 0 0;
+  text-align: center;
+}
+
+/* Name (h3) — Roboto Slab 20px / 300 / black (mobile) */
+.cards.profile-grid .cards-card-body h3 {
+  font-family: var(--heading-font-family);
+  font-size: 20px;
+  font-weight: 300;
+  color: var(--text-color);
+  line-height: 1.3;
+  margin: 0 0 20px;
+  text-align: center;
+}
+
+/* Title (h4) — Roboto Slab 16px / 600 / black (mobile) */
+.cards.profile-grid .cards-card-body h4 {
+  font-family: var(--heading-font-family);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-color);
+  line-height: 1.3;
+  margin: 0 0 30px;
+  text-align: center;
+}
+
+/* "Read more" link — Roboto Slab 14px / 600 / black, no transform/underline */
+.cards.profile-grid .cards-card-body p {
+  margin: 0;
+  text-align: center;
+}
+
+.cards.profile-grid .cards-card-body a:any-link {
+  font-family: var(--heading-font-family);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-color);
+  text-transform: none;
+  text-decoration: none;
+  letter-spacing: normal;
+  transition: color var(--transition-speed) ease;
+}
+
+.cards.profile-grid .cards-card-body a:hover {
+  color: var(--link-hover-color);
+}
+
+/* Tablet: still single column, larger card padding (source 0 20px 20px) */
+@media (width >= 600px) {
+  .cards.profile-grid > ul > li {
+    padding: 0 20px 20px;
+  }
+}
+
+/* Desktop: 2 columns, 40px column gap; larger name/title fonts */
+@media (width >= 900px) {
+  .cards.profile-grid > ul {
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 40px;
+  }
+
+  .cards.profile-grid .cards-card-body h3 {
+    font-size: 26px;
+    line-height: 1.15;
+  }
+
+  .cards.profile-grid .cards-card-body h4 {
+    font-size: 18px;
+    line-height: 1.7;
+  }
+}
+
+/* ===================== Variant: solution-grid ===================== */
+
+/* Solution cards grid — text-only cards on a light-gray tile.
+   Source: grace.com UNIPOL UNIPPAC solution feature set.
+   Mobile/tablet: single column. Desktop: rows [1,1,2,1] — the 3rd + 4th
+   cards sit side-by-side, all others span full width. */
+
+.cards.solution-grid > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px; /* source vertical gap between cards */
+}
+
+/* Individual card tile */
+.cards.solution-grid > ul > li {
+  border: 0;
+  background-color: var(--light-color); /* #e6e7e8 rgb(230 231 232) */
+  padding: 10px 20px; /* source: article 10px + inner col 0 10px → 20px sides */
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Card body (text) */
+.cards.solution-grid .cards-card-body {
+  margin: 0;
+  text-align: center;
+}
+
+/* Card title — Roboto Slab, weight 300, centered */
+.cards.solution-grid .cards-card-body h2,
+.cards.solution-grid .cards-card-body h3,
+.cards.solution-grid .cards-card-body h4 {
+  font-family: var(--heading-font-family);
+  font-size: 24px; /* mobile/tablet */
+  font-weight: 300;
+  line-height: 1.3; /* 31.2px */
+  color: var(--text-color);
+  margin: 0 0 10px;
+  text-align: center;
+}
+
+/* Card description — Roboto 14px weight 400, centered */
+.cards.solution-grid .cards-card-body p {
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m); /* 14px */
+  font-weight: 400;
+  line-height: 1.3; /* 18.2px mobile/tablet */
+  color: var(--text-color);
+  margin: 0;
+  text-align: center;
+}
+
+/* Optional card image (kept generic in case of icon/image variant) */
+.cards.solution-grid .cards-card-image {
+  line-height: 0;
+  margin: 0 0 10px;
+  text-align: center;
+}
+
+.cards.solution-grid .cards-card-image img {
+  max-width: 100%;
+  display: inline-block;
+}
+
+/* Desktop: larger padding/type, and 3rd + 4th cards side-by-side.
+   Source switches near 992px; project breakpoint is 900px. */
+@media (width >= 900px) {
+  .cards.solution-grid > ul {
+    grid-template-columns: 1fr 1fr;
+    gap: 20px 40px; /* row 20px (vertical) / column 40px (paired horizontal) */
+  }
+
+  .cards.solution-grid > ul > li {
+    padding: 20px 40px; /* source: article 20px + inner col 0 20px → 40px sides */
+    grid-column: 1 / -1; /* full-width by default */
+  }
+
+  /* 3rd and 4th cards share a row, 50/50 */
+  .cards.solution-grid > ul > li:nth-child(3),
+  .cards.solution-grid > ul > li:nth-child(4) {
+    grid-column: auto;
+  }
+
+  .cards.solution-grid .cards-card-body h2,
+  .cards.solution-grid .cards-card-body h3,
+  .cards.solution-grid .cards-card-body h4 {
+    font-size: 30px;
+    line-height: 1.7; /* 51px */
+  }
+
+  .cards.solution-grid .cards-card-body p {
+    line-height: 1.7; /* 23.8px */
+  }
+}
