@@ -1125,8 +1125,10 @@
 }
 
 @media (width >= 900px) {
+  /* Source lays all products out in a single row (grace.com uses a 4-across
+     flex row for the 4 product tiles), so match with 4 equal columns. */
   .cards.product > ul {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 35px 28px;
   }
 
