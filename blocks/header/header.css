@@ -1,9 +1,11 @@
 /* stylelint-disable no-descending-specificity */
 
 /* === Utility Bar === */
+
+/* Hidden on mobile (mobile-first base); re-shown at >=900px. */
 header .nav-utility {
   background-color: #000;
-  display: flex;
+  display: none;
   justify-content: center;
   align-items: center;
   height: 40px;
@@ -48,25 +50,25 @@ header .nav-wrapper {
   border-bottom: 1px solid #e6e7e8;
 }
 
-/* === Nav Layout === */
+/* === Nav Layout (mobile-first: 50px bar, 10px padding) === */
 header nav {
   box-sizing: border-box;
   display: grid;
   grid-template:
-    'hamburger brand tools' var(--nav-height)
+    'hamburger brand tools' 50px
     'sections sections sections' 1fr / auto 1fr auto;
   align-items: center;
   gap: 0 24px;
   margin: auto;
   max-width: 1264px;
-  height: var(--nav-height);
-  padding: 0 24px;
+  height: 50px;
+  padding: 0 10px;
   font-family: var(--body-font-family);
 }
 
 header nav[aria-expanded='true'] {
   grid-template:
-    'hamburger brand tools' var(--nav-height)
+    'hamburger brand tools' 50px
     'sections sections sections' 1fr / auto 1fr auto;
   overflow-y: auto;
   min-height: 100dvh;
@@ -83,14 +85,17 @@ header nav a:any-link {
 }
 
 /* === Brand / Logo === */
+
+/* Mobile-first: centered brand, 108x36 logo (full 150px restored at >=900px) */
 header .nav-brand {
   grid-area: brand;
   flex-shrink: 0;
+  justify-self: center;
 }
 
 header nav .nav-brand img {
-  width: 150px;
-  height: auto;
+  width: 108px;
+  height: 36px;
   display: block;
 }
 
@@ -227,6 +232,9 @@ header nav[aria-expanded='true'] .mobile-slide-nav {
   display: flex;
   flex-direction: column;
   flex: 1;
+
+  /* Gap between header bar and nav items to match source */
+  padding-top: 15px;
 }
 
 header .mobile-slide-back {
@@ -524,52 +532,17 @@ header .nav-search-suggestions-grid .chevron {
   color: #666;
 }
 
-/* === Mobile-only styles === */
-@media (width <= 899px) {
-  /* Hide utility bar on mobile */
-  header .nav-utility {
-    display: none;
-  }
+/* === Mobile-only styles (no >=900px equivalent) === */
 
-  /* Match source mobile header bar: 50px height, centered 108px logo */
-  header nav {
-    padding: 0 10px;
-    height: 50px;
-    grid-template:
-      'hamburger brand tools' 50px
-      'sections sections sections' 1fr / auto 1fr auto;
-  }
+/* Match source mobile search icon: 14x14 */
+header .nav-mobile-search .nav-search-btn img,
+header .nav-mobile-search .nav-search-btn svg {
+  width: 14px;
+  height: 14px;
+}
 
-  header nav[aria-expanded='true'] {
-    grid-template:
-      'hamburger brand tools' 50px
-      'sections sections sections' 1fr / auto 1fr auto;
-  }
-
-  header nav .nav-brand {
-    justify-self: center;
-  }
-
-  header nav .nav-brand img {
-    width: 108px;
-    height: 36px;
-  }
-
-  /* Match source search icon: 14x14 */
-  header .nav-mobile-search .nav-search-btn img,
-  header .nav-mobile-search .nav-search-btn svg {
-    width: 14px;
-    height: 14px;
-  }
-
-  /* Gap between header bar and nav items to match source */
-  header nav[aria-expanded='true'] .mobile-slide-nav {
-    padding-top: 15px;
-  }
-
-  header nav[aria-expanded='true'] .nav-sections .default-content-wrapper {
-    display: none;
-  }
+header nav[aria-expanded='true'] .nav-sections .default-content-wrapper {
+  display: none;
 }
 
 /* ========================== */
@@ -578,6 +551,11 @@ header .nav-search-suggestions-grid .chevron {
 
 /* ========================== */
 @media (width >= 900px) {
+  /* Re-show the utility bar hidden in the mobile-first base */
+  header .nav-utility {
+    display: flex;
+  }
+
   header .nav-wrapper {
     position: relative;
   }
@@ -590,6 +568,12 @@ header .nav-search-suggestions-grid .chevron {
     max-width: 1280px;
     padding: 0 20px;
     height: 80px;
+  }
+
+  /* Restore full-size logo (mobile base shrinks it to 108x36) */
+  header nav .nav-brand img {
+    width: 150px;
+    height: auto;
   }
 
   header nav[aria-expanded='true'] {
@@ -627,8 +611,10 @@ header .nav-search-suggestions-grid .chevron {
     display: none !important;
   }
 
-  /* Show desktop content wrapper */
-  header nav .nav-sections .default-content-wrapper {
+  /* Show desktop content wrapper (attribute selector matches the base
+     nav[aria-expanded='true'] specificity so desktop nav links stay visible) */
+  header nav .nav-sections .default-content-wrapper,
+  header nav[aria-expanded='true'] .nav-sections .default-content-wrapper {
     display: flex;
     align-items: stretch;
     height: 100%;
