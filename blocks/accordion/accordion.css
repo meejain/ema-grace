@@ -10,6 +10,7 @@
 
 .accordion.faq {
   width: 100%;
+  max-width: 900px;
 }
 
 /* one Q/A item */
@@ -24,6 +25,7 @@
 /* question row (clickable) */
 .accordion.faq .accordion-faq-item-label {
   position: relative;
+  box-sizing: border-box;
   display: flex;
   align-items: center;
   width: 100%;
@@ -58,7 +60,13 @@
   color: inherit;
 }
 
-/* plus / minus indicator - two 13x3px black bars at the right edge.
+/* remove browser focus outline on the clickable summary (source has none) */
+.accordion.faq .accordion-faq-item-label:focus,
+.accordion.faq .accordion-faq-item-label:focus-visible {
+  outline: none;
+}
+
+/* plus / minus indicator - two 20x3px black bars at the right edge.
    Collapsed: horizontal bar (::before) + vertical bar (::after) = plus.
    Expanded: ::after rotates to horizontal so both overlap = minus. */
 .accordion.faq .accordion-faq-item-label::before,
@@ -67,8 +75,8 @@
   position: absolute;
   top: 50%;
   right: 0;
-  width: 13px;
-  height: 3px;
+  width: 15px;
+  height: 2px;
   background-color: var(--text-color);
   transition: transform var(--transition-speed);
 }
@@ -127,8 +135,11 @@
 .accordion.nested {
   --accordion-nested-line: #c4c4c4;
   --accordion-nested-bar: #000;
+  --accordion-nested-panel-bg: #e8e8e8;
 
   margin: 0;
+  width: 100%;
+  max-width: 900px;
 }
 
 /* ---- shared item / divider ---- */
@@ -154,6 +165,11 @@
   display: none;
 }
 
+.accordion.nested .accordion-nested-summary:focus,
+.accordion.nested .accordion-nested-summary:focus-visible {
+  outline: none;
+}
+
 .accordion.nested .accordion-nested-label {
   margin: 17px 17px 17px 0;
   font-family: var(--heading-font-family);
@@ -175,8 +191,8 @@
 .accordion.nested .accordion-nested-indicator {
   position: relative;
   flex: 0 0 auto;
-  width: 13px;
-  height: 13px;
+  width: 15px;
+  height: 15px;
   margin-left: 10px;
 }
 
@@ -186,8 +202,8 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 13px;
-  height: 3px;
+  width: 15px;
+  height: 2px;
   background-color: var(--accordion-nested-bar);
   transition: transform var(--transition-speed) ease;
 }
@@ -226,10 +242,11 @@
   margin-bottom: 0;
 }
 
-/* ---- inner level: indentation expresses nesting ---- */
+/* ---- inner level: grey panel + indentation expresses nesting ---- */
 .accordion.nested .accordion-nested-content-outer {
   margin-bottom: 15px;
-  padding-left: 10px;
+  padding: 20px;
+  background-color: var(--accordion-nested-panel-bg);
 }
 
 .accordion.nested .accordion-nested-item-inner {

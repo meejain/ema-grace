@@ -349,8 +349,12 @@ main img {
 }
 
 /* sections */
+
+/* Section break: vertical breathing room above and below each block section so
+   consecutive blocks are not flush against each other. Full-bleed hero sections
+   and the padded colored (light-gray/dark/highlight) sections opt out below. */
 main > .section {
-  margin: 0;
+  margin: var(--spacing-l) 0;
 }
 
 main > .section > div {
@@ -363,6 +367,15 @@ main > .section > div {
   main > .section > div {
     padding: 0 32px;
   }
+
+  main > .section {
+    margin: var(--spacing-xl) 0;
+  }
+}
+
+/* Hero is full-bleed and self-spaced — no outer section break */
+main > .section.hero-container {
+  margin: 0;
 }
 
 /* section metadata - light gray background */
