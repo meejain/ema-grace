@@ -242,8 +242,8 @@
 
 .columns.brochure-promo .columns-brochure-promo-text-col ul {
   margin: 0 0 21px;
-  padding: 0;
-  list-style: none;
+  padding: 0 0 0 20px;
+  list-style: disc;
 }
 
 .columns.brochure-promo .columns-brochure-promo-text-col li {
