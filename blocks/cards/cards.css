@@ -601,14 +601,17 @@
    Source: grace.com PP catalysts "Lighter/Cleaner/Clearer/Faster" cards
    (a.cmp-card.generic, col-lg-6 → 2 cols at desktop). */
 
-/* Card grid – 1 column on mobile */
+/* Card grid – 1 column on mobile. The source constrains the icon-card block to
+   a ~920px centered container (each column ~460px) rather than the full section
+   width, which keeps the icons proportionally larger within each cell. */
 .cards.icon-grid > ul {
   list-style: none;
-  margin: 0;
+  margin: 0 auto;
   padding: 0;
   display: grid;
   grid-template-columns: 1fr;
   gap: 0;
+  max-width: 920px;
 }
 
 /* Individual cards – transparent, no border, centered content.
@@ -623,16 +626,17 @@
   padding: 30px 40px;
 }
 
-/* Icon – centered. Source: 50px mobile, margin 0 auto 10px. */
+/* Icon – centered square. Source: 50px mobile → 70px desktop, margin below 18px. */
 .cards.icon-grid .cards-card-image {
   width: 50px;
-  margin: 0 auto 10px;
+  margin: 0 auto 18px;
   line-height: 0;
 }
 
 .cards.icon-grid .cards-card-image img {
   width: 100%;
-  height: 100%;
+  aspect-ratio: 1;
+  object-fit: contain;
   display: block;
 }
 
@@ -642,15 +646,16 @@
   padding: 0;
 }
 
-/* Title / label – Roboto 18px weight 600 green, centered.
-   Source: .cmp-card .title { font-size:18px; font-weight:600; color:#27853c }. */
+/* Title / label – Roboto Slab (serif) 18px weight 600 green, centered.
+   Source: .cmp-card .title { font-family: 'Roboto Slab'; font-size:18px;
+   font-weight:600; color:#27853c }. */
 .cards.icon-grid .cards-card-body p:first-child {
-  font-family: var(--body-font-family);
+  font-family: var(--heading-font-family);
   font-size: 18px;
   font-weight: 600;
   color: var(--link-hover-color);
-  line-height: 1.3;
-  margin: 0 0 20px;
+  line-height: 1.7;
+  margin: 0 0 15px;
   text-align: center;
 }
 
@@ -666,7 +671,7 @@
   text-align: center;
 }
 
-/* Tablet (source ~576–991): icon 75px. */
+/* Tablet (source 600–899px): icon grows to 75px. */
 @media (width >= 600px) {
   .cards.icon-grid .cards-card-image {
     width: 75px;
@@ -674,7 +679,7 @@
 }
 
 /* Desktop (source col-lg-6 → 2 columns, col gap 40px). Icon 70px.
-   Title/desc line-height loosens to 1.7; title margin-bottom 15px. */
+   Description line-height loosens to 1.7. */
 @media (width >= 900px) {
   .cards.icon-grid > ul {
     grid-template-columns: repeat(2, 1fr);
@@ -683,11 +688,6 @@
 
   .cards.icon-grid .cards-card-image {
     width: 70px;
-  }
-
-  .cards.icon-grid .cards-card-body p:first-child {
-    line-height: 1.7;
-    margin: 0 0 15px;
   }
 
   .cards.icon-grid .cards-card-body p:last-child {
@@ -701,13 +701,18 @@
    Source: grace.com/about-grace/community/ (Bootstrap .row / .col-lg-6 layout:
    1 column on mobile, 2 columns from the large breakpoint). */
 
+/* The source renders this block inside a narrow content column (~707px shared
+   with a sidebar), so each image column is ~313px. Cap the grid to a comparable
+   centered content width so images match the source scale rather than filling
+   the full section. */
 .cards.image-text-grid > ul {
   list-style: none;
-  margin: 0;
+  margin: 0 auto;
   padding: 0;
   display: grid;
   grid-template-columns: 1fr;
   gap: 30px 40px;
+  max-width: 720px;
 }
 
 /* Individual card – no border/background, blends with the section */
@@ -718,7 +723,8 @@
   flex-direction: column;
 }
 
-/* Card image – full column width, natural aspect ratio (source does not crop) */
+/* Card image – full column width, natural aspect ratio (source preserves the
+   image's own ratio; it is not cropped). */
 .cards.image-text-grid .cards-card-image {
   line-height: 0;
 }
@@ -726,6 +732,10 @@
 .cards.image-text-grid > ul > li img {
   width: 100%;
   height: auto;
+
+  /* override the base .cards img crop so the image keeps its natural ratio */
+  aspect-ratio: auto;
+  object-fit: fill;
   display: block;
 }
 
@@ -801,14 +811,14 @@
   color: var(--white);
 }
 
-/* cards grid */
+/* cards grid – single column on mobile (source stacks full-width cards) */
 .cards.industry > ul {
   list-style: none;
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
+  grid-template-columns: 1fr;
+  gap: 35px 26px;
 }
 
 .cards.industry > ul > li {
@@ -829,7 +839,7 @@
   display: block;
 }
 
-/* green label banner below image */
+/* green label banner below image – short, single-line, text centered */
 .cards.industry .cards-card-body {
   margin: 0;
   padding: 0;
@@ -842,9 +852,11 @@
   font-family: var(--heading-font-family);
   font-size: var(--body-font-size-m);
   font-weight: 600;
+  line-height: 1;
   color: var(--text-color);
   text-decoration: none;
   padding: 14px 25px;
+  white-space: nowrap;
   transition: all var(--transition-speed) ease;
 }
 
@@ -869,7 +881,7 @@
   }
 
   .cards-container:has(.cards.industry) > .default-content-wrapper,
-  .cards-container:has(.cards.industry) > .cards.industry-wrapper {
+  .cards-container:has(.cards.industry) > .cards-wrapper {
     max-width: none;
     padding: 0;
   }
@@ -879,16 +891,16 @@
     grid-row: 1 / 3;
   }
 
-  .cards-container:has(.cards.industry) > .cards.industry-wrapper {
-    grid-column: 2;
-  }
-
-  .cards-container:has(.cards.industry) > .default-content-wrapper:last-child {
+  .cards-container:has(.cards.industry) > .cards-wrapper {
     grid-column: 2;
   }
 
   .cards.industry > ul {
     grid-template-columns: repeat(3, 1fr);
+  }
+
+  .cards.industry > ul > li img {
+    aspect-ratio: 254 / 115;
   }
 }
 
