@@ -1068,6 +1068,16 @@
     aspect-ratio: 16 / 9;
     height: auto;
   }
+
+  /* "View all insights" reverts to a compact, text-sized button on desktop
+     (the full-width treatment above is mobile-only – source shows an
+     inline-block button aligned to the left of the insights column). */
+  .cards-container:has(.cards.insight) .button-wrapper a.button:any-link,
+  .cards-container:has(.cards.insight) > div > .default-content-wrapper:last-child p > strong > a:any-link {
+    display: inline-block;
+    width: auto;
+    padding: 18px 30px;
+  }
 }
 
 /* ===================== Variant: location-grid ===================== */
