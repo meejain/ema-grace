@@ -1,29 +1,33 @@
 /* Consolidated accordion block: variants scoped to .accordion.{variant}. */
 /* stylelint-disable no-descending-specificity */
 
-/* ===================== Variant: faq ===================== */
+/* ===================== Variants: faq + rich-content ===================== */
 
-/* Accordion FAQ - tokens extracted from grace.com Curtis Bay FUSRAP page
-   row min-height 54px, bars 13x3px black at right edge, question span
-   14px/600 Roboto Slab margin 17px 17px 17px 0, dividers 1px #c4c4c4,
-   answer 14px/400 Roboto, line-height 1.3 mobile / 1.7 desktop, p margin-bottom 21px */
+/* Accordion FAQ + Rich Content share one flat, single-level structure decorated
+   by faq.js (.accordion-faq-*). Tokens extracted from grace.com Curtis Bay FUSRAP
+   (faq) and US Employee Benefits Summary (rich-content):
+   row min-height 54px, bars 13x3px black at right edge, header 14px Roboto Slab
+   margin 17px 17px 17px 0, dividers 1px #c4c4c4, body 14px/400 Roboto,
+   line-height 1.3 mobile / 1.7 desktop, p margin-bottom 21px.
+   Difference: faq header weight 600; rich-content header weight 700 with rich
+   body typography (lists, strong, links, headings) - see rich-content section. */
 
-.accordion.faq {
+:is(.accordion.faq, .accordion.rich-content) {
   width: 100%;
   max-width: 900px;
 }
 
 /* one Q/A item */
-.accordion.faq .accordion-faq-item {
+:is(.accordion.faq, .accordion.rich-content) .accordion-faq-item {
   border-top: 1px solid #c4c4c4;
 }
 
-.accordion.faq .accordion-faq-item:last-child {
+:is(.accordion.faq, .accordion.rich-content) .accordion-faq-item:last-child {
   border-bottom: 1px solid #c4c4c4;
 }
 
 /* question row (clickable) */
-.accordion.faq .accordion-faq-item-label {
+:is(.accordion.faq, .accordion.rich-content) .accordion-faq-item-label {
   position: relative;
   box-sizing: border-box;
   display: flex;
@@ -37,11 +41,11 @@
 }
 
 /* remove native disclosure triangle */
-.accordion.faq .accordion-faq-item-label::-webkit-details-marker {
+:is(.accordion.faq, .accordion.rich-content) .accordion-faq-item-label::-webkit-details-marker {
   display: none;
 }
 
-.accordion.faq .accordion-faq-item-title {
+:is(.accordion.faq, .accordion.rich-content) .accordion-faq-item-title {
   display: block;
   margin: 17px 17px 17px 0;
   font-family: var(--heading-font-family);
@@ -54,51 +58,51 @@
 
 /* EDS wraps the question cell text in a <p>; strip its default margins so the
    row height matches source (single-line row = 54px) */
-.accordion.faq .accordion-faq-item-title p {
+:is(.accordion.faq, .accordion.rich-content) .accordion-faq-item-title p {
   margin: 0;
   font: inherit;
   color: inherit;
 }
 
 /* remove browser focus outline on the clickable summary (source has none) */
-.accordion.faq .accordion-faq-item-label:focus,
-.accordion.faq .accordion-faq-item-label:focus-visible {
+:is(.accordion.faq, .accordion.rich-content) .accordion-faq-item-label:focus,
+:is(.accordion.faq, .accordion.rich-content) .accordion-faq-item-label:focus-visible {
   outline: none;
 }
 
-/* plus / minus indicator - two 20x3px black bars at the right edge.
+/* plus / minus indicator - two 13x3px black bars at the right edge (source parity).
    Collapsed: horizontal bar (::before) + vertical bar (::after) = plus.
    Expanded: ::after rotates to horizontal so both overlap = minus. */
-.accordion.faq .accordion-faq-item-label::before,
-.accordion.faq .accordion-faq-item-label::after {
+:is(.accordion.faq, .accordion.rich-content) .accordion-faq-item-label::before,
+:is(.accordion.faq, .accordion.rich-content) .accordion-faq-item-label::after {
   content: "";
   position: absolute;
   top: 50%;
   right: 0;
-  width: 15px;
-  height: 2px;
+  width: 13px;
+  height: 3px;
   background-color: var(--text-color);
   transition: transform var(--transition-speed);
 }
 
-.accordion.faq .accordion-faq-item-label::before {
+:is(.accordion.faq, .accordion.rich-content) .accordion-faq-item-label::before {
   transform: translateY(-50%);
 }
 
-.accordion.faq .accordion-faq-item-label::after {
+:is(.accordion.faq, .accordion.rich-content) .accordion-faq-item-label::after {
   transform: translateY(-50%) rotate(90deg);
 }
 
-.accordion.faq .accordion-faq-item[open] .accordion-faq-item-label::after {
+:is(.accordion.faq, .accordion.rich-content) .accordion-faq-item[open] .accordion-faq-item-label::after {
   transform: translateY(-50%) rotate(0deg);
 }
 
 /* answer panel */
-.accordion.faq .accordion-faq-item-body {
+:is(.accordion.faq, .accordion.rich-content) .accordion-faq-item-body {
   padding-left: 0;
 }
 
-.accordion.faq .accordion-faq-item-body p {
+:is(.accordion.faq, .accordion.rich-content) .accordion-faq-item-body p {
   margin-top: 0;
   margin-bottom: 21px;
   font-family: var(--body-font-family);
@@ -108,13 +112,13 @@
   color: var(--text-color);
 }
 
-.accordion.faq .accordion-faq-item-body p:last-child {
+:is(.accordion.faq, .accordion.rich-content) .accordion-faq-item-body p:last-child {
   margin-bottom: 21px;
 }
 
 /* desktop: answer text uses looser 1.7 line-height (source parity) */
 @media (width >= 900px) {
-  .accordion.faq .accordion-faq-item-body p {
+  :is(.accordion.faq, .accordion.rich-content) .accordion-faq-item-body p {
     line-height: 1.7;
   }
 }
@@ -135,7 +139,7 @@
 .accordion.nested {
   --accordion-nested-line: #c4c4c4;
   --accordion-nested-bar: #000;
-  --accordion-nested-panel-bg: #e8e8e8;
+  --accordion-nested-panel-bg: #e6e7e8;
 
   margin: 0;
   width: 100%;
@@ -202,8 +206,8 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 15px;
-  height: 2px;
+  width: 13px;
+  height: 3px;
   background-color: var(--accordion-nested-bar);
   transition: transform var(--transition-speed) ease;
 }
@@ -245,7 +249,7 @@
 /* ---- inner level: grey panel + indentation expresses nesting ---- */
 .accordion.nested .accordion-nested-content-outer {
   margin-bottom: 15px;
-  padding: 20px;
+  padding: 0 20px;
   background-color: var(--accordion-nested-panel-bg);
 }
 
@@ -259,10 +263,6 @@
 }
 
 @media (width >= 900px) {
-  .accordion.nested .accordion-nested-content-outer {
-    padding-left: 20px;
-  }
-
   .accordion.nested .accordion-nested-content p {
     line-height: 1.7;
   }
@@ -270,173 +270,65 @@
 
 /* ===================== Variant: rich-content ===================== */
 
-/* Accordion Rich Content
- * Tokens extracted from grace.com US Employee Benefits Summary accordion
- * (dl.plus-minus.accordion > dt>button.accordion-btn / dd):
- * - header: Roboto Slab 14px/700, #000, divider 1px solid rgb(196 196 196),
- *   row height ~54px, top border only (no bottom border on last item)
- * - indicator: plus/minus built from two 13px x 3px black bars at the right edge
- * - panel body: Roboto 14px #000, rich paragraphs/lists margin 0 0 21px,
- *   list-style none with 14px li indent
- * - line-height: 1.3 (18.2px) on mobile/tablet, 1.7 (23.8px) on desktop
- */
+/* Rich Content reuses the faq structure/decoration above. Only its true
+   differences from faq are declared here (source: US Employee Benefits Summary):
+   header weight 700 (faq is 600) and rich body typography - lists, strong,
+   links, and inline headings. */
 
-.accordion.rich-content {
-  margin: 0;
-}
-
-/* Item + divider */
-.accordion.rich-content .accordion-rich-content-item {
-  border-top: 1px solid rgb(196 196 196);
-}
-
-/* Header (summary) */
-.accordion.rich-content .accordion-rich-content-header {
-  position: relative;
-  display: flex;
-  box-sizing: border-box;
-  align-items: center;
-  min-height: 54px;
-  padding: 8px 44px 8px 0;
-  font-family: var(--heading-font-family);
-  font-size: 14px;
+/* header is heavier than faq */
+.accordion.rich-content .accordion-faq-item-title {
   font-weight: 700;
-  line-height: 1.3;
-  color: rgb(0 0 0);
-  cursor: pointer;
-  list-style: none;
 }
 
-/* EDS wraps the authored label in a <p>; strip its default spacing so the
-   header row height matches the source (~54px). */
-.accordion.rich-content .accordion-rich-content-header p {
-  margin: 0;
-  font: inherit;
-  color: inherit;
+/* rich body: lists, strong, links, inline headings */
+.accordion.rich-content .accordion-faq-item-body strong {
+  font-weight: 700;
+  color: var(--text-color);
 }
 
-/* Remove native disclosure triangle */
-.accordion.rich-content .accordion-rich-content-header::-webkit-details-marker {
-  display: none;
-}
-
-/* Plus / minus indicator recreated with two bars */
-.accordion.rich-content .accordion-rich-content-header::before,
-.accordion.rich-content .accordion-rich-content-header::after {
-  content: "";
-  position: absolute;
-  right: 0;
-  top: 50%;
-  width: 13px;
-  height: 3px;
-  background: rgb(0 0 0);
-  transition: transform var(--transition-speed) ease, opacity var(--transition-speed) ease;
-}
-
-/* horizontal bar (always visible = minus) */
-.accordion.rich-content .accordion-rich-content-header::before {
-  transform: translateY(-50%);
-}
-
-/* vertical bar (shown when collapsed to form a plus) */
-.accordion.rich-content .accordion-rich-content-header::after {
-  transform: translateY(-50%) rotate(90deg);
-}
-
-/* collapse the vertical bar when open -> minus */
-.accordion.rich-content .accordion-rich-content-item[open] .accordion-rich-content-header::after {
-  transform: translateY(-50%) rotate(0deg);
-  opacity: 0;
-}
-
-.accordion.rich-content .accordion-rich-content-header:hover {
-  color: var(--link-hover-color);
-}
-
-.accordion.rich-content .accordion-rich-content-header:focus-visible {
-  outline: 2px solid var(--accent-color);
-  outline-offset: 2px;
-}
-
-/* Panel / rich content */
-.accordion.rich-content .accordion-rich-content-panel {
-  padding: 0 0 4px;
-  font-family: var(--body-font-family);
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 1.3;
-  color: rgb(0 0 0);
-}
-
-.accordion.rich-content .accordion-rich-content-panel > *:last-child {
-  margin-bottom: 8px;
-}
-
-/* rich typography inside the panel */
-.accordion.rich-content .accordion-rich-content-panel p,
-.accordion.rich-content .accordion-rich-content-panel ul,
-.accordion.rich-content .accordion-rich-content-panel ol {
+.accordion.rich-content .accordion-faq-item-body ul,
+.accordion.rich-content .accordion-faq-item-body ol {
   margin: 0 0 21px;
-  font-size: 14px;
-  line-height: 1.3;
-  color: rgb(0 0 0);
-}
-
-.accordion.rich-content .accordion-rich-content-panel h3,
-.accordion.rich-content .accordion-rich-content-panel h4,
-.accordion.rich-content .accordion-rich-content-panel h5,
-.accordion.rich-content .accordion-rich-content-panel h6 {
-  margin: 0 0 8px;
-  font-family: var(--body-font-family);
-  font-size: 14px;
-  font-weight: 700;
-  line-height: 1.3;
-  color: rgb(0 0 0);
-}
-
-.accordion.rich-content .accordion-rich-content-panel strong {
-  font-weight: 700;
-  color: rgb(0 0 0);
-}
-
-.accordion.rich-content .accordion-rich-content-panel ul,
-.accordion.rich-content .accordion-rich-content-panel ol {
   padding: 0;
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m);
+  line-height: 1.3;
+  color: var(--text-color);
   list-style: none;
 }
 
-.accordion.rich-content .accordion-rich-content-panel li {
+.accordion.rich-content .accordion-faq-item-body li {
   margin: 0;
   padding: 0 0 0 14px;
-  font-size: 14px;
+  font-size: var(--body-font-size-m);
   line-height: 1.3;
-  color: rgb(0 0 0);
 }
 
-.accordion.rich-content .accordion-rich-content-panel a:any-link {
+.accordion.rich-content .accordion-faq-item-body h3,
+.accordion.rich-content .accordion-faq-item-body h4,
+.accordion.rich-content .accordion-faq-item-body h5,
+.accordion.rich-content .accordion-faq-item-body h6 {
+  margin: 0 0 8px;
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m);
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--text-color);
+}
+
+.accordion.rich-content .accordion-faq-item-body a:any-link {
   color: var(--link-color);
   text-decoration: underline;
 }
 
-.accordion.rich-content .accordion-rich-content-panel a:hover {
+.accordion.rich-content .accordion-faq-item-body a:hover {
   color: var(--link-hover-color);
 }
 
 @media (width >= 900px) {
-  .accordion.rich-content .accordion-rich-content-header {
-    padding-right: 48px;
-  }
-
-  /* Source panel text relaxes to line-height 1.7 (23.8px) on desktop. */
-  .accordion.rich-content .accordion-rich-content-panel,
-  .accordion.rich-content .accordion-rich-content-panel p,
-  .accordion.rich-content .accordion-rich-content-panel ul,
-  .accordion.rich-content .accordion-rich-content-panel ol,
-  .accordion.rich-content .accordion-rich-content-panel li,
-  .accordion.rich-content .accordion-rich-content-panel h3,
-  .accordion.rich-content .accordion-rich-content-panel h4,
-  .accordion.rich-content .accordion-rich-content-panel h5,
-  .accordion.rich-content .accordion-rich-content-panel h6 {
+  .accordion.rich-content .accordion-faq-item-body ul,
+  .accordion.rich-content .accordion-faq-item-body ol,
+  .accordion.rich-content .accordion-faq-item-body li {
     line-height: 1.7;
   }
 }

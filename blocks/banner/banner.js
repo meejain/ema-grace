@@ -4,10 +4,12 @@
  */
 import decorateContactSplit from './contact-split.js';
 import decorateCta from './cta.js';
+import decorateResourceDownload from './resource-download.js';
 
 const DECORATORS = {
   'contact-split': decorateContactSplit,
   cta: decorateCta,
+  'resource-download': decorateResourceDownload,
 };
 
 export default async function decorate(block) {

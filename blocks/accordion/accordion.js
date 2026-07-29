@@ -4,12 +4,12 @@
  */
 import decorateFaq from './faq.js';
 import decorateNested from './nested.js';
-import decorateRichContent from './rich-content.js';
 
 const DECORATORS = {
   faq: decorateFaq,
   nested: decorateNested,
-  'rich-content': decorateRichContent,
+  // rich-content shares the faq structure; only its typography differs (see CSS).
+  'rich-content': decorateFaq,
 };
 
 export default async function decorate(block) {

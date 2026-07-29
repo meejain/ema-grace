@@ -9,9 +9,16 @@
  * Mobile-first: stacked single column; 50/50 side-by-side from 900px up.
  */
 
-/* Full-width background: escape the section max-width wrapper. */
-.banner-contact-split-wrapper {
+/* Full-width background: escape the section content wrapper so the banner
+   spans edge-to-edge (source has no side gutters or vertical section margin). */
+.banner-wrapper:has(> .banner.contact-split) {
   max-width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.section:has(> .banner-wrapper > .banner.contact-split) {
+  margin: 0 !important;
   padding: 0 !important;
 }
 
@@ -32,7 +39,7 @@
 .banner.contact-split .banner-contact-split-title {
   margin: 0 0 36px;
   color: var(--white);
-  font-family: var(--body-font-family);
+  font-family: var(--heading-font-family);
   font-size: 24px;
   font-weight: 300;
   line-height: 1.3;
@@ -57,7 +64,7 @@
 .banner.contact-split .banner-contact-split-half h3 {
   margin: 0 0 15px;
   color: var(--white);
-  font-family: var(--body-font-family);
+  font-family: var(--heading-font-family);
   font-size: 20px;
   font-weight: 300;
   line-height: 1.3;
@@ -81,13 +88,20 @@
   padding: 13px;
   background-color: var(--accent-color);
   color: var(--text-color);
-  font-family: var(--body-font-family);
+  font-family: var(--heading-font-family);
   font-size: var(--body-font-size-m);
   font-weight: 600;
   line-height: 1;
   text-align: center;
   text-decoration: none;
   transition: all var(--transition-speed) ease;
+}
+
+/* Full-width white rule between the CTA and the descriptive copy. */
+.banner.contact-split .banner-contact-split-divider {
+  height: 1px;
+  margin: 30px 10px;
+  background-color: var(--white);
 }
 
 .banner.contact-split a.banner-contact-split-cta:any-link::after {
@@ -122,6 +136,11 @@
   font-size: var(--body-font-size-m);
   line-height: 1.3;
   list-style: none;
+}
+
+/* source spaces list items 7px apart (first item has no top margin) */
+.banner.contact-split .banner-contact-split-half ul li + li {
+  margin-top: 7px;
 }
 
 .banner.contact-split .banner-contact-split-half ul li::before {
@@ -166,6 +185,10 @@
     line-height: 1.7;
   }
 
+  .banner.contact-split .banner-contact-split-divider {
+    margin: 45px 0;
+  }
+
   /* Content-width, centred CTA on desktop. */
   .banner.contact-split a.banner-contact-split-cta:any-link {
     width: auto;
@@ -175,81 +198,92 @@
 
 /* ===================== Variant: cta ===================== */
 
-/* Banner CTA - call-to-action on the brand green background.
-   Tokens re-verified against grace.com sustainability page green contact banner
-   (.contactus__content-desktop / green-bkgd):
-   background rgb(122,193,67) = #7ac143 (--accent-color); black text;
-   padding 20px; heading = body font (Roboto) 16px/700; body text 16px
-   (line-height 1.3 mobile -> 1.7 desktop); CTA buttons white bg / black text,
-   Roboto Slab 14px 600, padding 13px 10px, no radius, stacked. */
+/* Banner CTA - centered "Request a sample" promo band.
+   Source: grace.com/campaign/chromatography (bottom band). A short, wide band
+   on a dark-blue panel (#004990) with a blue-tinted flasks photo, centered
+   white heading + subheading + green button. The photo is a CSS background.
+   Mobile: padding 25px 10px, heading 24px, text 16px, full-width button;
+   desktop (>=900px): padding 50px 70px, heading 30px, text 18px, auto button. */
 
-/* Full-width: escape the section 1200px content wrapper. */
-.banner-cta-wrapper {
+/* Full-width: escape the section content wrapper so the band spans edge-to-edge. */
+.banner-wrapper:has(> .banner.cta) {
   max-width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.section:has(> .banner-wrapper > .banner.cta) {
+  margin: 0 !important;
   padding: 0 !important;
 }
 
 .banner.cta {
   box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: var(--spacing-s);
-  background-color: var(--accent-color);
-  color: var(--text-color);
-  padding: var(--spacing-s);
-  text-align: left;
+  width: 100%;
+  margin: 0;
+  padding: 25px 10px;
+  background-color: #004990;
+  background-image: url('./cta-flasks.jpg');
+  background-position: 50% 50%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: var(--white);
+  text-align: center;
 }
 
-.banner-cta-content {
-  display: flex;
-  flex-direction: column;
+/* content + actions stacked and centered within a max-width container */
+.banner.cta .banner-cta-content,
+.banner.cta .banner-cta-actions {
+  width: 100%;
+  max-width: 1264px;
+  margin: 0 auto;
 }
 
-/* Heading uses the body (Roboto) font at 16px/700 on the source, not a
-   large serif display heading. */
+/* Heading: Roboto Slab, light weight, white, centered. */
 .banner.cta .banner-cta-heading {
-  margin: 0 0 var(--spacing-s);
-  font-family: var(--body-font-family);
-
-  /* source keeps heading + text at 16px on all breakpoints, so pin the size
-     rather than use --body-font-size-l (which grows to 20px at >=900px). */
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 1.7;
-  color: var(--text-color);
-}
-
-.banner.cta .banner-cta-text {
-  margin: 0;
-  font-family: var(--body-font-family);
-  font-size: 16px;
-  font-weight: 400;
+  margin: 0 0 10px;
+  font-family: var(--heading-font-family);
+  font-size: 24px;
+  font-weight: 300;
   line-height: 1.3;
-  color: var(--text-color);
+  color: var(--white);
+  text-align: center;
 }
 
-/* Buttons stay stacked at every breakpoint (source keeps them in a column). */
-.banner-cta-actions {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  align-items: flex-start;
+/* Subheading: Roboto Slab 16px/600 white, 30px gap above the button. */
+.banner.cta .banner-cta-text {
+  margin: 0 0 30px;
+  font-family: var(--heading-font-family);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--white);
+  text-align: center;
 }
 
-/* CTA buttons: white background, black text (contrast on green banner).
-   Source padding is 13px 10px with no radius. */
+/* CTA button: green bg, black text, full-width on mobile, centered. */
 .banner.cta a.button.secondary:any-link {
-  margin: 0;
-  padding: 13px 10px;
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0 auto;
+  border: 0;
   border-radius: 0;
-  background-color: var(--white);
+  padding: 13px;
+  background-color: var(--accent-color);
   color: var(--text-color);
   font-family: var(--heading-font-family);
   font-size: var(--body-font-size-m);
   font-weight: 600;
   line-height: 1;
   text-align: center;
+  text-decoration: none;
+  transition: all var(--transition-speed) ease;
+}
+
+.banner.cta a.button.secondary:any-link::after {
+  content: ' \203A';
+  font-size: 1.2em;
 }
 
 .banner.cta a.button.secondary:hover,
@@ -259,7 +293,174 @@
 }
 
 @media (width >= 900px) {
-  .banner.cta .banner-cta-text {
+  .banner.cta {
+    padding: 50px 70px;
+  }
+
+  .banner.cta .banner-cta-heading {
+    font-size: 30px;
     line-height: 1.7;
+  }
+
+  .banner.cta .banner-cta-text {
+    font-size: 18px;
+    line-height: 1.7;
+  }
+
+  .banner.cta a.button.secondary:any-link {
+    display: inline-block;
+    width: auto;
+    padding: 18px 30px;
+  }
+}
+
+/* ===================== Variant: resource-download ===================== */
+
+/* Banner Resource Download - image-left / content-right promo for downloading
+   a resource (magazine/PDF). Source: grace.com sustainability page bottom band
+   (.resource-download-comp.light). Light-grey panel (#e6e7e8), full-width edge
+   to edge. Desktop: image ~58% left, content right with padding 20px 140px 20px
+   40px; eyebrow Roboto 10px/500, heading Roboto Slab 30px/300, subhead Roboto
+   Slab 20px/300, green CTA. Mobile: stacked (image full-width above content). */
+
+/* Full-width: escape the section content wrapper. */
+.banner-wrapper:has(> .banner.resource-download) {
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.section:has(> .banner-wrapper > .banner.resource-download) {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.banner.resource-download {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 0;
+  padding: 0 0 45px;
+  background-color: #e6e7e8;
+  overflow: hidden;
+}
+
+.banner.resource-download .banner-resource-download-media {
+  width: 100%;
+  line-height: 0;
+}
+
+.banner.resource-download .banner-resource-download-media img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.banner.resource-download .banner-resource-download-content {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 20px 10px 0;
+}
+
+/* Eyebrow (issue line): small uppercase-style label. */
+.banner.resource-download .banner-resource-download-eyebrow {
+  margin: 0 0 7.5px;
+  font-family: var(--body-font-family);
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 1.7;
+  color: var(--text-color);
+}
+
+/* Heading: Roboto Slab, light weight. */
+.banner.resource-download .banner-resource-download-title {
+  margin: 0 0 15px;
+  font-family: var(--heading-font-family);
+  font-size: 24px;
+  font-weight: 300;
+  line-height: 1.3;
+  color: var(--text-color);
+}
+
+/* Subheading paragraph. */
+.banner.resource-download .banner-resource-download-text {
+  margin: 0 0 30px;
+  font-family: var(--heading-font-family);
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 1.2;
+  color: var(--text-color);
+}
+
+/* Green CTA button, full-width on mobile. */
+.banner.resource-download a.button.secondary:any-link {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  padding: 13px;
+  background-color: var(--accent-color);
+  color: var(--text-color);
+  font-family: var(--heading-font-family);
+  font-size: var(--body-font-size-m);
+  font-weight: 600;
+  line-height: 1;
+  text-align: center;
+  text-decoration: none;
+  transition: all var(--transition-speed) ease;
+}
+
+.banner.resource-download a.button.secondary:any-link::after {
+  content: ' \203A';
+  font-size: 1.2em;
+}
+
+.banner.resource-download a.button.secondary:hover,
+.banner.resource-download a.button.secondary:focus-visible {
+  background-color: var(--accent-color-hover);
+  color: var(--white);
+}
+
+/* Desktop: side-by-side image (left) + content (right). */
+@media (width >= 900px) {
+  .banner.resource-download {
+    flex-direction: row;
+    align-items: stretch;
+    padding: 0;
+  }
+
+  .banner.resource-download .banner-resource-download-media {
+    flex: 0 0 58%;
+    max-width: 58%;
+    padding-right: 40px;
+  }
+
+  .banner.resource-download .banner-resource-download-media img {
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .banner.resource-download .banner-resource-download-content {
+    flex: 1 1 auto;
+    align-self: center;
+    padding: 20px 140px 20px 40px;
+  }
+
+  .banner.resource-download .banner-resource-download-title {
+    font-size: 30px;
+    line-height: 1.7;
+  }
+
+  .banner.resource-download .banner-resource-download-text {
+    line-height: 1.5;
+  }
+
+  .banner.resource-download a.button.secondary:any-link {
+    display: inline-block;
+    width: auto;
+    padding: 18px 30px;
   }
 }

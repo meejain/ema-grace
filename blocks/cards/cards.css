@@ -206,6 +206,17 @@
 
 /* ===================== Variant: contact-options ===================== */
 
+/* Source: grace.com/contact-us "How can we help you?" — three white cards on a
+   light-grey section (#e6e7e8). Each card: icon image, centered Roboto Slab
+   title, a left-aligned bulleted option list, and a green CTA button.
+   Mobile-first single column; 3 equal columns with a 40px gap from 1200px up. */
+
+/* Grey full-bleed section background (source .light-gray-bkgd). */
+.cards-container:has(.cards.contact-options) {
+  background-color: #e6e7e8;
+  padding: 45px 0;
+}
+
 /* Section heading – "How can we help you?" (Roboto Slab 30px, weight 300, centered) */
 .cards-container:has(.cards.contact-options) h2 {
   text-align: center;
@@ -214,24 +225,24 @@
   font-weight: 300;
   color: var(--text-color);
   line-height: 1.7;
-  margin: 0 0 10px;
+  margin: 0 0 30px;
 }
 
-/* Card grid – single column mobile-first */
+/* Card grid – single column mobile-first, 40px gap */
 .cards.contact-options > ul {
   list-style: none;
   margin: 0;
   padding: 0;
   display: grid;
   grid-template-columns: 1fr;
-  gap: 0;
+  gap: 40px;
 }
 
-/* Individual cards – transparent, no border, horizontal-only padding (source: 0 10px mobile) */
+/* Individual cards – white boxes with 20px padding */
 .cards.contact-options > ul > li {
   border: 0;
-  background-color: transparent;
-  padding: 0 10px;
+  background-color: var(--white);
+  padding: 20px;
   text-align: left;
 }
 
@@ -244,7 +255,7 @@
 .cards.contact-options .cards-card-image img {
   width: 100%;
   aspect-ratio: 340 / 150;
-  object-fit: fill;
+  object-fit: contain;
   display: block;
 }
 
@@ -254,10 +265,10 @@
   padding: 0;
 }
 
-/* Card title – Roboto Slab, weight 600, centered, black; 16px mobile → 18px desktop */
+/* Card title – Roboto Slab, weight 600, centered, black; 18px */
 .cards.contact-options .cards-card-body h4 {
   font-family: var(--heading-font-family);
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 600;
   color: var(--text-color);
   line-height: 1.7;
@@ -265,7 +276,7 @@
   margin: 0 0 30px;
 }
 
-/* List of options – no bullets, Roboto 14px, left aligned */
+/* List of options – no bullets, Roboto 14px, left aligned, white-dot bullets */
 .cards.contact-options .cards-card-body ul {
   list-style: none;
   margin: 0 0 21px;
@@ -274,6 +285,7 @@
 }
 
 .cards.contact-options .cards-card-body li {
+  position: relative;
   font-family: var(--body-font-family);
   font-size: var(--body-font-size-m);
   font-weight: 400;
@@ -281,6 +293,17 @@
   line-height: 1.7;
   margin: 0;
   padding: 0 0 0 14px;
+}
+
+.cards.contact-options .cards-card-body li::before {
+  content: '';
+  position: absolute;
+  top: 0.75em;
+  left: 0;
+  width: 4px;
+  height: 4px;
+  border-radius: 4px;
+  background-color: var(--text-color);
 }
 
 /* Links inside list */
@@ -295,7 +318,8 @@
   color: var(--link-hover-color);
 }
 
-/* CTA link – plain underlined text link (reset EDS button auto-decoration) */
+/* CTA – green button (source .btn-primary-green): Roboto Slab 14px/600, black
+   text, no radius, padding 18px 30px, with a trailing chevron. */
 .cards.contact-options .cards-card-body .button-container,
 .cards.contact-options .cards-card-body p {
   margin: 0;
@@ -304,44 +328,41 @@
 
 .cards.contact-options .cards-card-body a.button:any-link,
 .cards.contact-options .cards-card-body p a:any-link {
-  display: inline;
+  display: inline-block;
   box-sizing: border-box;
   margin: 0;
   border: 0;
   border-radius: 0;
-  padding: 0;
-  background-color: transparent;
+  padding: 18px 30px;
+  background-color: var(--accent-color);
   color: var(--text-color);
-  font-family: var(--body-font-family);
+  font-family: var(--heading-font-family);
   font-size: var(--body-font-size-m);
-  font-weight: 400;
-  line-height: 1.7;
-  text-align: left;
-  text-decoration: underline;
+  font-weight: 600;
+  line-height: 1;
+  text-align: center;
+  text-decoration: none;
   text-transform: none;
-  white-space: normal;
-  overflow: visible;
-  transition: color var(--transition-speed) ease;
+  transition: all var(--transition-speed) ease;
+}
+
+.cards.contact-options .cards-card-body a.button:any-link::after,
+.cards.contact-options .cards-card-body p a:any-link::after {
+  content: ' \203A';
+  font-size: 1.2em;
 }
 
 .cards.contact-options .cards-card-body a.button:hover,
 .cards.contact-options .cards-card-body p a:hover {
-  background-color: transparent;
-  color: var(--link-hover-color);
+  background-color: var(--accent-color-hover);
+  color: var(--white);
 }
 
 /* Desktop: source keeps a single column until >1200px, then switches to 3 equal columns */
 @media (width >= 1200px) {
   .cards.contact-options > ul {
     grid-template-columns: repeat(3, 1fr);
-  }
-
-  .cards.contact-options > ul > li {
-    padding: 0 20px;
-  }
-
-  .cards.contact-options .cards-card-body h4 {
-    font-size: 18px;
+    align-items: start;
   }
 }
 

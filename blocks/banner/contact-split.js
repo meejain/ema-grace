@@ -31,7 +31,15 @@ export default function decorate(block) {
     if (cta) {
       cta.classList.add('banner-contact-split-cta');
       const wrapper = cta.closest('p');
-      if (wrapper) wrapper.classList.add('banner-contact-split-cta-wrapper');
+      if (wrapper) {
+        wrapper.classList.add('banner-contact-split-cta-wrapper');
+        // Source shows a full-width white rule between the CTA and the
+        // "For all ... including:" copy.
+        const divider = document.createElement('div');
+        divider.className = 'banner-contact-split-divider';
+        divider.setAttribute('aria-hidden', 'true');
+        wrapper.after(divider);
+      }
     }
 
     grid.append(half);
