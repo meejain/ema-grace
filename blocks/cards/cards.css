@@ -999,17 +999,20 @@
   font-size: var(--body-font-size-m);
 }
 
-/* "View all insights" button – green accent */
+/* "View all insights" button – green accent, full-width (source spans the
+   insights column width on both mobile and desktop). */
 .cards-container:has(.cards.insight) .button-wrapper a.button:any-link,
 .cards-container:has(.cards.insight) > div > .default-content-wrapper:last-child p > strong > a:any-link {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
   background-color: var(--accent-color);
   color: var(--text-color);
-  padding: 13px 20px;
+  padding: 13px;
   border-radius: 0;
   font-family: var(--heading-font-family);
   font-size: var(--body-font-size-m);
   font-weight: 600;
-  display: inline-block;
   text-align: center;
   text-decoration: none;
 }
@@ -1085,7 +1088,7 @@
   background-color: transparent;
 }
 
-/* Card image – 16:9 to match source */
+/* Card image – 16:9 landscape to match source (source images are 16:9). */
 .cards.location-grid .cards-card-image {
   line-height: 0;
 }
@@ -1093,7 +1096,7 @@
 .cards.location-grid > ul > li img {
   width: 100%;
   aspect-ratio: 16 / 9;
-  object-fit: fill;
+  object-fit: cover;
   display: block;
   margin-bottom: 11px;
 }
@@ -1116,6 +1119,23 @@
   margin: 0;
 }
 
+/* Type-indicator icons before the facility name (source uses Font Awesome
+   factory/building/flask/pin glyphs). Render inline at text size, black. */
+.cards.location-grid > ul > li strong .icon {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  vertical-align: middle;
+  margin-right: 3px;
+}
+
+.cards.location-grid > ul > li strong .icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
 /* Facility name link – underlined, black */
 .cards.location-grid > ul > li strong a:any-link {
   font-family: var(--body-font-family);
@@ -1129,6 +1149,11 @@
   color: var(--link-hover-color);
 }
 
+/* keep the underline off the leading type-indicator icons */
+.cards.location-grid > ul > li strong a .icon {
+  text-decoration: none;
+}
+
 /* Address paragraphs – Roboto 14px weight 400, black */
 .cards.location-grid > ul > li p {
   font-family: var(--body-font-family);
@@ -1140,11 +1165,16 @@
   text-align: left;
 }
 
-/* Desktop: 3 columns, looser line-height matches source */
+/* Desktop: 3 columns, looser line-height matches source. The source renders
+   this grid inside a ~920px content column (shared with a left sidebar), so
+   cap the width and center it to keep cards/images at the source scale rather
+   than filling the full section. */
 @media (width >= 900px) {
   .cards.location-grid > ul {
     grid-template-columns: repeat(3, 1fr);
     gap: 40px;
+    max-width: 920px;
+    margin: 0;
   }
 
   .cards.location-grid > ul > li strong,
@@ -1239,6 +1269,12 @@
 
 /* ===================== Variant: profile-grid ===================== */
 
+/* Section sits on a light-grey band; cards are white tiles (source layout). */
+.cards-container:has(.cards.profile-grid) {
+  background-color: #e6e7e8;
+  padding: 45px 0;
+}
+
 /* Section heading (e.g. "Meet the Grace Leadership Team") */
 .cards-container:has(.cards.profile-grid) h2 {
   text-align: center;
@@ -1254,11 +1290,12 @@
   gap: 40px;
 }
 
-/* Individual profile card — no border/background, matches source card padding */
+/* Individual profile card — white tile with inset padding (source: white-bkgd
+   card, padding 25px 20px 20px so the headshot has a white border). */
 .cards.profile-grid > ul > li {
   border: 0;
-  background-color: transparent;
-  padding: 0 10px 10px;
+  background-color: var(--white);
+  padding: 25px 20px 20px;
   text-align: center;
 }
 
@@ -1332,12 +1369,6 @@
   color: var(--link-hover-color);
 }
 
-/* Tablet: still single column, larger card padding (source 0 20px 20px) */
-@media (width >= 600px) {
-  .cards.profile-grid > ul > li {
-    padding: 0 20px 20px;
-  }
-}
 
 /* Desktop: 2 columns, 40px column gap; larger name/title fonts */
 @media (width >= 900px) {
@@ -1403,14 +1434,16 @@
   text-align: center;
 }
 
-/* Card description — Roboto 14px weight 400, centered */
+/* Card description — Roboto 14px weight 400, centered.
+   Source keeps a 21px bottom margin on the description, giving each tile the
+   extra breathing room below the text. */
 .cards.solution-grid .cards-card-body p {
   font-family: var(--body-font-family);
   font-size: var(--body-font-size-m); /* 14px */
   font-weight: 400;
   line-height: 1.3; /* 18.2px mobile/tablet */
   color: var(--text-color);
-  margin: 0;
+  margin: 0 0 21px;
   text-align: center;
 }
 
