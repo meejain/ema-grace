@@ -311,13 +311,37 @@
   margin: 0 0 3px;
 }
 
-/* the quote is the first paragraph after the image */
+/* quote + citation group – blue rules above and below (source .quote-container).
+   Mobile uses tighter padding; desktop values are set in the 900px block. */
+.columns.checklist .columns-checklist-quote-container {
+  max-width: 387px;
+  margin: 29px auto 0;
+
+  /* no side padding on mobile so the one-line quote isn't squeezed – the
+     container has no side borders, so this is visually identical to the
+     source while reclaiming the width our section side-padding takes. */
+  padding: 24px 0 28px;
+  border-top: 4px solid rgb(0 73 144);
+  border-bottom: 4px solid rgb(0 73 144);
+}
+
+/* the quote is the first paragraph after the image (20px mobile / 26px desktop) */
 .columns.checklist .columns-checklist-media-col .columns-checklist-quote {
   font-family: var(--heading-font-family);
-  font-size: 26px;
+  font-size: 20px;
   font-weight: 100;
-  line-height: 1.4;
-  margin: 0 0 39px;
+  line-height: 1.2;
+  margin: 0 0 30px;
+}
+
+/* short blue divider between the quote and the name */
+.columns.checklist .columns-checklist-quote::after {
+  content: "";
+  display: block;
+  width: 50px;
+  height: 1px;
+  margin: 30px auto 0;
+  background-color: rgb(0 73 144);
 }
 
 .columns.checklist .columns-checklist-media-col p:last-child {
@@ -349,10 +373,11 @@
   text-align: center;
 }
 
-/* checklist items - light gray rows with a green check marker */
+/* checklist items - rows sit flush against the next section heading (source
+   tables have no vertical spacing between them). */
 .columns.checklist .columns-checklist-list {
   list-style: none;
-  margin: 0 0 var(--spacing-m);
+  margin: 0;
   padding: 0;
 }
 
@@ -362,44 +387,51 @@
   font-weight: 400;
   line-height: 1.7;
   color: var(--text-color);
-  background-color: rgb(244 244 244);
   border-bottom: 1px solid rgb(218 218 218);
   margin: 0;
   padding: 7px 10.5px;
+}
+
+/* zebra striping - source alternates light gray / white, restarting under
+   each black section heading (each section is its own list). */
+.columns.checklist .columns-checklist-list li:nth-child(odd) {
+  background-color: rgb(244 244 244);
+}
+
+.columns.checklist .columns-checklist-list li:nth-child(even) {
+  background-color: var(--white);
 }
 
 .columns.checklist .columns-checklist-list li strong {
   font-weight: 700;
 }
 
-/* CTA - source renders a plain bold text link, so neutralise the EDS button */
+/* CTA - green button centred below the checklist (source: #7ac143 bg,
+   black text, no radius, arrow suffix) */
 .columns.checklist .columns-checklist-list-col .button-wrapper {
   margin-top: var(--spacing-m);
+  text-align: center;
 }
 
 .columns.checklist .columns-checklist-list-col a.button:any-link {
-  display: inline;
+  display: inline-block;
   margin: 0;
-  padding: 0;
+  padding: 18px 30px;
   border: 0;
   border-radius: 0;
-  background-color: transparent;
-  color: var(--link-color);
-  font-family: var(--body-font-family);
+  background-color: var(--accent-color);
+  color: var(--text-color);
+  font-family: var(--heading-font-family);
   font-size: var(--body-font-size-m);
-  font-weight: 700;
-  line-height: 1.7;
+  font-weight: 600;
+  line-height: 1;
+  text-align: center;
   white-space: normal;
-  overflow: visible;
 }
 
 .columns.checklist .columns-checklist-list-col a.button:any-link:hover {
-  background-color: transparent;
-  color: var(--link-hover-color);
-}
-
-.columns.checklist .columns-checklist-list-col a.button.primary::after {
-  content: none;
+  background-color: var(--accent-color-hover);
+  color: var(--white);
 }
 
 @media (width >= 900px) {
@@ -409,14 +441,33 @@
     gap: 0;
   }
 
-  /* 1 : 2 split matching the source (33% / 67%) */
+  /* larger quote + roomier padding on desktop (source: 26px, 48px padding) */
+  .columns.checklist .columns-checklist-quote-container {
+    margin-top: 32px;
+    padding: 48px 12px;
+  }
+
+  .columns.checklist .columns-checklist-media-col .columns-checklist-quote {
+    font-size: 26px;
+    line-height: 1.4;
+    margin-bottom: 39px;
+  }
+
+  .columns.checklist .columns-checklist-quote::after {
+    margin-top: 39px;
+  }
+
+  /* 1 : 2 split matching the source (33% / 67%). border-box keeps the 20px
+     side padding inside the flex basis so the columns don't overflow. */
   .columns.checklist .columns-checklist-media-col {
+    box-sizing: border-box;
     flex: 0 0 33.333%;
     max-width: 33.333%;
     padding: 0 20px;
   }
 
   .columns.checklist .columns-checklist-list-col {
+    box-sizing: border-box;
     flex: 0 0 66.667%;
     max-width: 66.667%;
     padding: 0 20px;
@@ -431,7 +482,7 @@
   display: flex;
   flex-direction: column;
   gap: var(--spacing-s); /* 20px */
-  margin-bottom: var(--spacing-m); /* 30px between timeline items */
+  margin-bottom: var(--spacing-s); /* 20px between timeline items (source) */
 }
 
 .columns.history-item > div > div {
@@ -451,8 +502,6 @@
   width: 100%;
   height: auto;
   display: block;
-  aspect-ratio: 1 / 1; /* source images are square */
-  object-fit: cover;
 }
 
 /* Text column: year heading + description */
@@ -492,7 +541,7 @@
 @media (width >= 900px) {
   .columns.history-item > div {
     flex-direction: row;
-    align-items: flex-start;
+    align-items: center; /* source vertically centres the text against the image */
     gap: 0; /* source gutter comes from column inner padding */
   }
 
@@ -518,142 +567,304 @@
   }
 }
 
-/* ===================== Variant: horizontal-teaser ===================== */
+/* ===================== Variant: horizontal-teaser =====================
+   "This product is used in the following processes" – white full-width
+   process cards (title | description | chevron) over a light-gray section
+   with a white hexagon top edge and a faint geometric line-network pattern
+   (same decorative artwork as the hero campaign variant). */
 
-/* full-bleed dark hero band: bg image + gradient overlay + left content */
+/* full-bleed light-gray patterned section; content kept above the decorative
+   layers via position/z-index */
 .columns-horizontal-teaser-wrapper {
+  position: relative;
+  z-index: 2;
   max-width: 100% !important;
   padding: 0 !important;
 }
 
-.columns.horizontal-teaser > div {
+.columns-container:has(.columns.horizontal-teaser) {
   position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  min-height: 100px;
-  padding: 42px 10px 80px;
+  background-color: rgb(230 231 232);
+
+  /* mobile: clear the ~90px hexagon band; desktop bumps this up in the 900px
+     block to clear the taller proportional band (source ~210px intro offset) */
+  padding: 110px 0 40px;
   overflow: hidden;
-  background-color: var(--dark-color);
-  color: var(--white);
 }
 
-/* background image layer */
-.columns.horizontal-teaser .columns-horizontal-teaser-bg {
+/* lift all real content above the decorative hexagon/geo layers */
+.columns-container:has(.columns.horizontal-teaser) > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* Decorative brand artwork (exact grace.com assets):
+   ::before = faint triangle line-network filling the whole section,
+   ::after  = white hexagon band along the top edge. The hex artwork is
+   hexagons-over-solid-white, so it is flipped vertically (scaleY) to put the
+   solid edge at the top (blending into the white page above) and the hexagons
+   hanging down into the gray section – matching the source. */
+.columns-container:has(.columns.horizontal-teaser)::before {
+  content: '';
   position: absolute;
   inset: 0;
   z-index: 0;
-  line-height: 0;
+  pointer-events: none;
+  background-image: url('./teaser-geo-lines.png');
+  background-repeat: no-repeat;
+  background-position: 50% 100%;
+  background-size: 100% auto;
+  transform: scaleX(-1); /* mirror so the denser artwork sits on the left (matches source) */
 }
 
-.columns.horizontal-teaser .columns-horizontal-teaser-bg picture,
-.columns.horizontal-teaser .columns-horizontal-teaser-bg img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: 50% 50%;
-}
-
-/* gradient overlay layer (mobile: vertical) */
-.columns.horizontal-teaser .columns-horizontal-teaser-overlay {
+.columns-container:has(.columns.horizontal-teaser)::after {
+  content: '';
   position: absolute;
-  inset: 0;
+  top: 0;
+  right: 0;
+  left: 0;
+
+  /* Mobile: a fixed-height band with background-size:cover keeps the hexagons
+     large (matching the source / hero campaign, which crop the wide artwork
+     rather than shrinking it). Desktop switches to the full-width proportional
+     fit in the media query below. */
+  height: 90px;
   z-index: 1;
-  background-image: linear-gradient(to bottom, rgb(0 0 0) 70%, rgb(0 0 0 / 0%) 100%);
-}
-
-/* content column */
-.columns.horizontal-teaser .columns-horizontal-teaser-content {
-  position: relative;
-  z-index: 2;
-  text-align: left;
-}
-
-.columns.horizontal-teaser .columns-horizontal-teaser-content h2 {
-  margin: 0 0 22.5px;
-  font-family: var(--heading-font-family);
-  font-size: 30px;
-  font-weight: 100;
-  line-height: 34.2px;
-  color: var(--white);
-}
-
-.columns.horizontal-teaser .columns-horizontal-teaser-content p {
-  margin: 0;
-  font-family: var(--heading-font-family);
-  font-size: 20px;
-  font-weight: 300;
-  line-height: 26px;
-  color: var(--white);
-}
-
-.columns.horizontal-teaser .columns-horizontal-teaser-content p:has(a) {
-  margin-top: 30px;
-}
-
-.columns.horizontal-teaser .columns-horizontal-teaser-content a:any-link {
-  display: inline-block;
-  box-sizing: border-box;
-  width: 100%;
-  padding: 13px;
-  background-color: var(--accent-color);
-  color: var(--text-color);
-  font-family: var(--heading-font-family);
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 14px;
-  text-align: center;
-  text-decoration: none;
-  border-radius: 0;
-  transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
-}
-
-.columns.horizontal-teaser .columns-horizontal-teaser-content a:hover {
-  background-color: var(--accent-color-hover);
-  color: var(--white);
-}
-
-@media (width >= 600px) {
-  .columns.horizontal-teaser > div {
-    padding: 68px 10px 30px;
-  }
+  pointer-events: none;
+  background-image: url('./teaser-hex-mask.png');
+  background-repeat: no-repeat;
+  background-position: 50% 100%;
+  background-size: cover;
+  transform: scale(-1, -1); /* vertical flip (solid edge on top) + horizontal mirror to match source */
 }
 
 @media (width >= 900px) {
-  .columns.horizontal-teaser > div {
-    justify-content: center;
-    padding: 68px 20px 30px;
+  .columns-container:has(.columns.horizontal-teaser) {
+    padding: 210px 0 60px;
   }
 
-  .columns.horizontal-teaser .columns-horizontal-teaser-overlay {
-    background-image: linear-gradient(to right, rgb(0 0 0) 0%, rgb(0 0 0 / 0%) 100%);
-  }
-
-  .columns.horizontal-teaser .columns-horizontal-teaser-content {
-    width: 50%;
-    max-width: 620px;
-  }
-
-  .columns.horizontal-teaser .columns-horizontal-teaser-content h2 {
-    margin-bottom: 31.5px;
-    font-size: 42px;
-    line-height: 45px;
-  }
-
-  .columns.horizontal-teaser .columns-horizontal-teaser-content p {
-    line-height: 34px;
-  }
-
-  .columns.horizontal-teaser .columns-horizontal-teaser-content a:any-link {
-    width: auto;
-    padding: 18px 30px;
+  .columns-container:has(.columns.horizontal-teaser)::after {
+    height: auto;
+    aspect-ratio: 13083 / 1372;
+    background-position: 50% 0;
+    background-size: 100% 100%;
   }
 }
 
-@media (width >= 1200px) {
-  .columns.horizontal-teaser > div {
-    padding: 68px max(20px, calc((100% - 1440px) / 2 + 100px)) 30px;
+/* intro line ("This product is used in the following processes:") –
+   source renders a small thin serif heading, not the large default h2 */
+.columns-container:has(.columns.horizontal-teaser) .default-content-wrapper h2 {
+  max-width: 1240px;
+  margin: 0 auto 25px;
+  padding: 0 20px;
+  font-family: var(--heading-font-family);
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 1.2;
+  color: var(--text-color);
+  text-align: center; /* mobile centered (source); desktop left-aligns below */
+}
+
+@media (width >= 900px) {
+  .columns-container:has(.columns.horizontal-teaser) .default-content-wrapper h2 {
+    text-align: left;
+  }
+}
+
+/* Mobile: swipeable single-card carousel (horizontal scroll-snap track).
+   All slides are equal height (align-items: stretch) so sliding is a pure
+   horizontal move with no height change – this is what makes it seamless,
+   matching the source (Owl carousel with equal-height items). No gap between
+   slides so a single card fills the viewport (no white edge of the next one). */
+.columns.horizontal-teaser {
+  box-sizing: border-box;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  overflow: auto hidden;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.columns.horizontal-teaser::-webkit-scrollbar {
+  display: none;
+}
+
+/* one process card – mobile stacks title, description, chevron, centered
+   vertically within the equal-height slide (matches source carousel slides) */
+.columns.horizontal-teaser .columns-horizontal-teaser-card {
+  flex: 0 0 100%;
+  scroll-snap-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* top-align content (source); no vertical centering */
+  gap: 12px;
+  padding: 40px 30px;
+  background-color: var(--white);
+  text-align: center;
+  cursor: pointer;
+  transition: box-shadow var(--transition-speed) ease;
+}
+
+
+/* keep DOM order (title, description, chevron) – a global columns rule sets
+   order on child cells, which would otherwise float the chevron to the top */
+.columns.horizontal-teaser .columns-horizontal-teaser-card > * {
+  order: 0;
+}
+
+/* carousel dots (mobile only) */
+.columns-horizontal-teaser-dots {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.columns-horizontal-teaser-dot {
+  width: 10px;
+  height: 10px;
+  padding: 0;
+  border: 1px solid var(--text-color);
+  border-radius: 50%;
+  background-color: transparent;
+  cursor: pointer;
+  transition: background-color var(--transition-speed) ease;
+}
+
+.columns-horizontal-teaser-dot.active {
+  background-color: var(--text-color);
+}
+
+/* hover: soft even glow around the card (source: 0 0 12px rgba(0,0,0,.2)) */
+.columns.horizontal-teaser .columns-horizontal-teaser-card:hover {
+  box-shadow: 0 0 12px rgb(0 0 0 / 20%);
+}
+
+/* hover: CTA turns Grace green (source .white-bkgd a:hover) */
+.columns.horizontal-teaser .columns-horizontal-teaser-card:hover .columns-horizontal-teaser-arrow {
+  color: rgb(39 133 60);
+}
+
+.columns.horizontal-teaser .columns-horizontal-teaser-card:hover .columns-horizontal-teaser-arrow-icon {
+  border-color: rgb(39 133 60);
+}
+
+/* title */
+.columns.horizontal-teaser .columns-horizontal-teaser-title {
+  font-family: var(--heading-font-family);
+  font-weight: 700;
+  color: var(--text-color);
+}
+
+.columns.horizontal-teaser .columns-horizontal-teaser-title p,
+.columns.horizontal-teaser .columns-horizontal-teaser-title h2,
+.columns.horizontal-teaser .columns-horizontal-teaser-title h3 {
+  margin: 0;
+  font-family: var(--heading-font-family);
+  font-size: 16px; /* title: 16px mobile, 18px desktop (in the 900px block) */
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--text-color);
+}
+
+/* description – 14px at all breakpoints */
+.columns.horizontal-teaser .columns-horizontal-teaser-desc p {
+  margin: 0 0 12px;
+  font-family: var(--heading-font-family);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--text-color);
+}
+
+.columns.horizontal-teaser .columns-horizontal-teaser-desc p:last-child {
+  margin-bottom: 0;
+}
+
+/* CTA – mobile shows "Learn More ›" centered near the card bottom (source),
+   desktop shows the chevron only (label hidden). margin-top:auto pushes it to
+   the bottom of the flex-column card while the title/description stay on top. */
+.columns.horizontal-teaser .columns-horizontal-teaser-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: auto;
+  font-family: var(--body-font-family);
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--text-color);
+}
+
+.columns.horizontal-teaser .columns-horizontal-teaser-arrow-icon {
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid var(--text-color);
+  border-bottom: 2px solid var(--text-color);
+  transform: rotate(-45deg);
+}
+
+/* Desktop: stacked full-width rows (no carousel); title | description | chevron */
+@media (width >= 900px) {
+  .columns.horizontal-teaser {
+    flex-direction: column;
+    gap: 40px;
+    overflow-x: visible;
+    scroll-snap-type: none;
+  }
+
+  .columns.horizontal-teaser .columns-horizontal-teaser-card {
+    flex: none;
+    display: grid;
+    grid-template-columns: 300px 1fr 40px;
+    align-items: center;
+    gap: 40px;
+    padding: 20px 50px;
+    text-align: left; /* description left-aligned (source); title centered below */
+
+    /* uniform height across all cards, sized close to the source (~148px) */
+    min-height: 148px;
+  }
+
+  /* desktop typography: title 18px; description 14px, tighter line-height so
+     the card matches the source's compact ~148px height */
+  .columns.horizontal-teaser .columns-horizontal-teaser-title p,
+  .columns.horizontal-teaser .columns-horizontal-teaser-title h2,
+  .columns.horizontal-teaser .columns-horizontal-teaser-title h3 {
+    font-size: 18px;
+    line-height: 1.3;
+  }
+
+  .columns.horizontal-teaser .columns-horizontal-teaser-desc p {
+    line-height: 1.5;
+  }
+
+  .columns.horizontal-teaser .columns-horizontal-teaser-title {
+    text-align: center;
+  }
+
+  /* desktop: chevron only (hide the "Learn More" label), centered in its column */
+  .columns.horizontal-teaser .columns-horizontal-teaser-arrow {
+    justify-self: center;
+    margin-top: 0;
+  }
+
+  .columns.horizontal-teaser .columns-horizontal-teaser-arrow-label {
+    display: none;
+  }
+
+  .columns.horizontal-teaser .columns-horizontal-teaser-arrow-icon {
+    width: 14px;
+    height: 14px;
+  }
+
+  /* dots are carousel-only */
+  .columns-horizontal-teaser-dots {
+    display: none;
   }
 }
 

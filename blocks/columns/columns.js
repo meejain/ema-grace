@@ -138,22 +138,101 @@ function decorateBrochurePromo(block) {
   });
 }
 
+/* Mobile: the source presents the process cards as a swipeable single-card
+   carousel. CSS turns the block into a horizontal scroll-snap track below the
+   900px breakpoint; this adds dot pagination that stays in sync with scroll
+   and is hidden via CSS on desktop (where the layout reverts to a stack). */
+function setupTeaserCarousel(block) {
+  const cards = [...block.children];
+  if (cards.length <= 1) return;
+
+  const dots = document.createElement('div');
+  dots.className = 'columns-horizontal-teaser-dots';
+  dots.setAttribute('role', 'tablist');
+
+  cards.forEach((card, i) => {
+    const dot = document.createElement('button');
+    dot.type = 'button';
+    dot.className = 'columns-horizontal-teaser-dot';
+    dot.setAttribute('role', 'tab');
+    dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
+    dot.addEventListener('click', () => {
+      card.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    });
+    dots.append(dot);
+  });
+  block.after(dots);
+
+  /* All slides are equal height (CSS), so sliding is a pure horizontal move
+     with no height change – this is what makes the source carousel seamless.
+     The dots just track which slide is in view. */
+  const setActive = (idx) => {
+    [...dots.children].forEach((dot, i) => {
+      const active = i === idx;
+      dot.classList.toggle('active', active);
+      dot.setAttribute('aria-selected', active ? 'true' : 'false');
+    });
+  };
+  setActive(0);
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting && entry.intersectionRatio >= 0.6) {
+        setActive(cards.indexOf(entry.target));
+      }
+    });
+  }, { root: block, threshold: 0.6 });
+  cards.forEach((card) => observer.observe(card));
+}
+
+/* Horizontal teaser = "used in the following processes" process cards.
+   Each block row is one card: cell 0 = title, cell 1 = description (which
+   may contain a "Learn More" link). Cards render as full-width white rows
+   over a light-gray hexagon/geo-line patterned background; the whole card is
+   clickable when the description carries a link, and a chevron is appended. */
 function decorateHorizontalTeaser(block) {
-  const row = block.querySelector(':scope > div');
-  if (!row) return;
-  const cols = [...row.children];
-  const imgCol = cols.find((col) => col.querySelector('picture'));
-  const textCol = cols.find((col) => !col.querySelector('picture'));
-  if (imgCol) {
-    const pic = imgCol.querySelector('picture');
-    const anchor = pic.closest('a');
-    if (anchor && anchor.childElementCount === 1) anchor.replaceWith(pic);
-    imgCol.classList.add('columns-horizontal-teaser-bg');
-  }
-  const overlay = document.createElement('div');
-  overlay.className = 'columns-horizontal-teaser-overlay';
-  row.append(overlay);
-  if (textCol) textCol.classList.add('columns-horizontal-teaser-content');
+  [...block.children].forEach((row) => {
+    const cells = [...row.children];
+    const titleCell = cells[0];
+    const bodyCell = cells[1] || cells[0];
+    if (titleCell) titleCell.classList.add('columns-horizontal-teaser-title');
+    if (bodyCell) bodyCell.classList.add('columns-horizontal-teaser-desc');
+
+    row.classList.add('columns-horizontal-teaser-card');
+
+    /* the whole card links to the destination if the body has a link */
+    const link = bodyCell ? bodyCell.querySelector('a') : null;
+    if (link) {
+      row.dataset.href = link.getAttribute('href');
+      row.setAttribute('role', 'link');
+      row.tabIndex = 0;
+      const go = () => { window.location.href = row.dataset.href; };
+      row.addEventListener('click', go);
+      row.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') go();
+      });
+      /* keep the anchor out of the flow – source shows only a chevron */
+      const wrapper = link.closest('p');
+      if (wrapper && wrapper.textContent.trim() === link.textContent.trim()) wrapper.remove();
+      else link.remove();
+    }
+
+    /* CTA: "Learn More" label + chevron. On desktop CSS hides the label and
+       shows just the chevron on the right; on mobile the source shows the
+       full "Learn More ›" centered below the copy. */
+    const cta = document.createElement('span');
+    cta.className = 'columns-horizontal-teaser-arrow';
+    const ctaLabel = document.createElement('span');
+    ctaLabel.className = 'columns-horizontal-teaser-arrow-label';
+    ctaLabel.textContent = 'Learn More';
+    const ctaIcon = document.createElement('span');
+    ctaIcon.className = 'columns-horizontal-teaser-arrow-icon';
+    ctaIcon.setAttribute('aria-hidden', 'true');
+    cta.append(ctaLabel, ctaIcon);
+    row.append(cta);
+  });
+
+  setupTeaserCarousel(block);
 }
 
 function decorateImageTeaser(block) {
@@ -229,6 +308,15 @@ function decorateChecklist(block) {
     }
     const firstP = mediaCol.querySelector('p');
     if (firstP) firstP.classList.add('columns-checklist-quote');
+    /* wrap the quote + citation paragraphs in a bordered container (source
+       draws blue rules above and below this group, separate from the image) */
+    const paragraphs = [...mediaCol.querySelectorAll(':scope > p')];
+    if (paragraphs.length) {
+      const quoteContainer = document.createElement('div');
+      quoteContainer.className = 'columns-checklist-quote-container';
+      paragraphs[0].before(quoteContainer);
+      paragraphs.forEach((p) => quoteContainer.append(p));
+    }
   }
   const listCol = block.querySelector('.columns-checklist-list-col');
   if (listCol) {
