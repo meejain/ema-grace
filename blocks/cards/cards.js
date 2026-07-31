@@ -44,7 +44,64 @@ function setupCarousel(ul) {
   slides.forEach((slide) => observer.observe(slide));
 }
 
+/* people variant: each authored card is a single cell holding an image (link),
+   a paragraph (with a bold inline phrase) and a CTA link. Split that into an
+   image cell + a body cell (paragraph + centered CTA), one <li> per card.
+   Flat, unboxed, centered layout — matches grace.com homepage "people" section. */
+function decoratePeople(block) {
+  const ul = document.createElement('ul');
+  const cells = [...block.querySelectorAll(':scope > div > div')];
+  cells.forEach((cell) => {
+    if (!cell.querySelector('picture, img')) return;
+    const li = document.createElement('li');
+
+    const imageDiv = document.createElement('div');
+    imageDiv.className = 'cards-card-image';
+    // the image (its wrapping link, if any) becomes the image cell
+    const pic = cell.querySelector('picture') || cell.querySelector('img');
+    const imgNode = pic.closest('a') || pic;
+    imageDiv.append(imgNode);
+
+    const bodyDiv = document.createElement('div');
+    bodyDiv.className = 'cards-card-body';
+    // remaining nodes (paragraph + CTA link) go to the body
+    [...cell.childNodes].forEach((node) => {
+      if (node.nodeType === Node.TEXT_NODE && !node.textContent.trim()) return;
+      bodyDiv.append(node);
+    });
+
+    // the CTA link may have been auto-wrapped into the paragraph alongside the
+    // body copy; lift a trailing text link out to its own line (matches source)
+    const para = bodyDiv.querySelector('p');
+    if (para) {
+      const trailingLink = para.querySelector(':scope > a:last-child:not(:has(img))');
+      if (trailingLink && para.lastElementChild === trailingLink) {
+        bodyDiv.append(trailingLink);
+      }
+    }
+
+    li.append(imageDiv, bodyDiv);
+    ul.append(li);
+  });
+
+  ul.querySelectorAll('picture > img').forEach((img) => {
+    const optimizedPic = createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }]);
+    img.closest('picture').replaceWith(optimizedPic);
+  });
+  // CTA links are plain text CTAs, not EDS buttons
+  ul.querySelectorAll('.cards-card-body a.button').forEach((a) => {
+    a.classList.remove('button', 'primary', 'secondary', 'accent');
+    const wrapper = a.closest('.button-container');
+    if (wrapper) wrapper.replaceWith(a);
+  });
+  block.replaceChildren(ul);
+}
+
 export default function decorate(block) {
+  if (block.classList.contains('people')) {
+    decoratePeople(block);
+    return;
+  }
   /* change to ul, li */
   const ul = document.createElement('ul');
   [...block.children].forEach((row) => {

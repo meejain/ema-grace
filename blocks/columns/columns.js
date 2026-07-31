@@ -5,7 +5,7 @@
  * their own decorate function keyed by the variant class on the block.
  */
 
-const VARIANTS = ['app-promo', 'brochure-promo', 'checklist', 'history-item', 'horizontal-teaser', 'image-left', 'image-right', 'image-teaser', 'image-text-list', 'location-detail', 'people', 'profile-detail'];
+const VARIANTS = ['app-promo', 'brochure-promo', 'checklist', 'history-item', 'horizontal-teaser', 'image-left', 'image-right', 'image-teaser', 'location-detail', 'profile-detail'];
 
 function getVariant(block) {
   return VARIANTS.find((v) => block.classList.contains(v)) || null;
@@ -54,10 +54,6 @@ function decorateImageRight(block) {
     const imgCol = row.querySelector('.columns-image-right-img-col');
     if (imgCol && imgCol !== row.lastElementChild) row.appendChild(imgCol);
   });
-}
-
-function decorateImageTextList(block) {
-  tagImageTextCols(block, 'columns-image-text-list');
 }
 
 function decorateLocationDetail(block) {
@@ -391,26 +387,6 @@ function decorateChecklist(block) {
   }
 }
 
-function decoratePeople(block) {
-  [...block.children].forEach((row) => {
-    [...row.children].forEach((col) => {
-      const imgLink = col.querySelector('a > img, a > picture');
-      const pic = col.querySelector('picture') || (imgLink ? imgLink.parentElement : null);
-      if (!pic) return;
-      const imgWrapper = document.createElement('div');
-      imgWrapper.classList.add('columns-people-img-col');
-      const imgEl = pic.tagName === 'A' ? pic : pic.closest('a') || pic;
-      imgWrapper.appendChild(imgEl.cloneNode(true));
-      if (imgEl.parentElement) imgEl.remove();
-      const textWrapper = document.createElement('div');
-      textWrapper.classList.add('columns-people-text-col');
-      while (col.firstChild) textWrapper.appendChild(col.firstChild);
-      col.appendChild(imgWrapper);
-      col.appendChild(textWrapper);
-    });
-  });
-}
-
 const DECORATORS = {
   'app-promo': decorateAppPromo,
   'brochure-promo': decorateBrochurePromo,
@@ -420,9 +396,7 @@ const DECORATORS = {
   'image-left': decorateImageLeft,
   'image-right': decorateImageRight,
   'image-teaser': decorateImageTeaser,
-  'image-text-list': decorateImageTextList,
   'location-detail': decorateLocationDetail,
-  people: decoratePeople,
   'profile-detail': decorateProfileDetail,
 };
 

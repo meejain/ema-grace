@@ -483,7 +483,8 @@
   padding: 0;
 }
 
-/* Eyebrow / category label — Roboto 10px weight 700, uppercase */
+/* Eyebrow / category label — Roboto 10px weight 700, uppercase, green
+   (source .featured-blog-cmp .tag { color:#27853c }). */
 .cards.featured-content .cards-card-body strong:first-child {
   display: block;
   font-family: var(--body-font-family);
@@ -491,18 +492,20 @@
   font-weight: 700;
   letter-spacing: 0.5px;
   line-height: 1.3;
-  color: var(--text-color);
+  text-transform: uppercase;
+  color: var(--link-hover-color);
   margin-bottom: 12px;
 }
 
-/* Title — Roboto (sans-serif) weight 400, black, generous line spacing.
-   Larger on mobile (carousel) to match the source's single-card emphasis. */
+/* Title — Roboto Slab weight 300, black (source /insights/ card title:
+   Roboto Slab 20px/300, line-height 1.2). Larger on mobile (carousel) to
+   match the source's single-card emphasis. */
 .cards.featured-content .cards-card-body a:not(strong a) {
   display: block;
-  font-family: var(--body-font-family);
-  font-size: 28px;
-  font-weight: 400;
-  line-height: 1.4;
+  font-family: var(--heading-font-family);
+  font-size: 24px;
+  font-weight: 300;
+  line-height: 1.2;
   color: var(--text-color);
   text-decoration: none;
   margin-bottom: 15px;
@@ -576,10 +579,10 @@
     aspect-ratio: 1 / 1;
   }
 
-  /* Title shrinks back to the grid size */
+  /* Title shrinks back to the grid size (source /insights/: 20px / 1.2) */
   .cards.featured-content .cards-card-body a:not(strong a) {
     font-size: 20px;
-    line-height: 1.5;
+    line-height: 1.2;
   }
 
   /* Hide carousel dots outside mobile */
@@ -905,6 +908,13 @@
 }
 
 /* ===================== Variant: insight ===================== */
+
+/* Section sits on a light-grey band (source homepage #blogs .light-gray-bkgd
+   { background-color:#e6e7e8 }). */
+.cards-container:has(.cards.insight) {
+  background-color: var(--light-color);
+  padding: 45px 0;
+}
 
 /* Section heading (source: centered, 24px mobile / 30px desktop). */
 .cards-container:has(.cards.insight) h2 {
@@ -1497,5 +1507,121 @@
 
   .cards.solution-grid .cards-card-body p {
     line-height: 1.7; /* 23.8px */
+  }
+}
+
+/* ===================== Variant: people ===================== */
+
+/* source section sits flush (0 margin/padding), unlike the global
+   main > .section 50/80px vertical margin. Scope the reset to this block only
+   so other cards-container sections keep their intended spacing. */
+main > .section.cards-container:has(.cards.people) {
+  margin: 0;
+  padding: 0;
+}
+
+/* Flat, unboxed people cards — image, centered paragraph (with a bold inline
+   phrase) and a centered CTA link. Source: grace.com homepage "We compete with
+   our chemistry..." section. No border/shadow/radius; transparent background.
+   Mobile-first: cards stack full-width; 2-up side-by-side at >=900px. */
+.cards.people > ul {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cards.people > ul > li {
+  display: flex;
+  flex-direction: column;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  background: none;
+  padding: 0 10px; /* source mobile card padding */
+  text-align: center;
+}
+
+.cards.people .cards-card-image {
+  line-height: 0;
+}
+
+.cards.people .cards-card-image a,
+.cards.people .cards-card-image picture {
+  display: block;
+}
+
+/* source displays the full uncropped image (natural 600x265 => 2.264:1,
+   renders 560x247 in a 600px card). Match that ratio so nothing is cropped. */
+.cards.people .cards-card-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 600 / 265;
+  object-fit: cover;
+}
+
+.cards.people .cards-card-body {
+  margin: 0; /* reset base .cards-card-body 16px margin so text spans the same width as the image */
+  padding: 0;
+  text-align: center;
+}
+
+.cards.people .cards-card-body p {
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m); /* 14px */
+  font-weight: 400;
+  line-height: 1.3; /* 18.2px mobile */
+  color: var(--text-color);
+  text-align: center;
+  margin: 16px 0 0;
+}
+
+/* the bold inline phrase ("we win with our people,") */
+.cards.people .cards-card-body p strong {
+  font-weight: 700;
+}
+
+/* CTA link — Roboto Slab 14px/600, black, no underline, with a ">" chevron */
+.cards.people .cards-card-body a:any-link {
+  display: block;
+  margin-top: 18px;
+  font-family: var(--heading-font-family);
+  font-size: var(--body-font-size-m);
+  font-weight: 600;
+  color: var(--text-color);
+  text-align: center;
+  text-decoration: none;
+  transition: color var(--transition-speed) ease;
+}
+
+.cards.people .cards-card-body a:not(:has(img))::after {
+  content: ' \203A';
+  font-size: 1.2em;
+}
+
+.cards.people .cards-card-body a:hover,
+.cards.people .cards-card-body a:focus-visible {
+  color: var(--link-hover-color);
+}
+
+@media (width >= 900px) {
+  /* two cards side-by-side, each 50%, no gap (source .row) */
+  .cards.people > ul {
+    flex-direction: row;
+    gap: 0;
+  }
+
+  .cards.people > ul > li {
+    flex: 1 1 50%;
+    max-width: 50%;
+    padding: 0 20px 20px; /* source desktop card padding */
+  }
+
+  .cards.people .cards-card-body p {
+    line-height: 1.7; /* 23.8px desktop */
+    margin-top: 21px;
   }
 }
