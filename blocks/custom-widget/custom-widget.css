@@ -497,18 +497,24 @@
   margin: 0 0 var(--spacing-m);
 }
 
-/* Search bar */
+/* Search bar — source .search-bar is centered with a large bottom gap. */
 .custom-widget-search-filter-bar {
   width: 100%;
+  margin-bottom: 60px; /* source: 6rem */
+  text-align: center;
 }
 
-/* source: 10px vertical padding + 1px solid black underline */
+/* source: 10px vertical padding + 1px solid black underline. The form is an
+   inline-block that is centered by the bar's text-align (full width on mobile,
+   half width on desktop — see media query). */
 .custom-widget-search-filter-form {
   position: relative;
-  display: flex;
+  display: inline-flex;
   align-items: center;
+  width: 100%;
   padding: 10px 0;
   border-bottom: 1px solid rgb(0 0 0);
+  text-align: left;
 }
 
 .custom-widget-search-filter-input {
@@ -559,47 +565,34 @@
   width: 100%;
 }
 
+/* ---- Mobile-first: chips are left-aligned, mixed-case block links inside a
+   light-gray dropdown panel (source .tag-dropdown .dropdown-content a). ---- */
 .custom-widget-search-filter-all,
 .custom-widget-search-filter-tag {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 60px;
-  padding: 0 10px;
+  display: block;
+  width: 100%;
+  min-height: 0;
+  padding: 10px; /* source: 1rem */
   border: 0;
   margin: 0;
+  background-color: transparent;
+  color: var(--text-color);
   font-family: var(--body-font-family);
-  font-size: var(--body-font-size-xs);
-  font-weight: 700;
+  font-size: 14px;
+  font-weight: 400;
   line-height: normal;
-  text-align: center;
-  text-transform: uppercase;
+  text-align: left;
+  text-transform: none;
   cursor: pointer;
+
+  /* Source has no transition — the highlight snaps instantly. */
+  transition: none;
 }
 
-/* On mobile the "All" chip is part of the collapsible list, hidden until the
-   "Filter Articles" toggle is opened (source grace.com/insights/ @390px). */
-.custom-widget-search-filter-all {
-  display: none;
-  background-color: var(--cwsf-tag-bg);
-  color: var(--cwsf-tag-color);
-}
-
-.custom-widget-search-filter-all.active {
-  background-color: var(--cwsf-tag-active-bg);
-  color: var(--cwsf-tag-active-color);
-  box-shadow: var(--cwsf-shadow);
-}
-
-.custom-widget-search-filter-tag {
-  background-color: var(--cwsf-tag-bg);
-  color: var(--cwsf-tag-color);
-}
-
+/* The active item is bold on mobile (source .dropdown-content a.active). */
+.custom-widget-search-filter-all.active,
 .custom-widget-search-filter-tag.active {
-  background-color: var(--cwsf-tag-active-bg);
-  color: var(--cwsf-tag-active-color);
-  box-shadow: var(--cwsf-shadow);
+  font-weight: 700;
 }
 
 /* Mobile expand/collapse toggle button ("Filter Articles"): transparent,
@@ -609,6 +602,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  order: 0;
   min-height: 42px;
   padding: 14px 15px;
   border: 1px solid rgb(0 0 0);
@@ -633,12 +627,26 @@
   transform: rotate(180deg);
 }
 
-.custom-widget-search-filter-tag-list {
+/* The "All" chip and tag list are hidden until the toggle opens the dropdown.
+   Order places them after the toggle so the panel drops down below it, with
+   "All" as the first item (source order). */
+.custom-widget-search-filter-all {
   display: none;
-  flex-direction: column;
+  order: 1;
+  background-color: rgb(230 231 232); /* source dropdown gray #e6e7e8 */
 }
 
-.custom-widget-search-filter-tag-bar.is-open .custom-widget-search-filter-all,
+.custom-widget-search-filter-tag-list {
+  display: none;
+  order: 2;
+  flex-direction: column;
+  background-color: rgb(230 231 232); /* source dropdown gray #e6e7e8 */
+}
+
+.custom-widget-search-filter-tag-bar.is-open .custom-widget-search-filter-all {
+  display: block;
+}
+
 .custom-widget-search-filter-tag-bar.is-open .custom-widget-search-filter-tag-list {
   display: flex;
 }
@@ -657,24 +665,66 @@
     display: flex;
     flex: 10 1 0;
     flex-flow: row nowrap;
+    order: 0; /* reset mobile ordering */
+    background-color: transparent;
   }
 
   .custom-widget-search-filter-all {
     display: flex;
     flex: 1 1 0;
+    order: 0;
+  }
+
+  /* Restore the black uppercase box row (source desktop .tag-bar button). */
+  .custom-widget-search-filter-all,
+  .custom-widget-search-filter-tag {
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    min-height: 84px;
+    padding: 0 10px;
+    background-color: var(--cwsf-tag-bg);
+    color: var(--cwsf-tag-color);
+    font-size: var(--body-font-size-xs);
+    font-weight: 700;
+    text-align: center;
+    text-transform: uppercase;
+
+    /* White separator between chips (source: border-right 0.5px solid #fff). */
+    border-right: 0.5px solid rgb(255 255 255);
   }
 
   .custom-widget-search-filter-tag {
     flex: 1 1 0;
   }
 
-  .custom-widget-search-filter-all,
-  .custom-widget-search-filter-tag {
-    min-height: 84px;
+  /* Last chip in the row has no trailing separator (source :last-child). */
+  .custom-widget-search-filter-tag:last-child {
+    border-right: 0;
+  }
+
+  /* Desktop hover/focus/active: white bg + black text + shadow (snaps, no
+     transition), matching source .tag-bar button:hover, :focus, .active. */
+  .custom-widget-search-filter-all:hover,
+  .custom-widget-search-filter-all:focus,
+  .custom-widget-search-filter-all.active,
+  .custom-widget-search-filter-tag:hover,
+  .custom-widget-search-filter-tag:focus,
+  .custom-widget-search-filter-tag.active {
+    background-color: var(--cwsf-tag-active-bg);
+    color: var(--cwsf-tag-active-color);
+    font-weight: 700;
+    box-shadow: var(--cwsf-shadow);
   }
 
   .custom-widget-search-filter-input {
     font-size: 30px; /* source .search-list input desktop size */
+  }
+
+  /* Desktop: the search form is a centered half-width field (source
+     .search-bar .search-form { width: 50%; display: inline-block }). */
+  .custom-widget-search-filter-form {
+    width: 50%;
   }
 }
 
