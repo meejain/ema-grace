@@ -235,6 +235,50 @@ function decorateHorizontalTeaser(block) {
   setupTeaserCarousel(block);
 }
 
+/* Mobile: the source presents the insight cards as a swipeable single-card
+   carousel (Owl carousel). CSS turns the card row into a horizontal scroll-snap
+   track below 900px; this adds dot pagination that tracks the scroll position
+   and is hidden via CSS on desktop (where the layout reverts to a stack). */
+function setupImageTeaserCarousel(row) {
+  const cards = [...row.children].filter((c) => c.classList.contains('columns-image-teaser-card'));
+  if (cards.length <= 1) return;
+
+  const dots = document.createElement('div');
+  dots.className = 'columns-image-teaser-dots';
+  dots.setAttribute('role', 'tablist');
+
+  cards.forEach((card, i) => {
+    const dot = document.createElement('button');
+    dot.type = 'button';
+    dot.className = 'columns-image-teaser-dot';
+    dot.setAttribute('role', 'tab');
+    dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
+    dot.addEventListener('click', () => {
+      card.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    });
+    dots.append(dot);
+  });
+  row.after(dots);
+
+  const setActive = (idx) => {
+    [...dots.children].forEach((dot, i) => {
+      const active = i === idx;
+      dot.classList.toggle('active', active);
+      dot.setAttribute('aria-selected', active ? 'true' : 'false');
+    });
+  };
+  setActive(0);
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting && entry.intersectionRatio >= 0.6) {
+        setActive(cards.indexOf(entry.target));
+      }
+    });
+  }, { root: row, threshold: 0.6 });
+  cards.forEach((card) => observer.observe(card));
+}
+
 function decorateImageTeaser(block) {
   [...block.children].forEach((row) => {
     [...row.children].forEach((col) => {
@@ -248,18 +292,31 @@ function decorateImageTeaser(block) {
       imgWrapper.append(pic.cloneNode(true));
 
       const heading = col.querySelector('h1, h2, h3, h4, h5, h6');
+      const overlay = document.createElement('div');
+      overlay.classList.add('columns-image-teaser-overlay');
+      imgWrapper.append(overlay);
+
+      // desktop title: white, overlaid on the (small) image
       if (heading) {
         const title = document.createElement('p');
         title.classList.add('columns-image-teaser-title');
         title.textContent = heading.textContent;
         imgWrapper.append(title);
       }
-      const overlay = document.createElement('div');
-      overlay.classList.add('columns-image-teaser-overlay');
-      imgWrapper.append(overlay);
 
       const body = document.createElement('div');
       body.classList.add('columns-image-teaser-body');
+
+      // mobile title: the source overlays the title + caption + "Learn More"
+      // together on the image, so the body carries its own title (shown only
+      // on mobile; the desktop title above is hidden there).
+      if (heading) {
+        const mobileTitle = document.createElement('p');
+        mobileTitle.classList.add('columns-image-teaser-title-mobile');
+        mobileTitle.textContent = heading.textContent;
+        body.append(mobileTitle);
+      }
+
       [...col.querySelectorAll('p')].forEach((p) => {
         if (p.querySelector('picture')) return;
         if (p.querySelector('a') && !p.textContent.replace(p.querySelector('a').textContent, '').trim()) return;
@@ -269,10 +326,17 @@ function decorateImageTeaser(block) {
         caption.innerHTML = p.innerHTML;
         body.append(caption);
       });
+
+      // mobile CTA: "Learn More >" text, shown over the image (mobile only)
       const cta = document.createElement('span');
       cta.classList.add('columns-image-teaser-cta');
       cta.textContent = 'Learn More';
       body.append(cta);
+
+      // desktop CTA: large chevron on the far right (no "Learn More" text)
+      const chevron = document.createElement('span');
+      chevron.classList.add('columns-image-teaser-chevron');
+      chevron.setAttribute('aria-hidden', 'true');
 
       col.textContent = '';
       col.classList.add('columns-image-teaser-card');
@@ -280,12 +344,14 @@ function decorateImageTeaser(block) {
         const wrap = document.createElement('a');
         wrap.href = href;
         wrap.setAttribute('aria-label', heading ? heading.textContent : 'Read more');
-        wrap.append(imgWrapper, body);
+        wrap.append(imgWrapper, body, chevron);
         col.append(wrap);
       } else {
-        col.append(imgWrapper, body);
+        col.append(imgWrapper, body, chevron);
       }
     });
+
+    setupImageTeaserCarousel(row);
   });
 }
 
