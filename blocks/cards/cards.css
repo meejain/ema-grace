@@ -1512,14 +1512,6 @@
 
 /* ===================== Variant: people ===================== */
 
-/* source section sits flush (0 margin/padding), unlike the global
-   main > .section 50/80px vertical margin. Scope the reset to this block only
-   so other cards-container sections keep their intended spacing. */
-main > .section.cards-container:has(.cards.people) {
-  margin: 0;
-  padding: 0;
-}
-
 /* Flat, unboxed people cards — image, centered paragraph (with a bold inline
    phrase) and a centered CTA link. Source: grace.com homepage "We compete with
    our chemistry..." section. No border/shadow/radius; transparent background.
