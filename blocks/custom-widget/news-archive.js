@@ -25,11 +25,14 @@ export default function decorate(block) {
     const dt = document.createElement('dt');
     dt.className = 'custom-widget-news-archive-heading';
 
+    // First (latest) year is expanded by default, matching grace.com.
+    const openByDefault = index === 0;
+
     const button = document.createElement('button');
     button.type = 'button';
     button.id = btnId;
     button.className = 'custom-widget-news-archive-btn';
-    button.setAttribute('aria-expanded', 'false');
+    button.setAttribute('aria-expanded', String(openByDefault));
     button.setAttribute('aria-controls', bodyId);
 
     const label = document.createElement('span');
@@ -49,7 +52,7 @@ export default function decorate(block) {
     dd.className = 'custom-widget-news-archive-body';
     dd.setAttribute('role', 'region');
     dd.setAttribute('aria-labelledby', btnId);
-    dd.hidden = true;
+    dd.hidden = !openByDefault;
     if (listCell) {
       dd.append(...listCell.childNodes);
     }

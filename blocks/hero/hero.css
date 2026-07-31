@@ -349,9 +349,10 @@
   /* Banner stays short; keep it vertically centered and mirror the header nav
      container at desktop (max-width 1240, no side padding) so the breadcrumb
      and title align with the Grace logo at every viewport >= 900px. Border-box
-     so the 178px total height matches grace.com (not 178 + padding). */
+     so the total height matches grace.com. Source renders the banner hero at a
+     fixed 247.5px tall (background-size: cover) at desktop. */
   .hero.banner {
-    min-height: 178px;
+    min-height: 247.5px;
     padding: 30px 0;
     box-sizing: border-box;
   }

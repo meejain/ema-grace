@@ -10,7 +10,20 @@ import {
   loadSection,
   loadSections,
   loadCSS,
+  getMetadata,
 } from './aem.js';
+
+// Default content for the metadata-driven "Contact Us" sticky widget.
+// Authors opt in per page via a `contactus` metadata flag; the heading,
+// tagline and CTA links can be overridden with `contactus-*` metadata.
+const CONTACT_STICKY_DEFAULTS = {
+  heading: 'Contact Us',
+  tagline: 'Talk to our experts to see how we can best help your business',
+  links: [
+    { label: 'Product and service inquiries', href: '/forms/contact-us-product-and-services/' },
+    { label: 'Non-product related inquiries', href: '/forms/contact-us-corporate/' },
+  ],
+};
 
 /**
  * Builds hero block and prepends to main in a new section.
@@ -29,6 +42,44 @@ function buildHeroBlock(main) {
     section.append(buildBlock('hero', { elems: [picture, h1] }));
     main.prepend(section);
   }
+}
+
+/**
+ * Builds the metadata-driven "Contact Us" sticky widget and inserts it right
+ * after the hero (or at the top of main) when the page metadata opts in via a
+ * `contactus` flag. Content defaults to the standard Contact Us copy but can be
+ * overridden with `contactus-heading` / `contactus-tagline` metadata.
+ * @param {Element} main The container element
+ */
+function buildContactStickyBlock(main) {
+  // Only inject into the real page main. Fragments (header/footer) run through
+  // decorateMain on a detached main and must not receive the widget.
+  if (!document.body.contains(main)) return;
+  const flag = getMetadata('contactus').trim().toLowerCase();
+  if (!flag || ['false', 'no', '0', 'off'].includes(flag)) return;
+  if (main.querySelector('.custom-widget.contact-sticky')) return;
+
+  const heading = getMetadata('contactus-heading').trim() || CONTACT_STICKY_DEFAULTS.heading;
+  const tagline = getMetadata('contactus-tagline').trim() || CONTACT_STICKY_DEFAULTS.tagline;
+  const list = document.createElement('ul');
+  CONTACT_STICKY_DEFAULTS.links.forEach(({ label, href }) => {
+    const li = document.createElement('li');
+    const a = document.createElement('a');
+    a.href = href;
+    a.textContent = label;
+    li.append(a);
+    list.append(li);
+  });
+
+  const block = buildBlock('custom-widget', [[heading], [tagline], [{ elems: [list] }]]);
+  block.classList.add('contact-sticky');
+  const section = document.createElement('div');
+  section.append(block);
+
+  const hero = main.querySelector('.hero, [class*="hero"]');
+  const heroSection = hero ? hero.closest('main > div') : null;
+  if (heroSection) heroSection.after(section);
+  else main.prepend(section);
 }
 
 /**
@@ -68,6 +119,7 @@ function buildAutoBlocks(main) {
     }
 
     buildHeroBlock(main);
+    buildContactStickyBlock(main);
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('Auto Blocking failed', error);

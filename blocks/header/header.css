@@ -556,8 +556,18 @@ header nav[aria-expanded='true'] .nav-sections .default-content-wrapper {
     display: flex;
   }
 
+  /* Fixed header (matches grace.com nav-cmp): both rows are pinned at the top of
+     the viewport at all times. The utility row does NOT slide up on scroll —
+     instead, once scrolled past the threshold the JS adds `.scrolled`, which
+     snaps the utility row to display:none and shrinks the nav row + logo. */
   header .nav-wrapper {
-    position: relative;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1000;
+    background-color: var(--background-color);
+    transition: all 0.3s ease;
   }
 
   header nav {
@@ -568,6 +578,29 @@ header nav[aria-expanded='true'] .nav-sections .default-content-wrapper {
     max-width: 1280px;
     padding: 0 20px;
     height: 80px;
+    transition: height 0.3s ease;
+  }
+
+  /* Reserve space for the fixed header so page content starts below it (util 40
+     + nav 80 = 120px). */
+  header.header-wrapper {
+    display: block;
+    height: 120px;
+  }
+
+  /* === Scrolled/collapsed state === */
+  header .nav-wrapper.scrolled .nav-utility {
+    display: none;
+  }
+
+  header .nav-wrapper.scrolled nav {
+    height: 55px;
+  }
+
+  /* Logo shrinks with the bar (source swaps to a ~130x55 "on scroll" logo). */
+  header .nav-wrapper.scrolled nav .nav-brand img {
+    width: 120px;
+    transition: width 0.3s ease;
   }
 
   /* Restore full-size logo (mobile base shrinks it to 108x36) */

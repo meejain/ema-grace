@@ -564,6 +564,19 @@ export default async function decorate(block) {
     closeAllDropdowns(navSections);
   });
 
+  // Sticky/shrink on scroll (source parity, grace.com nav-cmp): the fixed header
+  // shows both rows at the top; once scrolled past the utility-bar height the
+  // wrapper gets a `scrolled` class that hides the utility row (display:none) and
+  // shrinks the main nav row + logo. It never gradually slides — it snaps at the
+  // threshold and stays collapsed until scrolled back above it.
+  const SCROLL_THRESHOLD = 115; // px, matches grace.com trigger point
+  const onHeaderScroll = () => {
+    const y = window.scrollY || window.pageYOffset;
+    navWrapper.classList.toggle('scrolled', y >= SCROLL_THRESHOLD);
+  };
+  window.addEventListener('scroll', onHeaderScroll, { passive: true });
+  onHeaderScroll();
+
   // Close on escape
   window.addEventListener('keydown', (e) => {
     if (e.code === 'Escape') {

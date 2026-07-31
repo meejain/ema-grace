@@ -89,6 +89,214 @@
   }
 }
 
+/* ===================== Variant: contact-sticky ===================== */
+
+/*
+ * Green "Contact Us" widget. Source: grace.com contact-us-sticky clientlib
+ * (root 1rem = 10px). Desktop: a green panel overlapping the bottom-right of
+ * the hero that switches to fixed (sticky) below the header once the hero
+ * scrolls away. Mobile: a fixed green bottom bar that expands on tap.
+ * Mobile-first; desktop panel activates at >=900px.
+ */
+
+.custom-widget.contact-sticky {
+  --contact-sticky-green: var(--accent-color); /* #7ac143 */
+  --contact-sticky-btn-bg: #fff;
+  --contact-sticky-btn-color: #000;
+
+  display: block;
+  margin: 0;
+  padding: 0;
+  color: #000;
+  font-family: var(--body-font-family);
+}
+
+/* Desktop panel hidden on mobile; mobile bar hidden on desktop. */
+.custom-widget.contact-sticky .contact-sticky-desktop {
+  display: none;
+}
+
+/* ---- Mobile bottom bar ---- */
+.custom-widget.contact-sticky .contact-sticky-mobile {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 50;
+  padding: 10px;
+}
+
+.custom-widget.contact-sticky .contact-sticky-mobile-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 40px;
+  padding: 10px 20px;
+  border: 0;
+  background-color: var(--contact-sticky-green);
+  color: #000;
+  font-family: var(--heading-font-family);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.custom-widget.contact-sticky .contact-sticky-mobile-icon-wrap {
+  display: inline-flex;
+  margin-left: 8px;
+}
+
+.custom-widget.contact-sticky .contact-sticky-mobile-icon {
+  width: 15px;
+  height: 15px;
+}
+
+.custom-widget.contact-sticky .contact-sticky-mobile-content {
+  padding: 20px;
+  background-color: var(--contact-sticky-green);
+}
+
+.custom-widget.contact-sticky .contact-sticky-mobile-content[hidden] {
+  display: none;
+}
+
+/* ---- Shared body (tagline + buttons) ---- */
+.custom-widget.contact-sticky .contact-sticky-text {
+  margin: 0 0 20px;
+  color: #000;
+  font-family: var(--body-font-family);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.3;
+}
+
+.custom-widget.contact-sticky .contact-sticky-buttons {
+  display: flex;
+  flex-direction: column;
+}
+
+.custom-widget.contact-sticky .contact-sticky-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 14px 20px;
+  margin-bottom: 14px;
+  background-color: var(--contact-sticky-btn-bg);
+  color: var(--contact-sticky-btn-color);
+  font-family: var(--heading-font-family);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.2;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+.custom-widget.contact-sticky .contact-sticky-btn:last-child {
+  margin-bottom: 0;
+}
+
+/* Source parity (.btn-primary:hover): fill dark green, white text. The chevron
+   uses currentcolor so it turns white with the label. */
+.custom-widget.contact-sticky .contact-sticky-btn:hover,
+.custom-widget.contact-sticky .contact-sticky-btn:focus {
+  background-color: var(--accent-color-hover); /* #27853c */
+  color: #fff;
+}
+
+/* trailing chevron ">" after the label */
+.custom-widget.contact-sticky .contact-sticky-btn-label::after {
+  content: "";
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  margin-left: 8px;
+  border-top: 2px solid currentcolor;
+  border-right: 2px solid currentcolor;
+  transform: translateY(-1px) rotate(45deg);
+}
+
+/* ---- Desktop panel (>=900px) ---- */
+@media (width >= 900px) {
+  /* The block is a zero-height positioning context for the panel. Full-bleed it
+     to the viewport (break out of the centered content column) so the panel's
+     `right: calc(50% - 620px)` is measured against the viewport, exactly like
+     the source's full-width contactus cmp. */
+  .custom-widget.contact-sticky {
+    position: relative;
+    height: 0;
+    width: 100vw;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+  }
+
+  .custom-widget.contact-sticky .contact-sticky-mobile {
+    display: none;
+  }
+
+  /* Horizontal offset mirrors the source: the panel's right edge is anchored to
+     a 1240px-wide centered content column (source uses right: calc(50% - 620px)).
+     max() keeps a 20px gutter when the viewport is narrower than the column, so
+     the panel stays correctly positioned at 1280/1440/1920px alike. */
+  .custom-widget.contact-sticky .contact-sticky-desktop {
+    display: block;
+    position: absolute;
+    top: -190px;
+    right: max(20px, calc(50% - 620px));
+    z-index: 600;
+    box-sizing: border-box;
+    width: calc(1240px / 12 * 2.7); /* source: 279px */
+    padding: 20px; /* source: 20px all round → 279 x ~254px */
+    background-color: var(--contact-sticky-green);
+    color: #000;
+  }
+
+  /* Once the hero scrolls away the panel sticks (fixed) just below the collapsed
+     sticky nav row, matching grace.com's locked landing spot of top:106px. It
+     stays on the same row at the same height for the rest of the scroll. */
+  .custom-widget.contact-sticky.is-stuck .contact-sticky-desktop {
+    position: fixed;
+    top: 106px;
+  }
+
+  .custom-widget.contact-sticky .contact-sticky-heading {
+    margin: 0 0 4px;
+    padding: 0;
+    color: #000;
+    font-family: var(--heading-font-family);
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.25;
+  }
+
+  /* Compact single-line buttons to match the source's 239px content column. */
+  .custom-widget.contact-sticky .contact-sticky-desktop .contact-sticky-text {
+    margin: 0 0 20px;
+    font-size: 16px;
+  }
+
+  .custom-widget.contact-sticky .contact-sticky-desktop .contact-sticky-btn {
+    min-height: 0;
+    padding: 14px 12px;
+    margin-bottom: 14px; /* source: 1.4rem */
+    font-size: 14px;
+    line-height: 1.2;
+    white-space: nowrap;
+  }
+
+  .custom-widget.contact-sticky .contact-sticky-desktop .contact-sticky-btn-label::after {
+    width: 6px;
+    height: 6px;
+    margin-left: 6px;
+    border-width: 1.5px;
+  }
+}
+
 /* ===================== Variant: document-viewer ===================== */
 
 /*
@@ -196,7 +404,7 @@
   color: rgb(0 0 0);
   font-family: var(--heading-font-family);
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 700; /* source .accordion-btn weight 700 */
   line-height: normal;
 }
 
@@ -278,7 +486,9 @@
 .custom-widget.search-filter {
   --cwsf-tag-bg: rgb(0 0 0);
   --cwsf-tag-color: rgb(255 255 255);
-  --cwsf-tag-active-bg: rgb(128 128 128);
+
+  /* Source: .blog-list-cmp .tag-bar button.active → white bg, black text + shadow */
+  --cwsf-tag-active-bg: rgb(255 255 255);
   --cwsf-tag-active-color: rgb(0 0 0);
   --cwsf-all-bg: rgb(255 255 255);
   --cwsf-placeholder-color: rgb(117 117 117);
@@ -464,7 +674,7 @@
   }
 
   .custom-widget-search-filter-input {
-    font-size: 24px;
+    font-size: 30px; /* source .search-list input desktop size */
   }
 }
 
