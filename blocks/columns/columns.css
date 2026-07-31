@@ -1091,14 +1091,18 @@
   padding: var(--spacing-l) 0;
 }
 
-/* Mobile: swipeable single-card carousel (horizontal scroll-snap track).
-   The source (Owl carousel) shows one card per view and slides horizontally;
-   dots below track the active slide. At >=900px this reverts to a vertical
-   stack (see media query). */
+/* Mobile: swipeable "peek" carousel (horizontal scroll-snap track).
+   The source (Owl carousel) centers the active card at ~86% of the viewport
+   (336px of 390) with ~17px slivers of the prev/next cards peeking on each
+   edge and a 10px gap between cards. We reproduce that with a centered
+   scroll-snap track: the track keeps a small inline padding so the centered
+   card sits inset, and each card is 86vw wide. Dots below track the active
+   slide. At >=900px this reverts to a vertical stack (see media query). */
 .columns.image-teaser > div:not(.columns-image-teaser-dots) {
   display: flex;
   flex-flow: row nowrap;
-  gap: 0;
+  gap: 10px;
+  padding: 0 17px;
   overflow: auto hidden;
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
@@ -1109,7 +1113,7 @@
 }
 
 .columns.image-teaser .columns-image-teaser-card {
-  flex: 0 0 100%;
+  flex: 0 0 86vw;
   scroll-snap-align: center;
 }
 
@@ -1276,6 +1280,7 @@
   .columns.image-teaser > div:not(.columns-image-teaser-dots) {
     flex-direction: column;
     gap: 40px;
+    padding: 0;
     max-width: 920px;
     overflow: visible;
     scroll-snap-type: none;
@@ -1349,137 +1354,11 @@
   }
 }
 
-/* ===================== Variant: image-text-list ===================== */
-
-/* Columns Image Text List
- * Source: https://grace.com/people-and-careers/early-career-programs/
- * Two-column row: image + text block containing a bulleted list.
- * Tokens extracted from source computed styles (html font-size 62.5% => 1rem = 10px).
- */
-
-.columns.image-text-list > div {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
-
-.columns.image-text-list > div > div {
-  display: flex;
-  flex-direction: column;
-}
-
-/* Image column */
-.columns.image-text-list .columns-image-text-list-img-col {
-  line-height: 0;
-}
-
-.columns.image-text-list .columns-image-text-list-img-col picture,
-.columns.image-text-list .columns-image-text-list-img-col img {
-  display: block;
-  width: 100%;
-}
-
-.columns.image-text-list .columns-image-text-list-img-col img {
-  /* Source hero asset ratio 3000x938 ~= 3.2:1 */
-  aspect-ratio: 3000 / 938;
-  object-fit: cover;
-}
-
-/* Text column */
-.columns.image-text-list .columns-image-text-list-text-col {
-  text-align: left;
-}
-
-.columns.image-text-list .columns-image-text-list-text-col h2 {
-  font-family: var(--heading-font-family);
-  font-size: var(--heading-font-size-xl); /* 24px mobile */
-  font-weight: 300;
-  line-height: 1.3;
-  color: var(--text-color);
-  margin: 0 0 10px;
-}
-
-.columns.image-text-list .columns-image-text-list-text-col p {
-  font-family: var(--body-font-family);
-  font-size: var(--body-font-size-m); /* 14px */
-  font-weight: 400;
-  line-height: 1.3;
-  color: var(--text-color);
-  margin: 0 0 1.5em;
-}
-
-/* Bold subhead paragraph (e.g. "Manufacturing Leadership Program (MLP)") */
-.columns.image-text-list .columns-image-text-list-text-col p strong {
-  font-weight: 700;
-}
-
-/* Bulleted list matches source custom-bullet styling */
-.columns.image-text-list .columns-image-text-list-text-col ul {
-  list-style: none;
-  padding: 0;
-  margin: 0 0 1.5em;
-  font-family: var(--body-font-family);
-  font-size: var(--body-font-size-m); /* 14px */
-  font-weight: 400;
-  line-height: 1.3;
-  color: var(--text-color);
-}
-
-.columns.image-text-list .columns-image-text-list-text-col ul li {
-  position: relative;
-  padding: 0 0 0 1em;
-}
-
-.columns.image-text-list .columns-image-text-list-text-col ul li::before {
-  content: "";
-  position: absolute;
-  z-index: 0;
-  left: 0;
-  top: 0.6em; /* source ::before top 8.4px @ 14px font-size */
-  width: 4px;
-  height: 4px;
-  background: var(--text-color);
-  border-radius: 4px;
-}
-
-@media (width >= 900px) {
-  .columns.image-text-list > div {
-    flex-direction: row;
-    align-items: flex-start;
-    gap: 40px;
-  }
-
-  .columns.image-text-list .columns-image-text-list-img-col {
-    flex: 0 0 40%;
-    max-width: 40%;
-  }
-
-  .columns.image-text-list .columns-image-text-list-text-col {
-    flex: 1;
-  }
-
-  /* Source h2 30px / line-height 51px (1.7) at >=992px; 900 is closest EDS bp */
-  .columns.image-text-list .columns-image-text-list-text-col h2 {
-    font-size: var(--heading-font-size-xl); /* 30px desktop */
-    line-height: 1.7;
-  }
-
-  /* Source body/list line-height becomes 1.7 at >=992px; 900 is closest EDS bp */
-  .columns.image-text-list .columns-image-text-list-text-col p,
-  .columns.image-text-list .columns-image-text-list-text-col ul {
-    line-height: 1.7;
-  }
-
-  .columns.image-text-list .columns-image-text-list-text-col ul li::before {
-    top: 0.65em; /* source ::before top 9.1px @ 14px font-size */
-  }
-}
-
 /* ===================== Variant: location-detail ===================== */
 .columns.location-detail > div {
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 10px; /* mobile: source button-to-image gap is 10px */
 }
 
 .columns.location-detail > div > div {
@@ -1509,6 +1388,13 @@
 /* Join the Grace Team button (matches source green primary) */
 .columns.location-detail .columns-location-detail-text-col .button-container {
   margin: 0;
+}
+
+/* the button sits in a plain <p> (last child of the text column); drop its
+   inherited trailing margin so only the 10px column gap separates it from the
+   stacked image on mobile (source button-to-image gap = 10px) */
+.columns.location-detail .columns-location-detail-text-col p:last-child {
+  margin-bottom: 0;
 }
 
 .columns.location-detail .columns-location-detail-text-col a.button:any-link {
@@ -1569,88 +1455,6 @@
     display: inline-block;
     width: auto;
     padding: 18px 30px;
-  }
-}
-
-/* ===================== Variant: people ===================== */
-.columns-container:has(.columns.people) {
-  padding: var(--spacing-l) 0;
-}
-
-.columns.people > div {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
-
-.columns.people > div > div {
-  display: flex;
-  flex-direction: column;
-}
-
-.columns.people .columns-people-img-col {
-  line-height: 0;
-}
-
-.columns.people .columns-people-img-col img {
-  width: 100%;
-  display: block;
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
-}
-
-.columns.people .columns-people-text-col {
-  padding: var(--spacing-s);
-  text-align: center;
-}
-
-.columns.people .columns-people-text-col p {
-  font-family: var(--body-font-family);
-  font-size: var(--body-font-size-m);
-  font-weight: 400;
-  line-height: 1.7;
-  color: var(--text-color);
-  margin-bottom: 0;
-}
-
-.columns.people .columns-people-text-col a:any-link {
-  display: block;
-  font-family: var(--heading-font-family);
-  font-size: var(--body-font-size-m);
-  font-weight: 600;
-  color: var(--text-color);
-  text-decoration: none;
-  margin-top: 0;
-  padding-top: 18px;
-  transition: color var(--transition-speed) ease;
-}
-
-.columns.people .columns-people-text-col a:not(:has(img))::after {
-  content: ' \203A';
-  font-size: 1.2em;
-}
-
-.columns.people .columns-people-text-col a:hover {
-  color: var(--link-hover-color);
-}
-
-@media (width >= 900px) {
-  .columns.people > div {
-    flex-direction: row;
-    gap: 32px;
-  }
-
-  .columns.people > div > div {
-    flex: 1;
-  }
-
-  .columns.people .columns-people-img-col img {
-    aspect-ratio: auto;
-    height: auto;
-  }
-
-  .columns.people .columns-people-text-col {
-    padding: var(--spacing-m) 0;
   }
 }
 
@@ -1715,7 +1519,8 @@
   margin-bottom: 0;
 }
 
-@media (width >= 900px) {
+/* source switches stacked -> 2-column at 992px (Bootstrap col-lg), not 900px */
+@media (width >= 992px) {
   .columns.profile-detail > div {
     flex-direction: row;
     align-items: flex-start;

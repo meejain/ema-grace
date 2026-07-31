@@ -1,28 +1,29 @@
 /* Map Embedded block - keyless OpenStreetMap iframe, matches source layout */
 
 /*
- * Source parity notes (grace.com facility page):
- *  - Map is a FIXED 350x300 embed at every breakpoint (never fluid).
- *  - Mobile/tablet: caption stacked above the map, both full width.
- *  - Desktop (>=900px): caption left (~1/3), map right (~2/3), top-aligned.
- *  - Caption typography: name 14px/700, labels 10px/500, lines 14px/400, black.
+ * Source parity notes (grace.com facility page, measured at 1440 and 390):
+ *  - Map is a FIXED 350x300 embed at every breakpoint (never fluid), border 0.
+ *  - Mobile/tablet: caption stacked ABOVE the map, ~10px gap.
+ *  - Desktop (>=900px): caption left (~1/3), fixed map right, top-aligned,
+ *    ~40px column gutter.
+ *  - Caption typography: Roboto 14px, line-height 1.7 (23.8px), black.
+ *    Facility name is bold (strong -> 700); paragraph spacing ~20px.
  */
 
 .map-embedded {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-s);
+  gap: var(--spacing-xs);
   margin: var(--spacing-m) 0;
 }
 
-/* Fixed-size map container to mirror the source Google embed (350x300) */
+/* Fixed-size map container mirrors the source Google embed (350x300) */
 .map-embedded .map-embedded-frame {
   position: relative;
   width: 350px;
   max-width: 100%;
   height: 300px;
   overflow: hidden;
-  background-color: var(--light-color);
 }
 
 .map-embedded .map-embedded-iframe {
@@ -41,7 +42,7 @@
   font-family: var(--body-font-family);
   font-size: var(--body-font-size-m);
   font-weight: 400;
-  line-height: 1.3;
+  line-height: 1.7;
 }
 
 .map-embedded .map-embedded-caption p {
@@ -50,48 +51,29 @@
 
 /* Facility name renders like the source <strong>: 14px bold */
 .map-embedded .map-embedded-title {
-  margin: 0 0 var(--spacing-xs);
+  margin: 0 0 var(--spacing-s);
   font-family: var(--body-font-family);
   font-size: var(--body-font-size-m);
   font-weight: 700;
-  line-height: 1.3;
+  line-height: 1.7;
   color: var(--text-color);
 }
 
-.map-embedded .map-embedded-link {
-  display: inline-block;
-  margin-top: var(--spacing-xs);
-  color: var(--link-color);
-  font-weight: 600;
-  text-decoration: underline;
-  transition: color var(--transition-speed) ease;
-}
-
-.map-embedded .map-embedded-link:hover {
-  color: var(--link-hover-color);
-}
-
-/* Desktop: caption left (~1/3), fixed map right (~2/3), top-aligned */
+/* Desktop: caption left (~1/3), fixed map right, top-aligned, 40px gutter */
 @media (width >= 900px) {
   .map-embedded {
     flex-direction: row;
     align-items: flex-start;
-    gap: var(--spacing-l);
+    gap: 40px;
   }
 
   .map-embedded .map-embedded-caption {
-    flex: 0 0 33%;
-    line-height: 1.7;
+    flex: 1 1 auto;
     order: 0;
   }
 
-  .map-embedded .map-embedded-caption p,
-  .map-embedded .map-embedded-title {
-    line-height: 1.7;
-  }
-
   .map-embedded .map-embedded-frame {
-    flex: 0 0 auto;
+    flex: 0 0 350px;
     order: 1;
   }
 }

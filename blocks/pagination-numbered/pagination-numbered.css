@@ -1,9 +1,9 @@
 /* Pagination Numbered
  * Source tokens (grace.com blog-list, root font-size 62.5% => 1rem = 10px):
- *   list: flex, centered, no list style, border 0
- *   number button: 30x30, font 12px Roboto 400, color #000, border removed (border-0)
+ *   list: flex, centered, no list style, border 0, margin 0 0 21px
+ *   number button: 30x30, no padding, 1px solid #c4c4c4, font 12px Roboto 400, color #000
  *   active number: background #000, color #fff
- *   prev/next: 30x30, 1px solid #c4c4c4, font 12px
+ *   prev/next li: 30x30, 1px solid #c4c4c4, margin-top 7px, arrow Roboto Slab 14px/700
  *   disabled: opacity .4
  */
 
@@ -17,7 +17,7 @@
   justify-content: center;
   flex-wrap: nowrap;
   gap: 0;
-  margin: 0;
+  margin: 0 0 21px;
   padding: 0;
   border: 0;
   list-style: none;
@@ -41,7 +41,7 @@
   box-sizing: border-box;
   width: 30px;
   height: 30px;
-  padding: 5px;
+  padding: 0;
   border: 1px solid #c4c4c4;
   border-radius: 0;
   background-color: transparent;

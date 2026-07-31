@@ -97,10 +97,26 @@
   transition: all var(--transition-speed) ease;
 }
 
-/* Full-width white rule between the CTA and the descriptive copy. */
+/* Full-width white rule between the CTA and the descriptive copy.
+   Source hides this per-column rule on mobile (.has-title .divider-line
+   { display:none }) and instead separates the two stacked columns with a
+   single rule after the first half. Shown inside each column at >=900px. */
 .banner.contact-split .banner-contact-split-divider {
+  display: none;
   height: 1px;
-  margin: 30px 10px;
+  margin: 45px 0;
+  background-color: var(--white);
+}
+
+/* Mobile separator between the two stacked halves (source
+   .has-title .col-lg-6:first-child::after — full-width white 1px rule,
+   20px below it). */
+.banner.contact-split .banner-contact-split-half:first-child::after {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 1px;
+  margin-bottom: 20px;
   background-color: var(--white);
 }
 
@@ -185,8 +201,15 @@
     line-height: 1.7;
   }
 
+  /* Desktop restores the per-column divider and drops the between-column
+     separator (source: .divider-line shows, col:first::after only <992px). */
   .banner.contact-split .banner-contact-split-divider {
+    display: block;
     margin: 45px 0;
+  }
+
+  .banner.contact-split .banner-contact-split-half:first-child::after {
+    display: none;
   }
 
   /* Content-width, centred CTA on desktop. */

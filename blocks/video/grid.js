@@ -1,8 +1,9 @@
 /*
  * Video Grid Block
- * Renders a grid of video cards. Each card shows a poster, a title and a
- * centered play button. Clicking a card swaps the poster for an inline
- * YouTube/Vimeo iframe that plays in place.
+ * Renders a grid of "media callout" video teasers. Each card mirrors Grace's
+ * cmp-media-callout layout: a centered title above a 16:9 poster with a
+ * centered play button, and a "Video ansehen" label below. Clicking a card
+ * swaps the poster for an inline YouTube/Vimeo iframe that plays in place.
  */
 
 import { createOptimizedPicture } from '../../scripts/aem.js';
@@ -67,6 +68,14 @@ export default function decorate(block) {
     const item = document.createElement('li');
     item.className = 'video-grid-card';
 
+    // title above the media (matches source cmp-media-callout layout)
+    if (titleText) {
+      const title = document.createElement('p');
+      title.className = 'video-grid-title';
+      title.textContent = titleText;
+      item.append(title);
+    }
+
     const media = document.createElement('div');
     media.className = 'video-grid-media';
 
@@ -83,30 +92,20 @@ export default function decorate(block) {
       media.append(poster);
     }
 
-    // overlay content: title + play button + watch label
-    const overlay = document.createElement('div');
-    overlay.className = 'video-grid-overlay';
-
-    if (titleText) {
-      const title = document.createElement('p');
-      title.className = 'video-grid-title';
-      title.textContent = titleText;
-      overlay.append(title);
-    }
-
+    // centered play button over the poster
     const play = document.createElement('button');
     play.type = 'button';
     play.className = 'video-grid-play';
     play.setAttribute('aria-label', `${WATCH_LABEL}: ${titleText}`.trim());
-    overlay.append(play);
+    media.append(play);
 
+    item.append(media);
+
+    // watch label below the media
     const watch = document.createElement('p');
     watch.className = 'video-grid-watch';
     watch.textContent = WATCH_LABEL;
-    overlay.append(watch);
-
-    media.append(overlay);
-    item.append(media);
+    item.append(watch);
 
     if (rawUrl) {
       const embedUrl = buildEmbedUrl(rawUrl);

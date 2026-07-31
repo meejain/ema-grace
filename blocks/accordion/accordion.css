@@ -152,6 +152,16 @@
   border-top: 1px solid var(--accordion-nested-line);
 }
 
+/* source: both the outer list and each inner (grey-panel) list close with a
+   bottom divider on their last item (parity with faq/rich-content) */
+.accordion.nested .accordion-nested-item-outer:last-child {
+  border-bottom: 1px solid var(--accordion-nested-line);
+}
+
+.accordion.nested .accordion-nested-content-outer .accordion-nested-item-inner:last-child {
+  border-bottom: 1px solid var(--accordion-nested-line);
+}
+
 
 /* ---- summary (both levels share typography) ---- */
 .accordion.nested .accordion-nested-summary {
@@ -270,15 +280,11 @@
 
 /* ===================== Variant: rich-content ===================== */
 
-/* Rich Content reuses the faq structure/decoration above. Only its true
-   differences from faq are declared here (source: US Employee Benefits Summary):
-   header weight 700 (faq is 600) and rich body typography - lists, strong,
-   links, and inline headings. */
-
-/* header is heavier than faq */
-.accordion.rich-content .accordion-faq-item-title {
-  font-weight: 700;
-}
+/* Rich Content reuses the faq structure/decoration above. On grace.com the
+   US Employee Benefits Summary accordion headers render identically to the
+   FAQ headers (Roboto Slab 14px / weight 600), so no header override is
+   needed here. Its only true differences are the rich body typography -
+   lists, strong, links, and inline headings. */
 
 /* rich body: lists, strong, links, inline headings */
 .accordion.rich-content .accordion-faq-item-body strong {

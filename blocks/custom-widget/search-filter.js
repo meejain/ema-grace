@@ -95,7 +95,7 @@ export default async function decorate(block) {
   toggle.className = 'custom-widget-search-filter-toggle';
   toggle.setAttribute('aria-expanded', 'false');
   toggle.setAttribute('aria-controls', 'custom-widget-search-filter-tag-list');
-  toggle.innerHTML = `<span>Filter</span>${CHEVRON_ICON}`;
+  toggle.innerHTML = `<span>Filter Articles</span>${CHEVRON_ICON}`;
   tagList.id = 'custom-widget-search-filter-tag-list';
 
   tagBar.append(allBtn, toggle, tagList);

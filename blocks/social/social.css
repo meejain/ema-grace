@@ -78,7 +78,7 @@
 
 .social.follow .social-follow-name {
   display: block;
-  margin: 0 0 15px;
+  margin: 0 0 20px;
   font-family: var(--heading-font-family);
   font-size: 18px;
   font-weight: 600;
@@ -155,11 +155,12 @@
 }
 
 .social.share .social-share-label {
-  display: inline-block;
-  margin-right: 8px;
-  font-size: var(--body-font-size-m);
+  display: block;
+  margin: 0 0 10px;
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-xs);
+  font-weight: 500;
   color: var(--text-color);
-  vertical-align: middle;
 }
 
 .social.share .social-share-button {

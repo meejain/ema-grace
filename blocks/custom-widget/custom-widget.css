@@ -278,7 +278,7 @@
 .custom-widget.search-filter {
   --cwsf-tag-bg: rgb(0 0 0);
   --cwsf-tag-color: rgb(255 255 255);
-  --cwsf-tag-active-bg: rgb(255 255 255);
+  --cwsf-tag-active-bg: rgb(128 128 128);
   --cwsf-tag-active-color: rgb(0 0 0);
   --cwsf-all-bg: rgb(255 255 255);
   --cwsf-placeholder-color: rgb(117 117 117);
@@ -292,11 +292,13 @@
   width: 100%;
 }
 
+/* source: 10px vertical padding + 1px solid black underline */
 .custom-widget-search-filter-form {
   position: relative;
   display: flex;
   align-items: center;
   padding: 10px 0;
+  border-bottom: 1px solid rgb(0 0 0);
 }
 
 .custom-widget-search-filter-input {
@@ -308,8 +310,8 @@
   background-color: transparent;
   color: var(--text-color);
   font-family: var(--body-font-family);
-  font-size: 16px;
-  font-weight: 300;
+  font-size: 14px;
+  font-weight: 400;
   line-height: normal;
 }
 
@@ -365,7 +367,10 @@
   cursor: pointer;
 }
 
+/* On mobile the "All" chip is part of the collapsible list, hidden until the
+   "Filter Articles" toggle is opened (source grace.com/insights/ @390px). */
 .custom-widget-search-filter-all {
+  display: none;
   background-color: var(--cwsf-tag-bg);
   color: var(--cwsf-tag-color);
 }
@@ -387,21 +392,24 @@
   box-shadow: var(--cwsf-shadow);
 }
 
-/* Mobile expand/collapse toggle */
+/* Mobile expand/collapse toggle button ("Filter Articles"): transparent,
+   1px black border, Roboto Slab 12px/700, black text
+   (source grace.com/insights/ @390px). */
 .custom-widget-search-filter-toggle {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-height: 44px;
-  padding: 0 10px;
-  border: 0;
-  margin-top: 2px;
-  background-color: var(--cwsf-tag-bg);
-  color: var(--cwsf-tag-color);
-  font-family: var(--body-font-family);
-  font-size: var(--body-font-size-xs);
+  min-height: 42px;
+  padding: 14px 15px;
+  border: 1px solid rgb(0 0 0);
+  margin-top: 20px;
+  background-color: transparent;
+  color: rgb(0 0 0);
+  font-family: var(--heading-font-family);
+  font-size: var(--body-font-size-s); /* 12px */
   font-weight: 700;
-  text-transform: uppercase;
+  line-height: 1;
+  text-transform: none;
   cursor: pointer;
 }
 
@@ -420,6 +428,7 @@
   flex-direction: column;
 }
 
+.custom-widget-search-filter-tag-bar.is-open .custom-widget-search-filter-all,
 .custom-widget-search-filter-tag-bar.is-open .custom-widget-search-filter-tag-list {
   display: flex;
 }
@@ -441,6 +450,7 @@
   }
 
   .custom-widget-search-filter-all {
+    display: flex;
     flex: 1 1 0;
   }
 
@@ -454,7 +464,7 @@
   }
 
   .custom-widget-search-filter-input {
-    font-size: 30px;
+    font-size: 24px;
   }
 }
 

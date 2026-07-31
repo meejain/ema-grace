@@ -76,19 +76,9 @@ export default function decorate(block) {
 
   block.textContent = '';
 
-  // Map frame
-  const frame = document.createElement('div');
-  frame.className = 'map-embedded-frame';
-
-  const iframe = document.createElement('iframe');
-  iframe.className = 'map-embedded-iframe';
-  iframe.setAttribute('loading', 'lazy');
-  iframe.setAttribute('title', title ? `Map of ${title}` : 'Location map');
-  iframe.setAttribute('src', buildOsmSrc(center, zoom));
-  frame.append(iframe);
-  block.append(frame);
-
-  // Caption (facility name + address / phone)
+  // Caption (facility name + address / phone). Source stacks the caption ABOVE
+  // the map on mobile and places it to the LEFT of the map on desktop, so the
+  // caption is appended first and the layout is handled with flex direction.
   if (title || captionNodes.length) {
     const caption = document.createElement('figcaption');
     caption.className = 'map-embedded-caption';
@@ -105,15 +95,18 @@ export default function decorate(block) {
         && node.textContent.trim() !== title)
       .forEach((node) => caption.append(node.cloneNode(true)));
 
-    // "View larger map" link (opens OSM in a new tab, keyless)
-    const link = document.createElement('a');
-    link.className = 'map-embedded-link';
-    link.href = `https://www.openstreetmap.org/?mlat=${center.lat}&mlon=${center.lng}#map=${zoom}/${center.lat}/${center.lng}`;
-    link.target = '_blank';
-    link.rel = 'noopener';
-    link.textContent = 'View larger map';
-    caption.append(link);
-
     block.append(caption);
   }
+
+  // Map frame (fixed 350x300 to mirror the source Google embed)
+  const frame = document.createElement('div');
+  frame.className = 'map-embedded-frame';
+
+  const iframe = document.createElement('iframe');
+  iframe.className = 'map-embedded-iframe';
+  iframe.setAttribute('loading', 'lazy');
+  iframe.setAttribute('title', title ? `Map of ${title}` : 'Location map');
+  iframe.setAttribute('src', buildOsmSrc(center, zoom));
+  frame.append(iframe);
+  block.append(frame);
 }

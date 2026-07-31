@@ -19,7 +19,7 @@
 .quote.cta {
   padding: 10px;
   color: var(--text-color);
-  text-align: start;
+  text-align: center;
 }
 
 .quote.cta .quote-cta-figure {
@@ -64,6 +64,8 @@
 /* CTA — matches primary green button but without the trailing arrow glyph
  * present on the global button.primary style. */
 .quote.cta a.button.primary:any-link {
+  display: block;
+  width: 100%;
   border-radius: 0;
   padding: 13px;
   font-family: var(--heading-font-family);
@@ -95,6 +97,8 @@
   }
 
   .quote.cta a.button.primary:any-link {
+    display: inline-block;
+    width: auto;
     padding: 18px 30px;
   }
 }
@@ -150,15 +154,14 @@
   line-height: 1.3;
 }
 
-@media (width >= 600px) {
-  .quote.highlight .quote-highlight-text {
-    font-size: 46px;
-  }
-}
-
 @media (width >= 900px) {
   .quote.highlight .quote-highlight-text {
     font-size: 60px;
+    line-height: 1.7;
+  }
+
+  .quote.highlight .quote-highlight-author,
+  .quote.highlight .quote-highlight-role {
     line-height: 1.7;
   }
 }
@@ -212,7 +215,7 @@
   line-height: 1.3;
 }
 
-@media (width >= 600px) {
+@media (width >= 900px) {
   .quote.testimonial {
     max-width: 83%;
   }
@@ -227,9 +230,7 @@
   .quote.testimonial .quote-testimonial-author {
     margin-bottom: 3px;
   }
-}
 
-@media (width >= 900px) {
   .quote.testimonial .quote-testimonial-author,
   .quote.testimonial .quote-testimonial-position {
     line-height: 1.7;
