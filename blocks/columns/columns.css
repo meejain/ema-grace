@@ -820,27 +820,36 @@
   .columns.horizontal-teaser .columns-horizontal-teaser-card {
     flex: none;
     display: grid;
-    grid-template-columns: 300px 1fr 40px;
-    align-items: center;
-    gap: 40px;
-    padding: 20px 50px;
-    text-align: left; /* description left-aligned (source); title centered below */
 
-    /* uniform height across all cards, sized close to the source (~148px) */
-    min-height: 148px;
+    /* source split: narrow title column (wraps to 2 lines), wide description
+       column (~3 lines), narrow chevron column. No card padding — the source
+       card has padding 0 and relies on min-height for the ~159px row. */
+    grid-template-columns: 214px 1fr 105px;
+    align-items: center;
+    gap: 0;
+    padding: 0;
+    text-align: left; /* description left-aligned (source); title centered below */
+    min-height: 159px;
   }
 
-  /* desktop typography: title 18px; description 14px, tighter line-height so
-     the card matches the source's compact ~148px height */
+  /* desktop typography matches source: title 18px/30.6px weight 600 (centered,
+     narrow column so it wraps to 2 lines); description 14px/25.2px weight 500
+     left-aligned in the wide column (wraps to ~3 lines). */
   .columns.horizontal-teaser .columns-horizontal-teaser-title p,
   .columns.horizontal-teaser .columns-horizontal-teaser-title h2,
   .columns.horizontal-teaser .columns-horizontal-teaser-title h3 {
     font-size: 18px;
-    line-height: 1.3;
+    font-weight: 600;
+    line-height: 1.7;
+  }
+
+  .columns.horizontal-teaser .columns-horizontal-teaser-desc {
+    padding-left: 30px;
   }
 
   .columns.horizontal-teaser .columns-horizontal-teaser-desc p {
-    line-height: 1.5;
+    font-weight: 500;
+    line-height: 1.8;
   }
 
   .columns.horizontal-teaser .columns-horizontal-teaser-title {

@@ -206,11 +206,45 @@ async function loadEager(doc) {
  * Loads everything that doesn't need to be delayed.
  * @param {Element} doc The container element
  */
+/**
+ * Loads a page template's CSS (and optional JS) when a `template` metadata
+ * value is present. Template files live in /templates/{name}/{name}.{css,js};
+ * the JS default export (if any) is called with the main element.
+ * @param {Element} main The main element
+ */
+async function loadTemplate(main) {
+  const template = getMetadata('template');
+  if (!template) return;
+  const name = template.trim().toLowerCase().replace(/[^a-z0-9-]/g, '-');
+  if (!name) return;
+  try {
+    await Promise.all([
+      loadCSS(`${window.hlx.codeBasePath}/templates/${name}/${name}.css`),
+      new Promise((resolve) => {
+        (async () => {
+          try {
+            const mod = await import(`${window.hlx.codeBasePath}/templates/${name}/${name}.js`);
+            if (mod.default) await mod.default(main);
+          } catch (e) {
+            // template has no JS (CSS-only) — ignore
+          }
+          resolve();
+        })();
+      }),
+    ]);
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.warn(`Template ${name} failed to load`, e);
+  }
+}
+
 async function loadLazy(doc) {
   loadHeader(doc.querySelector('header'));
 
   const main = doc.querySelector('main');
   await loadSections(main);
+
+  await loadTemplate(main);
 
   const { hash } = window.location;
   const element = hash ? doc.getElementById(hash.substring(1)) : false;

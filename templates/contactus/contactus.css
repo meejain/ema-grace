@@ -1,0 +1,26 @@
+/*
+ * Template: contactus
+ * Applied when a page's `template` metadata is `contactus`. Reserves the right
+ * side of the centered content column for the sticky "Contact Us" widget so the
+ * main content flows in a narrower LEFT column and never sits under the widget
+ * (source layout: grace.com/products/ludox).
+ *
+ * The widget itself (.custom-widget.contact-sticky) is a viewport-anchored fixed
+ * panel on the right; this template only narrows + left-shifts the main content
+ * so it leaves clean space for it. Desktop only — on mobile the widget is a
+ * bottom bar and content stays full width.
+ */
+
+@media (width >= 900px) {
+  /* The global rule centers each section's inner div at 1200px. On contactus
+     pages, left-align that column inside a 1240px band and cap its width so the
+     content sits in a LEFT column with a clean right gutter for the widget.
+     Source: content column ~920px, widget ~279px on the right. */
+  body.contactus main > .section:not(.hero-container, .custom-widget-container) > div {
+    max-width: 920px;
+    margin-left: max(20px, calc((100% - 1240px) / 2));
+    margin-right: 0;
+    padding-left: 0;
+    padding-right: 0;
+  }
+}

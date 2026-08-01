@@ -290,6 +290,76 @@
   margin-bottom: 0;
 }
 
+/* === Variant: product === product-page hero (source grace.com/products/ludox).
+   A "reduce-height" generic hero: dark photo background with a left-to-right
+   black gradient, a left-aligned content column (heading + description + green
+   CTA) vertically centred. Source desktop: section 342px tall, padding
+   68px 0 30px, content inset 100px, column ~620px, h1 42px/100, desc 20px/300,
+   green CTA #7ac143. Mobile-first below; desktop tokens in the media query. */
+.hero.product {
+  min-height: 0;
+  padding: 42px 10px 40px;
+  align-items: center;
+}
+
+/* Left-to-right dark gradient over the photo (same treatment as banner/event). */
+.hero.product::after {
+  background: linear-gradient(to right, rgb(0 0 0) 0%, transparent 100%);
+}
+
+/* Content column: left-aligned, mirrors the header nav container so the heading
+   aligns with the Grace logo; on desktop it insets 100px and caps at ~620px. */
+.hero.product > div:last-child {
+  text-align: left;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+.hero.product h1 {
+  align-items: flex-start;
+  text-align: left;
+  font-family: var(--heading-font-family);
+  font-weight: 100;
+  font-size: 30px;
+  line-height: 1.1;
+  color: var(--white);
+  margin: 0 0 20px;
+}
+
+/* Description paragraph beneath the heading (Roboto Slab, light). */
+.hero.product > div:last-child p:not(.button-wrapper) {
+  font-family: var(--heading-font-family);
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 1.5;
+  color: var(--white);
+  margin: 0 0 30px;
+}
+
+/* Green CTA button (source .learn-more #7ac143, black text, Roboto Slab
+   14px/600, 18px/30px padding, rectangle). */
+.hero.product a:any-link {
+  display: inline-block;
+  padding: 18px 30px;
+  border-radius: 0;
+  background-color: var(--accent-color); /* #7ac143 */
+  color: #000;
+  font-family: var(--heading-font-family);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+  text-decoration: none;
+  margin-top: 0;
+}
+
+.hero.product a:hover,
+.hero.product a:focus {
+  background-color: var(--accent-color-hover); /* #27853c */
+  color: #fff;
+}
+
 /* === Breadcrumb (rendered by hero.js from an authored "a / b / c" line) === */
 .hero-breadcrumb {
   margin: 0 0 10px;
@@ -361,6 +431,33 @@
     box-sizing: border-box;
     max-width: 1280px;
     padding: 0 20px;
+  }
+
+  /* Desktop product hero (source grace.com/products/ludox): 342px tall, content
+     inset 100px from the left, column capped at ~620px, vertically centred,
+     h1 42px/100, description 20px. */
+  .hero.product {
+    min-height: 342px;
+    padding: 68px 0 30px;
+    box-sizing: border-box;
+  }
+
+  .hero.product > div:last-child {
+    max-width: 1280px;
+    padding: 0 20px 0 100px;
+  }
+
+  .hero.product h1 {
+    max-width: 620px;
+    font-size: 42px;
+    line-height: 1.07;
+    margin-bottom: 30px;
+  }
+
+  .hero.product > div:last-child p:not(.button-wrapper) {
+    max-width: 620px;
+    font-size: 20px;
+    line-height: 1.7;
   }
 
   /* Desktop campaign: content collapses to a left column inside the centered

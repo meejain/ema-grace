@@ -68,9 +68,11 @@ export default function decorate(block) {
     const item = document.createElement('li');
     item.className = 'video-grid-card';
 
-    // title above the media (matches source cmp-media-callout layout)
+    // Title — a sibling of the media so it flows above the image on mobile and
+    // is repositioned as an overlay on desktop (source responsive behaviour).
+    let title = null;
     if (titleText) {
-      const title = document.createElement('p');
+      title = document.createElement('p');
       title.className = 'video-grid-title';
       title.textContent = titleText;
       item.append(title);
@@ -92,6 +94,12 @@ export default function decorate(block) {
       media.append(poster);
     }
 
+    // dark gradient tint over the poster (desktop overlay only; hidden on mobile)
+    const tint = document.createElement('span');
+    tint.className = 'video-grid-tint';
+    tint.setAttribute('aria-hidden', 'true');
+    media.append(tint);
+
     // centered play button over the poster
     const play = document.createElement('button');
     play.type = 'button';
@@ -101,7 +109,8 @@ export default function decorate(block) {
 
     item.append(media);
 
-    // watch label below the media
+    // "Video ansehen" label — a sibling below the media (flows below on mobile,
+    // repositioned as an overlay on desktop).
     const watch = document.createElement('p');
     watch.className = 'video-grid-watch';
     watch.textContent = WATCH_LABEL;

@@ -265,7 +265,7 @@
   }
 
   .custom-widget.contact-sticky .contact-sticky-heading {
-    margin: 0 0 4px;
+    margin: 0 0 7px;
     padding: 0;
     color: #000;
     font-family: var(--heading-font-family);
@@ -274,9 +274,10 @@
     line-height: 1.25;
   }
 
-  /* Compact single-line buttons to match the source's 239px content column. */
+  /* Compact single-line buttons to match the source's 239px content column.
+     Tagline bottom gap tuned so the panel totals ~254px like the source. */
   .custom-widget.contact-sticky .contact-sticky-desktop .contact-sticky-text {
-    margin: 0 0 20px;
+    margin: 0 0 28px;
     font-size: 16px;
   }
 
