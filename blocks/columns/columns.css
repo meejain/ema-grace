@@ -877,6 +877,76 @@
   }
 }
 
+/* ---- horizontal-teaser modifier: featured-products ----
+   Same card layout as horizontal-teaser (title / description / chevron rows,
+   159px tall) but with inverted colours to match the grace.com "Featured
+   Products" feature-set: dark slate cards with white text by default that
+   flip to a white card with black text on hover (source .slate-bkgd + the
+   feature-set item:hover rule). */
+.columns.horizontal-teaser.featured-products .columns-horizontal-teaser-card {
+  background-color: rgb(30 30 30);
+  box-shadow: none;
+}
+
+.columns.horizontal-teaser.featured-products .columns-horizontal-teaser-title,
+.columns.horizontal-teaser.featured-products .columns-horizontal-teaser-title p,
+.columns.horizontal-teaser.featured-products .columns-horizontal-teaser-title h2,
+.columns.horizontal-teaser.featured-products .columns-horizontal-teaser-title h3,
+.columns.horizontal-teaser.featured-products .columns-horizontal-teaser-desc p,
+.columns.horizontal-teaser.featured-products .columns-horizontal-teaser-arrow {
+  color: var(--white);
+}
+
+.columns.horizontal-teaser.featured-products .columns-horizontal-teaser-arrow-icon {
+  border-color: var(--white);
+}
+
+/* hover: card flips to white with black text/chevron. Desktop only — mobile
+   has no hover (tap would leave the card stuck in the hovered state), so the
+   flip is scoped to >= 900px to match the source's touch behaviour. */
+@media (width >= 900px) {
+  .columns.horizontal-teaser.featured-products .columns-horizontal-teaser-card:hover {
+    background-color: var(--white);
+    box-shadow: 0 0 12px rgb(0 0 0 / 20%);
+  }
+
+  .columns.horizontal-teaser.featured-products .columns-horizontal-teaser-card:hover .columns-horizontal-teaser-title,
+  .columns.horizontal-teaser.featured-products .columns-horizontal-teaser-card:hover .columns-horizontal-teaser-title p,
+  .columns.horizontal-teaser.featured-products .columns-horizontal-teaser-card:hover .columns-horizontal-teaser-title h2,
+  .columns.horizontal-teaser.featured-products .columns-horizontal-teaser-card:hover .columns-horizontal-teaser-title h3,
+  .columns.horizontal-teaser.featured-products .columns-horizontal-teaser-card:hover .columns-horizontal-teaser-desc p,
+  .columns.horizontal-teaser.featured-products .columns-horizontal-teaser-card:hover .columns-horizontal-teaser-arrow {
+    color: var(--text-color);
+  }
+
+  .columns.horizontal-teaser.featured-products .columns-horizontal-teaser-card:hover .columns-horizontal-teaser-arrow-icon {
+    border-color: var(--text-color);
+  }
+}
+
+/* featured-products mobile: the source presents each card as a tall 336px
+   slate tile — title near the top, a larger 16px centred description in the
+   middle, and "Learn More ›" pinned near the bottom (the base card's
+   margin-top:auto on the CTA handles the bottom placement). Scoped to mobile
+   so the desktop 159px banner rows above are untouched. */
+@media (width < 900px) {
+  .columns.horizontal-teaser.featured-products .columns-horizontal-teaser-card {
+    min-height: 336px;
+    padding: 40px 20px 34px;
+    box-sizing: border-box; /* 336px is the total tile height (source), not + padding */
+  }
+
+  .columns.horizontal-teaser.featured-products .columns-horizontal-teaser-desc {
+    padding: 0 30px;
+  }
+
+  .columns.horizontal-teaser.featured-products .columns-horizontal-teaser-desc p {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.3; /* 20.8px, matches source */
+  }
+}
+
 /* ===================== Variant: image-left ===================== */
 .columns-container:has(.columns.image-left) {
   padding: var(--spacing-l) 0;
