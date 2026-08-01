@@ -158,23 +158,36 @@
     line-height: 30.6px;
   }
 
+  /* The content layer is a fixed 160px card centred vertically over the tile.
+     On hover it grows to 224px; because it is pinned at top:50% with a
+     translateY(-50%), the extra height expands equally up AND down from the
+     centre — the source's smooth scaleY(1.4) grow. Height is animatable, so
+     the whole thing eases over .3s instead of jumping. */
   .featured.product-selector .featured-product-selector-content {
     box-sizing: border-box;
+    inset: auto 0;
+    top: 50%;
+    height: 160px;
     justify-content: center;
     padding: 24px 20px;
     background-color: transparent;
-    transition: background-color var(--transition-speed) ease,
-      box-shadow var(--transition-speed) ease,
-      min-height var(--transition-speed) ease;
+    transform: translateY(-50%);
+    transition: height var(--transition-speed) ease,
+      background-color var(--transition-speed) ease,
+      box-shadow var(--transition-speed) ease;
   }
 
-  /* details are removed from flow on desktop until the tile is hovered/focused
-     — using display:none (not opacity) so the collapsed tile centres its title
-     on its own instead of centring the whole title+desc+cta group (which would
-     push the title to the top). */
+  /* details start collapsed (zero height, faded out) so the collapsed card
+     centres just the title; they expand + fade in on hover. max-height/opacity
+     are animatable, giving the source's smooth reveal (no display jump). */
   .featured.product-selector .featured-product-selector-desc,
   .featured.product-selector .featured-product-selector-cta {
-    display: none;
+    max-height: 0;
+    margin: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height var(--transition-speed) ease,
+      opacity var(--transition-speed) ease;
   }
 
   /* hover/focus: raise the tile so its card overlaps siblings */
@@ -184,13 +197,10 @@
     color: var(--text-color);
   }
 
-  /* the white card grows centred to 224px, gains a shadow, and reveals text */
+  /* the white card grows centred to 224px, gains a shadow, reveals text */
   .featured.product-selector .featured-product-selector-tile:hover .featured-product-selector-content,
   .featured.product-selector .featured-product-selector-tile:focus-within .featured-product-selector-content {
-    top: 50%;
-    bottom: auto;
-    min-height: 224px;
-    transform: translateY(-50%);
+    height: 224px;
     background-color: var(--white);
     box-shadow: 0 0 12px 0 rgb(0 0 0 / 20%);
   }
@@ -208,11 +218,13 @@
 
   .featured.product-selector .featured-product-selector-tile:hover .featured-product-selector-desc,
   .featured.product-selector .featured-product-selector-tile:focus-within .featured-product-selector-desc {
-    display: block;
+    max-height: 130px;
+    opacity: 1;
   }
 
   .featured.product-selector .featured-product-selector-tile:hover .featured-product-selector-cta,
   .featured.product-selector .featured-product-selector-tile:focus-within .featured-product-selector-cta {
-    display: inline-block;
+    max-height: 40px;
+    opacity: 1;
   }
 }
