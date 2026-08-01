@@ -740,17 +740,391 @@
 .custom-widget.search-results {
   max-width: 1240px;
   margin: 0 auto;
-  padding: 20px 10px;
+
+  /* Mobile: pull out to a 10px gutter (source uses a 10px inset). The section
+     wrapper adds 20px side padding; -10px margins + 0 side padding bring the
+     effective gutter to 10px, widening the filter bar / results. Desktop resets
+     this below. */
+  margin-left: -10px;
+  margin-right: -10px;
+  padding: 0 0 20px;
 }
 
-/* results-count header ("Showing 1-8 of 176") */
-.custom-widget.search-results .search-results-count {
-  margin: 0 0 var(--spacing-s);
+/* Remove the global section top margin so the full-bleed blue hero sits flush
+   under the header (no gap between header and this widget). */
+main > .section.custom-widget-container:has(.custom-widget.search-results) {
+  margin-top: 0;
+}
+
+/* ---- Blue "Search Results" hero band (source .search-hero #004990) ---- */
+
+/* Full-bleed to the viewport, breaking out of the centered content column. */
+.custom-widget.search-results .search-results-hero {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  padding: 20px 10px;
+  min-height: 210px;
+  box-sizing: border-box;
+  background-color: #004990;
+  color: #fff;
+}
+
+.custom-widget.search-results .search-results-hero-content {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 10px;
+}
+
+.custom-widget.search-results .search-results-hero-title {
+  margin: 0;
+  font-family: var(--heading-font-family);
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+  color: #fff;
+}
+
+.custom-widget.search-results .search-results-hero-form {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgb(255 255 255 / 50%);
+}
+
+.custom-widget.search-results .search-results-hero-field {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 0 20px 0 0;
+  border: 0;
+  background: transparent;
+  color: #fff;
+  font-family: var(--body-font-family);
+  font-size: 24px;
+  font-weight: 300;
+  line-height: 1.2;
+}
+
+.custom-widget.search-results .search-results-hero-field::placeholder {
+  color: #fff;
+  opacity: 0.5;
+}
+
+.custom-widget.search-results .search-results-hero-field:focus {
+  outline: 0;
+}
+
+.custom-widget.search-results .search-results-hero-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+}
+
+.custom-widget.search-results .search-results-hero-icon {
+  width: 22px;
+  height: 22px;
+}
+
+/* Layout: sidebar + main column stack on mobile, side-by-side on desktop. */
+.custom-widget.search-results .search-results-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin-top: 20px;
+}
+
+/* ---- Filter sidebar ---- */
+
+/* Heading row: "Results: N" + "Clear all filters" (source .filter-heading).
+   Mobile-first: the "Clear all filters" link is hidden (it lives inside the
+   filter modal) and "Results: N" is centered. Desktop restores both below. */
+.custom-widget.search-results .search-results-filter-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.custom-widget.search-results .search-results-amount {
+  font-family: var(--heading-font-family);
+  font-size: 20px;
+  font-weight: 300;
+  color: var(--text-color);
+}
+
+/* The sidebar-heading clear link is mobile-hidden; the modal has its own. */
+.custom-widget.search-results .search-results-filter-heading .search-results-clear {
+  display: none;
+}
+
+.custom-widget.search-results .search-results-clear {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--text-color);
+  font-family: var(--body-font-family);
+  font-size: 14px;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.custom-widget.search-results .search-results-clear:hover,
+.custom-widget.search-results .search-results-clear:focus {
+  border-bottom: 1px solid #000;
+}
+
+/* Gray facet panel (source .filter-group__accordions: padding 3rem, #e6e7e8).
+   Hidden on mobile (a "Filters" modal is used instead); shown inline at >=900px. */
+.custom-widget.search-results .search-results-filter-panel {
+  display: none;
+  padding: 30px;
+  background-color: #e6e7e8;
+}
+
+.custom-widget.search-results .search-results-filter-title {
+  margin: 0 0 20px;
+  font-family: var(--heading-font-family);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: normal;
+  color: var(--text-color);
+}
+
+.custom-widget.search-results .search-results-facets {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Each facet row: label left, custom checkbox right (source label full-width,
+   checkbox positioned at right via ::before). Source rows are compact — ~19px
+   tall with a ~7px gap between them (no vertical padding). */
+.custom-widget.search-results .search-results-facet {
+  position: relative;
+  min-height: 19px;
+  margin: 0 0 7px;
+  padding: 0;
+}
+
+.custom-widget.search-results .search-results-facet::before {
+  display: none;
+}
+
+.custom-widget.search-results .search-results-facet-checkbox {
+  position: absolute;
+  left: 0;
+  width: 0;
+  height: 0;
+  opacity: 0;
+}
+
+.custom-widget.search-results .search-results-facet-label {
+  display: inline-block;
+  width: 100%;
+  color: #000;
+  font-family: var(--body-font-family);
+  font-size: 14px;
+  font-weight: 400;
+  text-transform: capitalize;
+  cursor: pointer;
+}
+
+/* Empty checkbox square at the right edge (source 1.3rem, 1px solid #000). */
+.custom-widget.search-results .search-results-facet-checkbox + .search-results-facet-label::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 0;
+  width: 13px;
+  height: 13px;
+  border: 1px solid #000;
+  background-color: transparent;
+  transform: translateY(-50%);
+}
+
+/* Checked: black square with a white check glyph. */
+.custom-widget.search-results .search-results-facet-checkbox:checked + .search-results-facet-label::before {
+  content: "\2713";
+  border-color: #000;
+  background-color: #000;
+  color: #fff;
+  font-size: 9px;
+  font-weight: 800;
+  line-height: 13px;
+  text-align: center;
+}
+
+/* ---- Mobile filters toggle + modal ---- */
+
+/* Mobile-first: a "Filters" button opens a full-screen modal (the gray desktop
+   panel is hidden above). Both flip at the desktop breakpoint below. */
+.custom-widget.search-results .search-results-filters-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 12px 20px; /* shorter bar, matches source height */
+  border: 1px solid #c4c4c4;
+  background: transparent;
+  color: var(--text-color);
+  font-family: var(--heading-font-family);
+  font-size: 16px;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.custom-widget.search-results .search-results-filters-icon {
+  width: 18px;
+  height: 18px;
+}
+
+/* Full-screen gray modal that slides in from the top (source .more-filter-
+   content__filter-group: fixed inset 0, #e6e7e8, padding 1rem, scrollable).
+   The panel slides in from the top (source uses transition: all on the fixed
+   panel); it starts translated fully off the top and animates to 0. */
+.custom-widget.search-results .search-results-filter-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  padding: 10px;
+  overflow-y: auto;
+  background: #e6e7e8;
+  transform: translateY(-100%);
+  visibility: hidden;
+  transition: transform 0.4s ease, visibility 0.4s ease;
+}
+
+.custom-widget.search-results .search-results-filter-modal.is-open {
+  transform: translateY(0);
+  visibility: visible;
+}
+
+.custom-widget.search-results .search-results-modal-close-row {
+  text-align: right;
+}
+
+.custom-widget.search-results .search-results-modal-close {
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #000;
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.custom-widget.search-results .search-results-modal-clear-row {
+  margin-top: 15px; /* separate "Clear all filters" from the X above (source gap) */
+  margin-bottom: 10px;
+  text-align: right;
+}
+
+/* Green "Apply" button (source .filter-group__apply-button #7ac143, pill). */
+.custom-widget.search-results .search-results-apply {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-top: 20px;
+  padding: 13px 0; /* source: 40px tall */
+  border: 0;
+  border-radius: 0; /* source Apply is a rectangle (green container, no radius) */
+  background: var(--accent-color); /* #7ac143 */
+  color: #000;
+  font-family: var(--heading-font-family);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.custom-widget.search-results .search-results-apply:hover,
+.custom-widget.search-results .search-results-apply:focus {
+  background: var(--accent-color-hover); /* #27853c */
+  color: #fff;
+}
+
+.custom-widget.search-results .search-results-apply-chevron {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin-left: 8px;
+  border-top: 2px solid currentcolor;
+  border-right: 2px solid currentcolor;
+  transform: translateY(-1px) rotate(45deg);
+}
+
+/* No-results message (source .no-result-section h2: 2rem, left-aligned). */
+.custom-widget.search-results .search-results-empty {
+  margin: 20px 0 0;
+  font-family: var(--heading-font-family);
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 1.3;
+  color: var(--text-color);
+}
+
+.custom-widget.search-results .search-results-empty[hidden] {
+  display: none;
+}
+
+/* ---- Main results column ---- */
+
+/* Counter row: "Showing X of Y" + "Show N" select (source .result-counter). */
+.custom-widget.search-results .search-results-counter {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 25px;
+}
+
+.custom-widget.search-results .search-results-showing {
   font-family: var(--heading-font-family);
   font-size: 14px;
   font-weight: 500;
-  line-height: 1.3;
   color: var(--text-color);
+}
+
+.custom-widget.search-results .search-results-show {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--body-font-family);
+  font-size: 16px;
+  color: var(--text-color);
+}
+
+/* Native select styled as the source's bordered dropdown (source: 1px #c4c4c4,
+   4rem tall, 6rem wide, custom chevron). */
+.custom-widget.search-results .search-results-show-select {
+  height: 40px;
+  width: 60px;
+  padding: 0 20px 0 10px;
+  border: 1px solid #c4c4c4;
+  background-color: transparent;
+
+  /* custom chevron on the right */
+  background-image:
+    linear-gradient(45deg, transparent 50%, #000 50%),
+    linear-gradient(135deg, #000 50%, transparent 50%);
+  background-position:
+    calc(100% - 14px) 17px,
+    calc(100% - 9px) 17px;
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+  color: var(--text-color);
+  font-family: var(--body-font-family);
+  font-size: 16px;
+  appearance: none;
+  cursor: pointer;
 }
 
 .custom-widget.search-results .search-results-list {
@@ -759,7 +1133,7 @@
   list-style: none;
 }
 
-/* one result */
+/* one result (source .list__card-item: 3.5rem vertical padding at desktop) */
 .custom-widget.search-results .search-results-item {
   margin: 0;
   padding: 20px 0;
@@ -821,15 +1195,79 @@
   color: #000;
 }
 
-/* display URL / breadcrumb — source styles it as a plain result paragraph */
-.custom-widget.search-results .search-results-url {
-  display: block;
-  margin-bottom: 0;
-  font-family: var(--body-font-family);
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 1.3;
+/* ---- Pagination (source .search-results__pagination) ---- */
+
+/* Top pagination sits between the counter and results (source top-paging:
+   2.5rem top / 3rem bottom). Bottom pagination follows the last result
+   (source bot-paging: 3.5rem top). */
+.custom-widget.search-results .search-results-pagination-top {
+  margin: 25px 0 30px;
+}
+
+.custom-widget.search-results .search-results-pagination-bottom {
+  margin-top: 35px;
+}
+
+.custom-widget.search-results .search-results-pagination ul {
+  display: flex;
+  justify-content: center;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.custom-widget.search-results .search-results-pagination li {
+  margin: 0;
+  padding: 0;
+}
+
+.custom-widget.search-results .search-results-pagination li::before {
+  display: none;
+}
+
+.custom-widget.search-results .search-results-pagination button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: 1px solid #c4c4c4;
+  background: transparent;
   color: var(--text-color);
+  font-family: var(--body-font-family);
+  font-size: 12px;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.custom-widget.search-results .search-results-pagination button.active {
+  background: #000;
+  color: #fff;
+  pointer-events: none;
+}
+
+.custom-widget.search-results .search-results-pagination button.disabled {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+/* chevron glyphs for prev/next */
+.custom-widget.search-results .search-results-chevron {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-top: 1.5px solid currentcolor;
+  border-right: 1.5px solid currentcolor;
+}
+
+.custom-widget.search-results .search-results-chevron-left {
+  transform: rotate(-135deg);
+}
+
+.custom-widget.search-results .search-results-chevron-right {
+  transform: rotate(45deg);
 }
 
 @media (width >= 900px) {
@@ -839,7 +1277,73 @@
   }
 
   .custom-widget.search-results {
-    padding: 10px 0;
+    margin-left: auto; /* reset mobile full-bleed negative margins */
+    margin-right: auto;
+    padding: 0 0 10px;
+  }
+
+  /* Desktop hero: taller band, left-aligned title, larger field
+     (source .search-hero min-height 373px, padding-top 8rem, field 3rem). */
+  .custom-widget.search-results .search-results-hero {
+    min-height: 373px;
+    padding: 80px 0 0;
+  }
+
+  .custom-widget.search-results .search-results-hero-content {
+    padding: 0 20px;
+  }
+
+  .custom-widget.search-results .search-results-hero-title {
+    font-size: 18px;
+    text-align: left;
+  }
+
+  .custom-widget.search-results .search-results-hero-form {
+    margin-top: 16px;
+  }
+
+  .custom-widget.search-results .search-results-hero-field {
+    font-size: 30px;
+  }
+
+  /* Desktop: show the gray facet panel inline; hide the mobile Filters toggle
+     and modal. */
+  .custom-widget.search-results .search-results-filter-panel {
+    display: block;
+  }
+
+  .custom-widget.search-results .search-results-filters-toggle {
+    display: none;
+  }
+
+  .custom-widget.search-results .search-results-filter-modal {
+    display: none;
+  }
+
+  /* Desktop restores the "Results: N" / "Clear all filters" split heading. */
+  .custom-widget.search-results .search-results-filter-heading {
+    justify-content: space-between;
+  }
+
+  .custom-widget.search-results .search-results-filter-heading .search-results-clear {
+    display: inline;
+  }
+
+  /* Two-column layout: fixed ~320px sidebar + flexible results column. */
+  .custom-widget.search-results .search-results-layout {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 40px;
+  }
+
+  .custom-widget.search-results .search-results-sidebar {
+    flex: 0 0 320px;
+    max-width: 320px;
+  }
+
+  .custom-widget.search-results .search-results-main {
+    flex: 1 1 auto;
+    min-width: 0;
   }
 
   .custom-widget.search-results .search-results-item {
