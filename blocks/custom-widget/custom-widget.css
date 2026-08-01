@@ -380,15 +380,20 @@
   padding: 0;
 }
 
+/* Full-width accordion row with a top divider and the +/- icon at the far right
+   (source .accordion-btn: full width, 1px solid #c4c4c4 top border, ~54px tall,
+   Roboto Slab 14px/700). */
 .custom-widget.news-archive .custom-widget-news-archive-btn {
   position: relative;
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  width: auto;
+  justify-content: space-between;
+  width: 100%;
   margin: 0;
-  padding: 0;
+  padding: 18px 0;
   background-color: transparent;
   border: 0;
+  border-top: 1px solid #c4c4c4;
   color: rgb(0 0 0);
   font-family: var(--heading-font-family);
   font-size: 14px;
@@ -400,7 +405,7 @@
 
 .custom-widget.news-archive .custom-widget-news-archive-year {
   display: block;
-  margin: 17px 17px 17px 0;
+  margin: 0;
   color: rgb(0 0 0);
   font-family: var(--heading-font-family);
   font-size: 14px;
@@ -408,12 +413,11 @@
   line-height: normal;
 }
 
-/* Plus / minus indicator: two 13x3px black bars hanging 13px right of the
-   label, vertically centred on the row (source: right:-13px; top:26.5px) */
+/* Plus / minus indicator: two 13x3px black bars at the far right of the row,
+   vertically centred (source aligns the icon to the right edge). */
 .custom-widget.news-archive .custom-widget-news-archive-icon {
-  position: absolute;
-  top: 50%;
-  right: -13px;
+  position: relative;
+  flex: 0 0 auto;
   width: 13px;
   height: 3px;
 }
@@ -442,10 +446,11 @@
   opacity: 0;
 }
 
-/* Year body */
+/* Year body: holds either a text link-list (press-releases style) or a cover
+   image + green download button (catalagram-archive style). */
 .custom-widget.news-archive .custom-widget-news-archive-body {
-  margin: 0 0 21px;
-  padding: 0;
+  margin: 0;
+  padding: 20px 0 30px 20px; /* source indents body content 20px from the year */
 }
 
 .custom-widget.news-archive .custom-widget-news-archive-body[hidden] {
@@ -464,7 +469,10 @@
   margin-bottom: 0;
 }
 
-.custom-widget.news-archive .custom-widget-news-archive-body a {
+/* Text release links (press-releases variant) are underlined; catalagram
+   download links are styled as a green button (below), so scope this to plain
+   paragraph links only. */
+.custom-widget.news-archive .custom-widget-news-archive-body p a {
   color: rgb(0 0 0);
   font-family: var(--body-font-family);
   font-size: 14px;
@@ -473,9 +481,58 @@
   text-decoration: underline;
 }
 
-.custom-widget.news-archive .custom-widget-news-archive-body a:hover,
-.custom-widget.news-archive .custom-widget-news-archive-body a:focus {
+.custom-widget.news-archive .custom-widget-news-archive-body p a:hover,
+.custom-widget.news-archive .custom-widget-news-archive-body p a:focus {
   color: var(--link-hover-color);
+}
+
+/* ---- Catalagram cover image (source ~272px portrait cover) ---- */
+.custom-widget.news-archive .custom-widget-news-archive-body picture,
+.custom-widget.news-archive .custom-widget-news-archive-body img {
+  display: block;
+  width: 100%;
+  max-width: 272px;
+  height: auto;
+  margin: 0 0 30px;
+}
+
+/* ---- Green "Download …" button (source .learn-more #7ac143, Roboto Slab
+   14px/600, black text, 18px/30px padding, rectangle). Author it as a strong or
+   em link so decorateButtons turns it into a .button, then style it green. ---- */
+.custom-widget.news-archive .custom-widget-news-archive-body .button-wrapper {
+  margin: 0;
+}
+
+.custom-widget.news-archive .custom-widget-news-archive-body a.button {
+  display: inline-flex;
+  align-items: center;
+  padding: 18px 30px;
+  border-radius: 0;
+  background-color: var(--accent-color); /* #7ac143 */
+  color: #000;
+  font-family: var(--heading-font-family);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+  text-decoration: none;
+}
+
+.custom-widget.news-archive .custom-widget-news-archive-body a.button:hover,
+.custom-widget.news-archive .custom-widget-news-archive-body a.button:focus {
+  background-color: var(--accent-color-hover); /* #27853c */
+  color: #fff;
+}
+
+/* trailing chevron after the download label (source uses a › glyph) */
+.custom-widget.news-archive .custom-widget-news-archive-body a.button::after {
+  content: "";
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  margin-left: 10px;
+  border-top: 2px solid currentcolor;
+  border-right: 2px solid currentcolor;
+  transform: translateY(-1px) rotate(45deg);
 }
 
 /* ===================== Variant: search-filter ===================== */
