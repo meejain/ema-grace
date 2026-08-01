@@ -34,9 +34,10 @@ export default function decorate(block) {
   const tiles = [];
 
   productRows.forEach((row, i) => {
-    const cells = [...row.children];
-    // cells: [image][title][description][link] — image cell is intentionally unused
-    const [, titleCell, descCell, linkCell] = cells;
+    // Cells are [title][description][link]. The source design uses no imagery,
+    // so if an author left a leading image cell, drop it before mapping.
+    const cells = [...row.children].filter((c, idx) => !(idx === 0 && c.querySelector('picture, img')));
+    const [titleCell, descCell, linkCell] = cells;
 
     const title = (titleCell?.textContent || '').trim();
     const sourceLink = linkCell?.querySelector('a');

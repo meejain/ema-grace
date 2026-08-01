@@ -69,9 +69,9 @@
 .featured.product-selector .featured-product-selector-title {
   margin: 0;
   font-family: var(--heading-font-family);
-  font-size: 18px;
+  font-size: 16px; /* mobile 16px; desktop bumps to 18px */
   font-weight: 600;
-  line-height: 30.6px;
+  line-height: 1.3;
   color: inherit;
 }
 
@@ -101,57 +101,118 @@
 @media (width >= 900px) {
   .featured.product-selector {
     flex-direction: row;
-    align-items: stretch;
+
+    /* centre the 160px label tile against the 224px tile row so it lines up
+       with the dark tiles (which are centred in that row) instead of sitting
+       higher/top-aligned. */
+    align-items: center;
   }
 
+  /* label sits in its own white tile that floats above the strip with a soft
+     shadow (source: white bg, 0 4px 8px + 0 6px 20px black shadows). */
   .featured.product-selector .featured-product-selector-label {
     box-sizing: border-box;
     flex: 0 0 223px;
     width: 223px;
     min-width: 0;
+    height: 160px;
     margin-bottom: 0;
     padding: 0 45px;
+    background-color: var(--white);
+    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+    position: relative;
+    z-index: 3; /* keep the label tile above the dark strip */
   }
 
+  /* Reserve the expanded height (224px) on the row so a hovered tile can pop
+     out without shifting the content below. Tiles sit 160px tall, centred in
+     that band (source: dark tiles 160px, list track lets the hovered card
+     overflow to 224px). */
   .featured.product-selector .featured-product-selector-list {
     flex: 1 1 auto;
     flex-direction: row;
+    align-items: center;
     gap: 0;
+    min-height: 224px;
   }
 
   .featured.product-selector .featured-product-selector-tile {
     flex: 1 1 0;
     min-height: 160px;
-    overflow: hidden;
+    height: 160px;
+    overflow: visible; /* let the expanded card pop out over neighbours */
+
+    /* thin grey separators between tiles (source: 1px solid #5f6062) */
+    border-right: 1px solid rgb(95 96 98);
+  }
+
+  .featured.product-selector .featured-product-selector-tile:last-child {
+    border-right: 0;
+  }
+
+  /* The content layer carries the tile's look. Normally it fills the 160px
+     dark tile (transparent, showing the dark tile behind); on hover it turns
+     into a white 224px card, centred vertically, that overlaps neighbours. */
+  .featured.product-selector .featured-product-selector-title {
+    font-size: 18px; /* desktop title 18px (source) */
+    line-height: 30.6px;
   }
 
   .featured.product-selector .featured-product-selector-content {
+    box-sizing: border-box;
     justify-content: center;
     padding: 24px 20px;
+    background-color: transparent;
+    transition: background-color var(--transition-speed) ease,
+      box-shadow var(--transition-speed) ease,
+      min-height var(--transition-speed) ease;
   }
 
-  /* details are hidden on desktop until the tile is selected/hovered */
+  /* details are removed from flow on desktop until the tile is hovered/focused
+     — using display:none (not opacity) so the collapsed tile centres its title
+     on its own instead of centring the whole title+desc+cta group (which would
+     push the title to the top). */
   .featured.product-selector .featured-product-selector-desc,
   .featured.product-selector .featured-product-selector-cta {
-    opacity: 0;
-    transition: opacity var(--transition-speed) ease;
+    display: none;
   }
 
-  /* active/hover: tile turns light, text goes dark, details revealed */
+  /* hover/focus: raise the tile so its card overlaps siblings */
   .featured.product-selector .featured-product-selector-tile:hover,
-  .featured.product-selector .featured-product-selector-tile:focus-visible,
-  .featured.product-selector .featured-product-selector-tile[aria-selected="true"] {
+  .featured.product-selector .featured-product-selector-tile:focus-within {
+    z-index: 2;
     color: var(--text-color);
+  }
+
+  /* the white card grows centred to 224px, gains a shadow, and reveals text */
+  .featured.product-selector .featured-product-selector-tile:hover .featured-product-selector-content,
+  .featured.product-selector .featured-product-selector-tile:focus-within .featured-product-selector-content {
+    top: 50%;
+    bottom: auto;
+    min-height: 224px;
+    transform: translateY(-50%);
     background-color: var(--white);
     box-shadow: 0 0 12px 0 rgb(0 0 0 / 20%);
   }
 
+  /* on hover the title truncates to a single line with an ellipsis (source:
+     nowrap + text-overflow: ellipsis, e.g. "LUDOX® Colloidal Sil...") so the
+     revealed description + CTA fit within the expanded card. */
+  .featured.product-selector .featured-product-selector-tile:hover .featured-product-selector-title,
+  .featured.product-selector .featured-product-selector-tile:focus-within .featured-product-selector-title {
+    max-width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
   .featured.product-selector .featured-product-selector-tile:hover .featured-product-selector-desc,
-  .featured.product-selector .featured-product-selector-tile:focus-visible .featured-product-selector-desc,
-  .featured.product-selector .featured-product-selector-tile[aria-selected="true"] .featured-product-selector-desc,
+  .featured.product-selector .featured-product-selector-tile:focus-within .featured-product-selector-desc {
+    display: block;
+  }
+
   .featured.product-selector .featured-product-selector-tile:hover .featured-product-selector-cta,
-  .featured.product-selector .featured-product-selector-tile:focus-visible .featured-product-selector-cta,
-  .featured.product-selector .featured-product-selector-tile[aria-selected="true"] .featured-product-selector-cta {
-    opacity: 1;
+  .featured.product-selector .featured-product-selector-tile:focus-within .featured-product-selector-cta {
+    display: inline-block;
   }
 }
