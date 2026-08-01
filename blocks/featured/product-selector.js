@@ -105,4 +105,43 @@ export default function decorate(block) {
 
   block.textContent = '';
   block.append(label, list);
+
+  // Mobile: the tiles become a swipeable single-card carousel (CSS turns the
+  // list into a horizontal scroll-snap track below 900px). Add dot pagination
+  // that tracks the scroll position; CSS hides the dots on desktop.
+  if (tiles.length > 1) {
+    const dots = document.createElement('div');
+    dots.className = 'featured-product-selector-dots';
+    dots.setAttribute('role', 'tablist');
+
+    tiles.forEach((tile, i) => {
+      const dot = document.createElement('button');
+      dot.type = 'button';
+      dot.className = 'featured-product-selector-dot';
+      dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
+      dot.addEventListener('click', () => {
+        tile.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      });
+      dots.append(dot);
+    });
+    block.append(dots);
+
+    const setActiveDot = (idx) => {
+      [...dots.children].forEach((dot, i) => {
+        const active = i === idx;
+        dot.classList.toggle('active', active);
+        dot.setAttribute('aria-selected', active ? 'true' : 'false');
+      });
+    };
+    setActiveDot(0);
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && entry.intersectionRatio >= 0.6) {
+          setActiveDot(tiles.indexOf(entry.target));
+        }
+      });
+    }, { root: list, threshold: 0.6 });
+    tiles.forEach((tile) => observer.observe(tile));
+  }
 }
