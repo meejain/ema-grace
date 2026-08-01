@@ -1,20 +1,22 @@
 /**
  * Map Embedded block.
  *
- * Renders a keyless, responsive map for a facility location using an
- * OpenStreetMap iframe embed (no API key required, renders locally).
+ * Renders a responsive Google Maps embed for a facility location using the
+ * keyless `maps.google.com/maps?q=...&output=embed` URL — the same method the
+ * source (grace.com facility pages) uses, so it shows real Google tiles and a
+ * red pin with no API key required.
  *
  * Authored structure (EDS block table). Cells are read by role:
- *  - a "lat,long" coordinate cell (e.g. "42.4030,-86.2739") drives the map center
+ *  - a "lat,long" coordinate cell (e.g. "42.4030,-86.2739") sets a fallback
+ *    center / zoom when no address is authored
  *  - a cell with a facility name (heading or strong text)
  *  - a cell with the address / phone text becomes the caption
- * Order-independent: coordinates are detected by pattern, remaining text is
- * used for the caption. If no coordinates are authored, South Haven, MI is
- * used as a graceful default.
+ * The Google embed is queried by facility name + address when available so the
+ * pin lands on the actual business listing; coordinates are the fallback.
  */
 
 const DEFAULT_COORDS = { lat: 42.403, lng: -86.2739 };
-const DEFAULT_ZOOM = 14;
+const DEFAULT_ZOOM = 13;
 
 /** Parse a "lat,long" (optionally with trailing zoom "lat,long,zoom") string. */
 function parseCoords(text) {
@@ -31,20 +33,22 @@ function parseCoords(text) {
   return { lat, lng, zoom };
 }
 
-/** Build an OpenStreetMap embed URL centered on coords with a marker. */
-function buildOsmSrc({ lat, lng }, zoom) {
-  // bbox sized from zoom so the marker sits roughly centered
-  const span = 360 / 2 ** zoom;
-  const left = (lng - span).toFixed(6);
-  const right = (lng + span).toFixed(6);
-  const top = (lat + span / 2).toFixed(6);
-  const bottom = (lat - span / 2).toFixed(6);
+/**
+ * Build a keyless Google Maps embed URL. Uses the facility query (name +
+ * address) when available so the red pin lands on the business listing;
+ * otherwise centers on the authored coordinates. Mirrors the source embed:
+ * https://maps.google.com/maps?q=...&z=13&output=embed
+ */
+function buildGoogleSrc({ lat, lng }, zoom, query) {
+  const q = query || `${lat},${lng}`;
   const params = new URLSearchParams({
-    bbox: `${left},${bottom},${right},${top}`,
-    layer: 'mapnik',
-    marker: `${lat},${lng}`,
+    q,
+    z: String(zoom),
+    ie: 'UTF8',
+    iwloc: '',
+    output: 'embed',
   });
-  return `https://www.openstreetmap.org/export/embed.html?${params.toString()}`;
+  return `https://maps.google.com/maps?${params.toString()}`;
 }
 
 export default function decorate(block) {
@@ -52,6 +56,7 @@ export default function decorate(block) {
   let coords = null;
   const captionNodes = [];
   let title = '';
+  let addressText = '';
 
   rows.forEach((row) => {
     [...row.children].forEach((cell) => {
@@ -65,6 +70,18 @@ export default function decorate(block) {
         const strong = cell.querySelector('strong');
         if (!title && (heading || strong)) {
           title = (heading || strong).textContent.trim();
+        }
+        // capture the street/city line for the maps query (the paragraph that
+        // follows an "ADDRESS:" heading, or the first plain address-looking p)
+        const addrP = cell.querySelector('h5 + p, p');
+        if (!addressText && addrP && /\d/.test(addrP.textContent)
+          && !/phone/i.test(addrP.previousElementSibling?.textContent || '')) {
+          // <br> inside the address must become a space, not collapse two
+          // lines into one word ("StreetSouth Haven").
+          const withBreaks = addrP.innerHTML.replace(/<br\s*\/?>/gi, ', ');
+          const tmp = document.createElement('div');
+          tmp.innerHTML = withBreaks;
+          addressText = tmp.textContent.replace(/\s+/g, ' ').trim();
         }
         captionNodes.push(...cell.childNodes);
       }
@@ -102,11 +119,18 @@ export default function decorate(block) {
   const frame = document.createElement('div');
   frame.className = 'map-embedded-frame';
 
+  // Query by facility name + address so the red pin lands on the business
+  // listing (as the source does); coordinates are the fallback. The Google
+  // embed renders its own "Open in Maps" / "View larger map" controls, exactly
+  // like the source, so no separate overlay button is needed.
+  const mapsQuery = [title, addressText].filter(Boolean).join(', ');
+
   const iframe = document.createElement('iframe');
   iframe.className = 'map-embedded-iframe';
   iframe.setAttribute('loading', 'lazy');
   iframe.setAttribute('title', title ? `Map of ${title}` : 'Location map');
-  iframe.setAttribute('src', buildOsmSrc(center, zoom));
+  iframe.setAttribute('src', buildGoogleSrc(center, zoom, mapsQuery));
   frame.append(iframe);
+
   block.append(frame);
 }

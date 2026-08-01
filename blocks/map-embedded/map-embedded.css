@@ -35,6 +35,7 @@
   display: block;
 }
 
+
 /* Caption: facility name, address, phone - matches source black type */
 .map-embedded .map-embedded-caption {
   margin: 0;
@@ -51,7 +52,7 @@
 
 /* Facility name renders like the source <strong>: 14px bold */
 .map-embedded .map-embedded-title {
-  margin: 0 0 var(--spacing-s);
+  margin: 0 0 25px;
   font-family: var(--body-font-family);
   font-size: var(--body-font-size-m);
   font-weight: 700;
@@ -59,16 +60,36 @@
   color: var(--text-color);
 }
 
+/* "ADDRESS:" / "PHONE:" labels — small uppercase-style headings (source h5:
+   10px, weight 500, black, tight bottom gap above the value paragraph). */
+.map-embedded .map-embedded-caption h5 {
+  margin: 0 0 7.5px;
+  font-family: var(--body-font-family);
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 1.7;
+  color: var(--text-color);
+}
+
+/* space between the address value and the next PHONE label (source ~20px) */
+.map-embedded .map-embedded-caption h5:not(:first-child) {
+  margin-top: 20px;
+}
+
 /* Desktop: caption left (~1/3), fixed map right, top-aligned, 40px gutter */
 @media (width >= 900px) {
   .map-embedded {
     flex-direction: row;
     align-items: flex-start;
+    justify-content: flex-start;
     gap: 40px;
   }
 
+  /* caption is a fixed ~1/3 column (source ~196px within the content box), map
+     sits immediately to its right with the 40px gutter — not pushed to the far
+     edge. Trailing space stays after the map, as in source. */
   .map-embedded .map-embedded-caption {
-    flex: 1 1 auto;
+    flex: 0 1 320px;
     order: 0;
   }
 
