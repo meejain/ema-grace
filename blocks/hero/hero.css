@@ -442,9 +442,12 @@
     box-sizing: border-box;
   }
 
+  /* Align the hero content column with the Grace logo and the body content
+     below — both sit at max(20px, calc((100% - 1240px) / 2)) from the left. */
   .hero.product > div:last-child {
-    max-width: 1280px;
-    padding: 0 20px 0 100px;
+    max-width: none;
+    margin: 0 0 0 max(20px, calc((100% - 1240px) / 2));
+    padding: 0;
   }
 
   .hero.product h1 {

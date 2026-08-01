@@ -1,0 +1,212 @@
+/* Carousel block family: variants scoped to .carousel.{variant}. */
+/* stylelint-disable no-descending-specificity */
+
+/* ===================== Base carousel ===================== */
+
+/* Editorial featured highlight carousel.
+   Mirrors grace.com/insights/ generic-hero blog-landing featured module.
+   Source base: html font-size 62.5% (1rem = 10px). */
+
+.carousel {
+  position: relative;
+  width: 100%;
+}
+
+.carousel .carousel-track {
+  position: relative;
+  overflow: hidden;
+}
+
+/* one slide = full-bleed image with left-aligned overlay content */
+.carousel .carousel-slide {
+  position: relative;
+  display: none;
+  min-height: 400px;
+  padding: 60px 20px 40px;
+  box-sizing: border-box;
+  overflow: hidden;
+  font-family: var(--heading-font-family);
+  color: var(--white);
+}
+
+.carousel .carousel-slide.is-active {
+  display: flex;
+  align-items: flex-start;
+}
+
+/* background image fills the slide */
+.carousel .carousel-media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.carousel .carousel-media picture,
+.carousel .carousel-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* gradient overlay: mobile darkens from top */
+.carousel .carousel-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background-image: linear-gradient(to bottom, #000 70%, transparent 100%);
+  opacity: 0.5;
+}
+
+.carousel .carousel-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  align-self: center;
+}
+
+/* category label (source .h5: Roboto, 10px, weight 500, lh 17px) */
+.carousel .carousel-category {
+  margin: 0 0 7.5px;
+  font-family: var(--body-font-family);
+  font-size: var(--heading-font-size-xs); /* 10px */
+  font-weight: 500;
+  line-height: 1.7; /* 17px */
+  text-transform: uppercase;
+  color: var(--white);
+}
+
+/* title (source <h1>: 30px mobile lh 34.2px weight 100) */
+.carousel .carousel-title {
+  margin: 0 0 22.5px;
+  font-family: var(--heading-font-family);
+  font-size: var(--heading-font-size-xxl); /* 30px mobile */
+  font-weight: 100;
+  line-height: 1.14; /* 34.2px */
+  color: var(--white);
+}
+
+/* excerpt (source .hero__copy: 20px, weight 300, lh 26px mobile) */
+.carousel .carousel-excerpt {
+  margin: 0 0 30px;
+  font-family: var(--heading-font-family);
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 1.3; /* 26px */
+  color: var(--white);
+}
+
+/* CTA - reuse global primary button (Grace green #7ac143 with › arrow) */
+.carousel .carousel-cta.button.primary {
+  margin-top: 20px;
+  width: 100%;
+  padding: 13px;
+  box-sizing: border-box;
+}
+
+/* nav bar below the stage: text controls on the left, dots centered */
+.carousel .carousel-nav {
+  position: relative;
+  padding: 12px 20px 0;
+}
+
+/* Previous / Next / Pause / Play — plain text buttons (source: 14px, bold,
+   black, no background/border). The active-mode button is disabled + greyed. */
+.carousel .carousel-controls {
+  display: flex;
+  gap: 12px;
+}
+
+.carousel .carousel-control {
+  padding: 0;
+  border: 0;
+  background: none;
+  font-family: var(--body-font-family);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.7;
+  color: var(--text-color);
+  cursor: pointer;
+}
+
+.carousel .carousel-control:hover {
+  color: var(--accent-color-hover);
+}
+
+.carousel .carousel-control:disabled {
+  color: rgb(0 0 0 / 35%);
+  cursor: default;
+}
+
+/* dot indicators, centered below the controls */
+.carousel .carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.carousel .carousel-dot {
+  width: 10px;
+  height: 10px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgb(0 0 0 / 25%);
+  cursor: pointer;
+  transition: background var(--transition-speed) ease;
+}
+
+.carousel .carousel-dot.is-active {
+  background: var(--accent-color);
+}
+
+/* tablet: source stays mobile-style (bottom gradient, full-width content) */
+@media (width >= 600px) {
+  .carousel .carousel-slide {
+    padding: 80px 20px 60px;
+  }
+}
+
+/* desktop: gradient shifts to horizontal, content constrained to left ~46% */
+@media (width >= 900px) {
+  .carousel .carousel-slide {
+    min-height: 668px;
+    padding: 120px 0 100px 85px;
+  }
+
+  .carousel .carousel-overlay {
+    background-image: linear-gradient(to right, #000 0, transparent 100%);
+    opacity: 1;
+  }
+
+  .carousel .carousel-content {
+    width: 50%; /* source content ~557.5px within 1115px content box */
+  }
+
+  .carousel .carousel-category {
+    margin-bottom: 7.5px;
+  }
+
+  .carousel .carousel-title {
+    font-size: var(--heading-font-size-xxl); /* 42px desktop */
+    line-height: 1.07; /* 45px */
+    margin-bottom: 31.5px;
+  }
+
+  .carousel .carousel-excerpt {
+    line-height: 1.7; /* 34px */
+  }
+
+  .carousel .carousel-cta.button.primary {
+    width: auto;
+    margin-top: 0;
+    padding: 18px 30px;
+  }
+
+  /* dots align to the right edge / controls to the left, source keeps controls
+     left-aligned with the stage and dots centered below the full width */
+  .carousel .carousel-nav {
+    padding: 16px 0 0;
+  }
+}
