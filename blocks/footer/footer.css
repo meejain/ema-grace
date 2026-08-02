@@ -31,6 +31,14 @@ footer .footer a:hover {
   text-decoration: underline;
 }
 
+/* quick-links: give each link a >=24px hit area (WCAG target-size) while
+   keeping the row visually compact */
+footer .footer ul a:any-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+}
+
 /* Quick links row */
 footer .footer ul {
   list-style: none;

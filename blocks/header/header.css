@@ -892,7 +892,9 @@ header nav[aria-expanded='true'] .nav-sections .default-content-wrapper {
 
   header .megamenu-category-item.active a,
   header .megamenu-category-item a:hover {
-    color: var(--accent-color-hover);
+    /* darker green than --accent-color-hover (#27853c = 3.76:1) so the
+       active/hover label clears WCAG AA 4.5:1 on the #e6e7e8 megamenu band */
+    color: #1e6b30;
   }
 
   header .megamenu-category-item.active {
