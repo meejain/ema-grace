@@ -21,6 +21,7 @@ const ICONS = {
   x: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M18.9 1.15h3.68l-8.04 9.19L24 22.85h-7.4l-5.8-7.58-6.64 7.58H.48l8.6-9.83L0 1.15h7.59l5.24 6.93 6.07-6.93Zm-1.29 19.5h2.04L6.48 3.24H4.29L17.61 20.65Z"/></svg>',
   email: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M2 4h20c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H2c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2Zm10 7.42L21.6 5.4A.99.99 0 0 0 21 5.2H3c-.22 0-.42.07-.6.2L12 11.42Zm0 2.35L2.2 7.63c-.13.2-.2.43-.2.7V17c0 .55.45 1 1 1h18c.55 0 1-.45 1-1V8.33c0-.27-.07-.5-.2-.7L12 13.77Z"/></svg>',
   facebook: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.68.24 2.68.24v2.97h-1.51c-1.49 0-1.96.93-1.96 1.89v2.25h3.33l-.53 3.49h-2.8V24C19.61 23.1 24 18.1 24 12.07Z"/></svg>',
+  print: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M19 8H5c-1.66 0-3 1.34-3 3v6h4v4h12v-4h4v-6c0-1.66-1.34-3-3-3Zm-3 11H8v-5h8v5Zm3-7a1 1 0 1 1 0-2 1 1 0 0 1 0 2Zm-1-9H6v3h12V3Z"/></svg>',
 };
 
 /* Network definitions: aliases, aria label, and share URL builder. */
@@ -49,9 +50,16 @@ const NETWORKS = {
     icon: ICONS.facebook,
     url: (u) => `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(u)}`,
   },
+  print: {
+    aliases: ['print'],
+    label: 'Print',
+    icon: ICONS.print,
+    url: () => '#',
+  },
 };
 
-const DEFAULT_ORDER = ['linkedin', 'x', 'email', 'facebook'];
+/* Source order: Facebook, X, LinkedIn, Email, Print. */
+const DEFAULT_ORDER = ['facebook', 'x', 'linkedin', 'email', 'print'];
 
 function resolveNetwork(token) {
   const key = token.trim().toLowerCase();
@@ -96,7 +104,9 @@ export default function decorate(block) {
     link.title = net.label;
     link.setAttribute('aria-label', net.label);
     link.dataset.channel = key;
-    if (key !== 'email') {
+    if (key === 'print') {
+      link.addEventListener('click', (e) => { e.preventDefault(); window.print(); });
+    } else if (key !== 'email') {
       link.target = '_blank';
       link.rel = 'noopener noreferrer';
     }
@@ -104,11 +114,11 @@ export default function decorate(block) {
     container.append(link);
   });
 
-  if (label) {
-    const heading = document.createElement('span');
-    heading.className = 'social-share-label';
-    heading.textContent = label;
-    block.append(heading);
-  }
+  // Label renders ABOVE the icon row (source: "SHARE" heading). Default to
+  // "SHARE" when no explicit label is authored, matching the source.
+  const heading = document.createElement('span');
+  heading.className = 'social-share-label';
+  heading.textContent = label || 'SHARE';
+  block.append(heading);
   block.append(container);
 }

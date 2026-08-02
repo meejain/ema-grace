@@ -22,6 +22,7 @@ To create a new skill: read `writing-skills/SKILL.md` first, then copy the forma
 |-------|-----------|
 | [responsive-breakpoints](responsive-breakpoints/SKILL.md) | Writing or reviewing any CSS media query; a layout needs to adapt across mobile/tablet/desktop; tempted to use `max-width` or a non-standard breakpoint. Enforced by `tools/quality/breakpoint-check.mjs` |
 | [accessibility](accessibility/SKILL.md) | Building or reviewing any block/UI; adding an image (alt text); a CTA/form/nav/interactive element; heading structure; a focus ring. Enforced by `npm run test:a11y` |
+| [svg-assets](svg-assets/SKILL.md) | Adding an icon or inline SVG; committing an SVG under `icons/`; an SVG asset looks heavy. How SVGs are delivered + the Asset-Size Rule (rasterize oversized SVGs to 2x PNG). Enforced by `npm run check:svg` |
 | [security](security/SKILL.md) | Injecting author/external HTML (`innerHTML`); handling user/API/URL input; adding config; anything that could commit a secret or run dynamic code |
 | [eds-code-conventions](eds-code-conventions/SKILL.md) | Writing block CSS or JS; reviewing code for EDS standards; naming classes; deciding where code lives |
 

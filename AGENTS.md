@@ -24,7 +24,8 @@ These load-bearing rules are enforced by skills and by deterministic checkers. S
 - **Verify before claiming done.** Before writing "done"/"fixed"/"implemented", you MUST run the full quality gate and **paste the actual command output** for each — a completion claim without shown output is invalid:
   1. `npm run lint`
   2. `node tools/quality/breakpoint-check.mjs`
-  3. `npm run test:a11y <url>` — for any UI/CSS change (needs the dev server up + deps installed; if it genuinely cannot run, say so explicitly and run the other two).
+  3. `npm run check:svg` — when any SVG under `icons/` was added or changed (flags oversized SVGs; rasterize with `npm run convert:svg` — see `svg-assets`).
+  4. `npm run test:a11y <url>` — for any UI/CSS change (needs the dev server up + deps installed; if it genuinely cannot run, say so explicitly and run the others).
 
   Then confirm the change visually at `localhost:3000` and review the diff for dead code. If any check fails, fix it and re-run — this is a loop, not a one-shot report. Never assert a pass from memory. → `verify-before-claiming`, `quality-tooling`
 
@@ -150,6 +151,7 @@ Pages are progressively loaded in three phases to maximize performance. This pro
 ### Performance
 - Follow AEM Edge Delivery performance best practices https://www.aem.live/developer/keeping-it-100
 - Images uploaded by authors are automatically optimized, all images and assets committed to git must be optimized and checked for size
+- **SVG assets (enforced):** keep committed SVGs small — `npm run check:svg` flags any `icons/*.svg` over budget (warn > 8KB, fail > 40KB). A large/illustrative SVG usually ships smaller and renders identically as a rasterized 2x PNG; convert with `npm run convert:svg <page.plain.html>`. Small UI glyphs stay as SVG. See `skills/svg-assets`.
 - Use lazy loading for non-critical resources (`lazy-styles.css` and `delayed.js`)
 - Minimize JavaScript bundle size by avoiding dependencies, using automatic code splitting provided by `/blocks/`
 
