@@ -43,13 +43,10 @@
   width: 100%;
 }
 
-/* each authored row keeps the source 2px divider between rows */
+/* each authored row keeps the source 2px divider (source draws one under the
+   header, between rows, AND below the final row). */
 .table.contact-matrix tr {
   border-bottom: 2px solid rgb(196 196 196);
-}
-
-.table.contact-matrix tbody tr:last-child {
-  border-bottom: 0;
 }
 
 /* header row: Roboto Slab, light weight, black */
@@ -68,7 +65,8 @@
   padding-top: 0;
 }
 
-/* data cells: Roboto body, black text */
+/* data cells: Roboto body, black text. Lines within a cell stack tightly at
+   line-height 18.2px (source), so multi-line phone/industry lists don't spread. */
 .table.contact-matrix tbody td {
   padding: 20px 20px 0;
   font-size: var(--body-font-size-m);
@@ -82,19 +80,16 @@
   padding-bottom: 20px;
 }
 
-/* paragraph rhythm inside cells: 21px between lines, none after the last */
+/* Lines within a cell stack tightly — spacing comes from line-height only, NOT
+   inter-paragraph margin (source: each phone/industry line is one row of the
+   same block, no gap between them). */
 .table.contact-matrix th p,
 .table.contact-matrix td p {
-  margin: 0 0 21px;
+  margin: 0;
   font-size: inherit;
   font-weight: inherit;
   line-height: inherit;
   color: inherit;
-}
-
-.table.contact-matrix th p:last-child,
-.table.contact-matrix td p:last-child {
-  margin-bottom: 0;
 }
 
 /* phone / email links match source plain black text */
@@ -158,11 +153,6 @@
   .table.contact-matrix tbody td:last-child {
     padding-bottom: 20px;
   }
-
-  .table.contact-matrix tbody tr:last-child th,
-  .table.contact-matrix tbody tr:last-child td {
-    border-bottom: 0;
-  }
 }
 
 /* ===================== Variant: data-grid ===================== */
@@ -170,42 +160,31 @@
 /* Table Data Grid — dense multi-column data table.
    Tokens extracted from grace.com/cookie-policy computed styles:
    header bg #000 / #fff text; cells #fff bg / #000 text; 14px/400;
-   padding 7px 10.5px; 1px solid rgb(218,218,218) borders; text-align center;
-   no row striping; border-collapse. Source uses auto table-layout that always
-   fits its container (never scrolls); we use fixed layout with source column
-   proportions so the grid fills the width and wraps down to mobile safely. */
+   padding 7px 10.5px; 1px solid rgb(218,218,218) borders; text-align left;
+   no row striping; border-collapse. Source uses AUTO table-layout: columns keep
+   their natural width and the table overflows its container, which scrolls
+   horizontally on narrow viewports (the table does NOT crunch to fit). */
 
-/* mobile-first: table fills its container at every width — no forced
-   min-width, no horizontal scroll (matches source behavior) */
+/* the wrapper scrolls horizontally when the table is wider than the viewport
+   (source: overflow content in the rich-text container, ~730px table). */
 .table.data-grid .table-data-grid-scroll {
   width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .table.data-grid table {
   border-collapse: collapse;
-  table-layout: fixed;
+  table-layout: auto;
   width: 100%;
-  max-width: 100%;
+
+  /* keep columns readable — the table overflows and the wrapper scrolls rather
+     than crunching cells (source behaviour on mobile). */
+  min-width: 730px;
   margin: 0;
   background-color: transparent;
   font-family: var(--body-font-family);
   font-size: var(--body-font-size-m);
-}
-
-/* source column proportions (Name / Provider / Purpose / Expiry / Type):
-   ~21.5% / 17.2% / 26.7% / 17.2% / 17.2% at desktop */
-.table.data-grid tr > *:nth-child(1) {
-  width: 21.5%;
-}
-
-.table.data-grid tr > *:nth-child(2),
-.table.data-grid tr > *:nth-child(4),
-.table.data-grid tr > *:nth-child(5) {
-  width: 17.2%;
-}
-
-.table.data-grid tr > *:nth-child(3) {
-  width: 26.9%;
 }
 
 .table.data-grid th,
@@ -215,11 +194,7 @@
   font-size: var(--body-font-size-m);
   font-weight: 400;
   line-height: 1.7;
-  text-align: center;
-
-  /* let long unbreakable tokens wrap so the auto-layout table never forces
-     horizontal page overflow on narrow viewports (source wraps to fit too) */
-  overflow-wrap: break-word;
+  text-align: left;
 }
 
 /* header row: black background, white text */
