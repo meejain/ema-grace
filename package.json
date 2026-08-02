@@ -12,6 +12,7 @@
     "check:svg": "node tools/quality/svg-size-check.mjs",
     "convert:svg": "node skills/svg-assets/convert-svg-to-png.mjs",
     "test:a11y": "node tests/a11y/run.mjs",
+    "test:a11y:all": "node tests/a11y/run.mjs",
     "test:a11y:nav": "node tests/a11y/header-footer-states.mjs",
     "postinstall": "playwright install chromium || true"
   },

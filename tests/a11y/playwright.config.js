@@ -7,7 +7,7 @@ export default defineConfig({
   testDir: '.',
   testMatch: 'a11y.test.js',
   timeout: 60_000,
-  reporter: 'list',
+  reporter: './a11y.reporter.mjs',
   use: {
     headless: true,
   },
