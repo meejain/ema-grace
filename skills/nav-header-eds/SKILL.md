@@ -33,4 +33,11 @@ Nav uses `aria-expanded='true'` on desktop (set by `toggleMenu` on init). Mobile
 - Mobile: a nav-item click handler must guard against mega-panel clicks — `if (e.target.closest('.nav-mega-panel')) return;` — or clicks inside the panel bubble up and close the menu.
 - Nav often switches hamburger→full-nav at a *different* breakpoint than the content — use the sanctioned set (`responsive-breakpoints`) but pick the one where the nav actually breaks.
 
-See also: `css-specificity-eds` (the `aria-expanded` specificity issue), `css-pitfalls-eds` (sticky/overflow), `interaction-states-eds` (dropdown clipping + hover-vs-touch + focus).
+## Verify (after any header/nav change)
+The standard a11y gate (`npm run test:a11y`) only scans the page **as first loaded** — it never opens the hamburger or expands the nav, so interactive-state issues (unlabeled controls, focus, contrast in the open menu) slip through. Also run:
+```
+npm run test:a11y:nav [url]   # opens mobile nav + expands desktop nav, then runs axe
+```
+Fix any critical/serious violations before claiming the nav change done (`verify-before-claiming`).
+
+See also: `css-specificity-eds` (the `aria-expanded` specificity issue), `css-pitfalls-eds` (sticky/overflow), `accessibility` (focus, hover-vs-touch, dropdown clipping, the 8 interactive states).

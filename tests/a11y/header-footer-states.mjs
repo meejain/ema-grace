@@ -1,9 +1,13 @@
 /**
- * One-off a11y scan of header/footer INTERACTIVE states that the standard
- * page-load scan doesn't reach: mobile nav open, and desktop expanded nav.
+ * a11y scan of header/nav INTERACTIVE states that the standard page-load scan
+ * doesn't reach: mobile hamburger nav open, and desktop expanded/hovered nav.
+ * (Footers rarely have interactive states, so only the nav is exercised here;
+ * extend with a footer interaction if one is added.)
  * Uses the same axe tags + fail impacts as the gate (tests/a11y/a11y.config.js).
+ *
+ * Run after any header/nav change:  npm run test:a11y:nav [url]
  */
-import { chromium } from 'playwright';
+import { chromium } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 import config from './a11y.config.js';
 
@@ -63,4 +67,4 @@ if (total > 0) {
   console.error(`\nTotal critical/serious violations: ${total}`);
   process.exit(1);
 }
-console.log('\n✓ Header/footer interactive states passed (mobile open + desktop).');
+console.log('\n✓ Header/nav interactive states passed (mobile open + desktop).');
