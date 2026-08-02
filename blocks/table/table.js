@@ -68,7 +68,10 @@ function decorateThreeColumn(block) {
   dataRows.forEach((row) => tbody.append(buildRow(row, 'td')));
   table.append(thead);
   if (dataRows.length) table.append(tbody);
-  block.replaceChildren(table);
+  const scroller = document.createElement('div');
+  scroller.className = 'table-three-column-scroll';
+  scroller.append(table);
+  block.replaceChildren(scroller);
 }
 
 /* ---- link-list: header + link cells, EDS button decoration reversed ---- */
@@ -215,43 +218,25 @@ function decorateProductComparison(block) {
   block.replaceChildren(wrapper);
 }
 
-/* ---- two-column-content: auto-detect header row ---- */
-const BLOCK_LEVEL = 'UL, OL, DL, TABLE, IMG, PICTURE, H1, H2, H3, H4, H5, H6, BLOCKQUOTE';
-
-function isLabelCell(cell) {
-  if (cell.querySelector(BLOCK_LEVEL)) return false;
-  if (cell.querySelectorAll('p').length > 1) return false;
-  const text = cell.textContent.trim();
-  return text.length > 0 && text.length <= 60 && !text.includes('\n');
-}
-
-function isHeaderRow(row) {
-  const cells = [...row.children];
-  if (cells.length < 2) return false;
-  return cells.every(isLabelCell);
-}
-
+/* ---- two-column-content: side-by-side content columns (list + button) ----
+   Source (grace.com/products/davisil DAVISIL Sphere section) is a content
+   layout, not a data table: each authored cell becomes a column holding rich
+   content (bulleted lists, buttons). Cells flow row-major into a 2-column grid
+   that collapses to a single column on mobile. */
 function decorateTwoColumnContent(block) {
   const rows = [...block.children];
   if (!rows.length) return;
-  const table = document.createElement('table');
-  const tbody = document.createElement('tbody');
-  const buildRow = (row, tag) => {
-    const tr = document.createElement('tr');
-    [...row.children].slice(0, 2).forEach((cell) => tr.append(buildCell(cell, tag, { scope: tag === 'th' ? 'col' : undefined, unwrapP: true })));
-    return tr;
-  };
-  let dataRows = rows;
-  if (isHeaderRow(rows[0])) {
-    const thead = document.createElement('thead');
-    thead.append(buildRow(rows[0], 'th'));
-    table.append(thead);
-    dataRows = rows.slice(1);
-    block.classList.add('has-header');
-  }
-  dataRows.forEach((row) => tbody.append(buildRow(row, 'td')));
-  if (tbody.children.length) table.append(tbody);
-  block.replaceChildren(table);
+  const grid = document.createElement('div');
+  grid.className = 'table-two-column-content-grid';
+  rows.forEach((row) => {
+    [...row.children].forEach((cell) => {
+      const col = document.createElement('div');
+      col.className = 'table-two-column-content-cell';
+      while (cell.firstChild) col.append(cell.firstChild);
+      grid.append(col);
+    });
+  });
+  block.replaceChildren(grid);
 }
 
 const DECORATORS = {
