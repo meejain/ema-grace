@@ -46,16 +46,22 @@ export default function decorate(block) {
     button.append(label, icon);
     dt.append(button);
 
-    // Year body with the list of releases
+    // Year body with the list of releases. The region role/labelledby live on
+    // an inner wrapper — NOT the <dd> — so the <dd> keeps its implicit role and
+    // stays a valid direct child of the <dl> (WCAG definition-list rule).
     const dd = document.createElement('dd');
     dd.id = bodyId;
     dd.className = 'custom-widget-news-archive-body';
-    dd.setAttribute('role', 'region');
-    dd.setAttribute('aria-labelledby', btnId);
     dd.hidden = !openByDefault;
+
+    const region = document.createElement('div');
+    region.className = 'custom-widget-news-archive-region';
+    region.setAttribute('role', 'region');
+    region.setAttribute('aria-labelledby', btnId);
     if (listCell) {
-      dd.append(...listCell.childNodes);
+      region.append(...listCell.childNodes);
     }
+    dd.append(region);
 
     dl.append(dt, dd);
   });

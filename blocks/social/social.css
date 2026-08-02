@@ -83,7 +83,10 @@
   font-size: 18px;
   font-weight: 600;
   line-height: 23.4px;
-  color: var(--link-hover-color);
+
+  /* lighter brand green (#7ac143) — 7.57:1 on the dark card, WCAG AA.
+     The darker #27853c only reached 3.57:1. */
+  color: var(--accent-color);
 }
 
 .social.follow .social-follow-cta {

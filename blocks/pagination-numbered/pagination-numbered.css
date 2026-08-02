@@ -33,6 +33,13 @@
   display: none;
 }
 
+/* Cells sit flush with SHARED 1px borders (source): every cell carries a full
+   1px border and overlaps its left neighbour by -1px so adjacent borders
+   collapse into a single crisp line instead of a 2px double line. */
+.pagination-numbered .pagination-list li + li {
+  margin-left: -1px;
+}
+
 /* numbered page links */
 .pagination-numbered .pagination-button {
   display: flex;
@@ -60,13 +67,15 @@
   color: var(--text-color);
 }
 
-/* active/current page */
+/* active/current page — raise above neighbours so its full border shows */
 .pagination-numbered .pagination-button.active {
+  position: relative;
+  z-index: 1;
   background-color: var(--text-color);
   color: var(--white);
 }
 
-/* previous / next controls */
+/* previous / next controls — same 30x30 cell, aligned in the row (no offset) */
 .pagination-numbered .pagination-list li.prev,
 .pagination-numbered .pagination-list li.next {
   display: flex;
@@ -75,7 +84,6 @@
   box-sizing: border-box;
   width: 30px;
   height: 30px;
-  margin-top: 7px;
   border: 1px solid #c4c4c4;
   font-family: var(--body-font-family);
   font-size: var(--body-font-size-s);

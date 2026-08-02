@@ -142,22 +142,34 @@
 .carousel .carousel-dots {
   display: flex;
   justify-content: center;
-  gap: 10px;
+  gap: 4px; /* 4px gap + 24px targets keeps the visible dots ~14px apart */
   margin-top: 12px;
 }
 
+/* 24x24 transparent hit target (WCAG 2.5.8 target-size) with the visible 10px
+   dot drawn centered via a pseudo-element — look unchanged, tap area compliant. */
 .carousel .carousel-dot {
-  width: 10px;
-  height: 10px;
+  width: 24px;
+  height: 24px;
   padding: 0;
   border: 0;
+  background: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carousel .carousel-dot::before {
+  content: '';
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
   background: rgb(0 0 0 / 25%);
-  cursor: pointer;
   transition: background var(--transition-speed) ease;
 }
 
-.carousel .carousel-dot.is-active {
+.carousel .carousel-dot.is-active::before {
   background: var(--accent-color);
 }
 

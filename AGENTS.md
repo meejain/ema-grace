@@ -21,7 +21,12 @@ These load-bearing rules are enforced by skills and by deterministic checkers. S
 - **The Block-Isolation Rule.** Every block CSS selector scoped to the block (`.{blockname} .part`); no `nth-child` for logic; avoid `!important` (use the `.full-width` escape hatch). → `eds-code-conventions`, `full-width-escape-hatch`
 - **The Security Rule.** Client-side code is public. Never commit secrets. Never use `eval`/`new Function`. Validate external input. Sanitize author/external HTML with DOMPurify before `innerHTML`. → `security`
 - **The Localization Rule.** No hard-coded user-facing strings — source from content or make data-driven. → `eds-code-conventions`
-- **Verify before claiming done.** Before writing "done"/"fixed"/"implemented", run `npm run lint`, `node tools/quality/breakpoint-check.mjs`, and `npm run test:a11y <url>` for UI changes, and confirm visually at `localhost:3000`. Report failures honestly. → `verify-before-claiming`, `quality-tooling`
+- **Verify before claiming done.** Before writing "done"/"fixed"/"implemented", you MUST run the full quality gate and **paste the actual command output** for each — a completion claim without shown output is invalid:
+  1. `npm run lint`
+  2. `node tools/quality/breakpoint-check.mjs`
+  3. `npm run test:a11y <url>` — for any UI/CSS change (needs the dev server up + deps installed; if it genuinely cannot run, say so explicitly and run the other two).
+
+  Then confirm the change visually at `localhost:3000` and review the diff for dead code. If any check fails, fix it and re-run — this is a loop, not a one-shot report. Never assert a pass from memory. → `verify-before-claiming`, `quality-tooling`
 
 ---
 
