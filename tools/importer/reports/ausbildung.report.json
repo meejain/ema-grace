@@ -1,0 +1,25 @@
+{
+  "status": "success",
+  "url": "https://grace.com/ausbildung/",
+  "path": "ausbildung",
+  "timestamp": "2026-08-05T20:51:36.121Z",
+  "title": "Ausbildung",
+  "pageType": "default",
+  "blocks": [
+    "accordion-faq",
+    "accordion-faq",
+    "accordion-faq",
+    "accordion-faq",
+    "columns-history-item",
+    "hero-banner",
+    "quote-testimonial",
+    "video-grid",
+    "columns-image-left",
+    "columns-image-left",
+    "columns-image-right",
+    "columns-image-right"
+  ],
+  "blocksLeftInPlace": [],
+  "pageMetadata": [],
+  "hasForm": false
+}

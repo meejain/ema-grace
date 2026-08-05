@@ -1,0 +1,24 @@
+{
+  "status": "success",
+  "url": "https://grace.com/industries/coatings/wood/",
+  "path": "industries/coatings/wood",
+  "timestamp": "2026-08-05T17:05:39.728Z",
+  "title": "Wood",
+  "pageType": "sidebar",
+  "pageMetadata": [
+    "template",
+    "contactus",
+    "contactus-tagline",
+    "breadcrumb-title"
+  ],
+  "sidebarNav": true,
+  "contentNodes": 2,
+  "contactSplitBanner": false,
+  "blocks": [
+    "featured-product-selector"
+  ],
+  "blocksLeftInPlace": [
+    "cards-featured-content"
+  ],
+  "hasForm": true
+}

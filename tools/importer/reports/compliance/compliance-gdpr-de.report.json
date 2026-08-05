@@ -1,0 +1,20 @@
+{
+  "status": "success",
+  "url": "https://grace.com/compliance/compliance-gdpr-de/",
+  "path": "compliance/compliance-gdpr-de",
+  "timestamp": "2026-08-05T20:54:12.760Z",
+  "title": "Compliance - GDPR (German)",
+  "pageType": "sidebar",
+  "pageMetadata": [
+    "template",
+    "contactus",
+    "contactus-tagline",
+    "breadcrumb-title"
+  ],
+  "sidebarNav": true,
+  "contentNodes": 71,
+  "contactSplitBanner": true,
+  "blocks": [],
+  "blocksLeftInPlace": [],
+  "hasForm": false
+}

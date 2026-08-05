@@ -1,0 +1,16 @@
+{
+  "status": "success",
+  "url": "https://grace.com/about-grace/leadership-team/",
+  "path": "about-grace/leadership-team",
+  "timestamp": "2026-08-05T20:56:51.215Z",
+  "title": "Leadership Team",
+  "pageType": "default",
+  "blocks": [
+    "hero-banner",
+    "cards-featured-content",
+    "cards-profile-grid"
+  ],
+  "blocksLeftInPlace": [],
+  "pageMetadata": [],
+  "hasForm": false
+}

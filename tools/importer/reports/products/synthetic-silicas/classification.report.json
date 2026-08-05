@@ -1,0 +1,17 @@
+{
+  "status": "success",
+  "url": "https://grace.com/products/synthetic-silicas/classification/",
+  "path": "products/synthetic-silicas/classification",
+  "timestamp": "2026-08-05T17:08:27.451Z",
+  "title": "Synthetic Amorphous Silica (SAS)",
+  "pageType": "default",
+  "blocks": [
+    "columns-image-teaser",
+    "hero-banner"
+  ],
+  "blocksLeftInPlace": [
+    "banner-cta"
+  ],
+  "pageMetadata": [],
+  "hasForm": false
+}

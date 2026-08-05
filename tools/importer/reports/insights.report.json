@@ -1,0 +1,21 @@
+{
+  "status": "success",
+  "url": "https://grace.com/insights/",
+  "path": "insights",
+  "timestamp": "2026-08-05T17:25:55.895Z",
+  "title": "Insights",
+  "pageType": "default",
+  "blocks": [
+    "carousel",
+    "hero-banner",
+    "hero-banner",
+    "hero-banner",
+    "hero-banner",
+    "hero-banner",
+    "custom-widget-search-filter",
+    "pagination-numbered"
+  ],
+  "blocksLeftInPlace": [],
+  "pageMetadata": [],
+  "hasForm": true
+}

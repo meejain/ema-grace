@@ -1,0 +1,30 @@
+{
+  "status": "success",
+  "url": "https://grace.com/insights/grace-silica-goes-into-promegas-purification-kits/",
+  "path": "insights/grace-silica-goes-into-promegas-purification-kits",
+  "timestamp": "2026-08-05T20:44:25.174Z",
+  "title": "Grace Silica Goes into Promega’s Purification Kits to Enable COVID-19 PCR Testing",
+  "pageType": "sidebar",
+  "pageMetadata": [
+    "template",
+    "contactus",
+    "contactus-tagline"
+  ],
+  "sidebarNav": true,
+  "contentNodes": 1,
+  "contactSplitBanner": true,
+  "blocks": [
+    "cards-product",
+    "cards-product",
+    "cards-related-articles",
+    "columns-horizontal-teaser-featured",
+    "quote-testimonial",
+    "quote-testimonial",
+    "social-follow",
+    "social-share",
+    "social-share",
+    "cards-featured-content"
+  ],
+  "blocksLeftInPlace": [],
+  "hasForm": false
+}

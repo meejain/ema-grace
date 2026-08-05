@@ -1,0 +1,18 @@
+{
+  "status": "success",
+  "url": "https://grace.com/cookie-policy/",
+  "path": "cookie-policy",
+  "timestamp": "2026-08-05T20:55:05.709Z",
+  "title": "Cookie Policy",
+  "pageType": "default",
+  "blocks": [
+    "hero-banner",
+    "table-data-grid",
+    "table-data-grid",
+    "table-data-grid",
+    "table-data-grid"
+  ],
+  "blocksLeftInPlace": [],
+  "pageMetadata": [],
+  "hasForm": false
+}

@@ -1,0 +1,26 @@
+{
+  "status": "success",
+  "url": "https://grace.com/industries/refining-technologies/fcc-catalyst-application/maximize-propylene/",
+  "path": "industries/refining-technologies/fcc-catalyst-application/maximize-propylene",
+  "timestamp": "2026-08-05T17:06:41.731Z",
+  "title": "Maximize Propylene",
+  "pageType": "sidebar",
+  "pageMetadata": [
+    "template",
+    "contactus",
+    "contactus-tagline",
+    "breadcrumb-title"
+  ],
+  "sidebarNav": true,
+  "contentNodes": 10,
+  "contactSplitBanner": false,
+  "blocks": [
+    "banner-resource-download",
+    "cards-product"
+  ],
+  "blocksLeftInPlace": [
+    "cards-related-articles",
+    "cards-featured-content"
+  ],
+  "hasForm": true
+}

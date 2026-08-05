@@ -1,0 +1,20 @@
+{
+  "status": "success",
+  "url": "https://grace.com/products/shieldex/",
+  "path": "products/shieldex",
+  "timestamp": "2026-08-05T16:48:17.375Z",
+  "title": "SHIELDEX® Anti-Corrosive Pigments",
+  "pageType": "default",
+  "blocks": [
+    "columns-brochure-promo",
+    "columns-horizontal-teaser-featured",
+    "hero-banner"
+  ],
+  "blocksLeftInPlace": [
+    "featured-product-selector",
+    "banner-cta",
+    "cards-featured-content"
+  ],
+  "pageMetadata": [],
+  "hasForm": true
+}

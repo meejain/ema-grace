@@ -1,0 +1,17 @@
+{
+  "status": "success",
+  "url": "https://grace.com/industries/refining-technologies/catalagram-archive/",
+  "path": "industries/refining-technologies/catalagram-archive",
+  "timestamp": "2026-08-05T17:04:46.013Z",
+  "title": "Catalagram Archive",
+  "pageType": "default",
+  "blocks": [
+    "custom-widget-news-archive",
+    "hero-banner"
+  ],
+  "blocksLeftInPlace": [
+    "banner-cta"
+  ],
+  "pageMetadata": [],
+  "hasForm": true
+}

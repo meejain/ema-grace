@@ -1,0 +1,643 @@
+{
+  "_meta": {
+    "purpose": "Master component-library catalog for the block-complete importer. Every block a draft page exists for has a usable source selector (or a named matcher for non-component blocks). Applied in full to EVERY page.",
+    "generated": "2026-08-05",
+    "fields": {
+      "selector": "CSS querySelectorAll target on the SOURCE DOM (verified against live grace.com)",
+      "matcher": "name of a JS matcher fn in the importer (block identity is column-order/heading/position, not a class); when present, used instead of/with selector",
+      "item": "selector for ONE repeated item within the block (for parsers)",
+      "render": "parse = run block parser | seed-from-draft = emit draft block as-is (dynamic/empty-shell) | skip-existing = header/footer/hero-lineage | forms-pass = defer to AEM Forms",
+      "family": "base EDS block folder"
+    },
+    "counts": {
+      "skip-existing": 4,
+      "parse": 50,
+      "seed-from-draft": 8,
+      "forms-pass": 5,
+      "total": 67,
+      "needs_matcher": 16,
+      "clean_selector_only": 47
+    }
+  },
+  "blocks": [
+    {
+      "name": "contact-sticky-demo",
+      "family": "custom-widget",
+      "render": "skip-existing",
+      "selector": null,
+      "item": null,
+      "note": "demo page; contactus widget synthesized from metadata flag, not a source block",
+      "priority": 5
+    },
+    {
+      "name": "footer-standard",
+      "family": "footer",
+      "render": "skip-existing",
+      "selector": null,
+      "item": null,
+      "note": "footer orchestrator",
+      "priority": 5
+    },
+    {
+      "name": "header-mega-menu",
+      "family": "header",
+      "render": "skip-existing",
+      "selector": null,
+      "item": null,
+      "note": "navigation orchestrator",
+      "priority": 5
+    },
+    {
+      "name": "hero-full-width",
+      "family": "hero",
+      "render": "skip-existing",
+      "selector": ".generic-hero .hero__section",
+      "item": null,
+      "note": "homepage full-width; hero lineage",
+      "priority": 5
+    },
+    {
+      "name": "accordion-faq",
+      "family": "accordion",
+      "render": "parse",
+      "selector": "div.accordion-comp",
+      "item": ".accordion-comp-list > dl.plus-minus.accordion",
+      "note": "flat FAQ",
+      "priority": 20
+    },
+    {
+      "name": "accordion-nested",
+      "family": "accordion",
+      "render": "parse",
+      "selector": "div.accordion-comp:has(dd .accordion-comp)",
+      "item": ".accordion-comp-list > dl.plus-minus.accordion",
+      "note": "nested: dd contains child accordion (recurse)",
+      "priority": 20
+    },
+    {
+      "name": "banner-contact-split",
+      "family": "banner",
+      "render": "parse",
+      "selector": ".contact-us-cmp",
+      "item": ".row.has-title > .col-lg-6",
+      "note": "want-to-talk banner; title + 2 halves",
+      "priority": 20
+    },
+    {
+      "name": "banner-resource-download",
+      "family": "banner",
+      "render": "parse",
+      "selector": ".resource-download-comp",
+      "item": null,
+      "note": "issue+title+desc+gated download",
+      "priority": 20
+    },
+    {
+      "name": "cards-icon-grid",
+      "family": "cards",
+      "render": "parse",
+      "selector": "a.cmp-card.generic",
+      "item": ".card",
+      "note": "icon grid; filter .cmp-card.generic",
+      "priority": 20
+    },
+    {
+      "name": "cards-industry",
+      "family": "cards",
+      "render": "parse",
+      "selector": "section.background-image .card-group",
+      "item": ".card",
+      "note": "industry small cards",
+      "priority": 20
+    },
+    {
+      "name": "cards-insight",
+      "family": "cards",
+      "render": "parse",
+      "selector": "section#blogs .media-callout",
+      "item": ".media-callout",
+      "note": "insight/blog callouts",
+      "priority": 20
+    },
+    {
+      "name": "cards-people",
+      "family": "cards",
+      "render": "parse",
+      "selector": ".cmp-image__link",
+      "item": null,
+      "note": "people columns (homepage)",
+      "priority": 20
+    },
+    {
+      "name": "cards-product",
+      "family": "cards",
+      "render": "parse",
+      "selector": ".cmp-card-list.grid.three-columns .card-group",
+      "item": ".card-group > .card",
+      "note": "product grid (bio)",
+      "priority": 20
+    },
+    {
+      "name": "cards-related-articles",
+      "family": "cards",
+      "render": "parse",
+      "selector": ".cmp-card-list.grid.three-columns .card-group .card",
+      "item": "a.cmp-card.bio",
+      "note": "related-articles list",
+      "priority": 20
+    },
+    {
+      "name": "carousel",
+      "family": "carousel",
+      "render": "parse",
+      "selector": ".carousel .cmp-carousel",
+      "item": ".cmp-carousel__item",
+      "note": "AEM core carousel; server-rendered",
+      "priority": 20
+    },
+    {
+      "name": "columns-app-promo",
+      "family": "columns",
+      "render": "parse",
+      "selector": "div.cmp-media-callout",
+      "item": null,
+      "note": "right-media callout",
+      "priority": 20
+    },
+    {
+      "name": "columns-brochure-promo",
+      "family": "columns",
+      "render": "parse",
+      "selector": "section > article > div.row:has(.cmp-media-callout):has(.col-lg-6 .rich-text)",
+      "item": ".col-lg-6",
+      "note": "cover img + gated download button",
+      "priority": 20
+    },
+    {
+      "name": "columns-history-item",
+      "family": "columns",
+      "render": "parse",
+      "selector": "article .row.section-66-33",
+      "item": ".row.section-66-33",
+      "note": "year+desc+img; strong discriminator",
+      "priority": 20
+    },
+    {
+      "name": "columns-horizontal-teaser",
+      "family": "columns",
+      "render": "parse",
+      "selector": ".feature-set .cmp-feature-set .feature-set-section.list",
+      "item": ".content.owl-carousel > a.item",
+      "note": "teaser items (href on anchor)",
+      "priority": 20
+    },
+    {
+      "name": "columns-horizontal-teaser-featured",
+      "family": "columns",
+      "render": "parse",
+      "selector": "div.feature-set-section.list",
+      "item": ".content.owl-carousel > a.item.slate-bkgd",
+      "note": "featured = slate-bkgd, no img",
+      "priority": 20
+    },
+    {
+      "name": "columns-image-teaser",
+      "family": "columns",
+      "render": "parse",
+      "selector": "div.cmp-feature-set[data-size]",
+      "item": ".content.owl-carousel > a.item.tab-img",
+      "note": "image-teaser = tab-img + img",
+      "priority": 20
+    },
+    {
+      "name": "columns-location-detail",
+      "family": "columns",
+      "render": "parse",
+      "selector": "section.none-bkgd .row:has(.text):has(.button):has(.image)",
+      "item": null,
+      "note": "address+jobs CTA+image",
+      "priority": 20
+    },
+    {
+      "name": "columns-people",
+      "family": "columns",
+      "render": "parse",
+      "selector": ".cmp-image__link",
+      "item": ".col-lg-6",
+      "note": "people 2-col",
+      "priority": 20
+    },
+    {
+      "name": "columns-profile-detail",
+      "family": "columns",
+      "render": "parse",
+      "selector": "article .row:has(> .col-lg-4 .media-callout):has(> .col-lg-8 .text)",
+      "item": null,
+      "note": "single profile row",
+      "priority": 20
+    },
+    {
+      "name": "custom-widget-contact-panel",
+      "family": "custom-widget",
+      "render": "parse",
+      "selector": ".contact-us-sticky .contact-us__cmp",
+      "item": null,
+      "note": "sticky contact panel; dedupe mobile/desktop",
+      "priority": 20
+    },
+    {
+      "name": "custom-widget-news-archive",
+      "family": "custom-widget",
+      "render": "parse",
+      "selector": ".accordion .accordion-comp:has(.media-callout)",
+      "item": "dl.plus-minus.accordion",
+      "note": "per-year accordion w/ media-callouts",
+      "priority": 20
+    },
+    {
+      "name": "embed-video",
+      "family": "embed-video",
+      "render": "parse",
+      "selector": ".cmp-media-callout.slate-bkgd .media-video",
+      "item": null,
+      "note": "youtube embed",
+      "priority": 20
+    },
+    {
+      "name": "featured-product-selector",
+      "family": "featured",
+      "render": "parse",
+      "selector": ".cmp-feature-set[data-size]",
+      "item": ".content.owl-carousel > a.item",
+      "priority": 20,
+      "note": "Featured Products carousel; server-rendered, data-size = item count"
+    },
+    {
+      "name": "hero-banner",
+      "family": "hero",
+      "render": "parse",
+      "selector": ".hero__section",
+      "item": null,
+      "note": "homepage hero",
+      "priority": 20
+    },
+    {
+      "name": "hero-campaign",
+      "family": "hero",
+      "render": "parse",
+      "selector": ".generic-hero .hero__section",
+      "item": null,
+      "note": "campaign immersive",
+      "priority": 20
+    },
+    {
+      "name": "hero-event",
+      "family": "hero",
+      "render": "parse",
+      "selector": ".generic-hero .hero__section",
+      "item": null,
+      "note": "event band #004990",
+      "priority": 20
+    },
+    {
+      "name": "hero-product",
+      "family": "hero",
+      "render": "parse",
+      "selector": ".generic-hero .hero__section",
+      "item": null,
+      "note": "product hero + subhead",
+      "priority": 20
+    },
+    {
+      "name": "map-embedded",
+      "family": "map-embedded",
+      "render": "parse",
+      "selector": ".embed-code .mapouter",
+      "item": "iframe#gmap_canvas",
+      "note": "google maps iframe; strip junk backlinks",
+      "priority": 20
+    },
+    {
+      "name": "quote-highlight",
+      "family": "quote",
+      "render": "parse",
+      "selector": ".card-item .cmp-card.statistic",
+      "item": null,
+      "note": "big stat number + caption",
+      "priority": 20
+    },
+    {
+      "name": "quote-testimonial",
+      "family": "quote",
+      "render": "parse",
+      "selector": "div.quote .quote-section",
+      "item": null,
+      "note": "quote-text + citation",
+      "priority": 20
+    },
+    {
+      "name": "social-follow",
+      "family": "social",
+      "render": "parse",
+      "selector": ".card-list .cmp-card-list.grid.three-columns:has(.cmp-card.style-icon)",
+      "item": "a.cmp-card.style-icon",
+      "note": "Follow us icon card-list",
+      "priority": 20
+    },
+    {
+      "name": "social-share",
+      "family": "social",
+      "render": "parse",
+      "selector": ".social-share-container",
+      "item": ".share-container > a.social-link",
+      "note": "SHARE icons; hrefs runtime",
+      "priority": 20
+    },
+    {
+      "name": "table-product-comparison",
+      "family": "table",
+      "render": "parse",
+      "selector": "div.rich-text.vertical-border table",
+      "item": "tbody > tr",
+      "note": "real table w/ rowspan; flatten",
+      "priority": 20
+    },
+    {
+      "name": "banner-cta",
+      "family": "banner",
+      "render": "seed-from-draft",
+      "selector": ".media-callout",
+      "item": null,
+      "note": "empty shell server-side; seed from draft",
+      "priority": 40
+    },
+    {
+      "name": "cards-featured-content",
+      "family": "cards",
+      "render": "seed-from-draft",
+      "selector": ".featured-blog-cmp",
+      "item": null,
+      "note": "data-blogs JSON; seed from draft, wire later",
+      "priority": 40
+    },
+    {
+      "name": "custom-widget-document-viewer",
+      "family": "custom-widget",
+      "render": "seed-from-draft",
+      "selector": ".embed-code a.fbo-embed",
+      "item": null,
+      "note": "FlippingBook; seed from draft",
+      "priority": 40
+    },
+    {
+      "name": "custom-widget-search-filter",
+      "family": "custom-widget",
+      "render": "seed-from-draft",
+      "selector": ".blog-list-cmp",
+      "item": null,
+      "note": "data-bloglist JSON; seed from draft",
+      "priority": 40
+    },
+    {
+      "name": "custom-widget-search-results",
+      "family": "custom-widget",
+      "render": "seed-from-draft",
+      "selector": ".search-results__container",
+      "item": null,
+      "note": "client-side search API; seed from draft",
+      "priority": 40
+    },
+    {
+      "name": "pagination-numbered",
+      "family": "pagination-numbered",
+      "render": "seed-from-draft",
+      "selector": ".pagination#pagenation",
+      "item": null,
+      "note": "JS-generated numbers; seed from draft",
+      "priority": 40
+    },
+    {
+      "name": "quote-cta",
+      "family": "quote",
+      "render": "seed-from-draft",
+      "selector": "div.quote",
+      "item": null,
+      "note": "empty shell server-side; seed from draft",
+      "priority": 40
+    },
+    {
+      "name": "video-overlay",
+      "family": "video",
+      "render": "seed-from-draft",
+      "selector": ".media-video",
+      "item": null,
+      "note": "homepage video; seed from draft",
+      "priority": 40
+    },
+    {
+      "name": "cards-category-grid",
+      "family": "cards",
+      "render": "parse",
+      "selector": ".cmp-card-list .card-group",
+      "item": ".card-group > .card",
+      "matcher": "cardsCategoryGrid",
+      "note": "bare card-list (no grid modifier); disambiguate by .small variant + preceding H2 Industries",
+      "priority": 60
+    },
+    {
+      "name": "columns-checklist",
+      "family": "columns",
+      "render": "parse",
+      "matcher": "columnsChecklist",
+      "selector": "section > article > div.row.section-66-33",
+      "item": "[class*=col-lg-]",
+      "note": "quote + checklist richtext; match by .quote + h4/ul",
+      "priority": 60
+    },
+    {
+      "name": "table-data-grid",
+      "family": "table",
+      "render": "parse",
+      "matcher": "tableDataGrid",
+      "selector": "div.rich-text > table[width='100%']",
+      "item": "tbody > tr",
+      "note": "5-col, no vertical-border, multiple tables",
+      "priority": 60
+    },
+    {
+      "name": "table-link-list",
+      "family": "table",
+      "render": "parse",
+      "matcher": "tableLinkList",
+      "selector": "div.rich-text.vertical-border > table",
+      "item": "tbody > tr",
+      "note": "1-col + vertical-border",
+      "priority": 60
+    },
+    {
+      "name": "table-three-column",
+      "family": "table",
+      "render": "parse",
+      "matcher": "tableThreeColumn",
+      "selector": "div.rich-text.vertical-border > table",
+      "item": "tbody > tr",
+      "note": "3-col + vertical-border",
+      "priority": 60
+    },
+    {
+      "name": "table-two-column-content",
+      "family": "table",
+      "render": "parse",
+      "matcher": "tableTwoColumnContent",
+      "selector": "div.rich-text.split-list",
+      "item": "ul > li",
+      "note": "split-list ul + separate gated CTAs; merge",
+      "priority": 60
+    },
+    {
+      "name": "video-grid",
+      "family": "video",
+      "render": "parse",
+      "selector": ".media-video",
+      "item": null,
+      "matcher": "videoGrid",
+      "note": "multiple video stills grid; refine on ausbildung",
+      "priority": 60
+    },
+    {
+      "name": "cards-benefits-grid",
+      "family": "cards",
+      "render": "parse",
+      "matcher": "cardsBenefitsGrid",
+      "selector": null,
+      "item": ".col-lg-6",
+      "note": "image+text col-lg-6 in light-gray section",
+      "priority": 80
+    },
+    {
+      "name": "cards-contact-options",
+      "family": "cards",
+      "render": "parse",
+      "matcher": "cardsContactOptions",
+      "selector": null,
+      "item": ".col-lg-4",
+      "note": "svg-icon+text col-lg-4; anchor to How can we help H2",
+      "priority": 80
+    },
+    {
+      "name": "cards-image-text-grid",
+      "family": "cards",
+      "render": "parse",
+      "matcher": "cardsImageTextGrid",
+      "selector": null,
+      "item": ".row > .col-lg-6",
+      "note": "image+text pairs in .row; scope by section, no card class",
+      "priority": 80
+    },
+    {
+      "name": "cards-location-grid",
+      "family": "cards",
+      "render": "parse",
+      "matcher": "cardsLocationGrid",
+      "selector": null,
+      "item": ".row > .col-lg-4",
+      "note": "image+embed+text col-lg-4; grouped by region H2",
+      "priority": 80
+    },
+    {
+      "name": "cards-profile-grid",
+      "family": "cards",
+      "render": "parse",
+      "matcher": "cardsProfileGrid",
+      "selector": null,
+      "item": ".row > .col-lg-6",
+      "note": "media-callout+text+button; scope white-bkgd grid",
+      "priority": 80
+    },
+    {
+      "name": "cards-solution-grid",
+      "family": "cards",
+      "render": "parse",
+      "matcher": "cardsSolutionGrid",
+      "selector": null,
+      "item": null,
+      "note": "stacked centered-h2 rich-text; sequence-based",
+      "priority": 80
+    },
+    {
+      "name": "columns-image-left",
+      "family": "columns",
+      "render": "parse",
+      "matcher": "columnsImageLeft",
+      "selector": null,
+      "item": ".col-lg-6",
+      "note": "2-col row, IMAGE column first (order-based)",
+      "priority": 80
+    },
+    {
+      "name": "columns-image-right",
+      "family": "columns",
+      "render": "parse",
+      "matcher": "columnsImageRight",
+      "selector": null,
+      "item": ".col-lg-6",
+      "note": "2-col row, TEXT column first (order-based)",
+      "priority": 80
+    },
+    {
+      "name": "table-contact-matrix",
+      "family": "table",
+      "render": "parse",
+      "matcher": "tableContactMatrix",
+      "selector": null,
+      "item": "div.row",
+      "note": "stacked .row col-lg-6 pairs; reconstruct, not a <table>",
+      "priority": 80
+    },
+    {
+      "name": "form-contact-simple",
+      "family": "form",
+      "render": "forms-pass",
+      "selector": "form, .cmp-form, .mktoForm",
+      "item": null,
+      "note": "Adaptive Form path",
+      "priority": 95
+    },
+    {
+      "name": "form-lead-generation",
+      "family": "form",
+      "render": "forms-pass",
+      "selector": "form, .cmp-form, .mktoForm",
+      "item": null,
+      "note": "Adaptive Form path",
+      "priority": 95
+    },
+    {
+      "name": "form-modal-download",
+      "family": "form",
+      "render": "forms-pass",
+      "selector": "form, .cmp-form, .mktoForm",
+      "item": null,
+      "note": "gated modal form",
+      "priority": 95
+    },
+    {
+      "name": "form-multi-step",
+      "family": "form",
+      "render": "forms-pass",
+      "selector": "form, .cmp-form, .mktoForm",
+      "item": null,
+      "note": "multi-step",
+      "priority": 95
+    },
+    {
+      "name": "form-newsletter-signup",
+      "family": "form",
+      "render": "forms-pass",
+      "selector": "form, .cmp-form, .mktoForm",
+      "item": null,
+      "note": "newsletter",
+      "priority": 95
+    }
+  ]
+}

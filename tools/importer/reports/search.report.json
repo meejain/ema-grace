@@ -1,0 +1,23 @@
+{
+  "status": "success",
+  "url": "https://grace.com/search/?q=silica",
+  "path": "search",
+  "timestamp": "2026-08-05T17:27:16.886Z",
+  "title": "404 Page Not Found",
+  "pageType": "sidebar",
+  "pageMetadata": [
+    "template",
+    "contactus",
+    "contactus-tagline"
+  ],
+  "sidebarNav": false,
+  "contentNodes": 4,
+  "contactSplitBanner": false,
+  "blocks": [
+    "banner-cta",
+    "banner-cta",
+    "quote-cta"
+  ],
+  "blocksLeftInPlace": [],
+  "hasForm": false
+}

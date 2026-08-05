@@ -1,0 +1,33 @@
+{
+  "_meta": {
+    "purpose": "Register of source pages that contain a FORM. Forms are deferred from the master importer and handled later via the AEM Forms -> Adaptive Form JSON path. This register tracks WHERE forms appear so no form page is missed during migration.",
+    "handling": "Forms are NOT converted by block parsers. When migrating any URL in this register, flag it: the form area is left as a placeholder / skipped block, and the page is queued for the Forms migration pass.",
+    "status": "deferred",
+    "generated": "2026-08-04"
+  },
+  "formPagesFromReport": [
+    { "formVariant": "form-contact-simple", "sourceUrl": "https://grace.com/campaign/ludox-colloidal-silica-pic/", "notes": "Simple contact form embedded on a campaign page (also hosts cards-benefits-grid)." },
+    { "formVariant": "form-lead-generation", "sourceUrl": "https://grace.com/forms/contact-us-product-and-services/", "notes": "Dedicated form page under /forms/." },
+    { "formVariant": "form-modal-download", "sourceUrl": "https://grace.com/products/syloid-mx-silica-series/", "notes": "Gated-modal download form on a product page." },
+    { "formVariant": "form-newsletter-signup", "sourceUrl": "https://grace.com/forms/coatings-newsletter-sign-up/", "notes": "Newsletter signup under /forms/." },
+    { "formVariant": "form-multi-step", "sourceUrl": "https://grace.com/forms/contact-us-corporate/", "notes": "Multi-step form under /forms/." }
+  ],
+  "detectionHints": {
+    "note": "During bulk import, ANY page (not just those above) may contain a form. The importer should DETECT forms and append the URL to detectedFormPages[] so the Forms pass covers everything.",
+    "selectors": [
+      "form",
+      ".cmp-form",
+      ".marketo-form",
+      "form.mktoForm",
+      "[data-form-id]",
+      ".gated-modal-form",
+      "iframe[src*='marketo']",
+      "iframe[src*='pardot']"
+    ],
+    "gatedCtaHints": [
+      "button[data-trigger-type='gated-modal']",
+      "a[data-trigger-type='modal'][data-gated-id]"
+    ]
+  },
+  "detectedFormPages": []
+}
