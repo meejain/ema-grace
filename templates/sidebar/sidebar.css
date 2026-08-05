@@ -1,0 +1,171 @@
+/*
+ * Template: sidebar
+ * Applied when a page's `template` metadata is `sidebar` (adds body.sidebar).
+ *
+ * Reproduces the grace.com content-page layout:
+ *   - a full-width blue hero band (the EXISTING `hero` block, banner variant —
+ *     #004990, reduce-height, auto-breadcrumb + title) across the top;
+ *   - below it, a left section-navigation column + a wide main-content column;
+ *   - the green "Contact Us" widget (existing contact-sticky block) floats at the
+ *     top-right, straddling the hero, then sticks (fixed, top:106px) on scroll —
+ *     its own block JS/CSS drives that animation; this template only positions
+ *     its resting spot for the shorter sidebar-page hero.
+ *
+ * Source (measured live, grace.com/compliance/compliance-gdpr-de):
+ *   hero band #004990 ~178px; content band 1280px; nav col-lg-2 (213px) +
+ *   main col-lg-7 (747px) + widget col-lg-3 (320px). Widget rests static at
+ *   top:199 (over the hero), switches to fixed top:106 once scrolled ~400px.
+ *   Multi-column engages at 992px -> mapped to the project's 900px breakpoint.
+ *
+ * Mobile-first: base = single column. >=900px: nav+content grid engages.
+ */
+
+/* ---- Section-nav styling (matches source .section-navigation) ---- */
+/* Thin gray divider above the list, plain link list (no bullets), 12px links. */
+/* Divider spans the full column width (source .section-navigation top rule),
+   sitting above the inset link list. */
+body.sidebar main > .section.sidebar-nav > div {
+  padding-top: 20px;
+  border-top: 1px solid #d2d2d2;
+}
+
+body.sidebar main > .section.sidebar-nav ul {
+  margin: 0;
+  /* left inset (source .section-navigation padding-left) so link text starts at
+     ~x=100 within the 80px column, not flush at the column edge. */
+  padding: 0 0 0 20px;
+  list-style: none;
+}
+
+body.sidebar main > .section.sidebar-nav li {
+  margin: 0 0 16px;
+}
+
+body.sidebar main > .section.sidebar-nav a {
+  color: #000;
+  font-family: var(--heading-font-family);
+  font-size: 12px;
+  font-weight: 500; /* source sub-items: weight 500 */
+  line-height: 1.4;
+  text-decoration: none;
+}
+
+/* Source: the first item ("Compliance", the section root) is bold 900. */
+body.sidebar main > .section.sidebar-nav li:first-child a {
+  font-weight: 900;
+}
+
+body.sidebar main > .section.sidebar-nav a:hover {
+  color: var(--accent-color-hover, #27853c);
+  text-decoration: underline;
+}
+
+/* ---- >=900px: engage the nav + content band ---- */
+@media (width >= 900px) {
+  /* main is a FULL-WIDTH grid so the hero band bleeds edge-to-edge. The content
+     columns are centered in a 1280px band via flexible gutter tracks. Columns
+     match source: nav col-lg-2 (213px) | main col-lg-7 (747px) | widget col-lg-3
+     (320px, the gutter the floating widget overlays). */
+  body.sidebar main {
+    display: grid;
+    position: relative;
+    grid-template-columns:
+      minmax(20px, 1fr)
+      minmax(0, 213px)
+      minmax(0, 747px)
+      minmax(0, 320px)
+      minmax(20px, 1fr);
+    align-items: start;
+  }
+
+  /* Source spacing: content sits 50px below the hero band (source article
+     padding-top: 5rem = 50px), not the global desktop section margin of
+     --spacing-xl (80px). Scope 50px to sidebar pages so the hero-to-content gap
+     matches the live site; the homepage and other templates keep their 80px.
+     Exclude the hero-container — it must stay margin:0 (this selector is more
+     specific than the global `.section.hero-container { margin: 0 }` reset, so
+     without the :not() it would give the hero a 50px bottom margin → 100px gap). */
+  body.sidebar main > .section:not(.hero-container) {
+    margin-block: var(--spacing-l); /* 50px */
+  }
+
+  /* Hero band: row 1, full bleed across all columns (the hero block paints its
+     own blue background and centers its own content). */
+  body.sidebar main > .section.hero-container {
+    grid-column: 1 / -1;
+    grid-row: 1;
+  }
+
+  /* Left section-navigation: row 2, nav column. Static (NOT sticky) — the source
+     nav scrolls away with the page content, same as the right column. */
+  body.sidebar main > .section.sidebar-nav {
+    grid-column: 2;
+    grid-row: 2;
+    align-self: start;
+  }
+
+  /* Neutralize the global 1200px inner-centering inside the nav + content
+     sections so they fill their grid cells. Nav wrapper has no inset (its <ul>
+     carries the 20px left inset). */
+  body.sidebar main > .section.sidebar-nav > div {
+    max-width: none;
+    margin-inline: 0;
+    padding-inline: 0;
+  }
+
+  /* Main content wrapper: fill the grid cell but keep the source's 20px side inset
+     (source .rich-text padding: 0 20px), so text sits at 313/1020 within the
+     293/1040 column and the nav-to-content gap matches (~48px). Excludes the
+     full-width contact-split banner section (handled separately below). */
+  body.sidebar main > .section:not(.hero-container, .sidebar-nav, .custom-widget-container):not(:has(.banner.contact-split)) > div {
+    max-width: none;
+    margin-inline: 0;
+    padding-inline: 20px;
+  }
+
+  /* Main content: row 2, content column. */
+  body.sidebar main > .section:not(.hero-container, .sidebar-nav, .custom-widget-container) {
+    grid-column: 3;
+    grid-row: 2;
+  }
+
+  /* Contact-split banner ("Want to talk to an expert?") sits below the sidebar
+     content, spanning the full band width in its own row (row 3), like the source
+     full-width banner above the footer. */
+  body.sidebar main > .section:has(.banner.contact-split) {
+    grid-column: 1 / -1;
+    grid-row: 3;
+  }
+
+  /* Let the banner's own content re-center within the band (undo the nav/content
+     column's max-width:none reset for this full-width section). */
+  body.sidebar main > .section:has(.banner.contact-split) > div {
+    max-width: none;
+  }
+
+  /* Contact widget: the block self-floats — its OWN CSS makes it height:0 with a
+     100vw breakout and the panel absolutely positioned; its JS switches the panel
+     to fixed (top:106) on scroll. The block must stay in NORMAL grid flow (never
+     position:absolute) so its JS can read a stable document position for the
+     stick threshold. Pin it to the TOP of the hero row (grid-row 1, align-self
+     start, height 0) so its flow origin coincides with the hero band top. */
+  body.sidebar main > .custom-widget-container {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    align-self: start;
+    height: 0;
+    min-height: 0;
+    margin: 0;
+    z-index: 20;
+  }
+
+  /* Resting position (NON-stuck only): the widget-container's flow top sits ~80px
+     below the hero band top (grid row centers it), so offset the panel to land at
+     78px below the hero top — matching the source (hero 121-299, panel top 199),
+     straddling the 178px band. Scoped to :not(.is-stuck) so it does NOT override
+     the block's stuck landing spot (fixed, top:106). The block JS switches to
+     .is-stuck once the panel's top reaches 106px on scroll. */
+  body.sidebar .custom-widget.contact-sticky:not(.is-stuck) .contact-sticky-desktop {
+    top: 29px;
+  }
+}

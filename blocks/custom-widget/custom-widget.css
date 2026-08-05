@@ -265,28 +265,31 @@
   }
 
   .custom-widget.contact-sticky .contact-sticky-heading {
-    margin: 0 0 7px;
+    /* Source parity: the green-box title uses the BODY font (Roboto), not the
+       heading font (Roboto Slab), at 16px x 1.7 = 27.2px with no bottom margin. */
+    margin: 0;
     padding: 0;
     color: #000;
-    font-family: var(--heading-font-family);
+    font-family: var(--body-font-family);
     font-size: 16px;
     font-weight: 700;
-    line-height: 1.25;
+    line-height: 1.7;
   }
 
   /* Compact single-line buttons to match the source's 239px content column.
-     Tagline bottom gap tuned so the panel totals ~254px like the source. */
+     Tagline bottom gap (24px) tuned so the panel totals ~226px like the source. */
   .custom-widget.contact-sticky .contact-sticky-desktop .contact-sticky-text {
-    margin: 0 0 28px;
+    margin: 0 0 24px;
     font-size: 16px;
+    line-height: 1.7; /* source: 16px x 1.7 = 27.2px */
   }
 
   .custom-widget.contact-sticky .contact-sticky-desktop .contact-sticky-btn {
     min-height: 0;
-    padding: 14px 12px;
+    padding: 13px 10px; /* source: 13px 10px → 40px tall button */
     margin-bottom: 14px; /* source: 1.4rem */
     font-size: 14px;
-    line-height: 1.2;
+    line-height: 1; /* source: 14px text line-height */
     white-space: nowrap;
   }
 

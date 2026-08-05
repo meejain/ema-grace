@@ -71,22 +71,26 @@ function initSticky(block) {
   const panel = block.querySelector('.contact-sticky-desktop');
   if (!panel) return;
 
-  // Distance (px) the panel's natural top sits below its containing block. The
-  // panel is absolutely positioned at top:-190px within the block, so its
-  // document-space top is blockDocTop - 190. Read the value actually in effect
-  // so the threshold stays correct if the offset is ever tweaked in CSS.
-  const panelOffset = parseFloat(getComputedStyle(panel).top) || 0; // e.g. -190
-
   let stuck = false;
+  // Distance (px) the panel's resting (non-stuck) top sits below its containing
+  // block. Default is -190px, but a template may override it (e.g. the sidebar
+  // layout uses top:78px). Cache the RESTING value and only refresh it while the
+  // panel is not stuck — when stuck the panel is fixed at 106px and reading its
+  // top would return 106, corrupting the threshold. Refreshing each non-stuck
+  // scroll makes it resilient to template CSS applied AFTER the block decorates
+  // (reading only once at decorate time captured a stale offset, so the panel
+  // never stuck under the sidebar template).
+  let restingOffset = parseFloat(getComputedStyle(panel).top) || 0;
 
   const onScroll = () => {
     const y = window.scrollY || window.pageYOffset;
+    if (!stuck) restingOffset = parseFloat(getComputedStyle(panel).top) || restingOffset;
     // The block is always in normal flow (height:0, never fixed), so its viewport
     // top plus scroll gives a stable document position — safe to read every
     // scroll and recompute the threshold unconditionally. This self-corrects
     // after the hero image loads and never locks against a stale measurement.
     const blockDocTop = block.getBoundingClientRect().top + y;
-    const panelDocTop = blockDocTop + panelOffset;
+    const panelDocTop = blockDocTop + restingOffset;
     const threshold = panelDocTop - STUCK_TOP;
     // Never stick at the very top, and never trust a non-positive threshold
     // (which only arises from a premature/incomplete layout measurement, e.g.

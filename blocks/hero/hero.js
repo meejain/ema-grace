@@ -1,3 +1,5 @@
+import { getMetadata } from '../../scripts/aem.js';
+
 // Convert a URL slug (e.g. "this-is-grace") into a readable label
 // ("This is Grace"). Small connector words stay lowercase; everything else is
 // capitalized. Display casing (uppercase) is handled by CSS.
@@ -47,7 +49,10 @@ function buildBreadcrumbFromPath() {
       a.textContent = slugToLabel(segment);
       li.append(a);
     } else {
-      li.textContent = slugToLabel(segment);
+      // Current page: prefer the authored page title (e.g. "Compliance - GDPR
+      // (German)") over the humanized slug, matching the source breadcrumb.
+      const title = (getMetadata('breadcrumb-title') || getMetadata('og:title') || document.title || '').trim();
+      li.textContent = title || slugToLabel(segment);
     }
     ol.append(li);
   });

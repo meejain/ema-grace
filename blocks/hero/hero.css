@@ -251,42 +251,72 @@
 }
 
 /* === Variant: banner (and its alias, overlay) === short, wide page banner
-   with breadcrumb + title. Source metrics (grace.com): container ~178px tall,
-   padding 68px top / 30px bottom, content top-aligned. The "overlay" variant is
-   an alias of "banner" — same short breadcrumb-header treatment. */
+   with breadcrumb + title. Source metrics (grace.com hero__section
+   hero-reduce-height): container 178px tall at ALL viewports, padding
+   68px top / 30px bottom, content top-aligned. The "overlay" variant is an
+   alias of "banner" — same short breadcrumb-header treatment. */
 .hero.banner,
 .hero.overlay {
   min-height: 178px;
-  padding: 30px 0;
-  align-items: center;
+  padding: 68px 0 30px;
+  align-items: flex-start;
   box-sizing: border-box;
 }
 
-/* Left-to-right dark gradient over the photo: solid black on the left fading to
-   transparent, matching grace.com's ".hero__section.black-text.gradient .overlay"
-   rule (linear-gradient(to right, #000 0, transparent 100%)). This keeps the
-   breadcrumb + title legible on the dark left while revealing the image right. */
-.hero.banner::after,
-.hero.overlay::after {
-  background: linear-gradient(to right, rgb(0 0 0) 0%, transparent 100%);
+/* No-image banner (e.g. compliance pages): solid blue band #004990 with white
+   text — matches the source hero__section reduce-height blue band. */
+.hero.banner.no-image,
+.hero.overlay.no-image {
+  background-color: #004990;
 }
 
-/* Mirror the header nav container exactly (max-width 1264 + 24px padding,
-   centered) so the breadcrumb and title align vertically with the Grace logo
-   above them at every viewport. */
+.hero.banner.no-image *,
+.hero.overlay.no-image * {
+  color: var(--white);
+}
+
+/* Left-to-right dark gradient over the band, matching grace.com's
+   ".hero__section.black-text.gradient .overlay" (linear-gradient(to right, #000 0,
+   transparent 100%)). Painted on ::before at z-index 0 (UNDER the content), same
+   as the event variant — so the gradient darkens the blue band behind the text
+   without ever washing over the white title/breadcrumb (the base .hero::after
+   `to top` overlay paints above content and would fade the text, so hide it). */
+.hero.banner::before,
+.hero.overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: linear-gradient(to right, rgb(0 0 0) 0%, transparent 100%);
+}
+
+.hero.banner::after,
+.hero.overlay::after {
+  display: none;
+}
+
+/* Mirror the header nav container so the breadcrumb + title left edge aligns with
+   the Grace logo. Source: content left edge at 100px within a 1240px band, so cap
+   the column and inset it to match. z-index 2 keeps text above the ::before gradient. */
 .hero.banner > div:last-child,
 .hero.overlay > div:last-child {
+  position: relative;
+  z-index: 2;
   text-align: left;
-  max-width: 1264px;
+  max-width: 1240px;
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 20px;
 }
 
 .hero.banner h1,
 .hero.overlay h1 {
-  align-items: flex-start;
+  display: block; /* override base flex-column-center so the title sits at padding-top, not vertically centered in a tall flex box */
+  max-width: 620px; /* source h1 column width */
   text-align: left;
   font-weight: 100;
+  line-height: 1.07; /* source reduce-height title */
+  margin-top: 0;
   margin-bottom: 0;
 }
 
@@ -372,7 +402,7 @@
   font-family: var(--body-font-family);
   font-size: 10px;
   font-weight: 600;
-  letter-spacing: 0.06em;
+  letter-spacing: normal; /* source breadcrumb uses normal spacing */
   text-transform: uppercase;
 }
 
@@ -406,6 +436,17 @@
   text-decoration: underline;
 }
 
+/* Banner variant: the source breadcrumb overlaps the band's padding-top and sits
+   ~45px below the section top (23px above the 68px padding mark). Pull it up 23px;
+   the H1 follows up by the same amount so it lands at the 68px-from-hero-top mark
+   (source: breadcrumb-bottom → H1-top gap = 13px). Placed after the base
+   .hero-breadcrumb rules so specificity ascends. */
+.hero.banner .hero-breadcrumb,
+.hero.overlay .hero-breadcrumb {
+  margin-top: -23px;
+  margin-bottom: 13px;
+}
+
 @media (width >= 900px) {
   .hero {
     padding: 80px 32px;
@@ -416,14 +457,13 @@
     font-size: 42px;
   }
 
-  /* Banner stays short; keep it vertically centered and mirror the header nav
-     container at desktop (max-width 1240, no side padding) so the breadcrumb
-     and title align with the Grace logo at every viewport >= 900px. Border-box
-     so the total height matches grace.com. Source renders the banner hero at a
-     fixed 247.5px tall (background-size: cover) at desktop. */
+  /* Banner stays short: the source hero__section reduce-height band is 178px
+     tall at desktop too (padding 68px top / 30px bottom), so keep the same
+     height as mobile — do NOT grow it. Content top-aligned, mirroring the
+     header nav container so the breadcrumb/title align with the Grace logo. */
   .hero.banner {
-    min-height: 247.5px;
-    padding: 30px 0;
+    min-height: 178px;
+    padding: 68px 0 30px;
     box-sizing: border-box;
   }
 
