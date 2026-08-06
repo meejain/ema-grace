@@ -200,6 +200,35 @@ export function decorateMain(main) {
 }
 
 /**
+ * Normalizes the `template` metadata value to a safe file/dir name, or returns
+ * an empty string when no template is set.
+ * @returns {string} the sanitized template name (e.g. `sidebar`) or ''
+ */
+function getTemplateName() {
+  const template = getMetadata('template');
+  if (!template) return '';
+  return template.trim().toLowerCase().replace(/[^a-z0-9-]/g, '-');
+}
+
+/**
+ * Loads a page template's CSS EAGERLY (blocking) so the template layout is in
+ * place at first paint. The body is hidden (`display:none` until `.appear`)
+ * during eager load, so awaiting the CSS here means the correct layout paints
+ * immediately with no flash-of-default-layout / layout shift (CLS). Called
+ * before `body.appear` is added.
+ */
+async function loadTemplateCSS() {
+  const name = getTemplateName();
+  if (!name) return;
+  try {
+    await loadCSS(`${window.hlx.codeBasePath}/templates/${name}/${name}.css`);
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.warn(`Template ${name} CSS failed to load`, e);
+  }
+}
+
+/**
  * Loads everything needed to get to LCP.
  * @param {Element} doc The container element
  */
@@ -209,6 +238,11 @@ async function loadEager(doc) {
   const main = doc.querySelector('main');
   if (main) {
     decorateMain(main);
+    // Load the template CSS BEFORE revealing the body so the template layout
+    // (e.g. the sidebar grid) paints on the first frame — otherwise the body
+    // appears in the default single-column layout and shifts when the template
+    // CSS arrives later in the lazy phase (flash of unstyled layout / CLS).
+    await loadTemplateCSS();
     document.body.classList.add('appear');
     await loadSection(main.querySelector('.section'), waitForFirstImage);
   }
@@ -224,38 +258,19 @@ async function loadEager(doc) {
 }
 
 /**
- * Loads everything that doesn't need to be delayed.
- * @param {Element} doc The container element
- */
-/**
- * Loads a page template's CSS (and optional JS) when a `template` metadata
- * value is present. Template files live in /templates/{name}/{name}.{css,js};
- * the JS default export (if any) is called with the main element.
+ * Loads a page template's optional JS in the lazy phase. Template files live in
+ * /templates/{name}/{name}.{css,js}; the JS default export (if any) is called
+ * with the main element. The CSS is loaded eagerly by loadTemplateCSS().
  * @param {Element} main The main element
  */
 async function loadTemplate(main) {
-  const template = getMetadata('template');
-  if (!template) return;
-  const name = template.trim().toLowerCase().replace(/[^a-z0-9-]/g, '-');
+  const name = getTemplateName();
   if (!name) return;
   try {
-    await Promise.all([
-      loadCSS(`${window.hlx.codeBasePath}/templates/${name}/${name}.css`),
-      new Promise((resolve) => {
-        (async () => {
-          try {
-            const mod = await import(`${window.hlx.codeBasePath}/templates/${name}/${name}.js`);
-            if (mod.default) await mod.default(main);
-          } catch (e) {
-            // template has no JS (CSS-only) — ignore
-          }
-          resolve();
-        })();
-      }),
-    ]);
+    const mod = await import(`${window.hlx.codeBasePath}/templates/${name}/${name}.js`);
+    if (mod.default) await mod.default(main);
   } catch (e) {
-    // eslint-disable-next-line no-console
-    console.warn(`Template ${name} failed to load`, e);
+    // template has no JS (CSS-only) — ignore
   }
 }
 

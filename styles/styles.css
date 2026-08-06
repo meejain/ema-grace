@@ -384,6 +384,17 @@ main > .section.hero-container {
   margin: 0;
 }
 
+/* CLS guard (must live in the synchronously-loaded styles.css so it applies at
+   first paint): the auto-built contact-sticky widget holds raw author rows that
+   render IN-FLOW (~114px tall on mobile) until its block JS/CSS decorates it into
+   a fixed/absolute overlay (height:0). That collapse shifts the whole page up.
+   Keep the un-decorated widget out of flow so there is no layout shift when it
+   finishes loading. Scoped to .contact-sticky so other custom-widget variants
+   (document-viewer, etc.) that render real in-flow content are unaffected. */
+main .custom-widget.contact-sticky:not([data-block-status="loaded"]) {
+  display: none;
+}
+
 /* section metadata - light gray background */
 main .section.light-gray,
 main .section.light,

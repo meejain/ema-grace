@@ -111,6 +111,7 @@
   font-family: var(--body-font-family);
 }
 
+
 /* Desktop panel hidden on mobile; mobile bar hidden on desktop. */
 .custom-widget.contact-sticky .contact-sticky-desktop {
   display: none;
