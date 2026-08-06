@@ -1,0 +1,20 @@
+{
+  "status": "success",
+  "url": "https://grace.com/insights/hydrogenation-innovations/",
+  "path": "insights/hydrogenation-innovations",
+  "timestamp": "2026-08-06T09:57:38.283Z",
+  "title": "Hydrogenation Innovations",
+  "pageType": "insights-article",
+  "pageMetadata": [
+    "template",
+    "contactus",
+    "contactus-tagline",
+    "breadcrumb-title"
+  ],
+  "contentNodes": 6,
+  "blocks": [
+    "cards-featured-content"
+  ],
+  "blocksLeftInPlace": [],
+  "hasForm": true
+}

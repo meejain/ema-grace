@@ -1,0 +1,22 @@
+{
+  "status": "success",
+  "url": "https://grace.com/insights/pharmas-almanac-cites-grace-experts-in-q3-2021-round-table/",
+  "path": "insights/pharmas-almanac-cites-grace-experts-in-q3-2021-round-table",
+  "timestamp": "2026-08-06T10:03:52.936Z",
+  "title": "Pharma’s Almanac Cites Grace Experts in Q3 2021 Round Table",
+  "pageType": "insights-article",
+  "pageMetadata": [
+    "template",
+    "contactus",
+    "contactus-tagline",
+    "breadcrumb-title"
+  ],
+  "contentNodes": 6,
+  "blocks": [
+    "cards-product",
+    "social-follow",
+    "cards-featured-content"
+  ],
+  "blocksLeftInPlace": [],
+  "hasForm": true
+}

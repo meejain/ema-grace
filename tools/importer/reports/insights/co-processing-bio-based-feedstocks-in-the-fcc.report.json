@@ -1,0 +1,20 @@
+{
+  "status": "success",
+  "url": "https://grace.com/insights/co-processing-bio-based-feedstocks-in-the-fcc/",
+  "path": "insights/co-processing-bio-based-feedstocks-in-the-fcc",
+  "timestamp": "2026-08-06T10:07:30.636Z",
+  "title": "Co-processing Bio-based Feedstocks in the FCC",
+  "pageType": "insights-article",
+  "pageMetadata": [
+    "template",
+    "contactus",
+    "contactus-tagline",
+    "breadcrumb-title"
+  ],
+  "contentNodes": 4,
+  "blocks": [
+    "cards-featured-content"
+  ],
+  "blocksLeftInPlace": [],
+  "hasForm": false
+}

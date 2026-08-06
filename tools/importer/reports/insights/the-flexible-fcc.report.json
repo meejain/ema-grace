@@ -1,0 +1,20 @@
+{
+  "status": "success",
+  "url": "https://grace.com/insights/the-flexible-fcc/",
+  "path": "insights/the-flexible-fcc",
+  "timestamp": "2026-08-06T10:21:37.774Z",
+  "title": "The Flexible FCC",
+  "pageType": "insights-article",
+  "pageMetadata": [
+    "template",
+    "contactus",
+    "contactus-tagline",
+    "breadcrumb-title"
+  ],
+  "contentNodes": 4,
+  "blocks": [
+    "cards-featured-content"
+  ],
+  "blocksLeftInPlace": [],
+  "hasForm": false
+}

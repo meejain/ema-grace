@@ -1,0 +1,20 @@
+{
+  "status": "success",
+  "url": "https://grace.com/insights/could-ai-enabled-retrosynthesis-lead-to-the-next-big-breakthrough/",
+  "path": "insights/could-ai-enabled-retrosynthesis-lead-to-the-next-big-breakthrough",
+  "timestamp": "2026-08-06T10:19:00.658Z",
+  "title": "Could AI-enabled Retrosynthesis Lead to the Next Big Breakthrough?",
+  "pageType": "insights-article",
+  "pageMetadata": [
+    "template",
+    "contactus",
+    "contactus-tagline",
+    "breadcrumb-title"
+  ],
+  "contentNodes": 3,
+  "blocks": [
+    "cards-featured-content"
+  ],
+  "blocksLeftInPlace": [],
+  "hasForm": false
+}

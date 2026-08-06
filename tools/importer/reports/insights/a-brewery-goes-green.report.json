@@ -1,0 +1,20 @@
+{
+  "status": "success",
+  "url": "https://grace.com/insights/a-brewery-goes-green/",
+  "path": "insights/a-brewery-goes-green",
+  "timestamp": "2026-08-06T09:57:33.559Z",
+  "title": "A Brewery Goes Green",
+  "pageType": "insights-article",
+  "pageMetadata": [
+    "template",
+    "contactus",
+    "contactus-tagline",
+    "breadcrumb-title"
+  ],
+  "contentNodes": 6,
+  "blocks": [
+    "cards-featured-content"
+  ],
+  "blocksLeftInPlace": [],
+  "hasForm": true
+}

@@ -1,5 +1,26 @@
 import { createOptimizedPicture } from '../../scripts/aem.js';
 
+/* Only AEM-hosted (same-origin or relative) images can be run through
+   createOptimizedPicture — it rewrites the src with ?width/&format/&optimize
+   params the origin's media pipeline understands. External absolute URLs
+   (e.g. grace.scene7.com) would be mangled into a 404, so leave those as-is. */
+function isOptimizable(src) {
+  try {
+    const url = new URL(src, window.location.href);
+    return url.origin === window.location.origin;
+  } catch {
+    return false;
+  }
+}
+
+function optimizeCardImages(ul) {
+  ul.querySelectorAll('picture > img').forEach((img) => {
+    if (!isOptimizable(img.src)) return;
+    const optimizedPic = createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }]);
+    img.closest('picture').replaceWith(optimizedPic);
+  });
+}
+
 /* featured-content becomes a swipeable single-card carousel on mobile.
    CSS handles the scroll-snap track; this adds dot pagination that stays
    in sync with the scroll position. Dots are hidden via CSS on
@@ -84,10 +105,7 @@ function decoratePeople(block) {
     ul.append(li);
   });
 
-  ul.querySelectorAll('picture > img').forEach((img) => {
-    const optimizedPic = createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }]);
-    img.closest('picture').replaceWith(optimizedPic);
-  });
+  optimizeCardImages(ul);
   // CTA links are plain text CTAs, not EDS buttons
   ul.querySelectorAll('.cards-card-body a.button').forEach((a) => {
     a.classList.remove('button', 'primary', 'secondary', 'accent');
@@ -113,10 +131,7 @@ export default function decorate(block) {
     });
     ul.append(li);
   });
-  ul.querySelectorAll('picture > img').forEach((img) => {
-    const optimizedPic = createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }]);
-    img.closest('picture').replaceWith(optimizedPic);
-  });
+  optimizeCardImages(ul);
   /* Some variants (e.g. category-grid) present links as plain text CTAs rather
      than EDS buttons; undo the auto button decoration so CSS can style them. */
   ul.querySelectorAll('.cards-card-body a.button').forEach((a) => {

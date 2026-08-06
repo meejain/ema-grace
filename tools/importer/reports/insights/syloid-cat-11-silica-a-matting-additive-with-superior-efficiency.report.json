@@ -1,0 +1,20 @@
+{
+  "status": "success",
+  "url": "https://grace.com/insights/syloid-cat-11-silica-a-matting-additive-with-superior-efficiency/",
+  "path": "insights/syloid-cat-11-silica-a-matting-additive-with-superior-efficiency",
+  "timestamp": "2026-08-06T10:02:57.114Z",
+  "title": "SYLOID® CAT 11 Silica - a Matting Additive with Superior Efficiency",
+  "pageType": "insights-article",
+  "pageMetadata": [
+    "template",
+    "contactus",
+    "contactus-tagline",
+    "breadcrumb-title"
+  ],
+  "contentNodes": 6,
+  "blocks": [
+    "cards-featured-content"
+  ],
+  "blocksLeftInPlace": [],
+  "hasForm": true
+}

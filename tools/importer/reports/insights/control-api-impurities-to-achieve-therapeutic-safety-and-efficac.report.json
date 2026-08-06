@@ -1,0 +1,20 @@
+{
+  "status": "success",
+  "url": "https://grace.com/insights/control-api-impurities-to-achieve-therapeutic-safety-and-efficac/",
+  "path": "insights/control-api-impurities-to-achieve-therapeutic-safety-and-efficac",
+  "timestamp": "2026-08-06T10:23:30.267Z",
+  "title": "Control API Impurities to Achieve Therapeutic Safety and Efficacy for Patients",
+  "pageType": "insights-article",
+  "pageMetadata": [
+    "template",
+    "contactus",
+    "contactus-tagline",
+    "breadcrumb-title"
+  ],
+  "contentNodes": 5,
+  "blocks": [
+    "cards-featured-content"
+  ],
+  "blocksLeftInPlace": [],
+  "hasForm": true
+}

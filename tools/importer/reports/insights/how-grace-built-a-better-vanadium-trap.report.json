@@ -1,0 +1,20 @@
+{
+  "status": "success",
+  "url": "https://grace.com/insights/how-grace-built-a-better-vanadium-trap/",
+  "path": "insights/how-grace-built-a-better-vanadium-trap",
+  "timestamp": "2026-08-06T10:14:24.104Z",
+  "title": "How Grace Built a Better Vanadium Trap",
+  "pageType": "insights-article",
+  "pageMetadata": [
+    "template",
+    "contactus",
+    "contactus-tagline",
+    "breadcrumb-title"
+  ],
+  "contentNodes": 3,
+  "blocks": [
+    "cards-featured-content"
+  ],
+  "blocksLeftInPlace": [],
+  "hasForm": false
+}

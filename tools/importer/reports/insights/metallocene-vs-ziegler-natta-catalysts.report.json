@@ -1,0 +1,20 @@
+{
+  "status": "success",
+  "url": "https://grace.com/insights/metallocene-vs--ziegler-natta-catalysts/",
+  "path": "insights/metallocene-vs-ziegler-natta-catalysts",
+  "timestamp": "2026-08-06T10:20:34.233Z",
+  "title": "Metallocene vs. Ziegler-Natta Catalysts: Which to Choose?",
+  "pageType": "insights-article",
+  "pageMetadata": [
+    "template",
+    "contactus",
+    "contactus-tagline",
+    "breadcrumb-title"
+  ],
+  "contentNodes": 7,
+  "blocks": [
+    "cards-featured-content"
+  ],
+  "blocksLeftInPlace": [],
+  "hasForm": true
+}

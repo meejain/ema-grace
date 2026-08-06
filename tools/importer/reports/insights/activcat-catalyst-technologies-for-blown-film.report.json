@@ -1,0 +1,20 @@
+{
+  "status": "success",
+  "url": "https://grace.com/insights/activcat-catalyst-technologies-for-blown-film/",
+  "path": "insights/activcat-catalyst-technologies-for-blown-film",
+  "timestamp": "2026-08-06T10:03:01.683Z",
+  "title": "The ActivCat® Catalyst Advantage: Using Metallocene PE for Blown Film",
+  "pageType": "insights-article",
+  "pageMetadata": [
+    "template",
+    "contactus",
+    "contactus-tagline",
+    "breadcrumb-title"
+  ],
+  "contentNodes": 7,
+  "blocks": [
+    "cards-featured-content"
+  ],
+  "blocksLeftInPlace": [],
+  "hasForm": true
+}

@@ -1,0 +1,20 @@
+{
+  "status": "success",
+  "url": "https://grace.com/insights/six-benefits-from-cdmo-team/",
+  "path": "insights/six-benefits-from-cdmo-team",
+  "timestamp": "2026-08-06T10:25:54.062Z",
+  "title": "Six Benefits a Biotech Company Should Expect from Their CDMO Program Team",
+  "pageType": "insights-article",
+  "pageMetadata": [
+    "template",
+    "contactus",
+    "contactus-tagline",
+    "breadcrumb-title"
+  ],
+  "contentNodes": 8,
+  "blocks": [
+    "cards-featured-content"
+  ],
+  "blocksLeftInPlace": [],
+  "hasForm": true
+}

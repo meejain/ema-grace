@@ -1938,6 +1938,57 @@ var CustomImportScript = (() => {
     element.replaceWith(block);
   }
 
+  // tools/importer/parsers/cards-featured-content.js
+  function parse50(element, { document }) {
+    const cmp = element.classList && element.classList.contains("featured-blog-cmp") ? element : element.closest(".featured-blog-cmp") || element;
+    const items = Array.from(cmp.querySelectorAll(".featured-blog-list .item, a.item, .item"));
+    if (!items.length) return;
+    const cells = items.map((item) => {
+      var _a, _b;
+      let img = item.querySelector(".image img, picture img, img");
+      const imageCell = [];
+      if (img) {
+        imageCell.push(img.cloneNode(true));
+      } else {
+        const imgDiv = item.querySelector('.image[style*="background-image"]');
+        const m = imgDiv && (imgDiv.getAttribute("style") || "").match(/url\((['"]?)(.*?)\1\)/);
+        if (m && m[2]) {
+          const el = document.createElement("img");
+          el.src = m[2];
+          el.alt = "";
+          imageCell.push(el);
+        }
+      }
+      const href = item.getAttribute("href") || ((_b = (_a = item.querySelector("a[href]") || {}).getAttribute) == null ? void 0 : _b.call(_a, "href")) || "";
+      const category = (item.querySelector(".tag") || {}).textContent || "";
+      const title = (item.querySelector(".blog-heading, .blog-title") || {}).textContent || "";
+      const content = [];
+      if (category.trim()) {
+        const s = document.createElement("strong");
+        s.textContent = category.trim();
+        content.push(s);
+      }
+      if (title.trim()) {
+        const a = document.createElement("a");
+        a.href = href || "#";
+        a.textContent = title.trim();
+        content.push(a);
+      }
+      if (href) {
+        const s = document.createElement("strong");
+        const a = document.createElement("a");
+        a.href = href;
+        a.textContent = "Read more >";
+        s.append(a);
+        content.push(s);
+      }
+      return [imageCell, content];
+    });
+    const block = WebImporter.Blocks.createBlock(document, { name: "Cards (featured-content)", cells });
+    const host = element.closest(".featured-blog-cmp") || cmp;
+    host.replaceWith(block);
+  }
+
   // tools/importer/transformers/grace-cleanup.js
   var TransformHook = {
     beforeTransform: "beforeTransform",
@@ -2062,7 +2113,11 @@ var CustomImportScript = (() => {
     // buildContactSplitBanner; this covers non-sidebar pages carrying the same fragment).
     "banner-contact-split": parse47,
     "cards-related-articles": parse48,
-    "video-grid": parse49
+    "video-grid": parse49,
+    // Real parser for the "Latest Insights"/related block — REPLACES the earlier seed-from-draft
+    // (which injected placeholder draft images + wrong articles). Registering here makes the
+    // seed-from-draft discovery branch fall through to this parser.
+    "cards-featured-content": parse50
   };
   var transformers = [transform];
   var MATCHERS = {
@@ -2313,6 +2368,19 @@ var CustomImportScript = (() => {
       }
     });
   }
+  function isInsightsArticle(document, url) {
+    const path = (() => {
+      try {
+        return new URL(url || "").pathname;
+      } catch (e) {
+        return "";
+      }
+    })();
+    const looksInsights = /\/insights\/.+/.test(path) || !!document.querySelector(".blog-detail, .cmp-blog-detail");
+    const hasShare = !!document.querySelector(".social-share-container");
+    const hasPostMeta = Array.from(document.querySelectorAll("article dl dt")).some((dt) => /posted|industry/i.test(dt.textContent || ""));
+    return looksInsights && (hasShare || hasPostMeta) || hasShare && hasPostMeta;
+  }
   function isSidebarPage(document) {
     return !!document.querySelector(
       '.section-navigation, [aria-label="Section navigation"], article .row > .col-lg-2, article .col-lg-2 a'
@@ -2354,7 +2422,8 @@ var CustomImportScript = (() => {
         if (/^https?:\/\//i.test(href)) {
           const u = new URL(href);
           const host = u.hostname;
-          const isInternal = host === "grace.com" || host.endsWith(".grace.com") && host !== "jobs.grace.com" || host.includes("xmod-gracev1") || host.includes("--ema-grace--") || host.includes("aem.live") || host.includes("aem.page");
+          const externalGraceSubdomains = ["jobs.grace.com", "marketing.grace.com"];
+          const isInternal = host === "grace.com" || host.endsWith(".grace.com") && !externalGraceSubdomains.includes(host) || host.includes("xmod-gracev1") || host.includes("--ema-grace--") || host.includes("aem.live") || host.includes("aem.page");
           if (isInternal) {
             let path = u.pathname.replace(/^\/content\/grace\/us\/en/, "").replace(/\.html$/, "");
             if (path.length > 1) path = path.replace(/\/$/, "");
@@ -2455,6 +2524,181 @@ var CustomImportScript = (() => {
     }).filter((c) => c.length);
     if (!halfCells.length) return null;
     return WebImporter.Blocks.createBlock(document, { name: "Banner (contact-split)", cells: [[title], halfCells] });
+  }
+  function buildInsightsArticle(document, url, params) {
+    const main = document.createElement("main");
+    const railInner = document.createElement("div");
+    let railHasContent = false;
+    const crumbLinks = Array.from(document.querySelectorAll(
+      'article nav[aria-label*="readcrumb" i] a, article .breadcrumb a, article nav ol a, article nav ul a'
+    )).filter((a) => (a.textContent || "").trim());
+    if (crumbLinks.length) {
+      const seen = /* @__PURE__ */ new Set();
+      const rows = [];
+      crumbLinks.forEach((a) => {
+        const text = (a.textContent || "").replace(/\s+/g, " ").trim();
+        const href = a.getAttribute("href") || "";
+        const key = `${text}|${href}`;
+        if (!text || seen.has(key)) return;
+        seen.add(key);
+        const link = document.createElement("a");
+        link.href = href || "#";
+        link.textContent = text;
+        rows.push([link]);
+      });
+      if (rows.length) {
+        const crumbBlock = WebImporter.Blocks.createBlock(document, { name: "Breadcrumb", cells: rows });
+        railInner.append(crumbBlock);
+        railHasContent = true;
+      }
+    }
+    const share = document.querySelector(".social-share-container");
+    if (share) {
+      const networks = Array.from(share.querySelectorAll("a[href], a")).map((a) => (a.getAttribute("aria-label") || a.textContent || "").replace(/share via/i, "").trim()).filter(Boolean);
+      if (!networks.some((n) => /print/i.test(n))) networks.push("Print");
+      const list = networks.length ? networks.join(", ") : "Facebook, X, LinkedIn, Email, Print";
+      const shareBlock = WebImporter.Blocks.createBlock(document, { name: "Social (share)", cells: [[list]] });
+      railInner.append(shareBlock);
+      railHasContent = true;
+    }
+    const dl = document.querySelector("article dl");
+    if (dl) {
+      const rows = [];
+      Array.from(dl.querySelectorAll("dt")).forEach((dt) => {
+        const dd = dt.nextElementSibling && dt.nextElementSibling.tagName === "DD" ? dt.nextElementSibling : null;
+        const label = (dt.textContent || "").replace(/\s+/g, " ").trim();
+        const val = dd ? (dd.textContent || "").replace(/\s+/g, " ").trim() : "";
+        if (!label) return;
+        rows.push([label, val]);
+      });
+      if (rows.length) {
+        const metaBlock = WebImporter.Blocks.createBlock(document, { name: "Post Meta", cells: rows });
+        railInner.append(metaBlock);
+        railHasContent = true;
+      }
+    }
+    if (railHasContent) {
+      railInner.append(createSectionMetadata(document, "sidebar-nav"));
+      main.append(railInner);
+      main.append(document.createElement("hr"));
+    }
+    const h1el = document.querySelector("article h1");
+    const bodyCol = h1el && h1el.closest('[class*="col-lg-7"]') || document.querySelector("article .col-lg-7");
+    const bodyBlocks = [];
+    const contentNodes = [];
+    if (bodyCol) {
+      Array.from(bodyCol.children).forEach((el) => {
+        if (/^(SCRIPT|STYLE|NOSCRIPT|LINK|IFRAME)$/.test(el.tagName)) return;
+        if (el.matches(".divider")) return;
+        if (el.matches(".card-list")) return;
+        const featureSet = el.matches(".feature-set-section, .feature-set, .cmp-feature-set") ? el : el.querySelector(".feature-set-section, .feature-set, .cmp-feature-set");
+        if (featureSet && featureSet.querySelector("a.item")) {
+          const dlLink = el.querySelector('a.btn-primary, .button__section a, a[target="_blank"][href*="marketing.grace"]') || featureSet.querySelector('a.btn-primary, .cta a, a[target="_blank"]');
+          if (dlLink && !dlLink.closest("a.item")) {
+            const p = document.createElement("p");
+            const strong = document.createElement("strong");
+            const a = document.createElement("a");
+            a.href = dlLink.getAttribute("href") || "#";
+            if (dlLink.getAttribute("target")) a.setAttribute("target", dlLink.getAttribute("target"));
+            a.textContent = (dlLink.textContent || "Download").replace(/\s+/g, " ").trim();
+            strong.append(a);
+            p.append(strong);
+            p.className = "insights-download-cta";
+            contentNodes.push(p);
+          }
+          const labelEl = featureSet.querySelector(".subhead-large, .header .title, .heading");
+          const label = labelEl ? (labelEl.textContent || "").replace(/\s+/g, " ").trim() : "";
+          if (label) {
+            const p = document.createElement("p");
+            p.textContent = label;
+            contentNodes.push(p);
+          }
+          const before = new Set(document.querySelectorAll("table"));
+          try {
+            parse30(featureSet, { document, url, params });
+          } catch (e) {
+          }
+          const created = Array.from(document.querySelectorAll("table")).find((t2) => !before.has(t2) && !t2.closest("td"));
+          if (created) {
+            contentNodes.push(created);
+            return;
+          }
+        }
+        if (el.matches(".media-callout") || el.querySelector(".media-callout")) {
+          const img = el.querySelector(".media-image img, .img img, picture, img");
+          if (img) {
+            const p = document.createElement("p");
+            p.append(img.cloneNode(true));
+            contentNodes.push(p);
+          }
+          return;
+        }
+        const hasContent = (el.textContent || "").trim().length > 0 || el.querySelector("img, picture");
+        if (hasContent) contentNodes.push(el.cloneNode(true));
+      });
+    }
+    if (contentNodes.length) {
+      const section = document.createElement("div");
+      contentNodes.forEach((n) => section.append(n));
+      section.querySelectorAll("a").forEach((a) => {
+        const href = (a.getAttribute("href") || "").trim();
+        if ((!href || href === "#") && !a.textContent.trim() && !a.querySelector("img, picture")) a.remove();
+      });
+      section.querySelectorAll("p").forEach((p) => {
+        if (!p.textContent.trim() && !p.querySelector("img, picture, a[href], br, table")) p.remove();
+      });
+      section.querySelectorAll('a[href*="machine-learning-whitepaper"] em, a[href*="marketing.grace"] em').forEach((em) => {
+        while (em.firstChild) em.parentNode.insertBefore(em.firstChild, em);
+        em.remove();
+      });
+      section.querySelectorAll('em > a[href*="machine-learning-whitepaper"]:only-child, em > a[href*="marketing.grace"]:only-child').forEach((a) => {
+        const em = a.parentElement;
+        if (em && em.tagName === "EM") em.replaceWith(a);
+      });
+      const leadImg = section.querySelector('img[alt="Image of Media Callout"], img[alt=""]');
+      if (leadImg && h1el) leadImg.setAttribute("alt", (h1el.textContent || "").replace(/\s+/g, " ").trim());
+      main.append(section);
+    }
+    if (share) {
+      const sc = share.closest('[class*="col-lg-2"]') || share;
+      if (sc && sc.parentNode) sc.remove();
+    }
+    if (bodyCol && bodyCol.parentNode) bodyCol.remove();
+    document.querySelectorAll(".social-share-container").forEach((s) => {
+      if (s.parentNode) s.remove();
+    });
+    const extra = discoverAndParseBlocks(document, url, params, { excludeSidebarHandled: true });
+    extra.rendered.forEach((blockEl) => {
+      main.append(document.createElement("hr"));
+      const section = document.createElement("div");
+      section.append(blockEl);
+      main.append(section);
+    });
+    const t = document.querySelector(
+      ".contactus__content-desktop .contactus__text, .contactus__text, .contact-us-sticky .contactus__text, .contact-us-cmp .contact-us-subtitle"
+    );
+    const pageMeta = [["template", "sidebar"], ["contactus", "true"]];
+    const tagline = t && (t.textContent || "").trim() ? (t.textContent || "").replace(/\s+/g, " ").trim() : "Talk to our experts about how we can help your business.";
+    pageMeta.push(["contactus-tagline", tagline]);
+    const title = h1el ? (h1el.textContent || "").replace(/\s+/g, " ").trim() : "";
+    if (title) pageMeta.push(["breadcrumb-title", title]);
+    rewriteInternalLinks(main);
+    WebImporter.rules.transformBackgroundImages(main, document);
+    WebImporter.rules.adjustImageUrls(main, url, params.originalURL);
+    main.appendChild(document.createElement("hr"));
+    main.appendChild(buildMetadataBlock(document, pageMeta));
+    return {
+      element: main,
+      path: finalizePath(params),
+      report: {
+        title: document.title,
+        pageType: "insights-article",
+        pageMetadata: pageMeta.map((p) => p[0]),
+        contentNodes: contentNodes.length,
+        blocks: extra.parsedNames,
+        blocksLeftInPlace: extra.unparsed
+      }
+    };
   }
   function buildSidebarPage(document, url, params) {
     const main = document.createElement("main");
@@ -2652,7 +2896,14 @@ var CustomImportScript = (() => {
       const { document, url, params } = payload;
       executeTransformers("beforeTransform", document.body, payload);
       const hasForm = detectForm(document);
-      const result = isSidebarPage(document) ? buildSidebarPage(document, url, params) : buildDefaultPage(document, url, params);
+      let result;
+      if (isInsightsArticle(document, params.originalURL || url)) {
+        result = buildInsightsArticle(document, url, params);
+      } else if (isSidebarPage(document)) {
+        result = buildSidebarPage(document, url, params);
+      } else {
+        result = buildDefaultPage(document, url, params);
+      }
       result.report.hasForm = hasForm;
       return [result];
     }

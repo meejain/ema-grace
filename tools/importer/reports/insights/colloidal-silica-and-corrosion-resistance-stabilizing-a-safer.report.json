@@ -1,0 +1,22 @@
+{
+  "status": "success",
+  "url": "https://grace.com/insights/colloidal-silica-and-corrosion-resistance---stabilizing-a-safer-/",
+  "path": "insights/colloidal-silica-and-corrosion-resistance-stabilizing-a-safer",
+  "timestamp": "2026-08-06T10:00:12.496Z",
+  "title": "Colloidal Silica and Corrosion Resistance – Stabilizing a Safer Alternative",
+  "pageType": "insights-article",
+  "pageMetadata": [
+    "template",
+    "contactus",
+    "contactus-tagline",
+    "breadcrumb-title"
+  ],
+  "contentNodes": 6,
+  "blocks": [
+    "cards-product",
+    "social-follow",
+    "cards-featured-content"
+  ],
+  "blocksLeftInPlace": [],
+  "hasForm": true
+}

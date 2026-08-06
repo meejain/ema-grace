@@ -39,19 +39,22 @@ footer .footer ul a:any-link {
   min-height: 24px;
 }
 
-/* Quick links row */
+/* Quick links. MF1 (mobile-first): the source stacks each policy link on its own
+   line, centered. Base = a centered column; >=900px restores the wrapped horizontal
+   row. */
 footer .footer ul {
   list-style: none;
   padding: 0;
   margin: 0 0 40px;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 8px 20px;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
 }
 
 footer .footer ul li {
-  display: inline;
+  display: block;
+  text-align: center;
 }
 
 /* Trademark text */
@@ -77,5 +80,16 @@ footer .footer p img {
 @media (width >= 900px) {
   footer .footer > div {
     padding: 55px 32px;
+  }
+
+  /* MF1: desktop restores the wrapped horizontal row of policy links. */
+  footer .footer ul {
+    flex-flow: row wrap;
+    justify-content: center;
+    gap: 8px 20px;
+  }
+
+  footer .footer ul li {
+    display: inline;
   }
 }

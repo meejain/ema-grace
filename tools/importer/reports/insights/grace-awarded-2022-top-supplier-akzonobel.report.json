@@ -1,0 +1,22 @@
+{
+  "status": "success",
+  "url": "https://grace.com/insights/grace-awarded-2022-top-supplier-akzonobel/",
+  "path": "insights/grace-awarded-2022-top-supplier-akzonobel",
+  "timestamp": "2026-08-06T10:05:35.839Z",
+  "title": "Grace Awarded 2022 Top Supplier Designation by AkzoNobel South America",
+  "pageType": "insights-article",
+  "pageMetadata": [
+    "template",
+    "contactus",
+    "contactus-tagline",
+    "breadcrumb-title"
+  ],
+  "contentNodes": 8,
+  "blocks": [
+    "cards-product",
+    "social-follow",
+    "cards-featured-content"
+  ],
+  "blocksLeftInPlace": [],
+  "hasForm": true
+}

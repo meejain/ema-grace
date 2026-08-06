@@ -1,0 +1,20 @@
+{
+  "status": "success",
+  "url": "https://grace.com/insights/how-to-improve-reactor-operations-and-product-versatility/",
+  "path": "insights/how-to-improve-reactor-operations-and-product-versatility",
+  "timestamp": "2026-08-06T10:20:45.089Z",
+  "title": "How to improve reactor operations and product versatility",
+  "pageType": "insights-article",
+  "pageMetadata": [
+    "template",
+    "contactus",
+    "contactus-tagline",
+    "breadcrumb-title"
+  ],
+  "contentNodes": 6,
+  "blocks": [
+    "cards-featured-content"
+  ],
+  "blocksLeftInPlace": [],
+  "hasForm": true
+}

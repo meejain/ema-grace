@@ -1,0 +1,20 @@
+{
+  "status": "success",
+  "url": "https://grace.com/insights/catalysts-for-a-more-sustainable-future/",
+  "path": "insights/catalysts-for-a-more-sustainable-future",
+  "timestamp": "2026-08-06T10:04:40.223Z",
+  "title": "Catalysts for a More Sustainable Future",
+  "pageType": "insights-article",
+  "pageMetadata": [
+    "template",
+    "contactus",
+    "contactus-tagline",
+    "breadcrumb-title"
+  ],
+  "contentNodes": 7,
+  "blocks": [
+    "cards-featured-content"
+  ],
+  "blocksLeftInPlace": [],
+  "hasForm": false
+}

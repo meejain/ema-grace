@@ -1,0 +1,20 @@
+{
+  "status": "success",
+  "url": "https://grace.com/insights/keeping-surfaces-cool-with-colloidal-silica/",
+  "path": "insights/keeping-surfaces-cool-with-colloidal-silica",
+  "timestamp": "2026-08-06T10:19:43.366Z",
+  "title": "Keeping Surfaces Cool with Colloidal Silica",
+  "pageType": "insights-article",
+  "pageMetadata": [
+    "template",
+    "contactus",
+    "contactus-tagline",
+    "breadcrumb-title"
+  ],
+  "contentNodes": 4,
+  "blocks": [
+    "cards-featured-content"
+  ],
+  "blocksLeftInPlace": [],
+  "hasForm": true
+}

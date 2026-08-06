@@ -1,0 +1,20 @@
+{
+  "status": "success",
+  "url": "https://grace.com/insights/activcat-innovation-solutions/",
+  "path": "insights/activcat-innovation-solutions",
+  "timestamp": "2026-08-06T10:11:05.792Z",
+  "title": "ActivCat® Catalyst Innovative Solutions",
+  "pageType": "insights-article",
+  "pageMetadata": [
+    "template",
+    "contactus",
+    "contactus-tagline",
+    "breadcrumb-title"
+  ],
+  "contentNodes": 5,
+  "blocks": [
+    "cards-featured-content"
+  ],
+  "blocksLeftInPlace": [],
+  "hasForm": true
+}

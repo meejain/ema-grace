@@ -1,0 +1,20 @@
+{
+  "status": "success",
+  "url": "https://grace.com/insights/choosing-a-small-molecule-drug-substance-partner/",
+  "path": "insights/choosing-a-small-molecule-drug-substance-partner",
+  "timestamp": "2026-08-06T10:17:17.233Z",
+  "title": "Choosing a small-molecule drug substance partner",
+  "pageType": "insights-article",
+  "pageMetadata": [
+    "template",
+    "contactus",
+    "contactus-tagline",
+    "breadcrumb-title"
+  ],
+  "contentNodes": 4,
+  "blocks": [
+    "cards-featured-content"
+  ],
+  "blocksLeftInPlace": [],
+  "hasForm": true
+}

@@ -1,0 +1,20 @@
+{
+  "status": "success",
+  "url": "https://grace.com/insights/the-growth-of-nutraceuticals/",
+  "path": "insights/the-growth-of-nutraceuticals",
+  "timestamp": "2026-08-06T10:13:31.127Z",
+  "title": "The Growth of Nutraceuticals",
+  "pageType": "insights-article",
+  "pageMetadata": [
+    "template",
+    "contactus",
+    "contactus-tagline",
+    "breadcrumb-title"
+  ],
+  "contentNodes": 7,
+  "blocks": [
+    "cards-featured-content"
+  ],
+  "blocksLeftInPlace": [],
+  "hasForm": true
+}

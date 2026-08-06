@@ -1,0 +1,27 @@
+/* Post Meta block — POSTED / INDUSTRY article metadata as a definition list,
+   matching grace.com: small uppercase-ish label (10px/500) above a 12px value.
+   Source puts a 1px #c4c4c4 separator + 18px padding above each POSTED/INDUSTRY
+   label (DT), with the whole list offset 15px from the SHARE block above. */
+.post-meta dl {
+  margin: 15px 0 0;
+
+  /* BUG3: the POSTED/INDUSTRY separators (dt border-top) span the content width, not
+     the full column — source is 173px wide, left-aligned with the SHARE label/icons. */
+  max-width: 173px;
+}
+
+.post-meta dt {
+  margin: 0;
+  border-top: 1px solid #c4c4c4;
+  padding-top: 18px;
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.post-meta dd {
+  margin: 0 0 15px;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.4;
+}

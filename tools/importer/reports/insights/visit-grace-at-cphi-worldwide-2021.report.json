@@ -1,0 +1,20 @@
+{
+  "status": "success",
+  "url": "https://grace.com/insights/visit-grace-at-cphi-worldwide-2021/",
+  "path": "insights/visit-grace-at-cphi-worldwide-2021",
+  "timestamp": "2026-08-06T09:55:45.460Z",
+  "title": "Visit Grace at CPhI Worldwide 2021",
+  "pageType": "insights-article",
+  "pageMetadata": [
+    "template",
+    "contactus",
+    "contactus-tagline",
+    "breadcrumb-title"
+  ],
+  "contentNodes": 12,
+  "blocks": [
+    "cards-featured-content"
+  ],
+  "blocksLeftInPlace": [],
+  "hasForm": true
+}

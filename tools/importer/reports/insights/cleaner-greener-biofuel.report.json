@@ -1,0 +1,20 @@
+{
+  "status": "success",
+  "url": "https://grace.com/insights/cleaner-greener-biofuel/",
+  "path": "insights/cleaner-greener-biofuel",
+  "timestamp": "2026-08-06T09:58:25.949Z",
+  "title": "Cleaner Greener Biofuel",
+  "pageType": "insights-article",
+  "pageMetadata": [
+    "template",
+    "contactus",
+    "contactus-tagline",
+    "breadcrumb-title"
+  ],
+  "contentNodes": 6,
+  "blocks": [
+    "cards-featured-content"
+  ],
+  "blocksLeftInPlace": [],
+  "hasForm": false
+}

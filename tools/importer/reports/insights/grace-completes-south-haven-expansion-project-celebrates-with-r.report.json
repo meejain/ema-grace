@@ -1,0 +1,20 @@
+{
+  "status": "success",
+  "url": "https://grace.com/insights/grace-completes-south-haven-expansion-project--celebrates-with-r/",
+  "path": "insights/grace-completes-south-haven-expansion-project-celebrates-with-r",
+  "timestamp": "2026-08-06T10:17:02.093Z",
+  "title": "Grace Completes South Haven Expansion Project, Celebrates with Ribbon Cutting",
+  "pageType": "insights-article",
+  "pageMetadata": [
+    "template",
+    "contactus",
+    "contactus-tagline",
+    "breadcrumb-title"
+  ],
+  "contentNodes": 10,
+  "blocks": [
+    "cards-featured-content"
+  ],
+  "blocksLeftInPlace": [],
+  "hasForm": false
+}

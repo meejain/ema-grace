@@ -1,0 +1,20 @@
+{
+  "status": "success",
+  "url": "https://grace.com/insights/women-engineers-of-grace-leading-with-purpose/",
+  "path": "insights/women-engineers-of-grace-leading-with-purpose",
+  "timestamp": "2026-08-06T10:26:46.855Z",
+  "title": "Women Engineers of Grace: Leading with Purpose",
+  "pageType": "insights-article",
+  "pageMetadata": [
+    "template",
+    "contactus",
+    "contactus-tagline",
+    "breadcrumb-title"
+  ],
+  "contentNodes": 13,
+  "blocks": [
+    "cards-featured-content"
+  ],
+  "blocksLeftInPlace": [],
+  "hasForm": false
+}

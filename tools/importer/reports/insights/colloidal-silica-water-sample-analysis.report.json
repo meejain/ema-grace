@@ -1,0 +1,22 @@
+{
+  "status": "success",
+  "url": "https://grace.com/insights/colloidal-silica-water-sample-analysis/",
+  "path": "insights/colloidal-silica-water-sample-analysis",
+  "timestamp": "2026-08-06T10:00:14.107Z",
+  "title": "Colloidal Silica Can Help Expedite Water Sample Analysis of Toxic Pesticides",
+  "pageType": "insights-article",
+  "pageMetadata": [
+    "template",
+    "contactus",
+    "contactus-tagline",
+    "breadcrumb-title"
+  ],
+  "contentNodes": 8,
+  "blocks": [
+    "cards-product",
+    "social-follow",
+    "cards-featured-content"
+  ],
+  "blocksLeftInPlace": [],
+  "hasForm": true
+}

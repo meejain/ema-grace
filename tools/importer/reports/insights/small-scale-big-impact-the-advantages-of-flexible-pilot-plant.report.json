@@ -1,0 +1,20 @@
+{
+  "status": "success",
+  "url": "https://grace.com/insights/small-scale--big-impact--the-advantages-of-flexible-pilot-plant-/",
+  "path": "insights/small-scale-big-impact-the-advantages-of-flexible-pilot-plant",
+  "timestamp": "2026-08-06T10:19:52.847Z",
+  "title": "Small scale, big impact: The advantages of flexible pilot plant equipment",
+  "pageType": "insights-article",
+  "pageMetadata": [
+    "template",
+    "contactus",
+    "contactus-tagline",
+    "breadcrumb-title"
+  ],
+  "contentNodes": 4,
+  "blocks": [
+    "cards-featured-content"
+  ],
+  "blocksLeftInPlace": [],
+  "hasForm": true
+}

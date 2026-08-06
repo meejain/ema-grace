@@ -78,6 +78,7 @@ import videoOverlayParser from './parsers/video-overlay.js';
 import bannerContactSplitParser from './parsers/banner-contact-split.js';
 import cardsRelatedArticlesParser from './parsers/cards-related-articles.js';
 import videoGridParser from './parsers/video-grid.js';
+import cardsFeaturedContentParser from './parsers/cards-featured-content.js';
 
 // TRANSFORMER IMPORTS — site-wide chrome cleanup (page-agnostic).
 import graceCleanupTransformer from './transformers/grace-cleanup.js';
@@ -144,6 +145,10 @@ const parsers = {
   'banner-contact-split': bannerContactSplitParser,
   'cards-related-articles': cardsRelatedArticlesParser,
   'video-grid': videoGridParser,
+  // Real parser for the "Latest Insights"/related block — REPLACES the earlier seed-from-draft
+  // (which injected placeholder draft images + wrong articles). Registering here makes the
+  // seed-from-draft discovery branch fall through to this parser.
+  'cards-featured-content': cardsFeaturedContentParser,
 };
 
 const transformers = [graceCleanupTransformer];
@@ -445,6 +450,22 @@ function detectForm(document) {
 // ---------------------------------------------------------------------------
 // PAGE-TYPE DISPATCH
 // ---------------------------------------------------------------------------
+/**
+ * Insights ARTICLE (blog-detail) page: a 3-column row (col-lg-2 left rail with SHARE + POSTED/
+ * INDUSTRY, col-lg-7 body, col-lg-3 widget). This is NOT the compliance section-nav sidebar —
+ * the left col-lg-2 holds social share + post metadata, not a page nav — so it needs its own
+ * extraction. Detect on the share container + POSTED/INDUSTRY <dl> signature (the col-lg-2
+ * heuristic below would otherwise misroute these to the compliance recipe).
+ */
+function isInsightsArticle(document, url) {
+  const path = (() => { try { return new URL(url || '').pathname; } catch (e) { return ''; } })();
+  const looksInsights = /\/insights\/.+/.test(path) || !!document.querySelector('.blog-detail, .cmp-blog-detail');
+  const hasShare = !!document.querySelector('.social-share-container');
+  const hasPostMeta = Array.from(document.querySelectorAll('article dl dt'))
+    .some((dt) => /posted|industry/i.test(dt.textContent || ''));
+  return (looksInsights && (hasShare || hasPostMeta)) || (hasShare && hasPostMeta);
+}
+
 /** Sidebar pages: left section-navigation column beside the main content. */
 function isSidebarPage(document) {
   return !!document.querySelector(
@@ -501,8 +522,12 @@ function rewriteInternalLinks(main) {
       if (/^https?:\/\//i.test(href)) {
         const u = new URL(href);
         const host = u.hostname;
+        // jobs. and marketing. are separate external Grace properties (careers portal,
+        // marketing/whitepaper landing pages) — NOT part of the EDS site, so keep their
+        // absolute URLs instead of rewriting to a broken same-site relative path.
+        const externalGraceSubdomains = ['jobs.grace.com', 'marketing.grace.com'];
         const isInternal = host === 'grace.com'
-          || (host.endsWith('.grace.com') && host !== 'jobs.grace.com')
+          || (host.endsWith('.grace.com') && !externalGraceSubdomains.includes(host))
           || host.includes('xmod-gracev1') || host.includes('--ema-grace--')
           || host.includes('aem.live') || host.includes('aem.page');
         if (isInternal) {
@@ -629,6 +654,239 @@ function buildContactSplitBanner(document) {
 
   if (!halfCells.length) return null;
   return WebImporter.Blocks.createBlock(document, { name: 'Banner (contact-split)', cells: [[title], halfCells] });
+}
+
+/**
+ * Build an insights ARTICLE (blog-detail) page. Source layout (verified live):
+ *   article > .row [ col-lg-2 SHARE + POSTED/INDUSTRY | col-lg-7 body | col-lg-3 widget ].
+ * There is NO blue hero band — the H1 is plain serif text at the top of the content column and
+ * the microscope image is the article's LEAD image (a .media-callout inside the body, not a
+ * hero). The body col-lg-7 holds, in order:
+ *   .text(H1) · .media-callout(lead image) · .text(the article: paragraphs + headings) ·
+ *   .section(Featured Service card) · .divider · .text(References) · trailing empty shells +
+ *   a .card-list (related articles — handled by discovery).
+ * Left rail (col-lg-2) = SHARE social links + POSTED/INDUSTRY metadata, tagged sidebar-nav so
+ * the template pins it to the left column (matching the source).
+ */
+function buildInsightsArticle(document, url, params) {
+  const main = document.createElement('main');
+
+  // ---- Left rail: breadcrumb + Social (share) block + POSTED/INDUSTRY (dl), tagged sidebar-nav ----
+  const railInner = document.createElement('div');
+  let railHasContent = false;
+
+  // Breadcrumb (Home > Insights) — the source renders it at the top of the left rail.
+  const crumbLinks = Array.from(document.querySelectorAll(
+    'article nav[aria-label*="readcrumb" i] a, article .breadcrumb a, article nav ol a, article nav ul a',
+  )).filter((a) => (a.textContent || '').trim());
+  if (crumbLinks.length) {
+    // Emit a Breadcrumb block — one row per crumb (single cell holding the link).
+    // The block JS renders a semantic <nav><ol><li> with BreadcrumbList schema.
+    const seen = new Set();
+    const rows = [];
+    crumbLinks.forEach((a) => {
+      const text = (a.textContent || '').replace(/\s+/g, ' ').trim();
+      const href = a.getAttribute('href') || '';
+      const key = `${text}|${href}`;
+      if (!text || seen.has(key)) return;
+      seen.add(key);
+      const link = document.createElement('a');
+      link.href = href || '#';
+      link.textContent = text;
+      rows.push([link]);
+    });
+    if (rows.length) {
+      const crumbBlock = WebImporter.Blocks.createBlock(document, { name: 'Breadcrumb', cells: rows });
+      railInner.append(crumbBlock);
+      railHasContent = true;
+    }
+  }
+
+  const share = document.querySelector('.social-share-container');
+  if (share) {
+    // Emit the `Social (share)` block: a single cell listing the networks (incl. Print, matching
+    // the source's 5 icons). The block JS renders the circular share buttons for the page.
+    const networks = Array.from(share.querySelectorAll('a[href], a'))
+      .map((a) => (a.getAttribute('aria-label') || a.textContent || '').replace(/share via/i, '').trim())
+      .filter(Boolean);
+    // Ensure Print is present (source's 5th icon; its link often has empty text/aria).
+    if (!networks.some((n) => /print/i.test(n))) networks.push('Print');
+    const list = networks.length ? networks.join(', ') : 'Facebook, X, LinkedIn, Email, Print';
+    const shareBlock = WebImporter.Blocks.createBlock(document, { name: 'Social (share)', cells: [[list]] });
+    railInner.append(shareBlock);
+    railHasContent = true;
+  }
+
+  // POSTED / INDUSTRY as a Post Meta block — one row per label/value pair. The block
+  // JS renders a semantic <dl><dt>LABEL</dt><dd>VALUE</dd> (markdown can't carry a raw
+  // <dl>, so a block preserves the definition-list semantics through the round-trip).
+  const dl = document.querySelector('article dl');
+  if (dl) {
+    const rows = [];
+    Array.from(dl.querySelectorAll('dt')).forEach((dt) => {
+      const dd = dt.nextElementSibling && dt.nextElementSibling.tagName === 'DD' ? dt.nextElementSibling : null;
+      const label = (dt.textContent || '').replace(/\s+/g, ' ').trim();
+      const val = dd ? (dd.textContent || '').replace(/\s+/g, ' ').trim() : '';
+      if (!label) return;
+      rows.push([label, val]);
+    });
+    if (rows.length) {
+      const metaBlock = WebImporter.Blocks.createBlock(document, { name: 'Post Meta', cells: rows });
+      railInner.append(metaBlock);
+      railHasContent = true;
+    }
+  }
+
+  if (railHasContent) {
+    railInner.append(createSectionMetadata(document, 'sidebar-nav'));
+    main.append(railInner);
+    main.append(document.createElement('hr'));
+  }
+
+  // ---- Body: parse in-body BLOCKS first, then collect the rest as default content ----
+  const h1el = document.querySelector('article h1');
+  const bodyCol = (h1el && h1el.closest('[class*="col-lg-7"]'))
+    || document.querySelector('article .col-lg-7');
+
+  const bodyBlocks = []; // { after: <node cloned into contentNodes to anchor order>, block }
+  const contentNodes = [];
+  if (bodyCol) {
+    Array.from(bodyCol.children).forEach((el) => {
+      if (/^(SCRIPT|STYLE|NOSCRIPT|LINK|IFRAME)$/.test(el.tagName)) return;
+      if (el.matches('.divider')) return;
+      if (el.matches('.card-list')) return; // related articles → discovery (below)
+
+      // In-body "Featured Service" promo: a .feature-set-section with an a.item.slate-bkgd card.
+      // Parse it as the columns-horizontal-teaser-featured block (dark card) rather than flatten.
+      const featureSet = el.matches('.feature-set-section, .feature-set, .cmp-feature-set')
+        ? el : el.querySelector('.feature-set-section, .feature-set, .cmp-feature-set');
+      if (featureSet && featureSet.querySelector('a.item')) {
+        // (1) Green "Download the whitepaper" gated CTA sits just before the feature card (a
+        // .btn-primary link inside/adjacent to the feature-set). Emit it as a Button
+        // (primary-green) block ABOVE the featured block, matching the source order.
+        const dlLink = (el.querySelector('a.btn-primary, .button__section a, a[target="_blank"][href*="marketing.grace"]')
+          || featureSet.querySelector('a.btn-primary, .cta a, a[target="_blank"]'));
+        if (dlLink && !dlLink.closest('a.item')) {
+          // A lone link in its own <p> is auto-decorated by EDS into a button. Wrap in <strong>
+          // so decorateButtons() gives it the PRIMARY (filled) style; the insights CSS paints
+          // that primary button Grace-green to match the source "Download the whitepaper" CTA.
+          const p = document.createElement('p');
+          const strong = document.createElement('strong');
+          const a = document.createElement('a');
+          a.href = dlLink.getAttribute('href') || '#';
+          if (dlLink.getAttribute('target')) a.setAttribute('target', dlLink.getAttribute('target'));
+          a.textContent = (dlLink.textContent || 'Download').replace(/\s+/g, ' ').trim();
+          strong.append(a);
+          p.append(strong);
+          p.className = 'insights-download-cta';
+          contentNodes.push(p);
+        }
+        // (2) "Featured Service" label. Source is a <p class="subhead-large"> (a styled
+        // label, NOT a heading), so emit a plain <p> to match its semantics. The insights
+        // CSS styles the <p> that immediately precedes the featured columns block as the
+        // subhead-large label (markdown strips the class, so target it structurally).
+        const labelEl = featureSet.querySelector('.subhead-large, .header .title, .heading');
+        const label = labelEl ? (labelEl.textContent || '').replace(/\s+/g, ' ').trim() : '';
+        if (label) { const p = document.createElement('p'); p.textContent = label; contentNodes.push(p); }
+        // (3) The featured dark card itself.
+        const before = new Set(document.querySelectorAll('table'));
+        try { columnsHorizontalTeaserFeaturedParser(featureSet, { document, url, params }); } catch (e) { /* leave */ }
+        const created = Array.from(document.querySelectorAll('table')).find((t) => !before.has(t) && !t.closest('td'));
+        if (created) { contentNodes.push(created); return; }
+      }
+
+      // Lead .media-callout: extract ONLY its image (drop video-modal/clientlib scaffolding).
+      if (el.matches('.media-callout') || el.querySelector('.media-callout')) {
+        const img = el.querySelector('.media-image img, .img img, picture, img');
+        if (img) { const p = document.createElement('p'); p.append(img.cloneNode(true)); contentNodes.push(p); }
+        return;
+      }
+
+      const hasContent = (el.textContent || '').trim().length > 0 || el.querySelector('img, picture');
+      if (hasContent) contentNodes.push(el.cloneNode(true));
+    });
+  }
+  void bodyBlocks;
+  if (contentNodes.length) {
+    const section = document.createElement('div');
+    contentNodes.forEach((n) => section.append(n));
+    // Clean the source's inert link scaffolding + now-empty wrapper paragraphs.
+    section.querySelectorAll('a').forEach((a) => {
+      const href = (a.getAttribute('href') || '').trim();
+      if ((!href || href === '#') && !a.textContent.trim() && !a.querySelector('img, picture')) a.remove();
+    });
+    section.querySelectorAll('p').forEach((p) => {
+      if (!p.textContent.trim() && !p.querySelector('img, picture, a[href], br, table')) p.remove();
+    });
+    // D4: the "Go here to learn more" whitepaper link. In the source DOM the link
+    // text is wrapped in <em> INSIDE the <a> (<a><em>…</em></a>); markdown would flip
+    // that to <em><a>…</a></em> (italic). Live renders it upright, so unwrap the inner
+    // <em> — move its text up into the <a> — for whitepaper links. Handle both nestings.
+    section.querySelectorAll('a[href*="machine-learning-whitepaper"] em, a[href*="marketing.grace"] em').forEach((em) => {
+      while (em.firstChild) em.parentNode.insertBefore(em.firstChild, em);
+      em.remove();
+    });
+    section.querySelectorAll('em > a[href*="machine-learning-whitepaper"]:only-child, em > a[href*="marketing.grace"]:only-child').forEach((a) => {
+      const em = a.parentElement;
+      if (em && em.tagName === 'EM') em.replaceWith(a);
+    });
+    const leadImg = section.querySelector('img[alt="Image of Media Callout"], img[alt=""]');
+    if (leadImg && h1el) leadImg.setAttribute('alt', (h1el.textContent || '').replace(/\s+/g, ' ').trim());
+    main.append(section);
+  }
+
+  // DETACH consumed regions (left rail + body column) before discovery, so discovery only sees
+  // the sibling related-articles block (no duplicates). Also remove EVERY .social-share-container
+  // (the page has a second mobile/bottom one after the article) so discovery can't re-emit a
+  // duplicate share block — we already put the share block in the left rail.
+  if (share) { const sc = share.closest('[class*="col-lg-2"]') || share; if (sc && sc.parentNode) sc.remove(); }
+  if (bodyCol && bodyCol.parentNode) bodyCol.remove();
+  document.querySelectorAll('.social-share-container').forEach((s) => { if (s.parentNode) s.remove(); });
+
+  // Related-articles (.featured-blog-cmp) via catalog discovery — full-width below the article.
+  const extra = discoverAndParseBlocks(document, url, params, { excludeSidebarHandled: true });
+  extra.rendered.forEach((blockEl) => {
+    main.append(document.createElement('hr'));
+    const section = document.createElement('div');
+    section.append(blockEl);
+    main.append(section);
+  });
+
+  // Page metadata: sidebar template (left rail layout) + contactus widget. Tagline reads the
+  // source contact widget's SUBHEAD/text ("Talk to our experts about how we can help your
+  // business."), not just its title, so the widget copy matches live.
+  // The contact widget copy is JS-hydrated (often absent from the captured DOM at transform
+  // time), so read it if present, else use the insights-article default copy (which the source
+  // uses site-wide on articles): "Talk to our experts about how we can help your business."
+  const t = document.querySelector(
+    '.contactus__content-desktop .contactus__text, .contactus__text, .contact-us-sticky .contactus__text, .contact-us-cmp .contact-us-subtitle',
+  );
+  const pageMeta = [['template', 'sidebar'], ['contactus', 'true']];
+  const tagline = (t && (t.textContent || '').trim())
+    ? (t.textContent || '').replace(/\s+/g, ' ').trim()
+    : 'Talk to our experts about how we can help your business.';
+  pageMeta.push(['contactus-tagline', tagline]);
+  const title = h1el ? (h1el.textContent || '').replace(/\s+/g, ' ').trim() : '';
+  if (title) pageMeta.push(['breadcrumb-title', title]);
+
+  rewriteInternalLinks(main);
+  WebImporter.rules.transformBackgroundImages(main, document);
+  WebImporter.rules.adjustImageUrls(main, url, params.originalURL);
+  main.appendChild(document.createElement('hr'));
+  main.appendChild(buildMetadataBlock(document, pageMeta));
+
+  return {
+    element: main,
+    path: finalizePath(params),
+    report: {
+      title: document.title,
+      pageType: 'insights-article',
+      pageMetadata: pageMeta.map((p) => p[0]),
+      contentNodes: contentNodes.length,
+      blocks: extra.parsedNames,
+      blocksLeftInPlace: extra.unparsed,
+    },
+  };
 }
 
 function buildSidebarPage(document, url, params) {
@@ -901,10 +1159,16 @@ export default {
     // 2. form detection (deferred handling — flag only)
     const hasForm = detectForm(document);
 
-    // 3. dispatch by page type
-    const result = isSidebarPage(document)
-      ? buildSidebarPage(document, url, params)
-      : buildDefaultPage(document, url, params);
+    // 3. dispatch by page type — insights articles FIRST (their col-lg-2 share rail would
+    //    otherwise be misread as a compliance section-nav sidebar).
+    let result;
+    if (isInsightsArticle(document, params.originalURL || url)) {
+      result = buildInsightsArticle(document, url, params);
+    } else if (isSidebarPage(document)) {
+      result = buildSidebarPage(document, url, params);
+    } else {
+      result = buildDefaultPage(document, url, params);
+    }
 
     // 4. attach the form flag (bulk runner appends url to forms-register.json when true)
     result.report.hasForm = hasForm;

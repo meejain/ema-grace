@@ -2,26 +2,19 @@
   "status": "success",
   "url": "https://grace.com/insights/4-ways-cdmos-help-nutraceutical-companies-grow/",
   "path": "insights/4-ways-cdmos-help-nutraceutical-companies-grow",
-  "timestamp": "2026-08-05T17:03:52.198Z",
+  "timestamp": "2026-08-06T10:22:36.152Z",
   "title": "4 Ways CDMOs help Nutraceutical Companies Grow",
-  "pageType": "sidebar",
+  "pageType": "insights-article",
   "pageMetadata": [
     "template",
     "contactus",
     "contactus-tagline",
     "breadcrumb-title"
   ],
-  "sidebarNav": true,
-  "contentNodes": 2,
-  "contactSplitBanner": false,
+  "contentNodes": 3,
   "blocks": [
-    "social-share",
-    "social-share"
+    "cards-featured-content"
   ],
-  "blocksLeftInPlace": [
-    "banner-cta",
-    "cards-featured-content",
-    "quote-cta"
-  ],
+  "blocksLeftInPlace": [],
   "hasForm": false
 }

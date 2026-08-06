@@ -1,0 +1,20 @@
+{
+  "status": "success",
+  "url": "https://grace.com/insights/insights-from-the-2025-aci-future-of-chemical-recycling-conference/",
+  "path": "insights/insights-from-the-2025-aci-future-of-chemical-recycling-conference",
+  "timestamp": "2026-08-06T10:24:07.138Z",
+  "title": "Insights from the 2025 ACI Future of Chemical Recycling Conference",
+  "pageType": "insights-article",
+  "pageMetadata": [
+    "template",
+    "contactus",
+    "contactus-tagline",
+    "breadcrumb-title"
+  ],
+  "contentNodes": 4,
+  "blocks": [
+    "cards-featured-content"
+  ],
+  "blocksLeftInPlace": [],
+  "hasForm": false
+}

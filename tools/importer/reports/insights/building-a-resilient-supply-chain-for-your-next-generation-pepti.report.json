@@ -1,0 +1,20 @@
+{
+  "status": "success",
+  "url": "https://grace.com/insights/building-a-resilient-supply-chain-for-your-next-generation-pepti/",
+  "path": "insights/building-a-resilient-supply-chain-for-your-next-generation-pepti",
+  "timestamp": "2026-08-06T10:24:18.101Z",
+  "title": "Building A Resilient Supply Chain For Your Next-Generation Peptide Therapeutic",
+  "pageType": "insights-article",
+  "pageMetadata": [
+    "template",
+    "contactus",
+    "contactus-tagline",
+    "breadcrumb-title"
+  ],
+  "contentNodes": 6,
+  "blocks": [
+    "cards-featured-content"
+  ],
+  "blocksLeftInPlace": [],
+  "hasForm": true
+}

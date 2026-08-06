@@ -1,0 +1,20 @@
+{
+  "status": "success",
+  "url": "https://grace.com/insights/a-successful-case-of-resid-to-propylene-maximization/",
+  "path": "insights/a-successful-case-of-resid-to-propylene-maximization",
+  "timestamp": "2026-08-06T10:09:16.642Z",
+  "title": "A Successful Case of Resid-to-Propylene Maximization at OQ",
+  "pageType": "insights-article",
+  "pageMetadata": [
+    "template",
+    "contactus",
+    "contactus-tagline",
+    "breadcrumb-title"
+  ],
+  "contentNodes": 4,
+  "blocks": [
+    "cards-featured-content"
+  ],
+  "blocksLeftInPlace": [],
+  "hasForm": false
+}

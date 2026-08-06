@@ -166,6 +166,26 @@ function decorateButtons(main) {
 }
 
 /**
+ * Opens cross-origin links in a new tab. Authored `target="_blank"` is stripped by
+ * the markdown round-trip, so external links (different origin, http/https) get the
+ * new-tab behavior + safe rel here at decoration time, matching the source site.
+ * @param {Element} main The main element
+ */
+function decorateExternalLinks(main) {
+  main.querySelectorAll('a[href]').forEach((a) => {
+    const { href } = a;
+    if (!/^https?:\/\//i.test(href)) return;
+    try {
+      if (new URL(href).origin === window.location.origin) return;
+    } catch {
+      return;
+    }
+    a.setAttribute('target', '_blank');
+    a.setAttribute('rel', 'noopener noreferrer');
+  });
+}
+
+/**
  * Decorates the main element.
  * @param {Element} main The main element
  */
@@ -176,6 +196,7 @@ export function decorateMain(main) {
   decorateSections(main);
   decorateBlocks(main);
   decorateButtons(main);
+  decorateExternalLinks(main);
 }
 
 /**

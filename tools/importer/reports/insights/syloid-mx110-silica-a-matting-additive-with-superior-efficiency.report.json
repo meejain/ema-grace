@@ -1,0 +1,21 @@
+{
+  "status": "success",
+  "url": "https://grace.com/insights/syloid-mx110-silica-a-matting-additive-with-superior-efficiency/",
+  "path": "insights/syloid-mx110-silica-a-matting-additive-with-superior-efficiency",
+  "timestamp": "2026-08-06T10:02:01.536Z",
+  "title": "SYLOID® MX 110 Silica - a Matting Additive with Superior Efficiency",
+  "pageType": "insights-article",
+  "pageMetadata": [
+    "template",
+    "contactus",
+    "contactus-tagline",
+    "breadcrumb-title"
+  ],
+  "contentNodes": 6,
+  "blocks": [
+    "columns-image-teaser",
+    "cards-featured-content"
+  ],
+  "blocksLeftInPlace": [],
+  "hasForm": true
+}

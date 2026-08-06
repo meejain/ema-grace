@@ -1,0 +1,22 @@
+{
+  "status": "success",
+  "url": "https://grace.com/insights/colloidal-silica-coatings-in-food-contact-applications/",
+  "path": "insights/colloidal-silica-coatings-in-food-contact-applications",
+  "timestamp": "2026-08-06T10:00:15.419Z",
+  "title": "Colloidal Silica Coatings in Food-Contact Applications",
+  "pageType": "insights-article",
+  "pageMetadata": [
+    "template",
+    "contactus",
+    "contactus-tagline",
+    "breadcrumb-title"
+  ],
+  "contentNodes": 8,
+  "blocks": [
+    "cards-product",
+    "social-follow",
+    "cards-featured-content"
+  ],
+  "blocksLeftInPlace": [],
+  "hasForm": true
+}

@@ -1,0 +1,20 @@
+{
+  "status": "success",
+  "url": "https://grace.com/insights/transforming-waste-cooking-oils-into-renewable-fuels/",
+  "path": "insights/transforming-waste-cooking-oils-into-renewable-fuels",
+  "timestamp": "2026-08-06T10:26:08.549Z",
+  "title": "Transforming Waste Cooking Oils into Renewable Fuels",
+  "pageType": "insights-article",
+  "pageMetadata": [
+    "template",
+    "contactus",
+    "contactus-tagline",
+    "breadcrumb-title"
+  ],
+  "contentNodes": 3,
+  "blocks": [
+    "cards-featured-content"
+  ],
+  "blocksLeftInPlace": [],
+  "hasForm": false
+}
