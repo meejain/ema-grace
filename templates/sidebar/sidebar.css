@@ -403,11 +403,13 @@ body.sidebar main .default-content-wrapper:has(+ .columns-wrapper) > p:last-chil
    above and 50px below. Match: force the source aspect ratio and add the vertical
    rhythm. Scoped to the hero image paragraph (the H1's sibling <p> holding an img)
    right after the H1 in the content column. */
-/* Reserve the fixed hero height on the PARAGRAPH wrapper (not just the img) so the
-   box holds 208px from the very first layout frame — before createOptimizedPicture
-   swaps the <picture>/<img> in. Without this the paragraph collapses to text height
-   until the image decorates, reflowing the body copy below it (small CLS). */
-body.sidebar main .default-content-wrapper h1 + p:has(img) {
+/* Reserve the fixed hero height on the hero wrapper so the box holds 208px from
+   the first layout frame (before the image decodes), preventing body-copy reflow
+   (CLS). Two shapes are matched: a `<p>` wrapping the img (native EDS image) and a
+   bare `<picture>` directly after the H1 — the DM/Scene7 auto-block unwraps the
+   markdown `<p>` and replaces the carrier anchor with a top-level `<picture>`. */
+body.sidebar main .default-content-wrapper h1 + p:has(img),
+body.sidebar main .default-content-wrapper h1 + picture {
   height: 208px;
   margin: 25px 0 50px;
   overflow: hidden;
@@ -416,7 +418,9 @@ body.sidebar main .default-content-wrapper h1 + p:has(img) {
 /* Mobile base: source mobile hero is ~208px tall. Desktop (>=900px) overrides to 397px.
    The <picture> wrapper must ALSO fill the reserved box so the image is stable. */
 body.sidebar main .default-content-wrapper h1 + p:has(img) picture,
-body.sidebar main .default-content-wrapper h1 + p:has(img) img {
+body.sidebar main .default-content-wrapper h1 + p:has(img) img,
+body.sidebar main .default-content-wrapper h1 + picture,
+body.sidebar main .default-content-wrapper h1 + picture img {
   display: block;
   width: 100%;
   height: 100%;
@@ -424,7 +428,8 @@ body.sidebar main .default-content-wrapper h1 + p:has(img) img {
 }
 
 @media (width >= 900px) {
-  body.sidebar main .default-content-wrapper h1 + p:has(img) {
+  body.sidebar main .default-content-wrapper h1 + p:has(img),
+  body.sidebar main .default-content-wrapper h1 + picture {
     height: 397px;
   }
 }

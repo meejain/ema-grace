@@ -82,6 +82,10 @@ import cardsFeaturedContentParser from './parsers/cards-featured-content.js';
 
 // TRANSFORMER IMPORTS — site-wide chrome cleanup (page-agnostic).
 import graceCleanupTransformer from './transformers/grace-cleanup.js';
+// Dynamic Media / Scene7: preserve DM image URLs as carrier anchors so they
+// survive the markdown round-trip (rebuilt into <picture> client-side by
+// buildDynamicMediaImages in scripts/scripts.js) instead of being DAM-ingested.
+import graceDmImagesTransformer from './transformers/grace-dm-images.js';
 
 // ---------------------------------------------------------------------------
 // REGISTRIES
@@ -151,7 +155,7 @@ const parsers = {
   'cards-featured-content': cardsFeaturedContentParser,
 };
 
-const transformers = [graceCleanupTransformer];
+const transformers = [graceCleanupTransformer, graceDmImagesTransformer];
 
 // MATCHER REGISTRY — non-component blocks whose identity is position / column order /
 // heading / table-column-count, not a CSS class. A matcher returns block-root elements.
@@ -872,6 +876,11 @@ function buildInsightsArticle(document, url, params) {
   rewriteInternalLinks(main);
   WebImporter.rules.transformBackgroundImages(main, document);
   WebImporter.rules.adjustImageUrls(main, url, params.originalURL);
+  // afterTransform transformers (e.g. DM/Scene7 image → carrier anchor) run on the
+  // assembled article main, after blocks are built. buildInsightsArticle constructs
+  // its own <main> rather than going through buildDefaultPage, so the transformer
+  // pass must be invoked here too.
+  executeTransformers('afterTransform', main, { document, url, params });
   main.appendChild(document.createElement('hr'));
   main.appendChild(buildMetadataBlock(document, pageMeta));
 
