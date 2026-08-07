@@ -534,6 +534,10 @@ function rewriteInternalLinks(main) {
           || (host.endsWith('.grace.com') && !externalGraceSubdomains.includes(host))
           || host.includes('xmod-gracev1') || host.includes('--ema-grace--')
           || host.includes('aem.live') || host.includes('aem.page');
+        // DAM assets (…/content/dam/…, e.g. gated brochure PDFs) are NOT part of the EDS site
+        // tree — keep their absolute grace.com URL so they resolve to the real downloadable file
+        // instead of being turned into a broken same-site relative path.
+        if (isInternal && /^\/content\/dam\//.test(u.pathname)) return;
         if (isInternal) {
           let path = u.pathname.replace(/^\/content\/grace\/us\/en/, '').replace(/\.html$/, '');
           if (path.length > 1) path = path.replace(/\/$/, '');
@@ -674,6 +678,27 @@ function buildContactSplitBanner(document) {
  */
 function buildInsightsArticle(document, url, params) {
   const main = document.createElement('main');
+
+  // Detect the decorative geoAndHex background on the related-articles section BEFORE any DOM is
+  // detached. On the source, the related-cards (.featured-blog-cmp) sit inside a full-bleed
+  // `section.light-gray-bkgd.geoAndHex` on SOME articles (e.g. a-brewery-goes-green) but a plain
+  // `section` on others (e.g. 5-things-to-consider-when-selecting-a-chromatography-silica). Only
+  // when that class is present do we tag the emitted cards section so the CSS paints the gray
+  // hexagon band — otherwise the cards render on plain white, matching the source per-page.
+  const featuredBlog = document.querySelector('.featured-blog-cmp, .feature-blog, [class*="featured-blog"]');
+  const relatedHasGeoHex = !!(featuredBlog && featuredBlog.closest('.geoAndHex, .light-gray-bkgd'));
+  // Capture the related-articles section heading ("Latest Insights from Grace") NOW, before the
+  // block is parsed/detached. The heading lives in `.header .title h2` inside the featured-blog
+  // region; the invalid `<p><h2>` wrapper can hoist the <h2> out of `.title` during parsing, so
+  // fall back to any descendant h2 mentioning "insight", then to the site-wide default string.
+  let relatedTitle = '';
+  if (featuredBlog) {
+    const scope = featuredBlog.closest('.feature-blog') || featuredBlog;
+    const titleEl = scope.querySelector('.header .title h2, .header h2, .featured-blog-header h2')
+      || Array.from(scope.querySelectorAll('h2')).find((h) => /insight/i.test(h.textContent || ''));
+    relatedTitle = (titleEl && (titleEl.textContent || '').replace(/\s+/g, ' ').trim())
+      || 'Latest Insights from Grace';
+  }
 
   // ---- Left rail: breadcrumb + Social (share) block + POSTED/INDUSTRY (dl), tagged sidebar-nav ----
   const railInner = document.createElement('div');
@@ -843,6 +868,40 @@ function buildInsightsArticle(document, url, params) {
       a.removeAttribute('data-gated-id');
       a.removeAttribute('data-trigger-type');
     });
+    // Some gated download CTAs are authored as a <button href=...> (e.g. the "Download DAVISIL®
+    // brochure" gated-modal trigger), NOT an <a>. A raw <button> has no link semantics and is
+    // dropped by the markdown round-trip, so the CTA vanishes. Convert any such button that
+    // carries an href (or gated attributes) into the same promoted <strong><a> primary CTA so
+    // decorateButtons() paints it Grace-green like the anchor case above. Skip buttons inside
+    // tables / feature cards (handled elsewhere) and content-less/JS-only buttons (no href).
+    section.querySelectorAll('button.btn-primary, button[data-gated-id], button[data-trigger-type], button[href]').forEach((btn) => {
+      if (btn.closest('strong') || btn.closest('a.item') || btn.closest('table')) return;
+      let href = (btn.getAttribute('href') || '').trim();
+      const text = (btn.textContent || '').replace(/\s+/g, ' ').trim();
+      if (!href || !text) return; // need a real destination + label
+      // grace.com's gated-modal JS base64-ENCODES the button's href in the rendered DOM the
+      // importer captures (e.g. "L2NvbnRlbnQv…" → "/content/dam/…"). Decode it back to the real
+      // path when it isn't already a normal URL/path and it base64-decodes to one.
+      if (!/^(https?:\/\/|\/|#|mailto:)/i.test(href) && /^[A-Za-z0-9+/=]+$/.test(href)) {
+        try {
+          const decoded = (typeof atob === 'function' ? atob(href) : href);
+          if (/^\/(content|[a-z])/i.test(decoded)) href = decoded;
+        } catch (e) { /* leave as-is if not valid base64 */ }
+      }
+      // The gated CTA points at a DAM asset (/content/dam/…pdf). Such paths are NOT part of the
+      // EDS site tree, so anchor them to the ABSOLUTE live grace.com URL (the real PDF). Strip
+      // any Pardot gate handler suffix so the link resolves straight to the asset.
+      if (/^\/content\/dam\//.test(href)) {
+        href = `https://grace.com${href.replace(/\.pardot\.handler.*$/i, '')}`;
+      }
+      const strong = document.createElement('strong');
+      const a = document.createElement('a');
+      a.href = href;
+      a.textContent = text;
+      if (btn.getAttribute('target')) a.setAttribute('target', btn.getAttribute('target'));
+      strong.append(a);
+      btn.replaceWith(strong);
+    });
     // D4: the "Go here to learn more" whitepaper link. In the source DOM the link
     // text is wrapped in <em> INSIDE the <a> (<a><em>…</em></a>); markdown would flip
     // that to <em><a>…</a></em> (italic). Live renders it upright, so unwrap the inner
@@ -870,10 +929,28 @@ function buildInsightsArticle(document, url, params) {
 
   // Related-articles (.featured-blog-cmp) via catalog discovery — full-width below the article.
   const extra = discoverAndParseBlocks(document, url, params, { excludeSidebarHandled: true });
-  extra.rendered.forEach((blockEl) => {
+  extra.rendered.forEach((blockEl, i) => {
     main.append(document.createElement('hr'));
     const section = document.createElement('div');
+    const blockName = (extra.parsedNames[i] || '').toLowerCase();
+    const isFeaturedCards = blockName.includes('featured-content')
+      || (blockEl.textContent || '').toLowerCase().includes('featured-content');
+    // Section heading — prepend "Latest Insights from Grace" (captured pre-detach) as default
+    // content ABOVE the cards block, in the same section, so the cards.css featured-content
+    // header styling picks it up. Emitted here (not in the parser) because the parser's created
+    // <table> is all that discovery collects — an <h2> added there would be dropped.
+    if (isFeaturedCards && relatedTitle) {
+      const h2 = document.createElement('h2');
+      h2.textContent = relatedTitle;
+      section.append(h2);
+    }
     section.append(blockEl);
+    // Tag ONLY the related-cards section with the geo-hex section style WHEN the source wrapped it
+    // in .geoAndHex/.light-gray-bkgd. The CSS keys the gray hexagon background off this class, so
+    // pages without the source class render the cards on plain white — per-page parity.
+    if (relatedHasGeoHex && isFeaturedCards) {
+      section.append(createSectionMetadata(document, 'geo-hex'));
+    }
     main.append(section);
   });
 

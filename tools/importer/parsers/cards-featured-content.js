@@ -53,4 +53,7 @@ export default function parse(element, { document }) {
   const block = WebImporter.Blocks.createBlock(document, { name: 'Cards (featured-content)', cells });
   const host = element.closest('.featured-blog-cmp') || cmp;
   host.replaceWith(block);
+  // NOTE: the "Latest Insights from Grace" section heading is emitted by buildInsightsArticle
+  // (as default content just before this block's section), NOT here — the insights builder only
+  // collects the created <table> into its output, so an <h2> sibling added here would be dropped.
 }

@@ -2493,6 +2493,7 @@ var CustomImportScript = (() => {
           const host = u.hostname;
           const externalGraceSubdomains = ["jobs.grace.com", "marketing.grace.com"];
           const isInternal = host === "grace.com" || host.endsWith(".grace.com") && !externalGraceSubdomains.includes(host) || host.includes("xmod-gracev1") || host.includes("--ema-grace--") || host.includes("aem.live") || host.includes("aem.page");
+          if (isInternal && /^\/content\/dam\//.test(u.pathname)) return;
           if (isInternal) {
             let path = u.pathname.replace(/^\/content\/grace\/us\/en/, "").replace(/\.html$/, "");
             if (path.length > 1) path = path.replace(/\/$/, "");
@@ -2596,6 +2597,14 @@ var CustomImportScript = (() => {
   }
   function buildInsightsArticle(document, url, params) {
     const main = document.createElement("main");
+    const featuredBlog = document.querySelector('.featured-blog-cmp, .feature-blog, [class*="featured-blog"]');
+    const relatedHasGeoHex = !!(featuredBlog && featuredBlog.closest(".geoAndHex, .light-gray-bkgd"));
+    let relatedTitle = "";
+    if (featuredBlog) {
+      const scope = featuredBlog.closest(".feature-blog") || featuredBlog;
+      const titleEl = scope.querySelector(".header .title h2, .header h2, .featured-blog-header h2") || Array.from(scope.querySelectorAll("h2")).find((h) => /insight/i.test(h.textContent || ""));
+      relatedTitle = titleEl && (titleEl.textContent || "").replace(/\s+/g, " ").trim() || "Latest Insights from Grace";
+    }
     const railInner = document.createElement("div");
     let railHasContent = false;
     const crumbLinks = Array.from(document.querySelectorAll(
@@ -2726,6 +2735,29 @@ var CustomImportScript = (() => {
         a.removeAttribute("data-gated-id");
         a.removeAttribute("data-trigger-type");
       });
+      section.querySelectorAll("button.btn-primary, button[data-gated-id], button[data-trigger-type], button[href]").forEach((btn) => {
+        if (btn.closest("strong") || btn.closest("a.item") || btn.closest("table")) return;
+        let href = (btn.getAttribute("href") || "").trim();
+        const text = (btn.textContent || "").replace(/\s+/g, " ").trim();
+        if (!href || !text) return;
+        if (!/^(https?:\/\/|\/|#|mailto:)/i.test(href) && /^[A-Za-z0-9+/=]+$/.test(href)) {
+          try {
+            const decoded = typeof atob === "function" ? atob(href) : href;
+            if (/^\/(content|[a-z])/i.test(decoded)) href = decoded;
+          } catch (e) {
+          }
+        }
+        if (/^\/content\/dam\//.test(href)) {
+          href = `https://grace.com${href.replace(/\.pardot\.handler.*$/i, "")}`;
+        }
+        const strong = document.createElement("strong");
+        const a = document.createElement("a");
+        a.href = href;
+        a.textContent = text;
+        if (btn.getAttribute("target")) a.setAttribute("target", btn.getAttribute("target"));
+        strong.append(a);
+        btn.replaceWith(strong);
+      });
       section.querySelectorAll('a[href*="machine-learning-whitepaper"] em, a[href*="marketing.grace"] em').forEach((em) => {
         while (em.firstChild) em.parentNode.insertBefore(em.firstChild, em);
         em.remove();
@@ -2747,10 +2779,20 @@ var CustomImportScript = (() => {
       if (s.parentNode) s.remove();
     });
     const extra = discoverAndParseBlocks(document, url, params, { excludeSidebarHandled: true });
-    extra.rendered.forEach((blockEl) => {
+    extra.rendered.forEach((blockEl, i) => {
       main.append(document.createElement("hr"));
       const section = document.createElement("div");
+      const blockName = (extra.parsedNames[i] || "").toLowerCase();
+      const isFeaturedCards = blockName.includes("featured-content") || (blockEl.textContent || "").toLowerCase().includes("featured-content");
+      if (isFeaturedCards && relatedTitle) {
+        const h2 = document.createElement("h2");
+        h2.textContent = relatedTitle;
+        section.append(h2);
+      }
       section.append(blockEl);
+      if (relatedHasGeoHex && isFeaturedCards) {
+        section.append(createSectionMetadata(document, "geo-hex"));
+      }
       main.append(section);
     });
     const contactBanner = buildContactSplitBanner(document);

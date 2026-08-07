@@ -558,20 +558,23 @@
     text-align: left;
   }
 
-  /* List becomes a single-column grid of horizontal cards */
+  /* List becomes a single-column grid of horizontal cards. Column gap matches the source
+     related-articles grid (28px between the two card columns); row gap 40px. */
   .cards.featured-content > ul {
     display: grid;
     grid-template-columns: 1fr;
     overflow: visible;
-    gap: 40px 60px;
+    gap: 40px 28px;
     scroll-snap-type: none;
   }
 
+  /* Horizontal card: source image is 126×126 with the text butting right up against it
+     (~24px gap), NOT a 150px thumbnail with a wide 30px gutter. */
   .cards.featured-content > ul > li {
     flex: initial;
     scroll-snap-align: none;
-    grid-template-columns: 150px 1fr;
-    gap: 30px;
+    grid-template-columns: 126px 1fr;
+    gap: 24px;
   }
 
   .cards.featured-content .cards-card-image picture,

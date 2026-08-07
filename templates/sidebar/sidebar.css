@@ -107,16 +107,6 @@ body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section:ha
   order: 4;
 }
 
-/* When the gray geoAndHex cards section is immediately followed by the blue contact-split
-   banner, the gray band must butt DIRECTLY against the blue banner (source: gap 0) at ALL
-   widths. Zero the cards section's bottom margin here (mobile base); the >=900px block keeps
-   its own margin reset too. NOTE: `:has(+ .section .banner.contact-split)` is a single-level
-   :has with a descendant — NOT a nested `:has(+ .section:has(...))`, which is invalid CSS and
-   would silently drop the whole rule. */
-body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section.cards-container:has(.cards.featured-content):has(+ .section .banner.contact-split) {
-  margin-bottom: 0;
-}
-
 body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .custom-widget-container {
   margin-top: 0;
   margin-bottom: 0;
@@ -219,26 +209,13 @@ body.sidebar main > .section.sidebar-nav.breadcrumb-container .breadcrumb nav ol
     grid-column: 1 / -1;
   }
 
-  /* Insights related-articles cards: the source renders these on a FULL-BLEED gray
-     `geoAndHex` band (see the geoAndHex rules further below), but with the cards' content
-     still aligned to the GRACE logo / left rail (x=100). So the SECTION spans the full page
-     width (1 / -1) to carry the full-bleed background, and becomes a nested grid re-using the
-     SAME column template as `main` — placing its inner content in columns 2–3 lands it at
-     x=100 (flush under the breadcrumb/SHARE rail) and stops it short of the floating contact
-     widget gutter (col 4), with no hard-coded gutter math. The cards block's own CSS lays the
-     items out as a 2-up grid within that band. */
+  /* Insights related-articles cards: DEFAULT (most pages, e.g. the ML reference + 4-ways +
+     chromatography article) render the cards in the nav+content band (cols 2–3) on PLAIN WHITE,
+     left edge aligned to the GRACE logo / rail (x=100). Only the rarer `.geo-hex` variant (source
+     `section.geoAndHex`, e.g. a-brewery-goes-green) makes the section full-bleed with the gray
+     hexagon band — see the geo-hex rules further below, which override grid-column + add the
+     decorative layers. */
   body.sidebar main > .section.cards-container:has(.cards.featured-content) {
-    grid-column: 1 / -1;
-    display: grid;
-    grid-template-columns:
-      minmax(20px, 1fr)
-      minmax(0, 213px)
-      minmax(0, 747px)
-      minmax(0, 320px)
-      minmax(20px, 1fr);
-  }
-
-  body.sidebar main > .section.cards-container:has(.cards.featured-content) > * {
     grid-column: 2 / 4;
   }
 
@@ -753,42 +730,33 @@ body.sidebar main > .section.columns-container .columns-wrapper:has(.columns.hor
      widths — no >=900px duplicate needed.) */
 }
 
-/* The geoAndHex base rule (below) has LOWER specificity than the cards→banner zero-gap rule
-   (which adds a `:has(+ .section .banner.contact-split)` tail) that necessarily sits earlier in
-   source. They set different properties so there's no real conflict; disable the ordering lint
-   for this block. */
-/* stylelint-disable no-descending-specificity */
-
-/* geoAndHex decorative background (source: the related-cards section is a full-bleed
-   `section.light-gray-bkgd.geoAndHex` — gray band rgb(230 231 232) with a white hexagon
-   top edge + faint geometric line-network, the SAME brand artwork used by the
-   columns-horizontal-teaser variant). The section itself is now full-bleed (grid-column
-   1 / -1, see the >=900px alignment rule above), so the gray fill + geo-lines paint directly
-   on the section (no viewport-breakout math) and the hexagon band rides its top edge via
-   `::after`. Content is inset to x=100 by the nested grid. The generous top padding (source:
-   the title sits ~206px below the section top) is the "space on top" that separates these
-   cards from the article / blue contact banner above. Reuses the teaser artwork committed
-   under blocks/columns/. Insights-scoped so compliance sidebar pages (no .cards.featured-content)
-   are untouched. */
-body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section.cards-container:has(.cards.featured-content) {
+/* ===== geoAndHex variant (section style `geo-hex`) =====
+   ONLY the related-cards sections whose SOURCE was wrapped in `section.light-gray-bkgd.geoAndHex`
+   (e.g. a-brewery-goes-green) get this treatment — the importer emits Section Metadata Style
+   `geo-hex` for exactly those, so the class is absent on the majority of articles (ML reference,
+   4-ways, chromatography …) whose cards stay on plain white. Full-bleed gray band + white hexagon
+   top edge + faint geometric line-network, using the SAME PNGs the source serves
+   (WR_Grace_triangle_pattern_1_dark_gray.png / WR_Grace_hexagon_pattern_mask_final.png, committed
+   as teaser-*.png). The section goes full-bleed to carry the background; a nested grid re-insets
+   the cards to x=100. */
+body.sidebar main > .section.cards-container.geo-hex:has(.cards.featured-content) {
   position: relative;
   overflow: hidden;
   background-color: rgb(230 231 232);
 
-  /* Mobile: top padding clears the hex band; desktop bumps to the source ~206px offset. */
+  /* Butt the gray band directly against whatever follows (banner or footer) — source gap 0. */
+  margin-bottom: 0;
+
+  /* Mobile: top padding clears the hex band; desktop bumps to the source ~206px offset below. */
   padding-top: 110px;
   padding-bottom: 40px;
 }
 
-/* Decorative artwork replicates the SOURCE geoAndHex technique EXACTLY (the assets are the very
-   same PNGs the source serves — WR_Grace_triangle_pattern_1_dark_gray.png /
-   WR_Grace_hexagon_pattern_mask_final.png, committed here as teaser-*.png). Both layers fill the
-   whole section (inset:0) with `background-size: contain` (NEVER stretch — an earlier
-   `100% 100%`/`cover` distorted the hexagons, which is the "looks different" the source
-   comparison flagged) anchored at the BOTTOM (`50% 100%`), then flipped: the bottom-anchored
-   band ends up at the top after the vertical flip. This is the source's own trick.
+/* Decorative artwork replicates the SOURCE technique EXACTLY: both layers fill the whole section
+   (inset:0) with `background-size: contain` (NEVER stretch — `100%/cover` distorts the hexagons)
+   anchored at the BOTTOM (`50% 100%`), then flipped so the bottom-anchored band lands at the top.
    ::before = faint triangle line-network, mirrored horizontally (scaleX(-1)). */
-body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section.cards-container:has(.cards.featured-content)::before {
+body.sidebar main > .section.cards-container.geo-hex:has(.cards.featured-content)::before {
   content: '';
   position: absolute;
   inset: 0;
@@ -803,7 +771,7 @@ body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section.ca
 
 /* ::after = white hexagon band; flipped BOTH ways (scale(-1,-1)) so the solid edge sits at the
    top (blending into the white page above) and the hexagons hang down into the gray. */
-body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section.cards-container:has(.cards.featured-content)::after {
+body.sidebar main > .section.cards-container.geo-hex:has(.cards.featured-content)::after {
   content: '';
   position: absolute;
   inset: 0;
@@ -816,20 +784,42 @@ body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section.ca
   transform: scale(-1, -1);
 }
 
-/* lift the real cards content (the nested grid children) above the decorative layers */
-body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section.cards-container:has(.cards.featured-content) > * {
+/* lift the real cards content above the decorative layers */
+body.sidebar main > .section.cards-container.geo-hex:has(.cards.featured-content) > * {
   position: relative;
   z-index: 2;
 }
 
 @media (width >= 900px) {
-  /* Desktop: ~206px top offset so the title clears the hexagons (source parity), giving the
-     cards clear separation from the section above. This overrides FIX 8's padding-top:0 for the
-     featured-content cards specifically (later in source + the :has(featured-content) tail wins). */
-  body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section.cards-container:has(.cards.featured-content) {
+  /* Desktop geo-hex: go FULL-BLEED to carry the gray band, and re-inset the cards to x=100 via a
+     nested grid re-using main's column template (content in cols 2–3, clear of the widget gutter).
+     ~206px top offset so the title clears the hexagons (source parity). */
+  body.sidebar main > .section.cards-container.geo-hex:has(.cards.featured-content) {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns:
+      minmax(20px, 1fr)
+      minmax(0, 213px)
+      minmax(0, 747px)
+      minmax(0, 320px)
+      minmax(20px, 1fr);
     padding-top: 206px;
-    padding-bottom: 60px;
+
+    /* Live has ~140px of decorative hex space below the last card row (60px was too tight,
+       stretching the grid to the section bottom). Keep 206px top + 28px col-gap + 40px row-gap. */
+    padding-bottom: 140px;
+  }
+
+  body.sidebar main > .section.cards-container.geo-hex:has(.cards.featured-content) > * {
+    grid-column: 2 / 4;
+  }
+
+  /* Live puts ~72px of vertical space between the "Latest Insights from Grace" heading and the
+     first card row (the migrated grid otherwise butts flush against the heading). Push the cards
+     WRAPPER down within the geo-hex section (target the wrapper only — adding it to both the
+     wrapper AND the nested block would stack to 144px). Scoped to geo-hex so the plain-white
+     featured-content pages keep their own spacing. */
+  body.sidebar main > .section.cards-container.geo-hex .cards-wrapper:has(.cards.featured-content) {
+    margin-top: 72px;
   }
 }
-
-/* stylelint-enable no-descending-specificity */
