@@ -2,14 +2,16 @@
   "status": "success",
   "url": "https://grace.com/insights/matte-finishes-reimagined/",
   "path": "insights/matte-finishes-reimagined",
-  "timestamp": "2026-08-07T17:10:17.185Z",
+  "timestamp": "2026-08-07T19:49:14.832Z",
   "title": "Matte Finishes, Reimagined: How to Achieve Lasting Coatings Performance Without Tradeoffs",
   "pageType": "insights-article",
   "pageMetadata": [
     "template",
     "contactus",
     "contactus-tagline",
-    "breadcrumb-title"
+    "breadcrumb-title",
+    "published",
+    "industry"
   ],
   "contentNodes": 6,
   "blocks": [

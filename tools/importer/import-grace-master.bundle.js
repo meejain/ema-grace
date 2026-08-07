@@ -2607,12 +2607,6 @@ var CustomImportScript = (() => {
     }
     const railInner = document.createElement("div");
     let railHasContent = false;
-    const homeSeed = document.createElement("a");
-    homeSeed.href = "/";
-    homeSeed.textContent = "Home";
-    const crumbBlock = WebImporter.Blocks.createBlock(document, { name: "Breadcrumb", cells: [[homeSeed]] });
-    railInner.append(crumbBlock);
-    railHasContent = true;
     const share = document.querySelector(".social-share-container");
     if (share) {
       const networks = Array.from(share.querySelectorAll("a[href], a")).map((a) => (a.getAttribute("aria-label") || a.textContent || "").replace(/share via/i, "").trim()).filter(Boolean);
@@ -2622,21 +2616,18 @@ var CustomImportScript = (() => {
       railInner.append(shareBlock);
       railHasContent = true;
     }
+    let publishedMeta = "";
+    let industryMeta = "";
     const dl = document.querySelector("article dl");
     if (dl) {
-      const rows = [];
       Array.from(dl.querySelectorAll("dt")).forEach((dt) => {
         const dd = dt.nextElementSibling && dt.nextElementSibling.tagName === "DD" ? dt.nextElementSibling : null;
-        const label = (dt.textContent || "").replace(/\s+/g, " ").trim();
+        const label = (dt.textContent || "").replace(/\s+/g, " ").trim().toLowerCase();
         const val = dd ? (dd.textContent || "").replace(/\s+/g, " ").trim() : "";
-        if (!label) return;
-        rows.push([label, val]);
+        if (!val) return;
+        if (/post|publish|date/.test(label)) publishedMeta = val;
+        else if (/industr/.test(label)) industryMeta = val;
       });
-      if (rows.length) {
-        const metaBlock = WebImporter.Blocks.createBlock(document, { name: "Post Meta", cells: rows });
-        railInner.append(metaBlock);
-        railHasContent = true;
-      }
     }
     if (railHasContent) {
       railInner.append(createSectionMetadata(document, "sidebar-nav"));
@@ -2652,6 +2643,32 @@ var CustomImportScript = (() => {
         if (/^(SCRIPT|STYLE|NOSCRIPT|LINK|IFRAME)$/.test(el.tagName)) return;
         if (el.matches(".divider")) return;
         if (el.matches(".card-list")) return;
+        const mediaVideo = el.matches(".media-video") ? el : el.querySelector(".media-video");
+        if (mediaVideo) {
+          const posterImg = mediaVideo.querySelector(".img img, .media-image img, picture, img");
+          const callout = mediaVideo.closest(".cmp-media-callout, .media-callout") || el;
+          const src = (() => {
+            const v = callout.querySelector(".media-modal video[src], .media-modal iframe[src], video[src], iframe[src]");
+            let raw = v ? v.getAttribute("src") || "" : "";
+            if (!raw) return "";
+            if (raw.startsWith("//")) raw = `https:${raw}`;
+            const ytId = raw.match(/(?:youtube(?:-nocookie)?\.com\/embed\/|youtu\.be\/)([\w-]{6,})/);
+            if (ytId) return `https://www.youtube.com/watch?v=${ytId[1]}`;
+            const vimeo = raw.match(/vimeo\.com\/(?:video\/)?(\d+)/);
+            if (vimeo) return `https://vimeo.com/${vimeo[1]}`;
+            if (raw.startsWith("/content/dam/")) return `https://grace.com${raw}`;
+            return raw;
+          })();
+          if (posterImg && src) {
+            const posterCell = [posterImg.cloneNode(true)];
+            const a = document.createElement("a");
+            a.href = src;
+            a.textContent = src;
+            const block = WebImporter.Blocks.createBlock(document, { name: "Video (overlay)", cells: [[posterCell, [a]]] });
+            contentNodes.push(block);
+            return;
+          }
+        }
         const featureSet = el.matches(".feature-set-section, .feature-set, .cmp-feature-set") ? el : el.querySelector(".feature-set-section, .feature-set, .cmp-feature-set");
         if (featureSet && featureSet.querySelector("a.item")) {
           const dlLink = el.querySelector('a.btn-primary, .button__section a, a[target="_blank"][href*="marketing.grace"]') || featureSet.querySelector('a.btn-primary, .cta a, a[target="_blank"]');
@@ -2710,6 +2727,21 @@ var CustomImportScript = (() => {
             contentNodes.push(created);
             return;
           }
+        }
+        const bq = el.matches("blockquote") ? el : el.querySelector(":scope > blockquote, blockquote");
+        if (bq && (bq.textContent || "").trim()) {
+          const quoteText = (bq.textContent || "").replace(/\s+/g, " ").trim();
+          const cells = [[quoteText]];
+          const authorP = bq.nextElementSibling && bq.nextElementSibling.tagName === "P" ? bq.nextElementSibling : el.matches("blockquote") ? null : el.querySelector("blockquote + p");
+          if (authorP) {
+            const lines = (authorP.innerHTML || "").split(/<br\s*\/?>/i).map((s) => s.replace(/<[^>]+>/g, "").replace(/\s+/g, " ").trim()).filter(Boolean);
+            if (lines[0]) cells.push([lines[0].replace(/^[-–—]\s*/, "")]);
+            if (lines.length > 1) cells.push([lines.slice(1).join(", ")]);
+            if (authorP.parentNode) authorP.remove();
+          }
+          const block = WebImporter.Blocks.createBlock(document, { name: "Quote (testimonial)", cells });
+          contentNodes.push(block);
+          return;
         }
         if (el.matches(".media-callout") || el.querySelector(".media-callout")) {
           const callouts = el.matches(".media-callout") ? [el] : Array.from(el.querySelectorAll(".media-callout"));
@@ -2847,6 +2879,8 @@ var CustomImportScript = (() => {
     pageMeta.push(["contactus-tagline", tagline]);
     const title = h1el ? (h1el.textContent || "").replace(/\s+/g, " ").trim() : "";
     if (title) pageMeta.push(["breadcrumb-title", title]);
+    if (publishedMeta) pageMeta.push(["published", publishedMeta]);
+    if (industryMeta) pageMeta.push(["industry", industryMeta]);
     rewriteInternalLinks(main);
     WebImporter.rules.transformBackgroundImages(main, document);
     WebImporter.rules.adjustImageUrls(main, url, params.originalURL);

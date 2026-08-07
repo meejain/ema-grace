@@ -2,14 +2,16 @@
   "status": "success",
   "url": "https://grace.com/insights/silica-chromatography-resins-for-LNP-purification/",
   "path": "insights/silica-chromatography-resins-for-lnp-purification",
-  "timestamp": "2026-08-07T17:03:49.067Z",
+  "timestamp": "2026-08-07T19:42:37.351Z",
   "title": "The Power of Silica Chromatography Resins in Delivering Superior LNP Lipid Purification",
   "pageType": "insights-article",
   "pageMetadata": [
     "template",
     "contactus",
     "contactus-tagline",
-    "breadcrumb-title"
+    "breadcrumb-title",
+    "published",
+    "industry"
   ],
   "contentNodes": 6,
   "blocks": [

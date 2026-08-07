@@ -2,14 +2,16 @@
   "status": "success",
   "url": "https://grace.com/insights/first-grace-dcr-pilot-plant-inauguarated-oman/",
   "path": "insights/first-grace-dcr-pilot-plant-inauguarated-oman",
-  "timestamp": "2026-08-07T16:47:40.268Z",
+  "timestamp": "2026-08-07T19:26:29.145Z",
   "title": "First Grace DCR™ Pilot Plant Inaugurated in Oman",
   "pageType": "insights-article",
   "pageMetadata": [
     "template",
     "contactus",
     "contactus-tagline",
-    "breadcrumb-title"
+    "breadcrumb-title",
+    "published",
+    "industry"
   ],
   "contentNodes": 7,
   "blocks": [

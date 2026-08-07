@@ -2,14 +2,16 @@
   "status": "success",
   "url": "https://grace.com/insights/silica-science-on-the-road/",
   "path": "insights/silica-science-on-the-road",
-  "timestamp": "2026-08-07T16:55:42.083Z",
+  "timestamp": "2026-08-07T19:34:25.010Z",
   "title": "Silica Science on the Road",
   "pageType": "insights-article",
   "pageMetadata": [
     "template",
     "contactus",
     "contactus-tagline",
-    "breadcrumb-title"
+    "breadcrumb-title",
+    "published",
+    "industry"
   ],
   "contentNodes": 4,
   "blocks": [],

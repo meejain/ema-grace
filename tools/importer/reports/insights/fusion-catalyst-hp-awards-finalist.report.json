@@ -2,14 +2,16 @@
   "status": "success",
   "url": "https://grace.com/insights/fusion-catalyst-hp-awards-finalist/",
   "path": "insights/fusion-catalyst-hp-awards-finalist",
-  "timestamp": "2026-08-07T16:34:08.235Z",
+  "timestamp": "2026-08-07T19:12:52.542Z",
   "title": "FUSION® FCC Catalyst a Finalist for “Best Catalyst Technology”",
   "pageType": "insights-article",
   "pageMetadata": [
     "template",
     "contactus",
     "contactus-tagline",
-    "breadcrumb-title"
+    "breadcrumb-title",
+    "published",
+    "industry"
   ],
   "contentNodes": 5,
   "blocks": [

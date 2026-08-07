@@ -2,14 +2,16 @@
   "status": "success",
   "url": "https://grace.com/insights/collaboration-consista-catalyst/",
   "path": "insights/collaboration-consista-catalyst",
-  "timestamp": "2026-08-07T16:35:53.140Z",
+  "timestamp": "2026-08-07T19:14:40.202Z",
   "title": "Collaboration and CONSISTA® Catalyst",
   "pageType": "insights-article",
   "pageMetadata": [
     "template",
     "contactus",
     "contactus-tagline",
-    "breadcrumb-title"
+    "breadcrumb-title",
+    "published",
+    "industry"
   ],
   "contentNodes": 8,
   "blocks": [

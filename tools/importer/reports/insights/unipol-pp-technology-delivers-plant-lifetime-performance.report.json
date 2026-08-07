@@ -2,14 +2,16 @@
   "status": "success",
   "url": "https://grace.com/insights/unipol-pp-technology-delivers-plant-lifetime-performance/",
   "path": "insights/unipol-pp-technology-delivers-plant-lifetime-performance",
-  "timestamp": "2026-08-07T16:38:42.228Z",
+  "timestamp": "2026-08-07T19:17:26.540Z",
   "title": "UNIPOL® PP Technology Delivers Plant Lifetime Performance™",
   "pageType": "insights-article",
   "pageMetadata": [
     "template",
     "contactus",
     "contactus-tagline",
-    "breadcrumb-title"
+    "breadcrumb-title",
+    "published",
+    "industry"
   ],
   "contentNodes": 4,
   "blocks": [

@@ -2,14 +2,16 @@
   "status": "success",
   "url": "https://grace.com/insights/refolution-project-explores-potential-cost-effective-biofuels/",
   "path": "insights/refolution-project-explores-potential-cost-effective-biofuels",
-  "timestamp": "2026-08-07T16:56:08.388Z",
+  "timestamp": "2026-08-07T19:35:06.403Z",
   "title": "REFOLUTION Project Explores Europe’s Potential for Cost-effective Biofuels",
   "pageType": "insights-article",
   "pageMetadata": [
     "template",
     "contactus",
     "contactus-tagline",
-    "breadcrumb-title"
+    "breadcrumb-title",
+    "published",
+    "industry"
   ],
   "contentNodes": 5,
   "blocks": [

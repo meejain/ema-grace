@@ -2,14 +2,16 @@
   "status": "success",
   "url": "https://grace.com/insights/dcr-pilot-plant-creates-opportunities-in-oman/",
   "path": "insights/dcr-pilot-plant-creates-opportunities-in-oman",
-  "timestamp": "2026-08-07T16:44:03.906Z",
+  "timestamp": "2026-08-07T19:22:51.629Z",
   "title": "DCR™ Pilot Plant Creates Opportunities in Oman",
   "pageType": "insights-article",
   "pageMetadata": [
     "template",
     "contactus",
     "contactus-tagline",
-    "breadcrumb-title"
+    "breadcrumb-title",
+    "published",
+    "industry"
   ],
   "contentNodes": 7,
   "blocks": [

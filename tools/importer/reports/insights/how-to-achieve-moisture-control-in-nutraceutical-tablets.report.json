@@ -2,14 +2,16 @@
   "status": "success",
   "url": "https://grace.com/insights/how-to-achieve-moisture-control-in-nutraceutical-tablets/",
   "path": "insights/how-to-achieve-moisture-control-in-nutraceutical-tablets",
-  "timestamp": "2026-08-07T17:02:02.506Z",
+  "timestamp": "2026-08-07T19:40:49.407Z",
   "title": "How to Achieve Moisture Control in Nutraceutical Tablets",
   "pageType": "insights-article",
   "pageMetadata": [
     "template",
     "contactus",
     "contactus-tagline",
-    "breadcrumb-title"
+    "breadcrumb-title",
+    "published",
+    "industry"
   ],
   "contentNodes": 5,
   "blocks": [

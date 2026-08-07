@@ -2,14 +2,16 @@
   "status": "success",
   "url": "https://grace.com/insights/strengthen-pharmaceutical-supply-chains-with-a-u-s--based-cdmo/",
   "path": "insights/strengthen-pharmaceutical-supply-chains-with-a-u-s-based-cdmo",
-  "timestamp": "2026-08-07T17:02:02.539Z",
+  "timestamp": "2026-08-07T19:40:47.572Z",
   "title": "Strengthen Pharmaceutical Supply Chains with a U.S.-Based CDMO",
   "pageType": "insights-article",
   "pageMetadata": [
     "template",
     "contactus",
     "contactus-tagline",
-    "breadcrumb-title"
+    "breadcrumb-title",
+    "published",
+    "industry"
   ],
   "contentNodes": 5,
   "blocks": [

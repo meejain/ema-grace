@@ -2,14 +2,16 @@
   "status": "success",
   "url": "https://grace.com/insights/the-many-manufacturing-challenges-solved-by-ludox/",
   "path": "insights/the-many-manufacturing-challenges-solved-by-ludox",
-  "timestamp": "2026-08-07T17:07:38.770Z",
+  "timestamp": "2026-08-07T19:46:35.462Z",
   "title": "From Adhesion to Zeolite Synthesis: The Many Manufacturing Challenges Solved by LUDOX® Colloidal Silica",
   "pageType": "insights-article",
   "pageMetadata": [
     "template",
     "contactus",
     "contactus-tagline",
-    "breadcrumb-title"
+    "breadcrumb-title",
+    "published",
+    "industry"
   ],
   "contentNodes": 6,
   "blocks": [

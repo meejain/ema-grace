@@ -2,14 +2,16 @@
   "status": "success",
   "url": "https://grace.com/insights/helping-to-decarbonize-the-fccu/",
   "path": "insights/helping-to-decarbonize-the-fccu",
-  "timestamp": "2026-08-07T16:58:21.204Z",
+  "timestamp": "2026-08-07T19:37:05.854Z",
   "title": "Helping to Decarbonize the FCCU",
   "pageType": "insights-article",
   "pageMetadata": [
     "template",
     "contactus",
     "contactus-tagline",
-    "breadcrumb-title"
+    "breadcrumb-title",
+    "published",
+    "industry"
   ],
   "contentNodes": 3,
   "blocks": [

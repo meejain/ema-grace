@@ -2,14 +2,16 @@
   "status": "success",
   "url": "https://grace.com/insights/new-solution-for-removing-glycidyl-esters-from-edible-oils/",
   "path": "insights/new-solution-for-removing-glycidyl-esters-from-edible-oils",
-  "timestamp": "2026-08-07T16:32:16.003Z",
+  "timestamp": "2026-08-07T19:11:02.828Z",
   "title": "A New Solution for Removing Glycidyl Esters from Once-Refined Edible and Specialty Oils",
   "pageType": "insights-article",
   "pageMetadata": [
     "template",
     "contactus",
     "contactus-tagline",
-    "breadcrumb-title"
+    "breadcrumb-title",
+    "published",
+    "industry"
   ],
   "contentNodes": 7,
   "blocks": [

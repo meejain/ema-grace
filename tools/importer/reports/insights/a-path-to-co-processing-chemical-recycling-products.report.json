@@ -2,14 +2,16 @@
   "status": "success",
   "url": "https://grace.com/insights/a-path-to-co-processing-chemical-recycling-products/",
   "path": "insights/a-path-to-co-processing-chemical-recycling-products",
-  "timestamp": "2026-08-07T17:05:30.879Z",
+  "timestamp": "2026-08-07T19:44:14.905Z",
   "title": "A Path to Co-processing Chemical Recycling Products",
   "pageType": "insights-article",
   "pageMetadata": [
     "template",
     "contactus",
     "contactus-tagline",
-    "breadcrumb-title"
+    "breadcrumb-title",
+    "published",
+    "industry"
   ],
   "contentNodes": 3,
   "blocks": [

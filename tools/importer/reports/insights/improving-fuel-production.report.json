@@ -2,14 +2,16 @@
   "status": "success",
   "url": "https://grace.com/insights/improving-fuel-production/",
   "path": "insights/improving-fuel-production",
-  "timestamp": "2026-08-07T16:32:16.743Z",
+  "timestamp": "2026-08-07T19:11:03.275Z",
   "title": "Improving Fuel Production",
   "pageType": "insights-article",
   "pageMetadata": [
     "template",
     "contactus",
     "contactus-tagline",
-    "breadcrumb-title"
+    "breadcrumb-title",
+    "published",
+    "industry"
   ],
   "contentNodes": 6,
   "blocks": [

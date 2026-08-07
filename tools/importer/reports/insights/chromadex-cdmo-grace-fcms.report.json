@@ -2,14 +2,16 @@
   "status": "success",
   "url": "https://grace.com/insights/chromadex-cdmo-grace-fcms/",
   "path": "insights/chromadex-cdmo-grace-fcms",
-  "timestamp": "2026-08-07T16:44:06.207Z",
+  "timestamp": "2026-08-07T19:22:54.808Z",
   "title": "ChromaDex’s CDMO: Grace’s FCMS",
   "pageType": "insights-article",
   "pageMetadata": [
     "template",
     "contactus",
     "contactus-tagline",
-    "breadcrumb-title"
+    "breadcrumb-title",
+    "published",
+    "industry"
   ],
   "contentNodes": 8,
   "blocks": [

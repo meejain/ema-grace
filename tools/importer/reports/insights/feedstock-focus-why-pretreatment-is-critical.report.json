@@ -2,14 +2,16 @@
   "status": "success",
   "url": "https://grace.com/insights/feedstock-focus-why-pretreatment-is-critical/",
   "path": "insights/feedstock-focus-why-pretreatment-is-critical",
-  "timestamp": "2026-08-07T16:59:22.509Z",
+  "timestamp": "2026-08-07T19:38:08.209Z",
   "title": "Feedstock focus: Why Pretreatment is Especially Critical for Renewable Fuels",
   "pageType": "insights-article",
   "pageMetadata": [
     "template",
     "contactus",
     "contactus-tagline",
-    "breadcrumb-title"
+    "breadcrumb-title",
+    "published",
+    "industry"
   ],
   "contentNodes": 8,
   "blocks": [

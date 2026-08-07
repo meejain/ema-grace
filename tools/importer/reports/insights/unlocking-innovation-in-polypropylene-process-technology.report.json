@@ -2,16 +2,18 @@
   "status": "success",
   "url": "https://grace.com/insights/unlocking-innovation-in-polypropylene-process-technology/",
   "path": "insights/unlocking-innovation-in-polypropylene-process-technology",
-  "timestamp": "2026-08-07T16:55:45.683Z",
+  "timestamp": "2026-08-07T19:34:31.405Z",
   "title": "Unlocking Innovation in Polypropylene Process Technology",
   "pageType": "insights-article",
   "pageMetadata": [
     "template",
     "contactus",
     "contactus-tagline",
-    "breadcrumb-title"
+    "breadcrumb-title",
+    "published",
+    "industry"
   ],
-  "contentNodes": 7,
+  "contentNodes": 6,
   "blocks": [
     "cards-featured-content"
   ],

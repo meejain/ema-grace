@@ -2,14 +2,16 @@
   "status": "success",
   "url": "https://grace.com/insights/technical-support-for-fluid-catalytic-cracking-/",
   "path": "insights/technical-support-for-fluid-catalytic-cracking",
-  "timestamp": "2026-08-07T16:40:18.506Z",
+  "timestamp": "2026-08-07T19:19:08.223Z",
   "title": "Technical Support for Fluid Catalytic Cracking",
   "pageType": "insights-article",
   "pageMetadata": [
     "template",
     "contactus",
     "contactus-tagline",
-    "breadcrumb-title"
+    "breadcrumb-title",
+    "published",
+    "industry"
   ],
   "contentNodes": 6,
   "blocks": [

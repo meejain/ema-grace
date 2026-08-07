@@ -2,14 +2,16 @@
   "status": "success",
   "url": "https://grace.com/insights/answering-refiners-questions/",
   "path": "insights/answering-refiners-questions",
-  "timestamp": "2026-08-07T16:54:48.908Z",
+  "timestamp": "2026-08-07T19:33:32.346Z",
   "title": "Answering Refiners’ Questions",
   "pageType": "insights-article",
   "pageMetadata": [
     "template",
     "contactus",
     "contactus-tagline",
-    "breadcrumb-title"
+    "breadcrumb-title",
+    "published",
+    "industry"
   ],
   "contentNodes": 5,
   "blocks": [

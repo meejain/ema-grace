@@ -2,14 +2,16 @@
   "status": "success",
   "url": "https://grace.com/insights/grace-in-your-world/",
   "path": "insights/grace-in-your-world",
-  "timestamp": "2026-08-07T16:34:02.971Z",
+  "timestamp": "2026-08-07T19:12:52.639Z",
   "title": "Where is Grace in Your World?",
   "pageType": "insights-article",
   "pageMetadata": [
     "template",
     "contactus",
     "contactus-tagline",
-    "breadcrumb-title"
+    "breadcrumb-title",
+    "published",
+    "industry"
   ],
   "contentNodes": 3,
   "blocks": [

@@ -2,14 +2,16 @@
   "status": "success",
   "url": "https://grace.com/insights/optimize-your-formulations-with-a-multifunctional-silica-excipie/",
   "path": "insights/optimize-your-formulations-with-a-multifunctional-silica-excipie",
-  "timestamp": "2026-08-07T17:05:32.964Z",
+  "timestamp": "2026-08-07T19:44:21.033Z",
   "title": "Optimize Your Formulations with a Multifunctional Silica Excipient",
   "pageType": "insights-article",
   "pageMetadata": [
     "template",
     "contactus",
     "contactus-tagline",
-    "breadcrumb-title"
+    "breadcrumb-title",
+    "published",
+    "industry"
   ],
   "contentNodes": 5,
   "blocks": [

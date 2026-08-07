@@ -2,14 +2,16 @@
   "status": "success",
   "url": "https://grace.com/insights/grace-recognized-as-a-top-coatings-supplier-by-akzonobel-again/",
   "path": "insights/grace-recognized-as-a-top-coatings-supplier-by-akzonobel-again",
-  "timestamp": "2026-08-07T16:50:24.841Z",
+  "timestamp": "2026-08-07T19:29:13.568Z",
   "title": "Grace recognized as a top coatings supplier by AkzoNobel – again!",
   "pageType": "insights-article",
   "pageMetadata": [
     "template",
     "contactus",
     "contactus-tagline",
-    "breadcrumb-title"
+    "breadcrumb-title",
+    "published",
+    "industry"
   ],
   "contentNodes": 3,
   "blocks": [

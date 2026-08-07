@@ -2,14 +2,16 @@
   "status": "success",
   "url": "https://grace.com/insights/identifying-value-from-co2-reduction-in-the-fcc-unit/",
   "path": "insights/identifying-value-from-co2-reduction-in-the-fcc-unit",
-  "timestamp": "2026-08-07T16:45:52.005Z",
+  "timestamp": "2026-08-07T19:24:41.008Z",
   "title": "Identifying Value from CO2 Reduction in the FCC Unit",
   "pageType": "insights-article",
   "pageMetadata": [
     "template",
     "contactus",
     "contactus-tagline",
-    "breadcrumb-title"
+    "breadcrumb-title",
+    "published",
+    "industry"
   ],
   "contentNodes": 4,
   "blocks": [

@@ -2,14 +2,16 @@
   "status": "success",
   "url": "https://grace.com/insights/hydrogenation-innovations/",
   "path": "insights/hydrogenation-innovations",
-  "timestamp": "2026-08-07T16:34:04.483Z",
+  "timestamp": "2026-08-07T19:12:49.808Z",
   "title": "Hydrogenation Innovations",
   "pageType": "insights-article",
   "pageMetadata": [
     "template",
     "contactus",
     "contactus-tagline",
-    "breadcrumb-title"
+    "breadcrumb-title",
+    "published",
+    "industry"
   ],
   "contentNodes": 6,
   "blocks": [

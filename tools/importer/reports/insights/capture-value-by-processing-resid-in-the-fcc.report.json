@@ -2,14 +2,16 @@
   "status": "success",
   "url": "https://grace.com/insights/capture-value-by-processing-resid-in-the-fcc/",
   "path": "insights/capture-value-by-processing-resid-in-the-fcc",
-  "timestamp": "2026-08-07T16:34:03.963Z",
+  "timestamp": "2026-08-07T19:12:51.430Z",
   "title": "Capture Value by Processing Resid in the FCC",
   "pageType": "insights-article",
   "pageMetadata": [
     "template",
     "contactus",
     "contactus-tagline",
-    "breadcrumb-title"
+    "breadcrumb-title",
+    "published",
+    "industry"
   ],
   "contentNodes": 4,
   "blocks": [

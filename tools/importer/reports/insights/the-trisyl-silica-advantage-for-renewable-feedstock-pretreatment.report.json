@@ -2,14 +2,16 @@
   "status": "success",
   "url": "https://grace.com/insights/the-trisyl-silica-advantage-for-renewable-feedstock-pretreatment/",
   "path": "insights/the-trisyl-silica-advantage-for-renewable-feedstock-pretreatment",
-  "timestamp": "2026-08-07T16:53:58.609Z",
+  "timestamp": "2026-08-07T19:32:43.370Z",
   "title": "The TRISYL® Silica Advantage for Renewable Feedstock Pretreatment",
   "pageType": "insights-article",
   "pageMetadata": [
     "template",
     "contactus",
     "contactus-tagline",
-    "breadcrumb-title"
+    "breadcrumb-title",
+    "published",
+    "industry"
   ],
   "contentNodes": 5,
   "blocks": [

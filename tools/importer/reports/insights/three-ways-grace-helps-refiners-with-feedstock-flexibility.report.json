@@ -2,14 +2,16 @@
   "status": "success",
   "url": "https://grace.com/insights/three-ways-grace-helps-refiners-with-feedstock-flexibility/",
   "path": "insights/three-ways-grace-helps-refiners-with-feedstock-flexibility",
-  "timestamp": "2026-08-07T16:57:28.406Z",
+  "timestamp": "2026-08-07T19:36:11.434Z",
   "title": "Three Ways Grace Helps Refiners with Feedstock Flexibility",
   "pageType": "insights-article",
   "pageMetadata": [
     "template",
     "contactus",
     "contactus-tagline",
-    "breadcrumb-title"
+    "breadcrumb-title",
+    "published",
+    "industry"
   ],
   "contentNodes": 3,
   "blocks": [

@@ -2,14 +2,16 @@
   "status": "success",
   "url": "https://grace.com/insights/finding-the-right-matting-agent-for-uv-cured-coatings/",
   "path": "insights/finding-the-right-matting-agent-for-uv-cured-coatings",
-  "timestamp": "2026-08-07T16:54:52.549Z",
+  "timestamp": "2026-08-07T19:33:36.508Z",
   "title": "Finding the Right Matting Agent for UV-cured Coatings",
   "pageType": "insights-article",
   "pageMetadata": [
     "template",
     "contactus",
     "contactus-tagline",
-    "breadcrumb-title"
+    "breadcrumb-title",
+    "published",
+    "industry"
   ],
   "contentNodes": 7,
   "blocks": [

@@ -700,24 +700,13 @@ function buildInsightsArticle(document, url, params) {
       || 'Latest Insights from Grace';
   }
 
-  // ---- Left rail: breadcrumb + Social (share) block + POSTED/INDUSTRY (dl), tagged sidebar-nav ----
+  // ---- Left rail: Social (share) block + POSTED/INDUSTRY (dl), tagged sidebar-nav ----
+  // NOTE: the breadcrumb is NOT authored/emitted. It is auto-blocked at render
+  // time (scripts.js buildBreadcrumbBlock) from the URL path, which also
+  // re-creates the `.breadcrumb-container` section hook the sidebar CSS uses.
+  // Keeping it out of the content keeps the authoring surface clean.
   const railInner = document.createElement('div');
   let railHasContent = false;
-
-  // Breadcrumb (e.g. "Home / Insights") — emitted at the top of the left rail.
-  // The block JS derives the WHOLE trail from the current URL path (Home + each
-  // ancestor segment, current page dropped), so we do NOT scrape the source
-  // crumbs — that avoids capturing stale/localized crumb text and keeps the
-  // trail correct on every page. We still emit the block so its section gains
-  // the `breadcrumb-container` class the sidebar layout CSS keys off; a single
-  // seed cell (a Home link) keeps the block table non-empty through the markdown
-  // round-trip. The seed content is ignored at render time — the JS rebuilds it.
-  const homeSeed = document.createElement('a');
-  homeSeed.href = '/';
-  homeSeed.textContent = 'Home';
-  const crumbBlock = WebImporter.Blocks.createBlock(document, { name: 'Breadcrumb', cells: [[homeSeed]] });
-  railInner.append(crumbBlock);
-  railHasContent = true;
 
   const share = document.querySelector('.social-share-container');
   if (share) {
@@ -734,24 +723,23 @@ function buildInsightsArticle(document, url, params) {
     railHasContent = true;
   }
 
-  // POSTED / INDUSTRY as a Post Meta block — one row per label/value pair. The block
-  // JS renders a semantic <dl><dt>LABEL</dt><dd>VALUE</dd> (markdown can't carry a raw
-  // <dl>, so a block preserves the definition-list semantics through the round-trip).
+  // POSTED / INDUSTRY are PAGE METADATA, not content — extract them here and emit
+  // them as `published` / `industry` rows in the page Metadata block (below). They
+  // are NOT authored as a Post Meta block anymore; the rail's POSTED/INDUSTRY panel
+  // is rebuilt at render time from these meta values (scripts.js buildPostMetaBlock),
+  // matching the source visually while keeping all page data in one Metadata table.
+  let publishedMeta = '';
+  let industryMeta = '';
   const dl = document.querySelector('article dl');
   if (dl) {
-    const rows = [];
     Array.from(dl.querySelectorAll('dt')).forEach((dt) => {
       const dd = dt.nextElementSibling && dt.nextElementSibling.tagName === 'DD' ? dt.nextElementSibling : null;
-      const label = (dt.textContent || '').replace(/\s+/g, ' ').trim();
+      const label = (dt.textContent || '').replace(/\s+/g, ' ').trim().toLowerCase();
       const val = dd ? (dd.textContent || '').replace(/\s+/g, ' ').trim() : '';
-      if (!label) return;
-      rows.push([label, val]);
+      if (!val) return;
+      if (/post|publish|date/.test(label)) publishedMeta = val;
+      else if (/industr/.test(label)) industryMeta = val;
     });
-    if (rows.length) {
-      const metaBlock = WebImporter.Blocks.createBlock(document, { name: 'Post Meta', cells: rows });
-      railInner.append(metaBlock);
-      railHasContent = true;
-    }
   }
 
   if (railHasContent) {
@@ -773,8 +761,50 @@ function buildInsightsArticle(document, url, params) {
       if (el.matches('.divider')) return;
       if (el.matches('.card-list')) return; // related articles → discovery (below)
 
+      // In-body VIDEO (source .media-video: a poster still + play button; the real video URL
+      // lives in a sibling `.media-modal .active-video[data-video-type] <video src>`). A bare
+      // clone would flatten it to just the poster image + "Watch the video" text, losing the
+      // video. Emit a `Video (overlay)` block instead: poster picture + the video URL link
+      // (the block JS swaps the poster for an autoplaying embed on click).
+      const mediaVideo = el.matches('.media-video') ? el : el.querySelector('.media-video');
+      if (mediaVideo) {
+        // Poster image (Scene7 still).
+        const posterImg = mediaVideo.querySelector('.img img, .media-image img, picture, img');
+        // Video URL: prefer the .media-modal video/iframe src in the same .cmp-media-callout.
+        const callout = mediaVideo.closest('.cmp-media-callout, .media-callout') || el;
+        const src = (() => {
+          const v = callout.querySelector('.media-modal video[src], .media-modal iframe[src], video[src], iframe[src]');
+          let raw = v ? (v.getAttribute('src') || '') : '';
+          if (!raw) return '';
+          if (raw.startsWith('//')) raw = `https:${raw}`;
+          // Normalize a YouTube embed/nocookie URL to the watch?v= form the overlay
+          // block's embedYoutube() understands; strip player query params.
+          const ytId = raw.match(/(?:youtube(?:-nocookie)?\.com\/embed\/|youtu\.be\/)([\w-]{6,})/);
+          if (ytId) return `https://www.youtube.com/watch?v=${ytId[1]}`;
+          const vimeo = raw.match(/vimeo\.com\/(?:video\/)?(\d+)/);
+          if (vimeo) return `https://vimeo.com/${vimeo[1]}`;
+          // HTML5/DAM mp4: anchor a /content/dam/… path to the absolute live URL.
+          if (raw.startsWith('/content/dam/')) return `https://grace.com${raw}`;
+          return raw;
+        })();
+        if (posterImg && src) {
+          const posterCell = [posterImg.cloneNode(true)];
+          const a = document.createElement('a');
+          a.href = src;
+          a.textContent = src;
+          const block = WebImporter.Blocks.createBlock(document, { name: 'Video (overlay)', cells: [[posterCell, [a]]] });
+          contentNodes.push(block);
+          return;
+        }
+        // No resolvable URL (e.g. JS-only player) → fall through so the poster is at least kept.
+      }
+
       // In-body "Featured Service" promo: a .feature-set-section with an a.item.slate-bkgd card.
       // Parse it as the columns-horizontal-teaser-featured block (dark card) rather than flatten.
+      // NOTE: multi-card feature-set carousels (e.g. a "Learn More About:" product grid) live in
+      // a col-lg-8 sibling, NOT this col-lg-7 body, and are correctly claimed by the discovery
+      // phase's columns-image-teaser matcher (which renders ALL cards) — so no multi-card handling
+      // is needed here.
       const featureSet = el.matches('.feature-set-section, .feature-set, .cmp-feature-set')
         ? el : el.querySelector('.feature-set-section, .feature-set, .cmp-feature-set');
       if (featureSet && featureSet.querySelector('a.item')) {
@@ -833,6 +863,33 @@ function buildInsightsArticle(document, url, params) {
         try { quoteTestimonialParser(quoteEl, { document, url, params }); } catch (e) { /* leave */ }
         const created = Array.from(document.querySelectorAll('table')).find((t) => !before.has(t) && !t.closest('td'));
         if (created) { contentNodes.push(created); return; }
+      }
+
+      // Bare pull-quote: a rich-text `<blockquote>` (no .quote-section wrapper), optionally
+      // followed by an author `<p>` shaped "- Name<br>Title<br>…" (e.g. giving-grace). The
+      // markdown round-trip keeps the <blockquote> but renders it as a plain unstyled quote;
+      // emit a Quote (testimonial) block so it gets the styled treatment (quote + author +
+      // position rows) matching the source pull-quote.
+      const bq = el.matches('blockquote') ? el : el.querySelector(':scope > blockquote, blockquote');
+      if (bq && (bq.textContent || '').trim()) {
+        const quoteText = (bq.textContent || '').replace(/\s+/g, ' ').trim();
+        const cells = [[quoteText]];
+        // Author block: the <p> immediately after the blockquote, lines split on <br>,
+        // leading "- " stripped from the name. First line → author, second → position.
+        const authorP = (bq.nextElementSibling && bq.nextElementSibling.tagName === 'P')
+          ? bq.nextElementSibling
+          : (el.matches('blockquote') ? null : el.querySelector('blockquote + p'));
+        if (authorP) {
+          const lines = (authorP.innerHTML || '').split(/<br\s*\/?>/i)
+            .map((s) => s.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim())
+            .filter(Boolean);
+          if (lines[0]) cells.push([lines[0].replace(/^[-–—]\s*/, '')]);
+          if (lines.length > 1) cells.push([lines.slice(1).join(', ')]);
+          if (authorP.parentNode) authorP.remove();
+        }
+        const block = WebImporter.Blocks.createBlock(document, { name: 'Quote (testimonial)', cells });
+        contentNodes.push(block);
+        return;
       }
 
       // .media-callout mid-content image(s): keep the image AND its caption. The source renders
@@ -1045,6 +1102,9 @@ function buildInsightsArticle(document, url, params) {
   pageMeta.push(['contactus-tagline', tagline]);
   const title = h1el ? (h1el.textContent || '').replace(/\s+/g, ' ').trim() : '';
   if (title) pageMeta.push(['breadcrumb-title', title]);
+  // POSTED / INDUSTRY → page metadata (rendered into the left-rail panel at runtime).
+  if (publishedMeta) pageMeta.push(['published', publishedMeta]);
+  if (industryMeta) pageMeta.push(['industry', industryMeta]);
 
   rewriteInternalLinks(main);
   WebImporter.rules.transformBackgroundImages(main, document);

@@ -2,14 +2,16 @@
   "status": "success",
   "url": "https://grace.com/insights/multi-functional-silicas-in-pharmaceutical-nutraceutical/",
   "path": "insights/multi-functional-silicas-in-pharmaceutical-nutraceutical",
-  "timestamp": "2026-08-07T17:03:14.685Z",
+  "timestamp": "2026-08-07T19:42:11.523Z",
   "title": "Multi-functional Silicas in Pharmaceutical & Nutraceutical Applications",
   "pageType": "insights-article",
   "pageMetadata": [
     "template",
     "contactus",
     "contactus-tagline",
-    "breadcrumb-title"
+    "breadcrumb-title",
+    "published",
+    "industry"
   ],
   "contentNodes": 7,
   "blocks": [

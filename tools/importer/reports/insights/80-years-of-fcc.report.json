@@ -2,14 +2,16 @@
   "status": "success",
   "url": "https://grace.com/insights/80-years-of-fcc/",
   "path": "insights/80-years-of-fcc",
-  "timestamp": "2026-08-07T16:43:59.955Z",
+  "timestamp": "2026-08-07T19:22:47.071Z",
   "title": "80 Years of FCC",
   "pageType": "insights-article",
   "pageMetadata": [
     "template",
     "contactus",
     "contactus-tagline",
-    "breadcrumb-title"
+    "breadcrumb-title",
+    "published",
+    "industry"
   ],
   "contentNodes": 8,
   "blocks": [

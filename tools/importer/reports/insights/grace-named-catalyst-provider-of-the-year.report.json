@@ -2,14 +2,16 @@
   "status": "success",
   "url": "https://grace.com/insights/grace-named-catalyst-provider-of-the-year/",
   "path": "insights/grace-named-catalyst-provider-of-the-year",
-  "timestamp": "2026-08-07T16:42:16.767Z",
+  "timestamp": "2026-08-07T19:21:04.403Z",
   "title": "Grace Named Catalyst Provider of the Year",
   "pageType": "insights-article",
   "pageMetadata": [
     "template",
     "contactus",
     "contactus-tagline",
-    "breadcrumb-title"
+    "breadcrumb-title",
+    "published",
+    "industry"
   ],
   "contentNodes": 6,
   "blocks": [

@@ -2,14 +2,16 @@
   "status": "success",
   "url": "https://grace.com/insights/activcat-wins-chemical-weeks-sustainable-product-innovation-award/",
   "path": "insights/activcat-wins-chemical-weeks-sustainable-product-innovation-award",
-  "timestamp": "2026-08-07T16:45:47.230Z",
+  "timestamp": "2026-08-07T19:24:36.205Z",
   "title": "ActivCat® Catalyst Wins Chemical Week’s Sustainable Product Innovation Award",
   "pageType": "insights-article",
   "pageMetadata": [
     "template",
     "contactus",
     "contactus-tagline",
-    "breadcrumb-title"
+    "breadcrumb-title",
+    "published",
+    "industry"
   ],
   "contentNodes": 7,
   "blocks": [

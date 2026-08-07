@@ -2,14 +2,16 @@
   "status": "success",
   "url": "https://grace.com/insights/ebook-water-based-technologies-wood-coatings/",
   "path": "insights/ebook-water-based-technologies-wood-coatings",
-  "timestamp": "2026-08-07T16:48:31.667Z",
+  "timestamp": "2026-08-07T19:27:17.306Z",
   "title": "Exclusive eBook – Water-based Technologies for Wood Coatings",
   "pageType": "insights-article",
   "pageMetadata": [
     "template",
     "contactus",
     "contactus-tagline",
-    "breadcrumb-title"
+    "breadcrumb-title",
+    "published",
+    "industry"
   ],
   "contentNodes": 5,
   "blocks": [

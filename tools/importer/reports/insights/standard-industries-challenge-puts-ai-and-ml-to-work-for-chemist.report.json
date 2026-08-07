@@ -2,14 +2,16 @@
   "status": "success",
   "url": "https://grace.com/insights/standard-industries-challenge-puts-ai-and-ml-to-work-for-chemist/",
   "path": "insights/standard-industries-challenge-puts-ai-and-ml-to-work-for-chemist",
-  "timestamp": "2026-08-07T16:56:42.285Z",
+  "timestamp": "2026-08-07T19:35:25.446Z",
   "title": "Standard Industries Challenge Puts AI and ML to Work for Chemistry",
   "pageType": "insights-article",
   "pageMetadata": [
     "template",
     "contactus",
     "contactus-tagline",
-    "breadcrumb-title"
+    "breadcrumb-title",
+    "published",
+    "industry"
   ],
   "contentNodes": 3,
   "blocks": [

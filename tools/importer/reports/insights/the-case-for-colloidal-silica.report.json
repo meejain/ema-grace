@@ -2,14 +2,16 @@
   "status": "success",
   "url": "https://grace.com/insights/the-case-for-colloidal-silica/",
   "path": "insights/the-case-for-colloidal-silica",
-  "timestamp": "2026-08-07T16:40:26.607Z",
+  "timestamp": "2026-08-07T19:19:07.370Z",
   "title": "The Case for Colloidal Silica",
   "pageType": "insights-article",
   "pageMetadata": [
     "template",
     "contactus",
     "contactus-tagline",
-    "breadcrumb-title"
+    "breadcrumb-title",
+    "published",
+    "industry"
   ],
   "contentNodes": 8,
   "blocks": [

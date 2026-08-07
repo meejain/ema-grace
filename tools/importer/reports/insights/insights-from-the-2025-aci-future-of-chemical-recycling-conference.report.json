@@ -2,14 +2,16 @@
   "status": "success",
   "url": "https://grace.com/insights/insights-from-the-2025-aci-future-of-chemical-recycling-conference/",
   "path": "insights/insights-from-the-2025-aci-future-of-chemical-recycling-conference",
-  "timestamp": "2026-08-07T17:02:49.275Z",
+  "timestamp": "2026-08-07T19:41:36.003Z",
   "title": "Insights from the 2025 ACI Future of Chemical Recycling Conference",
   "pageType": "insights-article",
   "pageMetadata": [
     "template",
     "contactus",
     "contactus-tagline",
-    "breadcrumb-title"
+    "breadcrumb-title",
+    "published",
+    "industry"
   ],
   "contentNodes": 4,
   "blocks": [

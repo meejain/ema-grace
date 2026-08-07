@@ -2,14 +2,16 @@
   "status": "success",
   "url": "https://grace.com/insights/troubleshoot-fcc-reactor-level-control-with-fluidization-princip/",
   "path": "insights/troubleshoot-fcc-reactor-level-control-with-fluidization-princip",
-  "timestamp": "2026-08-07T16:55:49.459Z",
+  "timestamp": "2026-08-07T19:34:31.568Z",
   "title": "Troubleshoot FCC Reactor Level Control with Fluidization Principles",
   "pageType": "insights-article",
   "pageMetadata": [
     "template",
     "contactus",
     "contactus-tagline",
-    "breadcrumb-title"
+    "breadcrumb-title",
+    "published",
+    "industry"
   ],
   "contentNodes": 4,
   "blocks": [

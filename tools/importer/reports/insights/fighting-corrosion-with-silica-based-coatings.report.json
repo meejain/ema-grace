@@ -2,14 +2,16 @@
   "status": "success",
   "url": "https://grace.com/insights/fighting-corrosion-with-silica-based-coatings/",
   "path": "insights/fighting-corrosion-with-silica-based-coatings",
-  "timestamp": "2026-08-07T16:58:49.229Z",
+  "timestamp": "2026-08-07T19:37:47.086Z",
   "title": "Fighting Corrosion with Silica-based Coatings",
   "pageType": "insights-article",
   "pageMetadata": [
     "template",
     "contactus",
     "contactus-tagline",
-    "breadcrumb-title"
+    "breadcrumb-title",
+    "published",
+    "industry"
   ],
   "contentNodes": 6,
   "blocks": [

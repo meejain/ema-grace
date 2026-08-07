@@ -2,14 +2,16 @@
   "status": "success",
   "url": "https://grace.com/insights/activcat-catalyst-technologies-for-cast-film/",
   "path": "insights/activcat-catalyst-technologies-for-cast-film",
-  "timestamp": "2026-08-07T16:39:28.134Z",
+  "timestamp": "2026-08-07T19:18:16.956Z",
   "title": "ActivCat® Catalyst Technologies for Cast Film",
   "pageType": "insights-article",
   "pageMetadata": [
     "template",
     "contactus",
     "contactus-tagline",
-    "breadcrumb-title"
+    "breadcrumb-title",
+    "published",
+    "industry"
   ],
   "contentNodes": 6,
   "blocks": [

@@ -2,14 +2,16 @@
   "status": "success",
   "url": "https://grace.com/insights/providing-customers-with-new-catalyst-options/",
   "path": "insights/providing-customers-with-new-catalyst-options",
-  "timestamp": "2026-08-07T16:35:53.005Z",
+  "timestamp": "2026-08-07T19:14:38.407Z",
   "title": "Providing Customers with New Catalyst Options",
   "pageType": "insights-article",
   "pageMetadata": [
     "template",
     "contactus",
     "contactus-tagline",
-    "breadcrumb-title"
+    "breadcrumb-title",
+    "published",
+    "industry"
   ],
   "contentNodes": 6,
   "blocks": [

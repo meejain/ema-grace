@@ -2,14 +2,16 @@
   "status": "success",
   "url": "https://grace.com/insights/visit-grace-at-vitafoods-europe-2021/",
   "path": "insights/visit-grace-at-vitafoods-europe-2021",
-  "timestamp": "2026-08-07T16:36:53.704Z",
+  "timestamp": "2026-08-07T19:15:35.930Z",
   "title": "Visit Grace at Vitafoods Europe 2021",
   "pageType": "insights-article",
   "pageMetadata": [
     "template",
     "contactus",
     "contactus-tagline",
-    "breadcrumb-title"
+    "breadcrumb-title",
+    "published",
+    "industry"
   ],
   "contentNodes": 11,
   "blocks": [

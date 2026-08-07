@@ -2,14 +2,16 @@
   "status": "success",
   "url": "https://grace.com/insights/catalysts-pave-sustainable-path-PO-manufacturers/",
   "path": "insights/catalysts-pave-sustainable-path-po-manufacturers",
-  "timestamp": "2026-08-07T16:52:14.906Z",
+  "timestamp": "2026-08-07T19:30:59.980Z",
   "title": "Catalysts Can Help Pave a Sustainable Path for Polyolefin Manufacturers",
   "pageType": "insights-article",
   "pageMetadata": [
     "template",
     "contactus",
     "contactus-tagline",
-    "breadcrumb-title"
+    "breadcrumb-title",
+    "published",
+    "industry"
   ],
   "contentNodes": 4,
   "blocks": [

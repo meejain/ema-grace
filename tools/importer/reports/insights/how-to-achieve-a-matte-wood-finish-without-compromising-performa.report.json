@@ -2,14 +2,16 @@
   "status": "success",
   "url": "https://grace.com/insights/how-to-achieve-a-matte-wood-finish-without-compromising-performa/",
   "path": "insights/how-to-achieve-a-matte-wood-finish-without-compromising-performa",
-  "timestamp": "2026-08-07T16:54:01.471Z",
+  "timestamp": "2026-08-07T19:32:45.279Z",
   "title": "How to Achieve a Matte Wood Finish without Compromising Performance",
   "pageType": "insights-article",
   "pageMetadata": [
     "template",
     "contactus",
     "contactus-tagline",
-    "breadcrumb-title"
+    "breadcrumb-title",
+    "published",
+    "industry"
   ],
   "contentNodes": 7,
   "blocks": [

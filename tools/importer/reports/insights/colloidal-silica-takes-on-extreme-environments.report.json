@@ -2,14 +2,16 @@
   "status": "success",
   "url": "https://grace.com/insights/colloidal-silica-takes-on-extreme-environments/",
   "path": "insights/colloidal-silica-takes-on-extreme-environments",
-  "timestamp": "2026-08-07T16:42:59.560Z",
+  "timestamp": "2026-08-07T19:21:49.227Z",
   "title": "Colloidal Silica Takes on Extreme Environments",
   "pageType": "insights-article",
   "pageMetadata": [
     "template",
     "contactus",
     "contactus-tagline",
-    "breadcrumb-title"
+    "breadcrumb-title",
+    "published",
+    "industry"
   ],
   "contentNodes": 9,
   "blocks": [

@@ -2,14 +2,16 @@
   "status": "success",
   "url": "https://grace.com/insights/challenge-accepted--teams-of-innovators-compete-to-revolutionize/",
   "path": "insights/challenge-accepted-teams-of-innovators-compete-to-revolutionize",
-  "timestamp": "2026-08-07T16:57:32.261Z",
+  "timestamp": "2026-08-07T19:36:18.588Z",
   "title": "Challenge Accepted! Teams of Innovators Compete to Revolutionize Chemical Synthesis",
   "pageType": "insights-article",
   "pageMetadata": [
     "template",
     "contactus",
     "contactus-tagline",
-    "breadcrumb-title"
+    "breadcrumb-title",
+    "published",
+    "industry"
   ],
   "contentNodes": 4,
   "blocks": [

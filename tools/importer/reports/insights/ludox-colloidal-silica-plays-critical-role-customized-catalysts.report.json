@@ -2,14 +2,16 @@
   "status": "success",
   "url": "https://grace.com/insights/ludox-colloidal-silica-plays-critical-role-customized-catalysts/",
   "path": "insights/ludox-colloidal-silica-plays-critical-role-customized-catalysts",
-  "timestamp": "2026-08-07T16:40:29.941Z",
+  "timestamp": "2026-08-07T19:19:18.238Z",
   "title": "LUDOX® Colloidal Silica Plays Critical Role in Customized Catalysts",
   "pageType": "insights-article",
   "pageMetadata": [
     "template",
     "contactus",
     "contactus-tagline",
-    "breadcrumb-title"
+    "breadcrumb-title",
+    "published",
+    "industry"
   ],
   "contentNodes": 10,
   "blocks": [

@@ -2,14 +2,16 @@
   "status": "success",
   "url": "https://grace.com/insights/the-benefits-of-custom-bonded-silica/",
   "path": "insights/the-benefits-of-custom-bonded-silica",
-  "timestamp": "2026-08-07T16:56:35.811Z",
+  "timestamp": "2026-08-07T19:35:18.178Z",
   "title": "The Benefits of Custom Bonded Silica",
   "pageType": "insights-article",
   "pageMetadata": [
     "template",
     "contactus",
     "contactus-tagline",
-    "breadcrumb-title"
+    "breadcrumb-title",
+    "published",
+    "industry"
   ],
   "contentNodes": 6,
   "blocks": [

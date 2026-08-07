@@ -2,14 +2,16 @@
   "status": "success",
   "url": "https://grace.com/insights/grace-helps-make-lighter-cars-to-save-gas/",
   "path": "insights/grace-helps-make-lighter-cars-to-save-gas",
-  "timestamp": "2026-08-07T16:52:40.334Z",
+  "timestamp": "2026-08-07T19:31:35.045Z",
   "title": "Grace Helps Make Lighter Cars to Save Gas",
   "pageType": "insights-article",
   "pageMetadata": [
     "template",
     "contactus",
     "contactus-tagline",
-    "breadcrumb-title"
+    "breadcrumb-title",
+    "published",
+    "industry"
   ],
   "contentNodes": 6,
   "blocks": [

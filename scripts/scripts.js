@@ -271,6 +271,65 @@ function buildContactStickyBlock(main) {
 }
 
 /**
+ * Auto-block the insights-article breadcrumb. The breadcrumb is NOT authored —
+ * blocks/breadcrumb/breadcrumb.js derives the whole trail from the URL path
+ * (Home + ancestor segments, current page dropped, e.g. "Home / Insights"), so
+ * we synthesize an empty breadcrumb block at the top of the article's left rail
+ * at render time. This keeps the breadcrumb out of the authoring surface while
+ * still producing the `.breadcrumb-container` section wrapper the sidebar
+ * template CSS keys the insights rail layout off of.
+ *
+ * The rail is identified by its Post Meta block (insights-article specific).
+ * Rails that already carry an authored `.breadcrumb` (legacy content not yet
+ * re-imported) are skipped, so this is safe during the transition.
+ * @param {Element} main The container element
+ */
+function buildBreadcrumbBlock(main) {
+  if (!document.body.contains(main)) return;
+  // The insights left rail is identified by the Social (share) block (present on
+  // every article rail). Post Meta is NOT a reliable signal — it is itself
+  // auto-blocked (buildPostMetaBlock) and may not exist yet.
+  const rail = [...main.querySelectorAll(':scope > div')].find(
+    (d) => d.querySelector('.social.share, .social') && !d.querySelector('.breadcrumb'),
+  );
+  if (!rail) return;
+  // Content is ignored by breadcrumb.js (it rebuilds from the URL); an empty
+  // cell is enough to make this a recognized block.
+  const block = buildBlock('breadcrumb', [['']]);
+  rail.prepend(block);
+}
+
+/**
+ * Auto-block the insights-article POSTED / INDUSTRY panel. These are page-level
+ * metadata (`published` + `industry` rows in the Metadata block), NOT authored
+ * content, so we rebuild the left-rail definition-list panel at render time from
+ * `getMetadata()`. Matches the source visually (POSTED label + date, INDUSTRY
+ * label + value) while keeping all page data in the single Metadata table.
+ *
+ * Reuses the existing `post-meta` block (its CSS/JS render the styled <dl>); we
+ * synthesize the block's authored table shape (row = [label, value]) so the
+ * block JS produces the same markup as before. Placed in the rail after any
+ * existing content. Skipped when neither value is present, or when the rail
+ * already carries an authored `.post-meta` (legacy content not yet re-imported).
+ * @param {Element} main The container element
+ */
+function buildPostMetaBlock(main) {
+  if (!document.body.contains(main)) return;
+  const published = getMetadata('published').trim();
+  const industry = getMetadata('industry').trim();
+  if (!published && !industry) return;
+  const rail = [...main.querySelectorAll(':scope > div')].find(
+    (d) => (d.querySelector('.social.share, .social') || d.querySelector('.breadcrumb')) && !d.querySelector('.post-meta'),
+  );
+  if (!rail) return;
+  const rows = [];
+  if (published) rows.push(['POSTED', published]);
+  if (industry) rows.push(['INDUSTRY', industry]);
+  const block = buildBlock('post-meta', rows);
+  rail.append(block);
+}
+
+/**
  * load fonts.css and set a session storage flag
  */
 async function loadFonts() {
@@ -312,6 +371,8 @@ function buildAutoBlocks(main) {
     buildDynamicMediaImages(main);
     buildHeroBlock(main);
     buildContactStickyBlock(main);
+    buildBreadcrumbBlock(main);
+    buildPostMetaBlock(main);
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('Auto Blocking failed', error);

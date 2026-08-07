@@ -2,14 +2,16 @@
   "status": "success",
   "url": "https://grace.com/insights/silica-and-nutraceuticals/",
   "path": "insights/silica-and-nutraceuticals",
-  "timestamp": "2026-08-07T16:33:11.261Z",
+  "timestamp": "2026-08-07T19:11:57.309Z",
   "title": "Silica and Nutraceuticals",
   "pageType": "insights-article",
   "pageMetadata": [
     "template",
     "contactus",
     "contactus-tagline",
-    "breadcrumb-title"
+    "breadcrumb-title",
+    "published",
+    "industry"
   ],
   "contentNodes": 7,
   "blocks": [

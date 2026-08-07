@@ -2,14 +2,16 @@
   "status": "success",
   "url": "https://grace.com/insights/visit-grace-at-supplyside-west-2021/",
   "path": "insights/visit-grace-at-supplyside-west-2021",
-  "timestamp": "2026-08-07T16:39:35.428Z",
+  "timestamp": "2026-08-07T19:18:22.241Z",
   "title": "Visit Grace at SupplySide West 2021",
   "pageType": "insights-article",
   "pageMetadata": [
     "template",
     "contactus",
     "contactus-tagline",
-    "breadcrumb-title"
+    "breadcrumb-title",
+    "published",
+    "industry"
   ],
   "contentNodes": 7,
   "blocks": [

@@ -2,16 +2,18 @@
   "status": "success",
   "url": "https://grace.com/insights/ending-the-matting-compromise/",
   "path": "insights/ending-the-matting-compromise",
-  "timestamp": "2026-08-07T16:35:02.536Z",
+  "timestamp": "2026-08-07T19:13:46.005Z",
   "title": "Ending the Matting Compromise",
   "pageType": "insights-article",
   "pageMetadata": [
     "template",
     "contactus",
     "contactus-tagline",
-    "breadcrumb-title"
+    "breadcrumb-title",
+    "published",
+    "industry"
   ],
-  "contentNodes": 4,
+  "contentNodes": 3,
   "blocks": [
     "cards-featured-content"
   ],

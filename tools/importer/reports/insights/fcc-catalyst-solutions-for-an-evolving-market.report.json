@@ -2,16 +2,18 @@
   "status": "success",
   "url": "https://grace.com/insights/fcc-catalyst-solutions-for-an-evolving-market/",
   "path": "insights/fcc-catalyst-solutions-for-an-evolving-market",
-  "timestamp": "2026-08-07T16:33:13.307Z",
+  "timestamp": "2026-08-07T19:11:58.704Z",
   "title": "FCC Catalyst Solutions for An Evolving Market",
   "pageType": "insights-article",
   "pageMetadata": [
     "template",
     "contactus",
     "contactus-tagline",
-    "breadcrumb-title"
+    "breadcrumb-title",
+    "published",
+    "industry"
   ],
-  "contentNodes": 4,
+  "contentNodes": 3,
   "blocks": [
     "cards-featured-content"
   ],

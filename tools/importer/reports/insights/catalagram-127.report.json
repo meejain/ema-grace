@@ -2,14 +2,16 @@
   "status": "success",
   "url": "https://grace.com/insights/catalagram-127/",
   "path": "insights/catalagram-127",
-  "timestamp": "2026-08-07T16:41:23.307Z",
+  "timestamp": "2026-08-07T19:20:10.880Z",
   "title": "Catalagram 127",
   "pageType": "insights-article",
   "pageMetadata": [
     "template",
     "contactus",
     "contactus-tagline",
-    "breadcrumb-title"
+    "breadcrumb-title",
+    "published",
+    "industry"
   ],
   "contentNodes": 4,
   "blocks": [

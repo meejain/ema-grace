@@ -2,14 +2,16 @@
   "status": "success",
   "url": "https://grace.com/insights/unlocking-fcc-value--grace-s-guide-to-fluid-catalytic-cracking/",
   "path": "insights/unlocking-fcc-value-grace-s-guide-to-fluid-catalytic-cracking",
-  "timestamp": "2026-08-07T16:53:03.606Z",
+  "timestamp": "2026-08-07T19:31:48.851Z",
   "title": "Unlocking FCC Value: Grace’s Guide to Fluid Catalytic Cracking",
   "pageType": "insights-article",
   "pageMetadata": [
     "template",
     "contactus",
     "contactus-tagline",
-    "breadcrumb-title"
+    "breadcrumb-title",
+    "published",
+    "industry"
   ],
   "contentNodes": 3,
   "blocks": [

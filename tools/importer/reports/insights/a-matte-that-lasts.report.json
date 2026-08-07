@@ -2,14 +2,16 @@
   "status": "success",
   "url": "https://grace.com/insights/a-matte-that-lasts/",
   "path": "insights/a-matte-that-lasts",
-  "timestamp": "2026-08-07T16:34:58.429Z",
+  "timestamp": "2026-08-07T19:13:44.007Z",
   "title": "A Matte That Lasts",
   "pageType": "insights-article",
   "pageMetadata": [
     "template",
     "contactus",
     "contactus-tagline",
-    "breadcrumb-title"
+    "breadcrumb-title",
+    "published",
+    "industry"
   ],
   "contentNodes": 4,
   "blocks": [

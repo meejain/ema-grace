@@ -2,14 +2,16 @@
   "status": "success",
   "url": "https://grace.com/insights/a-better-way-to-dehydrate-ethanol/",
   "path": "insights/a-better-way-to-dehydrate-ethanol",
-  "timestamp": "2026-08-07T16:33:08.877Z",
+  "timestamp": "2026-08-07T19:11:59.243Z",
   "title": "A Better Way to Dehydrate Ethanol",
   "pageType": "insights-article",
   "pageMetadata": [
     "template",
     "contactus",
     "contactus-tagline",
-    "breadcrumb-title"
+    "breadcrumb-title",
+    "published",
+    "industry"
   ],
   "contentNodes": 6,
   "blocks": [

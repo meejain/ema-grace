@@ -2,14 +2,16 @@
   "status": "success",
   "url": "https://grace.com/insights/a-legacy-of-innovation/",
   "path": "insights/a-legacy-of-innovation",
-  "timestamp": "2026-08-07T16:37:39.607Z",
+  "timestamp": "2026-08-07T19:16:27.407Z",
   "title": "A Legacy of Innovation",
   "pageType": "insights-article",
   "pageMetadata": [
     "template",
     "contactus",
     "contactus-tagline",
-    "breadcrumb-title"
+    "breadcrumb-title",
+    "published",
+    "industry"
   ],
   "contentNodes": 4,
   "blocks": [

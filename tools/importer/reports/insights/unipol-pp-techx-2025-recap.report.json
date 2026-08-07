@@ -2,14 +2,16 @@
   "status": "success",
   "url": "https://grace.com/insights/unipol-pp-techx-2025-recap/",
   "path": "insights/unipol-pp-techx-2025-recap",
-  "timestamp": "2026-08-07T17:03:46.507Z",
+  "timestamp": "2026-08-07T19:42:34.947Z",
   "title": "Reflections from techX 2025: Advancing UNIPOL® Polypropylene Process Technology",
   "pageType": "insights-article",
   "pageMetadata": [
     "template",
     "contactus",
     "contactus-tagline",
-    "breadcrumb-title"
+    "breadcrumb-title",
+    "published",
+    "industry"
   ],
   "contentNodes": 5,
   "blocks": [

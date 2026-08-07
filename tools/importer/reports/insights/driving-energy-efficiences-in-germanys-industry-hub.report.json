@@ -2,14 +2,16 @@
   "status": "success",
   "url": "https://grace.com/insights/driving-energy-efficiences-in-germanys-industry-hub/",
   "path": "insights/driving-energy-efficiences-in-germanys-industry-hub",
-  "timestamp": "2026-08-07T17:01:08.646Z",
+  "timestamp": "2026-08-07T19:39:52.363Z",
   "title": "From Water Glass to Wind Turbines: Driving Energy Efficiencies in Germany's Industry Hub",
   "pageType": "insights-article",
   "pageMetadata": [
     "template",
     "contactus",
     "contactus-tagline",
-    "breadcrumb-title"
+    "breadcrumb-title",
+    "published",
+    "industry"
   ],
   "contentNodes": 17,
   "blocks": [

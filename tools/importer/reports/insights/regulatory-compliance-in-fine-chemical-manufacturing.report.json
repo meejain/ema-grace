@@ -2,14 +2,16 @@
   "status": "success",
   "url": "https://grace.com/insights/regulatory-compliance-in-fine-chemical-manufacturing/",
   "path": "insights/regulatory-compliance-in-fine-chemical-manufacturing",
-  "timestamp": "2026-08-07T16:47:38.393Z",
+  "timestamp": "2026-08-07T19:26:26.219Z",
   "title": "Regulatory Compliance in Fine Chemical Manufacturing",
   "pageType": "insights-article",
   "pageMetadata": [
     "template",
     "contactus",
     "contactus-tagline",
-    "breadcrumb-title"
+    "breadcrumb-title",
+    "published",
+    "industry"
   ],
   "contentNodes": 8,
   "blocks": [

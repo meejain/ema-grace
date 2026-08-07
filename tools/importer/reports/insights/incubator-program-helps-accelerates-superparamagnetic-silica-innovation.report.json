@@ -2,14 +2,16 @@
   "status": "success",
   "url": "https://grace.com/insights/incubator-program-helps-accelerates-superparamagnetic-silica-innovation/",
   "path": "insights/incubator-program-helps-accelerates-superparamagnetic-silica-innovation",
-  "timestamp": "2026-08-07T17:05:37.401Z",
+  "timestamp": "2026-08-07T19:44:23.029Z",
   "title": "Incubator Program Helps Accelerate Superparamagnetic Silica Innovation",
   "pageType": "insights-article",
   "pageMetadata": [
     "template",
     "contactus",
     "contactus-tagline",
-    "breadcrumb-title"
+    "breadcrumb-title",
+    "published",
+    "industry"
   ],
   "contentNodes": 3,
   "blocks": [
