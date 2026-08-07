@@ -2,7 +2,7 @@
   "status": "success",
   "url": "https://grace.com/insights/who-was-murray-raney/",
   "path": "insights/who-was-murray-raney",
-  "timestamp": "2026-08-07T14:22:42.976Z",
+  "timestamp": "2026-08-07T16:51:15.231Z",
   "title": "Who was Murray Raney?",
   "pageType": "insights-article",
   "pageMetadata": [
@@ -11,7 +11,7 @@
     "contactus-tagline",
     "breadcrumb-title"
   ],
-  "contentNodes": 5,
+  "contentNodes": 6,
   "blocks": [
     "cards-featured-content"
   ],

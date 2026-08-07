@@ -1642,14 +1642,18 @@
   }
 }
 
-/* ===================== Variant: media-figures ===================== */
-/* Two (or more) captioned insight images. Mobile: stacked, each full width.
+/* ===================== Variant: media-figures =====================
+   Two (or more) captioned insight images. Mobile: stacked, each full width.
    Desktop: side by side, equal columns. Matches the source's paired figures
    (e.g. 80-years-of-fcc: two ~313px images with small italic gray captions). */
 .columns.media-figures {
   display: flex;
   flex-direction: column;
   gap: 25px;
+
+  /* Breathing room above and below the paired-figure block so it doesn't butt
+     against the surrounding body copy. */
+  margin: 40px 0;
 }
 
 .columns.media-figures > div {

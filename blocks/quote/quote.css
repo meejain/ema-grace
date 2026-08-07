@@ -155,10 +155,12 @@
 
 /* ===================== Variant: testimonial ===================== */
 
-/* Framed by heavy blue horizontal rules top and bottom (source #004990). */
+/* Framed by heavy blue horizontal rules top and bottom (source #004990).
+   50px of vertical space above and below separates the block from the
+   surrounding body copy, matching the source article rhythm. */
 .quote.testimonial {
   position: relative;
-  margin: 0 auto;
+  margin: 50px auto;
   padding: 40px 0;
   border-top: 4px solid #004990;
   border-bottom: 4px solid #004990;

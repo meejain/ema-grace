@@ -63,14 +63,24 @@ function decorateLocationDetail(block) {
 /* Media figures: two (or more) captioned insight images shown side by side on
    desktop and stacked on mobile. Each column holds a <picture> and an italic
    caption paragraph. Tag the caption so the CSS styles it (small italic gray),
-   and lift the picture out of its wrapping <p> so it sizes cleanly. */
+   and lift the picture out of its wrapping <p> so it sizes cleanly.
+
+   NOTE: aem.js `wrapTextNodes` runs on this block BEFORE this decorator and,
+   when a cell's first child is a <picture> with trailing content, wraps the
+   ENTIRE cell (picture + caption <p>) into ONE outer <p>. So the picture's
+   parent <p> may also hold the caption. We must therefore UNWRAP that <p>
+   (hoisting all its children up to the cell) rather than replace it with just
+   the picture — the old `parentElement.replaceWith(pic)` discarded the caption. */
 function decorateMediaFigures(block) {
   [...block.children].forEach((row) => {
     [...row.children].forEach((col) => {
       col.classList.add('columns-media-figures-col');
       const pic = col.querySelector('picture');
-      if (pic && pic.parentElement && pic.parentElement.tagName === 'P') {
-        pic.parentElement.replaceWith(pic);
+      const picParent = pic && pic.parentElement;
+      // Unwrap the intermediate <p> around the picture, preserving ALL its
+      // children (picture AND any caption paragraph), unless the <p> IS the cell.
+      if (pic && picParent && picParent.tagName === 'P' && picParent !== col) {
+        picParent.replaceWith(...picParent.childNodes);
       }
       const caption = [...col.querySelectorAll('p')].find((p) => p.querySelector('em') && !p.querySelector('picture, img'));
       if (caption) caption.classList.add('columns-media-figures-caption');

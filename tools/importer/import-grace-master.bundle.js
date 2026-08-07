@@ -2607,29 +2607,12 @@ var CustomImportScript = (() => {
     }
     const railInner = document.createElement("div");
     let railHasContent = false;
-    const crumbLinks = Array.from(document.querySelectorAll(
-      'article nav[aria-label*="readcrumb" i] a, article .breadcrumb a, article nav ol a, article nav ul a'
-    )).filter((a) => (a.textContent || "").trim());
-    if (crumbLinks.length) {
-      const seen = /* @__PURE__ */ new Set();
-      const rows = [];
-      crumbLinks.forEach((a) => {
-        const text = (a.textContent || "").replace(/\s+/g, " ").trim();
-        const href = a.getAttribute("href") || "";
-        const key = `${text}|${href}`;
-        if (!text || seen.has(key)) return;
-        seen.add(key);
-        const link = document.createElement("a");
-        link.href = href || "#";
-        link.textContent = text;
-        rows.push([link]);
-      });
-      if (rows.length) {
-        const crumbBlock = WebImporter.Blocks.createBlock(document, { name: "Breadcrumb", cells: rows });
-        railInner.append(crumbBlock);
-        railHasContent = true;
-      }
-    }
+    const homeSeed = document.createElement("a");
+    homeSeed.href = "/";
+    homeSeed.textContent = "Home";
+    const crumbBlock = WebImporter.Blocks.createBlock(document, { name: "Breadcrumb", cells: [[homeSeed]] });
+    railInner.append(crumbBlock);
+    railHasContent = true;
     const share = document.querySelector(".social-share-container");
     if (share) {
       const networks = Array.from(share.querySelectorAll("a[href], a")).map((a) => (a.getAttribute("aria-label") || a.textContent || "").replace(/share via/i, "").trim()).filter(Boolean);

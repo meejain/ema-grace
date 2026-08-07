@@ -484,6 +484,35 @@ body.sidebar main .default-content-wrapper h1 + p + picture img {
   }
 }
 
+/* HERO CAPTION (source .media-callout .caption under the lead image, e.g. "Catalyst
+   Evaluation 2022"). The lead image carries a 50px bottom margin (FIX 3) so the next
+   body content clears it — but when a caption follows the image, that 50px wrongly
+   lands BETWEEN the image and its caption, floating the caption far below the image.
+   Source layout: caption sits 20px under the image, then 50px of rhythm to the next
+   content. So: (1) when a caption immediately follows the hero image, drop the image's
+   bottom margin to 20px; (2) style the caption itself (source: 12px italic gray, lh 18px)
+   and carry the 50px below it. Match the caption STRUCTURALLY — an italic <p> (sole child
+   <em>) right after the hero image (bare <picture> or <p><img>), with/without a preceding
+   optional-subhead <p>. Scoped with the same `main:has(> .breadcrumb-container)` prefix as
+   FIX 9 (+ the extra element chain) so it out-specifies FIX 9's `> p { margin-bottom }`. */
+body.sidebar main .default-content-wrapper h1 + p:has(img):has(+ p > em:only-child),
+body.sidebar main .default-content-wrapper h1 + picture:has(+ p > em:only-child),
+body.sidebar main .default-content-wrapper h1 + p + p:has(img):has(+ p > em:only-child),
+body.sidebar main .default-content-wrapper h1 + p + picture:has(+ p > em:only-child) {
+  margin-bottom: 20px;
+}
+
+body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section > .default-content-wrapper h1 + picture + p:has(> em:only-child),
+body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section > .default-content-wrapper h1 + p:has(img) + p:has(> em:only-child),
+body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section > .default-content-wrapper h1 + p + picture + p:has(> em:only-child),
+body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section > .default-content-wrapper h1 + p + p:has(img) + p:has(> em:only-child) {
+  margin: 0 0 50px;
+  font-size: 12px;
+  font-style: italic;
+  line-height: 1.5; /* 12px x 1.5 = 18px, matches source */
+  color: rgb(95 96 98);
+}
+
 /* Mid-content body images + captions (source .media-callout figures mid-article, e.g. the
    80-years "Catalyst Evaluation 1964"/"Technical Service Team" pair). Markdown strips the
    authored class, so match STRUCTURALLY: a mid-content figure is a `<picture>` FOLLOWED by a

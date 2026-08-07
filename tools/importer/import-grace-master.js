@@ -704,32 +704,20 @@ function buildInsightsArticle(document, url, params) {
   const railInner = document.createElement('div');
   let railHasContent = false;
 
-  // Breadcrumb (Home > Insights) — the source renders it at the top of the left rail.
-  const crumbLinks = Array.from(document.querySelectorAll(
-    'article nav[aria-label*="readcrumb" i] a, article .breadcrumb a, article nav ol a, article nav ul a',
-  )).filter((a) => (a.textContent || '').trim());
-  if (crumbLinks.length) {
-    // Emit a Breadcrumb block — one row per crumb (single cell holding the link).
-    // The block JS renders a semantic <nav><ol><li> with BreadcrumbList schema.
-    const seen = new Set();
-    const rows = [];
-    crumbLinks.forEach((a) => {
-      const text = (a.textContent || '').replace(/\s+/g, ' ').trim();
-      const href = a.getAttribute('href') || '';
-      const key = `${text}|${href}`;
-      if (!text || seen.has(key)) return;
-      seen.add(key);
-      const link = document.createElement('a');
-      link.href = href || '#';
-      link.textContent = text;
-      rows.push([link]);
-    });
-    if (rows.length) {
-      const crumbBlock = WebImporter.Blocks.createBlock(document, { name: 'Breadcrumb', cells: rows });
-      railInner.append(crumbBlock);
-      railHasContent = true;
-    }
-  }
+  // Breadcrumb (e.g. "Home / Insights") — emitted at the top of the left rail.
+  // The block JS derives the WHOLE trail from the current URL path (Home + each
+  // ancestor segment, current page dropped), so we do NOT scrape the source
+  // crumbs — that avoids capturing stale/localized crumb text and keeps the
+  // trail correct on every page. We still emit the block so its section gains
+  // the `breadcrumb-container` class the sidebar layout CSS keys off; a single
+  // seed cell (a Home link) keeps the block table non-empty through the markdown
+  // round-trip. The seed content is ignored at render time — the JS rebuilds it.
+  const homeSeed = document.createElement('a');
+  homeSeed.href = '/';
+  homeSeed.textContent = 'Home';
+  const crumbBlock = WebImporter.Blocks.createBlock(document, { name: 'Breadcrumb', cells: [[homeSeed]] });
+  railInner.append(crumbBlock);
+  railHasContent = true;
 
   const share = document.querySelector('.social-share-container');
   if (share) {
@@ -881,6 +869,9 @@ function buildInsightsArticle(document, url, params) {
 
         if (figures.length >= 2) {
           // Side-by-side: one Columns (media-figures) row, one cell per figure.
+          // Each cell keeps the image AND its italic caption (e.g. "Catalyst
+          // Evaluation 1964" / "Grace's Technical Service Team, 1961"), matching
+          // the source's captioned paired figures.
           const cells = [figures.map((f) => {
             const p = document.createElement('p');
             p.append(f.img);
