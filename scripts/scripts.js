@@ -358,6 +358,30 @@ function decorateButtons(main) {
 }
 
 /**
+ * Removes inert empty anchors (`<a href="">` with no text/image), which are decorative
+ * scaffolding left over from some source components (e.g. the "statistic" stat-card, whose
+ * clickable wrapper anchor is emitted around now-flattened content). They carry no
+ * destination or label, so they render as invisible zero-content links that fail the
+ * WCAG "link has discernible text" (link-name) check. Strip them at decoration time; if the
+ * anchor is the only child of a wrapper `<p>`, drop the emptied paragraph too.
+ * @param {Element} main The main element
+ */
+function removeEmptyLinks(main) {
+  main.querySelectorAll('a').forEach((a) => {
+    const href = (a.getAttribute('href') || '').trim();
+    const hasDestination = href && href !== '#';
+    const hasContent = a.textContent.trim() || a.querySelector('img, picture, svg');
+    if (hasDestination || hasContent) return;
+    const parent = a.parentElement;
+    a.remove();
+    if (parent && parent.tagName === 'P' && !parent.textContent.trim()
+      && !parent.querySelector('img, picture, a, br, table')) {
+      parent.remove();
+    }
+  });
+}
+
+/**
  * Opens cross-origin links in a new tab. Authored `target="_blank"` is stripped by
  * the markdown round-trip, so external links (different origin, http/https) get the
  * new-tab behavior + safe rel here at decoration time, matching the source site.
@@ -388,6 +412,7 @@ export function decorateMain(main) {
   decorateSections(main);
   decorateBlocks(main);
   decorateButtons(main);
+  removeEmptyLinks(main);
   decorateExternalLinks(main);
 }
 

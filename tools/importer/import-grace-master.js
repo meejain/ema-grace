@@ -822,6 +822,27 @@ function buildInsightsArticle(document, url, params) {
     section.querySelectorAll('p').forEach((p) => {
       if (!p.textContent.trim() && !p.querySelector('img, picture, a[href], br, table')) p.remove();
     });
+    // D3-import: promote the article's gated/download CTA to an EDS primary button.
+    // On grace.com the CTA is an `<a class="btn-primary btn-primary-green">` (or a
+    // gated-asset trigger) — a class-based button that the markdown round-trip drops,
+    // leaving a plain text link. The feature-card branch above already promotes the
+    // CTA when it sits beside a "Featured Service" card; this covers STANDALONE CTAs
+    // (e.g. the wood-coatings eBook link, which has no feature card). Detect the source
+    // button by class/gated attributes on the CURRENT DOM (still present pre-markdown)
+    // and wrap it in <strong> so decorateButtons() turns it into a primary button
+    // (insights CSS paints it Grace-green). Skip DM image carrier anchors and links
+    // inside the feature card / tables. The anchor need not be a lone <p><a> yet — the
+    // source may wrap it in a button container; we promote the anchor in place.
+    section.querySelectorAll('a.btn-primary, a[data-gated-id], a[data-trigger-type]').forEach((a) => {
+      if (a.closest('strong') || a.closest('a.item') || a.closest('table')) return;
+      if (a.querySelector('img, picture')) return; // not an image link
+      const strong = document.createElement('strong');
+      a.replaceWith(strong);
+      strong.append(a);
+      a.removeAttribute('class');
+      a.removeAttribute('data-gated-id');
+      a.removeAttribute('data-trigger-type');
+    });
     // D4: the "Go here to learn more" whitepaper link. In the source DOM the link
     // text is wrapped in <em> INSIDE the <a> (<a><em>…</em></a>); markdown would flip
     // that to <em><a>…</a></em> (italic). Live renders it upright, so unwrap the inner
@@ -855,6 +876,20 @@ function buildInsightsArticle(document, url, params) {
     section.append(blockEl);
     main.append(section);
   });
+
+  // "Want to talk to an expert?" contact-split banner (source .contact-us-cmp). Present on
+  // MANY insights articles above the footer, but was only emitted on the buildSidebarPage
+  // path — so insights pages that carry it (e.g. a-brewery-goes-green) were missing the blue
+  // banner. Build it here too (same helper, same placement: after the related cards, before
+  // the page metadata). Returns null when the page has no .contact-us-cmp, so pages without
+  // it are unaffected.
+  const contactBanner = buildContactSplitBanner(document);
+  if (contactBanner) {
+    main.append(document.createElement('hr'));
+    const bannerSection = document.createElement('div');
+    bannerSection.append(contactBanner);
+    main.append(bannerSection);
+  }
 
   // Page metadata: sidebar template (left rail layout) + contactus widget. Tagline reads the
   // source contact widget's SUBHEAD/text ("Talk to our experts about how we can help your

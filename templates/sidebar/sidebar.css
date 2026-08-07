@@ -97,6 +97,26 @@ body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section.ca
   padding-top: 20px;
 }
 
+/* The "Want to talk to an expert?" contact-split banner sits ABOVE the footer — i.e. LAST,
+   after the related cards. It comes last in the DOM already, but the cards carry order:3 for
+   the mobile flex column; give the banner order:4 so it stays after the cards on mobile AND —
+   critically — on the >=900px grid, where CSS Grid auto-placement also honours `order`. Without
+   this the banner (default order:0) would be auto-placed into an earlier grid row than the
+   order:3 cards, rendering the banner above the cards and pushing the cards onto the footer. */
+body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section:has(.banner.contact-split) {
+  order: 4;
+}
+
+/* When the gray geoAndHex cards section is immediately followed by the blue contact-split
+   banner, the gray band must butt DIRECTLY against the blue banner (source: gap 0) at ALL
+   widths. Zero the cards section's bottom margin here (mobile base); the >=900px block keeps
+   its own margin reset too. NOTE: `:has(+ .section .banner.contact-split)` is a single-level
+   :has with a descendant — NOT a nested `:has(+ .section:has(...))`, which is invalid CSS and
+   would silently drop the whole rule. */
+body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section.cards-container:has(.cards.featured-content):has(+ .section .banner.contact-split) {
+  margin-bottom: 0;
+}
+
 body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .custom-widget-container {
   margin-top: 0;
   margin-bottom: 0;
@@ -199,11 +219,27 @@ body.sidebar main > .section.sidebar-nav.breadcrumb-container .breadcrumb nav ol
     grid-column: 1 / -1;
   }
 
-  /* Insights related-articles cards stay WITHIN the content column (col 3), aligned under the
-     article — the source does NOT stretch them full page width. They flow into the next row of
-     column 3 (below the article), where the cards block's own CSS lays them out as a 2-up grid. */
+  /* Insights related-articles cards: the source renders these on a FULL-BLEED gray
+     `geoAndHex` band (see the geoAndHex rules further below), but with the cards' content
+     still aligned to the GRACE logo / left rail (x=100). So the SECTION spans the full page
+     width (1 / -1) to carry the full-bleed background, and becomes a nested grid re-using the
+     SAME column template as `main` — placing its inner content in columns 2–3 lands it at
+     x=100 (flush under the breadcrumb/SHARE rail) and stops it short of the floating contact
+     widget gutter (col 4), with no hard-coded gutter math. The cards block's own CSS lays the
+     items out as a 2-up grid within that band. */
   body.sidebar main > .section.cards-container:has(.cards.featured-content) {
-    grid-column: 3;
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns:
+      minmax(20px, 1fr)
+      minmax(0, 213px)
+      minmax(0, 747px)
+      minmax(0, 320px)
+      minmax(20px, 1fr);
+  }
+
+  body.sidebar main > .section.cards-container:has(.cards.featured-content) > * {
+    grid-column: 2 / 4;
   }
 
   /* Let the banner's own content re-center within the band (undo the nav/content
@@ -398,21 +434,52 @@ body.sidebar main .default-content-wrapper:has(+ .columns-wrapper) > p:last-chil
   line-height: 30px;
 }
 
+/* Optional-subhead (source `<span class="optional-subhead">`): the intro line
+   between the H1 and the lead image. Markdown strips the authored class, so match
+   it STRUCTURALLY: the H1's immediately-following `<p>` that has NO image of its
+   own and is immediately followed by the lead image — either a bare `<picture>`
+   (the DM/Scene7 auto-block unwraps the markdown `<p>`) or a `<p>` wrapping the
+   image (native EDS). NOTE: `:has(+ p img)` — NOT `:has(+ p:has(img))`. A nested
+   `:has()` is INVALID CSS; the browser then drops the ENTIRE comma-group rule
+   (including its valid sibling), which previously left the subhead at 14px body
+   text. `+ p img` (descendant, not nested :has) expresses the same "next sibling
+   is a <p> containing an image" and parses fine. The `:has(> .breadcrumb-container)`
+   scope + this specificity out-rank the broadened body `p` rules (FIX 9 21px margin
+   + the >=900px 1.7 line-height), so it wins at every breakpoint without
+   `!important`. Source: 20px Roboto Slab / weight 300 / line-height 30px, 49px gap
+   to the image below. */
+body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section > .default-content-wrapper h1 + p:not(:has(img)):has(+ picture),
+body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section > .default-content-wrapper h1 + p:not(:has(img)):has(+ p img) {
+  margin: 0 0 49px;
+  font-family: var(--heading-font-family); /* Roboto Slab */
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 1.5; /* 20px x 1.5 = 30px, matches source */
+}
+
 /* FIX 3: lead media-callout hero image. Source renders it 707x397 (a fixed
    16:9-ish ratio box, taller than the 1200x628 natural 707x370), with 25px space
    above and 50px below. Match: force the source aspect ratio and add the vertical
-   rhythm. Scoped to the hero image paragraph (the H1's sibling <p> holding an img)
-   right after the H1 in the content column. */
-/* Reserve the fixed hero height on the hero wrapper so the box holds 208px from
-   the first layout frame (before the image decodes), preventing body-copy reflow
-   (CLS). Two shapes are matched: a `<p>` wrapping the img (native EDS image) and a
-   bare `<picture>` directly after the H1 — the DM/Scene7 auto-block unwraps the
-   markdown `<p>` and replaces the carrier anchor with a top-level `<picture>`. */
+   rhythm. Reserve the fixed hero height on the hero WRAPPER so the box holds 208px
+   from the first layout frame (before the image decodes), preventing body-copy
+   reflow (CLS). Shapes matched: a `<p>` wrapping the img (native EDS image) OR a
+   bare `<picture>` — the DM/Scene7 auto-block unwraps the markdown `<p>` and
+   replaces the carrier anchor with a top-level `<picture>`. Each can sit either
+   directly after the H1, OR after an optional-subhead `<p>` (h1 + p + …). */
 body.sidebar main .default-content-wrapper h1 + p:has(img),
-body.sidebar main .default-content-wrapper h1 + picture {
+body.sidebar main .default-content-wrapper h1 + picture,
+body.sidebar main .default-content-wrapper h1 + p + p:has(img),
+body.sidebar main .default-content-wrapper h1 + p + picture {
   height: 208px;
   margin: 25px 0 50px;
   overflow: hidden;
+}
+
+/* The subhead already supplies the 49px lead gap above the image, so when the
+   image follows a subhead its own top margin collapses to 0 (keep the 50px below). */
+body.sidebar main .default-content-wrapper h1 + p + p:has(img),
+body.sidebar main .default-content-wrapper h1 + p + picture {
+  margin-top: 0;
 }
 
 /* Mobile base: source mobile hero is ~208px tall. Desktop (>=900px) overrides to 397px.
@@ -420,7 +487,11 @@ body.sidebar main .default-content-wrapper h1 + picture {
 body.sidebar main .default-content-wrapper h1 + p:has(img) picture,
 body.sidebar main .default-content-wrapper h1 + p:has(img) img,
 body.sidebar main .default-content-wrapper h1 + picture,
-body.sidebar main .default-content-wrapper h1 + picture img {
+body.sidebar main .default-content-wrapper h1 + picture img,
+body.sidebar main .default-content-wrapper h1 + p + p:has(img) picture,
+body.sidebar main .default-content-wrapper h1 + p + p:has(img) img,
+body.sidebar main .default-content-wrapper h1 + p + picture,
+body.sidebar main .default-content-wrapper h1 + p + picture img {
   display: block;
   width: 100%;
   height: 100%;
@@ -429,7 +500,9 @@ body.sidebar main .default-content-wrapper h1 + picture img {
 
 @media (width >= 900px) {
   body.sidebar main .default-content-wrapper h1 + p:has(img),
-  body.sidebar main .default-content-wrapper h1 + picture {
+  body.sidebar main .default-content-wrapper h1 + picture,
+  body.sidebar main .default-content-wrapper h1 + p + p:has(img),
+  body.sidebar main .default-content-wrapper h1 + p + picture {
     height: 397px;
   }
 }
@@ -437,29 +510,33 @@ body.sidebar main .default-content-wrapper h1 + picture img {
 /* FIX 4: article section headings (H3) sit 20px above the following paragraph on
    the source; the global heading margin is smaller. Scope to the insights content
    column so other sidebar pages keep their own rhythm. */
-body.sidebar main > .section.columns-container .default-content-wrapper h3 {
+body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section > .default-content-wrapper h3 {
   margin-bottom: 20px;
 }
 
 /* FIX 5: source body list items (2nd onward) have 7px top spacing between them. */
-body.sidebar main > .section.columns-container .default-content-wrapper li + li {
+body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section > .default-content-wrapper li + li {
   margin-top: 7px;
 }
 
-/* D3: "Download the whitepaper" CTA. Source centers it in the content column and
-   the button is ~40px tall (padding ~13px 14px), not the 52px the global primary
-   button gives. The CTA is the button-wrapper <p> right before the Featured Service
-   label paragraph. Center the wrapper and trim the button height. */
-body.sidebar main > .section.columns-container .default-content-wrapper .button-wrapper:has(a[href*="machine-learning-whitepaper"]) {
+/* D3: the article's download/whitepaper CTA. Source centers it in the content column
+   and the button is ~40px tall (padding ~13px 14px), not the 52px the global primary
+   button gives. Generalized (was hardcoded to the machine-learning-whitepaper URL):
+   the CTA is the promoted `a.button` in the article content column — an author
+   `<strong><a href>` that decorateButtons turns into a primary button. Scope by
+   STRUCTURE, not URL, so every insights article's CTA (marketing.grace.com, ebook.*,
+   etc.) is styled the same. The feature-card "Learn More" is a plain link inside
+   `.columns` (not an `a.button`), so it is not affected. */
+body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section > .default-content-wrapper .button-wrapper:has(> a.button) {
   text-align: center;
 }
 
-body.sidebar main > .section.columns-container .default-content-wrapper a.button[href*="machine-learning-whitepaper"] {
+body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section > .default-content-wrapper a.button {
   padding: 13px 14px;
 }
 
 /* FIX 9: source article body paragraphs use a 21px bottom margin. */
-body.sidebar main > .section.columns-container .default-content-wrapper > p {
+body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section > .default-content-wrapper > p {
   margin-bottom: 21px;
 }
 
@@ -608,28 +685,28 @@ body.sidebar main > .section.columns-container > div {
 /* M3: mobile line-heights (source mobile uses ~1.3 on h1/h3/body). Base = mobile;
    the >=900px block below restores the desktop values. Scoped to the insights
    content column plus the H1. */
-body.sidebar main > .section.columns-container .default-content-wrapper h1,
-body.sidebar main > .section.columns-container .default-content-wrapper h3,
-body.sidebar main > .section.columns-container .default-content-wrapper p,
-body.sidebar main > .section.columns-container .default-content-wrapper li {
+body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section > .default-content-wrapper h1,
+body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section > .default-content-wrapper h3,
+body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section > .default-content-wrapper p,
+body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section > .default-content-wrapper li {
   line-height: 1.3;
 }
 
 /* D12: H1 line-height matches source (42px x 1.7 = 71.4px) — desktop only. Scoped
    to match the mobile h1 override's specificity so it wins at >=900px. */
 @media (width >= 900px) {
-  body.sidebar main > .section.columns-container .default-content-wrapper h1 {
+  body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section > .default-content-wrapper h1 {
     line-height: 1.7;
   }
 
   /* restore desktop body/heading line-heights (source desktop: h3 ~29.9px @26px,
      body ~23.8px @14px). */
-  body.sidebar main > .section.columns-container .default-content-wrapper h3 {
+  body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section > .default-content-wrapper h3 {
     line-height: 1.15;
   }
 
-  body.sidebar main > .section.columns-container .default-content-wrapper p,
-  body.sidebar main > .section.columns-container .default-content-wrapper li {
+  body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section > .default-content-wrapper p,
+  body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section > .default-content-wrapper li {
     line-height: 1.7;
   }
 }
@@ -671,4 +748,88 @@ body.sidebar main > .section.columns-container .columns-wrapper:has(.columns.hor
     margin-top: 0;
     padding-top: 0;
   }
+
+  /* (The cards→banner zero-gap rule lives at mobile-base scope above so it applies at all
+     widths — no >=900px duplicate needed.) */
 }
+
+/* The geoAndHex base rule (below) has LOWER specificity than the cards→banner zero-gap rule
+   (which adds a `:has(+ .section .banner.contact-split)` tail) that necessarily sits earlier in
+   source. They set different properties so there's no real conflict; disable the ordering lint
+   for this block. */
+/* stylelint-disable no-descending-specificity */
+
+/* geoAndHex decorative background (source: the related-cards section is a full-bleed
+   `section.light-gray-bkgd.geoAndHex` — gray band rgb(230 231 232) with a white hexagon
+   top edge + faint geometric line-network, the SAME brand artwork used by the
+   columns-horizontal-teaser variant). The section itself is now full-bleed (grid-column
+   1 / -1, see the >=900px alignment rule above), so the gray fill + geo-lines paint directly
+   on the section (no viewport-breakout math) and the hexagon band rides its top edge via
+   `::after`. Content is inset to x=100 by the nested grid. The generous top padding (source:
+   the title sits ~206px below the section top) is the "space on top" that separates these
+   cards from the article / blue contact banner above. Reuses the teaser artwork committed
+   under blocks/columns/. Insights-scoped so compliance sidebar pages (no .cards.featured-content)
+   are untouched. */
+body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section.cards-container:has(.cards.featured-content) {
+  position: relative;
+  overflow: hidden;
+  background-color: rgb(230 231 232);
+
+  /* Mobile: top padding clears the hex band; desktop bumps to the source ~206px offset. */
+  padding-top: 110px;
+  padding-bottom: 40px;
+}
+
+/* Decorative artwork replicates the SOURCE geoAndHex technique EXACTLY (the assets are the very
+   same PNGs the source serves — WR_Grace_triangle_pattern_1_dark_gray.png /
+   WR_Grace_hexagon_pattern_mask_final.png, committed here as teaser-*.png). Both layers fill the
+   whole section (inset:0) with `background-size: contain` (NEVER stretch — an earlier
+   `100% 100%`/`cover` distorted the hexagons, which is the "looks different" the source
+   comparison flagged) anchored at the BOTTOM (`50% 100%`), then flipped: the bottom-anchored
+   band ends up at the top after the vertical flip. This is the source's own trick.
+   ::before = faint triangle line-network, mirrored horizontally (scaleX(-1)). */
+body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section.cards-container:has(.cards.featured-content)::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: url('../../blocks/columns/teaser-geo-lines.png');
+  background-repeat: no-repeat;
+  background-position: 50% 100%;
+  background-size: contain;
+  transform: scaleX(-1);
+}
+
+/* ::after = white hexagon band; flipped BOTH ways (scale(-1,-1)) so the solid edge sits at the
+   top (blending into the white page above) and the hexagons hang down into the gray. */
+body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section.cards-container:has(.cards.featured-content)::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background-image: url('../../blocks/columns/teaser-hex-mask.png');
+  background-repeat: no-repeat;
+  background-position: 50% 100%;
+  background-size: contain;
+  transform: scale(-1, -1);
+}
+
+/* lift the real cards content (the nested grid children) above the decorative layers */
+body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section.cards-container:has(.cards.featured-content) > * {
+  position: relative;
+  z-index: 2;
+}
+
+@media (width >= 900px) {
+  /* Desktop: ~206px top offset so the title clears the hexagons (source parity), giving the
+     cards clear separation from the section above. This overrides FIX 8's padding-top:0 for the
+     featured-content cards specifically (later in source + the :has(featured-content) tail wins). */
+  body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section.cards-container:has(.cards.featured-content) {
+    padding-top: 206px;
+    padding-bottom: 60px;
+  }
+}
+
+/* stylelint-enable no-descending-specificity */

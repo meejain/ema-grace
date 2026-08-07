@@ -2716,6 +2716,16 @@ var CustomImportScript = (() => {
       section.querySelectorAll("p").forEach((p) => {
         if (!p.textContent.trim() && !p.querySelector("img, picture, a[href], br, table")) p.remove();
       });
+      section.querySelectorAll("a.btn-primary, a[data-gated-id], a[data-trigger-type]").forEach((a) => {
+        if (a.closest("strong") || a.closest("a.item") || a.closest("table")) return;
+        if (a.querySelector("img, picture")) return;
+        const strong = document.createElement("strong");
+        a.replaceWith(strong);
+        strong.append(a);
+        a.removeAttribute("class");
+        a.removeAttribute("data-gated-id");
+        a.removeAttribute("data-trigger-type");
+      });
       section.querySelectorAll('a[href*="machine-learning-whitepaper"] em, a[href*="marketing.grace"] em').forEach((em) => {
         while (em.firstChild) em.parentNode.insertBefore(em.firstChild, em);
         em.remove();
@@ -2743,6 +2753,13 @@ var CustomImportScript = (() => {
       section.append(blockEl);
       main.append(section);
     });
+    const contactBanner = buildContactSplitBanner(document);
+    if (contactBanner) {
+      main.append(document.createElement("hr"));
+      const bannerSection = document.createElement("div");
+      bannerSection.append(contactBanner);
+      main.append(bannerSection);
+    }
     const t = document.querySelector(
       ".contactus__content-desktop .contactus__text, .contactus__text, .contact-us-sticky .contactus__text, .contact-us-cmp .contact-us-subtitle"
     );
