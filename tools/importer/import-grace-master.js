@@ -824,10 +824,80 @@ function buildInsightsArticle(document, url, params) {
         if (created) { contentNodes.push(created); return; }
       }
 
-      // Lead .media-callout: extract ONLY its image (drop video-modal/clientlib scaffolding).
+      // Statistic highlight card (source .cmp-card.statistic — the big "61%" number + caption on
+      // a gray tile). The markdown round-trip would flatten it to loose "PROMOTION / 61% / …"
+      // paragraphs, so parse it into the Quote (highlight) block instead (its JS/CSS render the
+      // large number + caption). Emit the created block table in place.
+      const statCard = el.matches('.cmp-card.statistic') ? el : el.querySelector('.cmp-card.statistic');
+      if (statCard) {
+        const before = new Set(document.querySelectorAll('table'));
+        try { quoteHighlightParser(statCard, { document, url, params }); } catch (e) { /* leave */ }
+        const created = Array.from(document.querySelectorAll('table')).find((t) => !before.has(t) && !t.closest('td'));
+        if (created) { contentNodes.push(created); return; }
+      }
+
+      // Pull-quote / testimonial (source div.quote.quote-section — quote text + author +
+      // position, e.g. the Ken Bryden FCC quote). Parse into the Quote (testimonial) block so the
+      // citation survives; a raw clone would flatten it to plain paragraphs.
+      const quoteEl = el.matches('.quote') ? el : el.querySelector('.quote-section, div.quote');
+      if (quoteEl && (quoteEl.querySelector('.quote-text, .citation') || /quote-section/.test(quoteEl.className || ''))) {
+        const before = new Set(document.querySelectorAll('table'));
+        try { quoteTestimonialParser(quoteEl, { document, url, params }); } catch (e) { /* leave */ }
+        const created = Array.from(document.querySelectorAll('table')).find((t) => !before.has(t) && !t.closest('td'));
+        if (created) { contentNodes.push(created); return; }
+      }
+
+      // .media-callout mid-content image(s): keep the image AND its caption. The source renders
+      // these as sizeable figures with an italic caption below (e.g. "Catalyst Evaluation 1964");
+      // a bare <p><img> lost the caption and shrank the image.
+      //
+      // TWO layouts, matching the source:
+      //   • A single callout → emit the figure inline as <p><img></p> + italic caption
+      //     <p><em>…</em></p> (the insights CSS styles that caption paragraph).
+      //   • MULTIPLE callouts grouped in one row (the source pairs two figures in a
+      //     `.row` of two `.col-lg-6`, e.g. 80-years-of-fcc) → emit a `Columns (media-figures)`
+      //     block so they render SIDE BY SIDE on desktop and stack on mobile — the markdown
+      //     round-trip drops the source's Bootstrap columns, so we rebuild them as a real block.
       if (el.matches('.media-callout') || el.querySelector('.media-callout')) {
-        const img = el.querySelector('.media-image img, .img img, picture, img');
-        if (img) { const p = document.createElement('p'); p.append(img.cloneNode(true)); contentNodes.push(p); }
+        const callouts = el.matches('.media-callout') ? [el] : Array.from(el.querySelectorAll('.media-callout'));
+        const list = callouts.length ? callouts : [el];
+        // Build [imgClone, captionParagraph|null] for each callout, dropping ones with no image.
+        const figures = list.map((mc) => {
+          const img = mc.querySelector('.media-image img, .img img, picture, img');
+          if (!img) return null;
+          const capEl = mc.querySelector('.caption, .media-caption');
+          const capText = capEl ? (capEl.textContent || '').replace(/\s+/g, ' ').trim() : '';
+          let cap = null;
+          if (capText) {
+            cap = document.createElement('p');
+            const em = document.createElement('em');
+            em.textContent = capText;
+            cap.append(em);
+            cap.className = 'media-caption';
+          }
+          return { img: img.cloneNode(true), cap };
+        }).filter(Boolean);
+        if (!figures.length) return;
+
+        if (figures.length >= 2) {
+          // Side-by-side: one Columns (media-figures) row, one cell per figure.
+          const cells = [figures.map((f) => {
+            const p = document.createElement('p');
+            p.append(f.img);
+            return f.cap ? [p, f.cap] : [p];
+          })];
+          const block = WebImporter.Blocks.createBlock(document, { name: 'Columns (media-figures)', cells });
+          contentNodes.push(block);
+          return;
+        }
+
+        // Single figure: inline image + caption paragraphs.
+        figures.forEach((f) => {
+          const p = document.createElement('p');
+          p.append(f.img);
+          contentNodes.push(p);
+          if (f.cap) contentNodes.push(f.cap);
+        });
         return;
       }
 

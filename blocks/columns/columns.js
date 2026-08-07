@@ -5,7 +5,7 @@
  * their own decorate function keyed by the variant class on the block.
  */
 
-const VARIANTS = ['app-promo', 'brochure-promo', 'checklist', 'history-item', 'horizontal-teaser', 'image-left', 'image-right', 'image-teaser', 'location-detail', 'profile-detail'];
+const VARIANTS = ['app-promo', 'brochure-promo', 'checklist', 'history-item', 'horizontal-teaser', 'image-left', 'image-right', 'image-teaser', 'location-detail', 'media-figures', 'profile-detail'];
 
 function getVariant(block) {
   return VARIANTS.find((v) => block.classList.contains(v)) || null;
@@ -58,6 +58,24 @@ function decorateImageRight(block) {
 
 function decorateLocationDetail(block) {
   tagImageTextCols(block, 'columns-location-detail', { imgSelector: 'picture, img' });
+}
+
+/* Media figures: two (or more) captioned insight images shown side by side on
+   desktop and stacked on mobile. Each column holds a <picture> and an italic
+   caption paragraph. Tag the caption so the CSS styles it (small italic gray),
+   and lift the picture out of its wrapping <p> so it sizes cleanly. */
+function decorateMediaFigures(block) {
+  [...block.children].forEach((row) => {
+    [...row.children].forEach((col) => {
+      col.classList.add('columns-media-figures-col');
+      const pic = col.querySelector('picture');
+      if (pic && pic.parentElement && pic.parentElement.tagName === 'P') {
+        pic.parentElement.replaceWith(pic);
+      }
+      const caption = [...col.querySelectorAll('p')].find((p) => p.querySelector('em') && !p.querySelector('picture, img'));
+      if (caption) caption.classList.add('columns-media-figures-caption');
+    });
+  });
 }
 
 function decorateProfileDetail(block) {
@@ -397,6 +415,7 @@ const DECORATORS = {
   'image-right': decorateImageRight,
   'image-teaser': decorateImageTeaser,
   'location-detail': decorateLocationDetail,
+  'media-figures': decorateMediaFigures,
   'profile-detail': decorateProfileDetail,
 };
 

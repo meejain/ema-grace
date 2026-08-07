@@ -484,6 +484,46 @@ body.sidebar main .default-content-wrapper h1 + p + picture img {
   }
 }
 
+/* Mid-content body images + captions (source .media-callout figures mid-article, e.g. the
+   80-years "Catalyst Evaluation 1964"/"Technical Service Team" pair). Markdown strips the
+   authored class, so match STRUCTURALLY: a mid-content figure is a `<picture>` FOLLOWED by a
+   caption `<p>` (paragraph whose only child is an <em>). CRITICAL: exclude the HERO image, which
+   is `h1 + picture` (also has a caption on some pages) — `:not(h1 + *)` isn't expressible, so use
+   `p + picture` / `h2 + picture` / `h3 + picture` (mid-content figures always follow a paragraph
+   or heading, never the H1 directly). The importer wraps consecutive paired figures in a
+   `Columns (media-figures)` block so they sit SIDE BY SIDE (styled in blocks/columns/columns.css);
+   this rule sizes STANDALONE single figures. Without sizing the bare <picture> collapses to
+   height 0. */
+body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section > .default-content-wrapper :is(p, h2, h3, ul, ol) + picture:has(+ p em) {
+  display: block;
+  width: 313px;
+  max-width: 100%;
+  margin: 25px 0 6px;
+}
+
+body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section > .default-content-wrapper :is(p, h2, h3, ul, ol) + picture:has(+ p em) img {
+  display: block;
+  width: 100%;
+
+  /* Reserve the source ~16:9 box (313x176) so the figure holds its height even before the
+     cross-origin Scene7 image decodes (prevents a 0-height collapse / layout shift). */
+  height: auto;
+  aspect-ratio: 313 / 176;
+  object-fit: cover;
+}
+
+/* Italic caption paragraph — a <p> whose sole child is <em>, sitting right after a mid-content
+   image (source: italic 12px, gray #5f6062). Match structurally since the class is stripped.
+   Excludes the hero caption by requiring the caption to follow a picture that itself follows
+   body content (mid-content), via the picture rule's specificity chain above. */
+body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section > .default-content-wrapper :is(p, h2, h3, ul, ol) + picture + p:has(> em:only-child) {
+  margin: 0 0 25px;
+  font-size: 12px;
+  font-style: italic;
+  line-height: 1.4;
+  color: rgb(95 96 98);
+}
+
 /* FIX 4: article section headings (H3) sit 20px above the following paragraph on
    the source; the global heading margin is smaller. Scope to the insights content
    column so other sidebar pages keep their own rhythm. */
@@ -752,36 +792,45 @@ body.sidebar main > .section.cards-container.geo-hex:has(.cards.featured-content
   padding-bottom: 40px;
 }
 
-/* Decorative artwork replicates the SOURCE technique EXACTLY: both layers fill the whole section
-   (inset:0) with `background-size: contain` (NEVER stretch — `100%/cover` distorts the hexagons)
-   anchored at the BOTTOM (`50% 100%`), then flipped so the bottom-anchored band lands at the top.
-   ::before = faint triangle line-network, mirrored horizontally (scaleX(-1)). */
+/* Decorative artwork. MOBILE-FIRST base = compact FIXED-HEIGHT bands (source mobile does NOT
+   fill the whole section — that would zoom the hexagons huge). Desktop (>=900px, further below)
+   overrides to the full-section `contain` technique. Both keep the artwork flips so the solid
+   edge blends into the white page above and the hexagons hang down.
+   ::before = faint triangle line-network, a ~350px band in the LOWER half of the section,
+   over-wide (214vw) so it crops rather than shrinks; `cover` keeps the lines at native scale. */
 body.sidebar main > .section.cards-container.geo-hex:has(.cards.featured-content)::before {
   content: '';
   position: absolute;
-  inset: 0;
+  top: 50%;
+  left: 50%;
+  width: 214vw;
+  height: 350px;
   z-index: 0;
   pointer-events: none;
   background-image: url('../../blocks/columns/teaser-geo-lines.png');
   background-repeat: no-repeat;
   background-position: 50% 100%;
-  background-size: contain;
-  transform: scaleX(-1);
+  background-size: cover;
+  transform: translateX(-50%) scaleX(-1);
 }
 
-/* ::after = white hexagon band; flipped BOTH ways (scale(-1,-1)) so the solid edge sits at the
+/* ::after = white hexagon band pinned to the TOP; a ~136px fixed band, over-wide (130vw) so the
+   hexagons stay large-ish and crop at the edges. Flipped BOTH ways so the solid edge sits at the
    top (blending into the white page above) and the hexagons hang down into the gray. */
 body.sidebar main > .section.cards-container.geo-hex:has(.cards.featured-content)::after {
   content: '';
   position: absolute;
-  inset: 0;
+  top: 0;
+  left: 50%;
+  width: 130vw;
+  height: 136px;
   z-index: 1;
   pointer-events: none;
   background-image: url('../../blocks/columns/teaser-hex-mask.png');
   background-repeat: no-repeat;
   background-position: 50% 100%;
-  background-size: contain;
-  transform: scale(-1, -1);
+  background-size: cover;
+  transform: translateX(-50%) scale(-1, -1);
 }
 
 /* lift the real cards content above the decorative layers */
@@ -821,5 +870,26 @@ body.sidebar main > .section.cards-container.geo-hex:has(.cards.featured-content
      featured-content pages keep their own spacing. */
   body.sidebar main > .section.cards-container.geo-hex .cards-wrapper:has(.cards.featured-content) {
     margin-top: 72px;
+  }
+
+  /* Desktop overrides the mobile-base compact bands: both decorative layers fill the whole
+     section (inset:0) with `background-size: contain` — the source's desktop technique that keeps
+     the hexagons crisp across the full-bleed gray band. (Mobile keeps the fixed-height bands.) */
+  body.sidebar main > .section.cards-container.geo-hex:has(.cards.featured-content)::before {
+    top: 0;
+    width: auto;
+    height: auto;
+    inset: 0;
+    background-size: contain;
+    transform: scaleX(-1);
+  }
+
+  body.sidebar main > .section.cards-container.geo-hex:has(.cards.featured-content)::after {
+    top: 0;
+    width: auto;
+    height: auto;
+    inset: 0;
+    background-size: contain;
+    transform: scale(-1, -1);
   }
 }
