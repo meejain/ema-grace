@@ -139,6 +139,7 @@ export default function decorate(block) {
     const wrapper = a.closest('.button-container');
     if (wrapper) wrapper.replaceWith(a);
   });
+
   block.replaceChildren(ul);
 
   if (block.classList.contains('featured-content')) {

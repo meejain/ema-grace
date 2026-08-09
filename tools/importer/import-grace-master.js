@@ -760,7 +760,11 @@ function buildInsightsArticle(document, url, params) {
     Array.from(bodyCol.children).forEach((el) => {
       if (/^(SCRIPT|STYLE|NOSCRIPT|LINK|IFRAME)$/.test(el.tagName)) return;
       if (el.matches('.divider')) return;
-      if (el.matches('.card-list')) return; // related articles → discovery (below)
+      // A bare `.card-list` direct child: skip ONLY if it's NOT a "Related Articles" grid.
+      // The sibling "Latest Insights" region is handled by discovery, but an IN-BODY
+      // "Related Articles" card-list (6 pages) is inside col-lg-7 where discovery never runs —
+      // so let it fall through to the Related Articles branch below (which parses it).
+      if (el.matches('.card-list') && !/related articles/i.test(el.textContent || '')) return;
 
       // In-body VIDEO (source .media-video: a poster still + play button; the real video URL
       // lives in a sibling `.media-modal .active-video[data-video-type] <video src>`). A bare
@@ -969,6 +973,25 @@ function buildInsightsArticle(document, url, params) {
           const created = Array.from(clone.querySelectorAll('table')).find((t) => !before.has(t) && !t.closest('td'));
           if (created) { contentNodes.push(created); return; }
         } catch (e) { /* fall through to raw clone */ }
+      }
+
+      // In-body "Related Articles" card grid (source `.cmp-card-list` whose heading is
+      // "Related Articles" — a CURATED 3-card grid of a.cmp-card.bio, distinct from the
+      // JS-hydrated "Latest Insights" carousel and the "Featured Products" promo). It lives in
+      // the col-lg-7 body, so discovery never sees it and a raw clone drops it entirely (the
+      // "Related Articles" section was missing on migrated pages). Emit a heading + a proper
+      // `Cards (related-articles)` block. MUST run BEFORE the generic a.cmp-card.bio product
+      // branch below, since a Related-Articles list also contains a.cmp-card.bio cards.
+      const relCardList = el.matches('.cmp-card-list, .card-list') ? el : el.querySelector('.cmp-card-list, .card-list');
+      const relHeading = relCardList && (relCardList.querySelector('.heading, h2, h3') || {}).textContent;
+      if (relCardList && relHeading && /related articles/i.test(relHeading) && relCardList.querySelector('a.cmp-card')) {
+        const h2 = document.createElement('h2');
+        h2.textContent = relHeading.replace(/\s+/g, ' ').trim();
+        contentNodes.push(h2);
+        const before = new Set(document.querySelectorAll('table'));
+        try { cardsRelatedArticlesParser(relCardList, { document, url, params }); } catch (e) { /* leave */ }
+        const created = Array.from(document.querySelectorAll('table')).find((t) => !before.has(t) && !t.closest('td'));
+        if (created) { contentNodes.push(created); return; }
       }
 
       // In-body PRODUCT-CARD grid (source `a.cmp-card.bio` — a "Featured Products" promo of 1+

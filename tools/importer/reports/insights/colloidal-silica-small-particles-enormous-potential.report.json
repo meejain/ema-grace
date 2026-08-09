@@ -2,7 +2,7 @@
   "status": "success",
   "url": "https://grace.com/insights/colloidal-silica-small-particles-enormous-potential/",
   "path": "insights/colloidal-silica-small-particles-enormous-potential",
-  "timestamp": "2026-08-09T03:45:30.733Z",
+  "timestamp": "2026-08-09T06:39:00.506Z",
   "title": "Colloidal Silica: Small Particles, Enormous Potential",
   "pageType": "insights-article",
   "pageMetadata": [
@@ -13,10 +13,10 @@
     "published",
     "industry"
   ],
-  "contentNodes": 7,
+  "contentNodes": 9,
   "blocks": [
-    "social-follow",
-    "cards-featured-content"
+    "cards-featured-content",
+    "social-follow"
   ],
   "blocksLeftInPlace": [],
   "hasForm": true

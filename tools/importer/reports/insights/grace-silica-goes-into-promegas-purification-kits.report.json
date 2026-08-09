@@ -2,7 +2,7 @@
   "status": "success",
   "url": "https://grace.com/insights/grace-silica-goes-into-promegas-purification-kits/",
   "path": "insights/grace-silica-goes-into-promegas-purification-kits",
-  "timestamp": "2026-08-09T03:41:55.206Z",
+  "timestamp": "2026-08-09T06:41:37.742Z",
   "title": "Grace Silica Goes into Promega’s Purification Kits to Enable COVID-19 PCR Testing",
   "pageType": "insights-article",
   "pageMetadata": [
@@ -13,10 +13,10 @@
     "published",
     "industry"
   ],
-  "contentNodes": 9,
+  "contentNodes": 11,
   "blocks": [
-    "social-follow",
-    "cards-featured-content"
+    "cards-featured-content",
+    "social-follow"
   ],
   "blocksLeftInPlace": [],
   "hasForm": false

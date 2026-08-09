@@ -1,0 +1,8 @@
+{
+  "status": "failed",
+  "url": "https://grace.com/insights/colloidal-silica-and-corrosion-resistance---stabilizing-a-safer-/",
+  "path": "insights/colloidal-silica-and-corrosion-resistance---stabilizing-a-safer-",
+  "timestamp": "2026-08-09T06:14:25.804Z",
+  "error": "page.goto: Target page, context or browser has been closed",
+  "errorStack": "page.goto: Target page, context or browser has been closed\n    at processUrl (/home/node/.excat-marketplaces/excat-marketplace/excat/skills/excat-content-import/scripts/run-bulk-import.js:469:18)\n    at async main (/home/node/.excat-marketplaces/excat-marketplace/excat/skills/excat-content-import/scripts/run-bulk-import.js:696:22)"
+}

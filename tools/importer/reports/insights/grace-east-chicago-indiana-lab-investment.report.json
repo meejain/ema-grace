@@ -2,7 +2,7 @@
   "status": "success",
   "url": "https://grace.com/insights/grace-east-chicago--indiana-lab-investment/",
   "path": "insights/grace-east-chicago-indiana-lab-investment",
-  "timestamp": "2026-08-09T03:45:30.058Z",
+  "timestamp": "2026-08-09T06:40:45.416Z",
   "title": "Grace East Chicago, Indiana Lab Investment",
   "pageType": "insights-article",
   "pageMetadata": [
@@ -13,10 +13,10 @@
     "published",
     "industry"
   ],
-  "contentNodes": 8,
+  "contentNodes": 10,
   "blocks": [
-    "social-follow",
-    "cards-featured-content"
+    "cards-featured-content",
+    "social-follow"
   ],
   "blocksLeftInPlace": [],
   "hasForm": true

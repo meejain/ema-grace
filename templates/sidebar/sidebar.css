@@ -791,11 +791,26 @@ body.sidebar main > .section.columns-container .columns-wrapper:has(.columns.hor
 /* FIX 7 / D5: the source separates the feature block from References with a 5px
    BLUE divider (div.divider-line, background rgb(0,73,144)) plus ~90px of space.
    Reproduce the blue rule as a thick top border above the References
-   default-content-wrapper (the content wrapper after the featured columns-wrapper). */
-body.sidebar main > .section.columns-container .columns-wrapper:has(.columns.horizontal-teaser-featured) + .default-content-wrapper {
+   default-content-wrapper (the content wrapper after the featured columns-wrapper).
+   EXCLUDE the case where that wrapper is a "Related Articles" heading (immediately
+   followed by a .cards-wrapper) — Related Articles has no blue divider on source. */
+body.sidebar main > .section.columns-container .columns-wrapper:has(.columns.horizontal-teaser-featured) + .default-content-wrapper:not(:has(+ .cards-wrapper)) {
   margin-top: 45px;
   border-top: 5px solid rgb(0 73 144);
   padding-top: 45px;
+}
+
+/* A "Related Articles" heading wrapper (immediately followed by its .cards-wrapper) that
+   directly follows the Featured block: source leaves ~30px of space above the heading (no
+   blue divider). Add that gap; the border-exclusion above keeps it borderless. */
+body.sidebar main > .section.columns-container .columns-wrapper:has(.columns.horizontal-teaser-featured) + .default-content-wrapper:has(+ .cards-wrapper) {
+  margin-top: 30px;
+}
+
+/* Source leaves 50px between the centered "Related Articles" heading and the card image row;
+   the heading's own bottom margin was only 15px. Bump it to 50px (heading stays centered). */
+body.sidebar main > .section.columns-container .default-content-wrapper:has(+ .cards-wrapper) h2 {
+  margin-bottom: 50px;
 }
 
 /* stylelint-enable no-descending-specificity */

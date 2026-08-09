@@ -1885,35 +1885,23 @@ var CustomImportScript = (() => {
       const img = card.querySelector(".image picture, .image img, picture, img");
       const imageCell = img ? [img.cloneNode(true)] : [];
       const content = [];
-      const eyebrow = card.querySelector(".h5");
-      if (eyebrow && eyebrow.textContent.trim()) {
-        const p = document.createElement("p");
-        p.textContent = eyebrow.textContent.trim();
-        content.push(p);
-      }
       const titleEl = card.querySelector(".h4.title, .h4, .title");
+      const title = titleEl ? (titleEl.textContent || "").replace(/\s+/g, " ").trim() : "";
       const href = card.getAttribute("href") || (card.closest("a") || {}).href || "";
-      if (titleEl && titleEl.textContent.trim()) {
-        const h = document.createElement("h3");
-        if (href) {
-          const a = document.createElement("a");
-          a.href = href;
-          a.textContent = titleEl.textContent.trim();
-          h.append(a);
-        } else h.textContent = titleEl.textContent.trim();
-        content.push(h);
+      if (title) {
+        const s = document.createElement("strong");
+        s.textContent = title;
+        content.push(s);
       }
       if (href) {
-        const p = document.createElement("p");
         const a = document.createElement("a");
         a.href = href;
         a.textContent = "Read more";
-        p.append(a);
-        content.push(p);
+        content.push(a);
       }
       return [imageCell, content];
     });
-    const block = WebImporter.Blocks.createBlock(document, { name: "Cards (related-articles)", cells });
+    const block = WebImporter.Blocks.createBlock(document, { name: "Cards (product, cta)", cells });
     const host = container.closest(".card-list") || container;
     host.replaceWith(block);
   }
@@ -2646,7 +2634,7 @@ var CustomImportScript = (() => {
       Array.from(bodyCol.children).forEach((el) => {
         if (/^(SCRIPT|STYLE|NOSCRIPT|LINK|IFRAME)$/.test(el.tagName)) return;
         if (el.matches(".divider")) return;
-        if (el.matches(".card-list")) return;
+        if (el.matches(".card-list") && !/related articles/i.test(el.textContent || "")) return;
         const mediaVideo = el.matches(".media-video") ? el : el.querySelector(".media-video");
         if (mediaVideo) {
           const posterImg = mediaVideo.querySelector(".img img, .media-image img, picture, img");
@@ -2799,6 +2787,23 @@ var CustomImportScript = (() => {
               return;
             }
           } catch (e) {
+          }
+        }
+        const relCardList = el.matches(".cmp-card-list, .card-list") ? el : el.querySelector(".cmp-card-list, .card-list");
+        const relHeading = relCardList && (relCardList.querySelector(".heading, h2, h3") || {}).textContent;
+        if (relCardList && relHeading && /related articles/i.test(relHeading) && relCardList.querySelector("a.cmp-card")) {
+          const h2 = document.createElement("h2");
+          h2.textContent = relHeading.replace(/\s+/g, " ").trim();
+          contentNodes.push(h2);
+          const before = new Set(document.querySelectorAll("table"));
+          try {
+            parse48(relCardList, { document, url, params });
+          } catch (e) {
+          }
+          const created = Array.from(document.querySelectorAll("table")).find((t2) => !before.has(t2) && !t2.closest("td"));
+          if (created) {
+            contentNodes.push(created);
+            return;
           }
         }
         if (el.querySelector("a.cmp-card.bio")) {

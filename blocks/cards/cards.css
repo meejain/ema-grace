@@ -1296,6 +1296,25 @@ body.sidebar main > .section.cards-container.geo-hex:has(.cards.featured-content
   z-index: 1;
 }
 
+/* CTA option (authored `Cards (product, cta)` → `.cards.product.cta`). Opt-in: any product-card
+   block given the `cta` option surfaces each card's link as a VISIBLE black "Read more ›" below
+   the title, instead of the default invisible full-card overlay. Used by the insights
+   "Related Articles" block; homepage product tiles (no `cta` option) keep the overlay. */
+.cards.product.cta > ul > li .cards-card-body a:any-link {
+  position: static;
+  inset: auto;
+  display: inline-block;
+  margin-top: 12px;
+  color: var(--text-color);
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m);
+  font-weight: 400;
+}
+
+.cards.product.cta > ul > li .cards-card-body a:any-link::after {
+  content: ' ›';
+}
+
 @media (width >= 900px) {
   /* Source lays all products out in a single row (grace.com uses a 4-across
      flex row for the 4 product tiles), so match with 4 equal columns. */
@@ -1306,6 +1325,16 @@ body.sidebar main > .section.cards-container.geo-hex:has(.cards.featured-content
 
   .cards.product > ul > li {
     padding-bottom: 55px;
+  }
+
+  /* The CTA option (insights "Related Articles") is a 3-up grid, not the homepage's 4-across
+     product row — the 4-col template collapsed the 4th track and made the 3 cards uneven/overflow.
+     minmax(0,1fr) keeps the three tracks exactly equal regardless of title length (plain 1fr
+     lets a long title/image min-content widen one track → uneven images). On the 707px insights
+     content column with a 22px column gap this computes to 221px per card, matching live grace.com. */
+  .cards.product.cta > ul {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    column-gap: 22px;
   }
 }
 
