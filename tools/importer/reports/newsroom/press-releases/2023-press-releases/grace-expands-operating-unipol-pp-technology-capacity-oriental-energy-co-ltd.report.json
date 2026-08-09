@@ -2,13 +2,15 @@
   "status": "success",
   "url": "https://grace.com/newsroom/press-releases/2023-press-releases/grace-expands-operating-unipol-pp-technology-capacity-oriental-energy-co-ltd/",
   "path": "newsroom/press-releases/2023-press-releases/grace-expands-operating-unipol-pp-technology-capacity-oriental-energy-co-ltd",
-  "timestamp": "2026-08-09T08:55:54.861Z",
+  "timestamp": "2026-08-09T12:02:23.905Z",
   "title": "Grace Expands Operating UNIPOL® PP Technology Capacity in China with Oriental Energy Co. Ltd.",
   "pageType": "default",
   "blocks": [
     "hero-banner"
   ],
   "blocksLeftInPlace": [],
-  "pageMetadata": [],
+  "pageMetadata": [
+    "breadcrumb"
+  ],
   "hasForm": false
 }

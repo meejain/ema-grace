@@ -386,19 +386,13 @@ main > .section.hero-container {
 
 /* Default-path pages (e.g. newsroom press releases) put the hero banner AND the body content in
    ONE hero-container section, so the body content-wrapper that follows the hero-wrapper gets no
-   top spacing and renders flush against the blue band. Source grace.com leaves 50px there (its
-   content article has padding-top:50px). Add that gap. Scoped to a `.hero.banner` sibling so it
-   only affects the banner-hero default pages — insights/sidebar don't use hero banner. */
+   top spacing and renders flush against the blue band, and its last paragraph butts against the
+   footer. Source grace.com leaves 50px on BOTH ends (its content article has padding 50px top /
+   50px bottom). Add both. Scoped to a `.hero.banner` sibling so it only affects the banner-hero
+   default pages — insights/sidebar don't use hero banner. */
 main > .section.hero-container > .hero-wrapper:has(.hero.banner) + .default-content-wrapper {
   margin-top: var(--spacing-l);
-}
-
-/* Press-release body subhead: source renders the italic <h3><em> subhead (e.g. "Novel AI
-   Application…") CENTERED (inline text-align:center that the markdown round-trip drops). Re-center
-   it. Scoped to an <h3> whose only content is an <em>, inside the banner-hero body wrapper, so it
-   targets that subhead and not ordinary left-aligned section headings. */
-main > .section.hero-container > .hero-wrapper:has(.hero.banner) + .default-content-wrapper > h3:has(> em:only-child) {
-  text-align: center;
+  margin-bottom: var(--spacing-l);
 }
 
 /* CLS guard (must live in the synchronously-loaded styles.css so it applies at
@@ -446,6 +440,15 @@ main .section.dark h6 {
 
 main .section.dark a:any-link {
   color: var(--white);
+}
+
+/* Press-release body subhead: source renders the italic <h3><em> subhead (e.g. "Novel AI
+   Application…") CENTERED (inline text-align:center that the markdown round-trip drops). Re-center
+   it. Scoped to an <h3> whose only content is an <em>, inside the banner-hero body wrapper, so it
+   targets that subhead and not ordinary left-aligned section headings. Placed after the
+   `.section.dark h3` rules so selector specificity order is natural. */
+main > .section.hero-container > .hero-wrapper:has(.hero.banner) + .default-content-wrapper > h3:has(> em:only-child) {
+  text-align: center;
 }
 
 main .section.dark a:hover {

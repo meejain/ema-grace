@@ -2,13 +2,15 @@
   "status": "success",
   "url": "https://grace.com/newsroom/press-releases/2024-press-releases/grace-advances-iron-tolerance-in-fcc-catalysts--develops-innovat/",
   "path": "newsroom/press-releases/2024-press-releases/grace-advances-iron-tolerance-in-fcc-catalysts-develops-innovat",
-  "timestamp": "2026-08-09T08:52:26.660Z",
+  "timestamp": "2026-08-09T11:58:49.634Z",
   "title": "Grace Advances Iron Tolerance in FCC Catalysts, Develops Innovative Iron Deactivation Protocol",
   "pageType": "default",
   "blocks": [
     "hero-banner"
   ],
   "blocksLeftInPlace": [],
-  "pageMetadata": [],
+  "pageMetadata": [
+    "breadcrumb"
+  ],
   "hasForm": false
 }

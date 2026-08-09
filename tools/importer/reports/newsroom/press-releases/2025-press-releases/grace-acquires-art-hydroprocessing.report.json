@@ -2,13 +2,15 @@
   "status": "success",
   "url": "https://grace.com/newsroom/press-releases/2025-press-releases/grace-acquires-art-hydroprocessing/",
   "path": "newsroom/press-releases/2025-press-releases/grace-acquires-art-hydroprocessing",
-  "timestamp": "2026-08-09T10:01:01.967Z",
+  "timestamp": "2026-08-09T12:04:07.026Z",
   "title": "Grace Acquires ART Hydroprocessing™, Deepens Commitment to Refining Industry",
   "pageType": "default",
   "blocks": [
     "hero-banner"
   ],
   "blocksLeftInPlace": [],
-  "pageMetadata": [],
+  "pageMetadata": [
+    "breadcrumb"
+  ],
   "hasForm": false
 }

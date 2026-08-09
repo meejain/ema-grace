@@ -1,0 +1,19 @@
+{
+  "status": "success",
+  "url": "https://grace.com/products/synthetic-silicas/",
+  "path": "products/synthetic-silicas",
+  "timestamp": "2026-08-09T12:26:54.020Z",
+  "title": "Synthetic Silicas",
+  "pageType": "sidebar",
+  "pageMetadata": [
+    "template",
+    "contactus",
+    "contactus-tagline"
+  ],
+  "sidebarNav": true,
+  "contentNodes": 4,
+  "contactSplitBanner": false,
+  "blocks": [],
+  "blocksLeftInPlace": [],
+  "hasForm": false
+}

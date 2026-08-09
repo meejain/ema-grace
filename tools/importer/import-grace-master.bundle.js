@@ -724,7 +724,10 @@ var CustomImportScript = (() => {
       contentCell.push(link);
     }
     cells.push([contentCell]);
-    const block = WebImporter.Blocks.createBlock(document, { name: "Hero (banner)", cells });
+    const hasImage = !!bgImage;
+    const sourceHasGradient = (element.className || "").split(/\s+/).includes("gradient");
+    const name = !hasImage && sourceHasGradient ? "Hero (banner, gradient)" : "Hero (banner)";
+    const block = WebImporter.Blocks.createBlock(document, { name, cells });
     element.replaceWith(block);
   }
 
@@ -3158,6 +3161,9 @@ var CustomImportScript = (() => {
       const tagline = t ? (t.textContent || "").replace(/\s+/g, " ").trim() : "";
       if (tagline) pageMeta.push(["contactus-tagline", tagline]);
     }
+    if (params && params.sourceHadBannerHero && params.sourceHadBreadcrumb === false) {
+      pageMeta.push(["breadcrumb", "false"]);
+    }
     rewriteInternalLinks(main);
     WebImporter.rules.transformBackgroundImages(main, document);
     WebImporter.rules.adjustImageUrls(main, url, params.originalURL);
@@ -3181,6 +3187,8 @@ var CustomImportScript = (() => {
   var import_grace_master_default = {
     transform: (payload) => {
       const { document, url, params } = payload;
+      params.sourceHadBreadcrumb = !!document.querySelector('.cmp-breadcrumb, nav[aria-label*="readcrumb" i]');
+      params.sourceHadBannerHero = !!document.querySelector(".hero__section.hero-reduce-height");
       executeTransformers("beforeTransform", document.body, payload);
       const hasForm = detectForm(document);
       let result;

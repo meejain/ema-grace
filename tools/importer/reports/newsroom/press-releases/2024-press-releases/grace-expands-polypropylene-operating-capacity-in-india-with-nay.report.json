@@ -2,13 +2,15 @@
   "status": "success",
   "url": "https://grace.com/newsroom/press-releases/2024-press-releases/grace-expands-polypropylene-operating-capacity-in-india-with-nay/",
   "path": "newsroom/press-releases/2024-press-releases/grace-expands-polypropylene-operating-capacity-in-india-with-nay",
-  "timestamp": "2026-08-09T08:54:14.930Z",
+  "timestamp": "2026-08-09T12:00:35.855Z",
   "title": "Grace Expands Polypropylene Operating Capacity in India with Nayara Energy Limited",
   "pageType": "default",
   "blocks": [
     "hero-banner"
   ],
   "blocksLeftInPlace": [],
-  "pageMetadata": [],
+  "pageMetadata": [
+    "breadcrumb"
+  ],
   "hasForm": false
 }

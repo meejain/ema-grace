@@ -2,13 +2,15 @@
   "status": "success",
   "url": "https://grace.com/newsroom/press-releases/2023-press-releases/grace-marks-another-asia-polypropylene-start-up-petrochina-guangdong/",
   "path": "newsroom/press-releases/2023-press-releases/grace-marks-another-asia-polypropylene-start-up-petrochina-guangdong",
-  "timestamp": "2026-08-09T08:58:34.518Z",
+  "timestamp": "2026-08-09T12:05:04.364Z",
   "title": "Grace Marks Another Asia Polypropylene Start-Up Milestone with PetroChina GuangDong",
   "pageType": "default",
   "blocks": [
     "hero-banner"
   ],
   "blocksLeftInPlace": [],
-  "pageMetadata": [],
+  "pageMetadata": [
+    "breadcrumb"
+  ],
   "hasForm": false
 }

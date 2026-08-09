@@ -3,10 +3,11 @@
 The repeatable process for migrating a grace.com page family to EDS. Insights (165) and newsroom
 (28) are complete and validated with this loop; every other family follows the same steps.
 Companion docs: `MASTER-IMPORTER-STRATEGY.md` (architecture deep-dive), `component-library.json`
-(the catalog), `backups/README.md` (per-set frozen bundles). Memory notes: `console-error-sweep-validation`,
+(the catalog), `backups/README.md` (per-set frozen bundles), `block-intelligence.json` (reference
+report → template/block↔URL index; see §2). Memory notes: `console-error-sweep-validation`,
 `breadcrumb-url-derived`, `post-meta-is-metadata`, `parser-matcher-precision`, `insights-video-overlay`,
 `visual-parity-completion-standard`, `importer-bundle-backups`, `hero-banner-name-fix`,
-`authored-option-and-emits`.
+`authored-option-and-emits`, `block-intelligence-and-richest-rep`.
 
 **Two hard rules from experience — read these first:**
 1. **Never claim a set "done" without the visual-parity gate (§4a): 3+ full-page side-by-side
@@ -124,8 +125,28 @@ Key guarantees:
 1. **SCOPE & GROUP** — from the sitemap (`https://grace.com/sitemap.xml`, 470 URLs), take the
    family's sub-tree; group by URL depth/pattern into **template clusters** (near-identical pages
    share a template, e.g. newsroom press-releases, leadership bios).
-2. **ANALYZE a representative page** per cluster — fetch source, identify sections + blocks against
-   the catalog. Note new blocks / new page-type.
+2. **ANALYZE the RICHEST page per cluster (MANDATE).** The representative page MUST be the one with
+   the MAXIMUM number of distinct blocks/components in the cluster — NOT a random or first page. The
+   importer is extended once against that superset, so every simpler page in the cluster is then
+   covered automatically; picking a thin page means the rich page's block types get discovered late
+   (mid-bulk) and break. TWO ways to find it, use both:
+   - **Block-intelligence index (start here).** `reference/front-end-report-gracev1.html` is an
+     offline audit of the WHOLE site → parsed into `tools/importer/block-intelligence.json` by
+     `build-block-intelligence.py`. It gives 18 page **templates** (name → canonical example URL +
+     "N pages match") and 61 **blocks** (name → page-type badge + example URL). The template/block
+     example URLs ARE richest representatives. Look up a page:
+     `python3 tools/importer/block-intelligence-lookup.py <url>` (predicts template + likely blocks)
+     or `… --type "Product Detail"` (the exact block set for a page-type) or `… --templates` (all
+     templates by match-count). This tells you which blocks to expect BEFORE you fetch anything.
+   - **Confirm live.** Then fetch the candidate sources and rank by distinct-block count
+     (`curl … | grep -oE` the block-class signatures) to pick the true richest page (plus any page
+     carrying a block the top one lacks — the goal is a page-set whose UNION covers all block types).
+   Then identify sections + blocks against the catalog and note new blocks / new page-type.
+   ⚠️ **Beware JS-hydrated bodies.** Some pages (e.g. product CATEGORY-HUB pages like
+   `products/synthetic-silicas`) render their main column via client JS; the importer's headless
+   capture (`domcontentloaded` fallback) serialized BEFORE hydration → body dropped, file ~1.6 KB,
+   console-sweep still 0 (nothing broke, just empty). Detect by BYTE SIZE (a hub at 1.6 KB vs a
+   detail page at 6–9 KB) — the richest-representative mandate surfaces this immediately.
 3. **EXTEND the importer** — add page-type dispatch if the shape is new; add/adjust catalog
    selectors + parsers; reuse existing blocks wherever possible.
 4. **REBUNDLE** — `bash …/aem-import-bundle.sh --importjs tools/importer/import-grace-master.js`.
@@ -215,7 +236,7 @@ the 3+ visual comparisons are the GATE.
 | newsroom | 28 | 28 ✅ | 26 press-releases (default path + Hero (banner) + URL breadcrumb) + 2 landing (hero + year-accordion + featured cards) — DONE |
 | industries | 102 | 8 | deep (depth 2-5): landing → application → detail; most varied |
 | about-grace | 39 | 8 | section pages + ~30 leadership bios (person-profile template) |
-| products | 36 | 5 | product detail pages, mostly flat depth-2 |
+| products | 36 | 5 | 34 flat depth-2. TWO sub-templates: server-rendered DETAIL pages (ludox/davisil — migrate fine) vs JS-hydrated CATEGORY-HUB pages (synthetic-silicas, adsorbents, catalysts, fine-chemicals, product-stewardship, quality-management — body captured EMPTY, ~1.6KB, needs a hydration-wait fix) |
 | campaign | 17 | 2 | flat campaign/landing pages |
 | forms | 15 | 1 | DEFERRED → AEM Adaptive Forms pass |
 | vendor-suppliers | 12 | 0 | — |
@@ -230,16 +251,47 @@ Recommended order (ROI): ~~newsroom~~ ✅ → **leadership bios** (about-grace, 
 **Newsroom template notes (reference for similar default-path families):** press releases take the
 **default path** (`buildDefaultPage`) — no new page-type needed; the whole body (dateline, quotes,
 About-boilerplates, forward-looking statement, trademark, contact) is preserved as default content.
-The only work was the hero. Three fixes landed here that generalize:
-1. **Hero parser emits `Hero (banner)`** (was `Hero-Banner` → `blocks/hero-banner/` 404). The
-   `banner` variant styles the dark-blue band AND auto-derives the breadcrumb from the URL. Fixed
-   13 already-imported non-newsroom pages too (`git grep 'class="hero-banner"'`).
-2. **Hero `<p>`-title → `<h1>`.** Some heroes put the title in a bare `.hero__heading > p` (no
-   h-tag; 2025 PRs) → parser promotes it to `<h1>` or it shrinks to 14px body text.
-3. **grace-cleanup strips the authored `.cmp-breadcrumb`** — the source ships one, and we derive our
-   own from the URL; keeping both rendered a duplicate numbered list above the hero (13 of 26 PRs).
-Plus a RUNTIME CSS fix: no-image banner band was near-black (a `::before` gradient meant for
-photo heroes) → solid `#004990` for `.hero.banner.no-image` in `blocks/hero/hero.css`.
+All the work was the hero — see the "Hero (banner) recipe" below. Newsroom = 26 PRs (of which
+4 gradient heroes, 12 breadcrumb-off) + 2 landing pages. 0 console errors; 3-sample visual gate passed.
+
+### Hero (banner) recipe — the accumulated, PER-SOURCE truth (reference for every family)
+
+The grace.com short page banner is `hero__section hero-reduce-height`. It is **NOT one fixed style** —
+read each source page and emit accordingly. Parser: `parsers/hero-banner.js`; styles: `blocks/hero/hero.css`.
+
+1. **Block name (importer).** Emit `Hero (banner)` → class `hero banner` → loads `blocks/hero/`. NEVER
+   `Hero-Banner` (→ `blocks/hero-banner/` 404). Fixed 13 non-newsroom pages too (`git grep 'class="hero-banner"'`).
+2. **Background — detect per source (importer + CSS).** Source has TWO flavours, distinguished by the
+   source hero's `gradient` class:
+   - no `gradient` → **solid blue** `#004990` (`.hero.banner.no-image`; suppress the base `::before`
+     overlay or it goes near-black). e.g. PARAGON, braskem.
+   - `gradient` → solid blue **+ a left→right black overlay** (`linear-gradient(to right,#000,transparent)`).
+     Parser emits the `gradient` OPTION → `Hero (banner, gradient)` → `.hero.banner.no-image.gradient::before`
+     re-enables the overlay. e.g. molecule-one, ART. (Only for the no-image band; image heroes carry their photo.)
+3. **Title `<p>`→`<h1>` (importer).** Some heroes put the title in a bare `.hero__heading > p` (no h-tag;
+   2025 PRs) → parser promotes it to `<h1>`, else it shrinks to 14px body text.
+4. **min-height = 178px (CSS), NOT 100px.** The source floor is `min-height:100px`, but the intended
+   banner look is modeled on `about-grace/this-is-grace` where breadcrumb + single-line title fill it
+   to ~178px. Do NOT drop it to 100px (a mid-session mistake — short-title banners are meant to be 178px).
+   Content taller than that grows the band naturally (padding 68px top / 30px bottom at all viewports).
+5. **Body spacing (RUNTIME CSS).** Default-path pages put hero + body in ONE `.section.hero-container`
+   (margin 0), so the body wrapper is flush to the band and the last line butts the footer. Source leaves
+   **50px on BOTH ends** → `main > .section.hero-container > .hero-wrapper:has(.hero.banner) +
+   .default-content-wrapper { margin: var(--spacing-l) 0 }`. Scoped to `.hero.banner` so insights/sidebar unaffected.
+6. **Centered body subhead (RUNTIME CSS).** The italic `<h3><em>` subhead (e.g. "Novel AI Application…")
+   is `text-align:center` in source (markdown drops the inline style) → re-center via
+   `…+ .default-content-wrapper > h3:has(> em:only-child) { text-align:center }`.
+
+### Breadcrumb — ON by default + `breadcrumb: false` metadata (per source)
+
+Breadcrumb is auto-derived from the URL by the hero `banner` variant and shows BY DEFAULT. Two moving parts:
+- **grace-cleanup strips the authored source `.cmp-breadcrumb`** (else it renders a duplicate numbered
+  list above the hero — the source ships one; we derive our own).
+- **Per-page opt-out:** some source pages have NO breadcrumb (e.g. 2025 PRs). The importer captures
+  `params.sourceHadBreadcrumb` **before cleanup strips it**, and `buildDefaultPage` emits a
+  `breadcrumb: false` Metadata row on banner-hero pages whose source lacked one. `blocks/hero/hero.js`
+  reads `getMetadata('breadcrumb')` and skips the breadcrumb only when it's `false`/`no`/`off`. So:
+  source has breadcrumb → shows; source lacks it → `breadcrumb:false` → hidden. Faithful per page.
 
 ---
 
@@ -250,6 +302,10 @@ photo heroes) → solid `#004990` for `.hero.banner.no-image` in `blocks/hero/he
 - Parallel: split URLs into chunks, run ≤4 concurrent `run-bulk-import.js` processes (see prior sessions' pattern).
 - Regenerate catalog after JSON edit: `python3 tools/importer/gen-catalog-module.py`
 - Console sweep: `WORKSPACE_PATH=/workspace/current node tools/importer/console-error-sweep.mjs <subdir>`
+- Block-intelligence (which blocks a page needs, from the reference report):
+  `python3 tools/importer/build-block-intelligence.py` (regenerate `block-intelligence.json` from
+  `reference/front-end-report-gracev1.html`) · `python3 tools/importer/block-intelligence-lookup.py <url>`
+  (predict template + blocks) · `… --type "<PageType>"` (exact block set) · `… --templates` (all, by match-count).
 - Quality gate (before "done"): `npm run lint` · `node tools/quality/breakpoint-check.mjs` ·
   `npm run test:a11y <url>` · confirm at localhost:3000.
 
@@ -285,5 +341,8 @@ if the live bundle has already moved on, recover the earlier set's bundle from g
 <sha>:tools/importer/import-grace-master.bundle.js`) rather than copying the current one.
 
 Snapshotted so far: `backups/insights/` (pre-newsroom bundle, from git HEAD — no `.cmp-breadcrumb`
-strip / no hero `<p>`→h1) · `backups/newsroom/` (working bundle with those fixes). See
-`backups/README.md` and memory `importer-bundle-backups`.
+strip / no hero `<p>`→h1 / no gradient detection) · `backups/newsroom/` (current bundle with ALL the
+hero-recipe fixes: `Hero (banner[, gradient])`, `<p>`→h1, breadcrumb-metadata, `.cmp-breadcrumb` strip).
+Re-snapshot `backups/newsroom/` whenever the shared bundle gains more newsroom-affecting fixes (it was
+refreshed after the gradient + breadcrumb-metadata + spacing work). See `backups/README.md` and memory
+`importer-bundle-backups`.

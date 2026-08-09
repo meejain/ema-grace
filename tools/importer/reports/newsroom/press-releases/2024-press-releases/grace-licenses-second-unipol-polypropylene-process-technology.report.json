@@ -2,13 +2,15 @@
   "status": "success",
   "url": "https://grace.com/newsroom/press-releases/2024-press-releases/grace-licenses-second-unipol-polypropylene-process-technology/",
   "path": "newsroom/press-releases/2024-press-releases/grace-licenses-second-unipol-polypropylene-process-technology",
-  "timestamp": "2026-08-09T08:55:58.950Z",
+  "timestamp": "2026-08-09T12:02:21.413Z",
   "title": "Grace Licenses Second UNIPOL® Polypropylene Process Technology Reactor to China Coal Shaanxi Energy & Chemical Group Co., Ltd.",
   "pageType": "default",
   "blocks": [
     "hero-banner"
   ],
   "blocksLeftInPlace": [],
-  "pageMetadata": [],
+  "pageMetadata": [
+    "breadcrumb"
+  ],
   "hasForm": false
 }

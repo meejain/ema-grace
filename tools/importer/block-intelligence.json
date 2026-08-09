@@ -1,0 +1,613 @@
+{
+  "_meta": {
+    "source": "reference/front-end-report-gracev1.html",
+    "purpose": "Predict page-template + expected blocks for any URL to migrate. Template/block example URLs are the RICHEST representatives (playbook §2 mandate).",
+    "blockCount": 61,
+    "templateCount": 18
+  },
+  "templates": {
+    "Insight Article": {
+      "url": "https://grace.com/insights/5-Benefits-Of-Leveraging-Machine-Learning-In-PD-Workflows/",
+      "matchCount": 164,
+      "note": ""
+    },
+    "Solution Detail": {
+      "url": "https://grace.com/industries/agriculture/agriculture-cdmo/",
+      "matchCount": 91,
+      "note": ""
+    },
+    "Product Detail": {
+      "url": "https://grace.com/products/TRISYL-XGE-Catalyst/",
+      "matchCount": 54,
+      "note": ""
+    },
+    "Press Release": {
+      "url": "https://grace.com/newsroom/press-releases/2021-press-releases/art-icr450-technology-wins-hydrocarbon-processing-award/",
+      "matchCount": 28,
+      "note": ""
+    },
+    "Location Detail": {
+      "url": "https://grace.com/about-grace/locations/aiken/",
+      "matchCount": 20,
+      "note": ""
+    },
+    "Campaign Form Landing": {
+      "url": "https://grace.com/campaign/chromatography/",
+      "matchCount": 16,
+      "note": ""
+    },
+    "Campaign Landing": {
+      "url": "https://grace.com/ausbildung/",
+      "matchCount": 16,
+      "note": ""
+    },
+    "Solution Content Page": {
+      "url": "https://grace.com/industries/refining-technologies/hydroprocessing/resid-hydrocracking-solutions/",
+      "matchCount": 16,
+      "note": ""
+    },
+    "Legal Policy Page": {
+      "url": "https://grace.com/compliance/compliance-gdpr-de/",
+      "matchCount": 15,
+      "note": ""
+    },
+    "Faq Accordion Page": {
+      "url": "https://grace.com/vendor-suppliers/sap-ariba-support/sap-ariba-faqs/sap-ariba-supplier-enablement-faqs/",
+      "matchCount": 12,
+      "note": ""
+    },
+    "History Content Page": {
+      "url": "https://grace.com/about-grace/our-history/",
+      "matchCount": 11,
+      "note": ""
+    },
+    "Profile Detail": {
+      "url": "https://grace.com/about-grace/leadership-team/anthony-yoo/",
+      "matchCount": 9,
+      "note": ""
+    },
+    "Campaign App Download": {
+      "url": "https://grace.com/campaign/g-force/",
+      "matchCount": 7,
+      "note": "G-Force employee app microsite (single captured example)"
+    },
+    "Campaign Catalagram": {
+      "url": "https://grace.com/campaign/catalagram/",
+      "matchCount": 1,
+      "note": ""
+    },
+    "Event Workshop Page": {
+      "url": "https://grace.com/ap-workshops-2024/",
+      "matchCount": 1,
+      "note": ""
+    },
+    "Homepage": {
+      "url": "https://grace.com/",
+      "matchCount": 1,
+      "note": ""
+    },
+    "Locations Directory": {
+      "url": "https://grace.com/about-grace/locations/",
+      "matchCount": 1,
+      "note": ""
+    },
+    "Solution Detail Rich": {
+      "url": "https://grace.com/industries/biofuels/biomass-based-diesel/renewable-diesel/",
+      "matchCount": 0,
+      "note": "Content-rich solution variant (rolls up with solution-detail)"
+    }
+  },
+  "blocks": {
+    "Header Mega Menu": {
+      "badges": [
+        "Homepage"
+      ],
+      "url": "https://grace.com/"
+    },
+    "Hero Full Width": {
+      "badges": [
+        "Homepage"
+      ],
+      "url": "https://grace.com/"
+    },
+    "Hero Banner": {
+      "badges": [
+        "Industry Landing"
+      ],
+      "url": "https://grace.com/about-grace/this-is-grace/"
+    },
+    "Hero Campaign Immersive": {
+      "badges": [
+        "Career Landing"
+      ],
+      "url": "https://grace.com/campaign/chromatography"
+    },
+    "Hero Event": {
+      "badges": [
+        "Event Landing"
+      ],
+      "url": "https://grace.com/campaign/emea-fcc-workshop/"
+    },
+    "Hero Product": {
+      "badges": [
+        "Product Detail"
+      ],
+      "url": "https://grace.com/products/ludox/"
+    },
+    "Cards Product Grid": {
+      "badges": [
+        "Industry Landing"
+      ],
+      "url": "https://grace.com/industries/plastics-and-polymers/"
+    },
+    "Cards Featured Content": {
+      "badges": [
+        "Insights Listing"
+      ],
+      "url": "https://grace.com/industries/plastics-and-polymers/"
+    },
+    "Cards Category Grid": {
+      "badges": [
+        "Industry Landing"
+      ],
+      "url": "https://grace.com"
+    },
+    "Cards Image Text Grid": {
+      "badges": [
+        "Information Landing"
+      ],
+      "url": "https://grace.com/about-grace/community/"
+    },
+    "Cards Profile Grid": {
+      "badges": [
+        "Profile Listing"
+      ],
+      "url": "https://grace.com/about-grace/leadership-team/"
+    },
+    "Cards Location Grid": {
+      "badges": [
+        "Location Listing"
+      ],
+      "url": "https://grace.com/about-grace/locations/"
+    },
+    "Cards Benefits Grid": {
+      "badges": [
+        "Campaign"
+      ],
+      "url": "https://grace.com/campaign/ludox-colloidal-silica-pic/"
+    },
+    "Cards Contact Options": {
+      "badges": [
+        "Contact"
+      ],
+      "url": "https://grace.com/contact-us/"
+    },
+    "Cards Icon Grid": {
+      "badges": [
+        "Industry Detail"
+      ],
+      "url": "https://grace.com/industries/plastics-and-polymers/polypropylene-catalysts/"
+    },
+    "Cards Related Articles": {
+      "badges": [
+        "Article Detail"
+      ],
+      "url": "https://grace.com/insights/colloidal-silica-and-corrosion-resistance---stabilizing-a-safer-/"
+    },
+    "Cards Solution Grid": {
+      "badges": [
+        "Product Detail"
+      ],
+      "url": "https://grace.com/products/unipol-unippac-process-control-software/"
+    },
+    "Columns Image Left": {
+      "badges": [
+        "Article Detail"
+      ],
+      "url": "https://grace.com/about-grace/this-is-grace/"
+    },
+    "Columns Image Right": {
+      "badges": [
+        "Article Detail"
+      ],
+      "url": "https://grace.com/about-grace/this-is-grace/"
+    },
+    "Columns Profile Detail": {
+      "badges": [
+        "Profile Detail"
+      ],
+      "url": "https://grace.com/about-grace/leadership-team/anthony-yoo/"
+    },
+    "Columns Location Detail": {
+      "badges": [
+        "Location Detail"
+      ],
+      "url": "https://grace.com/about-grace/locations/aiken/"
+    },
+    "Columns History Item": {
+      "badges": [
+        "Information Detail"
+      ],
+      "url": "https://grace.com/about-grace/our-history/"
+    },
+    "Columns Checklist": {
+      "badges": [
+        "Career Landing"
+      ],
+      "url": "https://grace.com/ausbildung/"
+    },
+    "Columns App Promo": {
+      "badges": [
+        "Campaign"
+      ],
+      "url": "https://grace.com/campaign/g-force/"
+    },
+    "Columns Horizontal Teaser": {
+      "badges": [
+        "Product Detail"
+      ],
+      "url": "https://grace.com/products/ludox/"
+    },
+    "Columns Image Teaser": {
+      "badges": [
+        "Product Detail"
+      ],
+      "url": "https://grace.com/products/synthetic-silicas/classification/"
+    },
+    "Columns Brochure Promo": {
+      "badges": [
+        "Product Detail"
+      ],
+      "url": "https://grace.com/products/shieldex/"
+    },
+    "Columns Horizontal Teaser Featured": {
+      "badges": [
+        "Industry Landing"
+      ],
+      "url": "https://grace.com/industries/agriculture/"
+    },
+    "Accordion Faq": {
+      "badges": [
+        "Campaign"
+      ],
+      "url": "https://grace.com/campaign/curtis-bay-FUSRAP/"
+    },
+    "Accordion Nested": {
+      "badges": [
+        "Information Detail"
+      ],
+      "url": "https://grace.com/people-and-careers/benefits/us-employee-benefits-summary/"
+    },
+    "Table Link List": {
+      "badges": [
+        "Information Landing"
+      ],
+      "url": "https://grace.com/about-grace/sustainability/"
+    },
+    "Table Three Column": {
+      "badges": [
+        "Information Detail"
+      ],
+      "url": "https://grace.com/compliance/compliance-seveso-directive-iii-worms-de/"
+    },
+    "Table Data Grid": {
+      "badges": [
+        "Information Detail"
+      ],
+      "url": "https://grace.com/cookie-policy/"
+    },
+    "Table Contact Matrix": {
+      "badges": [
+        "Contact"
+      ],
+      "url": "https://grace.com/forms/contact-us-customer-service/"
+    },
+    "Table Product Comparison": {
+      "badges": [
+        "Product Detail"
+      ],
+      "url": "https://grace.com/industries/food-beverage/beer/"
+    },
+    "Table Two Column Content": {
+      "badges": [
+        "Article Detail"
+      ],
+      "url": "https://grace.com/products/davisil/"
+    },
+    "Featured Product Selector": {
+      "badges": [
+        "Industry Detail"
+      ],
+      "url": "https://grace.com/industries/coatings/wood/"
+    },
+    "Carousel Insights": {
+      "badges": [
+        "Insights Listing"
+      ],
+      "url": "https://grace.com/insights/"
+    },
+    "Banner Cta": {
+      "badges": [
+        "Industry Detail"
+      ],
+      "url": "https://grace.com/industries/refining-technologies/value-creation/sustainability/"
+    },
+    "Banner Contact Split": {
+      "badges": [
+        "Information Landing"
+      ],
+      "url": "https://grace.com/compliance/"
+    },
+    "Banner Resource Download": {
+      "badges": [
+        "Resource Download"
+      ],
+      "url": "https://grace.com/industries/refining-technologies/fcc-catalyst-application/maximize-propylene/"
+    },
+    "Quote Cta": {
+      "badges": [
+        "Industry Detail"
+      ],
+      "url": "https://grace.com/industries/refining-technologies/value-creation/sustainability/"
+    },
+    "Quote Highlight": {
+      "badges": [
+        "Industry Detail"
+      ],
+      "url": "https://grace.com/industries/refining-technologies/value-creation/technical-service-expertise/"
+    },
+    "Quote Testimonial": {
+      "badges": [
+        "Article Detail"
+      ],
+      "url": "https://grace.com/insights/grace-silica-goes-into-promegas-purification-kits/"
+    },
+    "Video Overlay": {
+      "badges": [
+        "Information Landing"
+      ],
+      "url": "https://grace.com/about-grace/this-is-grace/"
+    },
+    "Video Grid": {
+      "badges": [
+        "Career Landing"
+      ],
+      "url": "https://grace.com/ausbildung/"
+    },
+    "Form Contact Simple": {
+      "badges": [
+        "Campaign"
+      ],
+      "url": "https://grace.com/campaign/ludox-colloidal-silica-pic/"
+    },
+    "Form Lead Generation": {
+      "badges": [
+        "Contact"
+      ],
+      "url": "https://grace.com/forms/contact-us-product-and-services/"
+    },
+    "Form Modal Download": {
+      "badges": [
+        "Product Detail"
+      ],
+      "url": "https://grace.com/products/syloid-mx-silica-series/"
+    },
+    "Form Newsletter Signup": {
+      "badges": [
+        "Newsletter Signup"
+      ],
+      "url": "https://grace.com/forms/coatings-newsletter-sign-up/"
+    },
+    "Form Multi Step": {
+      "badges": [
+        "Contact"
+      ],
+      "url": "https://grace.com/forms/contact-us-corporate/"
+    },
+    "Map Embedded": {
+      "badges": [
+        "Location Detail"
+      ],
+      "url": "https://grace.com/industries/pharmaceutical-solutions/fine-chemicals/facilities/south-haven/"
+    },
+    "Social Share": {
+      "badges": [
+        "Article Detail"
+      ],
+      "url": "https://grace.com/insights/4-ways-cdmos-help-nutraceutical-companies-grow/"
+    },
+    "Social Follow": {
+      "badges": [
+        "Article Detail"
+      ],
+      "url": "https://grace.com/insights/ludox-colloidal-silica-plays-critical-role-customized-catalysts/"
+    },
+    "Pagination Numbered": {
+      "badges": [
+        "Insights Listing"
+      ],
+      "url": "https://grace.com/insights/"
+    },
+    "Custom Widget Contact Panel": {
+      "badges": [
+        "Contact"
+      ],
+      "url": "https://grace.com/products/synthetic-silicas/classification/"
+    },
+    "Custom Widget Document Viewer": {
+      "badges": [
+        "Campaign"
+      ],
+      "url": "https://grace.com/campaign/grace-essential-articles-vol-1/"
+    },
+    "Custom Widget Search Filter": {
+      "badges": [
+        "Insights Listing"
+      ],
+      "url": "https://grace.com/insights/"
+    },
+    "Custom Widget Search Results": {
+      "badges": [
+        "Search Results"
+      ],
+      "url": "https://grace.com/search-results/?&amp;page=1"
+    },
+    "Custom Widget News Archive": {
+      "badges": [
+        "Newsroom"
+      ],
+      "url": "https://grace.com/industries/refining-technologies/catalagram-archive/"
+    },
+    "Footer Standard": {
+      "badges": [
+        "Homepage"
+      ],
+      "url": "https://grace.com/"
+    }
+  },
+  "pageTypeToBlocks": {
+    "Article Detail": [
+      "Cards Related Articles",
+      "Columns Image Left",
+      "Columns Image Right",
+      "Quote Testimonial",
+      "Social Follow",
+      "Social Share",
+      "Table Two Column Content"
+    ],
+    "Campaign": [
+      "Accordion Faq",
+      "Cards Benefits Grid",
+      "Columns App Promo",
+      "Custom Widget Document Viewer",
+      "Form Contact Simple"
+    ],
+    "Career Landing": [
+      "Columns Checklist",
+      "Hero Campaign Immersive",
+      "Video Grid"
+    ],
+    "Contact": [
+      "Cards Contact Options",
+      "Custom Widget Contact Panel",
+      "Form Lead Generation",
+      "Form Multi Step",
+      "Table Contact Matrix"
+    ],
+    "Event Landing": [
+      "Hero Event"
+    ],
+    "Homepage": [
+      "Footer Standard",
+      "Header Mega Menu",
+      "Hero Full Width"
+    ],
+    "Industry Detail": [
+      "Banner Cta",
+      "Cards Icon Grid",
+      "Featured Product Selector",
+      "Quote Cta",
+      "Quote Highlight"
+    ],
+    "Industry Landing": [
+      "Cards Category Grid",
+      "Cards Product Grid",
+      "Columns Horizontal Teaser Featured",
+      "Hero Banner"
+    ],
+    "Information Detail": [
+      "Accordion Nested",
+      "Columns History Item",
+      "Table Data Grid",
+      "Table Three Column"
+    ],
+    "Information Landing": [
+      "Banner Contact Split",
+      "Cards Image Text Grid",
+      "Table Link List",
+      "Video Overlay"
+    ],
+    "Insights Listing": [
+      "Cards Featured Content",
+      "Carousel Insights",
+      "Custom Widget Search Filter",
+      "Pagination Numbered"
+    ],
+    "Location Detail": [
+      "Columns Location Detail",
+      "Map Embedded"
+    ],
+    "Location Listing": [
+      "Cards Location Grid"
+    ],
+    "Newsletter Signup": [
+      "Form Newsletter Signup"
+    ],
+    "Newsroom": [
+      "Custom Widget News Archive"
+    ],
+    "Product Detail": [
+      "Cards Solution Grid",
+      "Columns Brochure Promo",
+      "Columns Horizontal Teaser",
+      "Columns Image Teaser",
+      "Form Modal Download",
+      "Hero Product",
+      "Table Product Comparison"
+    ],
+    "Profile Detail": [
+      "Columns Profile Detail"
+    ],
+    "Profile Listing": [
+      "Cards Profile Grid"
+    ],
+    "Resource Download": [
+      "Banner Resource Download"
+    ],
+    "Search Results": [
+      "Custom Widget Search Results"
+    ]
+  },
+  "pathPrefixToTemplates": {
+    "(home)": [
+      "Homepage"
+    ],
+    "about-grace": [
+      "History Content Page",
+      "Location Detail",
+      "Locations Directory",
+      "Profile Detail"
+    ],
+    "ap-workshops-2024": [
+      "Event Workshop Page"
+    ],
+    "ausbildung": [
+      "Campaign Landing"
+    ],
+    "campaign": [
+      "Campaign App Download",
+      "Campaign Catalagram",
+      "Campaign Form Landing"
+    ],
+    "compliance": [
+      "Legal Policy Page"
+    ],
+    "industries": [
+      "Solution Content Page",
+      "Solution Detail",
+      "Solution Detail Rich"
+    ],
+    "insights": [
+      "Insight Article"
+    ],
+    "newsroom": [
+      "Press Release"
+    ],
+    "products": [
+      "Product Detail"
+    ],
+    "vendor-suppliers": [
+      "Faq Accordion Page"
+    ]
+  }
+}
