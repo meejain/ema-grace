@@ -1,0 +1,17 @@
+{
+  "status": "success",
+  "url": "https://grace.com/products/metallocenes/",
+  "path": "products/metallocenes",
+  "timestamp": "2026-08-09T17:03:30.204Z",
+  "title": "Metallocenes",
+  "pageType": "default",
+  "blocks": [
+    "hero-banner",
+    "cards-featured-content"
+  ],
+  "blocksLeftInPlace": [],
+  "pageMetadata": [
+    "breadcrumb"
+  ],
+  "hasForm": false
+}

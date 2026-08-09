@@ -1,9 +1,9 @@
 {
   "status": "success",
-  "url": "https://grace.com/products/adsorbents/",
-  "path": "products/adsorbents",
-  "timestamp": "2026-08-09T17:02:34.956Z",
-  "title": "Adsorbents",
+  "url": "https://grace.com/products/catalysts/",
+  "path": "products/catalysts",
+  "timestamp": "2026-08-09T17:03:30.004Z",
+  "title": "Catalysts",
   "pageType": "sidebar",
   "pageMetadata": [
     "template",
@@ -11,7 +11,7 @@
     "contactus-tagline"
   ],
   "sidebarNav": true,
-  "contentNodes": 4,
+  "contentNodes": 3,
   "contactSplitBanner": false,
   "blocks": [],
   "blocksLeftInPlace": [],

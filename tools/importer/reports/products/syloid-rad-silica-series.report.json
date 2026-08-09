@@ -1,0 +1,20 @@
+{
+  "status": "success",
+  "url": "https://grace.com/products/syloid-rad-silica-series/",
+  "path": "products/syloid-rad-silica-series",
+  "timestamp": "2026-08-09T17:03:27.843Z",
+  "title": "SYLOID® RAD Silica Series",
+  "pageType": "default",
+  "blocks": [
+    "hero-banner",
+    "columns-horizontal-teaser",
+    "cards-featured-content",
+    "social-follow",
+    "banner-contact-split",
+    "table-two-column-content",
+    "table-two-column-content"
+  ],
+  "blocksLeftInPlace": [],
+  "pageMetadata": [],
+  "hasForm": true
+}

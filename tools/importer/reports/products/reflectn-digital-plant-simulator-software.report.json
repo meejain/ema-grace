@@ -1,0 +1,20 @@
+{
+  "status": "success",
+  "url": "https://grace.com/products/reflectn-digital-plant-simulator-software/",
+  "path": "products/reflectn-digital-plant-simulator-software",
+  "timestamp": "2026-08-09T17:07:08.602Z",
+  "title": "REFLECTN™ Digital Plant Simulator Software",
+  "pageType": "default",
+  "blocks": [
+    "hero-banner",
+    "columns-horizontal-teaser",
+    "cards-featured-content",
+    "social-follow",
+    "banner-contact-split",
+    "table-two-column-content",
+    "table-two-column-content"
+  ],
+  "blocksLeftInPlace": [],
+  "pageMetadata": [],
+  "hasForm": true
+}

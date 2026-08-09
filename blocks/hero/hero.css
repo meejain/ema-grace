@@ -316,6 +316,26 @@
   display: none;
 }
 
+/* IMAGE banner (has a background photo, i.e. NOT .no-image): the source overlays a left→right
+   dark gradient on the photo so the white title/breadcrumb stay legible (e.g. silsol's light lab
+   photo washed out the title without it). The image wrapper (div:first-child) must stay absolute /
+   full-bleed at z-index 0 (base .hero > div:first-child rule) — do NOT set it position:relative,
+   or it drops out of the absolute flow and shrinks to an inline flex item beside the text column
+   (the "image on the left, title crammed right" regression). Instead re-enable the hero's own
+   ::after (which .hero.banner::after hides for the solid blue no-image band) and paint the gradient
+   there at z-index 1: above the full-bleed image (z-index 0), below the text column (z-index 2). */
+/* stylelint-disable no-descending-specificity */
+.hero.banner:not(.no-image)::after,
+.hero.overlay:not(.no-image)::after {
+  content: '';
+  display: block;
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(to right, rgb(0 0 0 / 85%) 0%, rgb(0 0 0 / 15%) 100%);
+}
+
 /* Mirror the header nav container so the breadcrumb + title left edge aligns with
    the Grace logo. Source: content left edge at 100px within a 1240px band, so cap
    the column and inset it to match. z-index 2 keeps text above the ::before gradient. */
@@ -328,6 +348,7 @@
   margin: 0 auto;
   padding: 0 20px;
 }
+/* stylelint-enable no-descending-specificity */
 
 .hero.banner h1,
 .hero.overlay h1 {
@@ -359,6 +380,7 @@
 
 /* Content column: left-aligned, mirrors the header nav container so the heading
    aligns with the Grace logo; on desktop it insets 100px and caps at ~620px. */
+/* stylelint-disable-next-line no-descending-specificity */
 .hero.product > div:last-child {
   text-align: left;
   max-width: 1280px;

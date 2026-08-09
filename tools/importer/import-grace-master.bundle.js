@@ -17,6 +17,26 @@ var CustomImportScript = (() => {
     return to;
   };
   var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+  var __async = (__this, __arguments, generator) => {
+    return new Promise((resolve, reject) => {
+      var fulfilled = (value) => {
+        try {
+          step(generator.next(value));
+        } catch (e) {
+          reject(e);
+        }
+      };
+      var rejected = (value) => {
+        try {
+          step(generator.throw(value));
+        } catch (e) {
+          reject(e);
+        }
+      };
+      var step = (x) => x.done ? resolve(x.value) : Promise.resolve(x.value).then(fulfilled, rejected);
+      step((generator = generator.apply(__this, __arguments)).next());
+    });
+  };
 
   // tools/importer/import-grace-master.js
   var import_grace_master_exports = {};
@@ -3164,9 +3184,26 @@ var CustomImportScript = (() => {
     if (params && params.sourceHadBannerHero && params.sourceHadBreadcrumb === false) {
       pageMeta.push(["breadcrumb", "false"]);
     }
+    Array.from(main.querySelectorAll("table")).forEach((table) => {
+      if (table.closest("td, th")) return;
+      const firstRow = table.querySelector("tr");
+      const cols = firstRow ? firstRow.querySelectorAll("td, th").length : 0;
+      if (cols < 2) return;
+      const variant = cols >= 3 ? "three-column" : "two-column-content";
+      try {
+        parseRealTables(table, document, `Table (${variant})`);
+      } catch (e) {
+      }
+    });
     rewriteInternalLinks(main);
     WebImporter.rules.transformBackgroundImages(main, document);
     WebImporter.rules.adjustImageUrls(main, url, params.originalURL);
+    main.querySelectorAll('a[href*="scene7"], a[href*="/is/image/"]').forEach((a) => {
+      if (/<\/?[a-z][^>]*>/i.test(a.textContent || "")) a.textContent = "";
+    });
+    main.querySelectorAll("img[alt]").forEach((img) => {
+      if (/<\/?[a-z][^>]*>/i.test(img.getAttribute("alt") || "")) img.setAttribute("alt", "");
+    });
     main.appendChild(document.createElement("hr"));
     main.appendChild(buildMetadataBlock(document, pageMeta));
     if (unparsed.length) {
@@ -3185,6 +3222,49 @@ var CustomImportScript = (() => {
     };
   }
   var import_grace_master_default = {
+    // onLoad runs IN-PAGE (live DOM) before transform, and the runner awaits it. Two jobs, both
+    // fixing grace.com's client-side hydration (the raw HTML is a skeleton; JS builds the real
+    // content + applies inline background-images after load — the runner can serialize too early):
+    //   1. WAIT for hydration — poll until the main content region has real text (product
+    //      category-hub pages were captured EMPTY otherwise). Bounded; non-fatal on timeout.
+    //   2. INLINE background-images — grace heroes carry the photo as inline
+    //      `style="background-image:url(scene7…)"`, NOT an <img>, so the hero parser missed it and
+    //      emitted a plain band. Materialize each such bg-image as a real <img> inside its element
+    //      so the existing hero (and other) parsers pick it up.
+    onLoad: (_0) => __async(void 0, [_0], function* ({ document }) {
+      const deadline = Date.now() + 12e3;
+      const bodyReady = () => {
+        const el = document.querySelector("main, article, .root.responsivegrid");
+        return el && (el.textContent || "").replace(/\s+/g, " ").trim().length > 400;
+      };
+      while (!bodyReady() && Date.now() < deadline) {
+        yield new Promise((r) => {
+          setTimeout(r, 300);
+        });
+      }
+      yield new Promise((r) => {
+        setTimeout(r, 800);
+      });
+      document.querySelectorAll(".hero__heading, .hero__headings, .hero__content-inner").forEach((host) => {
+        [...host.childNodes].forEach((n) => {
+          if (n.nodeType === 3 && /<\/?[a-z][^>]*>/i.test(n.textContent || "")) n.remove();
+        });
+      });
+      document.querySelectorAll('[style*="background-image"]').forEach((el) => {
+        if (el.querySelector(":scope > img")) return;
+        const m = /background-image\s*:\s*url\((['"]?)([^'")]+)\1\)/i.exec(el.getAttribute("style") || "");
+        const src = m && m[2];
+        if (!src || /gradient/i.test(src)) return;
+        const img = document.createElement("img");
+        img.src = src;
+        let alt = (el.getAttribute("aria-label") || "").trim();
+        if (!alt) {
+          alt = (document.title || "").replace(/<[^>]*>/g, "").replace(/[<>]/g, "").trim();
+        }
+        img.setAttribute("alt", alt);
+        el.insertBefore(img, el.firstChild);
+      });
+    }),
     transform: (payload) => {
       const { document, url, params } = payload;
       params.sourceHadBreadcrumb = !!document.querySelector('.cmp-breadcrumb, nav[aria-label*="readcrumb" i]');

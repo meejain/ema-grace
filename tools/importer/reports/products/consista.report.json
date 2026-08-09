@@ -1,13 +1,12 @@
 {
   "status": "success",
-  "url": "https://grace.com/products/ludox/",
-  "path": "products/ludox",
-  "timestamp": "2026-08-09T16:59:48.932Z",
-  "title": "LUDOX®",
+  "url": "https://grace.com/products/consista/",
+  "path": "products/consista",
+  "timestamp": "2026-08-09T17:04:25.639Z",
+  "title": "CONSISTA®",
   "pageType": "default",
   "blocks": [
     "hero-banner",
-    "columns-horizontal-teaser",
     "cards-featured-content"
   ],
   "blocksLeftInPlace": [],

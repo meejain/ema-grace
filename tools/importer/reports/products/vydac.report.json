@@ -1,13 +1,12 @@
 {
   "status": "success",
-  "url": "https://grace.com/products/ludox/",
-  "path": "products/ludox",
-  "timestamp": "2026-08-09T16:59:48.932Z",
-  "title": "LUDOX®",
+  "url": "https://grace.com/products/vydac/",
+  "path": "products/vydac",
+  "timestamp": "2026-08-09T17:05:23.669Z",
+  "title": "VYDAC®",
   "pageType": "default",
   "blocks": [
     "hero-banner",
-    "columns-horizontal-teaser",
     "cards-featured-content"
   ],
   "blocksLeftInPlace": [],

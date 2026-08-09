@@ -1,0 +1,17 @@
+{
+  "status": "success",
+  "url": "https://grace.com/products/sylopol-cr-catalysts/",
+  "path": "products/sylopol-cr-catalysts",
+  "timestamp": "2026-08-09T17:06:10.948Z",
+  "title": "SYLOPOL® CR Catalysts",
+  "pageType": "default",
+  "blocks": [
+    "hero-banner",
+    "cards-featured-content"
+  ],
+  "blocksLeftInPlace": [],
+  "pageMetadata": [
+    "breadcrumb"
+  ],
+  "hasForm": false
+}

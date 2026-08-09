@@ -122,25 +122,30 @@ Key guarantees:
 
 ## 3. The per-family migration loop (repeat for each section)
 
-1. **SCOPE & GROUP** — from the sitemap (`https://grace.com/sitemap.xml`, 470 URLs), take the
-   family's sub-tree; group by URL depth/pattern into **template clusters** (near-identical pages
-   share a template, e.g. newsroom press-releases, leadership bios).
-2. **ANALYZE the RICHEST page per cluster (MANDATE).** The representative page MUST be the one with
-   the MAXIMUM number of distinct blocks/components in the cluster — NOT a random or first page. The
-   importer is extended once against that superset, so every simpler page in the cluster is then
-   covered automatically; picking a thin page means the rich page's block types get discovered late
-   (mid-bulk) and break. TWO ways to find it, use both:
-   - **Block-intelligence index (start here).** `reference/front-end-report-gracev1.html` is an
-     offline audit of the WHOLE site → parsed into `tools/importer/block-intelligence.json` by
-     `build-block-intelligence.py`. It gives 18 page **templates** (name → canonical example URL +
-     "N pages match") and 61 **blocks** (name → page-type badge + example URL). The template/block
-     example URLs ARE richest representatives. Look up a page:
-     `python3 tools/importer/block-intelligence-lookup.py <url>` (predicts template + likely blocks)
-     or `… --type "Product Detail"` (the exact block set for a page-type) or `… --templates` (all
-     templates by match-count). This tells you which blocks to expect BEFORE you fetch anything.
-   - **Confirm live.** Then fetch the candidate sources and rank by distinct-block count
-     (`curl … | grep -oE` the block-class signatures) to pick the true richest page (plus any page
-     carrying a block the top one lacks — the goal is a page-set whose UNION covers all block types).
+1. **SCOPE & GROUP — CLUSTER BY TEMPLATE FIRST (MANDATE).** From the sitemap
+   (`https://grace.com/sitemap.xml`, 470 URLs), take the family's sub-tree and split it into
+   **template clusters** by RENDERED LAYOUT, not by URL prefix. A single URL folder can hold
+   MULTIPLE templates: `/products/` contains BOTH rich *detail* pages (silsol, trisyl — hero +
+   feature sections) AND thin *category-hub* pages (synthetic-silicas, adsorbents — sidebar-nav +
+   product link-list). Treating them as one cluster is the mistake that broke the products pass.
+   Each cluster gets its OWN representative + its own analysis.
+2. **PICK THE RICHEST page per cluster BY LOOKING (MANDATE).** The representative MUST be the
+   visually richest page in the cluster — the one with the most DISTINCT, STYLED content sections —
+   NOT a random/first page. **Judge it VISUALLY: open candidates in the browser (or screenshot
+   them) and compare rendered pages.** Do NOT rank by an automated block count — BOTH a raw-HTML
+   `grep` of block-class signatures AND a rendered-DOM selector count MISLEAD: the raw HTML is a
+   pre-hydration skeleton full of script-island/chrome noise, and loose selectors over-count
+   structural wrappers, so a THIN hub (synthetic-silicas) scored 7–8 "blocks" while a genuinely
+   RICH detail page (silsol) scored 6. The count inverted reality; the eye did not. (Real example:
+   an early raw-HTML rank picked synthetic-silicas as "richest products page" — it is one of the
+   thinnest.) Use `block-intelligence.json` (below) only as a HINT for which blocks a page-type
+   *should* have, never as the richness ranker.
+   - **Block-intelligence index (hint only).** `reference/front-end-report-gracev1.html` → parsed to
+     `tools/importer/block-intelligence.json` by `build-block-intelligence.py`. 18 page **templates**
+     (name → canonical example URL + "N pages match") + 61 **blocks** (name → page-type badge +
+     example URL). Query: `python3 tools/importer/block-intelligence-lookup.py <url>` /
+     `… --type "Product Detail"` / `… --templates`. Tells you which blocks a page-type SHOULD have —
+     use to confirm coverage, not to rank richness.
    Then identify sections + blocks against the catalog and note new blocks / new page-type.
    ⚠️ **Beware JS-hydrated bodies.** Some pages (e.g. product CATEGORY-HUB pages like
    `products/synthetic-silicas`) render their main column via client JS; the importer's headless

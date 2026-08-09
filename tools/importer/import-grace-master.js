@@ -1460,9 +1460,42 @@ function buildDefaultPage(document, url, params) {
     pageMeta.push(['breadcrumb', 'false']);
   }
 
+  // Real data <table>s left in the body: markdown's round-trip turns each table's FIRST header
+  // cell into a BLOCK NAME (e.g. "Segment"/"Benefits" → <div class="segment"> → EDS 404). The
+  // insights path handles this per-table; the default path did not, so product detail pages with
+  // spec tables emitted phantom blocks. Convert every remaining real <table> into a proper
+  // `Table (variant)` block (variant by column count), matching the insights body-loop treatment.
+  Array.from(main.querySelectorAll('table')).forEach((table) => {
+    if (table.closest('td, th')) return; // nested cell table — leave to its parent
+    const firstRow = table.querySelector('tr');
+    const cols = firstRow ? firstRow.querySelectorAll('td, th').length : 0;
+    // CRITICAL: skip EDS block tables that createBlock already emitted. Those have a single-cell
+    // header row holding the block NAME (e.g. "Hero (banner)", "Accordion (faq)"). Re-wrapping them
+    // would turn real blocks into Table(data-grid). Genuine source data tables always have ≥2
+    // columns in their first row, so only sweep those.
+    if (cols < 2) return;
+    const variant = cols >= 3 ? 'three-column' : 'two-column-content';
+    try { parseRealTables(table, document, `Table (${variant})`); } catch (e) { /* leave in place */ }
+  });
+
   rewriteInternalLinks(main);
   WebImporter.rules.transformBackgroundImages(main, document);
   WebImporter.rules.adjustImageUrls(main, url, params.originalURL);
+
+  // Targeted cleanup: some grace heroes carry the heading as an ESCAPED-HTML string ("<h1>…</h1>"
+  // as text) which flows into the DM-image carrier-anchor's link text. Blank that anchor text so
+  // the round-trip doesn't emit a garbage "[<h1>…</h1>](scene7-url)" alt. Scoped to anchors whose
+  // href is a DM/scene7 image and whose text looks like escaped HTML — leaves real links alone.
+  main.querySelectorAll('a[href*="scene7"], a[href*="/is/image/"]').forEach((a) => {
+    if (/<\/?[a-z][^>]*>/i.test(a.textContent || '')) a.textContent = '';
+  });
+  // Same artifact on direct <img> (image heroes rendered as <img alt=…> not a carrier-anchor, e.g.
+  // silsol): the escaped-HTML "<h1>…</h1>" leaked into alt. Blank it — a hero photo is decorative
+  // (the real <h1> carries the meaning), so empty alt is correct and passes a11y.
+  main.querySelectorAll('img[alt]').forEach((img) => {
+    if (/<\/?[a-z][^>]*>/i.test(img.getAttribute('alt') || '')) img.setAttribute('alt', '');
+  });
+
   main.appendChild(document.createElement('hr'));
   main.appendChild(buildMetadataBlock(document, pageMeta));
 
@@ -1487,6 +1520,56 @@ function buildDefaultPage(document, url, params) {
 // TRANSFORM ENTRY POINT
 // ===========================================================================
 export default {
+  // onLoad runs IN-PAGE (live DOM) before transform, and the runner awaits it. Two jobs, both
+  // fixing grace.com's client-side hydration (the raw HTML is a skeleton; JS builds the real
+  // content + applies inline background-images after load — the runner can serialize too early):
+  //   1. WAIT for hydration — poll until the main content region has real text (product
+  //      category-hub pages were captured EMPTY otherwise). Bounded; non-fatal on timeout.
+  //   2. INLINE background-images — grace heroes carry the photo as inline
+  //      `style="background-image:url(scene7…)"`, NOT an <img>, so the hero parser missed it and
+  //      emitted a plain band. Materialize each such bg-image as a real <img> inside its element
+  //      so the existing hero (and other) parsers pick it up.
+  onLoad: async ({ document }) => {
+    // 1. hydration wait
+    const deadline = Date.now() + 12000;
+    const bodyReady = () => {
+      const el = document.querySelector('main, article, .root.responsivegrid');
+      return el && (el.textContent || '').replace(/\s+/g, ' ').trim().length > 400;
+    };
+    // eslint-disable-next-line no-await-in-loop
+    while (!bodyReady() && Date.now() < deadline) { await new Promise((r) => { setTimeout(r, 300); }); }
+    // small settle so late inline-style bg-images are applied
+    await new Promise((r) => { setTimeout(r, 800); });
+
+    // 1b. Some grace heroes leave a STRAY escaped-HTML text node in the heading wrapper — literally
+    // the string "<h1>Title</h1>" as text, ALONGSIDE the real <h1>. Left in place it becomes the
+    // hero image's carrier-anchor text (garbage alt like "<h1>TRISYL…</h1>"). Remove any text node
+    // whose content looks like escaped HTML tags so only the real elements remain.
+    document.querySelectorAll('.hero__heading, .hero__headings, .hero__content-inner').forEach((host) => {
+      [...host.childNodes].forEach((n) => {
+        if (n.nodeType === 3 && /<\/?[a-z][^>]*>/i.test(n.textContent || '')) n.remove();
+      });
+    });
+
+    // 2. materialize inline background-images as <img> (hero + any block)
+    document.querySelectorAll('[style*="background-image"]').forEach((el) => {
+      if (el.querySelector(':scope > img')) return;
+      const m = /background-image\s*:\s*url\((['"]?)([^'")]+)\1\)/i.exec(el.getAttribute('style') || '');
+      const src = m && m[2];
+      if (!src || /gradient/i.test(src)) return;
+      const img = document.createElement('img');
+      img.src = src;
+      // alt: prefer a clean aria-label; else a plain-text page title (strip any stray HTML/escapes
+      // some grace heroes carry an escaped "<h1>…</h1>" string — never use that as alt).
+      let alt = (el.getAttribute('aria-label') || '').trim();
+      if (!alt) {
+        alt = (document.title || '').replace(/<[^>]*>/g, '').replace(/[<>]/g, '').trim();
+      }
+      img.setAttribute('alt', alt);
+      // prepend so it reads as the section's leading image (hero image row)
+      el.insertBefore(img, el.firstChild);
+    });
+  },
   transform: (payload) => {
     const { document, url, params } = payload;
 

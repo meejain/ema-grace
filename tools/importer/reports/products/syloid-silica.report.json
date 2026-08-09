@@ -1,12 +1,13 @@
 {
   "status": "success",
-  "url": "https://grace.com/products/ludox/",
-  "path": "products/ludox",
-  "timestamp": "2026-08-09T16:59:48.932Z",
-  "title": "LUDOX®",
+  "url": "https://grace.com/products/syloid-silica/",
+  "path": "products/syloid-silica",
+  "timestamp": "2026-08-09T17:04:21.827Z",
+  "title": "SYLOID® Silica",
   "pageType": "default",
   "blocks": [
     "hero-banner",
+    "video-overlay",
     "columns-horizontal-teaser",
     "cards-featured-content"
   ],

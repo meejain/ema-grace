@@ -1,0 +1,20 @@
+{
+  "status": "success",
+  "url": "https://grace.com/products/syloid-xdp-f-silica/",
+  "path": "products/syloid-xdp-f-silica",
+  "timestamp": "2026-08-09T17:05:16.627Z",
+  "title": "SYLOID® XDP F Silica for Nutraceutical Formulators",
+  "pageType": "default",
+  "blocks": [
+    "hero-banner",
+    "columns-horizontal-teaser",
+    "cards-featured-content",
+    "social-follow",
+    "banner-contact-split",
+    "table-two-column-content",
+    "table-two-column-content"
+  ],
+  "blocksLeftInPlace": [],
+  "pageMetadata": [],
+  "hasForm": true
+}

@@ -1,0 +1,17 @@
+{
+  "status": "success",
+  "url": "https://grace.com/products/magnapore/",
+  "path": "products/magnapore",
+  "timestamp": "2026-08-09T17:02:35.030Z",
+  "title": "MAGNAPORE®",
+  "pageType": "default",
+  "blocks": [
+    "hero-banner",
+    "cards-featured-content"
+  ],
+  "blocksLeftInPlace": [],
+  "pageMetadata": [
+    "breadcrumb"
+  ],
+  "hasForm": false
+}

@@ -1,0 +1,23 @@
+{
+  "status": "success",
+  "url": "https://grace.com/products/trisyl-silica/",
+  "path": "products/trisyl-silica",
+  "timestamp": "2026-08-09T17:02:39.636Z",
+  "title": "TRISYL® Silica",
+  "pageType": "default",
+  "blocks": [
+    "hero-banner",
+    "video-overlay",
+    "accordion-faq",
+    "accordion-faq",
+    "accordion-faq",
+    "accordion-faq",
+    "accordion-faq",
+    "accordion-faq",
+    "columns-horizontal-teaser",
+    "cards-featured-content"
+  ],
+  "blocksLeftInPlace": [],
+  "pageMetadata": [],
+  "hasForm": true
+}

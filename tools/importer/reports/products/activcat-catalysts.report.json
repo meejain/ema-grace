@@ -1,13 +1,13 @@
 {
   "status": "success",
-  "url": "https://grace.com/products/ludox/",
-  "path": "products/ludox",
-  "timestamp": "2026-08-09T16:59:48.932Z",
-  "title": "LUDOX®",
+  "url": "https://grace.com/products/activcat-catalysts/",
+  "path": "products/activcat-catalysts",
+  "timestamp": "2026-08-09T17:01:41.202Z",
+  "title": "ActivCat® Catalysts",
   "pageType": "default",
   "blocks": [
     "hero-banner",
-    "columns-horizontal-teaser",
+    "video-overlay",
     "cards-featured-content"
   ],
   "blocksLeftInPlace": [],
