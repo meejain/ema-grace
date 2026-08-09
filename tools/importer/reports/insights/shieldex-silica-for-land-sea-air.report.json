@@ -2,7 +2,7 @@
   "status": "success",
   "url": "https://grace.com/insights/shieldex-silica-for-land-sea-air/",
   "path": "insights/shieldex-silica-for-land-sea-air",
-  "timestamp": "2026-08-07T19:27:06.992Z",
+  "timestamp": "2026-08-08T20:59:35.623Z",
   "title": "Environmentally Friendly Corrosion Protection for Land, Sea, and Air",
   "pageType": "insights-article",
   "pageMetadata": [
@@ -15,7 +15,6 @@
   ],
   "contentNodes": 8,
   "blocks": [
-    "cards-product",
     "social-follow",
     "cards-featured-content"
   ],

@@ -2,7 +2,7 @@
   "status": "success",
   "url": "https://grace.com/insights/colloidal-silica-as-a-foundation-for-3-d-printed-replacement-tissues/",
   "path": "insights/colloidal-silica-as-a-foundation-for-3-d-printed-replacement-tissues",
-  "timestamp": "2026-08-07T19:20:56.195Z",
+  "timestamp": "2026-08-08T20:57:50.008Z",
   "title": "Colloidal Silica as a Foundation for 3-D Printed Replacement Tissues",
   "pageType": "insights-article",
   "pageMetadata": [
@@ -15,7 +15,6 @@
   ],
   "contentNodes": 9,
   "blocks": [
-    "cards-product",
     "social-follow",
     "cards-featured-content"
   ],

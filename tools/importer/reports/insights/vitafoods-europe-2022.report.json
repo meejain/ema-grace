@@ -2,7 +2,7 @@
   "status": "success",
   "url": "https://grace.com/insights/vitafoods-europe-2022/",
   "path": "insights/vitafoods-europe-2022",
-  "timestamp": "2026-08-07T19:20:58.665Z",
+  "timestamp": "2026-08-08T20:56:57.242Z",
   "title": "Vitafoods Europe 2022",
   "pageType": "insights-article",
   "pageMetadata": [
@@ -15,7 +15,6 @@
   ],
   "contentNodes": 8,
   "blocks": [
-    "cards-product",
     "social-follow",
     "cards-featured-content"
   ],

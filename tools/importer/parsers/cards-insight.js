@@ -115,8 +115,9 @@ export default function parse(element, { document }) {
     cells.push([imageCell, contentCell]);
   });
 
-  // Create block using WebImporter utility
-  const block = WebImporter.Blocks.createBlock(document, { name: 'Cards-Insight', cells });
+  // "Cards (insight)" → class "cards insight" → blocks/cards/ variant. (A hyphenated
+  // "Cards-Insight" would 404 to a non-existent blocks/cards-insight/ folder.)
+  const block = WebImporter.Blocks.createBlock(document, { name: 'Cards (insight)', cells });
 
   // Replace the whole card group once, so the selector matching each individual
   // callout does not create duplicate blocks and does not leave stray markup

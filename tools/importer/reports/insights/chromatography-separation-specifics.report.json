@@ -2,7 +2,7 @@
   "status": "success",
   "url": "https://grace.com/insights/chromatography-separation-specifics/",
   "path": "insights/chromatography-separation-specifics",
-  "timestamp": "2026-08-07T19:21:58.300Z",
+  "timestamp": "2026-08-08T20:56:00.028Z",
   "title": "Chromatography Separation Specifics",
   "pageType": "insights-article",
   "pageMetadata": [
@@ -15,7 +15,6 @@
   ],
   "contentNodes": 6,
   "blocks": [
-    "cards-product",
     "social-follow",
     "cards-featured-content"
   ],

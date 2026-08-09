@@ -159,9 +159,9 @@ var CustomImportScript = (() => {
         "name": "cards-product",
         "family": "cards",
         "render": "parse",
-        "selector": ".cmp-card-list.grid.three-columns .card-group",
+        "selector": ".cmp-card-list.grid.three-columns:has(a.cmp-card.bio) .card-group",
         "item": ".card-group > .card",
-        "note": "product grid (bio)",
+        "note": "product grid (bio cards only). MUST require a.cmp-card.bio \u2014 the broad selector also matched the Follow-Us social card-list (a.cmp-card.style-icon), stealing it from social-follow.",
         "priority": 20
       },
       {
@@ -739,7 +739,7 @@ var CustomImportScript = (() => {
       const imageCell = img ? [img] : [];
       cells.push([imageCell, contentCell]);
     });
-    const block = WebImporter.Blocks.createBlock(document, { name: "Cards-Product", cells });
+    const block = WebImporter.Blocks.createBlock(document, { name: "Cards (product)", cells });
     const groupContainer = element.closest(".row") || element.closest("article") || element.parentElement;
     (groupContainer || element).replaceWith(block);
   }
@@ -774,7 +774,7 @@ var CustomImportScript = (() => {
       const imageCell = img ? [img] : [];
       cells.push([imageCell, contentCell]);
     });
-    const block = WebImporter.Blocks.createBlock(document, { name: "Cards-Industry", cells });
+    const block = WebImporter.Blocks.createBlock(document, { name: "Cards (industry)", cells });
     element.replaceWith(block);
   }
 
@@ -826,7 +826,7 @@ var CustomImportScript = (() => {
       const imageCell = img ? [img] : [];
       cells.push([imageCell, contentCell]);
     });
-    const block = WebImporter.Blocks.createBlock(document, { name: "Cards-Insight", cells });
+    const block = WebImporter.Blocks.createBlock(document, { name: "Cards (insight)", cells });
     let groupContainer = null;
     if (mediaCallouts.length > 1) {
       let ancestor = element.parentElement;
@@ -2779,6 +2779,23 @@ var CustomImportScript = (() => {
             if (f.cap) contentNodes.push(f.cap);
           });
           return;
+        }
+        const bodyTable = el.matches("table") ? el : el.querySelector(":scope table, :scope > .rich-text table");
+        if (bodyTable && bodyTable.querySelector("tr")) {
+          const firstRow = bodyTable.querySelector("tr");
+          const cols = firstRow ? firstRow.querySelectorAll("td, th").length : 0;
+          const variant = cols >= 3 ? "three-column" : cols === 2 ? "two-column-content" : "data-grid";
+          const clone = el.cloneNode(true);
+          const before = new Set(document.querySelectorAll("table"));
+          try {
+            parseRealTables(clone, document, `Table (${variant})`);
+            const created = Array.from(clone.querySelectorAll("table")).find((t2) => !before.has(t2) && !t2.closest("td"));
+            if (created) {
+              contentNodes.push(created);
+              return;
+            }
+          } catch (e) {
+          }
         }
         const hasContent = (el.textContent || "").trim().length > 0 || el.querySelector("img, picture");
         if (hasContent) contentNodes.push(el.cloneNode(true));

@@ -41,6 +41,7 @@ import tableLinkListParser from './parsers/table-link-list.js';
 import tableDataGridParser from './parsers/table-data-grid.js';
 import tableTwoColumnContentParser from './parsers/table-two-column-content.js';
 import tableContactMatrixParser from './parsers/table-contact-matrix.js';
+import { parseRealTables } from './parsers/_table-utils.js';
 import cardsIconGridParser from './parsers/cards-icon-grid.js';
 import cardsCategoryGridParser from './parsers/cards-category-grid.js';
 import cardsBenefitsGridParser from './parsers/cards-benefits-grid.js';
@@ -947,6 +948,27 @@ function buildInsightsArticle(document, url, params) {
           if (f.cap) contentNodes.push(f.cap);
         });
         return;
+      }
+
+      // Data TABLE in the body (e.g. syloid-mx110 "Applications and features": a 3-col
+      // Application | End-Use Industries | Features table in .rich-text.vertical-border).
+      // A raw clone passes the <table> to markdown, whose round-trip turns the first header
+      // cell ("Application") into a BLOCK NAME → <div class="application"> → EDS 404s trying
+      // to load blocks/application/. Parse it into a proper Table block instead (variant by
+      // column count), so it emits `Table (three-column)` etc. and renders as a real table.
+      const bodyTable = el.matches('table') ? el : el.querySelector(':scope table, :scope > .rich-text table');
+      if (bodyTable && bodyTable.querySelector('tr')) {
+        const firstRow = bodyTable.querySelector('tr');
+        const cols = firstRow ? firstRow.querySelectorAll('td, th').length : 0;
+        const variant = cols >= 3 ? 'three-column' : (cols === 2 ? 'two-column-content' : 'data-grid');
+        const clone = el.cloneNode(true);
+        const before = new Set(document.querySelectorAll('table'));
+        try {
+          parseRealTables(clone, document, `Table (${variant})`);
+          // The created block table is now inside `clone`; find it and push.
+          const created = Array.from(clone.querySelectorAll('table')).find((t) => !before.has(t) && !t.closest('td'));
+          if (created) { contentNodes.push(created); return; }
+        } catch (e) { /* fall through to raw clone */ }
       }
 
       const hasContent = (el.textContent || '').trim().length > 0 || el.querySelector('img, picture');

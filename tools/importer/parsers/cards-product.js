@@ -99,7 +99,10 @@ export default function parse(element, { document }) {
   });
 
   // Create block using WebImporter utility
-  const block = WebImporter.Blocks.createBlock(document, { name: 'Cards-Product', cells });
+  // EDS block naming: "Cards (product)" → class "cards product" → blocks/cards/ (variant
+  // `product`). The earlier "Cards-Product" slugified to a "cards-product" class, which EDS
+  // resolved to a non-existent blocks/cards-product/ folder (404) so the block never decorated.
+  const block = WebImporter.Blocks.createBlock(document, { name: 'Cards (product)', cells });
 
   // Replace the whole card group (the .row containing all cards) once, so the
   // selector matching each individual card does not create duplicate blocks and

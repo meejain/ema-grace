@@ -83,8 +83,9 @@ export default function parse(element, { document }) {
     cells.push([imageCell, contentCell]);
   });
 
-  // Create block using WebImporter utility
-  const block = WebImporter.Blocks.createBlock(document, { name: 'Cards-Industry', cells });
+  // "Cards (industry)" → class "cards industry" → blocks/cards/ variant. (A hyphenated
+  // "Cards-Industry" would 404 to a non-existent blocks/cards-industry/ folder.)
+  const block = WebImporter.Blocks.createBlock(document, { name: 'Cards (industry)', cells });
 
   // Replace original element with structured block table
   element.replaceWith(block);
