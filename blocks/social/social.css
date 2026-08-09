@@ -30,17 +30,20 @@
   padding: 0 !important;
 }
 
+/* Source ribbon spacing (~451px tall): 50px top padding + the title's 30px top margin =
+   80px section-top→heading; the title's 50px bottom margin = 50px heading→cards; and 85px
+   BOTTOM padding = 85px cards→section-bottom (live has more black space below the cards). */
 .social.follow {
   background-color: var(--dark-color);
   color: var(--white);
-  padding: var(--spacing-m) var(--spacing-s);
+  padding: var(--spacing-l) var(--spacing-s) 85px;
   text-align: center;
 }
 
 /* heading + card row stay centred within the full-bleed ribbon */
 .social.follow .social-follow-title {
   max-width: 1240px;
-  margin: 30px auto;
+  margin: 30px auto 50px;
   font-family: var(--heading-font-family);
   font-size: var(--heading-font-size-l);
   font-weight: 300;

@@ -1590,9 +1590,9 @@ var CustomImportScript = (() => {
     const cells = [[heading]];
     cards.forEach((card) => {
       const href = card.getAttribute("href") || "";
-      const icon = card.querySelector("i.fa, .icon");
+      const icon = card.querySelector('i.fa, i[class*="fa-"], .icon i, .icon');
       let network = "";
-      if (icon) network = (icon.className.match(/fa-([a-z-]+)/) || [])[1] || "";
+      if (icon) network = (String(icon.className).match(/fa-([a-z-]+)/) || [])[1] || "";
       if (!network && href) {
         try {
           network = new URL(href).hostname.replace(/^www\.|\.com$/g, "").split(".")[0];
@@ -1600,11 +1600,15 @@ var CustomImportScript = (() => {
           network = "";
         }
       }
-      const label = (card.querySelector(".text, .cta") || {}).textContent || "Follow us";
+      const titleEl = card.querySelector(".h4.title, .title, .h4");
+      const title = titleEl ? (titleEl.textContent || "").replace(/\s+/g, " ").trim() : "";
+      const ctaEl = card.querySelector(".cta, .link-text, .button");
+      let cta = ctaEl ? (ctaEl.textContent || "").replace(/\s+/g, " ").trim() : "";
+      if (!cta) cta = /youtu/i.test(network) ? "Subscribe" : "Follow us";
       const linkEl = document.createElement("a");
       linkEl.href = href;
       linkEl.textContent = href;
-      cells.push([network || "link", [linkEl], label.trim()]);
+      cells.push([network || title || "link", [linkEl], cta]);
     });
     const block = WebImporter.Blocks.createBlock(document, { name: "Social (follow)", cells });
     const host = element.closest(".card-list") || element;
@@ -2797,6 +2801,18 @@ var CustomImportScript = (() => {
           } catch (e) {
           }
         }
+        if (el.querySelector("a.cmp-card.bio")) {
+          const before = new Set(document.querySelectorAll("table"));
+          try {
+            parse2(el, { document, url, params });
+          } catch (e) {
+          }
+          const created = Array.from(document.querySelectorAll("table")).find((t2) => !before.has(t2) && !t2.closest("td"));
+          if (created) {
+            contentNodes.push(created);
+            return;
+          }
+        }
         const hasContent = (el.textContent || "").trim().length > 0 || el.querySelector("img, picture");
         if (hasContent) contentNodes.push(el.cloneNode(true));
       });
@@ -2874,6 +2890,12 @@ var CustomImportScript = (() => {
         const h2 = document.createElement("h2");
         h2.textContent = relatedTitle;
         section.append(h2);
+        const p = document.createElement("p");
+        const a = document.createElement("a");
+        a.href = "/insights";
+        a.textContent = "View all articles";
+        p.append(a);
+        section.append(p);
       }
       section.append(blockEl);
       if (relatedHasGeoHex && isFeaturedCards) {
@@ -3002,6 +3024,17 @@ var CustomImportScript = (() => {
         }
       }
       elements.forEach((element) => found.push({ def, element }));
+    });
+    found.sort((a, b) => {
+      if (a.element !== b.element) {
+        const rel = a.element.compareDocumentPosition(b.element);
+        if (rel & 2) return 1;
+        if (rel & 4) return -1;
+        return 0;
+      }
+      const pa = a.def.priority == null ? 999 : a.def.priority;
+      const pb = b.def.priority == null ? 999 : b.def.priority;
+      return pa - pb;
     });
     return found;
   }

@@ -97,14 +97,23 @@ body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section.ca
   padding-top: 20px;
 }
 
+/* "Follow Us" social-follow block: full-width dark ribbon that sits AFTER the related cards
+   and BEFORE the contact banner (source order). Like cards + banner it needs an explicit
+   `order` — without it the section defaults to order:0 and CSS Grid auto-placement floats it
+   ABOVE the cards, AND it inherits grid-column:3 (the 747px content column) so the dark ribbon
+   clips/overflows instead of spanning the band. Give it order:4 and full-bleed. */
+body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section:has(.social.follow) {
+  order: 4;
+}
+
 /* The "Want to talk to an expert?" contact-split banner sits ABOVE the footer — i.e. LAST,
-   after the related cards. It comes last in the DOM already, but the cards carry order:3 for
-   the mobile flex column; give the banner order:4 so it stays after the cards on mobile AND —
+   after the related cards + Follow Us. It comes last in the DOM already, but the cards carry
+   order:3 for the mobile flex column; give the banner order:5 so it stays last on mobile AND —
    critically — on the >=900px grid, where CSS Grid auto-placement also honours `order`. Without
    this the banner (default order:0) would be auto-placed into an earlier grid row than the
    order:3 cards, rendering the banner above the cards and pushing the cards onto the footer. */
 body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section:has(.banner.contact-split) {
-  order: 4;
+  order: 5;
 }
 
 body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .custom-widget-container {
@@ -204,8 +213,11 @@ body.sidebar main > .section.sidebar-nav.breadcrumb-container .breadcrumb nav ol
   }
 
   /* Full-width sections that break out of the content column and span the whole band on their
-     own row: the contact-split banner spans all columns. */
-  body.sidebar main > .section:has(.banner.contact-split) {
+     own row: the contact-split banner AND the Follow-Us social ribbon span all columns.
+     (Without this, social-follow inherits grid-column:3 = the 747px content column, so its dark
+     ribbon clips and the 3-card row overflows — the defect seen on colloidal-corrosion.) */
+  body.sidebar main > .section:has(.banner.contact-split),
+  body.sidebar main > .section:has(.social.follow) {
     grid-column: 1 / -1;
   }
 
@@ -605,6 +617,12 @@ body.sidebar main .columns.horizontal-teaser-featured > div {
   text-align: center;
 }
 
+/* Two SEPARATE dark cards with a 40px white gap between them (source renders each
+   feature-set item as its own dark row, not one continuous block). */
+body.sidebar main .columns.horizontal-teaser-featured > div:not(:last-child) {
+  margin-bottom: 40px;
+}
+
 body.sidebar main .columns.horizontal-teaser-featured > div > div:first-child,
 body.sidebar main .columns.horizontal-teaser-featured > div > div:last-child {
   padding: 0;
@@ -881,10 +899,10 @@ body.sidebar main > .section.cards-container.geo-hex:has(.cards.featured-content
       minmax(0, 747px)
       minmax(0, 320px)
       minmax(20px, 1fr);
-    padding-top: 206px;
+    padding-top: 215px;
 
     /* Live has ~140px of decorative hex space below the last card row (60px was too tight,
-       stretching the grid to the section bottom). Keep 206px top + 28px col-gap + 40px row-gap. */
+       stretching the grid to the section bottom). Keep 215px top + 28px col-gap + 40px row-gap. */
     padding-bottom: 140px;
   }
 
@@ -892,13 +910,13 @@ body.sidebar main > .section.cards-container.geo-hex:has(.cards.featured-content
     grid-column: 2 / 4;
   }
 
-  /* Live puts ~72px of vertical space between the "Latest Insights from Grace" heading and the
+  /* Live puts ~80px of vertical space between the "Latest Insights from Grace" heading and the
      first card row (the migrated grid otherwise butts flush against the heading). Push the cards
      WRAPPER down within the geo-hex section (target the wrapper only — adding it to both the
-     wrapper AND the nested block would stack to 144px). Scoped to geo-hex so the plain-white
+     wrapper AND the nested block would stack). Scoped to geo-hex so the plain-white
      featured-content pages keep their own spacing. */
   body.sidebar main > .section.cards-container.geo-hex .cards-wrapper:has(.cards.featured-content) {
-    margin-top: 72px;
+    margin-top: 80px;
   }
 
   /* Desktop overrides the mobile-base compact bands: both decorative layers fill the whole

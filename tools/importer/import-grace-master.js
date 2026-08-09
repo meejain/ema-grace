@@ -971,6 +971,18 @@ function buildInsightsArticle(document, url, params) {
         } catch (e) { /* fall through to raw clone */ }
       }
 
+      // In-body PRODUCT-CARD grid (source `a.cmp-card.bio` — a "Featured Products" promo of 1+
+      // cards with a PROMOTION eyebrow + title + CTA, e.g. vitafoods-europe-2022). These live in
+      // the col-lg-7 body, so discovery (which only runs on the related region) never sees them;
+      // a raw clone flattens them to loose "PROMOTION / title / Learn more" paragraphs. Run the
+      // cards-product parser so they emit a proper `Cards (product)` block (eyebrow dropped).
+      if (el.querySelector('a.cmp-card.bio')) {
+        const before = new Set(document.querySelectorAll('table'));
+        try { cardsProductParser(el, { document, url, params }); } catch (e) { /* leave */ }
+        const created = Array.from(document.querySelectorAll('table')).find((t) => !before.has(t) && !t.closest('td'));
+        if (created) { contentNodes.push(created); return; }
+      }
+
       const hasContent = (el.textContent || '').trim().length > 0 || el.querySelector('img, picture');
       if (hasContent) contentNodes.push(el.cloneNode(true));
     });
@@ -1083,6 +1095,15 @@ function buildInsightsArticle(document, url, params) {
       const h2 = document.createElement('h2');
       h2.textContent = relatedTitle;
       section.append(h2);
+      // "View all articles ›" link — source renders it right-aligned on the heading row
+      // (a.all-articles-cta → /insights/). Emit as a <p><a> next to the H2; cards.css styles
+      // the heading div (h2 + p) and this link.
+      const p = document.createElement('p');
+      const a = document.createElement('a');
+      a.href = '/insights';
+      a.textContent = 'View all articles';
+      p.append(a);
+      section.append(p);
     }
     section.append(blockEl);
     // Tag ONLY the related-cards section with the geo-hex section style WHEN the source wrapped it
@@ -1245,7 +1266,7 @@ function buildSidebarPage(document, url, params) {
 // parser; leaves (and logs) blocks that don't, so content is preserved.
 // ===========================================================================
 
-/** Discover every catalog block present on the page (selector OR matcher), priority-ordered. */
+/** Discover every catalog block present on the page (selector OR matcher). */
 function findBlocksOnPage(document) {
   const found = [];
   CATALOG.blocks.forEach((def) => {
@@ -1260,6 +1281,27 @@ function findBlocksOnPage(document) {
       try { elements = Array.from(document.querySelectorAll(def.selector)); } catch (e) { elements = []; }
     }
     elements.forEach((element) => found.push({ def, element }));
+  });
+  // Emit in SOURCE-DOM order, not catalog-iteration order — otherwise two blocks discovered
+  // by different catalog entries come out in catalog/priority order and can be swapped relative
+  // to the source layout (e.g. cards-featured-content "Latest Insights" is priority 40 but sits
+  // BEFORE social-follow priority 20 in the DOM; priority-first sorting wrongly flipped them).
+  // DOM POSITION is primary; priority is only the tie-breaker when two entries match the SAME
+  // element (which one claims it first). compareDocumentPosition works on the still-attached
+  // source DOM (before any parser detaches a node).
+  found.sort((a, b) => {
+    if (a.element !== b.element) {
+      const rel = a.element.compareDocumentPosition(b.element);
+      // eslint-disable-next-line no-bitwise
+      if (rel & 0x02) return 1; // b precedes a in the DOM
+      // eslint-disable-next-line no-bitwise
+      if (rel & 0x04) return -1; // a precedes b in the DOM
+      return 0;
+    }
+    // same element matched by two entries → more-specific (lower priority number) first
+    const pa = a.def.priority == null ? 999 : a.def.priority;
+    const pb = b.def.priority == null ? 999 : b.def.priority;
+    return pa - pb;
   });
   return found;
 }
