@@ -1452,6 +1452,14 @@ function buildDefaultPage(document, url, params) {
     if (tagline) pageMeta.push(['contactus-tagline', tagline]);
   }
 
+  // Breadcrumb is ON by default (hero banner auto-derives it from the URL). When the SOURCE
+  // page had NO breadcrumb (captured pre-cleanup in params.sourceHadBreadcrumb), opt this page
+  // OUT with a `breadcrumb: false` metadata row — but only when the page actually renders a
+  // banner hero (the thing that shows a breadcrumb), so we don't add noise elsewhere.
+  if (params && params.sourceHadBannerHero && params.sourceHadBreadcrumb === false) {
+    pageMeta.push(['breadcrumb', 'false']);
+  }
+
   rewriteInternalLinks(main);
   WebImporter.rules.transformBackgroundImages(main, document);
   WebImporter.rules.adjustImageUrls(main, url, params.originalURL);
@@ -1481,6 +1489,14 @@ function buildDefaultPage(document, url, params) {
 export default {
   transform: (payload) => {
     const { document, url, params } = payload;
+
+    // 0. capture whether the SOURCE page shipped a breadcrumb BEFORE cleanup strips it.
+    //    Breadcrumb is ON by default at render time; pages whose source had none get a
+    //    `breadcrumb: false` metadata row so the hero banner skips it (matches source per page).
+    params.sourceHadBreadcrumb = !!document.querySelector('.cmp-breadcrumb, nav[aria-label*="readcrumb" i]');
+    // The reduce-height banner hero is what renders a breadcrumb; capture its presence too
+    // (pre-cleanup) so we only emit a breadcrumb-off metadata row on pages that actually show one.
+    params.sourceHadBannerHero = !!document.querySelector('.hero__section.hero-reduce-height');
 
     // 1. site-wide chrome cleanup
     executeTransformers('beforeTransform', document.body, payload);

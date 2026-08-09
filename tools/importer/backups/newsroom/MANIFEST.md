@@ -1,0 +1,11 @@
+# newsroom — importer snapshot
+- **set:** newsroom (28 pages: 26 press-releases + 2 landing)
+- **bundle:** import-grace-master.bundle.js (frozen; current working bundle at snapshot time)
+- **bundle provenance:** working tree after newsroom fixes (uncommitted at snapshot).
+- **contains (delta over insights bundle):**
+  - Hero parser emits `Hero (banner)` (fixes the old `Hero-Banner` 404) — shared fix, also benefits others.
+  - Hero parser promotes a bare `.hero__heading` <p> title to <h1> (`headingHost`) — 2025 PR hero titles.
+  - grace-cleanup strips the authored `.cmp-breadcrumb` (breadcrumb is URL-derived at render).
+  - (hero no-image band solid-blue is a RUNTIME CSS fix in blocks/hero/hero.css, not in the bundle.)
+- **URL lists:** tools/importer/urls-newsroom-pr.txt (26) + tools/importer/urls-newsroom-landing.txt (2)
+- **snapshot date:** 2026-08-09

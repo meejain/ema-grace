@@ -65,11 +65,17 @@ export default function decorate(block) {
   }
 
   // Banner variant (and its alias, overlay): auto-generate the breadcrumb from
-  // the current URL path.
+  // the current URL path. Breadcrumb is ON by default; a page opts OUT with a
+  // `breadcrumb` metadata value of `false`/`no`/`off` (some source pages, e.g.
+  // certain 2025 press releases, have no breadcrumb). No metadata → breadcrumb shows.
   if (block.classList.contains('banner') || block.classList.contains('overlay')) {
-    const textCell = block.querySelector(':scope > div:last-child');
-    const breadcrumb = buildBreadcrumbFromPath();
-    if (textCell && breadcrumb) textCell.prepend(breadcrumb);
+    const breadcrumbMeta = (getMetadata('breadcrumb') || '').trim().toLowerCase();
+    const breadcrumbOff = ['false', 'no', 'off', '0'].includes(breadcrumbMeta);
+    if (!breadcrumbOff) {
+      const textCell = block.querySelector(':scope > div:last-child');
+      const breadcrumb = buildBreadcrumbFromPath();
+      if (textCell && breadcrumb) textCell.prepend(breadcrumb);
+    }
   }
 
   // The heading and CTA are separate elements in the original design. When the

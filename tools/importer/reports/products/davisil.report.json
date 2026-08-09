@@ -2,14 +2,14 @@
   "status": "success",
   "url": "https://grace.com/products/davisil/",
   "path": "products/davisil",
-  "timestamp": "2026-08-05T20:57:44.367Z",
+  "timestamp": "2026-08-09T09:12:08.931Z",
   "title": "DAVISIL®",
   "pageType": "default",
   "blocks": [
     "hero-banner",
-    "cards-featured-content",
     "table-two-column-content",
-    "table-two-column-content"
+    "table-two-column-content",
+    "cards-featured-content"
   ],
   "blocksLeftInPlace": [],
   "pageMetadata": [],

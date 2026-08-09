@@ -1,0 +1,8 @@
+{
+  "status": "failed",
+  "url": "https://grace.com/newsroom/press-releases/2022-press-releases/grace-welcomes-new-unipol-pp-licensee-in-egypt/",
+  "path": "newsroom/press-releases/2022-press-releases/grace-welcomes-new-unipol-pp-licensee-in-egypt",
+  "timestamp": "2026-08-09T10:06:15.647Z",
+  "error": "page.goto: Target page, context or browser has been closed",
+  "errorStack": "page.goto: Target page, context or browser has been closed\n    at processUrl (/home/node/.excat-marketplaces/excat-marketplace/excat/skills/excat-content-import/scripts/run-bulk-import.js:469:18)\n    at async main (/home/node/.excat-marketplaces/excat-marketplace/excat/skills/excat-content-import/scripts/run-bulk-import.js:696:22)"
+}

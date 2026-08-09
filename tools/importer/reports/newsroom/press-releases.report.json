@@ -1,0 +1,22 @@
+{
+  "status": "success",
+  "url": "https://grace.com/newsroom/press-releases/",
+  "path": "newsroom/press-releases",
+  "timestamp": "2026-08-09T09:02:34.656Z",
+  "title": "Press Releases",
+  "pageType": "sidebar",
+  "pageMetadata": [
+    "template",
+    "contactus",
+    "contactus-tagline"
+  ],
+  "sidebarNav": true,
+  "contentNodes": 3,
+  "contactSplitBanner": false,
+  "blocks": [
+    "accordion-faq",
+    "cards-featured-content"
+  ],
+  "blocksLeftInPlace": [],
+  "hasForm": false
+}

@@ -2,16 +2,15 @@
   "status": "success",
   "url": "https://grace.com/campaign/ludox-colloidal-silica-pic/",
   "path": "campaign/ludox-colloidal-silica-pic",
-  "timestamp": "2026-08-05T16:14:02.615Z",
+  "timestamp": "2026-08-09T09:12:59.503Z",
   "title": "Enhance Strength and Precision in Investment Casting with LUDOX® Colloidal Silica",
   "pageType": "default",
   "blocks": [
     "hero-banner",
-    "cards-benefits-grid"
-  ],
-  "blocksLeftInPlace": [
+    "cards-benefits-grid",
     "columns-image-right"
   ],
+  "blocksLeftInPlace": [],
   "pageMetadata": [],
   "hasForm": true
 }

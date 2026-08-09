@@ -2,17 +2,15 @@
   "status": "success",
   "url": "https://grace.com/products/ludox/",
   "path": "products/ludox",
-  "timestamp": "2026-08-05T16:40:23.504Z",
+  "timestamp": "2026-08-09T09:13:01.218Z",
   "title": "LUDOX®",
   "pageType": "default",
   "blocks": [
+    "hero-banner",
     "columns-horizontal-teaser",
-    "hero-banner"
-  ],
-  "blocksLeftInPlace": [
-    "featured-product-selector",
     "cards-featured-content"
   ],
+  "blocksLeftInPlace": [],
   "pageMetadata": [],
   "hasForm": true
 }

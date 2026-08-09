@@ -251,10 +251,12 @@
 }
 
 /* === Variant: banner (and its alias, overlay) === short, wide page banner
-   with breadcrumb + title. Source metrics (grace.com hero__section
-   hero-reduce-height): container 178px tall at ALL viewports, padding
-   68px top / 30px bottom, content top-aligned. The "overlay" variant is an
-   alias of "banner" — same short breadcrumb-header treatment. */
+   with breadcrumb + title, modeled on grace.com/about-grace/this-is-grace
+   (hero__section hero-reduce-height): renders ~178px with a breadcrumb + a
+   single-line title, padding 68px top / 30px bottom, content top-aligned. The
+   source min-height floor is 100px but the breadcrumb+title content lands the
+   band at ~178px on these about-grace pages, which is the intended banner look.
+   The "overlay" variant is an alias of "banner" — same treatment. */
 .hero.banner,
 .hero.overlay {
   min-height: 178px;
@@ -288,6 +290,24 @@
   inset: 0;
   z-index: 0;
   pointer-events: none;
+  background-image: linear-gradient(to right, rgb(0 0 0) 0%, transparent 100%);
+}
+
+/* No-image banner WITHOUT the `gradient` option: the source's plain `dark-blue-bkgd`
+   reduce-height band is SOLID blue (#004990) — suppress the base ::before overlay so it
+   doesn't turn the blue band near-black. (e.g. PARAGON / braskem press releases.) */
+.hero.banner.no-image::before,
+.hero.overlay.no-image::before {
+  background-image: none;
+}
+
+/* No-image banner WITH the `gradient` option (authored from the source hero's `gradient`
+   class — e.g. molecule-one / ART press releases): re-enable the left→right black overlay
+   over the solid blue band, matching the source's `.dark-blue-bkgd.gradient .overlay`
+   (linear-gradient(to right,#000,transparent)). Higher specificity than the suppress rule
+   above, so it wins for gradient banners while plain ones stay solid. */
+.hero.banner.no-image.gradient::before,
+.hero.overlay.no-image.gradient::before {
   background-image: linear-gradient(to right, rgb(0 0 0) 0%, transparent 100%);
 }
 
@@ -457,10 +477,10 @@
     font-size: 42px;
   }
 
-  /* Banner stays short: the source hero__section reduce-height band is 178px
-     tall at desktop too (padding 68px top / 30px bottom), so keep the same
-     height as mobile — do NOT grow it. Content top-aligned, mirroring the
-     header nav container so the breadcrumb/title align with the Grace logo. */
+  /* Banner stays short at desktop too: the source hero__section reduce-height band
+     with a breadcrumb + single-line title renders ~178px (about-grace/this-is-grace),
+     padding 68px top / 30px bottom — do NOT grow it. Content top-aligned, mirroring
+     the header nav container so the breadcrumb/title align with the Grace logo. */
   .hero.banner {
     min-height: 178px;
     padding: 68px 0 30px;

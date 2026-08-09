@@ -67,6 +67,16 @@ export default function transform(hookName, element, payload) {
     WebImporter.DOMUtils.remove(element, [
       '.alert-banner',
     ]);
+
+    // Remove the authored source breadcrumb (<nav class="cmp-breadcrumb"><ol>Home/…</ol></nav>).
+    // We DERIVE the breadcrumb from the URL at render time (hero `banner` variant + the
+    // buildBreadcrumbFromPath auto-block), so keeping the authored one duplicates it — it
+    // surfaced as a plain numbered list above the hero on the press releases whose source
+    // carried it (13 of 26). Single source of truth = URL-derived. See breadcrumb-url-derived.
+    WebImporter.DOMUtils.remove(element, [
+      '.cmp-breadcrumb',
+      'nav[aria-label*="readcrumb" i]',
+    ]);
   }
 
   if (hookName === TransformHook.afterTransform) {

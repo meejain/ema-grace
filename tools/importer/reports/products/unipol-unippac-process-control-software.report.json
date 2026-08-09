@@ -2,20 +2,16 @@
   "status": "success",
   "url": "https://grace.com/products/unipol-unippac-process-control-software/",
   "path": "products/unipol-unippac-process-control-software",
-  "timestamp": "2026-08-05T16:35:29.952Z",
+  "timestamp": "2026-08-09T09:15:41.679Z",
   "title": "UNIPOL UNIPPAC® Process Control Software",
   "pageType": "default",
   "blocks": [
-    "columns-horizontal-teaser",
-    "columns-horizontal-teaser-featured",
-    "columns-image-teaser",
     "hero-banner",
-    "cards-solution-grid"
-  ],
-  "blocksLeftInPlace": [
-    "banner-cta",
+    "cards-solution-grid",
+    "columns-horizontal-teaser",
     "cards-featured-content"
   ],
+  "blocksLeftInPlace": [],
   "pageMetadata": [],
   "hasForm": true
 }
