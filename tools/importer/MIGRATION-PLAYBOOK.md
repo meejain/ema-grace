@@ -26,10 +26,21 @@ importer (rebundle + reimport).**
 
 ## 1. The importer architecture (what composes the bundle)
 
-- **Catalog** — `component-library.json` (source of truth, 67 blocks) → generated `catalog-data.js`
-  (ES module, inlined by the bundler). Each block: `selector` (or named `matcher`), `item`,
-  `render` (parse | seed-from-draft | skip-existing | forms-pass), `family`, `priority`.
-  The catalog is the universal "what blocks exist + how to recognize them on the SOURCE DOM."
+- **Catalog** — `component-library.json` (source of truth, 68 blocks) → generated `catalog-data.js`
+  (ES module, inlined by the bundler; regenerate with `gen-catalog-module.py` after any edit). Each
+  block: `selector` (or named `matcher`), `item`, `render` (parse | seed-from-draft | skip-existing |
+  forms-pass), `family`, `priority`, and optional **`emits`** (the EDS block NAME the parser produces
+  incl. variant + options — present only when it differs from the catalog `name`, i.e. the parser
+  reuses another block/variant or adds an authored option; e.g. `cards-related-articles` →
+  `emits: "Cards (product, cta)"`). The catalog is the universal "what blocks exist + how to
+  recognize them on the SOURCE DOM."
+- **Body-loop-built blocks are `skip-existing` with `selector: null`.** A few blocks are constructed
+  INSIDE a page-type body loop (they consume the source nodes before catalog discovery runs), so
+  they must NOT also carry a discovery selector — that would double-emit and collide. They live in
+  the catalog as documentary `skip-existing` entries (with `emits` + `item` for reference) so the
+  variant is still catalog-visible and has a draft sample. Today: `columns-media-figures`
+  (`.media-callout` pairs → `Columns (media-figures)`, would otherwise collide with
+  `columns-app-promo`'s `div.cmp-media-callout`).
 - **Parsers** — `parsers/*.js` (50), one per block; take recognized source HTML → EDS block table.
   Shared helpers: `_cards-utils`, `_columns-utils`, `_table-utils`.
 - **Transformers** — `transformers/*.js` (2, page-agnostic): `grace-cleanup` (strip chrome,
@@ -53,8 +64,31 @@ Key guarantees:
 
 ## 2. Authoring principles learned (apply to every family)
 
-- **EDS block naming is `Name (variant)`** → class `name variant` → `blocks/name/`. NEVER
-  `Name-Variant` (slugifies to `name-variant` → 404 on a non-existent folder, block never decorates).
+- **EDS block naming is `Name (variant, option, …)`** → class `name variant option` → `blocks/name/`.
+  Every comma-separated token inside the parens becomes a class; `classList[0]` (the base name) is
+  what loads `blocks/name/{name}.js|css`. NEVER `Name-Variant` (slugifies to `name-variant` → 404 on
+  a non-existent folder, block never decorates). Verify via the imported `.plain.html`:
+  `Cards (product, cta)` must serialize to `<div class="cards product cta">`.
+- **Reuse ladder — option ▸ variant ▸ new block.** Prefer reusing an existing block and adding an
+  authored **option** class; only add a **variant** if the layout genuinely differs; only add a new
+  **block** as a last resort. Example: the insights "Related Articles" grid reuses `cards/product`
+  and adds the `cta` option (`.cards.product.cta` → visible "Read more ›"), NOT a `related-articles`
+  variant or block. Record the emitted name in the catalog `emits` field (see §1).
+- **Behavior follows an explicit authored signal, not a content heuristic.** The "Read more" CTA is
+  driven by the authored `cta` option, not by JS guessing (e.g. "link text ≠ title"). Heuristics are
+  fragile and invisible to authors; an option is explicit, catalog-modeled, and draft-testable.
+- **Every variant AND option needs a `content/drafts/<name>.plain.html` sample.** It makes the block
+  authorable, renders it in isolation, and is the regression fixture when there's no live source.
+  Two slipped through (`cards-product-cta`, `columns-media-figures`) — treat draft coverage as part
+  of "done," not an afterthought. (See §4 gap: no automated draft-coverage check yet.)
+- **Assert parity with measured computed styles, not eyeballing.** Read the live target in pixels at
+  a fixed breakpoint (column widths, gaps, margins) and gate on `browser_evaluate` computed styles;
+  screenshot only to confirm. Craft learned: use `minmax(0, 1fr)` (not bare `1fr`) for truly-equal
+  grid tracks; do grid math against the real container width (insights body column = 707px).
+- **In-body components need an explicit body-loop branch.** `buildInsightsArticle` only handles a
+  component if it has a branch (video-overlay, real tables, related-articles, media-figures);
+  everything else falls through to raw clone + flatten. A catalog entry alone is not enough for
+  in-body content — the branch consumes the source nodes before sibling-region discovery runs.
 - **Page metadata, not content blocks:** things that are page-level facts belong in the Metadata
   block + a render-time auto-block, NOT an authored content block. Done for:
   - breadcrumb → auto-blocked from URL (`Home / <ancestors>`, current page dropped)
@@ -106,6 +140,21 @@ Run in order; each stage is cheaper-first, and only escalates on flags:
 Note: the runner's **content-completeness %** is a blunt text-similarity heuristic — it false-flags
 ~100% of grace.com pages (their nav/megamenu/JS-hydrated text isn't in clean output). Treat it as
 noise, NOT a gate. The 3-stage funnel above is the real net.
+
+### Known misses (gaps the funnel does NOT yet cover)
+
+- **No draft-coverage check.** Nothing verifies every catalog variant/option has a matching
+  `content/drafts/*.plain.html`. This is why `cards-product-cta` / `columns-media-figures` slipped.
+  → cheap fix: a script that diffs catalog names + `emits` options against `content/drafts/`.
+- **No positive content-preservation gate.** Stage 0 catches *broken* blocks, Stage 1 catches
+  *missing* blocks; neither confirms authored body text/links actually survived, and completeness %
+  is too noisy to serve as that gate. Body components that fall through the body loop flatten
+  silently (preserved but unstyled) and only Stage 2 (manual) catches them.
+- **Parity is fully manual.** The computed-style comparison vs live grace.com (§2) is by hand per
+  page; there's no automated "diff migrated vs live measurements" pass.
+- **Stage 1 is per-family.** Signatures are hand-tuned to insights; each new family needs its own.
+- **Only insights (165/470) is proven.** The loop is validated on one family; newsroom is the next
+  test of whether it generalizes.
 
 ---
 

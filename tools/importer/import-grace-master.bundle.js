@@ -33,15 +33,16 @@ var CustomImportScript = (() => {
         "selector": "CSS querySelectorAll target on the SOURCE DOM (verified against live grace.com)",
         "matcher": "name of a JS matcher fn in the importer (block identity is column-order/heading/position, not a class); when present, used instead of/with selector",
         "item": "selector for ONE repeated item within the block (for parsers)",
-        "render": "parse = run block parser | seed-from-draft = emit draft block as-is (dynamic/empty-shell) | skip-existing = header/footer/hero-lineage | forms-pass = defer to AEM Forms",
-        "family": "base EDS block folder"
+        "render": "parse = run block parser | seed-from-draft = emit draft block as-is (dynamic/empty-shell) | skip-existing = header/footer/hero-lineage OR built outside catalog discovery (e.g. inside a page-type body loop) | forms-pass = defer to AEM Forms",
+        "family": "base EDS block folder",
+        "emits": "the EDS block NAME the parser produces, incl. variant + options, e.g. 'Cards (product, cta)' -> class 'cards product cta'. Present only when it differs from the catalog `name` (i.e. the parser reuses another block/variant or adds an authored option). Prefer reuse + option over a new variant, and a variant over a new block."
       },
       "counts": {
-        "skip-existing": 4,
+        "skip-existing": 5,
         "parse": 50,
         "seed-from-draft": 8,
         "forms-pass": 5,
-        "total": 67,
+        "total": 68,
         "needs_matcher": 16,
         "clean_selector_only": 47
       }
@@ -170,7 +171,8 @@ var CustomImportScript = (() => {
         "render": "parse",
         "selector": ".cmp-card-list.grid.three-columns .card-group .card",
         "item": "a.cmp-card.bio",
-        "note": "related-articles list",
+        "emits": "Cards (product, cta)",
+        "note": "Curated in-body 'Related Articles' list on insights articles. Matcher requires the heading to say 'Related Articles' (distinct from the JS-hydrated 'Latest Insights' featured-blog carousel). REUSES the existing cards/product block + the authored `cta` OPTION (no new block/variant): drops the .h5 'PROMOTION' eyebrow, emits image + <strong>title</strong> + <a>Read more</a> per card; `.cards.product.cta` CSS surfaces the visible 'Read more \u203A' CTA (vs the invisible full-card overlay on homepage product tiles). Discovered only via the buildInsightsArticle body loop (in-body, inside col-lg-7, where the sibling-region discovery does not reach).",
         "priority": 20
       },
       {
@@ -189,6 +191,16 @@ var CustomImportScript = (() => {
         "selector": "div.cmp-media-callout",
         "item": null,
         "note": "right-media callout",
+        "priority": 20
+      },
+      {
+        "name": "columns-media-figures",
+        "family": "columns",
+        "render": "skip-existing",
+        "selector": null,
+        "item": ".media-callout",
+        "emits": "Columns (media-figures)",
+        "note": "Paired captioned figures on insights articles: a source .row of two .col-lg-6, each holding a .media-callout (image + italic .caption). The markdown round-trip drops the Bootstrap columns, so buildInsightsArticle's body loop rebuilds them: 2+ grouped .media-callout -> one Columns (media-figures) row, one cell per figure (<picture> + <p><em>caption</em></p>), rendering side-by-side on desktop and stacked on mobile (a single callout stays an inline figure + caption, not this block). skip-existing/selector:null because it is built INSIDE the body loop (which consumes the .media-callout nodes first) \u2014 a catalog selector here would double-emit and collide with columns-app-promo (div.cmp-media-callout). Documentary entry so the variant is discoverable in the catalog and has a draft sample (columns-media-figures).",
         "priority": 20
       },
       {
