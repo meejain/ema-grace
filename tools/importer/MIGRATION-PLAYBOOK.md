@@ -18,6 +18,9 @@ report → template/block↔URL index; see §2). Memory notes: `console-error-sw
 
 ### START HERE — onboarding a new LLM to migrate the next family
 
+**Kicking off a fresh session?** Paste the ready-made prompt in `tools/importer/LLM-ONBOARDING-PROMPT.md`
+(fill in `<FAMILY>`) — it encodes the run-the-importer + create-the-backup discipline and points here.
+
 This file (`tools/importer/MIGRATION-PLAYBOOK.md`) is the single entry point. Read order:
 1. This playbook end-to-end (§0 mental model → §1 architecture → §2 principles → §3 the loop →
    §4/§4a validation → §5 scope/recipes → §6 commands → §7 backups).
