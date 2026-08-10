@@ -2,7 +2,7 @@
   "status": "success",
   "url": "https://grace.com/products/vydac/",
   "path": "products/vydac",
-  "timestamp": "2026-08-09T17:05:23.669Z",
+  "timestamp": "2026-08-09T21:49:41.758Z",
   "title": "VYDAC®",
   "pageType": "default",
   "blocks": [
@@ -11,6 +11,9 @@
   ],
   "blocksLeftInPlace": [],
   "pageMetadata": [
+    "template",
+    "contactus",
+    "contactus-tagline",
     "breadcrumb"
   ],
   "hasForm": true

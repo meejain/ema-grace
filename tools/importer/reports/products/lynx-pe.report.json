@@ -2,7 +2,7 @@
   "status": "success",
   "url": "https://grace.com/products/lynx-pe/",
   "path": "products/lynx-pe",
-  "timestamp": "2026-08-09T17:00:44.906Z",
+  "timestamp": "2026-08-09T21:29:43.704Z",
   "title": "LYNX® PE",
   "pageType": "default",
   "blocks": [
@@ -11,6 +11,9 @@
   ],
   "blocksLeftInPlace": [],
   "pageMetadata": [
+    "template",
+    "contactus",
+    "contactus-tagline",
     "breadcrumb"
   ],
   "hasForm": false

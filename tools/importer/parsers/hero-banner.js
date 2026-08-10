@@ -52,13 +52,42 @@ export default function parse(element, { document }) {
   // text is dropped. Exclude the element used as the heading (headingHost) and the CTA region.
   const subCandidates = element.querySelectorAll('.hero__subheading, .hero__heading.h2, .hero__heading.h3, .patent-number');
   const subEl = Array.from(subCandidates).find((el) => el !== headingHost);
-  const subText = subEl ? (subEl.textContent || '').replace(/\s+/g, ' ').trim() : '';
+  let subText = subEl ? (subEl.textContent || '').replace(/\s+/g, ' ').trim() : '';
+  // Product heroes carry the subtitle as a BARE <p> in `.hero__content`/`.hero__content-inner`
+  // (no subheading class) — a sibling of the title, before the `.button__section` CTA. If no
+  // classed subheading was found, take the first content <p> whose text differs from the title
+  // and isn't part of the button region, so the subtitle ("Reduce Glycidyl Esters…") isn't lost.
+  if (!subText) {
+    const headingText = heading ? (heading.textContent || '').replace(/\s+/g, ' ').trim() : '';
+    const contentHost = element.querySelector('.hero__content-inner, .hero__content');
+    if (contentHost) {
+      const p = Array.from(contentHost.querySelectorAll('p')).find((el) => {
+        const t = (el.textContent || '').replace(/\s+/g, ' ').trim();
+        return t && t !== headingText && !el.closest('.button__section, .hero__button');
+      });
+      if (p) subText = (p.textContent || '').replace(/\s+/g, ' ').trim();
+    }
+  }
 
-  // Extract CTA button/link
-  // VALIDATED: Found <a class="btn-primary btn-primary-green" href="/products/"> at line 217
-  const ctaLink = element.querySelector('.hero__button a.btn-primary')
-    || element.querySelector('.hero__button a')
-    || element.querySelector('.button__section a');
+  // Extract CTA button/link. Grace's PRODUCT hero carries a CTA inside `.button__section`, and
+  // that CTA is frequently a gated-download `<button>` (not an <a>): its real target is a base64
+  // string in the `href` attribute (data-trigger-type="gated-modal"). So look for a <button>
+  // there too and decode it. Banner heroes (press releases, about-grace) have NO such CTA.
+  const decodeGatedHref = (el) => {
+    if (!el) return '';
+    if (el.tagName === 'A' && el.getAttribute('href')) return el.getAttribute('href');
+    const raw = el.getAttribute('href') || '';
+    // gated buttons store a base64-encoded path in href; decode when it isn't already a URL/path.
+    if (raw && !/^(https?:|\/|#|mailto:)/i.test(raw)) {
+      try { const d = (typeof atob === 'function' ? atob(raw) : Buffer.from(raw, 'base64').toString('utf8')); if (/^\/|^https?:/i.test(d)) return d; } catch (e) { /* not base64 */ }
+    }
+    return raw;
+  };
+  const ctaEl = element.querySelector('.hero__button a.btn-primary')
+    || element.querySelector('.hero__button a, .hero__button button')
+    || element.querySelector('.button__section a, .button__section button');
+  const ctaHref = decodeGatedHref(ctaEl);
+  const ctaLink = ctaEl && (ctaEl.tagName === 'A' || ctaHref) ? ctaEl : null;
 
   // Build cells array matching Hero block table structure
   const cells = [];
@@ -77,10 +106,10 @@ export default function parse(element, { document }) {
     contentCell.push(sub);
   }
   if (ctaLink) {
-    // Create a clean link element
+    // Create a clean link element (works for both <a> heroes and decoded gated <button> CTAs).
     const link = document.createElement('a');
-    link.href = ctaLink.href;
-    link.textContent = ctaLink.textContent.trim();
+    link.href = ctaHref || ctaLink.href || '';
+    link.textContent = (ctaLink.textContent || '').trim();
     contentCell.push(link);
   }
   // ONE row, ONE cell holding heading + subheading + CTA together (hero.css targets the content
@@ -97,7 +126,26 @@ export default function parse(element, { document }) {
   // `gradient` option so `.hero.banner.gradient` CSS paints the overlay; without it the band is solid.
   const hasImage = !!bgImage;
   const sourceHasGradient = (element.className || '').split(/\s+/).includes('gradient');
-  const name = (!hasImage && sourceHasGradient) ? 'Hero (banner, gradient)' : 'Hero (banner)';
+
+  // Variant selection:
+  //   • PRODUCT hero → the REDUCE-HEIGHT hero of a product/solution page. It carries a CTA in
+  //     `.button__section`/`.hero__button` (often a gated-download button). Emits `Hero (product)`
+  //     → blocks/hero/ `.hero.product` (left column, green CTA). Requires BOTH the reduce-height
+  //     band class AND a CTA: banner heroes (press releases, about-grace) are reduce-height but
+  //     have breadcrumb + title only (no CTA), and the tall homepage/full-width hero has a CTA but
+  //     is NOT reduce-height — so both stay out of the product branch.
+  //   • BANNER hero → short breadcrumb+title band. `Hero (banner)`, or `Hero (banner, gradient)`
+  //     for the no-image blue band whose source hero has the `gradient` class.
+  const isReduceHeight = (element.className || '').split(/\s+/).includes('hero-reduce-height');
+  const isProduct = !!ctaLink && isReduceHeight;
+  let name;
+  if (isProduct) {
+    name = 'Hero (product)';
+  } else if (!hasImage && sourceHasGradient) {
+    name = 'Hero (banner, gradient)';
+  } else {
+    name = 'Hero (banner)';
+  }
 
   // Create block using WebImporter utility.
   // Emit the EXISTING `hero` block + `banner` variant → class "hero banner" → loads blocks/hero/.

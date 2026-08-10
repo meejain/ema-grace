@@ -2,16 +2,20 @@
   "status": "success",
   "url": "https://grace.com/products/TRISYL-XGE-Catalyst/",
   "path": "products/trisyl-xge-catalyst",
-  "timestamp": "2026-08-09T16:59:50.185Z",
+  "timestamp": "2026-08-09T21:52:01.687Z",
   "title": "TRISYL® XGE Catalyst",
   "pageType": "default",
   "blocks": [
     "hero-banner",
     "video-overlay",
+    "cards-product",
     "accordion-faq"
   ],
   "blocksLeftInPlace": [],
   "pageMetadata": [
+    "template",
+    "contactus",
+    "contactus-tagline",
     "breadcrumb"
   ],
   "hasForm": true

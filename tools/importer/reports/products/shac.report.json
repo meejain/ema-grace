@@ -2,7 +2,7 @@
   "status": "success",
   "url": "https://grace.com/products/shac/",
   "path": "products/shac",
-  "timestamp": "2026-08-09T16:59:47.928Z",
+  "timestamp": "2026-08-09T21:35:45.479Z",
   "title": "SHAC®",
   "pageType": "default",
   "blocks": [
@@ -11,6 +11,9 @@
   ],
   "blocksLeftInPlace": [],
   "pageMetadata": [
+    "template",
+    "contactus",
+    "contactus-tagline",
     "breadcrumb"
   ],
   "hasForm": false

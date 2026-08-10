@@ -133,7 +133,7 @@
       "name": "cards-product",
       "family": "cards",
       "render": "parse",
-      "selector": ".cmp-card-list.grid.three-columns:has(a.cmp-card.bio) .card-group",
+      "selector": null,
       "item": ".card-group > .card",
       "note": "product grid (bio cards only). MUST require a.cmp-card.bio — the broad selector also matched the Follow-Us social card-list (a.cmp-card.style-icon), stealing it from social-follow.",
       "priority": 20

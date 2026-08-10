@@ -1,19 +1,42 @@
 # WR Grace — Migration Playbook (end-to-end strategy)
 
-The repeatable process for migrating a grace.com page family to EDS. Insights (165) and newsroom
-(28) are complete and validated with this loop; every other family follows the same steps.
-Companion docs: `MASTER-IMPORTER-STRATEGY.md` (architecture deep-dive), `component-library.json`
+The repeatable process for migrating a grace.com page family to EDS. Insights (165), newsroom (28)
+and product-detail (28) are complete and validated with this loop; every other family follows the
+same steps. Companion docs: `MASTER-IMPORTER-STRATEGY.md` (architecture deep-dive), `component-library.json`
 (the catalog), `backups/README.md` (per-set frozen bundles), `block-intelligence.json` (reference
 report → template/block↔URL index; see §2). Memory notes: `console-error-sweep-validation`,
 `breadcrumb-url-derived`, `post-meta-is-metadata`, `parser-matcher-precision`, `insights-video-overlay`,
 `visual-parity-completion-standard`, `importer-bundle-backups`, `hero-banner-name-fix`,
-`authored-option-and-emits`, `block-intelligence-and-richest-rep`.
+`authored-option-and-emits`, `block-intelligence-and-richest-rep`, `products-hydration-fix`,
+`product-detail-template`.
 
 **Two hard rules from experience — read these first:**
 1. **Never claim a set "done" without the visual-parity gate (§4a): 3+ full-page side-by-side
    screenshots, migrated vs LIVE grace.com.** Console/structural sweeps pass on broken visuals.
 2. **On completing a set, snapshot its frozen bundle to `backups/<set>/` (§7). There is ONE live
    bundle for ALL templates — a source edit for one family can silently regress another.**
+
+### START HERE — onboarding a new LLM to migrate the next family
+
+This file (`tools/importer/MIGRATION-PLAYBOOK.md`) is the single entry point. Read order:
+1. This playbook end-to-end (§0 mental model → §1 architecture → §2 principles → §3 the loop →
+   §4/§4a validation → §5 scope/recipes → §6 commands → §7 backups).
+2. The memory notes listed above (kebab-case slugs) for the deep detail behind each recipe.
+3. `MASTER-IMPORTER-STRATEGY.md` only if you need the architecture deep-dive.
+
+Then follow the per-family loop (§3): pick the next family from §5 → **cluster by rendered template,
+pick the RICHEST page per cluster BY LOOKING** (§1–§2 mandate; block-intelligence is a hint, not a
+ranker) → read that page's rendered DOM to derive the section→block contract → extend the importer
+(reuse ladder: authored option ▸ variant ▸ new block) → rebundle → import a 1–2 page sample →
+**visual-parity gate (§4a)** → import the rest in batches → snapshot the frozen bundle (§7).
+
+**Kickoff prompt to paste to a fresh LLM:**
+> Read `tools/importer/MIGRATION-PLAYBOOK.md` in full (and the memory notes it lists), then migrate
+> the `<FAMILY>` pages to EDS following its per-family loop. Cluster by rendered template and pick
+> the richest representative by LOOKING (not an auto count). Reuse existing blocks where possible.
+> Rebundle, import a 1–2 page sample, run the §4a visual-parity gate (side-by-side vs live grace.com),
+> fix, then import the rest in batches of ~5 and audit byte size. Do NOT publish to DA without my
+> go-ahead. Show me the quality-gate output and screenshots before claiming done.
 
 ---
 
@@ -239,9 +262,10 @@ the 3+ visual comparisons are the GATE.
 |---|---|---|---|
 | insights | 165 | 165 ✅ | insights-article template — DONE |
 | newsroom | 28 | 28 ✅ | 26 press-releases (default path + Hero (banner) + URL breadcrumb) + 2 landing (hero + year-accordion + featured cards) — DONE |
+| products (detail) | 28 | 28 ✅ | Product Detail template — DONE. Default path + `template: contactus` + Hero (product) + `sectionizeFlatBody`. See "Product Detail recipe" below |
+| products (hubs) | 6 | 6 ⚠️ | JS-hydrated CATEGORY-HUB pages (synthetic-silicas, adsorbents, catalysts, fine-chemicals, product-stewardship, quality-management). Imported via onLoad hydration-wait; 2 hubs still miss a late-hydrating product-list (raise poll threshold / wait for the list selector, then reimport) |
 | industries | 102 | 8 | deep (depth 2-5): landing → application → detail; most varied |
 | about-grace | 39 | 8 | section pages + ~30 leadership bios (person-profile template) |
-| products | 36 | 5 | 34 flat depth-2. TWO sub-templates: server-rendered DETAIL pages (ludox/davisil — migrate fine) vs JS-hydrated CATEGORY-HUB pages (synthetic-silicas, adsorbents, catalysts, fine-chemicals, product-stewardship, quality-management — body captured EMPTY, ~1.6KB, needs a hydration-wait fix) |
 | campaign | 17 | 2 | flat campaign/landing pages |
 | forms | 15 | 1 | DEFERRED → AEM Adaptive Forms pass |
 | vendor-suppliers | 12 | 0 | — |
@@ -250,8 +274,9 @@ the 3+ visual comparisons are the GATE.
 | resources | 5 | 0 | — |
 | misc one-offs | ~10 | ~few | privacy/cookie/terms/search/404/etc. |
 
-Recommended order (ROI): ~~newsroom~~ ✅ → **leadership bios** (about-grace, person-profile template,
-~30 uniform) → products → campaign → industries (largest/most varied, last) → forms (Adaptive Forms pass).
+Recommended order (ROI): ~~newsroom~~ ✅ → ~~products (detail)~~ ✅ → **leadership bios** (about-grace,
+person-profile template, ~30 uniform) → campaign → industries (largest/most varied, last) →
+forms (Adaptive Forms pass). Remaining products work: close the 2 hub product-list gaps.
 
 **Newsroom template notes (reference for similar default-path families):** press releases take the
 **default path** (`buildDefaultPage`) — no new page-type needed; the whole body (dateline, quotes,
@@ -297,6 +322,59 @@ Breadcrumb is auto-derived from the URL by the hero `banner` variant and shows B
   `breadcrumb: false` Metadata row on banner-hero pages whose source lacked one. `blocks/hero/hero.js`
   reads `getMetadata('breadcrumb')` and skips the breadcrumb only when it's `false`/`no`/`off`. So:
   source has breadcrumb → shows; source lacks it → `breadcrumb:false` → hidden. Faithful per page.
+
+### Product Detail recipe — the accumulated, PER-SOURCE truth (28 pages, DONE)
+
+`grace.com/products/<slug>/` detail pages take the **default path** (`buildDefaultPage`) — no new
+page-type. block-intelligence has NO separate hub template (every `/products/*` → "Product Detail",
+rep `TRISYL-XGE-Catalyst`), so the section→block contract came from READING the page. Full contract in
+memory `product-detail-template`. Section order → block, all reusing EXISTING blocks:
+
+1. **Hero (product)** — `parsers/hero-banner.js`. Discriminator: `hero-reduce-height` **+ a CTA**
+   (`.button__section`/`.hero__button`) ⇒ `Hero (product)`; reduce-height **without** a CTA ⇒
+   `Hero (banner)` (breadcrumb+title only, e.g. syloid-rad, this-is-grace); the tall homepage hero has
+   a CTA but is NOT reduce-height ⇒ stays banner. The hero CTA is often a gated-download `<button>` whose
+   real href is base64 in the `href` attr → decode. Subtitle is a bare `<p>` in `.hero__content` (no
+   class) → captured as subheading. CSS: `.hero.product h1 { display:block }` (base `.hero h1` is
+   flex-column and stacks the ® `<sup>` on its own line, ballooning hero height).
+2. **Contact-us widget → metadata.** Emit `template: contactus` + `contactus: true` + `contactus-tagline`
+   (the `.contactus__text` subtitle — NOT the "Contact Us" button label). `template: contactus` drives
+   `templates/contactus/contactus.css` (narrow 920px LEFT column + right rail for the sticky panel);
+   without it content centers full-width and the widget floats over it. Presence + tagline MUST be
+   captured into `params` **pre-cleanup** (`params.sourceHadContactWidget/contactWidgetTagline`) because
+   grace-cleanup strips `.contact-us-sticky` in beforeTransform, before `buildDefaultPage` checks — same
+   pattern as `sourceHadBreadcrumb`.
+3. **Video (overlay)** — `.media-callout .media-video`; the URL is in the sibling
+   `.media-modal .active-video video[src]/iframe[src]` (youtube-nocookie embed) → normalize to `watch?v=`.
+4. **3 benefit cards → Cards (product)** — `.cmp-card.bio` (href-less anchors) in a plain `.row`
+   (NOT a `.cmp-card-list`). Body is a `.spt-copy > ul` bullet list — parser preserves ul/ol (don't flatten
+   to a `<p>`), skips the empty link. Matcher unions hub product-nav grids + these benefit rows.
+5. **2 download buttons** — gated-modal `<button>`s: `normalizeGatedDownloads` decodes the base64 href +
+   wraps in `<strong><a>` so `scripts.js` `decorateButtons` promotes to `.button.primary` (green). Runs of
+   ≥2 button-wrappers → `scripts.js` `groupButtons()` wraps them in `.button-group` (centered flex row on
+   desktop, stacked on mobile). It also strips leaked gated forms (`.lightbox-container`,
+   `.gated-asset-simplified`, `form.gated`) — forms are deferred to the Adaptive Forms pass.
+6. **Accordion (faq)** — `.accordion`.
+7. **Tail (silsol/syloid-rad):** **Columns (horizontal-teaser)** inside a `.geoAndHex/.light-gray-bkgd`
+   section (hexa band; columns.css keys it off `.columns-container:has(.columns.horizontal-teaser)`, incl
+   the intro `.subhead-large` h2 the parser now emits) + **Cards (featured-content)** "Latest Insights"
+   (heading + "View all articles" emitted when `params.emitFeaturedHeading`, set by buildDefaultPage).
+
+**CRITICAL — flat-body section isolation (`sectionizeFlatBody`, gated to `hasCU`).** buildDefaultPage
+decorates `document.body` in place, so ALL blocks stay in ONE source AEM-grid section → every block's
+`*-container` class stacks on one `.section`, and e.g. the columns hexa background bleeds across the WHOLE
+page (above the hero, everywhere). Fix: after discovery, FLATTEN by document order — collect block
+`<table>`s + text leaves (`h*/p/ul/ol/blockquote/figure`) via `querySelectorAll` (doc order), regroup so
+each block is its own section; a TRAILING heading-led run (≤3 nodes: the block's own H2 + optional CTA
+`<p>`) merges INTO the block's section (so teaser / Latest-Insights headings travel with their block),
+larger content runs stay standalone. Rebuild `main` as flat `<div>` sections joined by `<hr>` (the EDS
+section delimiter — the serializer maps `<hr>`/top-level-`<div>` → sections). Gated to `hasCU` so
+validated flat pages (newsroom/compliance) keep their single-section output.
+
+**Batch-import hydration caveat.** The onLoad hydration wait makes each product page slow: a 28-page run
+**times out at ~10 min**, AND under load a page can serialize EMPTY (trisyl-xge-catalyst came out 967B
+once). Import in **batches of ~5**, then AUDIT byte size / section count and reimport any tiny page. (A
+per-page completeness ⚠️ ~50% is EXPECTED here — the runner compares against the pre-hydration skeleton.)
 
 ---
 

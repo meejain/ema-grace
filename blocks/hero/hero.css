@@ -390,7 +390,10 @@
 }
 
 .hero.product h1 {
-  align-items: flex-start;
+  /* Override the base `.hero h1` flex-column (which stacks the title's inline parts — text, the
+     ® <sup>, more text — each on its own line). The product title is normal inline flow so
+     "SILSOL® Silica Active Ingredient Technology" wraps naturally and the hero stays short. */
+  display: block;
   text-align: left;
   font-family: var(--heading-font-family);
   font-weight: 100;

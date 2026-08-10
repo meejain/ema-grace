@@ -24,3 +24,26 @@
     padding-right: 0;
   }
 }
+
+/* A run of consecutive button CTAs (e.g. the two "Download …" buttons) is grouped by
+   templates/contactus/contactus.js into a `.button-group`. Stack + center on mobile; on desktop
+   lay them out in a centered horizontal row (matches grace.com's centered product download buttons).
+   Scoped under body.contactus so it only affects this template. */
+body.contactus .button-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  margin: 12px 0;
+}
+
+body.contactus .button-group .button-wrapper {
+  margin: 0;
+}
+
+@media (width >= 900px) {
+  body.contactus .button-group {
+    flex-flow: row wrap;
+    justify-content: center;
+  }
+}

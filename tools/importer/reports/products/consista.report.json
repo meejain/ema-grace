@@ -2,7 +2,7 @@
   "status": "success",
   "url": "https://grace.com/products/consista/",
   "path": "products/consista",
-  "timestamp": "2026-08-09T17:04:25.639Z",
+  "timestamp": "2026-08-09T21:26:10.006Z",
   "title": "CONSISTA®",
   "pageType": "default",
   "blocks": [
@@ -11,6 +11,9 @@
   ],
   "blocksLeftInPlace": [],
   "pageMetadata": [
+    "template",
+    "contactus",
+    "contactus-tagline",
     "breadcrumb"
   ],
   "hasForm": true

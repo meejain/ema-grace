@@ -195,6 +195,34 @@ const MATCHERS = {
       && !q.querySelector('.quote-section')
       && !q.closest('.cmp-card.statistic')
       && !q.querySelector('.cmp-card.statistic')),
+  // cards-product: two shapes, both → Cards (product).
+  //   1. HUB product-nav grid — the existing `.cmp-card-list.grid.three-columns` of anchor cards
+  //      (`.card-group` container). Reproduces the prior catalog selector verbatim so the 6 hubs
+  //      + 17 validated cards-product pages are unchanged; excludes the "Related Articles" /
+  //      "Follow us" card-lists (handled by their own matchers).
+  //   2. PRODUCT-DETAIL benefit grid — a plain `.row` holding ≥2 non-anchor `.cmp-card.bio` cards
+  //      (image + `.h4` title + `.spt-copy` bullet list), NOT inside a `.cmp-card-list`. These
+  //      were previously unmatched and leaked into the body as raw text/lists (TRISYL). Return the
+  //      `.row` container so the parser groups all its cards into ONE block.
+  'cards-product': (doc) => {
+    const hubGroups = Array.from(doc.querySelectorAll('.cmp-card-list.grid.three-columns:has(a.cmp-card.bio) .card-group'))
+      .filter((cg) => {
+        const list = cg.closest('.cmp-card-list');
+        const heading = (list && (list.querySelector('.heading, h3') || list.previousElementSibling) || {}).textContent || '';
+        return !/related articles|follow us/i.test(heading);
+      });
+    // Benefit cards are `<a class="cmp-card bio">` WITHOUT an href (target=_self only), so match
+    // `.cmp-card.bio` regardless of tag. Hub product-nav grids are excluded by the "not inside a
+    // .cmp-card-list" + "no .card-group" guards (those are returned by hubGroups above).
+    const benefitRows = Array.from(doc.querySelectorAll('article .row, section .row, .row'))
+      .filter((row) => !row.closest('.cmp-card-list')
+        && row.querySelectorAll('.cmp-card.bio').length >= 2
+        && !row.querySelector('.card-group'))
+      // de-dup nested rows: keep the innermost row that directly wraps the cards
+      .filter((row, _i, all) => !all.some((other) => other !== row && row.contains(other)
+        && other.querySelectorAll('.cmp-card.bio').length >= 2));
+    return [...hubGroups, ...benefitRows];
+  },
   // cards-related-articles: a .cmp-card-list.grid.three-columns whose heading says "Related
   // Articles" (distinguishes from cards-product grids and the Follow-us social card-list).
   'cards-related-articles': (doc) => Array.from(doc.querySelectorAll('.cmp-card-list.grid.three-columns, .card-list .cmp-card-list'))
@@ -1437,18 +1465,180 @@ function discoverAndParseBlocks(document, url, params, opts = {}) {
   return { rendered, parsedNames, unparsed };
 }
 
+/**
+ * Product-page gated download buttons + leaked gated forms.
+ * grace.com product pages render each "Download …" CTA as a `<button data-trigger-type="gated-modal"
+ * href="<base64-path>">` that pops a gated Marketo-style form (lazily injected). Two problems for
+ * import:
+ *   1. The button carries NO real href — its target is base64 in the `href` attr — so it round-trips
+ *      to plain text ("Download …"), losing the PDF link.
+ *   2. The gated form markup (First Name*, Business Email*, Submit, privacy copy…) sometimes
+ *      hydrates into the DOM and leaks into the body as a wall of stray text.
+ * Fix, run BEFORE discovery/markdown:
+ *   • Replace each gated-modal <button> with a real <a href="decoded.pdf"> (keeps the download CTA).
+ *   • Remove the gated form containers (lightbox / gated-asset / form.gated) — forms are handled in
+ *     the dedicated Adaptive Forms pass, not dumped as text here.
+ */
+function normalizeGatedDownloads(root, document) {
+  const decode = (raw) => {
+    if (!raw) return '';
+    if (/^(https?:|\/|#|mailto:)/i.test(raw)) return raw;
+    try {
+      const d = (typeof atob === 'function' ? atob(raw) : Buffer.from(raw, 'base64').toString('utf8'));
+      return /^\/|^https?:/i.test(d) ? d : '';
+    } catch (e) { return ''; }
+  };
+  // 1. gated-modal download buttons → real anchors
+  root.querySelectorAll('button[data-trigger-type="gated-modal"], a[data-trigger-type="gated-modal"]').forEach((btn) => {
+    const target = decode(btn.getAttribute('href') || '');
+    const label = (btn.textContent || '').replace(/\s+/g, ' ').trim();
+    if (!label) { btn.remove(); return; }
+    const a = document.createElement('a');
+    a.href = target || '#';
+    a.textContent = label;
+    // Wrap the anchor in <strong> inside its own <p>: scripts.js decorateButtons only promotes a
+    // link to a styled `.button.primary` when it's wrapped in <strong>/<em> (matching grace's
+    // source `<strong><a>` download CTAs). A bare <a> stays plain inline text (invisible on white).
+    const strong = document.createElement('strong');
+    strong.append(a);
+    const p = document.createElement('p');
+    p.append(strong);
+    btn.replaceWith(p);
+  });
+  // 2. strip leaked gated form modals (deferred to the Adaptive Forms pass). NOTE: do NOT remove
+  //    `.media-modal` here — the video-overlay parser reads the YouTube embed from the media-callout's
+  //    `.media-modal .active-video` during discovery (which runs after this). The gated download form
+  //    lives in its OWN lightbox/gated-asset containers, distinct from the video modal.
+  root.querySelectorAll('.lightbox-container, .gated-asset-simplified, form.gated, .gated-modal-form').forEach((el) => el.remove());
+}
+
+/**
+ * Sectionize a flat default-path body with `<hr>` breaks so each BLOCK table lands in its OWN EDS
+ * section. Without this, aem.js merges the whole body into a single `.section` that stacks every
+ * block's `*-container` class on one element — so, e.g. `.columns-container:has(.columns.horizontal-teaser)`
+ * (which paints the geo/hex background) applies to the ENTIRE page, bleeding the hexa band above
+ * the hero and across all content. One block per section keeps each block's container styling scoped.
+ *
+ * The WebImporter serializer turns each DIRECT child of the returned root into an EDS section (and
+ * `<hr>` children become section breaks). But the default path decorates `document.body` in place,
+ * so all blocks + content sit inside ONE source wrapper (one section) — every block's
+ * `*-container` class stacks on that single section and, e.g. the columns geo/hex background spans
+ * the whole page. Fix: REBUILD the root's flow as a flat sequence of sections. Walk the deepest
+ * single-child wrapper that holds the real flow, then regroup its children so each block table is
+ * its own section and contiguous default content forms its own section, joined by `<hr>`s at ROOT
+ * level (where the serializer acts). Returns the new root to use in place of `main`.
+ */
+function sectionizeFlatBody(main, document) {
+  // The parsers leave each block <table> buried in the ORIGINAL AEM grid nesting (e.g.
+  // TABLE < .generic-hero < .aem-Grid < .responsivegrid …), and default content is scattered
+  // through that same tree. A depth-based regroup can't handle the varying depths, so FLATTEN by
+  // document order instead:
+  //   1. collect the block tables in order;
+  //   2. for each block, gather the "loose" flow content (headings/paragraphs/lists/images) that
+  //      appears BEFORE it and hasn't been claimed yet — that content belongs to the section above
+  //      the block (e.g. the intro h3+paras before the cards, the "used in processes" line before
+  //      the teaser);
+  //   3. rebuild main as a flat list of <div> sections in order: [loose-before-block-1][block-1]
+  //      [loose-before-block-2][block-2]…[trailing-loose]. Each direct-child <div> becomes one EDS
+  //      section, so no block's *-container class stacks with another's.
+  const blocks = Array.from(main.querySelectorAll('table')).filter((t) => !t.closest('td, th'));
+  if (blocks.length < 2) return main; // nothing to isolate
+
+  // Ordered list of "content leaves" — text-bearing flow elements NOT inside a block table and not
+  // nested inside another leaf (e.g. a <p> inside an <li>). querySelectorAll returns them in
+  // document order; interleave with the block tables (also in document order) to form `seq`.
+  const LEAF = 'h1, h2, h3, h4, h5, h6, p, ul, ol, blockquote, pre, figure';
+  const isBlock = (el) => el.tagName === 'TABLE';
+  const leafParentOk = (el) => {
+    let p = el.parentElement;
+    while (p && p !== main) {
+      if (p.matches(LEAF) || p.tagName === 'TABLE' || p.tagName === 'LI' || p.tagName === 'A') return false;
+      p = p.parentElement;
+    }
+    return true;
+  };
+  const leaves = Array.from(main.querySelectorAll(LEAF)).filter(leafParentOk);
+  // Merge blocks + leaves into one document-ordered sequence.
+  const all = [...blocks, ...leaves].sort((a, b) => {
+    if (a === b) return 0;
+    // eslint-disable-next-line no-bitwise
+    return (a.compareDocumentPosition(b) & 0x04) ? -1 : 1; // a precedes b → -1
+  });
+  const seq = all.map((el) => ({ type: isBlock(el) ? 'block' : 'leaf', el }));
+  if (!seq.length) return main;
+
+  // Build ordered groups → sections. Each block is its own section. When a run of leaves precedes
+  // a block, its TRAILING heading-led tail is that block's HEADING (e.g. the teaser's
+  // "…used in the following processes:" H2, or the "Latest Insights" H2 + "View all articles" link)
+  // — peel that tail and merge it INTO the block's section so cards/columns CSS styles the header
+  // with the block. The rest of the run (intro body: heading + paragraphs + list + downloads) is
+  // its own standalone content section. The tail starts at the LAST heading in the run (so an H2
+  // plus a following link-<p> both travel with the block).
+  const isHeading = (el) => /^H[1-6]$/.test(el.tagName);
+  const sections = [];
+  let pending = [];
+  seq.forEach((item) => {
+    if (item.type === 'leaf') { pending.push(item.el); return; }
+    // find the start of the trailing header tail: the last heading in `pending`, if any content
+    // after it is only short (links/paragraph CTAs), treat from that heading to the end as the tail.
+    let tailStart = -1;
+    for (let i = pending.length - 1; i >= 0; i -= 1) {
+      if (isHeading(pending[i])) { tailStart = i; break; }
+    }
+    // only peel when the heading is near the end of the run (its tail is ≤3 nodes: heading + CTA/p)
+    const tail = (tailStart >= 0 && pending.length - tailStart <= 3) ? pending.slice(tailStart) : [];
+    const body = tail.length ? pending.slice(0, tailStart) : pending;
+    if (body.length) sections.push(body);
+    sections.push([...tail, item.el]);
+    pending = [];
+  });
+  if (pending.length) sections.push(pending);
+
+  // Rebuild main: detach each section's nodes from their old grid homes and re-append into fresh
+  // top-level <div> sections in order. Clear main first (its old grid wrappers are now empty).
+  const built = sections.map((group) => {
+    const section = document.createElement('div');
+    group.forEach((el) => section.appendChild(el)); // appendChild MOVES el out of its old parent
+    return section;
+  });
+  while (main.firstChild) main.removeChild(main.firstChild);
+  built.forEach((s, i) => {
+    if (i > 0) main.appendChild(document.createElement('hr')); // <hr> is the EDS section delimiter
+    main.appendChild(s);
+  });
+  return main;
+}
+
 function buildDefaultPage(document, url, params) {
   const main = document.body;
+
+  // Product-page gated download buttons (base64 hrefs) + leaked gated forms — normalize BEFORE
+  // discovery so the download CTAs survive as links and the form text doesn't dump into the body.
+  normalizeGatedDownloads(main, document);
+
+  // Tell the cards-featured-content parser to emit its own "Latest Insights from Grace" heading +
+  // "View all articles" link as siblings before the block (default/product path). On the insights
+  // path buildInsightsArticle emits the heading itself, so it leaves this flag unset to avoid a
+  // duplicate.
+  params.emitFeaturedHeading = true;
+
   const { parsedNames: rendered, unparsed } = discoverAndParseBlocks(document, url, params);
 
   executeTransformers('afterTransform', main, { document, url, params });
 
   // contactus widget (metadata-driven) can still apply on non-sidebar pages.
   const pageMeta = [];
-  if (hasContactWidget(document)) {
+  // Contact-us widget presence + tagline are captured in params BEFORE cleanup removes the
+  // widget (see transform()); fall back to a live query for any caller that didn't pre-capture.
+  const hasCU = (params && params.sourceHadContactWidget) || hasContactWidget(document);
+  if (hasCU) {
+    // `template: contactus` drives templates/contactus/contactus.css — it narrows + left-aligns the
+    // content column (max 920px) leaving a right gutter for the sticky Contact Us widget (source
+    // layout: grace.com/products/ludox). Without it the content centers full-width and the widget
+    // floats over it. The `contactus` flag + tagline feed scripts.js's auto-built sticky panel.
+    pageMeta.push(['template', 'contactus']);
     pageMeta.push(['contactus', 'true']);
-    const t = document.querySelector('.contact-us-cmp .contact-us-title, .contact-us-cmp h2, .contact-us__cmp .contactus__heading');
-    const tagline = t ? (t.textContent || '').replace(/\s+/g, ' ').trim() : '';
+    const tagline = (params && params.contactWidgetTagline) || '';
     if (tagline) pageMeta.push(['contactus-tagline', tagline]);
   }
 
@@ -1495,6 +1685,12 @@ function buildDefaultPage(document, url, params) {
   main.querySelectorAll('img[alt]').forEach((img) => {
     if (/<\/?[a-z][^>]*>/i.test(img.getAttribute('alt') || '')) img.setAttribute('alt', '');
   });
+
+  // Sectionize the flat body so each block gets its own EDS section (prevents the columns-container
+  // hexa background from spanning the whole page). Gated to contactus/product pages — the template
+  // that needs per-block section isolation — so already-validated flat default pages (newsroom,
+  // compliance) keep their current single-section output. `hasCU` is the product-detail signal.
+  if (hasCU) sectionizeFlatBody(main, document);
 
   main.appendChild(document.createElement('hr'));
   main.appendChild(buildMetadataBlock(document, pageMeta));
@@ -1580,6 +1776,23 @@ export default {
     // The reduce-height banner hero is what renders a breadcrumb; capture its presence too
     // (pre-cleanup) so we only emit a breadcrumb-off metadata row on pages that actually show one.
     params.sourceHadBannerHero = !!document.querySelector('.hero__section.hero-reduce-height');
+
+    // Capture the contact-us sticky widget BEFORE cleanup removes it. beforeTransform's
+    // grace-cleanup strips `.contact-us-sticky`, but the default path decides the `contactus`
+    // metadata AFTER cleanup — so read presence + tagline here or detection always sees nothing.
+    const cuWidget = document.querySelector('.contact-us-sticky, .contact-us__cmp, .contact-us-cmp');
+    params.sourceHadContactWidget = !!cuWidget;
+    if (cuWidget) {
+      // The tagline is the SUBTITLE ("Talk to our experts…"), held in `.contactus__text` /
+      // `.contact-us-subtitle`. Do NOT fall back to a bare heading — the sticky widget's toggle
+      // button reads "Contact Us", which is the panel title, not the tagline.
+      const t = cuWidget.querySelector(
+        '.contactus__content-desktop .contactus__text, .contactus__text, .contact-us-subtitle',
+      );
+      let tagline = t ? (t.textContent || '').replace(/\s+/g, ' ').trim() : '';
+      if (/^contact us$/i.test(tagline)) tagline = '';
+      params.contactWidgetTagline = tagline;
+    }
 
     // 1. site-wide chrome cleanup
     executeTransformers('beforeTransform', document.body, payload);

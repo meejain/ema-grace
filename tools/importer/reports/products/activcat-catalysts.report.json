@@ -2,7 +2,7 @@
   "status": "success",
   "url": "https://grace.com/products/activcat-catalysts/",
   "path": "products/activcat-catalysts",
-  "timestamp": "2026-08-09T17:01:41.202Z",
+  "timestamp": "2026-08-09T21:25:15.988Z",
   "title": "ActivCat® Catalysts",
   "pageType": "default",
   "blocks": [
@@ -12,6 +12,9 @@
   ],
   "blocksLeftInPlace": [],
   "pageMetadata": [
+    "template",
+    "contactus",
+    "contactus-tagline",
     "breadcrumb"
   ],
   "hasForm": true

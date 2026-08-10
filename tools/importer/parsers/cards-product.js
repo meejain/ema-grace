@@ -61,17 +61,31 @@ export default function parse(element, { document }) {
       || card.querySelector('.h4')
       || card.querySelector('h3, h4');
 
-    // Extract description
-    // VALIDATED: Found <div class="spt-copy"><p>...</p></div> at line 303
-    const descEl = card.querySelector('.spt-copy p')
-      || card.querySelector('.spt-copy')
-      || card.querySelector('.content p:not(.h4):not(.h5)');
+    // Extract description body. Two shapes occur:
+    //   • hub product-nav cards: a short prose paragraph in `.spt-copy p`.
+    //   • product-detail BENEFIT cards: a BULLET LIST in `.spt-copy > ul` (no <p>). Flattening a
+    //     <ul> to one <p> (old behaviour) destroys the list, so preserve the rich body: clone the
+    //     `.spt-copy` children (ul/ol/p) verbatim. Fall back to a plain <p> for bare-text bodies.
+    const descHost = card.querySelector('.spt-copy') || card.querySelector('.content .text');
+    const descNodes = [];
+    if (descHost) {
+      const rich = Array.from(descHost.children).filter((c) => /^(UL|OL|P|H4|H5|H6)$/.test(c.tagName));
+      if (rich.length) {
+        rich.forEach((c) => descNodes.push(c.cloneNode(true)));
+      } else {
+        const txt = (descHost.textContent || '').trim();
+        if (txt) { const p = document.createElement('p'); p.textContent = txt; descNodes.push(p); }
+      }
+    } else {
+      const p2 = card.querySelector('.content p:not(.h4):not(.h5)');
+      if (p2) { const p = document.createElement('p'); p.textContent = p2.textContent.trim(); descNodes.push(p); }
+    }
 
-    // Extract link href
-    // VALIDATED: Card itself is an <a> element with href at line 292
+    // Extract link href. Hub cards ARE anchors (card.href); benefit cards are plain divs with no
+    // link — skip the link entirely rather than emit an empty <a> (which round-trips to "[](​)").
     const href = card.href || card.closest('a')?.href || '';
 
-    // Build content cell (column 2): title + description + link
+    // Build content cell (column 2): title + description body + optional link
     const contentCell = [];
 
     if (title) {
@@ -80,11 +94,7 @@ export default function parse(element, { document }) {
       contentCell.push(h3);
     }
 
-    if (descEl) {
-      const p = document.createElement('p');
-      p.textContent = descEl.textContent.trim();
-      contentCell.push(p);
-    }
+    descNodes.forEach((n) => contentCell.push(n));
 
     if (href) {
       const link = document.createElement('a');

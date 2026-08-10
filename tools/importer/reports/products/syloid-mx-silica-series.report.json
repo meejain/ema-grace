@@ -2,7 +2,7 @@
   "status": "success",
   "url": "https://grace.com/products/syloid-mx-silica-series/",
   "path": "products/syloid-mx-silica-series",
-  "timestamp": "2026-08-09T17:02:34.204Z",
+  "timestamp": "2026-08-09T21:38:26.743Z",
   "title": "SYLOID® MX Silica Matting Agents for Coatings",
   "pageType": "default",
   "blocks": [
@@ -16,6 +16,9 @@
   ],
   "blocksLeftInPlace": [],
   "pageMetadata": [
+    "template",
+    "contactus",
+    "contactus-tagline",
     "breadcrumb"
   ],
   "hasForm": true
