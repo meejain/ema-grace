@@ -424,8 +424,10 @@ if the live bundle has already moved on, recover the earlier set's bundle from g
 <sha>:tools/importer/import-grace-master.bundle.js`) rather than copying the current one.
 
 Snapshotted so far: `backups/insights/` (pre-newsroom bundle, from git HEAD — no `.cmp-breadcrumb`
-strip / no hero `<p>`→h1 / no gradient detection) · `backups/newsroom/` (current bundle with ALL the
-hero-recipe fixes: `Hero (banner[, gradient])`, `<p>`→h1, breadcrumb-metadata, `.cmp-breadcrumb` strip).
-Re-snapshot `backups/newsroom/` whenever the shared bundle gains more newsroom-affecting fixes (it was
-refreshed after the gradient + breadcrumb-metadata + spacing work). See `backups/README.md` and memory
-`importer-bundle-backups`.
+strip / no hero `<p>`→h1 / no gradient detection) · `backups/newsroom/` (bundle with ALL the
+hero-recipe fixes: `Hero (banner[, gradient])`, `<p>`→h1, breadcrumb-metadata, `.cmp-breadcrumb` strip)
+· `backups/products/` (bundle at commit `bd7bc39` with the Product Detail work: `Hero (product)`,
+`template: contactus`, `normalizeGatedDownloads`, `sectionizeFlatBody`, cards-product benefit grid,
+video-from-media-modal, featured-content + teaser headings — 34 URLs incl. 6 hubs).
+Re-snapshot a set's folder whenever the shared bundle gains more fixes affecting that set. See
+`backups/README.md` and memory `importer-bundle-backups`, `product-detail-template`.
