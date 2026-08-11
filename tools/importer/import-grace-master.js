@@ -1692,6 +1692,24 @@ function buildDefaultPage(document, url, params) {
   // compliance) keep their current single-section output. `hasCU` is the product-detail signal.
   if (hasCU) sectionizeFlatBody(main, document);
 
+  // Tag the "Latest Insights" featured-content section with the `geo-hex` section style WHEN the
+  // SOURCE wrapped it in `.geoAndHex`/`.light-gray-bkgd` (captured pre-cleanup). The global
+  // `main .section.geo-hex` CSS (styles/lazy-styles.css) then paints the hexagon band — same
+  // treatment insights pages get. Per-source: pages whose source lacked the band stay plain white.
+  // Locate the featured-content block table (header cell = "Cards (featured-content)") and append
+  // Section Metadata to whichever top-level section <div> contains it.
+  if (params && params.sourceFeaturedHasGeoHex) {
+    // createBlock humanizes the variant in the header cell: `Cards (featured-content)` renders as
+    // "Cards (featured Content)" (hyphen → space, title-cased). Match tolerantly on both.
+    const featuredTable = Array.from(main.querySelectorAll('table')).find((t) => {
+      const cell = t.querySelector('tr');
+      return cell && /cards\s*\(\s*featured[\s-]*content/i.test((cell.textContent || ''));
+    });
+    const featuredSection = featuredTable
+      && Array.from(main.children).find((c) => c.nodeType === 1 && c.contains(featuredTable));
+    if (featuredSection) featuredSection.append(createSectionMetadata(document, 'geo-hex'));
+  }
+
   main.appendChild(document.createElement('hr'));
   main.appendChild(buildMetadataBlock(document, pageMeta));
 
@@ -1782,6 +1800,15 @@ export default {
     // metadata AFTER cleanup — so read presence + tagline here or detection always sees nothing.
     const cuWidget = document.querySelector('.contact-us-sticky, .contact-us__cmp, .contact-us-cmp');
     params.sourceHadContactWidget = !!cuWidget;
+
+    // Capture whether the SOURCE wrapped the "Latest Insights" related-articles block in the
+    // decorative `.geoAndHex`/`.light-gray-bkgd` band BEFORE cleanup — same signal buildInsightsArticle
+    // reads (line ~718), but the DEFAULT/product path decides section metadata after cleanup, so we
+    // must read it here. buildDefaultPage emits a `geo-hex` Section Metadata on the featured-content
+    // section only when this is true (per-source parity: pages without it render on plain white).
+    const featuredBlogEl = document.querySelector('.featured-blog-cmp');
+    params.sourceFeaturedHasGeoHex = !!(featuredBlogEl
+      && featuredBlogEl.closest('.geoAndHex, .light-gray-bkgd'));
     if (cuWidget) {
       // The tagline is the SUBTITLE ("Talk to our experts…"), held in `.contactus__text` /
       // `.contact-us-subtitle`. Do NOT fall back to a bare heading — the sticky widget's toggle

@@ -192,6 +192,7 @@ function buildDynamicMediaImages(main) {
 // delegate DM URLs here; standalone DM images render via buildDynamicMediaImages
 // regardless, and blocks/cards already skips createOptimizedPicture for
 // cross-origin src. No-op for non-DM URLs (returns null).
+// eslint-disable-next-line no-underscore-dangle
 window.__dmRender__ = (src, alt) => {
   const family = detectDynamicMediaUrl(src);
   if (!family) return null;
@@ -371,8 +372,15 @@ function buildAutoBlocks(main) {
     buildDynamicMediaImages(main);
     buildHeroBlock(main);
     buildContactStickyBlock(main);
-    buildBreadcrumbBlock(main);
-    buildPostMetaBlock(main);
+    // Breadcrumb + POSTED/INDUSTRY rail panels are insights-article (sidebar
+    // template) specific. Gate them to the sidebar template — otherwise a
+    // non-insights page that merely carries a Social ("Follow Us") block (e.g.
+    // product-detail syloid-rad / syloid-mx / reflectn) matches the rail
+    // heuristic and gets a stray mid-page "Home / Products" breadcrumb injected.
+    if (getMetadata('template').trim().toLowerCase() === 'sidebar') {
+      buildBreadcrumbBlock(main);
+      buildPostMetaBlock(main);
+    }
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('Auto Blocking failed', error);

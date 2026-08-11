@@ -1953,6 +1953,9 @@ var CustomImportScript = (() => {
     }
     href = normalizeVideoUrl(href);
     if (!img && !href) return;
+    const captionScope = element.closest(".media-callout, .cmp-media-callout") || element;
+    const titleEl = captionScope.querySelector(".subhead-large");
+    const captionTitle = titleEl ? (titleEl.textContent || "").replace(/\s+/g, " ").trim() : "";
     const imageCell = img ? [img.cloneNode(true)] : [];
     const linkCell = [];
     if (href) {
@@ -1962,7 +1965,13 @@ var CustomImportScript = (() => {
       linkCell.push(a);
     }
     const block = WebImporter.Blocks.createBlock(document, { name: "Video (overlay)", cells: [[imageCell, linkCell]] });
-    element.replaceWith(block);
+    if (captionTitle) {
+      const h = document.createElement("h3");
+      h.textContent = captionTitle;
+      element.replaceWith(h, block);
+    } else {
+      element.replaceWith(block);
+    }
   }
 
   // tools/importer/parsers/banner-contact-split.js
@@ -2189,6 +2198,15 @@ var CustomImportScript = (() => {
         body.removeAttribute("data-site-sections");
         body.removeAttribute("data-template");
       }
+      const INLINE_OK = /* @__PURE__ */ new Set(["A", "STRONG", "EM", "B", "I", "U", "BR", "SPAN", "SUP", "SUB", "SMALL", "MARK", "CODE"]);
+      element.querySelectorAll(".rich-text > div, .text > .rich-text div").forEach((div) => {
+        if (!(div.textContent || "").trim()) return;
+        const hasBlockChild = Array.from(div.children).some((c) => !INLINE_OK.has(c.tagName));
+        if (hasBlockChild) return;
+        const p = element.ownerDocument.createElement("p");
+        while (div.firstChild) p.appendChild(div.firstChild);
+        div.replaceWith(p);
+      });
     }
   }
 
@@ -3400,6 +3418,14 @@ var CustomImportScript = (() => {
       if (/<\/?[a-z][^>]*>/i.test(img.getAttribute("alt") || "")) img.setAttribute("alt", "");
     });
     if (hasCU) sectionizeFlatBody(main, document);
+    if (params && params.sourceFeaturedHasGeoHex) {
+      const featuredTable = Array.from(main.querySelectorAll("table")).find((t) => {
+        const cell = t.querySelector("tr");
+        return cell && /cards\s*\(\s*featured[\s-]*content/i.test(cell.textContent || "");
+      });
+      const featuredSection = featuredTable && Array.from(main.children).find((c) => c.nodeType === 1 && c.contains(featuredTable));
+      if (featuredSection) featuredSection.append(createSectionMetadata(document, "geo-hex"));
+    }
     main.appendChild(document.createElement("hr"));
     main.appendChild(buildMetadataBlock(document, pageMeta));
     if (unparsed.length) {
@@ -3467,6 +3493,8 @@ var CustomImportScript = (() => {
       params.sourceHadBannerHero = !!document.querySelector(".hero__section.hero-reduce-height");
       const cuWidget = document.querySelector(".contact-us-sticky, .contact-us__cmp, .contact-us-cmp");
       params.sourceHadContactWidget = !!cuWidget;
+      const featuredBlogEl = document.querySelector(".featured-blog-cmp");
+      params.sourceFeaturedHasGeoHex = !!(featuredBlogEl && featuredBlogEl.closest(".geoAndHex, .light-gray-bkgd"));
       if (cuWidget) {
         const t = cuWidget.querySelector(
           ".contactus__content-desktop .contactus__text, .contactus__text, .contact-us-subtitle"

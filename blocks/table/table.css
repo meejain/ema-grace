@@ -471,6 +471,31 @@
   padding-left: 14px;
 }
 
+/* Product-detail (body.contactus) reuse of the three-column table (e.g. vydac resin portfolio).
+   The base three-column tokens are tuned for the compliance ADDRESS table (body.sidebar): centered
+   header + centered/middle first column + BULLETLESS lists. The product resin table needs the
+   source's data-table look instead — LEFT-aligned header, LEFT/TOP-aligned resin column, and
+   visible disc bullets on the separations list. Scoped to body.contactus so the compliance tables
+   are untouched. */
+body.contactus .table.three-column thead th {
+  text-align: left;
+}
+
+body.contactus .table.three-column tbody td:first-child {
+  text-align: left;
+  vertical-align: top;
+}
+
+body.contactus .table.three-column td ul {
+  padding-left: 18px;
+  list-style: disc;
+}
+
+body.contactus .table.three-column td li {
+  padding-left: 0;
+  margin-bottom: 4px;
+}
+
 /* ===================== Variant: two-column-content ===================== */
 
 /* Table Two Column Content

@@ -1,1 +1,94 @@
 /* add global styles that can be loaded post LCP here */
+
+/* ===== Section style: geo-hex — GLOBAL (all templates) =====
+   Any section authored with Section Metadata Style `geo-hex` and containing a featured-content
+   block gets the full-bleed light-gray band + white hexagon top edge + faint geo-line network
+   (same teaser-*.png artwork the source serves). Applies on EVERY template — insights (sidebar),
+   product detail (contactus), etc. The ONLY template-specific piece is the insights left-rail
+   widget-gutter grid re-inset, which stays in templates/sidebar/sidebar.css and layers on top of
+   this. Product/other pages have no widget gutter, so they just use the normal centered wrapper.
+   NOTE image paths: this file lives in styles/ (one level deep) → `../blocks/columns/…`. */
+main .section.geo-hex:has(.cards.featured-content) {
+  position: relative;
+  overflow: hidden;
+  background-color: rgb(230 231 232);
+
+  /* Butt the gray band directly against whatever follows (banner or footer) — source gap 0. */
+  margin-bottom: 0;
+
+  /* Mobile: top padding clears the hex band; desktop bumps to the source offset below. */
+  padding-top: 110px;
+  padding-bottom: 40px;
+}
+
+/* ::before = faint triangle line-network band in the lower half; over-wide so it crops not shrinks. */
+main .section.geo-hex:has(.cards.featured-content)::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 214vw;
+  height: 350px;
+  z-index: 0;
+  pointer-events: none;
+  background-image: url('../blocks/columns/teaser-geo-lines.png');
+  background-repeat: no-repeat;
+  background-position: 50% 100%;
+  background-size: cover;
+  transform: translateX(-50%) scaleX(-1);
+}
+
+/* ::after = white hexagon band pinned to the top; flipped so the solid edge blends into the white
+   page above and the hexagons hang down into the gray. */
+main .section.geo-hex:has(.cards.featured-content)::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 130vw;
+  height: 136px;
+  z-index: 1;
+  pointer-events: none;
+  background-image: url('../blocks/columns/teaser-hex-mask.png');
+  background-repeat: no-repeat;
+  background-position: 50% 100%;
+  background-size: cover;
+  transform: translateX(-50%) scale(-1, -1);
+}
+
+/* Lift the real section content (heading wrapper + cards wrapper) above the decorative layers. */
+main .section.geo-hex:has(.cards.featured-content) > * {
+  position: relative;
+  z-index: 2;
+}
+
+@media (width >= 900px) {
+  /* Desktop: full-bleed band with both decorative layers filling the section (inset:0,
+     background-size:contain) — same technique as the sidebar rule. Top clearance so the heading
+     clears the hexagons; bottom room for the hex space below the last card row (matches sidebar). */
+  main .section.geo-hex:has(.cards.featured-content) {
+    padding-top: 250px;
+    padding-bottom: 140px;
+  }
+
+  main .section.geo-hex:has(.cards.featured-content)::before {
+    inset: 0;
+    width: auto;
+    height: auto;
+    background-size: contain;
+    transform: scaleX(-1);
+  }
+
+  main .section.geo-hex:has(.cards.featured-content)::after {
+    inset: 0;
+    width: auto;
+    height: auto;
+    background-size: contain;
+    transform: scale(-1, -1);
+  }
+
+  /* ~80px between the "Latest Insights from Grace" heading and the first card row (source parity). */
+  main .section.geo-hex .cards-wrapper:has(.cards.featured-content) {
+    margin-top: 80px;
+  }
+}

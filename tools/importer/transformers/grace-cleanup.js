@@ -122,5 +122,24 @@ export default function transform(hookName, element, payload) {
       body.removeAttribute('data-site-sections');
       body.removeAttribute('data-template');
     }
+
+    // Promote bare-text <div>s inside .rich-text to <p>. Grace's rich-text editor sometimes wraps a
+    // body paragraph in a plain <div> (not a <p>) — e.g. metallocenes "Custom synthesized
+    // metallocenes…", polytrak "You need to be able to ensure…", sylosiv "You deserve the highest…",
+    // each a <div> directly after an <h2>/<h3>. The default-path content extraction keeps <p>/heading/
+    // list leaves but DROPS such bare <div>s, silently losing the paragraph. Convert a rich-text <div>
+    // whose content is pure inline (text + inline formatting: a/strong/em/br/span/sup/sub — NO
+    // block-level or structural children) into a <p> so it survives as body copy.
+    const INLINE_OK = new Set(['A', 'STRONG', 'EM', 'B', 'I', 'U', 'BR', 'SPAN', 'SUP', 'SUB', 'SMALL', 'MARK', 'CODE']);
+    element.querySelectorAll('.rich-text > div, .text > .rich-text div').forEach((div) => {
+      // must actually contain visible text
+      if (!(div.textContent || '').trim()) return;
+      // every element child must be inline-only (no nested div/p/ul/table/heading/etc.)
+      const hasBlockChild = Array.from(div.children).some((c) => !INLINE_OK.has(c.tagName));
+      if (hasBlockChild) return;
+      const p = element.ownerDocument.createElement('p');
+      while (div.firstChild) p.appendChild(div.firstChild);
+      div.replaceWith(p);
+    });
   }
 }

@@ -23,6 +23,55 @@
     padding-left: 0;
     padding-right: 0;
   }
+
+  /* brochure-promo white panel: it sits over the metal-roof photo band and needs inner padding on
+     all sides (source ~40px inset before the cover image + text). The generic column rule above
+     zeroes side padding on contactus sections, so restore it here at matching specificity for the
+     brochure-promo section's inner div. */
+  body.contactus main > .section.columns-container:has(.columns.brochure-promo) > div {
+    padding: var(--spacing-l);
+  }
+}
+
+/* Body sub-headings on product-detail pages (e.g. "Primer and direct-to-metal applications",
+   "Coil coating primer applications") are authored as <h4>. The global h4 rule renders them small
+   + muted gray (14px, #696969, Roboto). Source renders these body h4s at 18px, weight 600, BLACK,
+   in the Roboto Slab heading font. Scope to contactus body content (default-content-wrapper) so
+   block-internal h4s and other templates are untouched. */
+body.contactus main .default-content-wrapper h4 {
+  font-family: var(--heading-font-family);
+  font-size: var(--heading-font-size-m); /* 18px base */
+  font-weight: 600;
+  color: var(--text-color);
+  line-height: 1.4;
+}
+
+/* Native data tables authored in default content on product pages (e.g. the syloid-mx "Applications
+   and Grades" matrix, which has rowspan/colspan merges no block variant supports). Match the source
+   look: black header row with white bold text, 1px light-gray cell borders, top-aligned cells,
+   Roboto body. The table scrolls horizontally on narrow viewports rather than crunching columns.
+   Scoped to contactus default content so block-built tables and other templates are untouched. */
+body.contactus main .default-content-wrapper table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m);
+  line-height: 1.7;
+  color: var(--text-color);
+}
+
+body.contactus main .default-content-wrapper table th,
+body.contactus main .default-content-wrapper table td {
+  border: 1px solid rgb(218 218 218);
+  padding: 16px 20px;
+  text-align: left;
+  vertical-align: top;
+}
+
+body.contactus main .default-content-wrapper table th {
+  background-color: var(--text-color); /* #000 */
+  color: var(--white);
+  font-weight: 700;
 }
 
 /* A run of consecutive button CTAs (e.g. the two "Download …" buttons) is grouped by
@@ -44,6 +93,17 @@ body.contactus .button-group .button-wrapper {
 @media (width >= 900px) {
   body.contactus .button-group {
     flex-flow: row wrap;
-    justify-content: center;
+    /* Source spreads a PAIR of download buttons end-to-end across the content width (one left,
+       one right) rather than bunching them centered. space-between does that for a 2-button row;
+       still centers a lone/odd button. */
+    justify-content: space-between;
   }
+}
+
+/* A LONE download button that is NOT part of a group (e.g. vydac "Download VYDAC® Sales Sheet"
+   below the table) should sit CENTERED under the content, matching source. decorateButtons wraps
+   each CTA paragraph as p.button-wrapper; contactus.js only wraps RUNS of ≥2 into .button-group,
+   so a single one stays a bare p.button-wrapper — center it. */
+body.contactus main .default-content-wrapper > p.button-wrapper {
+  text-align: center;
 }

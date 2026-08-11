@@ -148,6 +148,30 @@
 }
 
 /* ===================== Variant: brochure-promo ===================== */
+
+/* Full-bleed photographic background band behind the brochure-promo (source: the shieldex
+   brochure sits on a `none-bkgd black background-image` section using the metal-roof photo,
+   background-size:cover). The brochure card itself is a white panel floating over it. The image
+   URL is authored per-instance in Section Metadata Style `brochure-bg` + a --brochure-bg custom
+   property; falls back to the shieldex metal-roof asset. Scoped to the section that contains the
+   block so only brochure-promo sections get the band. */
+.columns-container:has(.columns.brochure-promo) {
+  position: relative;
+  background-image: var(--brochure-bg, url('https://grace.scene7.com/is/image/grace/mt-shieldex-metal-roof-blue'));
+  background-size: cover;
+  background-position: center;
+  padding: var(--spacing-l) 0;
+}
+
+/* The block content is a white card panel over the photo (source: white-bkgd inner panel).
+   NOTE: the white-panel PADDING lives in templates/contactus/contactus.css — the contactus
+   column rule (`body.contactus main > .section … > div { padding-left:0 }`) out-specifies a
+   plain selector here and would zero it out, so it must be set at matching specificity there.
+   This rule only sets the background so it applies on any template that uses brochure-promo. */
+.columns-container:has(.columns.brochure-promo) > div {
+  background-color: var(--white);
+}
+
 .columns.brochure-promo > div {
   display: flex;
   flex-direction: column;
@@ -883,6 +907,20 @@
    Products" feature-set: dark slate cards with white text by default that
    flip to a white card with black text on hover (source .slate-bkgd + the
    feature-set item:hover rule). */
+
+/* The base horizontal-teaser section paints a gray band + hexagon/geo-line artwork. The
+   featured-products variant sits on PLAIN WHITE in source (measured live on shieldex — the slate
+   cards provide the contrast, there is no gray hex band behind them). Suppress the band + both
+   decorative layers when the teaser carries the featured-products modifier. */
+.columns-container:has(.columns.horizontal-teaser.featured-products) {
+  background-color: transparent;
+  padding: var(--spacing-l) 0;
+}
+
+.columns-container:has(.columns.horizontal-teaser.featured-products)::before,
+.columns-container:has(.columns.horizontal-teaser.featured-products)::after {
+  content: none;
+}
 
 /* featured-products mobile (base): each card is a tall 336px slate tile —
    title near the top, a larger 16px centred description in the middle, and

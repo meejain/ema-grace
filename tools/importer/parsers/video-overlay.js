@@ -43,11 +43,26 @@ export default function parse(element, { document }) {
 
   if (!img && !href) return;
 
+  // Caption title (source: `.media-video > p.subhead-large.header-on-mobile`, mirrored in
+  // `.video-hover .subhead-large.header-on-desktop`). The parser previously dropped it, so the
+  // migrated video lost its "Grace ActivCat® Catalyst Overview"-style heading. Capture the first
+  // non-empty subhead and emit it as a sibling <h3> BEFORE the block (default content in the same
+  // section) — keeps the block's 2-cell contract intact while restoring the visible title.
+  const captionScope = element.closest('.media-callout, .cmp-media-callout') || element;
+  const titleEl = captionScope.querySelector('.subhead-large');
+  const captionTitle = titleEl ? (titleEl.textContent || '').replace(/\s+/g, ' ').trim() : '';
+
   // ONE content row, TWO cells: [ poster image | source link ] — the repo contract.
   const imageCell = img ? [img.cloneNode(true)] : [];
   const linkCell = [];
   if (href) { const a = document.createElement('a'); a.href = href; a.textContent = href; linkCell.push(a); }
 
   const block = WebImporter.Blocks.createBlock(document, { name: 'Video (overlay)', cells: [[imageCell, linkCell]] });
-  element.replaceWith(block);
+  if (captionTitle) {
+    const h = document.createElement('h3');
+    h.textContent = captionTitle;
+    element.replaceWith(h, block);
+  } else {
+    element.replaceWith(block);
+  }
 }

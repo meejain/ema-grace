@@ -832,80 +832,26 @@ body.sidebar main > .section.columns-container .default-content-wrapper:has(+ .c
      widths — no >=900px duplicate needed.) */
 }
 
-/* ===== geoAndHex variant (section style `geo-hex`) =====
-   ONLY the related-cards sections whose SOURCE was wrapped in `section.light-gray-bkgd.geoAndHex`
-   (e.g. a-brewery-goes-green) get this treatment — the importer emits Section Metadata Style
-   `geo-hex` for exactly those, so the class is absent on the majority of articles (ML reference,
-   4-ways, chromatography …) whose cards stay on plain white. Full-bleed gray band + white hexagon
-   top edge + faint geometric line-network, using the SAME PNGs the source serves
-   (WR_Grace_triangle_pattern_1_dark_gray.png / WR_Grace_hexagon_pattern_mask_final.png, committed
-   as teaser-*.png). The section goes full-bleed to carry the background; a nested grid re-insets
-   the cards to x=100. */
-body.sidebar main > .section.cards-container.geo-hex:has(.cards.featured-content) {
-  position: relative;
-  overflow: hidden;
-  background-color: rgb(230 231 232);
-
-  /* Butt the gray band directly against whatever follows (banner or footer) — source gap 0. */
-  margin-bottom: 0;
-
-  /* Mobile: top padding clears the hex band; desktop bumps to the source ~206px offset below. */
+/* ===== geoAndHex variant (section style `geo-hex`) — SIDEBAR-SPECIFIC padding + grid re-inset =====
+   The geo-hex TREATMENT (full-bleed gray band + white hexagon top edge + geo-line network + the
+   ~80px heading→cards gap) is GLOBAL, in styles/lazy-styles.css, so every template renders it.
+   But the SECTION PADDING must be re-declared HERE at the sidebar selector's specificity (0,6,2):
+   insights pages ALSO match the mobile-rail rule
+   `body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section.cards-container
+   { padding-top: 20px }` (also 0,6,2) — which would otherwise beat the global padding (only 0,4,1)
+   and crush the hex clearance (heading jammed to the top). This rule (same 0,6,2, later in source)
+   wins, restoring the clearance. Products have no such rail rule, so the GLOBAL padding applies to
+   them directly. The desktop grid re-inset (widget-gutter columns) is genuinely sidebar-only. */
+/* Match the mobile-rail selector's shape (`main:has(> .section.sidebar-nav.breadcrumb-container)`)
+   so this is STRICTLY more specific than the `padding-top: 20px` rule — otherwise that rule wins
+   and crushes the hex clearance. */
+body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section.cards-container.geo-hex:has(.cards.featured-content) {
   padding-top: 110px;
   padding-bottom: 40px;
 }
 
-/* Decorative artwork. MOBILE-FIRST base = compact FIXED-HEIGHT bands (source mobile does NOT
-   fill the whole section — that would zoom the hexagons huge). Desktop (>=900px, further below)
-   overrides to the full-section `contain` technique. Both keep the artwork flips so the solid
-   edge blends into the white page above and the hexagons hang down.
-   ::before = faint triangle line-network, a ~350px band in the LOWER half of the section,
-   over-wide (214vw) so it crops rather than shrinks; `cover` keeps the lines at native scale. */
-body.sidebar main > .section.cards-container.geo-hex:has(.cards.featured-content)::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 214vw;
-  height: 350px;
-  z-index: 0;
-  pointer-events: none;
-  background-image: url('../../blocks/columns/teaser-geo-lines.png');
-  background-repeat: no-repeat;
-  background-position: 50% 100%;
-  background-size: cover;
-  transform: translateX(-50%) scaleX(-1);
-}
-
-/* ::after = white hexagon band pinned to the TOP; a ~136px fixed band, over-wide (130vw) so the
-   hexagons stay large-ish and crop at the edges. Flipped BOTH ways so the solid edge sits at the
-   top (blending into the white page above) and the hexagons hang down into the gray. */
-body.sidebar main > .section.cards-container.geo-hex:has(.cards.featured-content)::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 50%;
-  width: 130vw;
-  height: 136px;
-  z-index: 1;
-  pointer-events: none;
-  background-image: url('../../blocks/columns/teaser-hex-mask.png');
-  background-repeat: no-repeat;
-  background-position: 50% 100%;
-  background-size: cover;
-  transform: translateX(-50%) scale(-1, -1);
-}
-
-/* lift the real cards content above the decorative layers */
-body.sidebar main > .section.cards-container.geo-hex:has(.cards.featured-content) > * {
-  position: relative;
-  z-index: 2;
-}
-
 @media (width >= 900px) {
-  /* Desktop geo-hex: go FULL-BLEED to carry the gray band, and re-inset the cards to x=100 via a
-     nested grid re-using main's column template (content in cols 2–3, clear of the widget gutter).
-     ~206px top offset so the title clears the hexagons (source parity). */
-  body.sidebar main > .section.cards-container.geo-hex:has(.cards.featured-content) {
+  body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section.cards-container.geo-hex:has(.cards.featured-content) {
     grid-column: 1 / -1;
     display: grid;
     grid-template-columns:
@@ -914,44 +860,11 @@ body.sidebar main > .section.cards-container.geo-hex:has(.cards.featured-content
       minmax(0, 747px)
       minmax(0, 320px)
       minmax(20px, 1fr);
-    padding-top: 215px;
-
-    /* Live has ~140px of decorative hex space below the last card row (60px was too tight,
-       stretching the grid to the section bottom). Keep 215px top + 28px col-gap + 40px row-gap. */
+    padding-top: 250px;
     padding-bottom: 140px;
   }
 
-  body.sidebar main > .section.cards-container.geo-hex:has(.cards.featured-content) > * {
+  body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section.cards-container.geo-hex:has(.cards.featured-content) > * {
     grid-column: 2 / 4;
-  }
-
-  /* Live puts ~80px of vertical space between the "Latest Insights from Grace" heading and the
-     first card row (the migrated grid otherwise butts flush against the heading). Push the cards
-     WRAPPER down within the geo-hex section (target the wrapper only — adding it to both the
-     wrapper AND the nested block would stack). Scoped to geo-hex so the plain-white
-     featured-content pages keep their own spacing. */
-  body.sidebar main > .section.cards-container.geo-hex .cards-wrapper:has(.cards.featured-content) {
-    margin-top: 80px;
-  }
-
-  /* Desktop overrides the mobile-base compact bands: both decorative layers fill the whole
-     section (inset:0) with `background-size: contain` — the source's desktop technique that keeps
-     the hexagons crisp across the full-bleed gray band. (Mobile keeps the fixed-height bands.) */
-  body.sidebar main > .section.cards-container.geo-hex:has(.cards.featured-content)::before {
-    top: 0;
-    width: auto;
-    height: auto;
-    inset: 0;
-    background-size: contain;
-    transform: scaleX(-1);
-  }
-
-  body.sidebar main > .section.cards-container.geo-hex:has(.cards.featured-content)::after {
-    top: 0;
-    width: auto;
-    height: auto;
-    inset: 0;
-    background-size: contain;
-    transform: scale(-1, -1);
   }
 }
