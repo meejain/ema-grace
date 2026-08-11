@@ -239,6 +239,71 @@ the 3+ visual comparisons are the GATE.
 - If a specific source page genuinely won't load headless (heavy JS / geo-gated / JS-hydrated list
   like the press-releases landing), **say so explicitly** — never skip silently and imply coverage.
 
+### 4b. Rendered-inventory comparison — the scaled, per-page audit method (products, 34 pages)
+
+§4a's 3-sample screenshot gate confirms a template *looks* right; when you need to grade EVERY page
+in a family for content fidelity (not just 3 samples), use this token-efficient rendered-DOM diff
+instead of screenshotting dozens of pages. This is how the products family (34 pages) was fully
+audited and segregated into OK ✅ / COSMETIC ⚠️ / MAJOR ❌.
+
+**Pick the two endpoints — and PROVE they're equivalent first.**
+- Source = live `https://grace.com/<path>/`. Migrated = the **production PREVIEW**
+  `https://{branch}--{repo}--{owner}.aem.page/<path>` (NOT localhost — the local dev server is
+  flaky here and, when started with `--html-folder`, PROXIES `.plain.html` from remote instead of
+  serving your working copy). Before trusting the preview as a stand-in for your on-disk output,
+  PROVE they match: (a) inject a unique marker comment into a local `.plain.html` and curl localhost
+  to see if it's reflected (it usually is NOT → confirms localhost proxies remote), and (b) diff the
+  preview's `.plain.html` block classes + byte size against your local file for one page. Only once
+  byte/structure-identical is the preview a faithful proxy for "what the migration produced."
+  ⚠️ Never assume — this equivalence check is the load-bearing step.
+- Fallback if the preview 404s (page not yet pushed to DA): you MUST use a working `localhost:3000`
+  serving local `content/` (plain `aem up`, no `--html-folder`), or you have nothing faithful to
+  compare. Say so rather than comparing against stale remote.
+
+**Pre-flag cheaply before rendering anything.** Map each source slug → migrated file (handle casing,
+e.g. `TRISYL-XGE-Catalyst` → `trisyl-xge-catalyst`). Record **byte size + block count** per migrated
+`.plain.html`: tiny files (hubs at 1.5–2.6 KB vs detail pages at 6–13 KB) pre-flag JS-hydrated
+content-loss suspects before you look at a pixel. A curl of the SOURCE gives a rough component
+signature too — but treat it as a HINT ONLY (raw grace.com HTML is a pre-hydration skeleton; §3 step 2).
+
+**Fan out — one sub-agent per batch of ~6–10 pages** (Task/Agent tool, `general-purpose`). Run
+batches SEQUENTIALLY, not concurrently — they share one headless browser and will fight over it.
+Each sub-agent, per page:
+1. Renders BOTH URLs at a fixed **1280×900 desktop** viewport (Playwright MCP).
+2. **Waits ~2.5–4 s for hydration** (EDS blocks + JS-hydrated hub lists populate after load; use a
+   `setTimeout` Promise in `browser_evaluate`).
+3. Extracts a **compact component inventory** from each side via `browser_evaluate` — the ORDERED
+   list of sections/blocks, heading text, and COUNTS of key elements (images, CTAs, cards, accordion
+   items, tables **+ column counts**, video embeds). Comparing two structured inventories is the core
+   — NOT dumping screenshots.
+4. Diffs the inventories **region by region** against a checklist: hero (bg/breadcrumb/H1/subtitle/
+   CTA), contact widget, body-copy completeness (is EVERY source heading/paragraph/download present?),
+   columns teaser, cards "Latest Insights", accordion, video, tables, layout.
+5. Uses `content/drafts/<block>.plain.html` as the REFERENCE for what a given EDS block should look
+   like whenever a block's identity is ambiguous.
+
+**Two verification rules that keep the OK list trustworthy (avoid false positives):**
+- **Lazy-load guard:** call an image "broken" ONLY if `naturalWidth === 0` *after scrolling it into
+  view*. This clears lazy "Latest Insights" thumbnails (false alarm) while still catching a genuinely
+  broken image (`src=about:error`, naturalWidth 0).
+- **Element-scoped screenshots ONLY as a last resort** — for a specific color/spacing/font judgment,
+  never `fullPage`. Every finding must cite what was actually observed in the rendered inventory.
+
+**Classify + roll up:** each region ✅/⚠️/❌ → per-page severity. **OK ✅** = no user-visible diff
+worth fixing; **COSMETIC ⚠️** = content correct, only visual polish differs (color, spacing, font,
+alignment, image sizing, a rendered-as-list-not-table); **MAJOR ❌** = missing/empty/broken/wrong
+content or broken layout (empty hub list, dropped paragraph/section, 404 links, broken image).
+
+**Report cross-cutting patterns separately so they're fixed ONCE, not per page.** The products audit
+surfaced: header breadcrumb rendering as bare `› › › › ›` (all 34 pages — one runtime fix);
+video-overlay dropping its caption title/description (parser); `.pdf` download hrefs rewritten to
+`-pdf` → 404 (transformer); a stray mid-page `Home / Products` breadcrumb before Follow-Us tails;
+and duplicated table columns / duplicated brochure images. Systemic → fix in the shared
+parser/transformer/runtime and re-verify a sample; per-page content loss → fix and reimport that page.
+
+**Caveat to record every time:** this grades the RENDERED PREVIEW vs LIVE grace.com — it proves
+migration fidelity, NOT that anything is published to DA (§0). Keep that distinction explicit.
+
 ### Known misses (gaps the funnel does NOT yet cover)
 
 - **No draft-coverage check.** Nothing verifies every catalog variant/option has a matching

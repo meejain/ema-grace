@@ -49,6 +49,22 @@ How to RUN the importer (from §6):
 - Quality gate before "done": `npm run lint` · `node tools/quality/breakpoint-check.mjs` ·
   `npm run test:a11y <localhost url>` · confirm visually at localhost:3000. Paste the actual output.
 
+How to AUDIT an already-migrated family per-page (grade every page OK/COSMETIC/MAJOR — from §4b):
+- Compare RENDERED source vs RENDERED migrated. Source = live grace.com; migrated = the production
+  PREVIEW `https://{branch}--{repo}--{owner}.aem.page/<path>`. **PROVE the preview equals your on-disk
+  output first** (inject a marker into a local `.plain.html` + curl localhost to see localhost proxies
+  remote; diff preview `.plain.html` block-classes/bytes vs local) — never assume. If the local dev
+  server won't stay up, or was started with `--html-folder` (which proxies `/family/*` from remote),
+  the preview IS your faithful target; if the preview 404s (not pushed to DA), you MUST use a plain
+  `aem up` localhost serving local `content/` or you have nothing valid to compare.
+- Pre-flag cheaply: byte size + block count per migrated `.plain.html` (tiny files = JS-hydrated
+  content-loss suspects). Then fan out ONE sub-agent per batch of ~6–10 pages, run batches
+  SEQUENTIALLY (they share one browser). Each renders both URLs at 1280×900, waits ~2.5–4s for
+  hydration, extracts a compact ordered component inventory (blocks + headings + element/column
+  counts) via `browser_evaluate`, and diffs region-by-region — NOT full-page screenshots. Judge an
+  image broken only if `naturalWidth===0` AFTER scrolling into view. Use `content/drafts/<block>` as
+  the block reference. Report cross-cutting defects ONCE (systemic → shared parser/transformer/runtime).
+
 How to CREATE a backup set when a family is COMPLETE (from §7 — do this every time):
 - Snapshot to `tools/importer/backups/<set>/` (one folder per completed set):
   1. `cp tools/importer/import-grace-master.bundle.js tools/importer/backups/<set>/import-grace-master.bundle.js`
