@@ -45,6 +45,30 @@ export default function decorate(block) {
   const picture = block.querySelector('picture');
   const anchor = block.querySelector('a');
   const link = anchor ? anchor.href : '';
+
+  // Caption title (source: `.media-video .subhead-large`). The importer emits it as a sibling
+  // heading immediately before the block (default content in the same section). Adopt it into the
+  // poster as a centered overlay caption — matching grace.com, where the title sits over the poster
+  // above the play button and a "Watch video ›" affordance sits below it. Read it before we clear.
+  // After decorateSections the heading sits in the PRECEDING `.default-content-wrapper` (the video
+  // block is in its own `*-wrapper`), so check both the block's own previous sibling (unwrapped)
+  // and the wrapper's previous sibling's LAST child (wrapped). Only adopt a bare heading, and only
+  // when it directly precedes the video (last child) so an unrelated subheading isn't taken.
+  const headingBefore = (el) => {
+    const p = el.previousElementSibling;
+    if (p && /^H[1-6]$/.test(p.tagName)) return p;
+    return null;
+  };
+  const wrapper = block.parentElement;
+  const wrapperPrev = wrapper && wrapper.classList.contains('video-wrapper')
+    ? wrapper.previousElementSibling : null;
+  const wrappedHeading = wrapperPrev && wrapperPrev.classList.contains('default-content-wrapper')
+    && /^H[1-6]$/.test(wrapperPrev.lastElementChild?.tagName || '')
+    ? wrapperPrev.lastElementChild : null;
+  const captionEl = headingBefore(block) || wrappedHeading;
+  const captionText = captionEl ? captionEl.textContent.trim() : '';
+  if (captionEl) captionEl.remove();
+
   block.textContent = '';
 
   const frame = document.createElement('div');
@@ -54,12 +78,28 @@ export default function decorate(block) {
   poster.className = 'video-overlay-poster';
   if (picture) poster.append(picture);
 
+  // Title overlay near the top-center of the poster (source parity).
+  if (captionText) {
+    const title = document.createElement('p');
+    title.className = 'video-overlay-title';
+    title.textContent = captionText;
+    poster.append(title);
+  }
+
   const button = document.createElement('button');
   button.type = 'button';
   button.className = 'video-overlay-play';
-  button.setAttribute('aria-label', 'Play video');
+  button.setAttribute('aria-label', captionText ? `Play video: ${captionText}` : 'Play video');
 
   poster.append(button);
+
+  // "Watch video ›" affordance below the play button (source parity).
+  const watch = document.createElement('span');
+  watch.className = 'video-overlay-watch';
+  watch.textContent = 'Watch video';
+  watch.setAttribute('aria-hidden', 'true');
+  poster.append(watch);
+
   frame.append(poster);
   block.append(frame);
 

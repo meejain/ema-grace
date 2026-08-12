@@ -253,3 +253,173 @@ to talk to an expert" widget in migrated main — harmless addition; flag only i
 
 - 2026-08-11 — consista hexa background (logged §C).
 - 2026-08-11 — TRISYL-XGE benefits cards too thin (logged §C).
+
+---
+
+## F. Hub product-navigation lists — RECONSTRUCTED 2026-08-11 (task #8, MAJOR)
+
+The importer dropped the main-column nested product-navigation list from two hub pages (only the
+sidebar-nav + intro H2/paragraphs survived). Reconstructed from the source cache
+(`/tmp/qa-src/{catalysts,synthetic-silicas}.html`), matching the WORKING hub pattern already present
+on `adsorbents.plain.html` / `fine-chemicals.plain.html`: a `<ul>` appended inside the intro section,
+each family a `<li><p><strong>NAME®</strong> <a href="…">label</a></p></li>`, with nested `<ul>` for
+sub-items. Hand-edited `content/products/*.plain.html` (per user go-ahead; uploads to DA later).
+
+- ✅ **catalysts** — 7 top-level categories restored (ART® Hydroprocessing, FCC Additives, FCC
+  Catalysts, Catalyst Carriers and Binders, Chemical Catalysts [+3 nested: RANEY®, DAVICAT® Supports,
+  DAVICAT® Custom Development], Polypropylene Catalyst, Polyethylene Catalysts). Links → /industries/…
+  as on source.
+- ✅ **synthetic-silicas** — 15 families restored preserving source nesting (SYLOID® Silicas [+4
+  nested], SHIELDEX®, SYLOWHITE™, SYLOJET®, LUDOX®, SYLOBLOC®, TRISYL® [+2 nested], DARACLAR®,
+  SYLODENT® & SYLOBLANC®, SILSOL®, DAVISIL®, VYDAC®, VYVID™, PERKASIL® [+2 nested]) + trailing
+  "Learn about the potential classification of SAS" link.
+
+**PRODUCTS SET COMPLETE** — all 13 tracked tasks closed. Final gate 2026-08-11:
+`npm run lint` → 0 errors (7 baseline no-console warnings only), `lint:css` clean;
+`node tools/quality/breakpoint-check.mjs` → passed (600/900/1200 min-width only).
+
+---
+
+## G. Validation spot-checks — trisyl-silica (2026-08-12, user)
+
+Two defects found during user validation of the major set, both hand-fixed in
+`content/products/trisyl-silica.plain.html`:
+
+- ✅ **Accordion fragmented into 6 separate blocks.** The importer emitted each FAQ as its own
+  `<div class="accordion faq">` in its own section → rendered as 6 disconnected accordions. Source
+  is ONE continuous accordion with 6 rows. Merged all rows into a single `accordion faq` block by
+  removing the intervening section/accordion boundaries (`class="accordion faq"` count now = 1;
+  6 rows verified: 5 questions + References). [IMPORTER root cause — accordion rows split per
+  section; fix page-level now, revisit parser if it recurs.]
+- ✅ **Missing 2-column benefits block with circular diagram.** Source "Benefits for edible oil…"
+  is a Bootstrap `col-4` bullet list beside a `col-8` circular benefits diagram
+  (`chart-trisyl-pie-chart`, natural 1200×900 / 4:3). The importer had (a) dropped the 2-col layout
+  (bullets rendered full-width) and (b) mis-placed the pie-chart INSIDE the first FAQ answer (source
+  FAQ answer #1 has only `chart-trisyl-table` + `chart-trisyl-bar-chart`). Fix: removed pie-chart
+  from the FAQ; wrapped the bullets + pie-chart into `columns image-right` (text left / diagram
+  right). Added `body.contactus`-scoped override in `blocks/columns/columns.css` so the diagram
+  renders UNCROPPED (`aspect-ratio:auto; object-fit:contain`) at a 1/3-text : 2/3-image full-width
+  split (matches source col-4/col-8). No product page used image-right before, so override is safe.
+  Gate: `lint:css` clean + breakpoint ✅.
+
+- ✅ **vyvid — Purification Solutions: geo-hex background + category-grid cards + "Learn more" CTA.**
+  Source wraps this section in `<section class="light-gray-bkgd"><div class="geoAndHex">` (confirmed
+  in `/tmp/qa-src/vyvid.html`), and its cards are `.card-item.white-bkgd` with a green title + a
+  "Learn more" CTA (source card body: `<p class="h4 title">DAVISIL®…</p><div class="cta">Learn
+  more</div>`). Three fixes in `content/products/vyvid.plain.html`:
+    1. Switched the block from `cards product` → `cards category-grid` (the matching draft/variant:
+       `content/drafts/cards-category-grid.plain.html` — white card, centered green 18/600 title,
+       "Learn more ›" CTA).
+    2. Replaced the repeated product-name link with the "Learn more" CTA label on each card
+       (DAVISIL® / VYDAC®), matching source.
+    3. Appended `Section Metadata Style=geo-hex` to the section.
+  CSS: broadened the geo-hex selector in `styles/lazy-styles.css` to
+  `:has(.cards.featured-content, .cards.category-grid)` (8 rules + the heading→cards margin). Safe:
+  vyvid is the ONLY geo-hex section containing a `.cards.category-grid` block (checked all content/),
+  so no other page is affected. The category-grid `li` already has `background-color: var(--white)`,
+  giving the white card panels over the gray hexa band. Gate: `lint:css` clean + breakpoint ✅.
+
+- ✅ **product-stewardship — hero bg, sidebar-nav dividers, top spacing, gray callout, summaries gap.**
+  Five defects verified against LIVE source (measured via Playwright getComputedStyle on
+  grace.com/products/product-stewardship):
+    1. **Hero missing bg image.** Source `generic-hero` has bg `ehs-product-risk-management-worms-ecat-lab`
+       (cover), 178px. Migrated was a solid-blue `no-image` banner. Fix: added the scene7 DM anchor as
+       the hero's first row in `content/products/product-stewardship.plain.html` (converts to <picture>
+       at runtime → image banner with the left→right gradient).
+    2. **Sidebar-nav missing dividers.** Source `.section-navigation li` = `border-top:1px solid
+       rgb(196 196 196)` + `padding:12px 0`. Migrated had only `margin-bottom:16px` (no lines). Fix in
+       `templates/sidebar/sidebar.css`: product-hub-scoped (`:not(:has(> .sidebar-nav.breadcrumb-container))`)
+       per-<li> top border + 12px padding; dropped the container's own top border/padding to avoid a
+       doubled top line. Verified live: `1px solid rgb(196,196,196)`, `12px 0`.
+    3. **Content too close to header.** Source article sits 50px below the hero (padding-top:5rem).
+       The insights alignment rule (`.sidebar-nav + .section {margin-top:0}` + nav `margin-top:0`) was
+       un-scoped and zeroed it for product hubs too → 0px gap. Fix: scoped BOTH the nav-zero and the
+       first-content-zero to insights (`:has(> .sidebar-nav.breadcrumb-container)`) only; product hubs
+       keep the 50px. Verified live: hero→content gap now 50px.
+    4. **Animal Testing / reps box needs a background.** Source reps panel ("…contact one of the
+       following Grace representatives") is `section.light-gray-bkgd.black` = rgb(230 231 232),
+       centered, h4 Roboto Slab 18/600. (The "Animal Testing Policy" heading itself is white/no-bg in
+       source — the gray box is the reps panel below it.) Fix: new GLOBAL `gray-callout` section style
+       in `styles/lazy-styles.css` (bg rgb(230 231 232), centered, h4 18/600, body text stays 14px —
+       deliberately NOT the global `.section.light-gray` whose intro rule blows body text to
+       heading-xl); tagged the reps section `Style: gray-callout`. Verified live via injected element:
+       bg rgb(230,231,232), centered, h4 Roboto Slab 18/600, links 14px. ✅
+    5. **Summaries: too much space.** Source heading→list gap is only 20px; migrated split the
+       "Available Product Stewardship Summaries" H3 and the two-column list into two sections (~113px of
+       inter-section margins). Fix: merged the H3 into the same section as the `table two-column-content`
+       list (removes both 50px section margins). [content edit]
+  NOTE: product content is PROXIED from remote DA on local/preview, so the 4 content-side edits
+  (hero anchor, gray-callout tag, summaries merge, + earlier reps section) render only AFTER these
+  pages are published to DA. All CSS edits (nav dividers, top-spacing scope, gray-callout style) are
+  served locally and verified live. Gate: `npm run lint` 0 errors + `lint:css` clean + breakpoint ✅.
+
+- ✅ **product-stewardship — excess vertical space around Animal Testing + reps box (follow-up).**
+  User flagged big empty gaps between the summaries list → "Animal Testing Policy" → gray reps box.
+  Root cause: these were three SEPARATE grid sections; grid margins don't collapse, so each
+  `margin-block: 50px` stacked → ~100px gaps (source: 52px list→AT heading, 21px AT→gray box, measured
+  live). Fix: (1) merged "Animal Testing Policy" into the SAME content section as the summaries list
+  (source has them in one `<article>`), so that gap becomes normal in-flow heading margin (~50px ≈
+  source 52px); (2) in `templates/sidebar/sidebar.css`, product-hub-scoped: zero the bottom margin of
+  the section preceding a `.section.gray-callout` and give the callout `margin-top: 20px` → total
+  gap ≈ 20px (≈ source 21px), instead of the doubled 100px. Verified live via injected structure:
+  preceding-section margin-bottom 0, callout margin-top 20px, bg rgb(230,231,232). Insights untouched
+  (scoped away from `.breadcrumb-container`). Gate: `lint:css` clean + breakpoint ✅.
+
+- ✅ **product-stewardship — gray background bled over the WHOLE content column (regression fix).**
+  After the Animal-Testing merge, the gray `gray-callout` background covered the entire main content
+  (intro + Characterization + …), not just the reps box. ROOT CAUSE: the merge edit left the
+  `<div class="table two-column-content">` block UNCLOSED — the content section had 5 `<div>` opens
+  vs 4 closes (whole-file diff +1). The unbalanced div made the browser fold the reps section (with
+  its `Style: gray-callout` metadata) INTO the content section, so aem.js applied gray-callout to the
+  merged super-section. Verified by running `aem.decorateSections` on the served plain.html: only 3
+  sections, section #2 = gray-callout wrapping all content. FIX: added the missing `</div>` to close
+  the two-column-content block before the Animal Testing H3. Re-verified: 5 clean sections, section #2
+  = content (no gray), section #3 = gray-callout wrapping ONLY the reps box. File div-balance now
+  38/38. Gate: `lint:css` clean + breakpoint ✅. LESSON: after hand-merging sections in `.plain.html`,
+  ALWAYS re-check `<div>` open/close balance — an off-by-one silently merges sections + leaks section
+  styles.
+
+- ✅ **ALL 6 product hubs — "Products" heading, hero images, two-column product list (2026-08-12).**
+  User validation of the hubs surfaced 3 gaps (measured against LIVE source via Playwright
+  getComputedStyle):
+    1. **Missing "Products" heading above the sidebar-nav.** Source `.section-navigation` opens with
+       `<h4><strong>Products</strong></h4>` (Roboto Slab 18px/600 black, margin-bottom 30px → 30px gap
+       to first nav item). Added `<h4 id="products"><strong>Products</strong></h4>` before the nav
+       `<ul>` in ALL 6 hub `.plain.html` files; styled it in `templates/sidebar/sidebar.css`
+       (product-hub-scoped, `:not(:has(> .sidebar-nav.breadcrumb-container))`). Verified live: 18/600,
+       Roboto Slab, mb 30px.
+    2. **Hero images missing on 3 hubs.** catalysts/synthetic-silicas/product-stewardship already had
+       them; adsorbents/fine-chemicals/quality-management did not. Source heroes are DAM paths but all
+       resolve as scene7 asset IDs (probed 200): adsorbents `mt-adsorbents-employee-FINAL-3000x1360`,
+       fine-chemicals `sc-chemicals-woman-lab-looking-3000x1360`, quality `ehs-quality-management-screen-plant-control-system-blue`.
+       Added each as the hero's first-row scene7 anchor. All 6 hubs now carry a hero bg image.
+    3. **Product-nav list not in two columns.** Source lays the main product list as TWO side-by-side
+       `<ul>` groups (~313px each, 40px gap) — only catalysts + synthetic-silicas have two groups
+       (adsorbents/fine-chemicals have one, stay full-width). Added `templates/sidebar/sidebar.css`
+       rule scoped to product hubs + `.default-content-wrapper:has(> ul + ul) > ul` →
+       `display:inline-block; width:calc(50% - 20px)` with `margin-left:40px` on the 2nd group, from
+       600px up. Verified live: `:has(> ul + ul)` matches, both ULs inline-block 50%-20px, 2nd ml 40px,
+       sideBySide=true. Single-list hubs unaffected.
+  Also: source renders ALL product-hub nav links at weight 900 (not just first-child) — updated the
+  nav-link rule accordingly. All 6 hubs div-balanced. Gate: `lint:css` clean + breakpoint ✅.
+  (Content-side edits — Products heading + hero anchors — render on preview only AFTER DA publish;
+  the CSS/spacing/2-col is served locally and verified live.)
+
+- ✅ **ALL 6 product hubs — MOBILE section-nav "filter" <select> (2026-08-12).**
+  Source collapses the product-hub left section-navigation on mobile (<900px) into a native
+  `<select>` "filter": the current hub is the selected option; choosing another navigates to it.
+  Desktop (>=900px) shows the plain `<ul>` list. Measured source select: bg rgb(239 239 239),
+  1px solid rgb(196 196 196), no radius, Roboto 16px/500, padding 0 30px 0 15px, appearance:none, 40px
+  tall, "+" (fa-plus) indicator on the right, current page `[selected]`, onchange → navigate.
+  IMPLEMENTATION (no content change — built from the authored `<ul>`):
+    - NEW `templates/sidebar/sidebar.js` (default export, called with `main` in the lazy phase by
+      `scripts.js` loadTemplate). Scoped to product-hub nav (`.section.sidebar-nav:not(.breadcrumb-container)`):
+      builds a `<select class="section-nav-select">` from the top-level nav `<li> > a` links, marks the
+      current pathname's option selected, wires `change` → `window.location.assign(value)`, inserts it
+      (wrapped in `.section-nav-select-wrapper`) before the `<ul>`. Insights rails untouched.
+    - `templates/sidebar/sidebar.css`: product-hub-scoped select styling to source spec + "+" indicator
+      via wrapper `::after`; mobile-first show/hide — base (mobile) shows the select + hides the `<ul>`,
+      `@media (width >= 900px)` flips it (list shown, select hidden).
+  Verified live locally: at 390px the select builds with all 6 options (Adsorbents selected), styled to
+  spec, `<ul>` hidden; at 1280px the select wrapper is `display:none` and the `<ul>` is `display:block`.
+  Gate: `npm run lint` 0 errors (new sidebar.js clean) + `lint:css` clean + breakpoint ✅.

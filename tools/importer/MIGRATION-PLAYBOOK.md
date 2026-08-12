@@ -316,9 +316,14 @@ migration fidelity, NOT that anything is published to DA (§0). Keep that distin
 - **Parity is fully manual.** The computed-style comparison vs live grace.com (§2) is by hand per
   page; there's no automated "diff migrated vs live measurements" pass.
 - **Stage 1 is per-family.** Signatures are hand-tuned to insights; each new family needs its own.
-- **2 of ~12 families proven (insights 165 + newsroom 28 = 193/470).** The loop generalized from
-  insights (custom `buildInsightsArticle`) to newsroom (default path) — but each new family still
-  needs its own analysis + visual gate; don't assume the default path covers everything.
+- **3 of ~12 families proven (insights 165 + newsroom 28 + products 34 = 227/470).** The loop
+  generalized from insights (custom `buildInsightsArticle`) to newsroom + products (default path) —
+  but each new family still needs its own analysis + visual gate; don't assume the default path covers
+  everything.
+- **Late-hydration hub lists need a live-DOM fallback.** The onLoad wait can serialize a JS-hydrated
+  hub before its product-nav list appears. The `/tmp/qa-src` cache is ALSO pre-hydration (missing
+  nested sub-items), so the fallback is the LIVE source DOM (Playbook "Product hub / sidebar recipe"),
+  not the cache. No automated detector for "list didn't hydrate" yet — caught by manual visual gate.
 - **Publishing to DA is unproven at scale.** Everything is local so far (see §0 — content is
   git-ignored, EDS serves from DA). No family has been pushed to `.aem.page`/`.aem.live` yet.
 
@@ -331,7 +336,7 @@ migration fidelity, NOT that anything is published to DA (§0). Keep that distin
 | insights | 165 | 165 ✅ | insights-article template — DONE |
 | newsroom | 28 | 28 ✅ | 26 press-releases (default path + Hero (banner) + URL breadcrumb) + 2 landing (hero + year-accordion + featured cards) — DONE |
 | products (detail) | 28 | 28 ✅ | Product Detail template — DONE. Default path + `template: contactus` + Hero (product) + `sectionizeFlatBody`. See "Product Detail recipe" below |
-| products (hubs) | 6 | 6 ⚠️ | JS-hydrated CATEGORY-HUB pages (synthetic-silicas, adsorbents, catalysts, fine-chemicals, product-stewardship, quality-management). Imported via onLoad hydration-wait; 2 hubs still miss a late-hydrating product-list (raise poll threshold / wait for the list selector, then reimport) |
+| products (hubs) | 6 | 6 ✅ | JS-hydrated CATEGORY-HUB pages (synthetic-silicas, adsorbents, catalysts, fine-chemicals, product-stewardship, quality-management). Imported via onLoad hydration-wait. The 2 hubs whose product-list didn't hydrate in time (catalysts, synthetic-silicas) were reconstructed by HAND from the LIVE source DOM (see "Product hub / sidebar recipe" below) — DONE 2026-08-12 |
 | industries | 102 | 8 | deep (depth 2-5): landing → application → detail; most varied |
 | about-grace | 39 | 8 | section pages + ~30 leadership bios (person-profile template) |
 | campaign | 17 | 2 | flat campaign/landing pages |
@@ -342,9 +347,10 @@ migration fidelity, NOT that anything is published to DA (§0). Keep that distin
 | resources | 5 | 0 | — |
 | misc one-offs | ~10 | ~few | privacy/cookie/terms/search/404/etc. |
 
-Recommended order (ROI): ~~newsroom~~ ✅ → ~~products (detail)~~ ✅ → **leadership bios** (about-grace,
-person-profile template, ~30 uniform) → campaign → industries (largest/most varied, last) →
-forms (Adaptive Forms pass). Remaining products work: close the 2 hub product-list gaps.
+Recommended order (ROI): ~~newsroom~~ ✅ → ~~products (detail)~~ ✅ → ~~products (hubs)~~ ✅ →
+**leadership bios** (about-grace, person-profile template, ~30 uniform) → campaign → industries
+(largest/most varied, last) → forms (Adaptive Forms pass — inventory started, see §8). Products set
+fully complete (28 detail + 6 hubs).
 
 **Newsroom template notes (reference for similar default-path families):** press releases take the
 **default path** (`buildDefaultPage`) — no new page-type needed; the whole body (dateline, quotes,
@@ -443,6 +449,82 @@ validated flat pages (newsroom/compliance) keep their single-section output.
 **times out at ~10 min**, AND under load a page can serialize EMPTY (trisyl-xge-catalyst came out 967B
 once). Import in **batches of ~5**, then AUDIT byte size / section count and reimport any tiny page. (A
 per-page completeness ⚠️ ~50% is EXPECTED here — the runner compares against the pre-hydration skeleton.)
+
+### Product hub / sidebar recipe — the accumulated, PER-SOURCE truth (6 hubs, DONE 2026-08-12)
+
+The 6 `/products/` HUB pages (adsorbents, catalysts, fine-chemicals, synthetic-silicas,
+product-stewardship, quality-management) use `template: sidebar` (left section-nav + wide content
+column). The nav list is authored as a plain `<ul>` + Section Metadata `Style: sidebar-nav`. All 6
+share ONE structure; the recurring gaps + their fixes:
+
+- **JS-hydrated product-nav list.** The main-column product list hydrates late; the importer's onLoad
+  wait sometimes serialized the page BEFORE it appeared (catalysts + synthetic-silicas came out with
+  only the intro). FIX: reconstruct BY HAND from the **LIVE source DOM** (`grace.com/products/<hub>/`
+  via Playwright `browser_evaluate`, walking the ULs), NOT from the `/tmp/qa-src` cache — the cache is
+  the pre-hydration skeleton and is MISSING the nested sub-items. The live list has **two top-level
+  `<ul>` groups** (rendered as two columns) with nested `<ul>` sub-items and trailing descriptive text
+  (e.g. catalysts: CONSISTA®/LYNX® PP/HYAMPP® under Polypropylene; RANEY® "…for hydrogenation";
+  synthetic-silicas: DARACLAR® "Beer Stabilizer & Clarifier", PERKASIL® "Precipitated Silica" + 2 subs).
+  Product names are wrapped in `<strong>`. Match the WORKING hubs (adsorbents/fine-chemicals) pattern:
+  `<li><p><strong>NAME®</strong> <a href="…">label</a></p></li>`.
+- **Hero background image.** Hub heroes are `Hero (banner)` (breadcrumb + title, no CTA) WITH a photo
+  background — NOT the solid-blue no-image band. Source bg is a DAM path, but a scene7 equivalent
+  exists (catalysts `sc_catalysts_employee_v2`, synthetic-silicas `mt-synthetic-silicas-worms-employee-flipped`
+  — probe `grace.scene7.com/is/image/grace/<name>` for 200). Author it as the hero's FIRST-row anchor
+  `<div class="hero banner"><div><div><a href="https://grace.scene7.com/is/image/grace/<name>"></a></div></div><div><div><h1>…`
+  → buildDynamicMediaImages converts it to a `<picture>` → image banner with the left→right gradient.
+- **Sidebar-nav dividers + top spacing (RUNTIME, `templates/sidebar/sidebar.css`).** Source
+  `.section-navigation li` = `border-top:1px solid rgb(196 196 196)` + `padding:12px 0` (a bordered
+  list). Content sits 50px below the hero (source article `padding-top:5rem`). The insights alignment
+  rules (nav `margin-top:0` + first-content `margin-top:0`) must be SCOPED to insights
+  (`:has(> .section.sidebar-nav.breadcrumb-container)`); product hubs (plain `sidebar-nav`, NO
+  breadcrumb-container) keep the 50px gap and get the per-`<li>` dividers. Scope everything with
+  `body.sidebar main:not(:has(> .section.sidebar-nav.breadcrumb-container))` so insights are untouched.
+- **Gray callout section (`gray-callout`, GLOBAL in `styles/lazy-styles.css`).** The
+  product-stewardship "contact one of the following Grace representatives" panel is
+  `section.light-gray-bkgd.black` = rgb(230 231 232), centered, h4 Roboto Slab 18/600. Do NOT reuse
+  the global `.section.light-gray` (its intro-paragraph rule balloons body text to heading-xl); add a
+  dedicated `gray-callout` style. Tag the section with Section Metadata `Style: gray-callout`. On
+  product hubs, tighten the gap before it (grid margins don't collapse → zero the preceding section's
+  bottom margin + give the callout `margin-top:20px` ≈ source 21px).
+- **"Products" heading above the nav.** Source `.section-navigation` opens with
+  `<h4><strong>Products</strong></h4>` (Roboto Slab 18px/**600** black, `margin-bottom:30px`). Author
+  it in content as `<h4 id="products"><strong>Products</strong></h4>` before the nav `<ul>` (all 6
+  hubs); style product-hub-scoped in sidebar.css. NOTE: source renders ALL product-hub nav links bold
+  (weight **900**), not just the first — override the `li:first-child a` weight for hubs.
+- **Hero images.** Hub heroes are `Hero (banner)` (breadcrumb+title, no CTA) WITH a photo bg. Source
+  uses DAM paths but a scene7 rendition of the SAME basename resolves (probe
+  `grace.scene7.com/is/image/grace/<basename>` for 200 — worked for all 6): adsorbents
+  `mt-adsorbents-employee-FINAL-3000x1360`, catalysts `sc_catalysts_employee_v2`, fine-chemicals
+  `sc-chemicals-woman-lab-looking-3000x1360`, synthetic-silicas `mt-synthetic-silicas-worms-employee-flipped`,
+  product-stewardship `ehs-product-risk-management-worms-ecat-lab`, quality
+  `ehs-quality-management-screen-plant-control-system-blue`. Author as the hero's first-row anchor →
+  buildDynamicMediaImages converts to `<picture>`.
+- **Two-column product list (catalysts, synthetic-silicas only).** Source lays the product list as TWO
+  side-by-side `<ul>` groups (~313px each, 40px gap). Author as two consecutive top-level `<ul>`s in the
+  content wrapper; CSS `.default-content-wrapper:has(> ul + ul) > ul { display:inline-block; width:calc(50% - 20px) }`
+  + `+ ul { margin-left:40px }` from 600px (only engages when 2 groups → single-list hubs stay full-width).
+- **MOBILE section-nav `<select>` "filter" (<900px).** Source collapses the nav `<ul>` into a native
+  `<select>` (current hub selected, onchange → navigate); desktop shows the `<ul>`. Implemented in NEW
+  `templates/sidebar/sidebar.js` (builds the select from the authored `<ul>`, product-hub-scoped) +
+  sidebar.css (mobile shows select/hides `<ul>`; `>=900px` flips). Select style: bg rgb(239 239 239),
+  1px rgb(196 196 196), Roboto 16/500, appearance:none, 40px, "+" indicator via wrapper `::after`.
+
+**⚠️ DIV-BALANCE LESSON (hand-editing `.plain.html`).** When merging/splitting sections by hand, an
+off-by-one `<div>` (e.g. forgetting to close a `table two-column-content` block) SILENTLY merges two
+top-level sections — the browser's parser folds them, and a following section's `Style:` metadata then
+applies to the merged super-section (product-stewardship: `gray-callout` bled over the WHOLE content
+column). ALWAYS after a hand edit: (1) `python3 -c` count `<div>` opens vs `</div>` closes (must be
+equal); (2) run `aem.decorateSections` on the served `.plain.html` (via `--html-folder <tmp>
+--prefer-plain-html` + Playwright `import('/scripts/aem.js')`) and assert the expected section count +
+that each `Style:` landed on the intended section ONLY.
+
+**Dev-server + proxy caveat (verifying content edits).** Product `.plain.html` is PROXIED from remote
+DA on both localhost AND the `.aem.page` preview, so hand-edits to `content/products/*.plain.html` do
+NOT render there until published to DA. To verify locally: copy the edited file into a throwaway
+folder and serve with `aem up --html-folder <tmp> --prefer-plain-html`, then fetch
+`/<tmp>/<slug>.plain.html` and run the decoration in-browser. CSS/JS (blocks, templates, styles) ARE
+served locally and render immediately.
 
 ---
 

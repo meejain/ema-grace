@@ -22,7 +22,24 @@
   (`contactus.css` narrow-left column; `contactus.js` groups adjacent download buttons into a
   centered `.button-group`).
 - **URL list:** `urls.txt` (34 — 28 detail + 6 hubs).
-- **KNOWN GAP:** 2 hubs (synthetic-silicas, catalysts) miss a late-hydrating product-list.
+- **~~KNOWN GAP~~ CLOSED 2026-08-12:** the 2 hubs (synthetic-silicas, catalysts) that missed the
+  late-hydrating product-list were reconstructed BY HAND from the LIVE source DOM (two `<ul>` groups
+  + nested sub-items + `<strong>` product names + suffix text), plus hero bg images
+  (`sc_catalysts_employee_v2`, `mt-synthetic-silicas-worms-employee-flipped`). These are content-side
+  edits to `content/products/{catalysts,synthetic-silicas}.plain.html` (NOT in the bundle — the
+  bundle still produces the pre-hydration skeleton; re-running it will NOT reproduce these lists).
+- **ADDITIONAL RUNTIME fixes since snapshot (2026-08-11/12, NOT in bundle):**
+  - `styles/lazy-styles.css`: `geo-hex` selector broadened to `.cards.category-grid` (vyvid
+    Purification Solutions); NEW `gray-callout` GLOBAL section style (product-stewardship reps panel).
+  - `templates/sidebar/sidebar.css`: product-hub-scoped sidebar-nav `<li>` dividers (1px #c4c4c4 +
+    12px pad), 50px hero→content gap kept for hubs (insights alignment rules scoped to
+    `.breadcrumb-container`), gray-callout gap tightening.
+  - `blocks/columns/columns.css`: `body.contactus .columns.image-right` uncropped-diagram override
+    (trisyl-silica benefits + circular chart).
+  - `blocks/video/overlay.js` + `video.css`: video-overlay title/scrim.
+  - Several content-side hand-edits verified but PENDING DA publish (product content is proxied from
+    remote DA, so edits don't render on localhost/preview until uploaded).
 - **import note:** onLoad hydration wait makes pages slow → import in batches of ~5 (a 28-page run
-  times out ~10 min and a page can serialize empty under load; audit byte size after).
-- **snapshot date:** 2026-08-10
+  times out ~10 min and a page can serialize empty under load; audit byte size after). HUB lists that
+  don't hydrate in time: reconstruct from LIVE source DOM, not the `/tmp/qa-src` cache.
+- **snapshot date:** 2026-08-10 (bundle); hub + runtime deltas logged 2026-08-12.

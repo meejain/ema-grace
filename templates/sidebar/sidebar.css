@@ -29,6 +29,94 @@ body.sidebar main > .section.sidebar-nav > div {
   border-top: 1px solid #d2d2d2;
 }
 
+/* PRODUCT HUBS (plain sidebar-nav): the per-<li> top borders (added below) are
+   the dividers, so drop the container's own top border + padding to avoid a
+   doubled line at the top of the list. */
+body.sidebar main:not(:has(> .section.sidebar-nav.breadcrumb-container)) > .section.sidebar-nav > div {
+  padding-top: 0;
+  border-top: 0;
+}
+
+/* PRODUCT HUBS: the "Products" heading above the nav list (source
+   .section-navigation h4). Roboto Slab 18px/600 black, with 30px space below it
+   before the first nav item (source margin-bottom:30px). */
+body.sidebar main:not(:has(> .section.sidebar-nav.breadcrumb-container)) > .section.sidebar-nav h4 {
+  margin: 0 0 30px;
+  padding: 0;
+  font-family: var(--heading-font-family);
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.7;
+  color: var(--text-color);
+}
+
+body.sidebar main:not(:has(> .section.sidebar-nav.breadcrumb-container)) > .section.sidebar-nav h4 strong {
+  font-weight: 600;
+}
+
+/* PRODUCT HUBS — mobile section-nav "filter" (<900px). Source collapses the nav
+   list into a native <select>: current hub selected, choosing another navigates.
+   templates/sidebar/sidebar.js builds the <select> from the authored <ul>. Base
+   (mobile) = show the select, hide the list; >=900px flips it (list shows, select
+   hidden). Select styling matches source: bg #efefef, 1px #c4c4c4, no radius,
+   Roboto 16px/500, padding 0 30px 0 15px, appearance:none + a "+" indicator. */
+body.sidebar main:not(:has(> .section.sidebar-nav.breadcrumb-container)) > .section.sidebar-nav .section-nav-select-wrapper {
+  position: relative;
+  margin: 0;
+}
+
+body.sidebar main:not(:has(> .section.sidebar-nav.breadcrumb-container)) > .section.sidebar-nav .section-nav-select {
+  width: 100%;
+  height: 40px;
+  box-sizing: border-box;
+  padding: 0 30px 0 15px;
+  border: 1px solid rgb(196 196 196);
+  border-radius: 0;
+  background-color: rgb(239 239 239);
+  color: var(--text-color);
+  font-family: var(--body-font-family);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 40px;
+  appearance: none;
+  cursor: pointer;
+}
+
+/* "+" indicator on the right edge of the box (source .fas.fa-plus) */
+body.sidebar main:not(:has(> .section.sidebar-nav.breadcrumb-container)) > .section.sidebar-nav .section-nav-select-wrapper::after {
+  content: '+';
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+  font-family: var(--body-font-family);
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--text-color);
+  pointer-events: none;
+}
+
+body.sidebar main:not(:has(> .section.sidebar-nav.breadcrumb-container)) > .section.sidebar-nav .section-nav-select:focus-visible {
+  outline: 2px solid var(--accent-color-hover, #27853c);
+  outline-offset: 2px;
+}
+
+/* Mobile: hide the desktop <ul> (the <select> is the nav). */
+body.sidebar main:not(:has(> .section.sidebar-nav.breadcrumb-container)) > .section.sidebar-nav ul {
+  display: none;
+}
+
+@media (width >= 900px) {
+  /* Desktop: show the list, hide the mobile select. */
+  body.sidebar main:not(:has(> .section.sidebar-nav.breadcrumb-container)) > .section.sidebar-nav ul {
+    display: block;
+  }
+
+  body.sidebar main:not(:has(> .section.sidebar-nav.breadcrumb-container)) > .section.sidebar-nav .section-nav-select-wrapper {
+    display: none;
+  }
+}
+
 body.sidebar main > .section.sidebar-nav ul {
   margin: 0;
   /* left inset (source .section-navigation padding-left) so link text starts at
@@ -39,6 +127,17 @@ body.sidebar main > .section.sidebar-nav ul {
 
 body.sidebar main > .section.sidebar-nav li {
   margin: 0 0 16px;
+}
+
+/* PRODUCT HUBS (plain sidebar-nav, NOT the insights breadcrumb rail): the source
+   section-navigation draws a thin gray divider ABOVE each item (border-top 1px
+   #c4c4c4) with 12px vertical padding, so the links read as a bordered list
+   rather than a plain margin-separated stack. Scoped away from insights
+   (.breadcrumb-container), whose rail has no per-item dividers. */
+body.sidebar main:not(:has(> .section.sidebar-nav.breadcrumb-container)) > .section.sidebar-nav li {
+  margin: 0;
+  padding: 12px 0;
+  border-top: 1px solid rgb(196 196 196);
 }
 
 body.sidebar main > .section.sidebar-nav a {
@@ -55,9 +154,40 @@ body.sidebar main > .section.sidebar-nav li:first-child a {
   font-weight: 900;
 }
 
+/* PRODUCT HUBS: source renders ALL section-nav links bold (weight 900), not just
+   the first — the list is the 6 product categories, each a heavy link. */
+body.sidebar main:not(:has(> .section.sidebar-nav.breadcrumb-container)) > .section.sidebar-nav a {
+  font-weight: 900;
+}
+
 body.sidebar main > .section.sidebar-nav a:hover {
   color: var(--accent-color-hover, #27853c);
   text-decoration: underline;
+}
+
+/* PRODUCT HUBS — two-column product-nav list (catalysts, synthetic-silicas).
+   Source lays the main-column product list as TWO side-by-side <ul> groups
+   (~313px each, 40px gap). In our EDS output the two groups are consecutive
+   top-level <ul> children of the content .default-content-wrapper. Only engage
+   the 2-col layout when there ARE two groups (`:has(> ul + ul)`), so single-list
+   hubs (adsorbents, fine-chemicals) stay full-width. Base = stacked (mobile);
+   from 600px the two groups sit side by side. Scoped away from insights. */
+body.sidebar main:not(:has(> .section.sidebar-nav.breadcrumb-container)) > .section .default-content-wrapper:has(> ul + ul) > ul {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+@media (width >= 600px) {
+  body.sidebar main:not(:has(> .section.sidebar-nav.breadcrumb-container)) > .section .default-content-wrapper:has(> ul + ul) > ul {
+    display: inline-block;
+    width: calc(50% - 20px);
+    vertical-align: top;
+  }
+
+  /* the second group gets the 40px inter-column gap (source) */
+  body.sidebar main:not(:has(> .section.sidebar-nav.breadcrumb-container)) > .section .default-content-wrapper:has(> ul + ul) > ul + ul {
+    margin-left: 40px;
+  }
 }
 
 /* M2 (mobile): on the insights article the source stacks the ARTICLE first and
@@ -168,6 +298,19 @@ body.sidebar main > .section.sidebar-nav.breadcrumb-container .breadcrumb nav ol
      without the :not() it would give the hero a 50px bottom margin → 100px gap). */
   body.sidebar main > .section:not(.hero-container, .custom-widget-container) {
     margin-block: var(--spacing-l); /* 50px */
+  }
+
+  /* Grid margins don't collapse, so two stacked content sections show
+     50px (bottom) + 50px (top) = ~100px between them. On product hubs the gray
+     reps callout must butt close under the preceding content (source gap ~21px,
+     NOT 100px). Zero the preceding section's bottom margin and give the callout a
+     small 20px top margin so the total gap ≈ 20px. Insights unaffected. */
+  body.sidebar main:not(:has(> .section.sidebar-nav.breadcrumb-container)) > .section:has(+ .section.gray-callout) {
+    margin-bottom: 0;
+  }
+
+  body.sidebar main:not(:has(> .section.sidebar-nav.breadcrumb-container)) > .section.gray-callout {
+    margin-top: 20px;
   }
 
   /* Hero band: row 1, full bleed across all columns (the hero block paints its
@@ -721,14 +864,31 @@ body.sidebar main .columns.horizontal-teaser-featured > div::after {
      after the nav, e.g. the insights columns-container) must share that row and
      drop its top margin, otherwise the global 50px section margin pushes the H1
      ~50px below the SHARE label. Pin it to grid-row 2, align-self:start, mt:0. */
-  body.sidebar main > .section.sidebar-nav {
+  /* INSIGHTS ONLY: zero the nav's top margin so it aligns with the SHARE rail at
+     the content-area top. Product hubs keep the nav's 50px top margin so it aligns
+     with the first content section (which also keeps 50px) — both start together
+     50px below the hero, matching source (article padding-top: 5rem). */
+  body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section.sidebar-nav {
     margin-top: 0;
   }
 
-  body.sidebar main > .section.sidebar-nav + .section {
+  /* INSIGHTS ONLY (breadcrumb-container): the first content section shares row 2
+     with the SHARE rail and drops its top margin so the H1 aligns with the rail.
+     Product hubs (plain sidebar-nav, NO breadcrumb-container) must NOT zero this
+     margin — they keep the source's 50px hero→content gap (see the product-hub
+     rule below), so the content doesn't sit flush under the header. */
+  body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section.sidebar-nav + .section {
     grid-row: 2;
     align-self: start;
     margin-top: 0;
+  }
+
+  /* PRODUCT HUBS (plain sidebar-nav, no breadcrumb): the nav + first content
+     section share row 2, but keep the 50px top gap below the hero band (source
+     article padding-top: 5rem = 50px). */
+  body.sidebar main:not(:has(> .section.sidebar-nav.breadcrumb-container)) > .section.sidebar-nav + .section {
+    grid-row: 2;
+    align-self: start;
   }
 }
 

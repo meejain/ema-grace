@@ -8,7 +8,7 @@
    widget-gutter grid re-inset, which stays in templates/sidebar/sidebar.css and layers on top of
    this. Product/other pages have no widget gutter, so they just use the normal centered wrapper.
    NOTE image paths: this file lives in styles/ (one level deep) → `../blocks/columns/…`. */
-main .section.geo-hex:has(.cards.featured-content) {
+main .section.geo-hex:has(.cards.featured-content, .cards.category-grid) {
   position: relative;
   overflow: hidden;
   background-color: rgb(230 231 232);
@@ -22,7 +22,7 @@ main .section.geo-hex:has(.cards.featured-content) {
 }
 
 /* ::before = faint triangle line-network band in the lower half; over-wide so it crops not shrinks. */
-main .section.geo-hex:has(.cards.featured-content)::before {
+main .section.geo-hex:has(.cards.featured-content, .cards.category-grid)::before {
   content: '';
   position: absolute;
   top: 50%;
@@ -40,7 +40,7 @@ main .section.geo-hex:has(.cards.featured-content)::before {
 
 /* ::after = white hexagon band pinned to the top; flipped so the solid edge blends into the white
    page above and the hexagons hang down into the gray. */
-main .section.geo-hex:has(.cards.featured-content)::after {
+main .section.geo-hex:has(.cards.featured-content, .cards.category-grid)::after {
   content: '';
   position: absolute;
   top: 0;
@@ -57,7 +57,7 @@ main .section.geo-hex:has(.cards.featured-content)::after {
 }
 
 /* Lift the real section content (heading wrapper + cards wrapper) above the decorative layers. */
-main .section.geo-hex:has(.cards.featured-content) > * {
+main .section.geo-hex:has(.cards.featured-content, .cards.category-grid) > * {
   position: relative;
   z-index: 2;
 }
@@ -66,12 +66,12 @@ main .section.geo-hex:has(.cards.featured-content) > * {
   /* Desktop: full-bleed band with both decorative layers filling the section (inset:0,
      background-size:contain) — same technique as the sidebar rule. Top clearance so the heading
      clears the hexagons; bottom room for the hex space below the last card row (matches sidebar). */
-  main .section.geo-hex:has(.cards.featured-content) {
+  main .section.geo-hex:has(.cards.featured-content, .cards.category-grid) {
     padding-top: 250px;
     padding-bottom: 140px;
   }
 
-  main .section.geo-hex:has(.cards.featured-content)::before {
+  main .section.geo-hex:has(.cards.featured-content, .cards.category-grid)::before {
     inset: 0;
     width: auto;
     height: auto;
@@ -79,7 +79,7 @@ main .section.geo-hex:has(.cards.featured-content) > * {
     transform: scaleX(-1);
   }
 
-  main .section.geo-hex:has(.cards.featured-content)::after {
+  main .section.geo-hex:has(.cards.featured-content, .cards.category-grid)::after {
     inset: 0;
     width: auto;
     height: auto;
@@ -87,8 +87,106 @@ main .section.geo-hex:has(.cards.featured-content) > * {
     transform: scale(-1, -1);
   }
 
-  /* ~80px between the "Latest Insights from Grace" heading and the first card row (source parity). */
-  main .section.geo-hex .cards-wrapper:has(.cards.featured-content) {
+  /* ~80px between the section heading and the first card row (source parity). */
+  main .section.geo-hex .cards-wrapper:has(.cards.featured-content, .cards.category-grid) {
     margin-top: 80px;
   }
+}
+
+/* ===== Section style: matte-2col — GLOBAL =====
+   A section authored with Section Metadata Style `matte-2col` lays its default content (a run of
+   short <h4> + <ul> application groups, e.g. the syloid-mx "difficult-to-matte applications")
+   into TWO columns on desktop, matching source (source uses two explicit column divs; CSS
+   multicolumn reproduces the same masonry flow). break-inside:avoid keeps a heading with its list.
+   Mobile-first: single column stacked (base); 2 columns from 900px. */
+main .section.matte-2col .default-content-wrapper h4 {
+  break-after: avoid;
+}
+
+main .section.matte-2col .default-content-wrapper ul {
+  break-inside: avoid;
+  margin-top: 0;
+}
+
+@media (width >= 900px) {
+  main .section.matte-2col .default-content-wrapper {
+    column-count: 2;
+    column-gap: 80px;
+  }
+
+  /* first heading in each column shouldn't add a top margin that misaligns the two columns */
+  main .section.matte-2col .default-content-wrapper > h4:first-child {
+    margin-top: 0;
+  }
+}
+
+/* ===== Section style: blue-band — GLOBAL =====
+   A section authored with Section Metadata Style `blue-band` renders as a full-bleed solid-blue
+   band with centered white text (source: `section.dark-blue-bkgd` = rgb(0,73,144) = #004990, used
+   e.g. for the reflectn REFLECTN™ tagline). Text-only — no CTA. Matches source: Roboto Slab, 26px,
+   weight 300, centered white. */
+main .section.blue-band {
+  background-color: rgb(0 73 144);
+  padding: var(--spacing-l) var(--spacing-m);
+  text-align: center;
+}
+
+main .section.blue-band .default-content-wrapper h1,
+main .section.blue-band .default-content-wrapper h2,
+main .section.blue-band .default-content-wrapper h3,
+main .section.blue-band .default-content-wrapper h4,
+main .section.blue-band .default-content-wrapper p {
+  color: var(--white);
+  font-family: var(--heading-font-family);
+  font-weight: 300;
+  text-align: center;
+  margin: 0 auto;
+  max-width: 1000px;
+}
+
+main .section.blue-band .default-content-wrapper h3 {
+  font-size: 26px;
+  line-height: 1.3;
+}
+
+/* ===== Section style: metrics-2col — GLOBAL =====
+   A section authored with Section Metadata Style `metrics-2col` lays ONLY its bullet list into two
+   columns on desktop (source: the unipol-unippac "key operating metrics" 9-item list, 5 left / 4
+   right), while the intro heading + paragraphs above it stay full-width. Mobile-first: single
+   column stacked (base); 2 columns from 900px. break-inside:avoid keeps each item intact. */
+@media (width >= 900px) {
+  main .section.metrics-2col .default-content-wrapper ul {
+    column-count: 2;
+    column-gap: 80px;
+  }
+
+  main .section.metrics-2col .default-content-wrapper ul li {
+    break-inside: avoid;
+  }
+}
+
+/* ===== Section style: gray-callout — GLOBAL =====
+   A section authored with Section Metadata Style `gray-callout` renders as a light-gray box with
+   centered content (source: grace.com product-stewardship "contact one of the following Grace
+   representatives" panel — `section.light-gray-bkgd.black` = rgb(230 231 232), padded article,
+   centered). The heading is Roboto Slab 18px/600; body links stay at normal body size (do NOT reuse
+   the global `.section.light-gray`, whose intro-paragraph rule blows body text up to heading-xl). */
+main .section.gray-callout {
+  background-color: rgb(230 231 232);
+  padding: var(--spacing-m) var(--spacing-m);
+  text-align: center;
+}
+
+main .section.gray-callout .default-content-wrapper h4 {
+  font-family: var(--heading-font-family);
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--text-color);
+  margin: 0 auto var(--spacing-s);
+  max-width: 760px;
+}
+
+main .section.gray-callout .default-content-wrapper p {
+  margin: 0 auto;
 }

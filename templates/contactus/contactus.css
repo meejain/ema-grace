@@ -51,6 +51,15 @@ body.contactus main .default-content-wrapper h4 {
    look: black header row with white bold text, 1px light-gray cell borders, top-aligned cells,
    Roboto body. The table scrolls horizontally on narrow viewports rather than crunching columns.
    Scoped to contactus default content so block-built tables and other templates are untouched. */
+/* The default-content-wrapper that holds a table becomes a horizontal-scroll container so the
+   table SLIDES within its own bounds on narrow/mobile viewports instead of overflowing the page to
+   the right (which widened the whole page). Mirrors the block-table variants' `-scroll` wrappers.
+   -webkit-overflow-scrolling keeps momentum scroll on iOS. */
+body.contactus main .default-content-wrapper:has(> table) {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
 body.contactus main .default-content-wrapper table {
   width: 100%;
   border-collapse: collapse;
@@ -58,6 +67,10 @@ body.contactus main .default-content-wrapper table {
   font-size: var(--body-font-size-m);
   line-height: 1.7;
   color: var(--text-color);
+
+  /* keep columns readable — below this width the wrapper scrolls rather than crunching cells
+     to one letter per line (source behavior). */
+  min-width: 680px;
 }
 
 body.contactus main .default-content-wrapper table th,
@@ -90,13 +103,25 @@ body.contactus .button-group .button-wrapper {
   margin: 0;
 }
 
+/* Buttons in a group share the row evenly and their labels WRAP (source: e.g. "Download SYLOID® MX
+   application overview" sits on two lines). The global `.button { white-space: nowrap }` would force
+   each button as wide as its longest line, breaking the even row — override to normal here. */
+body.contactus .button-group .button-wrapper a.button {
+  white-space: normal;
+  width: 100%;
+}
+
 @media (width >= 900px) {
   body.contactus .button-group {
-    flex-flow: row wrap;
-    /* Source spreads a PAIR of download buttons end-to-end across the content width (one left,
-       one right) rather than bunching them centered. space-between does that for a 2-button row;
-       still centers a lone/odd button. */
-    justify-content: space-between;
+    flex-flow: row nowrap;
+    /* Source lays the download buttons as an even row of equal-width blocks spanning the content
+       width, with consistent gaps (labels wrap inside each). Equal flex tracks reproduce that. */
+    justify-content: center;
+    gap: 30px;
+  }
+
+  body.contactus .button-group .button-wrapper {
+    flex: 1 1 0;
   }
 }
 

@@ -102,7 +102,13 @@ side-by-side screenshots before you claim done. Do not publish to DA without my 
 - **How:** open a new session, paste the fenced block above, replace `<FAMILY>`. The LLM will read
   the playbook + memory notes first, then run the per-family loop and create the backup set.
 - **Completed sets (already done + backed up):** insights (165), newsroom (28), products (34 = 28
-  detail + 6 hubs). Next recommended: about-grace leadership bios → campaign → industries (last) →
-  forms (Adaptive Forms pass). See playbook §5 for the full scope table + status.
+  detail + 6 hubs — hubs fully closed 2026-08-12: the 2 late-hydrating hub lists, catalysts +
+  synthetic-silicas, were reconstructed by hand from the LIVE source DOM; see playbook "Product hub /
+  sidebar recipe"). Next recommended: about-grace leadership bios → campaign → industries (last) →
+  forms (Adaptive Forms pass — SITE-WIDE FORMS INVENTORY started, see `FORMS-INVENTORY.md`). See
+  playbook §5 for the full scope table + status.
+- **Hand-editing `.plain.html`:** after any manual merge/split, verify `<div>` open/close balance AND
+  run `aem.decorateSections` on the served file — an off-by-one div silently merges sections and leaks
+  `Style:` metadata onto the wrong section (see playbook "DIV-BALANCE LESSON").
 - Keep this prompt in sync with the playbook's "START HERE" block if the process changes.
 ```
