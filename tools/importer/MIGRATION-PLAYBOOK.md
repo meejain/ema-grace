@@ -337,7 +337,7 @@ migration fidelity, NOT that anything is published to DA (§0). Keep that distin
 | newsroom | 28 | 28 ✅ | 26 press-releases (default path + Hero (banner) + URL breadcrumb) + 2 landing (hero + year-accordion + featured cards) — DONE |
 | products (detail) | 28 | 28 ✅ | Product Detail template — DONE. Default path + `template: contactus` + Hero (product) + `sectionizeFlatBody`. See "Product Detail recipe" below |
 | products (hubs) | 6 | 6 ✅ | JS-hydrated CATEGORY-HUB pages (synthetic-silicas, adsorbents, catalysts, fine-chemicals, product-stewardship, quality-management). Imported via onLoad hydration-wait. The 2 hubs whose product-list didn't hydrate in time (catalysts, synthetic-silicas) were reconstructed by HAND from the LIVE source DOM (see "Product hub / sidebar recipe" below) — DONE 2026-08-12 |
-| industries | 102 | 8 | deep (depth 2-5): landing → application → detail; most varied |
+| industries | 102 | 0 (analysis DONE 2026-08-12) | ONE template ("Solution Detail") with optional sections — NOT 3 templates (block-intelligence labels 3 but rendered DOM is one). Step-1 analysis complete: see `INDUSTRIES-ANALYSIS.md` + "Industries recipe" below. Rep set + section→block contract identified; importer NOT yet extended |
 | about-grace | 39 | 8 | section pages + ~30 leadership bios (person-profile template) |
 | campaign | 17 | 2 | flat campaign/landing pages |
 | forms | 15 | 1 | DEFERRED → AEM Adaptive Forms pass |
@@ -348,9 +348,10 @@ migration fidelity, NOT that anything is published to DA (§0). Keep that distin
 | misc one-offs | ~10 | ~few | privacy/cookie/terms/search/404/etc. |
 
 Recommended order (ROI): ~~newsroom~~ ✅ → ~~products (detail)~~ ✅ → ~~products (hubs)~~ ✅ →
-**leadership bios** (about-grace, person-profile template, ~30 uniform) → campaign → industries
-(largest/most varied, last) → forms (Adaptive Forms pass — inventory started, see §8). Products set
-fully complete (28 detail + 6 hubs).
+**industries** (step-1 analysis DONE — ready to build, see "Industries recipe") → leadership bios
+(about-grace, person-profile template, ~30 uniform) → campaign → forms (Adaptive Forms pass —
+inventory + submission flow DONE, see `FORMS-INVENTORY.md`). Products set fully complete (28 detail +
+6 hubs).
 
 **Newsroom template notes (reference for similar default-path families):** press releases take the
 **default path** (`buildDefaultPage`) — no new page-type needed; the whole body (dateline, quotes,
@@ -525,6 +526,40 @@ NOT render there until published to DA. To verify locally: copy the edited file 
 folder and serve with `aem up --html-folder <tmp> --prefer-plain-html`, then fetch
 `/<tmp>/<slug>.plain.html` and run the decoration in-browser. CSS/JS (blocks, templates, styles) ARE
 served locally and render immediately.
+
+### Industries recipe — STEP-1 ANALYSIS DONE (102 pages, 2026-08-12) — ready to build
+
+Full analysis in `tools/importer/INDUSTRIES-ANALYSIS.md`. Summary for a fresh session:
+
+- **It is ONE template ("Solution Detail") with optional sections**, NOT 3. block-intelligence.json
+  labels 3 names (Solution Detail / Solution Content Page / Solution Detail Rich) but the rendered-DOM
+  comparison shows one shared block vocabulary; pages differ only in WHICH optional blocks they include.
+  Depth tiers (11 landings d1 / 44 d2 / 42 d3 / 4 d4) are positions in the tree, not separate templates.
+- **RICHEST-representative SET (drives the importer bundle) — use BOTH, no single page covers all:**
+  1. `https://grace.com/industries/food-beverage/beverage/` — 13 blocks; has gated-download + featured-
+     products + data-table + accordion + both card variants + contact-split.
+  2. `https://grace.com/industries/pharmaceutical-solutions/fine-chemicals/consultative-services/r-d/`
+     — adds the **media-callout figure-pairs** (4×, its unique block) + h4 rich-text + 3-col table.
+  Cross-check page: `nutraceutical-solutions/traditional-herbal-medicine` (also 13 blocks).
+- **Tiered visual-walk set (5 upper / 5 mid / 5 low) already chosen** (see INDUSTRIES-ANALYSIS.md §
+  tier table): upper = beverage, traditional-herbal-medicine, cbd-/lipid-/nutraceutical-cdmo;
+  mid (8 blocks) = coatings/wood, food-beverage/beer, general-industrial/refractory-additives,
+  pharma…/active-ingredient-delivery, plastics…/unipol--pp-process-technology; low (5 blocks) =
+  fine-chemicals/fcms-case-study, plastics…/custom-catalysts, …/plastic-additives,
+  …/polyethylene-catalysts/pe-hybrid, …/tire-and-rubber-additives.
+- **Section → block contract** (from the rep set — nearly all REUSE existing blocks):
+  Hero (product) + `template: contactus` + Contact-Us widget · sidebar-nav (parent industry + nested
+  siblings; +mobile `<select>` filter like product hubs) · rich text (h3/h4 + bullet lists) ·
+  gated-download buttons (reuse `normalizeGatedDownloads` + `.button-group`; modal = Forms pass) ·
+  native data table · **Featured Products selector** (dark product cards → /products/ — the ONE
+  likely-new block; confirm vs drafts/catalog) · cards category-grid (reuse vyvid's) · cards
+  featured-content "Latest Insights" (+ geo-hex) · contact-split banner + social follow ·
+  **media-callout figure-pairs** (r-d — captioned 2-up image rows; confirm block/variant).
+- **NEW/confirm blocks:** (1) Featured-Products selector, (2) media-callout figure-pairs. Everything
+  else already built for products/insights/newsroom.
+- **NEXT (per §3):** extend importer (likely reuse products default-path + `sectionizeFlatBody` +
+  `template:contactus`; add the 2 new parsers) → rebundle → import the 2 reps → §4a visual gate →
+  bulk-import 102 in chunks → prove-no-regression on prior sets → snapshot `backups/industries/`.
 
 ---
 

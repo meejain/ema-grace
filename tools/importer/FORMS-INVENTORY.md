@@ -79,19 +79,64 @@ Phone, Job Title, Company, Country + interest checkboxes). They differ only by p
 
 ---
 
-## C. Modal / gated forms embedded ACROSS the site (fire from buttons)
+## C. Modal / gated "Before you download" forms — SITE-WIDE DEEP DIVE (crawled 2026-08-12)
 
-These are NOT separate `/forms/` URLs — they open as a modal/lightbox when a button is clicked, using
-`.gated-asset-simplified` / gated-lightbox markup. Sources by page type:
+These are NOT separate `/forms/` URLs — a `.gated-asset-simplified` lightbox ("Before you download can
+we get some information?") opens when a "Download <asset>" button is clicked. It is server-rendered
+INLINE in each page (not JS-injected), so it's reliably detectable by crawling. Fields: First Name,
+Last Name, Business Email, Company, Job Title, Country (select) + acknowledgement consent checkbox +
+reCAPTCHA — ONE reusable component parameterised per asset (same field set everywhere; verified on
+a-matte-that-lasts, syloid-mx, ludox-campaign).
 
-| Where | Trigger | Form | Count of source pages |
+**Actual counts — crawled all 453 live pages (sitemap minus /assets/ + 8 malformed sitemap entries):**
+
+| Section | Pages WITH gated download modal |
+|---|---|
+| **insights** | **96** (of 165) |
+| **industries** | **71** (of 102) |
+| **products** | **18** |
+| resources | 2 |
+| campaign | 2 |
+| forms | 1 |
+| ironsolution | 1 |
+| **TOTAL** | **191 pages (≈42% of the site)** |
+
+Full page list saved during the crawl to `/tmp/gated-pages.txt` (regenerate: crawl each URL, grep
+`gated-asset-simplified` / "Before you download"). This **corrects the earlier inventory**, which called
+insights gated forms "a subset" without a count — it is 96 insights + 71 industries, the dominant form
+footprint on the site. Still ONE template (many invocation points), but the migration must wire the
+gated modal into ~191 pages' Download buttons, not just products/campaign.
+
+**Also found inline (not the modal): 4 INSIGHTS pages embed a full `contact-us-form-cmp`** (the big
+conditional contact form, in the article body — NOT the standalone /forms/ set):
+`/insights/syloid-cat-11-silica-a-matting-additive-with-superior-efficiency/`,
+`/insights/colloidal-silica-as-a-foundation-for-3-d-printed-replacement-tissues/`,
+`/insights/colloidal-silica-takes-on-extreme-environments/`,
+`/insights/powerful-technology-through-tiny-particles/`.
+
+> Detection caveat: a raw `<form>`-tag count hits 442/453 because the header search box is a `<form>`
+> on every page — IGNORE that. The real content forms are the component classes counted above
+> (`gated-asset-simplified`, `contact-us-form-cmp`, `newsletter-signup-form`).
+
+### C1. IS IT THE SAME FORM? — verified field-set comparison across ALL 191 gated pages (2026-08-12)
+
+**Yes — it is essentially ONE reusable modal, opened per-asset.** Extracted the field names from every
+gated page (not a sample):
+
+| Variant | Component class | Fields | Pages |
 |---|---|---|---|
-| **Product detail pages** | Green "Download <asset>" buttons | Form Modal Download (gated simplified) | ~35 product-detail pages (each gated download opens it) |
-| **Campaign pages** | Inline / "Get the …" CTA | Form Contact Simple (gated simplified lead) | 17 campaign pages (e.g. ludox-colloidal-silica-pic, excipients, chromatography) |
-| **Insights (some)** | Gated ebook/whitepaper CTAs | Gated simplified | subset of 165 insights (gated assets only) |
+| **Simplified (6-field)** | `gated-asset-simplified` | first_name, last_name, email_address (Business Email), company, job_title, country + consent + reCAPTCHA | **184** |
+| **Download + Phone (7-field)** | `gated-asset-download` | same 6 **+ phone_number** | **1** (`/insights/how-to-achieve-a-matte-wood-finish-without-compromising-performa/`) |
+| **Both variants on one page** | (page gates 2 assets) | — | **6** (e.g. `/industries/chemical-processing/catalyst-supports/`) |
 
-The gated modal is a **single reusable component** (`.gated-asset-simplified`) parameterised per asset —
-so it's ~1 form template with many invocation points, not many distinct forms.
+190/191 pages use the **identical 6-field** modal — same names, labels, order, everywhere
+(insights=industries=products=campaign=resources). So for the Adaptive Forms build this is **ONE
+gated-modal template** (6-field) + a **minor 7-field variant** (adds Phone) for the edge case. The
+modal is parameterised only by which asset it downloads, not by different fields.
+
+**Net: distinct form TEMPLATES to build ≈ 6** (unchanged): the big conditional Contact–Product&Services
+(+single-col), Contact–Corporate, SDS, Newsletter (×4 topics), Tradeshow, and the **gated-modal
+(6-field, +7-field variant)**. Full per-URL list: `tools/importer/FORMS-URLS.txt` (200 pages).
 
 ---
 
@@ -121,11 +166,69 @@ people-and-careers 7, resources 5, + ~15 one-offs. Saved to `/tmp/all-urls.txt` 
 
 ---
 
+## D2. SUBMISSION MECHANISM — where the payload goes (inspected 2026-08-12)
+
+Verified by inspecting the live source forms (contact-us-product-and-services + the a-matte-that-lasts
+gated modal). ALL grace.com forms submit the SAME way:
+
+### The form markup
+```html
+<form class="contact-us" method="POST"
+      data-name="Contact Us (Product and Service) Form"
+      data-type="Contact Us"                         <!-- or "Download" for gated modal -->
+      action="L2NvbnRlbnQvZ3JhY2Uv…cGFyZG90LmhhbmRsZXI=">  <!-- BASE64-ENCODED -->
+  … visible fields (first_name, email_address, …) …
+  <input type="hidden" name="form_type"           value="CONTACTUS_PRODUCT_AND_SERVICE">
+  <input type="hidden" name="utmParams"           value="">
+  <input type="hidden" name="pagePath"            value="">
+  <input type="hidden" name="g-recaptcha-response" value="">
+</form>
+```
+
+### The `action` is base64 — decodes to an AEM **Pardot handler servlet** (server-side, per-component)
+- contact form → `/content/grace/us/en/forms/contact-us-product-and-services/jcr:content/root/container/section/col2/contact_us_form.pardot.handler`
+- gated modal → `/content/grace/us/en/insights/a-matte-that-lasts/jcr:content/root/container/lightbox/content/gated_asset_simplifi.pardot.handler`
+- Pattern: `<page JCR path>/<component node>.pardot.handler` — unique per form instance.
+
+### The full flow (what happens on submit)
+1. **reCAPTCHA v3** (invisible, score-based) runs on load — Google `recaptcha/api.js?render=6LfxaiAqAAAAAAOU3RPqe4IUpf5M6v7BaTCRb7U7`
+   (site key `6LfxaiAqAAAA…`) writes a token into the hidden `g-recaptcha-response` field.
+2. jQuery form JS (`/etc.clientlibs/grace/clientlibs/clientlib-dependencies.min.js`) collects the
+   visible fields + the hidden `form_type` / `utmParams` / `pagePath` / recaptcha token.
+3. It **POSTs to the AEM `.pardot.handler` servlet** (the decoded `action` path) — an endpoint on
+   grace.com's own AEM instance, NOT a third party.
+4. **AEM is the middleman:** the `.pardot.handler` servlet forwards the lead **server-to-server to
+   Salesforce Pardot (Account Engagement)**. The browser only ever talks to grace.com; the real Pardot
+   endpoint is hidden server-side and is NOT visible in page source.
+5. On success → redirect to the matching thank-you page (`/forms/download-thank-you/`,
+   `/forms/contact-us-thank-you/`, `/forms/newsletter-thank-you/`, `/forms/tradeshow-thank-you/`).
+
+### Backend discriminators (what tells Pardot which form this is)
+- **`form_type`** hidden field — e.g. `CONTACTUS_PRODUCT_AND_SERVICE` (the routing/tagging key).
+- **`data-type`** (`Contact Us` / `Download`) + **`data-name`** (human label).
+- The per-component `.pardot.handler` path.
+
+### ⚠️ MIGRATION IMPLICATION (blocker to resolve with client)
+The submit target is an **AEM-server-side Pardot handler servlet** — it will **NOT exist on Edge
+Delivery**. Copying the `action` verbatim is impossible. Rebuilding on EDS needs a decision on the
+target endpoint:
+- **A** — POST directly to Pardot's public form-handler URL (`pi.pardot.com/l/…`); needs the client to
+  provide the Pardot form-handler endpoints + field-name mapping.
+- **B** — an EDS form-submission function / serverless proxy that forwards to Pardot server-side
+  (mirrors today's AEM behaviour), keeping reCAPTCHA.
+- **C** — AEM Adaptive Forms native submit action with a Pardot/Marketo connector.
+Field names (`first_name`, `email_address`, `form_type`, …) + reCAPTCHA site key carry over regardless.
+**ACTION: get the Pardot form-handler endpoint URLs from the client before building submit.**
+
+---
+
 ## F. Next steps (Adaptive Forms pass — NOT started)
 
 - Enable the `forms-excat` plugin (AEM Forms migration tools — HTML form → Adaptive Form JSON).
 - Build the 6 templates above as Adaptive Forms; wire the conditional branches + reCAPTCHA + GDPR
-  consent + Pardot/endpoint mapping (confirm the target submission endpoint with the client).
+  consent + Pardot/endpoint mapping. **See §D2 for the submission flow — the current `action` is a
+  server-side AEM `.pardot.handler` servlet that won't exist on EDS; get the Pardot form-handler
+  endpoint URLs from the client before building submit.**
 - Map thank-you pages as redirect targets.
 - Decide iframe (`contact-us-customer-service`) strategy.
 - Track per-template migration status here as it proceeds.

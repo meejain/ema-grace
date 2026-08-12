@@ -104,9 +104,21 @@ side-by-side screenshots before you claim done. Do not publish to DA without my 
 - **Completed sets (already done + backed up):** insights (165), newsroom (28), products (34 = 28
   detail + 6 hubs — hubs fully closed 2026-08-12: the 2 late-hydrating hub lists, catalysts +
   synthetic-silicas, were reconstructed by hand from the LIVE source DOM; see playbook "Product hub /
-  sidebar recipe"). Next recommended: about-grace leadership bios → campaign → industries (last) →
-  forms (Adaptive Forms pass — SITE-WIDE FORMS INVENTORY started, see `FORMS-INVENTORY.md`). See
-  playbook §5 for the full scope table + status.
+  sidebar recipe").
+- **NEXT UP → INDUSTRIES (102 pages) — step-1 analysis DONE, ready to build.** It is ONE template
+  ("Solution Detail") with optional sections (NOT 3 templates). Full analysis:
+  `tools/importer/INDUSTRIES-ANALYSIS.md` + playbook "Industries recipe". Richest-representative SET
+  (use BOTH — no single page covers all blocks): `industries/food-beverage/beverage/` (13 blocks:
+  gated-download, featured-products, table, both card variants) + `industries/pharmaceutical-solutions/
+  fine-chemicals/consultative-services/r-d/` (adds media-callout figure-pairs). Two likely-NEW blocks:
+  Featured-Products selector + media-callout figure-pairs; everything else reuses products/insights
+  blocks. NEXT: extend importer (reuse products default-path + `sectionizeFlatBody` + `template:contactus`)
+  → import the 2 reps → §4a visual gate → bulk 102 → snapshot `backups/industries/`.
+- **Then:** about-grace leadership bios (person-profile, ~30 uniform) → campaign → forms. FORMS is
+  fully scoped: `tools/importer/FORMS-INVENTORY.md` (6 templates; 200 form pages; 191 = one shared
+  gated modal) + `FORMS-URLS.txt` (every form URL). Submission = server-side AEM `.pardot.handler` →
+  Pardot; the endpoint won't exist on EDS — GET the Pardot form-handler URLs from the client before
+  building submit (FORMS-INVENTORY §D2). See playbook §5 for the full scope table + status.
 - **Hand-editing `.plain.html`:** after any manual merge/split, verify `<div>` open/close balance AND
   run `aem.decorateSections` on the served file — an off-by-one div silently merges sections and leaks
   `Style:` metadata onto the wrong section (see playbook "DIV-BALANCE LESSON").
