@@ -1,0 +1,20 @@
+{
+  "status": "success",
+  "url": "https://grace.com/industries/chemical-processing/custom-development/",
+  "path": "industries/chemical-processing/custom-development",
+  "timestamp": "2026-08-13T13:47:59.217Z",
+  "title": "Custom Development",
+  "pageType": "default",
+  "blocks": [
+    "hero-banner",
+    "cards-featured-content"
+  ],
+  "blocksLeftInPlace": [],
+  "pageMetadata": [
+    "template",
+    "contactus",
+    "contactus-tagline",
+    "breadcrumb-title"
+  ],
+  "hasForm": true
+}

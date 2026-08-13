@@ -2,17 +2,22 @@
   "status": "success",
   "url": "https://grace.com/industries/plastics-and-polymers/polypropylene-catalysts/",
   "path": "industries/plastics-and-polymers/polypropylene-catalysts",
-  "timestamp": "2026-08-09T09:15:39.863Z",
+  "timestamp": "2026-08-13T13:55:09.865Z",
   "title": "Polypropylene Catalysts",
   "pageType": "default",
   "blocks": [
     "hero-banner",
     "cards-icon-grid",
     "columns-horizontal-teaser-featured",
-    "cards-product",
+    "cards-category-grid",
     "cards-featured-content"
   ],
   "blocksLeftInPlace": [],
-  "pageMetadata": [],
+  "pageMetadata": [
+    "template",
+    "contactus",
+    "contactus-tagline",
+    "breadcrumb-title"
+  ],
   "hasForm": true
 }

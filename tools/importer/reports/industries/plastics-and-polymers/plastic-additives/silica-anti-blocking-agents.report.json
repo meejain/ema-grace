@@ -1,0 +1,24 @@
+{
+  "status": "success",
+  "url": "https://grace.com/industries/plastics-and-polymers/plastic-additives/silica-anti-blocking-agents/",
+  "path": "industries/plastics-and-polymers/plastic-additives/silica-anti-blocking-agents",
+  "timestamp": "2026-08-13T14:05:57.086Z",
+  "title": "Silica Anti-blocking Agents",
+  "pageType": "default",
+  "blocks": [
+    "hero-banner",
+    "accordion-faq",
+    "table-three-column",
+    "table-three-column",
+    "table-three-column",
+    "cards-featured-content"
+  ],
+  "blocksLeftInPlace": [],
+  "pageMetadata": [
+    "template",
+    "contactus",
+    "contactus-tagline",
+    "breadcrumb-title"
+  ],
+  "hasForm": true
+}

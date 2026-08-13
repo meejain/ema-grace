@@ -1,0 +1,23 @@
+{
+  "status": "success",
+  "url": "https://grace.com/industries/food-beverage/food-processing/",
+  "path": "industries/food-beverage/food-processing",
+  "timestamp": "2026-08-13T14:50:05.235Z",
+  "title": "Food Processing",
+  "pageType": "default",
+  "blocks": [
+    "hero-banner",
+    "table-data-grid",
+    "columns-horizontal-teaser-featured",
+    "cards-category-grid",
+    "cards-featured-content"
+  ],
+  "blocksLeftInPlace": [],
+  "pageMetadata": [
+    "template",
+    "contactus",
+    "contactus-tagline",
+    "breadcrumb-title"
+  ],
+  "hasForm": true
+}

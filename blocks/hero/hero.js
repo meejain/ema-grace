@@ -64,14 +64,19 @@ export default function decorate(block) {
     block.classList.add('no-image');
   }
 
-  // Banner variant (and its alias, overlay): auto-generate the breadcrumb from
-  // the current URL path. Breadcrumb is ON by default; a page opts OUT with a
-  // `breadcrumb` metadata value of `false`/`no`/`off` (some source pages, e.g.
-  // certain 2025 press releases, have no breadcrumb). No metadata → breadcrumb shows.
-  if (block.classList.contains('banner') || block.classList.contains('overlay')) {
+  // Banner / overlay / product variants: auto-generate the breadcrumb from the current URL path.
+  // grace.com shows a breadcrumb on the reduce-height product/solution hero too (e.g. industries
+  // /unipol--pp-process-technology/unipol-pp-process). Breadcrumb is ON by default; a page opts OUT
+  // with a `breadcrumb` metadata value of `false`/`no`/`off` — products-detail pages set that
+  // (their source has no breadcrumb), so they stay breadcrumb-less while industries product heroes
+  // (no opt-out) show the trail.
+  if (block.classList.contains('banner') || block.classList.contains('overlay')
+    || block.classList.contains('product')) {
     const breadcrumbMeta = (getMetadata('breadcrumb') || '').trim().toLowerCase();
     const breadcrumbOff = ['false', 'no', 'off', '0'].includes(breadcrumbMeta);
     if (!breadcrumbOff) {
+      // product hero has the image in div:first-child + text in div:last-child; prepend into the
+      // text column (same as banner) so the breadcrumb sits above the H1.
       const textCell = block.querySelector(':scope > div:last-child');
       const breadcrumb = buildBreadcrumbFromPath();
       if (textCell && breadcrumb) textCell.prepend(breadcrumb);

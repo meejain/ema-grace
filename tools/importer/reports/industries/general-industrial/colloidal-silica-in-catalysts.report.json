@@ -1,0 +1,22 @@
+{
+  "status": "success",
+  "url": "https://grace.com/industries/general-industrial/colloidal-silica-in-catalysts/",
+  "path": "industries/general-industrial/colloidal-silica-in-catalysts",
+  "timestamp": "2026-08-13T14:16:42.744Z",
+  "title": "Colloidal Silica in Catalysts",
+  "pageType": "default",
+  "blocks": [
+    "hero-banner",
+    "video-overlay",
+    "columns-horizontal-teaser-featured",
+    "cards-featured-content"
+  ],
+  "blocksLeftInPlace": [],
+  "pageMetadata": [
+    "template",
+    "contactus",
+    "contactus-tagline",
+    "breadcrumb-title"
+  ],
+  "hasForm": true
+}

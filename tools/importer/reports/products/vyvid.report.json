@@ -2,13 +2,13 @@
   "status": "success",
   "url": "https://grace.com/products/vyvid/",
   "path": "products/vyvid",
-  "timestamp": "2026-08-09T21:50:37.007Z",
+  "timestamp": "2026-08-13T01:50:17.699Z",
   "title": "VYVID™",
   "pageType": "default",
   "blocks": [
     "hero-banner",
     "video-overlay",
-    "cards-product",
+    "cards-category-grid",
     "cards-featured-content"
   ],
   "blocksLeftInPlace": [],

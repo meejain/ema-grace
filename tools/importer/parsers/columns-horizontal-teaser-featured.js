@@ -19,7 +19,12 @@ export default function parse(element, { document }) {
     if (href) { const p = document.createElement('p'); const a = document.createElement('a'); a.href = href; a.textContent = 'Learn More'; p.append(a); c2.push(p); }
     return [c1, c2];
   });
-  const block = WebImporter.Blocks.createBlock(document, { name: 'Columns (horizontal-teaser-featured)', cells });
+  // Emit `horizontal-teaser` VARIANT + `featured-products` OPTION (two comma-separated tokens →
+  // class "columns horizontal-teaser featured-products"), matching the draft + columns.css slate
+  // styling. NOT a single `horizontal-teaser-featured` token — columns.js getVariant() looks up the
+  // base variant `horizontal-teaser` in its VARIANTS list, so a merged token would fail to decorate
+  // (block stays undecorated white text — the ART teaser defect).
+  const block = WebImporter.Blocks.createBlock(document, { name: 'Columns (horizontal-teaser, featured-products)', cells });
   const host = element.closest('.feature-set') || element;
   host.replaceWith(block);
 }

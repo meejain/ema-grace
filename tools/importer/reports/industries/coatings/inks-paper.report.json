@@ -1,0 +1,21 @@
+{
+  "status": "success",
+  "url": "https://grace.com/industries/coatings/inks-paper/",
+  "path": "industries/coatings/inks-paper",
+  "timestamp": "2026-08-13T14:12:10.609Z",
+  "title": "Inks and Paper",
+  "pageType": "default",
+  "blocks": [
+    "hero-banner",
+    "featured-product-selector",
+    "cards-featured-content"
+  ],
+  "blocksLeftInPlace": [],
+  "pageMetadata": [
+    "template",
+    "contactus",
+    "contactus-tagline",
+    "breadcrumb-title"
+  ],
+  "hasForm": true
+}

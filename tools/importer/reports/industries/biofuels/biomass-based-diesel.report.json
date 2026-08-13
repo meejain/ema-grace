@@ -1,0 +1,22 @@
+{
+  "status": "success",
+  "url": "https://grace.com/industries/biofuels/biomass-based-diesel/",
+  "path": "industries/biofuels/biomass-based-diesel",
+  "timestamp": "2026-08-13T14:52:47.948Z",
+  "title": "Biomass-based Diesel",
+  "pageType": "default",
+  "blocks": [
+    "hero-banner",
+    "cards-product",
+    "cards-category-grid",
+    "cards-featured-content"
+  ],
+  "blocksLeftInPlace": [],
+  "pageMetadata": [
+    "template",
+    "contactus",
+    "contactus-tagline",
+    "breadcrumb-title"
+  ],
+  "hasForm": true
+}

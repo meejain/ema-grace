@@ -1,0 +1,22 @@
+{
+  "status": "success",
+  "url": "https://grace.com/industries/pharmaceutical-solutions/fine-chemicals/facilities/",
+  "path": "industries/pharmaceutical-solutions/fine-chemicals/facilities",
+  "timestamp": "2026-08-13T14:28:24.292Z",
+  "title": "Facilities",
+  "pageType": "default",
+  "blocks": [
+    "hero-banner",
+    "columns-horizontal-teaser-featured",
+    "cards-category-grid",
+    "cards-featured-content"
+  ],
+  "blocksLeftInPlace": [],
+  "pageMetadata": [
+    "template",
+    "contactus",
+    "contactus-tagline",
+    "breadcrumb-title"
+  ],
+  "hasForm": false
+}

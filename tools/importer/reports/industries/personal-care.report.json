@@ -1,0 +1,23 @@
+{
+  "status": "success",
+  "url": "https://grace.com/industries/personal-care/",
+  "path": "industries/personal-care",
+  "timestamp": "2026-08-13T14:44:39.659Z",
+  "title": "Personal Care",
+  "pageType": "default",
+  "blocks": [
+    "hero-banner",
+    "featured-product-selector",
+    "table-product-comparison",
+    "cards-category-grid",
+    "cards-featured-content"
+  ],
+  "blocksLeftInPlace": [],
+  "pageMetadata": [
+    "template",
+    "contactus",
+    "contactus-tagline",
+    "breadcrumb-title"
+  ],
+  "hasForm": true
+}

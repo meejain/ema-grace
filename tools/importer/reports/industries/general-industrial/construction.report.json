@@ -1,0 +1,21 @@
+{
+  "status": "success",
+  "url": "https://grace.com/industries/general-industrial/construction/",
+  "path": "industries/general-industrial/construction",
+  "timestamp": "2026-08-13T14:19:25.286Z",
+  "title": "Construction",
+  "pageType": "default",
+  "blocks": [
+    "hero-banner",
+    "columns-horizontal-teaser-featured",
+    "cards-featured-content"
+  ],
+  "blocksLeftInPlace": [],
+  "pageMetadata": [
+    "template",
+    "contactus",
+    "contactus-tagline",
+    "breadcrumb-title"
+  ],
+  "hasForm": true
+}

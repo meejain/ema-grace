@@ -1,0 +1,21 @@
+{
+  "status": "success",
+  "url": "https://grace.com/industries/coatings/coil/",
+  "path": "industries/coatings/coil",
+  "timestamp": "2026-08-13T14:10:24.136Z",
+  "title": "Coil",
+  "pageType": "default",
+  "blocks": [
+    "hero-banner",
+    "featured-product-selector",
+    "cards-featured-content"
+  ],
+  "blocksLeftInPlace": [],
+  "pageMetadata": [
+    "template",
+    "contactus",
+    "contactus-tagline",
+    "breadcrumb-title"
+  ],
+  "hasForm": true
+}

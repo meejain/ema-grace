@@ -2,14 +2,26 @@
   "status": "success",
   "url": "https://grace.com/industries/refining-technologies/catalagram-archive/",
   "path": "industries/refining-technologies/catalagram-archive",
-  "timestamp": "2026-08-09T09:11:15.811Z",
+  "timestamp": "2026-08-13T13:44:22.893Z",
   "title": "Catalagram Archive",
   "pageType": "default",
   "blocks": [
     "hero-banner",
-    "custom-widget-news-archive"
+    "custom-widget-news-archive",
+    "columns-image-right",
+    "columns-image-right",
+    "columns-image-right",
+    "columns-image-right",
+    "columns-image-right",
+    "columns-image-right"
   ],
   "blocksLeftInPlace": [],
-  "pageMetadata": [],
+  "pageMetadata": [
+    "template",
+    "contactus",
+    "contactus-tagline",
+    "breadcrumb",
+    "breadcrumb-title"
+  ],
   "hasForm": true
 }

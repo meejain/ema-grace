@@ -158,6 +158,28 @@ const parsers = {
 
 const transformers = [graceCleanupTransformer, graceDmImagesTransformer];
 
+/**
+ * Structural test: is this `.cmp-card-list.grid.three-columns` a CATEGORY GRID (→ Cards
+ * (category-grid)) rather than a product-hub nav grid (→ Cards (product))? A category grid has a
+ * section `.heading` (H2 title, e.g. "Food and beverage solutions", "Purification Solutions") AND
+ * its cards are simple image + `.h4.title` + "Learn more" tiles with NO descriptive body
+ * (`.spt-copy` / `<ul>`). This is href-agnostic so it works for BOTH industries solution grids
+ * (links → /industries/…) and product-page purification grids (vyvid → /products/…). The
+ * product-DETAIL benefit grid has `.spt-copy`/`<ul>` card bodies; the product-HUB nav grid has no
+ * `.heading` section title — both fail this test and stay Cards (product).
+ */
+function isCategoryGrid(list) {
+  if (!list || !list.querySelector) return false;
+  const heading = list.querySelector(':scope > .heading, :scope > .card-list-header');
+  if (!heading) return false;
+  const cards = Array.from(list.querySelectorAll('a.cmp-card.bio'));
+  if (cards.length < 2) return false;
+  // every card must be a simple image+title tile with NO descriptive body
+  return cards.every((c) => (c.querySelector('.image img, picture, img'))
+    && (c.querySelector('.h4.title, .title, .h4'))
+    && !c.querySelector('.spt-copy, .content ul, .content ol, ul, ol'));
+}
+
 // MATCHER REGISTRY — non-component blocks whose identity is position / column order /
 // heading / table-column-count, not a CSS class. A matcher returns block-root elements.
 // Used for coverage discovery; a matched block with no parser is left in place + logged.
@@ -209,7 +231,17 @@ const MATCHERS = {
       .filter((cg) => {
         const list = cg.closest('.cmp-card-list');
         const heading = (list && (list.querySelector('.heading, h3') || list.previousElementSibling) || {}).textContent || '';
-        return !/related articles|follow us/i.test(heading);
+        if (/related articles|follow us/i.test(heading)) return false;
+        // CATEGORY GRID vs product-nav grid — a STRUCTURAL split (not href-based, so it holds for
+        // both /industries/ solution grids AND /products/ purification grids like vyvid). A grid is
+        // a `Cards (category-grid)` when it has a section `.heading` (H2 title like "Food and
+        // beverage solutions" / "Purification Solutions") AND its cards are simple image+title+
+        // "Learn more" tiles with NO descriptive body (no `.spt-copy`/`<ul>`). The product-hub nav
+        // grid has no such section heading; the product-detail BENEFIT grid has `.spt-copy`/`<ul>`
+        // bodies (handled by benefitRows below). Exclude category grids here — cards-category-grid
+        // claims them.
+        if (isCategoryGrid(list)) return false;
+        return true;
       });
     // Benefit cards are `<a class="cmp-card bio">` WITHOUT an href (target=_self only), so match
     // `.cmp-card.bio` regardless of tag. Hub product-nav grids are excluded by the "not inside a
@@ -319,8 +351,22 @@ const MATCHERS = {
   'table-link-list': (doc) => tablesByColumns(doc, '.rich-text.vertical-border > table', 1),
   'table-three-column': (doc) => tablesByColumns(doc, '.rich-text.vertical-border > table', 3),
   'table-product-comparison': (doc) => tablesByColumns(doc, '.rich-text.vertical-border table', 5),
-  'table-data-grid': (doc) => Array.from(doc.querySelectorAll(".rich-text:not(.vertical-border) > table[width='100%']"))
-    .filter((t) => { const r = t.querySelector('tr'); return r && r.children.length === 5; }),
+  'table-data-grid': (doc) => {
+    // Original: 5-col full-width cookie-policy tables (no .vertical-border).
+    const cookieGrids = Array.from(doc.querySelectorAll(".rich-text:not(.vertical-border) > table[width='100%']"))
+      .filter((t) => { const r = t.querySelector('tr'); return r && r.children.length === 5; });
+    // Industries features/benefits table: a 2-column table with a header row inside
+    // .rich-text.vertical-border (e.g. beverage "SYLOID® XDP silica Features | Performance
+    // benefits"). It's a genuine data table (header + list cells), NOT the davisil split-list
+    // two-column-content. The 1/3/5-col vertical-border matchers don't claim 2-col tables, so
+    // this is safe and mutually exclusive.
+    const featureTables = Array.from(doc.querySelectorAll('.rich-text.vertical-border > table'))
+      .filter((t) => {
+        const r = t.querySelector('tr');
+        return r && r.children.length === 2;
+      });
+    return [...cookieGrids, ...featureTables];
+  },
   // contact-matrix: the col-lg-9 content column of a 75/25 split, but ONLY when it holds the
   // Industries / Customer Service Number header pair (avoids matching generic 75/25 columns).
   'table-contact-matrix': (doc) => {
@@ -348,9 +394,23 @@ const MATCHERS = {
     const vids = Array.from(doc.querySelectorAll('.media-video'));
     return vids.length === 1 ? [vids[0]] : [];
   },
-  'cards-category-grid': (doc) => Array.from(doc.querySelectorAll('.cmp-card-list'))
-    .filter((cl) => !cl.classList.contains('grid') && cl.querySelector('a.cmp-card.small'))
-    .map((cl) => cl.querySelector('.card-group')).filter(Boolean),
+  'cards-category-grid': (doc) => {
+    // Shape 1 (original): bare .cmp-card-list (no `grid`) of a.cmp-card.small — the homepage
+    // "Industries" category tiles.
+    const bare = Array.from(doc.querySelectorAll('.cmp-card-list'))
+      .filter((cl) => !cl.classList.contains('grid') && cl.querySelector('a.cmp-card.small'))
+      .map((cl) => cl.querySelector('.card-group'));
+    // Shape 2 (industries + product category grids): a .cmp-card-list.grid.three-columns with a
+    // section `.heading` (H2) + simple image+title+"Learn more" cards, NO descriptive body. Covers
+    // both industries ("Food and beverage solutions" → /industries/…) AND product pages
+    // ("Purification Solutions" on vyvid → /products/davisil…). Structural test (isCategoryGrid),
+    // so it does NOT depend on the link target. Mutually exclusive with the product-hub nav grid
+    // (no heading) and the benefit grid (has .spt-copy/<ul> bodies).
+    const categoryGrids = Array.from(doc.querySelectorAll('.cmp-card-list.grid.three-columns:has(a.cmp-card.bio)'))
+      .filter((cl) => isCategoryGrid(cl))
+      .map((cl) => cl.querySelector('.card-group'));
+    return [...bare, ...categoryGrids].filter(Boolean);
+  },
   // icon-grid: small icon+label+desc cards (generic cmp-card). Return ONE container (LCA) so
   // the whole set → one block. Item = a generic card with an icon image + a .h4 title, no link.
   'cards-icon-grid': (doc) => cardGridContainers(
@@ -506,6 +566,45 @@ function isSidebarPage(document) {
   );
 }
 
+/**
+ * Industries DETAIL page (solution/application pages under /industries/*, depth ≥ 2): a rich
+ * product-style body (Hero product + rich text + gated downloads + Featured Products + optional
+ * table + category-grid + Latest Insights) PLUS a left section-navigation rail. These take the
+ * SAME rich pipeline as product-detail pages (buildDefaultPage: image hero via discovery, source
+ * DOM order via sectionizeFlatBody, geo-hex on the Latest-Insights band, contactus widget), with
+ * the nav rail injected + `template: sidebar` for the 3-column grid.
+ *
+ * Deliberately distinct from isSidebarPage() (compliance, product hubs) — those keep the
+ * rebuild-main buildSidebarPage recipe. Industries depth-1 LANDINGS have NO section-nav, so they
+ * fall through to the plain default path (contactus 2-col). Gate on the /industries/ path so
+ * other section-nav families are unaffected.
+ */
+function isIndustriesDetailPage(document, url) {
+  const path = (() => { try { return new URL(url || '').pathname; } catch (e) { return ''; } })();
+  if (!/\/industries\/.+/.test(path)) return false;
+  return isSidebarPage(document);
+}
+
+/**
+ * Build the left section-nav as a top-level EDS section (a <ul> of sibling-page links + Section
+ * Metadata Style=sidebar-nav) from the source `.section-navigation`, then REMOVE every source nav
+ * container from the DOM so its stray <ul>/links don't leak into default-path discovery or
+ * sectionizeFlatBody. Returns the built section <div> (or null). The mobile <select> filter is
+ * rebuilt at render time by templates/sidebar/sidebar.js from this authored <ul>.
+ */
+function extractAndRemoveSidebarNav(document) {
+  const navSection = buildSidebarNav(document);
+  // Strip the source nav wherever it lives so it isn't re-collected as content below.
+  document.querySelectorAll(
+    '.section-navigation, [aria-label="Section navigation"], article .row > .col-lg-2, article > .col-lg-2, .col-xs-12.col-lg-2',
+  ).forEach((el) => {
+    // only remove the left-rail nav column, not the wide content column
+    if (el.matches('.col-lg-7, .col-lg-8, .col-lg-9')) return;
+    el.remove();
+  });
+  return navSection;
+}
+
 /** Contact-us sticky widget present (metadata-driven, auto-built by scripts.js). */
 function hasContactWidget(document) {
   return !!document.querySelector('.contact-us-sticky, .contact-us__cmp, .contact-us-cmp');
@@ -545,6 +644,15 @@ function buildMetadataBlock(document, extraPairs) {
   return WebImporter.Blocks.createBlock(document, { name: 'Metadata', cells });
 }
 
+// Collapse consecutive hyphens within each path segment so internal LINK hrefs match the SAVED
+// file path. finalizePath() runs the target page's URL through WebImporter.FileUtils.sanitizePath,
+// which collapses `--` → `-` (e.g. grace's `unipol--pp-process-technology` slug saves as
+// `unipol-pp-process-technology`). rewriteInternalLinks must apply the SAME collapse or links to
+// those pages 404. Only affects segments with `--` (validated sets have none), so it is safe.
+function collapsePathHyphens(path) {
+  return path.split('/').map((seg) => seg.replace(/-{2,}/g, '-')).join('/');
+}
+
 /** Rewrite grace.com / AEM /content/grace/us/en links to root-relative paths. */
 function rewriteInternalLinks(main) {
   main.querySelectorAll('a[href]').forEach((a) => {
@@ -570,14 +678,14 @@ function rewriteInternalLinks(main) {
         if (isInternal) {
           let path = u.pathname.replace(/^\/content\/grace\/us\/en/, '').replace(/\.html$/, '');
           if (path.length > 1) path = path.replace(/\/$/, '');
-          a.setAttribute('href', path || '/');
+          a.setAttribute('href', collapsePathHyphens(path) || '/');
         }
         return;
       }
       if (href.startsWith('/')) {
         let path = href.replace(/^\/content\/grace\/us\/en/, '').replace(/\.html$/, '');
         if (path.length > 1) path = path.replace(/\/$/, '');
-        a.setAttribute('href', path || '/');
+        a.setAttribute('href', collapsePathHyphens(path) || '/');
       }
     } catch (e) { /* leave malformed hrefs */ }
   });
@@ -596,7 +704,10 @@ function finalizePath(params) {
 // ===========================================================================
 
 /** Hero as the EXISTING `hero` block, banner variant — hero.js auto-generates the
- *  breadcrumb from the URL and paints the #004990 no-image band. We emit only the H1. */
+ *  breadcrumb from the URL and paints the #004990 no-image band. We emit only the H1.
+ *  Used by buildSidebarPage (compliance + product hubs). Industries detail pages do NOT use
+ *  this — they route through buildDefaultPage, whose discovery-based hero-banner parser keeps
+ *  the photo background + CTA (Hero (product)). */
 function buildHeroBlock(document) {
   const h1src = document.querySelector('article h1, .hero h1, h1');
   const title = h1src ? (h1src.textContent || '').trim() : (document.title || '').trim();
@@ -1528,7 +1639,7 @@ function normalizeGatedDownloads(root, document) {
  * its own section and contiguous default content forms its own section, joined by `<hr>`s at ROOT
  * level (where the serializer acts). Returns the new root to use in place of `main`.
  */
-function sectionizeFlatBody(main, document) {
+function sectionizeFlatBody(main, document, splitFingerprints = []) {
   // The parsers leave each block <table> buried in the ORIGINAL AEM grid nesting (e.g.
   // TABLE < .generic-hero < .aem-Grid < .responsivegrid …), and default content is scattered
   // through that same tree. A depth-based regroup can't handle the varying depths, so FLATTEN by
@@ -1575,8 +1686,27 @@ function sectionizeFlatBody(main, document) {
   // its own standalone content section. The tail starts at the LAST heading in the run (so an H2
   // plus a following link-<p> both travel with the block).
   const isHeading = (el) => /^H[1-6]$/.test(el.tagName);
+  // A background-banded content run (gray-band / blue-border) must become its OWN section so the
+  // section style applies only to it. Split a leaf run into sub-runs at each leaf whose text starts
+  // a captured fingerprint. Returns an array of runs (one when no split points). No-op when
+  // splitFingerprints is empty (products/other families keep byte-identical single-run behaviour).
+  const fpNorm = (splitFingerprints || []).map((s) => (s || '').replace(/\s+/g, ' ').trim().slice(0, 60)).filter(Boolean);
+  const splitRun = (run) => {
+    if (!fpNorm.length || run.length < 2) return [run];
+    const out = [];
+    let cur = [];
+    run.forEach((el) => {
+      const t = (el.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 60);
+      const isBoundary = t && fpNorm.some((fp) => t.startsWith(fp) || fp.startsWith(t));
+      if (isBoundary && cur.length) { out.push(cur); cur = []; }
+      cur.push(el);
+    });
+    if (cur.length) out.push(cur);
+    return out;
+  };
   const sections = [];
   let pending = [];
+  const flushBody = (body) => { splitRun(body).forEach((r) => { if (r.length) sections.push(r); }); };
   seq.forEach((item) => {
     if (item.type === 'leaf') { pending.push(item.el); return; }
     // find the start of the trailing header tail: the last heading in `pending`, if any content
@@ -1588,11 +1718,11 @@ function sectionizeFlatBody(main, document) {
     // only peel when the heading is near the end of the run (its tail is ≤3 nodes: heading + CTA/p)
     const tail = (tailStart >= 0 && pending.length - tailStart <= 3) ? pending.slice(tailStart) : [];
     const body = tail.length ? pending.slice(0, tailStart) : pending;
-    if (body.length) sections.push(body);
+    if (body.length) flushBody(body);
     sections.push([...tail, item.el]);
     pending = [];
   });
-  if (pending.length) sections.push(pending);
+  if (pending.length) flushBody(pending);
 
   // Rebuild main: detach each section's nodes from their old grid homes and re-append into fresh
   // top-level <div> sections in order. Clear main first (its old grid wrappers are now empty).
@@ -1636,7 +1766,10 @@ function buildDefaultPage(document, url, params) {
     // content column (max 920px) leaving a right gutter for the sticky Contact Us widget (source
     // layout: grace.com/products/ludox). Without it the content centers full-width and the widget
     // floats over it. The `contactus` flag + tagline feed scripts.js's auto-built sticky panel.
-    pageMeta.push(['template', 'contactus']);
+    // Default is the `contactus` template (2-col: content + widget gutter). Industries DETAIL
+    // pages (left section-nav present) override to `sidebar` via params.forceTemplate so the
+    // 3-col grid (nav | content | widget) engages — the nav rail is inserted below.
+    pageMeta.push(['template', (params && params.forceTemplate) || 'contactus']);
     pageMeta.push(['contactus', 'true']);
     const tagline = (params && params.contactWidgetTagline) || '';
     if (tagline) pageMeta.push(['contactus-tagline', tagline]);
@@ -1648,6 +1781,26 @@ function buildDefaultPage(document, url, params) {
   // banner hero (the thing that shows a breadcrumb), so we don't add noise elsewhere.
   if (params && params.sourceHadBannerHero && params.sourceHadBreadcrumb === false) {
     pageMeta.push(['breadcrumb', 'false']);
+  }
+
+  // Industries pages: the source breadcrumb's last crumb is the URL-derived label (e.g. "Refining
+  // Technologies"), which DIFFERS from the hero H1 ("FCC Catalyst and Additive Solutions"). Emit it
+  // as `breadcrumb-title` so hero.js uses it verbatim instead of falling back to og:title/
+  // document.title (the H1). Only for /industries/ pages so newsroom PRs — whose source last crumb
+  // IS the full title — keep their og:title fallback. Prefer the captured source crumb; fall back to
+  // the humanized last URL segment.
+  const isIndustries = /\/industries\//.test((params && params.originalURL) || url || '');
+  if (isIndustries) {
+    let crumb = (params && params.sourceLastCrumb) || '';
+    if (!crumb) {
+      try {
+        const segs = new URL((params && params.originalURL) || url).pathname
+          .replace(/\/$/, '').split('/').filter(Boolean);
+        const last = segs[segs.length - 1] || '';
+        crumb = last.replace(/-+/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
+      } catch (e) { crumb = ''; }
+    }
+    if (crumb) pageMeta.push(['breadcrumb-title', crumb]);
   }
 
   // Real data <table>s left in the body: markdown's round-trip turns each table's FIRST header
@@ -1690,15 +1843,44 @@ function buildDefaultPage(document, url, params) {
   // hexa background from spanning the whole page). Gated to contactus/product pages — the template
   // that needs per-block section isolation — so already-validated flat default pages (newsroom,
   // compliance) keep their current single-section output. `hasCU` is the product-detail signal.
-  if (hasCU) sectionizeFlatBody(main, document);
+  if (hasCU) {
+    // Pass gray-band/blue-border fingerprints so those banded content runs each become their OWN
+    // section (the section style then applies only to them). Empty on non-industries pages → no-op.
+    const splitFps = [...(params.sourceGrayBands || []), ...(params.sourceBlueBorders || [])];
+    sectionizeFlatBody(main, document, splitFps);
+  }
 
-  // Tag the "Latest Insights" featured-content section with the `geo-hex` section style WHEN the
-  // SOURCE wrapped it in `.geoAndHex`/`.light-gray-bkgd` (captured pre-cleanup). The global
-  // `main .section.geo-hex` CSS (styles/lazy-styles.css) then paints the hexagon band — same
-  // treatment insights pages get. Per-source: pages whose source lacked the band stay plain white.
+  // Industries DETAIL pages: inject the left section-nav rail (built + detached pre-pipeline) as
+  // its OWN top-level section right AFTER the hero, so the sidebar grid places it in column 2
+  // (nav) while the body sections flow down column 3. The hero is the section whose block table's
+  // header cell names a Hero variant; insert the nav (already a section <div> from buildSidebarNav)
+  // immediately after that hero section, delimited by <hr>s.
+  if (params && params.industriesNav && params.industriesNav.children.length) {
+    const navSection = params.industriesNav; // a <div> holding <ul> + sidebar-nav Section Metadata
+    const topSections = Array.from(main.children).filter((c) => c.nodeType === 1 && c.tagName === 'DIV');
+    const heroSection = topSections.find((c) => {
+      const hdr = c.querySelector('table tr');
+      return hdr && /hero\s*\(/i.test(hdr.textContent || '');
+    });
+    const hr = document.createElement('hr');
+    if (heroSection) {
+      // insert: <hero> <hr> <nav> <hr> …rest. anchor = node right after hero (could be an <hr>).
+      const afterHero = heroSection.nextSibling;
+      main.insertBefore(hr, afterHero);
+      main.insertBefore(navSection, afterHero);
+      main.insertBefore(document.createElement('hr'), navSection); // ensure hero↔nav split
+    } else {
+      main.insertBefore(hr, main.firstChild);
+      main.insertBefore(navSection, main.firstChild);
+    }
+  }
+
+  // Tag the "Latest Insights" featured-content section with a background section style matching the
+  // SOURCE band (captured pre-cleanup): `.geoAndHex` → `geo-hex` (hexagon band); `.light-gray-bkgd`
+  // only → `gray-band` (PLAIN gray, no hexagons). Pages whose source lacked any band stay white.
   // Locate the featured-content block table (header cell = "Cards (featured-content)") and append
   // Section Metadata to whichever top-level section <div> contains it.
-  if (params && params.sourceFeaturedHasGeoHex) {
+  if (params && (params.sourceFeaturedHasGeoHex || params.sourceFeaturedIsPlainGray)) {
     // createBlock humanizes the variant in the header cell: `Cards (featured-content)` renders as
     // "Cards (featured Content)" (hyphen → space, title-cased). Match tolerantly on both.
     const featuredTable = Array.from(main.querySelectorAll('table')).find((t) => {
@@ -1707,7 +1889,75 @@ function buildDefaultPage(document, url, params) {
     });
     const featuredSection = featuredTable
       && Array.from(main.children).find((c) => c.nodeType === 1 && c.contains(featuredTable));
-    if (featuredSection) featuredSection.append(createSectionMetadata(document, 'geo-hex'));
+    const style = params.sourceFeaturedHasGeoHex ? 'geo-hex' : 'gray-band';
+    if (featuredSection) featuredSection.append(createSectionMetadata(document, style));
+  }
+
+  // Re-tag PLAIN default-content sections that the source painted with a background band. We
+  // captured their text fingerprints pre-cleanup (params.sourceGrayBands / sourceBlueBorders);
+  // match each rebuilt top-level section by the leading heading/first-paragraph text and append the
+  // matching Section Metadata (`gray-band` = light-gray fill; `blue-border` = blue top/bottom bars).
+  const tagSectionsByFingerprint = (fingerprints, styleName) => {
+    if (!fingerprints || !fingerprints.length) return;
+    const norm = (s) => (s || '').replace(/\s+/g, ' ').trim().slice(0, 60);
+    Array.from(main.children).forEach((sec) => {
+      if (sec.nodeType !== 1 || sec.tagName !== 'DIV') return;
+      if (sec.querySelector('table')) return; // block sections handle their own styling
+      if (sec.querySelector('.section-metadata')) return; // already tagged
+      const h = sec.querySelector('h1, h2, h3, h4');
+      const p = sec.querySelector('p');
+      const secFp = norm(h && h.textContent) || norm(p && p.textContent);
+      if (secFp && fingerprints.some((fp) => fp && (secFp.startsWith(fp) || fp.startsWith(secFp)))) {
+        sec.append(createSectionMetadata(document, styleName));
+      }
+    });
+  };
+  if (params) {
+    tagSectionsByFingerprint(params.sourceBlueBorders, 'blue-border');
+    tagSectionsByFingerprint(params.sourceGrayBands, 'gray-band');
+  }
+
+  // Category-grid sections whose SOURCE grid sat inside a `.light-gray-bkgd` band (e.g. refining
+  // "A Broad Catalyst Portfolio") get `gray-band` too. These sections DO contain the cards block
+  // table (so the fingerprint pass above skipped them) — match by the grid's section heading and
+  // tag the section that holds both the heading and a `cards category-grid` table.
+  if (params && params.sourceGrayCategoryHeadings && params.sourceGrayCategoryHeadings.length) {
+    const norm = (s) => (s || '').replace(/\s+/g, ' ').trim().slice(0, 60);
+    Array.from(main.children).forEach((sec) => {
+      if (sec.nodeType !== 1 || sec.tagName !== 'DIV') return;
+      if (sec.querySelector('.section-metadata')) return;
+      const catTable = Array.from(sec.querySelectorAll('table')).find((t) => {
+        const cell = t.querySelector('tr');
+        return cell && /cards\s*\(\s*category[\s-]*grid/i.test((cell.textContent || ''));
+      });
+      if (!catTable) return;
+      const h = sec.querySelector('h1, h2, h3');
+      const secFp = norm(h && h.textContent);
+      if (secFp && params.sourceGrayCategoryHeadings.some((fp) => fp
+        && (secFp.startsWith(fp) || fp.startsWith(secFp)))) {
+        sec.append(createSectionMetadata(document, 'gray-band'));
+      }
+    });
+  }
+
+  // Industries pages only: remove EMPTY top-level <div> sections (e.g. the emptied .col-lg-2 shell
+  // left behind after the nav rail was lifted out) — an empty top-level <div> serializes to a blank
+  // EDS section. Then collapse resulting adjacent/edge <hr> delimiters. Scoped to industriesNav
+  // pages so validated sets (products/newsroom/compliance) keep byte-identical output.
+  if (params && params.industriesNav) {
+    Array.from(main.children).forEach((c) => {
+      if (c.nodeType === 1 && c.tagName === 'DIV'
+        && !(c.textContent || '').trim()
+        && !c.querySelector('img, picture, table, ul, ol, a, hr')) {
+        c.remove();
+      }
+    });
+    Array.from(main.children).forEach((c) => {
+      if (c.tagName === 'HR') {
+        const prev = c.previousElementSibling;
+        if (!prev || prev.tagName === 'HR' || !c.nextElementSibling) c.remove();
+      }
+    });
   }
 
   main.appendChild(document.createElement('hr'));
@@ -1794,6 +2044,17 @@ export default {
     // The reduce-height banner hero is what renders a breadcrumb; capture its presence too
     // (pre-cleanup) so we only emit a breadcrumb-off metadata row on pages that actually show one.
     params.sourceHadBannerHero = !!document.querySelector('.hero__section.hero-reduce-height');
+    // Capture the SOURCE breadcrumb's LAST crumb text (pre-cleanup). grace.com industries pages show
+    // the URL-derived label as the last crumb (e.g. "Refining Technologies"), which DIFFERS from the
+    // hero H1 ("FCC Catalyst and Additive Solutions"). hero.js falls back to og:title/document.title
+    // (= the H1) when no breadcrumb-title is authored, producing the wrong crumb — so capture the real
+    // last crumb here and emit it as breadcrumb-title for industries pages (below).
+    const crumbLis = Array.from(document.querySelectorAll(
+      '.cmp-breadcrumb li, nav[aria-label*="readcrumb" i] li',
+    ));
+    params.sourceLastCrumb = crumbLis.length
+      ? (crumbLis[crumbLis.length - 1].textContent || '').replace(/\s+/g, ' ').trim()
+      : '';
 
     // Capture the contact-us sticky widget BEFORE cleanup removes it. beforeTransform's
     // grace-cleanup strips `.contact-us-sticky`, but the default path decides the `contactus`
@@ -1801,14 +2062,68 @@ export default {
     const cuWidget = document.querySelector('.contact-us-sticky, .contact-us__cmp, .contact-us-cmp');
     params.sourceHadContactWidget = !!cuWidget;
 
-    // Capture whether the SOURCE wrapped the "Latest Insights" related-articles block in the
-    // decorative `.geoAndHex`/`.light-gray-bkgd` band BEFORE cleanup — same signal buildInsightsArticle
-    // reads (line ~718), but the DEFAULT/product path decides section metadata after cleanup, so we
-    // must read it here. buildDefaultPage emits a `geo-hex` Section Metadata on the featured-content
-    // section only when this is true (per-source parity: pages without it render on plain white).
+    // Capture the SOURCE background band around the "Latest Insights" related-articles block BEFORE
+    // cleanup. TWO distinct source treatments — must NOT be conflated (per-source parity):
+    //   • `.geoAndHex`        → the hexagon band → `geo-hex` Section Metadata (white hex + geo lines)
+    //   • `.light-gray-bkgd` only (NO geoAndHex) → PLAIN gray band → `gray-band` Section Metadata
+    // Most industries pages use plain `.light-gray-bkgd` (e.g. unipol-pp-process) — those must NOT
+    // get hexagons. Only the few with an explicit `.geoAndHex` do.
     const featuredBlogEl = document.querySelector('.featured-blog-cmp');
-    params.sourceFeaturedHasGeoHex = !!(featuredBlogEl
-      && featuredBlogEl.closest('.geoAndHex, .light-gray-bkgd'));
+    params.sourceFeaturedHasGeoHex = !!(featuredBlogEl && featuredBlogEl.closest('.geoAndHex'));
+    params.sourceFeaturedIsPlainGray = !!(featuredBlogEl
+      && !featuredBlogEl.closest('.geoAndHex')
+      && featuredBlogEl.closest('.light-gray-bkgd'));
+
+    // Capture PLAIN default-content sections that the source paints with a background band, keyed by
+    // a text fingerprint (leading heading or first paragraph) so we can re-tag the matching rebuilt
+    // section AFTER sectionizeFlatBody (which discards the source wrapper classes). Two source
+    // treatments on industries pages:
+    //   • `.light-gray-bkgd` box holding rich text (NOT featured-blog, NOT contact widget) → gray-band
+    //   • content bracketed by blue `.divider-line` bars (Grace #004990) → blue-border
+    const fingerprint = (host) => {
+      const h = host.querySelector('h1, h2, h3, h4');
+      if (h && (h.textContent || '').trim()) return (h.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 60);
+      const p = host.querySelector('p');
+      return p ? (p.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 60) : '';
+    };
+    params.sourceGrayBands = [];
+    // Category-grid section heading, when the grid sits inside a `.light-gray-bkgd` band (e.g.
+    // refining "A Broad Catalyst Portfolio") — its emitted section (H2 + intro + cards) gets gray.
+    params.sourceGrayCategoryHeadings = [];
+    document.querySelectorAll('.light-gray-bkgd').forEach((el) => {
+      if (el.querySelector('.featured-blog-cmp, .contact-us-cmp, .cmp-feature-set, .feature-set')) return;
+      const catList = el.querySelector('.cmp-card-list');
+      if (catList) {
+        // record the category grid's section heading so we can tag its rebuilt section gray.
+        const h = el.querySelector('.heading h1, .heading h2, .heading h3, h2, h3');
+        const t = h ? (h.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 60) : '';
+        if (t) params.sourceGrayCategoryHeadings.push(t);
+        return;
+      }
+      const fp = fingerprint(el);
+      if (fp) params.sourceGrayBands.push(fp);
+    });
+    params.sourceBlueBorders = [];
+    // A blue-border block is CONTENT sandwiched between a PAIR of `.divider-line` bars (Grace
+    // #004990) — the UNIPOL PCF paragraphs. Bars + content share a `.col-lg-7`, so use DOCUMENT
+    // ORDER: take the first & last bar, then capture the fingerprint of the first `.rich-text`/`.text`
+    // block that falls BETWEEN them (position bitmask 4 = follows). Robust to the shared-parent shape.
+    const bars = Array.from(document.querySelectorAll('.divider-line'));
+    if (bars.length >= 2) {
+      const first = bars[0];
+      const last = bars[bars.length - 1];
+      const between = Array.from(document.querySelectorAll('.rich-text, .text')).find((el) => {
+        // eslint-disable-next-line no-bitwise
+        const afterFirst = (first.compareDocumentPosition(el) & 4) !== 0;
+        // eslint-disable-next-line no-bitwise
+        const beforeLast = (el.compareDocumentPosition(last) & 4) !== 0;
+        return afterFirst && beforeLast && !el.contains(first) && !el.contains(last) && fingerprint(el);
+      });
+      if (between) {
+        const fp = fingerprint(between);
+        if (fp) params.sourceBlueBorders.push(fp);
+      }
+    }
     if (cuWidget) {
       // The tagline is the SUBTITLE ("Talk to our experts…"), held in `.contactus__text` /
       // `.contact-us-subtitle`. Do NOT fall back to a bare heading — the sticky widget's toggle
@@ -1832,6 +2147,14 @@ export default {
     let result;
     if (isInsightsArticle(document, params.originalURL || url)) {
       result = buildInsightsArticle(document, url, params);
+    } else if (isIndustriesDetailPage(document, params.originalURL || url)) {
+      // Industries solution/detail pages: rich product-style body + a left section-nav rail.
+      // Capture the nav (and remove it from the source) BEFORE the default pipeline runs, then
+      // let buildDefaultPage build the body (image hero, order, geo-hex, contactus). It reads
+      // params.forceTemplate/industriesNav to emit `template: sidebar` + inject the nav section.
+      params.forceTemplate = 'sidebar';
+      params.industriesNav = extractAndRemoveSidebarNav(document);
+      result = buildDefaultPage(document, url, params);
     } else if (isSidebarPage(document)) {
       result = buildSidebarPage(document, url, params);
     } else {

@@ -1,0 +1,28 @@
+{
+  "status": "success",
+  "url": "https://grace.com/industries/pharmaceutical-solutions/purification-formulation-delivery/chromatography/",
+  "path": "industries/pharmaceutical-solutions/purification-formulation-delivery/chromatography",
+  "timestamp": "2026-08-13T14:32:55.749Z",
+  "title": "Chromatography",
+  "pageType": "default",
+  "blocks": [
+    "hero-banner",
+    "video-overlay",
+    "accordion-faq",
+    "accordion-faq",
+    "accordion-faq",
+    "accordion-faq",
+    "accordion-faq",
+    "columns-horizontal-teaser-featured",
+    "cards-category-grid",
+    "cards-featured-content"
+  ],
+  "blocksLeftInPlace": [],
+  "pageMetadata": [
+    "template",
+    "contactus",
+    "contactus-tagline",
+    "breadcrumb-title"
+  ],
+  "hasForm": true
+}

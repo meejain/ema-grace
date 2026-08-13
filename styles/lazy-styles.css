@@ -190,3 +190,33 @@ main .section.gray-callout .default-content-wrapper h4 {
 main .section.gray-callout .default-content-wrapper p {
   margin: 0 auto;
 }
+
+/* ===== Section style: gray-band — GLOBAL =====
+   A content section authored with Section Metadata Style `gray-band` renders full of the source
+   light-gray fill (rgb(230 231 232)) with generous padding — the grace.com `.light-gray-bkgd`
+   content panels that are NOT the centered gray-callout and NOT the geo-hex featured band (e.g.
+   the "How is gas phase polymerization…" FAQ box, the "A Broad Catalyst Portfolio" intro band,
+   and the Latest Insights bands whose source is plain light-gray with NO hexagon overlay). Left-
+   aligned, normal body sizing. Plain gray content box (gas-phase FAQ panel) insets its content
+   ~30px top/bottom inside the box (NOT 50px --spacing-l, which looked over-padded vs source). */
+main .section.gray-band {
+  background-color: rgb(230 231 232);
+  padding: var(--spacing-m) 0;
+}
+
+/* When the gray band wraps a featured-content/category-grid cards block (plain-gray Latest
+   Insights, no hexagons), keep the cards on the gray fill without the geo-hex decorative layers. */
+main .section.gray-band:has(.cards.featured-content, .cards.category-grid) {
+  padding: var(--spacing-l) 0;
+}
+
+/* ===== Section style: blue-border — GLOBAL =====
+   A content section authored with Section Metadata Style `blue-border` gets a 5px Grace-blue
+   (#004990) bar across the TOP and BOTTOM — the source `.divider-line` bars that bracket a text
+   block (e.g. the UNIPOL® PP carbon-footprint / PCF section). Bars span the centered content
+   width; content keeps normal padding between them. */
+main .section.blue-border {
+  border-top: 5px solid #004990;
+  border-bottom: 5px solid #004990;
+  padding: var(--spacing-l) 0;
+}

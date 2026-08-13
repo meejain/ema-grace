@@ -1,0 +1,21 @@
+{
+  "status": "success",
+  "url": "https://grace.com/industries/chemical-processing/catalyst-supports/",
+  "path": "industries/chemical-processing/catalyst-supports",
+  "timestamp": "2026-08-13T13:47:04.034Z",
+  "title": "Catalyst Supports",
+  "pageType": "default",
+  "blocks": [
+    "hero-banner",
+    "table-two-column-content",
+    "cards-featured-content"
+  ],
+  "blocksLeftInPlace": [],
+  "pageMetadata": [
+    "template",
+    "contactus",
+    "contactus-tagline",
+    "breadcrumb-title"
+  ],
+  "hasForm": true
+}

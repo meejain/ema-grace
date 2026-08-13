@@ -1,0 +1,21 @@
+{
+  "status": "success",
+  "url": "https://grace.com/industries/biofuels/biomass-based-diesel/first-generation-biodiesel/",
+  "path": "industries/biofuels/biomass-based-diesel/first-generation-biodiesel",
+  "timestamp": "2026-08-13T14:53:41.646Z",
+  "title": "First Generation Biodiesel",
+  "pageType": "default",
+  "blocks": [
+    "hero-banner",
+    "columns-horizontal-teaser-featured",
+    "cards-featured-content"
+  ],
+  "blocksLeftInPlace": [],
+  "pageMetadata": [
+    "template",
+    "contactus",
+    "contactus-tagline",
+    "breadcrumb-title"
+  ],
+  "hasForm": true
+}

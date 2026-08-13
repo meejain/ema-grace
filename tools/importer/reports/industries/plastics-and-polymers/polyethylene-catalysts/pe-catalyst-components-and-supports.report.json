@@ -1,0 +1,20 @@
+{
+  "status": "success",
+  "url": "https://grace.com/industries/plastics-and-polymers/polyethylene-catalysts/pe-catalyst-components-and-supports/",
+  "path": "industries/plastics-and-polymers/polyethylene-catalysts/pe-catalyst-components-and-supports",
+  "timestamp": "2026-08-13T13:50:39.994Z",
+  "title": "PE Catalyst Components and Supports",
+  "pageType": "default",
+  "blocks": [
+    "hero-banner",
+    "cards-featured-content"
+  ],
+  "blocksLeftInPlace": [],
+  "pageMetadata": [
+    "template",
+    "contactus",
+    "contactus-tagline",
+    "breadcrumb-title"
+  ],
+  "hasForm": false
+}

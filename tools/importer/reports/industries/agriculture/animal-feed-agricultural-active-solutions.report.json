@@ -1,0 +1,21 @@
+{
+  "status": "success",
+  "url": "https://grace.com/industries/agriculture/animal-feed-agricultural-active-solutions/",
+  "path": "industries/agriculture/animal-feed-agricultural-active-solutions",
+  "timestamp": "2026-08-13T14:43:46.430Z",
+  "title": "Animal Feed and Agricultural Active Solutions",
+  "pageType": "default",
+  "blocks": [
+    "hero-banner",
+    "columns-horizontal-teaser-featured",
+    "cards-product"
+  ],
+  "blocksLeftInPlace": [],
+  "pageMetadata": [
+    "template",
+    "contactus",
+    "contactus-tagline",
+    "breadcrumb-title"
+  ],
+  "hasForm": true
+}

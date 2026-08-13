@@ -189,6 +189,28 @@ p {
   line-height: 1.7;
 }
 
+/* Authored body-copy lists: align the bullet/number TEXT flush with the surrounding paragraph and
+   heading text — grace.com renders content lists with `padding-left:0; margin:0; list-style:outside`
+   so the marker hangs in the left gutter and the item text lines up on the SAME vertical edge as the
+   paragraphs (verified on grace.com/insights/catalagram-127 + industries/unipol-pp-process). Browser
+   default `ul/ol { padding-left: 40px }` pushes the list 40px right of the paragraphs, which reads as
+   misaligned/haphazard. Scope to `.default-content-wrapper` (authored body copy) so block-internal
+   lists (nav rail, cards, tables) — which live in their own wrappers — keep their own layout. */
+.default-content-wrapper ul,
+.default-content-wrapper ol {
+  padding-left: 0;
+  margin-left: 0;
+}
+
+/* Marker sits AT the paragraph left edge; item text indents 14px past it (source: ul padding/
+   margin 0, li list-style-position:outside + padding-left:14px — so the bullet dot lines up with
+   the body-copy left edge and the text is 14px in, NOT the marker hanging out into the gutter). */
+.default-content-wrapper li {
+  list-style-position: outside;
+  padding-left: 14px;
+  margin-left: 0;
+}
+
 code,
 pre {
   font-size: var(--body-font-size-s);

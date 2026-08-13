@@ -1,0 +1,76 @@
+# industries — importer snapshot
+- **set:** industries (102 pages: 1 root landing + 11 depth-1 landings + 90 depth-2/3/4 solution/detail pages)
+- **bundle:** import-grace-master.bundle.js (frozen; the live bundle that produced this set)
+- **bundle provenance:** working tree at snapshot (parent commit `c35279d` "Update importer"; importer
+  source + bundle uncommitted at snapshot time — the frozen bundle here IS the record).
+- **shape — ONE template, two dispatch branches keyed on section-nav presence:**
+  - DETAIL pages (depth ≥2, have `.section-navigation`) → `isIndustriesDetailPage()` (path `/industries/`
+    + `isSidebarPage`) routes to `buildDefaultPage` with `params.forceTemplate='sidebar'` +
+    `params.industriesNav`. Reuses the products-detail pipeline (image hero via discovery, source DOM
+    order via `sectionizeFlatBody`, geo-hex, contactus); injects the nav rail as its own section after
+    the hero; emits `template: sidebar` (3-col grid nav|content|widget).
+  - LANDING pages (depth-1, NO section-nav, e.g. plastics-and-polymers) → plain `buildDefaultPage`,
+    `template: contactus` (2-col content + widget gutter).
+- **contains (delta over products bundle):**
+  - `isIndustriesDetailPage()` + `extractAndRemoveSidebarNav()` + nav-rail injection into buildDefaultPage;
+    `params.forceTemplate` override so detail pages emit `template: sidebar`.
+  - `isCategoryGrid()` STRUCTURAL discriminator: a `.cmp-card-list.grid.three-columns` bio grid with a
+    section `.heading` (H2) + simple image+`.h4.title`+"Learn more" cards (NO `.spt-copy`/`<ul>` body) →
+    `Cards (category-grid)`; used by BOTH the cards-product matcher (to exclude) and cards-category-grid
+    (to claim). href-agnostic → works for industries solution grids AND product purification grids (vyvid).
+  - `cards-category-grid` parser: title from `.h4.title` (drops `.h5` "PROMOTION" eyebrow); preserves the
+    section H2+intro authored INSIDE `.cmp-card-list > .heading` (else replaceWith destroys it).
+  - `table-data-grid` matcher extended to catch a 2-col bordered features/benefits table
+    (`.rich-text.vertical-border > table`, 2 cols, header row) → `Table (data-grid)`.
+  - `featured-product-selector` wins over `columns-horizontal-teaser-featured` for slate "Featured
+    Products" carousels (the latter excludes "Featured Products" headings).
+  - `collapsePathHyphens()` in `rewriteInternalLinks`: collapses `--`→`-` in internal link paths to match
+    the saved file path (finalizePath/sanitizePath collapses it) — fixes the `unipol--pp-process-technology`
+    link/file mismatch. Validated sets have no `--` links so it is a no-op there.
+  - Empty top-level `<div>` section cleanup + `<hr>` collapse (scoped to `params.industriesNav` pages) —
+    removes the emptied `.col-lg-2` shell left after the nav rail is lifted out.
+  - Hero background image: relies on the existing transform `onLoad` hook that materializes inline
+    `style="background-image:url(scene7…)"` into a leading `<img>` so the discovery hero-banner parser
+    emits `Hero (product)` WITH the photo (the previously-missed hero-image class of bug — now covered on
+    the industries detail path because it routes through buildDefaultPage, not the stripped buildSidebarPage).
+- **RUNTIME fixes (NOT in the bundle — in repo, apply at render):** `blocks/table/table.js` —
+  data-grid + three-column scroll wrappers get `tabindex=0` + `role=group` + `aria-label` (fixes axe
+  `scrollable-region-focusable` serious violation surfaced by the beverage SYLOID data-grid). All other
+  rendering reuses existing hero/cards/featured/sidebar/contactus block+template code (unchanged).
+- **URL list:** `urls.txt` (102 — from grace.com/sitemap.xml `/industries/` subtree).
+- **KNOWN NOTES:**
+  - `unipol--pp-process-technology` (double-hyphen source slug) saves + links as single-hyphen
+    `unipol-pp-process-technology` (6 pages). Consistent internally; if the live EDS site must resolve the
+    exact double-hyphen URL, a DA-side redirect/alias may be needed.
+  - Section-nav is emitted as a FLAT `<ul>` (source nests the current industry as a parent `<li>` with
+    sibling sub-items); flattening keeps all links but drops the visual parent/child nesting. Cosmetic.
+  - `products/trisyl-xge-catalyst` source now 301s (removed/relocated) — unrelated to this set; the stale
+    on-disk product file was kept.
+- **validation:** 3 reps visually gated vs live grace.com (beverage = detail+table+category; wood =
+  detail+geo-hex; plastics-and-polymers = landing/no-nav). All 102 imported, byte-size audit found 0
+  tiny/empty pages. a11y passed on all 3 reps. Prove-no-regression: silsol/ludox products reimport →
+  identical block classes (byte deltas were pre-existing on-disk/older-bundle drift, not from these edits).
+- **import note:** onLoad hydration wait makes pages slow (~60-70s/page) → imported in batches of 5
+  (20 chunks). A large single run times out ~10 min and a page can serialize empty under load.
+- **REVISION 2 (2026-08-13, post-visual-review fixes):**
+  - **Breadcrumb:** industries pages emit `breadcrumb-title` = the SOURCE breadcrumb's last crumb
+    (captured pre-cleanup, e.g. "Refining Technologies"), so hero.js shows the URL-derived label, NOT
+    the hero H1 ("FCC Catalyst and Additive Solutions"). hero.js unchanged (newsroom keeps og:title).
+  - **ART featured teaser:** parser now emits `Columns (horizontal-teaser, featured-products)`
+    (variant + option, matching draft + columns.css) instead of the merged `horizontal-teaser-featured`
+    token that failed columns.js getVariant() → block stayed undecorated white. Now slate cards.
+  - **Latest Insights band:** split `geo-hex` (source `.geoAndHex` → hexagons) from `gray-band`
+    (source `.light-gray-bkgd` only → PLAIN gray, no hexagons). Most industries pages are plain gray.
+  - **NEW section styles (styles/lazy-styles.css):** `gray-band` (light-gray fill rgb(230 231 232))
+    + `blue-border` (5px #004990 top/bottom bars). Full-bleed re-inset for sidebar pages in
+    templates/sidebar/sidebar.css. Draft samples: content/drafts/section-gray-band.plain.html,
+    section-blue-border.plain.html.
+  - **Section tagging:** captured pre-cleanup fingerprints of `.light-gray-bkgd` content boxes,
+    category grids inside light-gray, and `.divider-line`-bracketed content → tag rebuilt sections
+    `gray-band`/`blue-border`. sectionizeFlatBody now splits leaf runs at those fingerprints so each
+    banded content run becomes its own section.
+  - RUNTIME additions: blocks/hero/hero.js unchanged; styles/lazy-styles.css + templates/sidebar/sidebar.css.
+  - Verified on refining-technologies (breadcrumb, ART slate, Broad-Catalyst gray full-bleed) +
+    unipol-pp-process (gas-phase gray-band, PCF blue-border, Latest-Insights gray). a11y green; products
+    prove-no-regression identical. Full 102-page reimport with this bundle in progress.
+- **snapshot date:** 2026-08-13 (rev 2).

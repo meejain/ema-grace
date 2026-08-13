@@ -1,0 +1,20 @@
+{
+  "status": "success",
+  "url": "https://grace.com/industries/general-industrial/static-adsorbents/",
+  "path": "industries/general-industrial/static-adsorbents",
+  "timestamp": "2026-08-13T14:15:47.645Z",
+  "title": "Static Adsorbents",
+  "pageType": "default",
+  "blocks": [
+    "hero-banner",
+    "cards-featured-content"
+  ],
+  "blocksLeftInPlace": [],
+  "pageMetadata": [
+    "template",
+    "contactus",
+    "contactus-tagline",
+    "breadcrumb-title"
+  ],
+  "hasForm": false
+}

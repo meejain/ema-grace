@@ -2,23 +2,21 @@
   "status": "success",
   "url": "https://grace.com/industries/food-beverage/beer/",
   "path": "industries/food-beverage/beer",
-  "timestamp": "2026-08-05T20:55:57.459Z",
+  "timestamp": "2026-08-13T14:48:17.644Z",
   "title": "Beer",
-  "pageType": "sidebar",
+  "pageType": "default",
+  "blocks": [
+    "hero-banner",
+    "table-product-comparison",
+    "cards-category-grid",
+    "cards-featured-content"
+  ],
+  "blocksLeftInPlace": [],
   "pageMetadata": [
     "template",
     "contactus",
     "contactus-tagline",
     "breadcrumb-title"
   ],
-  "sidebarNav": true,
-  "contentNodes": 4,
-  "contactSplitBanner": false,
-  "blocks": [
-    "cards-product",
-    "table-product-comparison",
-    "cards-featured-content"
-  ],
-  "blocksLeftInPlace": [],
   "hasForm": true
 }

@@ -1,0 +1,24 @@
+{
+  "status": "success",
+  "url": "https://grace.com/industries/pharmaceutical-solutions/",
+  "path": "industries/pharmaceutical-solutions",
+  "timestamp": "2026-08-13T14:20:19.429Z",
+  "title": "Pharmaceutical Solutions",
+  "pageType": "default",
+  "blocks": [
+    "hero-banner",
+    "video-overlay",
+    "columns-horizontal-teaser-featured",
+    "cards-category-grid",
+    "columns-horizontal-teaser",
+    "cards-featured-content"
+  ],
+  "blocksLeftInPlace": [],
+  "pageMetadata": [
+    "template",
+    "contactus",
+    "contactus-tagline",
+    "breadcrumb-title"
+  ],
+  "hasForm": true
+}

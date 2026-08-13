@@ -1,0 +1,23 @@
+{
+  "status": "success",
+  "url": "https://grace.com/industries/refining-technologies/value-creation/specialized-evaluation-tools/",
+  "path": "industries/refining-technologies/value-creation/specialized-evaluation-tools",
+  "timestamp": "2026-08-13T13:33:32.981Z",
+  "title": "Specialized Evaluation Tools",
+  "pageType": "default",
+  "blocks": [
+    "hero-banner",
+    "video-overlay",
+    "cards-featured-content",
+    "banner-resource-download"
+  ],
+  "blocksLeftInPlace": [],
+  "pageMetadata": [
+    "template",
+    "contactus",
+    "contactus-tagline",
+    "breadcrumb",
+    "breadcrumb-title"
+  ],
+  "hasForm": true
+}

@@ -1,0 +1,20 @@
+{
+  "status": "success",
+  "url": "https://grace.com/industries/plastics-and-polymers/polyethylene-catalysts/pe-hybrid/",
+  "path": "industries/plastics-and-polymers/polyethylene-catalysts/pe-hybrid",
+  "timestamp": "2026-08-13T13:54:16.910Z",
+  "title": "PE Hybrid",
+  "pageType": "default",
+  "blocks": [
+    "hero-banner",
+    "cards-featured-content"
+  ],
+  "blocksLeftInPlace": [],
+  "pageMetadata": [
+    "template",
+    "contactus",
+    "contactus-tagline",
+    "breadcrumb-title"
+  ],
+  "hasForm": false
+}

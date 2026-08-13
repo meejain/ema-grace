@@ -1,0 +1,24 @@
+{
+  "status": "success",
+  "url": "https://grace.com/industries/food-beverage/beverage/",
+  "path": "industries/food-beverage/beverage",
+  "timestamp": "2026-08-13T14:51:00.719Z",
+  "title": "Beverage",
+  "pageType": "default",
+  "blocks": [
+    "hero-banner",
+    "table-data-grid",
+    "featured-product-selector",
+    "cards-category-grid",
+    "cards-featured-content"
+  ],
+  "blocksLeftInPlace": [],
+  "pageMetadata": [
+    "template",
+    "contactus",
+    "contactus-tagline",
+    "breadcrumb",
+    "breadcrumb-title"
+  ],
+  "hasForm": true
+}

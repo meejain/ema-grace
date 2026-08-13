@@ -1,0 +1,22 @@
+{
+  "status": "success",
+  "url": "https://grace.com/industries/food-beverage/edible-oil-refining/",
+  "path": "industries/food-beverage/edible-oil-refining",
+  "timestamp": "2026-08-13T14:49:11.585Z",
+  "title": "Edible Oil Refining",
+  "pageType": "default",
+  "blocks": [
+    "hero-banner",
+    "table-product-comparison",
+    "cards-category-grid",
+    "cards-featured-content"
+  ],
+  "blocksLeftInPlace": [],
+  "pageMetadata": [
+    "template",
+    "contactus",
+    "contactus-tagline",
+    "breadcrumb-title"
+  ],
+  "hasForm": true
+}

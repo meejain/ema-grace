@@ -1,0 +1,21 @@
+{
+  "status": "success",
+  "url": "https://grace.com/industries/",
+  "path": "industries",
+  "timestamp": "2026-08-13T13:25:28.088Z",
+  "title": "Industries",
+  "pageType": "default",
+  "blocks": [
+    "hero-banner",
+    "cards-category-grid",
+    "cards-featured-content"
+  ],
+  "blocksLeftInPlace": [],
+  "pageMetadata": [
+    "template",
+    "contactus",
+    "contactus-tagline",
+    "breadcrumb-title"
+  ],
+  "hasForm": false
+}

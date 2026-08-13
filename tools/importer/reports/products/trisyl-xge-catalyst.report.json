@@ -1,22 +1,19 @@
 {
   "status": "success",
-  "url": "https://grace.com/products/TRISYL-XGE-Catalyst/",
+  "url": "https://grace.com/products/trisyl-xge-catalyst/",
   "path": "products/trisyl-xge-catalyst",
-  "timestamp": "2026-08-09T21:52:01.687Z",
-  "title": "TRISYL® XGE Catalyst",
-  "pageType": "default",
-  "blocks": [
-    "hero-banner",
-    "video-overlay",
-    "cards-product",
-    "accordion-faq"
-  ],
-  "blocksLeftInPlace": [],
+  "timestamp": "2026-08-13T01:54:13.941Z",
+  "title": "404 Page Not Found",
+  "pageType": "sidebar",
   "pageMetadata": [
     "template",
     "contactus",
-    "contactus-tagline",
-    "breadcrumb"
+    "contactus-tagline"
   ],
-  "hasForm": true
+  "sidebarNav": false,
+  "contentNodes": 4,
+  "contactSplitBanner": false,
+  "blocks": [],
+  "blocksLeftInPlace": [],
+  "hasForm": false
 }

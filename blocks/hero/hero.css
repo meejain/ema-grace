@@ -413,9 +413,11 @@
   margin: 0 0 30px;
 }
 
-/* Green CTA button (source .learn-more #7ac143, black text, Roboto Slab
-   14px/600, 18px/30px padding, rectangle). */
-.hero.product a:any-link {
+/* Green CTA button (source .learn-more #7ac143, black text, Roboto Slab 14px/600, 18px/30px
+   padding, rectangle). EXCLUDE breadcrumb links — they're plain white text over the hero (styled by
+   the .hero-breadcrumb rules below); without the :not(), the product green-button treatment paints
+   the breadcrumb links as green pills. */
+.hero.product a:any-link:not(.hero-breadcrumb a) {
   display: inline-block;
   padding: 18px 30px;
   border-radius: 0;
@@ -429,8 +431,8 @@
   margin-top: 0;
 }
 
-.hero.product a:hover,
-.hero.product a:focus {
+.hero.product a:hover:not(.hero-breadcrumb a),
+.hero.product a:focus:not(.hero-breadcrumb a) {
   background-color: var(--accent-color-hover); /* #27853c */
   color: #fff;
 }
@@ -487,7 +489,8 @@
    (source: breadcrumb-bottom → H1-top gap = 13px). Placed after the base
    .hero-breadcrumb rules so specificity ascends. */
 .hero.banner .hero-breadcrumb,
-.hero.overlay .hero-breadcrumb {
+.hero.overlay .hero-breadcrumb,
+.hero.product .hero-breadcrumb {
   margin-top: -23px;
   margin-bottom: 13px;
 }

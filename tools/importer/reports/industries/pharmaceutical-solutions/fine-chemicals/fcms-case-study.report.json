@@ -1,0 +1,18 @@
+{
+  "status": "success",
+  "url": "https://grace.com/industries/pharmaceutical-solutions/fine-chemicals/fcms-case-study/",
+  "path": "industries/pharmaceutical-solutions/fine-chemicals/fcms-case-study",
+  "timestamp": "2026-08-13T14:31:05.453Z",
+  "title": "FCMS Case Study",
+  "pageType": "default",
+  "blocks": [
+    "hero-banner"
+  ],
+  "blocksLeftInPlace": [],
+  "pageMetadata": [
+    "template",
+    "contactus",
+    "breadcrumb-title"
+  ],
+  "hasForm": true
+}

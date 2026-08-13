@@ -337,7 +337,7 @@ migration fidelity, NOT that anything is published to DA (§0). Keep that distin
 | newsroom | 28 | 28 ✅ | 26 press-releases (default path + Hero (banner) + URL breadcrumb) + 2 landing (hero + year-accordion + featured cards) — DONE |
 | products (detail) | 28 | 28 ✅ | Product Detail template — DONE. Default path + `template: contactus` + Hero (product) + `sectionizeFlatBody`. See "Product Detail recipe" below |
 | products (hubs) | 6 | 6 ✅ | JS-hydrated CATEGORY-HUB pages (synthetic-silicas, adsorbents, catalysts, fine-chemicals, product-stewardship, quality-management). Imported via onLoad hydration-wait. The 2 hubs whose product-list didn't hydrate in time (catalysts, synthetic-silicas) were reconstructed by HAND from the LIVE source DOM (see "Product hub / sidebar recipe" below) — DONE 2026-08-12 |
-| industries | 102 | 0 (analysis DONE 2026-08-12) | ONE template ("Solution Detail") with optional sections — NOT 3 templates (block-intelligence labels 3 but rendered DOM is one). Step-1 analysis complete: see `INDUSTRIES-ANALYSIS.md` + "Industries recipe" below. Rep set + section→block contract identified; importer NOT yet extended |
+| industries | 102 | 102 ✅ | ONE template with TWO dispatch branches keyed on section-nav: DETAIL pages (depth ≥2, have section-nav) → `template: sidebar` 3-col (nav\|content\|widget); LANDINGS (depth-1, no nav) → `template: contactus` 2-col. All blocks reuse existing (Hero product + sidebar-nav + rich text + gated downloads + Table data-grid + Featured product-selector + Cards category-grid + Cards featured-content + geo-hex). DONE 2026-08-13 — see "Industries recipe" + `backups/industries/`. Hero image FIX: routes through buildDefaultPage so onLoad materializes inline bg-image → Hero (product) with photo |
 | about-grace | 39 | 8 | section pages + ~30 leadership bios (person-profile template) |
 | campaign | 17 | 2 | flat campaign/landing pages |
 | forms | 15 | 1 | DEFERRED → AEM Adaptive Forms pass |
@@ -613,6 +613,10 @@ strip / no hero `<p>`→h1 / no gradient detection) · `backups/newsroom/` (bund
 hero-recipe fixes: `Hero (banner[, gradient])`, `<p>`→h1, breadcrumb-metadata, `.cmp-breadcrumb` strip)
 · `backups/products/` (bundle at commit `bd7bc39` with the Product Detail work: `Hero (product)`,
 `template: contactus`, `normalizeGatedDownloads`, `sectionizeFlatBody`, cards-product benefit grid,
-video-from-media-modal, featured-content + teaser headings — 34 URLs incl. 6 hubs).
+video-from-media-modal, featured-content + teaser headings — 34 URLs incl. 6 hubs)
+· `backups/industries/` (working-tree bundle, 2026-08-13, with the Industries work: `isIndustriesDetailPage`
+dispatch + nav-rail injection + `forceTemplate:sidebar`, `isCategoryGrid` structural discriminator,
+category-grid title/heading preservation, `table-data-grid` 2-col match, `collapsePathHyphens` link fix,
+empty-section cleanup — 102 URLs. RUNTIME: `blocks/table/table.js` scroll-region `tabindex`).
 Re-snapshot a set's folder whenever the shared bundle gains more fixes affecting that set. See
-`backups/README.md` and memory `importer-bundle-backups`, `product-detail-template`.
+`backups/README.md` and memory `importer-bundle-backups`, `product-detail-template`, `industries-migration`.

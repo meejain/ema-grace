@@ -47,6 +47,11 @@ function decorateDataGrid(block) {
   if (tbody.children.length) table.append(tbody);
   const scroller = document.createElement('div');
   scroller.className = 'table-data-grid-scroll';
+  // A horizontally-scrollable region must be keyboard-focusable so keyboard-only users can scroll
+  // it (axe scrollable-region-focusable). tabindex=0 + role/label makes it a labelled scroll area.
+  scroller.setAttribute('tabindex', '0');
+  scroller.setAttribute('role', 'group');
+  scroller.setAttribute('aria-label', 'Table');
   scroller.append(table);
   block.replaceChildren(scroller);
 }
@@ -70,6 +75,10 @@ function decorateThreeColumn(block) {
   if (dataRows.length) table.append(tbody);
   const scroller = document.createElement('div');
   scroller.className = 'table-three-column-scroll';
+  // Keyboard-focusable scroll region (axe scrollable-region-focusable) — same as data-grid.
+  scroller.setAttribute('tabindex', '0');
+  scroller.setAttribute('role', 'group');
+  scroller.setAttribute('aria-label', 'Table');
   scroller.append(table);
   block.replaceChildren(scroller);
 }

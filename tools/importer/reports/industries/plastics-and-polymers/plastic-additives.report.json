@@ -1,0 +1,21 @@
+{
+  "status": "success",
+  "url": "https://grace.com/industries/plastics-and-polymers/plastic-additives/",
+  "path": "industries/plastics-and-polymers/plastic-additives",
+  "timestamp": "2026-08-13T14:05:01.197Z",
+  "title": "Plastic Additives",
+  "pageType": "default",
+  "blocks": [
+    "hero-banner",
+    "cards-category-grid",
+    "cards-featured-content"
+  ],
+  "blocksLeftInPlace": [],
+  "pageMetadata": [
+    "template",
+    "contactus",
+    "contactus-tagline",
+    "breadcrumb-title"
+  ],
+  "hasForm": false
+}

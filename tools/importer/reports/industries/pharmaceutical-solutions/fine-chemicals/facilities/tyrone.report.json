@@ -1,0 +1,24 @@
+{
+  "status": "success",
+  "url": "https://grace.com/industries/pharmaceutical-solutions/fine-chemicals/facilities/tyrone/",
+  "path": "industries/pharmaceutical-solutions/fine-chemicals/facilities/tyrone",
+  "timestamp": "2026-08-13T14:30:12.247Z",
+  "title": "Tyrone",
+  "pageType": "default",
+  "blocks": [
+    "hero-banner",
+    "map-embedded",
+    "accordion-faq",
+    "columns-horizontal-teaser-featured",
+    "cards-category-grid",
+    "cards-featured-content"
+  ],
+  "blocksLeftInPlace": [],
+  "pageMetadata": [
+    "template",
+    "contactus",
+    "contactus-tagline",
+    "breadcrumb-title"
+  ],
+  "hasForm": false
+}

@@ -2,29 +2,23 @@
   "status": "success",
   "url": "https://grace.com/industries/pharmaceutical-solutions/fine-chemicals/facilities/south-haven/",
   "path": "industries/pharmaceutical-solutions/fine-chemicals/facilities/south-haven",
-  "timestamp": "2026-08-05T17:15:06.180Z",
+  "timestamp": "2026-08-13T14:29:17.753Z",
   "title": "South Haven",
-  "pageType": "sidebar",
+  "pageType": "default",
+  "blocks": [
+    "hero-banner",
+    "map-embedded",
+    "accordion-faq",
+    "columns-horizontal-teaser-featured",
+    "cards-category-grid",
+    "cards-featured-content"
+  ],
+  "blocksLeftInPlace": [],
   "pageMetadata": [
     "template",
     "contactus",
     "contactus-tagline",
     "breadcrumb-title"
-  ],
-  "sidebarNav": true,
-  "contentNodes": 4,
-  "contactSplitBanner": false,
-  "blocks": [
-    "accordion-faq",
-    "cards-product",
-    "columns-horizontal-teaser-featured",
-    "map-embedded"
-  ],
-  "blocksLeftInPlace": [
-    "cards-related-articles",
-    "banner-cta",
-    "cards-featured-content",
-    "quote-cta"
   ],
   "hasForm": false
 }

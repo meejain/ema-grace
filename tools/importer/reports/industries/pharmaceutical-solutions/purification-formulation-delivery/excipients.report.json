@@ -1,0 +1,24 @@
+{
+  "status": "success",
+  "url": "https://grace.com/industries/pharmaceutical-solutions/purification-formulation-delivery/excipients/",
+  "path": "industries/pharmaceutical-solutions/purification-formulation-delivery/excipients",
+  "timestamp": "2026-08-13T14:33:50.126Z",
+  "title": "Excipients",
+  "pageType": "default",
+  "blocks": [
+    "hero-banner",
+    "video-overlay",
+    "accordion-faq",
+    "columns-horizontal-teaser-featured",
+    "cards-category-grid",
+    "cards-featured-content"
+  ],
+  "blocksLeftInPlace": [],
+  "pageMetadata": [
+    "template",
+    "contactus",
+    "contactus-tagline",
+    "breadcrumb-title"
+  ],
+  "hasForm": true
+}

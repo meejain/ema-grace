@@ -1,0 +1,21 @@
+{
+  "status": "success",
+  "url": "https://grace.com/industries/personal-care/toothpaste/",
+  "path": "industries/personal-care/toothpaste",
+  "timestamp": "2026-08-13T14:45:33.742Z",
+  "title": "Toothpaste",
+  "pageType": "default",
+  "blocks": [
+    "hero-banner",
+    "table-data-grid",
+    "cards-featured-content"
+  ],
+  "blocksLeftInPlace": [],
+  "pageMetadata": [
+    "template",
+    "contactus",
+    "contactus-tagline",
+    "breadcrumb-title"
+  ],
+  "hasForm": true
+}

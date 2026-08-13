@@ -1,0 +1,23 @@
+{
+  "status": "success",
+  "url": "https://grace.com/industries/pharmaceutical-solutions/fine-chemicals/consultative-services/r-d/",
+  "path": "industries/pharmaceutical-solutions/fine-chemicals/consultative-services/r-d",
+  "timestamp": "2026-08-13T14:26:35.626Z",
+  "title": "R&D",
+  "pageType": "default",
+  "blocks": [
+    "hero-banner",
+    "table-data-grid",
+    "columns-horizontal-teaser-featured",
+    "cards-category-grid",
+    "cards-featured-content"
+  ],
+  "blocksLeftInPlace": [],
+  "pageMetadata": [
+    "template",
+    "contactus",
+    "contactus-tagline",
+    "breadcrumb-title"
+  ],
+  "hasForm": false
+}

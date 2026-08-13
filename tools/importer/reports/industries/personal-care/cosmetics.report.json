@@ -1,0 +1,26 @@
+{
+  "status": "success",
+  "url": "https://grace.com/industries/personal-care/cosmetics/",
+  "path": "industries/personal-care/cosmetics",
+  "timestamp": "2026-08-13T14:46:29.941Z",
+  "title": "Cosmetics",
+  "pageType": "default",
+  "blocks": [
+    "hero-banner",
+    "accordion-faq",
+    "accordion-faq",
+    "accordion-faq",
+    "accordion-faq",
+    "accordion-faq",
+    "accordion-faq",
+    "cards-featured-content"
+  ],
+  "blocksLeftInPlace": [],
+  "pageMetadata": [
+    "template",
+    "contactus",
+    "contactus-tagline",
+    "breadcrumb-title"
+  ],
+  "hasForm": true
+}

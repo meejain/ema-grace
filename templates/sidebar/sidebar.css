@@ -1028,3 +1028,46 @@ body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section.ca
     grid-column: 2 / 4;
   }
 }
+
+/* ===== gray-band section on SIDEBAR pages — full-bleed re-inset =====
+   A `gray-band` Section Metadata paints a light-gray fill (styles/lazy-styles.css). On body.sidebar
+   pages `main` is a grid, so by default the band only fills its grid CELL (cut off at the content-
+   column edges — the defect on the industries Latest-Insights / Broad-Catalyst bands). Span the
+   section across ALL columns so the fill bleeds edge-to-edge, then re-inset its content back into
+   the content column (cols 2–4) via a nested grid — same technique as the geo-hex rule above. */
+@media (width >= 900px) {
+  /* Full-bleed the gray band across all columns. The two selectors cover both shapes AND out-
+     specify the `.cards-container:has(.cards.featured-content) { grid-column: 2/4 }` rule above:
+     the featured/category variant repeats the `:has()` (specificity ≥ that rule), the plain variant
+     covers gray content boxes. */
+  /* CARD gray bands (Latest Insights featured-content / category grids) → FULL-BLEED edge-to-edge
+     (source 0–1280). Repeats the `:has()` so it out-specifies the
+     `.cards-container:has(.cards.featured-content) { grid-column: 2/4 }` rule above. */
+  body.sidebar main > .section.gray-band.cards-container:has(.cards.featured-content, .cards.category-grid) {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns:
+      minmax(20px, 1fr)
+      minmax(0, 213px)
+      minmax(0, 747px)
+      minmax(0, 320px)
+      minmax(20px, 1fr);
+    /* Source gray band insets its content ~40px top before the heading + ~50px bottom below the
+       last card row. Without this the heading jams to the top of the band (the "too close" defect).
+       Restore the vertical padding on the full-bleed band. */
+    padding-top: 40px;
+    padding-bottom: 50px;
+  }
+
+  /* Re-inset the card row into the nav+content band (cols 2–4) so the cards keep their width. */
+  body.sidebar main > .section.gray-band.cards-container:has(.cards.featured-content, .cards.category-grid) > * {
+    grid-column: 2 / 4;
+  }
+
+  /* PLAIN gray content box (NO cards, e.g. the "How is gas phase polymerization…" FAQ panel): the
+     source CONFINES the gray fill to the 707px content column (233–940), NOT full-bleed. Keep it in
+     the content grid cell (col 3) so it reads as an inset gray panel, matching source. */
+  body.sidebar main > .section.gray-band:not(:has(.cards.featured-content, .cards.category-grid)) {
+    grid-column: 3;
+  }
+}

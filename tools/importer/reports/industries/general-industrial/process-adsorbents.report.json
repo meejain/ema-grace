@@ -1,0 +1,20 @@
+{
+  "status": "success",
+  "url": "https://grace.com/industries/general-industrial/process-adsorbents/",
+  "path": "industries/general-industrial/process-adsorbents",
+  "timestamp": "2026-08-13T14:14:54.168Z",
+  "title": "Process Adsorbents",
+  "pageType": "default",
+  "blocks": [
+    "hero-banner",
+    "cards-featured-content"
+  ],
+  "blocksLeftInPlace": [],
+  "pageMetadata": [
+    "template",
+    "contactus",
+    "contactus-tagline",
+    "breadcrumb-title"
+  ],
+  "hasForm": true
+}

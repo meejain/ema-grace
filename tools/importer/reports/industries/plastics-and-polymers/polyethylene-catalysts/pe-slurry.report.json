@@ -1,0 +1,21 @@
+{
+  "status": "success",
+  "url": "https://grace.com/industries/plastics-and-polymers/polyethylene-catalysts/pe-slurry/",
+  "path": "industries/plastics-and-polymers/polyethylene-catalysts/pe-slurry",
+  "timestamp": "2026-08-13T13:51:34.883Z",
+  "title": "PE Slurry",
+  "pageType": "default",
+  "blocks": [
+    "hero-banner",
+    "columns-horizontal-teaser-featured",
+    "cards-featured-content"
+  ],
+  "blocksLeftInPlace": [],
+  "pageMetadata": [
+    "template",
+    "contactus",
+    "contactus-tagline",
+    "breadcrumb-title"
+  ],
+  "hasForm": false
+}

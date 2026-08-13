@@ -1,0 +1,21 @@
+{
+  "status": "success",
+  "url": "https://grace.com/industries/plastics-and-polymers/polypropylene-catalysts/pp-gas-phase/",
+  "path": "industries/plastics-and-polymers/polypropylene-catalysts/pp-gas-phase",
+  "timestamp": "2026-08-13T13:56:59.266Z",
+  "title": "PP Gas Phase",
+  "pageType": "default",
+  "blocks": [
+    "hero-banner",
+    "columns-horizontal-teaser-featured",
+    "cards-featured-content"
+  ],
+  "blocksLeftInPlace": [],
+  "pageMetadata": [
+    "template",
+    "contactus",
+    "contactus-tagline",
+    "breadcrumb-title"
+  ],
+  "hasForm": false
+}

@@ -1,0 +1,23 @@
+{
+  "status": "success",
+  "url": "https://grace.com/industries/general-industrial/",
+  "path": "industries/general-industrial",
+  "timestamp": "2026-08-13T14:13:58.101Z",
+  "title": "General Industrial",
+  "pageType": "default",
+  "blocks": [
+    "hero-banner",
+    "video-overlay",
+    "columns-horizontal-teaser-featured",
+    "cards-category-grid",
+    "cards-featured-content"
+  ],
+  "blocksLeftInPlace": [],
+  "pageMetadata": [
+    "template",
+    "contactus",
+    "contactus-tagline",
+    "breadcrumb-title"
+  ],
+  "hasForm": false
+}
