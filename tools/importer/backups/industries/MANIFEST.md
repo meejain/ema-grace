@@ -73,4 +73,16 @@
   - Verified on refining-technologies (breadcrumb, ART slate, Broad-Catalyst gray full-bleed) +
     unipol-pp-process (gas-phase gray-band, PCF blue-border, Latest-Insights gray). a11y green; products
     prove-no-regression identical. Full 102-page reimport with this bundle in progress.
-- **snapshot date:** 2026-08-13 (rev 2).
+- **REVISION 3 (2026-08-13, full clean reimport — no source changes):** regenerated catalog
+  (`gen-catalog-module.py`) + rebundled; the bundle came out BYTE-IDENTICAL (170847 bytes) to the rev-2
+  frozen snapshot — confirming the importer source was already fully in sync (the interim mobile-parity
+  work was all RUNTIME CSS/JS: styles.css, hero.css, header.css, templates/sidebar/*, which do NOT change
+  importer markup). Re-ran the ENTIRE set (102 URLs) via 4 parallel `run-bulk-import.js` chunks
+  (24+23+27+28) — **102/102 saved, 0 failures**, and `git status` showed **0 changed content files**
+  (every page reproduced byte-identically). This retires the earlier interrupted reimport: all 101
+  on-disk industries pages are now provably current. The `atob`/base64 + <90% completeness console
+  warnings are known false-lows from the source carousel/duplicate-card markup, not dropped content.
+  Coverage audit: 74 gray-band, 1 blue-border, 78 sidebar-template, 0 geo-hex (correct — industries
+  Latest-Insights bands are plain gray; geo-hex only on `.geoAndHex` sources = products/insights).
+  No re-snapshot needed (live bundle == frozen backup).
+- **snapshot date:** 2026-08-13 (rev 2; rev 3 reimport verified same bundle).

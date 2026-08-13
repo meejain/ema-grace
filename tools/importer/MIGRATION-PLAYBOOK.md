@@ -620,3 +620,15 @@ category-grid title/heading preservation, `table-data-grid` 2-col match, `collap
 empty-section cleanup — 102 URLs. RUNTIME: `blocks/table/table.js` scroll-region `tabindex`).
 Re-snapshot a set's folder whenever the shared bundle gains more fixes affecting that set. See
 `backups/README.md` and memory `importer-bundle-backups`, `product-detail-template`, `industries-migration`.
+
+**Runtime vs importer — the mobile-parity pass (2026-08-13) needed NO rebundle/reimport.** A round of
+mobile design-token parity (10px page gutters, mobile-first line-heights 1.3→1.7@900px, the rich-text
+lead `<h4>` restyled to Roboto Slab 16/18px black, the product-hero mobile CTA to full-width 13px, and
+the section-nav `<select>` preselecting the CURRENT page) was ALL runtime — `styles/styles.css`,
+`blocks/hero/hero.css`, `templates/sidebar/sidebar.{css,js}`. None changed the markup the importer
+emits (the lead is already an authored `<h4>`; the select is built by sidebar.js from the existing nav
+`<ul>`), so the 101 saved industries pages render the fixes immediately and a reimport would produce
+byte-identical files. Rule of thumb: only rebundle+reimport when the block/section MARKUP contract
+changes (new block name, new Section Metadata Style, changed DOM order) — pure CSS/JS decoration never
+requires it. The sidebar.js select-normalize also strips a leading `/content` and collapses `--`→`-`
+so the current-page option matches on local preview AND prod.

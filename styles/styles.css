@@ -93,19 +93,24 @@ body {
   font-family: var(--body-font-family);
   font-size: var(--body-font-size-m);
   font-weight: 400;
-  line-height: 1.7; /* body copy matches source: 14px x 1.7 = 23.8px */
+
+  /* Mobile-first: source body copy is 14px x 1.3 = 18.2px on mobile, loosening to
+     1.7 (23.8px) at desktop — see the >=900px override on `p`. */
+  line-height: 1.3;
 }
 
 body.appear {
   display: block;
 }
 
-/* The Grace header has two rows — a utility bar ("Vendors and Suppliers") above
-   the main nav — so it is taller than a single --nav-height row. Reserve space
-   with min-height and let the box grow to fit its content, otherwise the nav
-   overflows the fixed height and overlaps the page content below it. */
+/* First-paint space reservation for the header (CLS guard, before header.css
+   loads in the lazy phase). Mobile shows a single 50px bar (+1px border), so
+   reserve 51px here to match; header.css then pins the bar `position:fixed` and
+   sets the same 51px height on `.header-wrapper` (120px at desktop for the
+   two-row bar). Using the exact bar height avoids the empty strip that a larger
+   reservation left above the hero. */
 header {
-  min-height: var(--nav-height);
+  min-height: 51px;
 }
 
 header .header,
@@ -142,7 +147,10 @@ h1 {
 h2 {
   font-size: var(--heading-font-size-xl);
   font-weight: 300;
-  line-height: 1.7;
+
+  /* Mobile-first: source h2 is 24px x 1.3 = 31.2px on mobile, 30px x 1.7 = 51px at
+     desktop. Desktop line-height bump is in the >=900px media query. */
+  line-height: 1.3;
 }
 
 h3 {
@@ -183,32 +191,75 @@ blockquote {
   margin-bottom: var(--spacing-s);
 }
 
-/* Body copy line-height matches source (14px x 1.7 = 23.8px). Kept off the base
-   `body` rule (1.3) and the heading line-heights, which intentionally differ. */
+/* Body copy line-height is mobile-first: source is 1.3 (18.2px) on mobile and 1.7
+   (23.8px) at desktop. Base is inherited 1.3; the desktop bump lives in the
+   >=900px media query below. Kept off the heading line-heights, which differ. */
 p {
-  line-height: 1.7;
+  line-height: 1.3;
 }
 
-/* Authored body-copy lists: align the bullet/number TEXT flush with the surrounding paragraph and
-   heading text — grace.com renders content lists with `padding-left:0; margin:0; list-style:outside`
-   so the marker hangs in the left gutter and the item text lines up on the SAME vertical edge as the
-   paragraphs (verified on grace.com/insights/catalagram-127 + industries/unipol-pp-process). Browser
-   default `ul/ol { padding-left: 40px }` pushes the list 40px right of the paragraphs, which reads as
-   misaligned/haphazard. Scope to `.default-content-wrapper` (authored body copy) so block-internal
-   lists (nav rail, cards, tables) — which live in their own wrappers — keep their own layout. */
-.default-content-wrapper ul,
-.default-content-wrapper ol {
+/* Body-copy lead heading (rich-text <h4>, e.g. the bold intro sentence under the
+   page H2). grace.com renders these as Roboto SLAB, black, 600 — NOT the muted
+   grey Roboto 14px of the boilerplate h4 default (which is kept for standalone
+   labels elsewhere). Source: 16px mobile (x1.3 = 20.8px), 18px desktop (x1.7 =
+   30.6px), 30px bottom gap. Scoped to authored body copy inside `main` so it
+   never touches the contact-widget "Contact Us" h4 (not in a default-content
+   wrapper) or the header/footer. Desktop size/line-height bump in the media
+   query below. */
+main .default-content-wrapper h4 {
+  font-family: var(--heading-font-family);
+  font-size: var(--body-font-size-l); /* 16px mobile */
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--text-color);
+  margin-bottom: var(--spacing-m); /* 30px */
+}
+
+/* Authored body-copy lists: align the bullet TEXT flush with the surrounding paragraph and heading
+   text. grace.com does NOT use the native browser disc (which, with margin-left:0, renders
+   misaligned/hanging outside the text edge). Instead it draws a custom bullet as an absolutely
+   positioned ::before circle at the left edge of the li padding, so the dot lines up exactly with
+   the body-copy left edge and the text is one em in. We replicate that here. Scope to authored body
+   copy inside `main` only (`main .section:not(.sidebar-nav) .default-content-wrapper`): the header
+   nav and footer also use `.section .default-content-wrapper` for their link lists, so anchoring to
+   `main` keeps the dots out of the header/footer; `:not(.sidebar-nav)` further excludes the left
+   navigation rail (which repurposes default content as a styled link list). Block-internal lists
+   (cards, tables) live in their own wrappers and are unaffected. Verified against
+   grace.com/industries/plastics-and-polymers/.../unipol-pp-process. */
+main .section:not(.sidebar-nav) .default-content-wrapper ul,
+main .section:not(.sidebar-nav) .default-content-wrapper ol {
   padding-left: 0;
   margin-left: 0;
 }
 
-/* Marker sits AT the paragraph left edge; item text indents 14px past it (source: ul padding/
-   margin 0, li list-style-position:outside + padding-left:14px — so the bullet dot lines up with
-   the body-copy left edge and the text is 14px in, NOT the marker hanging out into the gutter). */
-.default-content-wrapper li {
-  list-style-position: outside;
-  padding-left: 14px;
+main .section:not(.sidebar-nav) .default-content-wrapper li {
+  list-style: none;
+  position: relative;
+  padding: 0 0 0 1em;
   margin-left: 0;
+}
+
+/* Custom bullet — 0.4rem black circle pinned to the left edge, vertically centered on the first
+   line (matches grace.com's ::before dot). */
+main .section:not(.sidebar-nav) .default-content-wrapper li::before {
+  position: absolute;
+  left: 0;
+  top: 0.65em;
+  transform: translate(0, -50%);
+  width: 0.4rem;
+  height: 0.4rem;
+  background: #000;
+  border-radius: 0.4rem;
+  content: "";
+}
+
+/* Second-level lists use a dash instead of a dot (matches source). */
+main .section:not(.sidebar-nav) .default-content-wrapper ul ul li::before {
+  width: auto;
+  height: auto;
+  border-radius: 0;
+  background: none;
+  content: "-";
 }
 
 code,
@@ -388,7 +439,10 @@ main > .section {
 main > .section > div {
   max-width: 1200px;
   margin: auto;
-  padding: 0 20px;
+
+  /* Mobile-first 10px side gutters (source uses 10px through mobile AND tablet,
+     widening to 32px only at the desktop breakpoint — see the >=900px override). */
+  padding: 0 10px;
 }
 
 @media (width >= 900px) {
@@ -398,6 +452,24 @@ main > .section > div {
 
   main > .section {
     margin: var(--spacing-xl) 0;
+  }
+
+  /* Desktop body/heading line-heights loosen to match source (see the mobile-first
+     1.3 base above): body copy 14px x 1.7 = 23.8px, h2 30px x 1.7 = 51px. */
+  p {
+    line-height: 1.7;
+  }
+
+  h2 {
+    line-height: 1.7;
+  }
+
+  /* Desktop lead heading: source is 18px x 1.7 = 30.6px (mobile is 16px x 1.3).
+     18px is not a heading token at desktop (--heading-font-size-m is 22px there),
+     so set it explicitly. */
+  main .default-content-wrapper h4 {
+    font-size: 18px;
+    line-height: 1.7;
   }
 }
 

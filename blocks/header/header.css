@@ -42,12 +42,30 @@ header .nav-utility ul {
 }
 
 /* === Nav Wrapper === */
+
+/* Mobile-first: the header bar is FIXED to the top of the viewport (matches
+   grace.com mobile — the logo/hamburger bar stays pinned while the page scrolls
+   under it). `header.header-wrapper` below reserves the 50px bar height so the
+   page content starts just under it (no gap, no overlap). The desktop >=900px
+   block re-declares fixed with its own two-row height. */
 header .nav-wrapper {
   background-color: var(--background-color);
   width: 100%;
-  z-index: 10;
-  position: relative;
+  z-index: 1000;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
   border-bottom: 1px solid #e6e7e8;
+}
+
+/* Reserve the fixed mobile bar's height (50px + 1px border) so page content
+   starts flush below it — the fixed .nav-wrapper is out of flow, so without this
+   the hero would slide under the bar. Desktop (>=900px) overrides with 120px for
+   the two-row header. */
+header.header-wrapper {
+  display: block;
+  height: 51px;
 }
 
 /* === Nav Layout (mobile-first: 50px bar, 10px padding) === */

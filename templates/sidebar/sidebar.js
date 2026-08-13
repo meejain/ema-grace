@@ -24,14 +24,28 @@ export default function decorate(main) {
   select.className = 'section-nav-select';
   select.setAttribute('aria-label', 'Section navigation');
 
-  const here = window.location.pathname.replace(/\/$/, '');
+  // Normalize a path for comparison: drop a leading `/content` prefix (the local
+  // preview serves pages under /content/… while authored hrefs are root-relative),
+  // strip a trailing slash, and collapse repeated hyphens within each segment. The
+  // nav <a> hrefs still carry grace.com's source slug (e.g.
+  // `unipol--pp-process-technology`), but the page is served at the sanitized
+  // single-hyphen path — without this NO option matches the current page, so the
+  // <select> falls back to its first option (the parent) instead of the page you
+  // are on.
+  const normalize = (p) => p
+    .replace(/^\/content/, '')
+    .replace(/\/$/, '')
+    .split('/')
+    .map((seg) => seg.replace(/-{2,}/g, '-'))
+    .join('/');
+  const here = normalize(window.location.pathname);
   const links = list.querySelectorAll(':scope > li > a');
   links.forEach((a) => {
     const option = document.createElement('option');
     const href = a.getAttribute('href') || '';
     option.value = href;
     option.textContent = a.textContent.trim();
-    if (href.replace(/\/$/, '') === here) option.selected = true;
+    if (normalize(href) === here) option.selected = true;
     select.append(option);
   });
   if (!select.options.length) return;

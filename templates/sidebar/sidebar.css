@@ -20,6 +20,32 @@
  * Mobile-first: base = single column. >=900px: nav+content grid engages.
  */
 
+/* MOBILE (<900px): the section-nav collapses into the <select> "filter". Source
+   sits it tight under the hero (~10px above) with ~10px before the first content
+   heading — NOT the global 50px section margin (`main > .section`), which on mobile
+   leaves a big empty band above and below the filter. Pull the margin in to 10px
+   on both ends. The >=900px grid block below restores the desktop rail spacing. */
+body.sidebar main > .section.sidebar-nav {
+  margin: var(--spacing-xs) 0;
+}
+
+/* MOBILE: the contact-us widget section renders as a FIXED bottom bar (its own
+   block JS pins it), so its in-flow section box is empty (h:0) but the global 50px
+   section margins still push the filter ~50px below the hero. Zero them so the
+   filter butts tight under the hero like the source. (>=900px the widget floats in
+   the right gutter — the grid block below handles that, unaffected by this base
+   rule.) */
+body.sidebar main > .section.custom-widget-container {
+  margin: 0;
+}
+
+/* MOBILE: the first content section after the filter inherits the global 50px top
+   margin, leaving a big gap below the filter. Source is ~10px. Tighten it; the
+   >=900px grid block re-sets content-section margins to 50px. */
+body.sidebar main > .section.sidebar-nav + .section {
+  margin-top: var(--spacing-xs);
+}
+
 /* ---- Section-nav styling (matches source .section-navigation) ---- */
 /* Thin gray divider above the list, plain link list (no bullets), 12px links. */
 /* Divider spans the full column width (source .section-navigation top rule),
@@ -119,9 +145,13 @@ body.sidebar main:not(:has(> .section.sidebar-nav.breadcrumb-container)) > .sect
 
 body.sidebar main > .section.sidebar-nav ul {
   margin: 0;
-  /* left inset (source .section-navigation padding-left) so link text starts at
-     ~x=100 within the 80px column, not flush at the column edge. */
-  padding: 0 0 0 20px;
+  /* Symmetric 20px inset (source .section-navigation padding-left AND padding-right):
+     the left inset starts the link text ~20px into the column; the RIGHT inset
+     constrains the text box so nav links wrap earlier and leave a clear gutter
+     before the content column (source: nav text box 173px wide within the 213px
+     column, ~80px visual gap to the content — WITHOUT the right inset the links run
+     to the column edge and crowd the content). */
+  padding: 0 20px;
   list-style: none;
 }
 
@@ -298,6 +328,14 @@ body.sidebar main > .section.sidebar-nav.breadcrumb-container .breadcrumb nav ol
      without the :not() it would give the hero a 50px bottom margin → 100px gap). */
   body.sidebar main > .section:not(.hero-container, .custom-widget-container) {
     margin-block: var(--spacing-l); /* 50px */
+  }
+
+  /* Restore the 50px top margin on the content section that follows the nav rail
+     — the mobile rule (`.sidebar-nav + .section { margin-top: 10px }`, which tightens
+     the gap under the collapsed <select> filter) is more specific than the rule
+     above, so re-assert it here for desktop where the nav is the left grid column. */
+  body.sidebar main > .section.sidebar-nav + .section {
+    margin-top: var(--spacing-l); /* 50px */
   }
 
   /* Grid margins don't collapse, so two stacked content sections show
