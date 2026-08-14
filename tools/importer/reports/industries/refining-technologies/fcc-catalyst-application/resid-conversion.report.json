@@ -2,11 +2,12 @@
   "status": "success",
   "url": "https://grace.com/industries/refining-technologies/fcc-catalyst-application/resid-conversion/",
   "path": "industries/refining-technologies/fcc-catalyst-application/resid-conversion",
-  "timestamp": "2026-08-13T19:46:18.270Z",
+  "timestamp": "2026-08-14T09:03:22.033Z",
   "title": "Resid Conversion",
   "pageType": "default",
   "blocks": [
     "hero-banner",
+    "cards-category-grid",
     "cards-featured-content",
     "banner-resource-download"
   ],

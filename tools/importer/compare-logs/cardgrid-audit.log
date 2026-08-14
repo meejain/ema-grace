@@ -1,0 +1,122 @@
+[1/102] FLAG src=1 eds=0 leak=0  /industries
+[2/102] ok   src=1 eds=1 leak=0  /industries/refining-technologies
+[3/102] FLAG src=1 eds=0 leak=0  /industries/refining-technologies/fcc-catalyst-application
+[4/102] FLAG src=1 eds=0 leak=0  /industries/refining-technologies/fcc-catalyst-application/maximize-propylene
+[5/102] FLAG src=1 eds=0 leak=0  /industries/refining-technologies/fcc-catalyst-application/butylene-selectivity
+[6/102] FLAG src=1 eds=0 leak=0  /industries/refining-technologies/fcc-catalyst-application/resid-conversion
+[7/102] FLAG src=1 eds=0 leak=0  /industries/refining-technologies/fcc-catalyst-application/light-feed-performance
+[8/102] FLAG src=1 eds=0 leak=0  /industries/refining-technologies/value-creation
+[9/102] ok   src=0 eds=0 leak=0  /industries/refining-technologies/value-creation/technical-service-expertise
+[10/102] ok   src=0 eds=0 leak=0  /industries/refining-technologies/value-creation/specialized-evaluation-tools
+[11/102] ok   src=0 eds=0 leak=0  /industries/refining-technologies/value-creation/sustainability
+[12/102] FLAG src=1 eds=0 leak=0  /industries/refining-technologies/fcc-additive-solutions
+[13/102] FLAG src=1 eds=0 leak=0  /industries/refining-technologies/fcc-additive-solutions/sox-reduction
+[14/102] FLAG src=1 eds=0 leak=0  /industries/refining-technologies/fcc-additive-solutions/gasoline-sulphur-reduction
+[15/102] FLAG src=1 eds=0 leak=0  /industries/refining-technologies/fcc-additive-solutions/light-olefins
+[16/102] FLAG src=1 eds=0 leak=0  /industries/refining-technologies/fcc-additive-solutions/nox-reduction
+[17/102] FLAG src=1 eds=0 leak=0  /industries/refining-technologies/fcc-additive-solutions/combustion-promoter
+[18/102] FLAG src=1 eds=0 leak=0  /industries/refining-technologies/hydroprocessing
+[19/102] ok   src=1 eds=1 leak=0  /industries/refining-technologies/hydroprocessing/resid-hydrotreating-solutions
+[20/102] ok   src=1 eds=1 leak=0  /industries/refining-technologies/hydroprocessing/resid-hydrocracking-solutions
+[21/102] ok   src=1 eds=1 leak=0  /industries/refining-technologies/hydroprocessing/distillate-hydrotreating-solutions
+[22/102] ok   src=0 eds=0 leak=0  /industries/refining-technologies/catalagram-archive
+[23/102] ok   src=1 eds=1 leak=0  /industries/chemical-processing
+[24/102] ok   src=0 eds=0 leak=0  /industries/chemical-processing/hydrogenation-catalysts
+[25/102] ok   src=0 eds=0 leak=0  /industries/chemical-processing/catalyst-supports
+[26/102] ok   src=0 eds=0 leak=0  /industries/chemical-processing/custom-development
+[27/102] ok   src=1 eds=1 leak=0  /industries/plastics-and-polymers
+[28/102] ok   src=1 eds=1 leak=0  /industries/plastics-and-polymers/polyethylene-catalysts
+[29/102] ok   src=0 eds=0 leak=0  /industries/plastics-and-polymers/polyethylene-catalysts/pe-catalyst-components-and-supports
+[30/102] FLAG src=1 eds=0 leak=0  /industries/plastics-and-polymers/polyethylene-catalysts/pe-slurry
+[31/102] FLAG src=1 eds=0 leak=0  /industries/plastics-and-polymers/polyethylene-catalysts/pe-gas-phase
+[32/102] ok   src=0 eds=0 leak=0  /industries/plastics-and-polymers/polyethylene-catalysts/pe-solution
+[33/102] ok   src=0 eds=0 leak=0  /industries/plastics-and-polymers/polyethylene-catalysts/pe-hybrid
+[34/102] ok   src=1 eds=2 leak=0  /industries/plastics-and-polymers/polypropylene-catalysts
+[35/102] FLAG src=1 eds=0 leak=0  /industries/plastics-and-polymers/polypropylene-catalysts/pp-bulk
+[36/102] FLAG src=1 eds=0 leak=0  /industries/plastics-and-polymers/polypropylene-catalysts/pp-gas-phase
+[37/102] ok   src=0 eds=0 leak=0  /industries/plastics-and-polymers/polypropylene-catalysts/pp-slurry
+[38/102] ok   src=1 eds=1 leak=0  /industries/plastics-and-polymers/unipol-pp-process-technology
+[39/102] ok   src=0 eds=0 leak=0  /industries/plastics-and-polymers/unipol-pp-process-technology/unipol-pp-process
+[40/102] ok   src=0 eds=0 leak=0  /industries/plastics-and-polymers/unipol-pp-process-technology/unipol-pp-products
+[41/102] ok   src=0 eds=0 leak=0  /industries/plastics-and-polymers/unipol-pp-process-technology/unipol-pp-performance
+[42/102] ok   src=0 eds=0 leak=0  /industries/plastics-and-polymers/unipol-pp-process-technology/unipol-pp-services
+[43/102] ok   src=1 eds=1 leak=0  /industries/plastics-and-polymers/unipol-pp-process-technology/unipol-pp-technology-ppartner-program
+[44/102] ok   src=0 eds=0 leak=0  /industries/plastics-and-polymers/custom-catalysts
+[45/102] ok   src=1 eds=1 leak=0  /industries/plastics-and-polymers/plastic-additives
+[46/102] ok   src=0 eds=0 leak=0  /industries/plastics-and-polymers/plastic-additives/silica-anti-blocking-agents
+[47/102] ok   src=0 eds=0 leak=0  /industries/plastics-and-polymers/plastic-additives/titanium-dioxide-extenders
+[48/102] ok   src=0 eds=0 leak=0  /industries/plastics-and-polymers/tire-and-rubber-additives
+[49/102] ok   src=1 eds=1 leak=0  /industries/coatings
+[50/102] ok   src=0 eds=0 leak=0  /industries/coatings/wood
+[51/102] ok   src=0 eds=0 leak=0  /industries/coatings/coil
+[52/102] ok   src=0 eds=0 leak=0  /industries/coatings/architectural
+[53/102] ok   src=0 eds=0 leak=0  /industries/coatings/inks-paper
+[54/102] ok   src=0 eds=0 leak=0  /industries/coatings/general-industrial-coatings
+[55/102] ok   src=1 eds=1 leak=0  /industries/general-industrial
+[56/102] ok   src=0 eds=0 leak=0  /industries/general-industrial/process-adsorbents
+[57/102] ok   src=0 eds=0 leak=0  /industries/general-industrial/static-adsorbents
+[58/102] ok   src=0 eds=0 leak=0  /industries/general-industrial/colloidal-silica-in-catalysts
+[59/102] ok   src=0 eds=0 leak=0  /industries/general-industrial/investment-casting-binders
+[60/102] ok   src=0 eds=0 leak=0  /industries/general-industrial/refractory-additives
+[61/102] ok   src=0 eds=0 leak=0  /industries/general-industrial/construction
+[62/102] ok   src=1 eds=1 leak=0  /industries/pharmaceutical-solutions
+[63/102] ok   src=1 eds=1 leak=0  /industries/pharmaceutical-solutions/fine-chemicals
+[64/102] ok   src=1 eds=1 leak=0  /industries/pharmaceutical-solutions/fine-chemicals/custom-apis
+[65/102] ok   src=1 eds=1 leak=0  /industries/pharmaceutical-solutions/fine-chemicals/rsms-and-intermediates
+[66/102] ok   src=1 eds=1 leak=0  /industries/pharmaceutical-solutions/fine-chemicals/generic-apis
+[67/102] ok   src=1 eds=1 leak=0  /industries/pharmaceutical-solutions/fine-chemicals/integrated-scale-up
+[68/102] ok   src=1 eds=1 leak=0  /industries/pharmaceutical-solutions/fine-chemicals/consultative-services
+[69/102] ok   src=1 eds=1 leak=0  /industries/pharmaceutical-solutions/fine-chemicals/consultative-services/r-d
+[70/102] ok   src=1 eds=1 leak=0  /industries/pharmaceutical-solutions/fine-chemicals/consultative-services/quality-and-compliance
+[71/102] ok   src=1 eds=1 leak=0  /industries/pharmaceutical-solutions/fine-chemicals/facilities
+[72/102] ok   src=1 eds=1 leak=0  /industries/pharmaceutical-solutions/fine-chemicals/facilities/south-haven
+[73/102] ok   src=1 eds=1 leak=0  /industries/pharmaceutical-solutions/fine-chemicals/facilities/tyrone
+[74/102] ok   src=0 eds=0 leak=0  /industries/pharmaceutical-solutions/fine-chemicals/fcms-case-study
+[75/102] ok   src=1 eds=1 leak=0  /industries/pharmaceutical-solutions/purification-formulation-delivery
+[76/102] ok   src=1 eds=1 leak=0  /industries/pharmaceutical-solutions/purification-formulation-delivery/chromatography
+[77/102] ok   src=1 eds=1 leak=0  /industries/pharmaceutical-solutions/purification-formulation-delivery/excipients
+[78/102] ok   src=1 eds=1 leak=0  /industries/pharmaceutical-solutions/purification-formulation-delivery/active-ingredient-delivery
+[79/102] ok   src=1 eds=1 leak=0  /industries/pharmaceutical-solutions/packaging-adsorbents
+[80/102] ok   src=1 eds=1 leak=0  /industries/nutraceutical-solutions
+[81/102] ok   src=1 eds=1 leak=0  /industries/nutraceutical-solutions/vitamin-purification-formulation-delivery
+[82/102] ok   src=1 eds=1 leak=0  /industries/nutraceutical-solutions/lipid-purification-formulation-delivery
+[83/102] ok   src=1 eds=1 leak=0  /industries/nutraceutical-solutions/cbd-purification-formulation-delivery
+[84/102] ok   src=1 eds=1 leak=0  /industries/nutraceutical-solutions/nutraceutical-cdmo
+[85/102] ok   src=0 eds=0 leak=0  /industries/nutraceutical-solutions/traditional-herbal-medicine
+[86/102] ok   src=1 eds=1 leak=0  /industries/agriculture
+[87/102] ok   src=1 eds=1 leak=0  /industries/agriculture/agriculture-cdmo
+[88/102] ok   src=1 eds=1 leak=0  /industries/agriculture/animal-feed-agricultural-active-solutions
+[89/102] ok   src=1 eds=1 leak=0  /industries/personal-care
+[90/102] ok   src=0 eds=0 leak=0  /industries/personal-care/toothpaste
+[91/102] ok   src=0 eds=0 leak=0  /industries/personal-care/cosmetics
+[92/102] ok   src=1 eds=1 leak=0  /industries/food-beverage
+[93/102] ok   src=1 eds=1 leak=0  /industries/food-beverage/beer
+[94/102] ok   src=1 eds=1 leak=0  /industries/food-beverage/edible-oil-refining
+[95/102] ok   src=1 eds=1 leak=0  /industries/food-beverage/food-processing
+[96/102] ok   src=1 eds=1 leak=0  /industries/food-beverage/beverage
+[97/102] ok   src=1 eds=1 leak=0  /industries/biofuels
+[98/102] ok   src=1 eds=2 leak=0  /industries/biofuels/biomass-based-diesel
+[99/102] ok   src=0 eds=0 leak=0  /industries/biofuels/biomass-based-diesel/first-generation-biodiesel
+[100/102] ok   src=0 eds=1 leak=0  /industries/biofuels/biomass-based-diesel/renewable-diesel
+[101/102] ok   src=0 eds=0 leak=0  /industries/biofuels/bioethanol
+[102/102] ok   src=1 eds=2 leak=0  /industries/biofuels/biodiesel
+
+=== 18 FLAGGED ===
+  /industries  src=1 eds=0 leak=0
+  /industries/refining-technologies/fcc-catalyst-application  src=1 eds=0 leak=0
+  /industries/refining-technologies/fcc-catalyst-application/maximize-propylene  src=1 eds=0 leak=0
+  /industries/refining-technologies/fcc-catalyst-application/butylene-selectivity  src=1 eds=0 leak=0
+  /industries/refining-technologies/fcc-catalyst-application/resid-conversion  src=1 eds=0 leak=0
+  /industries/refining-technologies/fcc-catalyst-application/light-feed-performance  src=1 eds=0 leak=0
+  /industries/refining-technologies/value-creation  src=1 eds=0 leak=0
+  /industries/refining-technologies/fcc-additive-solutions  src=1 eds=0 leak=0
+  /industries/refining-technologies/fcc-additive-solutions/sox-reduction  src=1 eds=0 leak=0
+  /industries/refining-technologies/fcc-additive-solutions/gasoline-sulphur-reduction  src=1 eds=0 leak=0
+  /industries/refining-technologies/fcc-additive-solutions/light-olefins  src=1 eds=0 leak=0
+  /industries/refining-technologies/fcc-additive-solutions/nox-reduction  src=1 eds=0 leak=0
+  /industries/refining-technologies/fcc-additive-solutions/combustion-promoter  src=1 eds=0 leak=0
+  /industries/refining-technologies/hydroprocessing  src=1 eds=0 leak=0
+  /industries/plastics-and-polymers/polyethylene-catalysts/pe-slurry  src=1 eds=0 leak=0
+  /industries/plastics-and-polymers/polyethylene-catalysts/pe-gas-phase  src=1 eds=0 leak=0
+  /industries/plastics-and-polymers/polypropylene-catalysts/pp-bulk  src=1 eds=0 leak=0
+  /industries/plastics-and-polymers/polypropylene-catalysts/pp-gas-phase  src=1 eds=0 leak=0

@@ -2,11 +2,12 @@
   "status": "success",
   "url": "https://grace.com/industries/refining-technologies/fcc-catalyst-application/butylene-selectivity/",
   "path": "industries/refining-technologies/fcc-catalyst-application/butylene-selectivity",
-  "timestamp": "2026-08-13T19:45:23.237Z",
+  "timestamp": "2026-08-14T09:04:15.024Z",
   "title": "Butylene Selectivity",
   "pageType": "default",
   "blocks": [
     "hero-banner",
+    "cards-category-grid",
     "cards-featured-content",
     "banner-resource-download"
   ],

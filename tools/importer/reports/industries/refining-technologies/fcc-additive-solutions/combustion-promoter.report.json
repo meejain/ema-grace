@@ -2,12 +2,13 @@
   "status": "success",
   "url": "https://grace.com/industries/refining-technologies/fcc-additive-solutions/combustion-promoter/",
   "path": "industries/refining-technologies/fcc-additive-solutions/combustion-promoter",
-  "timestamp": "2026-08-13T19:56:15.995Z",
+  "timestamp": "2026-08-14T08:57:10.011Z",
   "title": "Combustion Promoter",
   "pageType": "default",
   "blocks": [
     "hero-banner",
     "columns-horizontal-teaser-featured",
+    "cards-category-grid",
     "cards-featured-content",
     "banner-resource-download"
   ],

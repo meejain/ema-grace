@@ -2,12 +2,13 @@
   "status": "success",
   "url": "https://grace.com/industries/plastics-and-polymers/polypropylene-catalysts/pp-bulk/",
   "path": "industries/plastics-and-polymers/polypropylene-catalysts/pp-bulk",
-  "timestamp": "2026-08-13T19:50:37.896Z",
+  "timestamp": "2026-08-14T07:39:04.089Z",
   "title": "PP Bulk",
   "pageType": "default",
   "blocks": [
     "hero-banner",
     "columns-horizontal-teaser-featured",
+    "cards-category-grid",
     "cards-featured-content"
   ],
   "blocksLeftInPlace": [],

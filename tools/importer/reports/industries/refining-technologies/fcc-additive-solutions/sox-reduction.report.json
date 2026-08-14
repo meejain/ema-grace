@@ -2,12 +2,13 @@
   "status": "success",
   "url": "https://grace.com/industries/refining-technologies/fcc-additive-solutions/sox-reduction/",
   "path": "industries/refining-technologies/fcc-additive-solutions/sox-reduction",
-  "timestamp": "2026-08-13T19:52:38.394Z",
+  "timestamp": "2026-08-14T08:56:16.531Z",
   "title": "SOx Reduction",
   "pageType": "default",
   "blocks": [
     "hero-banner",
     "columns-horizontal-teaser-featured",
+    "cards-category-grid",
     "cards-featured-content",
     "banner-resource-download"
   ],

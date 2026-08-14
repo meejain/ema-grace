@@ -2,13 +2,14 @@
   "status": "success",
   "url": "https://grace.com/industries/refining-technologies/fcc-catalyst-application/",
   "path": "industries/refining-technologies/fcc-catalyst-application",
-  "timestamp": "2026-08-13T19:43:32.402Z",
+  "timestamp": "2026-08-14T08:59:49.380Z",
   "title": "FCC Catalyst Solutions",
   "pageType": "default",
   "blocks": [
     "hero-banner",
     "video-overlay",
     "columns-horizontal-teaser-featured",
+    "cards-category-grid",
     "cards-featured-content",
     "banner-resource-download"
   ],

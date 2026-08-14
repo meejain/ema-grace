@@ -129,6 +129,13 @@ export default function decorate(block) {
       if (div.children.length === 1 && (div.querySelector('picture') || div.querySelector('img'))) div.className = 'cards-card-image';
       else div.className = 'cards-card-body';
     });
+    /* Imageless cards (e.g. category-grid promotion tiles: title + "Learn more",
+       no image) still carry an EMPTY leading image cell from the import table.
+       Left in place it renders as a blank gap / phantom image at the card top.
+       Drop any empty cell so text-only cards sit flush (matches grace.com). */
+    [...li.children].forEach((div) => {
+      if (!div.textContent.trim() && !div.querySelector('picture, img')) div.remove();
+    });
     ul.append(li);
   });
   optimizeCardImages(ul);

@@ -2,12 +2,13 @@
   "status": "success",
   "url": "https://grace.com/industries/plastics-and-polymers/polyethylene-catalysts/pe-gas-phase/",
   "path": "industries/plastics-and-polymers/polyethylene-catalysts/pe-gas-phase",
-  "timestamp": "2026-08-13T19:46:59.894Z",
+  "timestamp": "2026-08-14T07:38:11.436Z",
   "title": "PE Gas Phase",
   "pageType": "default",
   "blocks": [
     "hero-banner",
     "columns-horizontal-teaser-featured",
+    "cards-category-grid",
     "cards-featured-content"
   ],
   "blocksLeftInPlace": [],

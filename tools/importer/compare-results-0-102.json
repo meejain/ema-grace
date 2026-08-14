@@ -1197,23 +1197,24 @@
       "h1Present": true,
       "heroPresent": true,
       "heroHasImage": true,
-      "h2Count": 2,
+      "h2Count": 3,
       "h2s": [
         "ICR ® and HOP ® Catalyst Systems",
-        "UFR ® and OCR ® Catalyst Systems"
+        "UFR ® and OCR ® Catalyst Systems",
+        "Catalyst System Solutions"
       ],
-      "h3Count": 1,
-      "grayBands": 0,
+      "h3Count": 3,
+      "grayBands": 1,
       "blueBorders": 0,
       "geoHex": 0,
-      "cards": 0,
+      "cards": 1,
       "tables": 0,
       "featured": 0,
       "navSelect": false,
       "navRail": false,
       "bullet": null,
-      "textLen": 2685,
-      "mainH": 2361
+      "textLen": 2666,
+      "mainH": 1773
     },
     "srcFp": {
       "h1": "",
@@ -1262,26 +1263,27 @@
       "h1Present": true,
       "heroPresent": true,
       "heroHasImage": true,
-      "h2Count": 5,
+      "h2Count": 6,
       "h2s": [
         "DCS",
         "ECAD",
         "LS",
         "HSLS",
-        "HCRC®"
+        "HCRC®",
+        "Catalyst System Solutions"
       ],
-      "h3Count": 1,
-      "grayBands": 0,
+      "h3Count": 3,
+      "grayBands": 1,
       "blueBorders": 0,
       "geoHex": 0,
-      "cards": 0,
+      "cards": 1,
       "tables": 0,
       "featured": 0,
       "navSelect": false,
       "navRail": false,
       "bullet": null,
-      "textLen": 3599,
-      "mainH": 2811
+      "textLen": 3580,
+      "mainH": 2244
     },
     "srcFp": {
       "h1": "",
@@ -1319,15 +1321,13 @@
     "desktop": {
       "cat": "cosmetic",
       "issues": [
-        "COSMETIC: nav rail missing",
-        "COSMETIC: cards missing (src 1)"
+        "COSMETIC: nav rail missing"
       ]
     },
     "mobile": {
       "cat": "cosmetic",
       "issues": [
-        "COSMETIC: nav rail missing",
-        "COSMETIC: cards missing (src 1)"
+        "COSMETIC: nav rail missing"
       ]
     },
     "edsFp": {
@@ -1335,17 +1335,18 @@
       "h1Present": true,
       "heroPresent": true,
       "heroHasImage": true,
-      "h2Count": 3,
+      "h2Count": 4,
       "h2s": [
         "StART ® Catalyst Systems",
         "SmART ® Catalyst Systems",
-        "ApART ® Catalyst Systems"
+        "ApART ® Catalyst Systems",
+        "Catalyst System Solutions"
       ],
-      "h3Count": 1,
-      "grayBands": 0,
+      "h3Count": 3,
+      "grayBands": 1,
       "blueBorders": 0,
       "geoHex": 0,
-      "cards": 0,
+      "cards": 1,
       "tables": 0,
       "featured": 0,
       "navSelect": false,
@@ -1355,8 +1356,8 @@
         "bg": "rgb(0, 0, 0)",
         "listStyle": "none"
       },
-      "textLen": 2646,
-      "mainH": 2414
+      "textLen": 2626,
+      "mainH": 1721
     },
     "srcFp": {
       "h1": "",
@@ -4259,15 +4260,15 @@
       "cards": 2,
       "tables": 0,
       "featured": 0,
-      "navSelect": false,
+      "navSelect": true,
       "navRail": true,
       "bullet": {
         "content": "none",
         "bg": "rgba(0, 0, 0, 0)",
         "listStyle": "none"
       },
-      "textLen": 3476,
-      "mainH": 0
+      "textLen": 3814,
+      "mainH": 3098
     },
     "srcFp": {
       "h1": "",
@@ -5926,10 +5927,12 @@
       "h1Present": true,
       "heroPresent": true,
       "heroHasImage": true,
-      "h2Count": 0,
-      "h2s": [],
+      "h2Count": 1,
+      "h2s": [
+        "A Portfolio of Solutions in Agriculture"
+      ],
       "h3Count": 5,
-      "grayBands": 0,
+      "grayBands": 1,
       "blueBorders": 0,
       "geoHex": 0,
       "cards": 1,
@@ -5942,8 +5945,8 @@
         "bg": "rgba(0, 0, 0, 0)",
         "listStyle": "none"
       },
-      "textLen": 3008,
-      "mainH": 2767
+      "textLen": 2999,
+      "mainH": 2759
     },
     "srcFp": {
       "h1": "",
@@ -5989,10 +5992,12 @@
       "h1Present": true,
       "heroPresent": true,
       "heroHasImage": true,
-      "h2Count": 0,
-      "h2s": [],
+      "h2Count": 1,
+      "h2s": [
+        "A Portfolio of Solutions in Agriculture"
+      ],
       "h3Count": 4,
-      "grayBands": 0,
+      "grayBands": 1,
       "blueBorders": 0,
       "geoHex": 0,
       "cards": 1,
@@ -6005,8 +6010,8 @@
         "bg": "rgba(0, 0, 0, 0)",
         "listStyle": "none"
       },
-      "textLen": 2690,
-      "mainH": 2330
+      "textLen": 2737,
+      "mainH": 2385
     },
     "srcFp": {
       "h1": "",

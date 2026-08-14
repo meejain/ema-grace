@@ -2,11 +2,12 @@
   "status": "success",
   "url": "https://grace.com/industries/refining-technologies/fcc-additive-solutions/light-olefins/",
   "path": "industries/refining-technologies/fcc-additive-solutions/light-olefins",
-  "timestamp": "2026-08-13T19:54:28.018Z",
+  "timestamp": "2026-08-14T08:54:28.613Z",
   "title": "Light Olefins",
   "pageType": "default",
   "blocks": [
     "hero-banner",
+    "cards-category-grid",
     "cards-featured-content",
     "banner-resource-download"
   ],

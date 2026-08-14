@@ -1,0 +1,215 @@
+[1/102] GOOD     /industries
+[2/102] COSMETIC /industries/refining-technologies
+   D: COSMETIC: h2 count eds 3 vs src 1
+   M: COSMETIC: h2 count eds 3 vs src 1
+[3/102] GOOD     /industries/refining-technologies/fcc-catalyst-application
+[4/102] GOOD     /industries/refining-technologies/fcc-catalyst-application/maximize-propylene
+[5/102] GOOD     /industries/refining-technologies/fcc-catalyst-application/butylene-selectivity
+[6/102] GOOD     /industries/refining-technologies/fcc-catalyst-application/resid-conversion
+[7/102] GOOD     /industries/refining-technologies/fcc-catalyst-application/light-feed-performance
+[8/102] GOOD     /industries/refining-technologies/value-creation
+[9/102] GOOD     /industries/refining-technologies/value-creation/technical-service-expertise
+[10/102] GOOD     /industries/refining-technologies/value-creation/specialized-evaluation-tools
+[11/102] GOOD     /industries/refining-technologies/value-creation/sustainability
+[12/102] GOOD     /industries/refining-technologies/fcc-additive-solutions
+[13/102] COSMETIC /industries/refining-technologies/fcc-additive-solutions/sox-reduction
+   D: COSMETIC: h2 count eds 3 vs src 1
+   M: COSMETIC: h2 count eds 3 vs src 1
+[14/102] COSMETIC /industries/refining-technologies/fcc-additive-solutions/gasoline-sulphur-reduction
+   D: COSMETIC: h2 count eds 3 vs src 1
+   M: COSMETIC: h2 count eds 3 vs src 1
+[15/102] COSMETIC /industries/refining-technologies/fcc-additive-solutions/light-olefins
+   D: COSMETIC: h2 count eds 5 vs src 3
+   M: COSMETIC: h2 count eds 5 vs src 3
+[16/102] COSMETIC /industries/refining-technologies/fcc-additive-solutions/nox-reduction
+   D: COSMETIC: h2 count eds 3 vs src 1
+   M: COSMETIC: h2 count eds 3 vs src 1
+[17/102] COSMETIC /industries/refining-technologies/fcc-additive-solutions/combustion-promoter
+   D: COSMETIC: h2 count eds 3 vs src 1
+   M: COSMETIC: h2 count eds 3 vs src 1
+[18/102] GOOD     /industries/refining-technologies/hydroprocessing
+[19/102] COSMETIC /industries/refining-technologies/hydroprocessing/resid-hydrotreating-solutions
+   D: COSMETIC: nav rail missing
+   M: COSMETIC: nav rail missing
+[20/102] COSMETIC /industries/refining-technologies/hydroprocessing/resid-hydrocracking-solutions
+   D: COSMETIC: nav rail missing
+   M: COSMETIC: nav rail missing
+[21/102] COSMETIC /industries/refining-technologies/hydroprocessing/distillate-hydrotreating-solutions
+   D: COSMETIC: nav rail missing
+   M: COSMETIC: nav rail missing
+[22/102] GOOD     /industries/refining-technologies/catalagram-archive
+[23/102] COSMETIC /industries/chemical-processing
+   D: COSMETIC: h2 count eds 3 vs src 1
+   M: COSMETIC: h2 count eds 3 vs src 1
+[24/102] GOOD     /industries/chemical-processing/hydrogenation-catalysts
+[25/102] GOOD     /industries/chemical-processing/catalyst-supports
+[26/102] GOOD     /industries/chemical-processing/custom-development
+[27/102] COSMETIC /industries/plastics-and-polymers
+   D: COSMETIC: h2 count eds 4 vs src 2
+   M: COSMETIC: h2 count eds 4 vs src 2
+[28/102] COSMETIC /industries/plastics-and-polymers/polyethylene-catalysts
+   D: COSMETIC: h2 count eds 3 vs src 1
+   M: COSMETIC: h2 count eds 3 vs src 1
+[29/102] GOOD     /industries/plastics-and-polymers/polyethylene-catalysts/pe-catalyst-components-and-supports
+[30/102] COSMETIC /industries/plastics-and-polymers/polyethylene-catalysts/pe-slurry
+   D: COSMETIC: h2 count eds 4 vs src 2
+   M: COSMETIC: h2 count eds 4 vs src 2
+[31/102] COSMETIC /industries/plastics-and-polymers/polyethylene-catalysts/pe-gas-phase
+   D: COSMETIC: h2 count eds 4 vs src 2
+   M: COSMETIC: h2 count eds 4 vs src 2
+[32/102] GOOD     /industries/plastics-and-polymers/polyethylene-catalysts/pe-solution
+[33/102] GOOD     /industries/plastics-and-polymers/polyethylene-catalysts/pe-hybrid
+[34/102] GOOD     /industries/plastics-and-polymers/polypropylene-catalysts
+[35/102] COSMETIC /industries/plastics-and-polymers/polypropylene-catalysts/pp-bulk
+   D: COSMETIC: h2 count eds 4 vs src 2
+   M: COSMETIC: h2 count eds 4 vs src 2
+[36/102] COSMETIC /industries/plastics-and-polymers/polypropylene-catalysts/pp-gas-phase
+   D: COSMETIC: h2 count eds 4 vs src 2
+   M: COSMETIC: h2 count eds 4 vs src 2
+[37/102] GOOD     /industries/plastics-and-polymers/polypropylene-catalysts/pp-slurry
+[38/102] COSMETIC /industries/plastics-and-polymers/unipol-pp-process-technology
+   D: COSMETIC: h2 count eds 4 vs src 2
+   M: COSMETIC: h2 count eds 4 vs src 2
+[39/102] GOOD     /industries/plastics-and-polymers/unipol-pp-process-technology/unipol-pp-process
+[40/102] GOOD     /industries/plastics-and-polymers/unipol-pp-process-technology/unipol-pp-products
+[41/102] GOOD     /industries/plastics-and-polymers/unipol-pp-process-technology/unipol-pp-performance
+[42/102] GOOD     /industries/plastics-and-polymers/unipol-pp-process-technology/unipol-pp-services
+[43/102] COSMETIC /industries/plastics-and-polymers/unipol-pp-process-technology/unipol-pp-technology-ppartner-program
+   D: COSMETIC: nav rail missing
+   M: COSMETIC: nav rail missing
+[44/102] GOOD     /industries/plastics-and-polymers/custom-catalysts
+[45/102] COSMETIC /industries/plastics-and-polymers/plastic-additives
+   D: COSMETIC: h2 count eds 2 vs src 0
+   M: COSMETIC: h2 count eds 2 vs src 0
+[46/102] GOOD     /industries/plastics-and-polymers/plastic-additives/silica-anti-blocking-agents
+[47/102] GOOD     /industries/plastics-and-polymers/plastic-additives/titanium-dioxide-extenders
+[48/102] GOOD     /industries/plastics-and-polymers/tire-and-rubber-additives
+[49/102] COSMETIC /industries/coatings
+   D: COSMETIC: h2 count eds 4 vs src 1
+   M: COSMETIC: h2 count eds 4 vs src 1
+[50/102] GOOD     /industries/coatings/wood
+[51/102] GOOD     /industries/coatings/coil
+[52/102] GOOD     /industries/coatings/architectural
+[53/102] GOOD     /industries/coatings/inks-paper
+[54/102] GOOD     /industries/coatings/general-industrial-coatings
+[55/102] COSMETIC /industries/general-industrial
+   D: COSMETIC: h2 count eds 3 vs src 1
+   M: COSMETIC: h2 count eds 3 vs src 1
+[56/102] GOOD     /industries/general-industrial/process-adsorbents
+[57/102] GOOD     /industries/general-industrial/static-adsorbents
+[58/102] GOOD     /industries/general-industrial/colloidal-silica-in-catalysts
+[59/102] GOOD     /industries/general-industrial/investment-casting-binders
+[60/102] GOOD     /industries/general-industrial/refractory-additives
+[61/102] GOOD     /industries/general-industrial/construction
+[62/102] COSMETIC /industries/pharmaceutical-solutions
+   D: COSMETIC: h2 count eds 8 vs src 4
+   M: COSMETIC: h2 count eds 8 vs src 4
+[63/102] COSMETIC /industries/pharmaceutical-solutions/fine-chemicals
+   D: COSMETIC: h2 count eds 3 vs src 1
+   M: COSMETIC: h2 count eds 3 vs src 1
+[64/102] COSMETIC /industries/pharmaceutical-solutions/fine-chemicals/custom-apis
+   D: COSMETIC: h2 count eds 2 vs src 0
+   M: COSMETIC: h2 count eds 2 vs src 0
+[65/102] COSMETIC /industries/pharmaceutical-solutions/fine-chemicals/rsms-and-intermediates
+   D: COSMETIC: h2 count eds 2 vs src 0
+   M: COSMETIC: h2 count eds 2 vs src 0
+[66/102] COSMETIC /industries/pharmaceutical-solutions/fine-chemicals/generic-apis
+   D: COSMETIC: h2 count eds 2 vs src 0
+   M: COSMETIC: h2 count eds 2 vs src 0
+[67/102] COSMETIC /industries/pharmaceutical-solutions/fine-chemicals/integrated-scale-up
+   D: COSMETIC: h2 count eds 2 vs src 0
+   M: COSMETIC: h2 count eds 2 vs src 0
+[68/102] COSMETIC /industries/pharmaceutical-solutions/fine-chemicals/consultative-services
+   D: COSMETIC: h2 count eds 4 vs src 2
+   M: COSMETIC: h2 count eds 4 vs src 2
+[69/102] COSMETIC /industries/pharmaceutical-solutions/fine-chemicals/consultative-services/r-d
+   D: COSMETIC: h2 count eds 2 vs src 0
+   M: COSMETIC: h2 count eds 2 vs src 0
+[70/102] COSMETIC /industries/pharmaceutical-solutions/fine-chemicals/consultative-services/quality-and-compliance
+   D: COSMETIC: h2 count eds 2 vs src 0
+   M: COSMETIC: h2 count eds 2 vs src 0
+[71/102] COSMETIC /industries/pharmaceutical-solutions/fine-chemicals/facilities
+   D: COSMETIC: h2 count eds 2 vs src 0
+   M: COSMETIC: h2 count eds 2 vs src 0
+[72/102] COSMETIC /industries/pharmaceutical-solutions/fine-chemicals/facilities/south-haven
+   D: COSMETIC: h2 count eds 2 vs src 0
+   M: COSMETIC: h2 count eds 2 vs src 0
+[73/102] COSMETIC /industries/pharmaceutical-solutions/fine-chemicals/facilities/tyrone
+   D: COSMETIC: h2 count eds 2 vs src 0
+   M: COSMETIC: h2 count eds 2 vs src 0
+[74/102] GOOD     /industries/pharmaceutical-solutions/fine-chemicals/fcms-case-study
+[75/102] COSMETIC /industries/pharmaceutical-solutions/purification-formulation-delivery
+   D: COSMETIC: h2 count eds 2 vs src 0
+   M: COSMETIC: h2 count eds 2 vs src 0
+[76/102] COSMETIC /industries/pharmaceutical-solutions/purification-formulation-delivery/chromatography
+   D: COSMETIC: h2 count eds 3 vs src 1
+   M: COSMETIC: h2 count eds 3 vs src 1
+[77/102] COSMETIC /industries/pharmaceutical-solutions/purification-formulation-delivery/excipients
+   D: COSMETIC: h2 count eds 4 vs src 2
+   M: COSMETIC: h2 count eds 4 vs src 2
+[78/102] COSMETIC /industries/pharmaceutical-solutions/purification-formulation-delivery/active-ingredient-delivery
+   D: COSMETIC: h2 count eds 3 vs src 1
+   M: COSMETIC: h2 count eds 3 vs src 1
+[79/102] COSMETIC /industries/pharmaceutical-solutions/packaging-adsorbents
+   D: COSMETIC: h2 count eds 3 vs src 1
+   M: COSMETIC: h2 count eds 3 vs src 1
+[80/102] COSMETIC /industries/nutraceutical-solutions
+   D: COSMETIC: h2 count eds 4 vs src 1
+   M: COSMETIC: h2 count eds 4 vs src 1
+[81/102] COSMETIC /industries/nutraceutical-solutions/vitamin-purification-formulation-delivery
+   D: COSMETIC: h2 count eds 5 vs src 3
+   M: COSMETIC: h2 count eds 5 vs src 3
+[82/102] COSMETIC /industries/nutraceutical-solutions/lipid-purification-formulation-delivery
+   D: COSMETIC: h2 count eds 2 vs src 0
+   M: COSMETIC: h2 count eds 2 vs src 0
+[83/102] COSMETIC /industries/nutraceutical-solutions/cbd-purification-formulation-delivery
+   D: COSMETIC: h2 count eds 2 vs src 0
+   M: COSMETIC: h2 count eds 2 vs src 0
+[84/102] COSMETIC /industries/nutraceutical-solutions/nutraceutical-cdmo
+   D: COSMETIC: h2 count eds 3 vs src 1
+   M: COSMETIC: h2 count eds 3 vs src 1
+[85/102] COSMETIC /industries/nutraceutical-solutions/traditional-herbal-medicine
+   D: COSMETIC: cards missing (src 1)
+   M: COSMETIC: cards missing (src 1)
+[86/102] GOOD     /industries/agriculture
+[87/102] GOOD     /industries/agriculture/agriculture-cdmo
+[88/102] GOOD     /industries/agriculture/animal-feed-agricultural-active-solutions
+[89/102] COSMETIC /industries/personal-care
+   D: COSMETIC: h2 count eds 3 vs src 1
+   M: COSMETIC: h2 count eds 3 vs src 1
+[90/102] GOOD     /industries/personal-care/toothpaste
+[91/102] GOOD     /industries/personal-care/cosmetics
+[92/102] COSMETIC /industries/food-beverage
+   D: COSMETIC: h2 count eds 3 vs src 1
+   M: COSMETIC: h2 count eds 3 vs src 1
+[93/102] COSMETIC /industries/food-beverage/beer
+   D: COSMETIC: h2 count eds 3 vs src 0
+   M: COSMETIC: h2 count eds 3 vs src 0
+[94/102] COSMETIC /industries/food-beverage/edible-oil-refining
+   D: COSMETIC: h2 count eds 3 vs src 1
+   M: COSMETIC: h2 count eds 3 vs src 1
+[95/102] COSMETIC /industries/food-beverage/food-processing
+   D: COSMETIC: h2 count eds 3 vs src 1
+   M: COSMETIC: h2 count eds 3 vs src 1
+[96/102] COSMETIC /industries/food-beverage/beverage
+   D: COSMETIC: h2 count eds 2 vs src 0
+   M: COSMETIC: h2 count eds 2 vs src 0
+[97/102] COSMETIC /industries/biofuels
+   D: COSMETIC: h2 count eds 3 vs src 1
+   M: COSMETIC: h2 count eds 3 vs src 1
+[98/102] COSMETIC /industries/biofuels/biomass-based-diesel
+   D: COSMETIC: h2 count eds 2 vs src 0
+   M: COSMETIC: h2 count eds 2 vs src 0
+[99/102] COSMETIC /industries/biofuels/biomass-based-diesel/first-generation-biodiesel
+   D: COSMETIC: h2 count eds 3 vs src 0
+   M: COSMETIC: h2 count eds 3 vs src 0
+[100/102] COSMETIC /industries/biofuels/biomass-based-diesel/renewable-diesel
+   D: COSMETIC: h2 count eds 3 vs src 0
+   M: COSMETIC: h2 count eds 3 vs src 0
+[101/102] GOOD     /industries/biofuels/bioethanol
+[102/102] COSMETIC /industries/biofuels/biodiesel
+   D: COSMETIC: h2 count eds 2 vs src 0
+   M: COSMETIC: h2 count eds 2 vs src 0
+
+=== SUMMARY (0-102) ===
+{"good":47,"cosmetic":55}

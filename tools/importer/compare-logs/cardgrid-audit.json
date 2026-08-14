@@ -1,0 +1,218 @@
+[
+  {
+    "path": "/industries",
+    "srcGrids": 1,
+    "edsGrids": 0,
+    "leak": 0,
+    "srcDetails": [
+      {
+        "heading": "Industries",
+        "cards": 11
+      }
+    ]
+  },
+  {
+    "path": "/industries/refining-technologies/fcc-catalyst-application",
+    "srcGrids": 1,
+    "edsGrids": 0,
+    "leak": 0,
+    "srcDetails": [
+      {
+        "heading": "A Broad Catalyst Portfolio At Grace, we have arran",
+        "cards": 5
+      }
+    ]
+  },
+  {
+    "path": "/industries/refining-technologies/fcc-catalyst-application/maximize-propylene",
+    "srcGrids": 1,
+    "edsGrids": 0,
+    "leak": 0,
+    "srcDetails": [
+      {
+        "heading": "Catalyst Solutions for FCC Not all FCC catalyst ar",
+        "cards": 6
+      }
+    ]
+  },
+  {
+    "path": "/industries/refining-technologies/fcc-catalyst-application/butylene-selectivity",
+    "srcGrids": 1,
+    "edsGrids": 0,
+    "leak": 0,
+    "srcDetails": [
+      {
+        "heading": "Catalyst Solutions for FCC Not all FCC catalyst ar",
+        "cards": 8
+      }
+    ]
+  },
+  {
+    "path": "/industries/refining-technologies/fcc-catalyst-application/resid-conversion",
+    "srcGrids": 1,
+    "edsGrids": 0,
+    "leak": 0,
+    "srcDetails": [
+      {
+        "heading": "Catalyst Solutions for FCC Not all FCC catalyst ar",
+        "cards": 8
+      }
+    ]
+  },
+  {
+    "path": "/industries/refining-technologies/fcc-catalyst-application/light-feed-performance",
+    "srcGrids": 1,
+    "edsGrids": 0,
+    "leak": 0,
+    "srcDetails": [
+      {
+        "heading": "Catalyst Solutions for FCC Not all FCC catalyst ar",
+        "cards": 8
+      }
+    ]
+  },
+  {
+    "path": "/industries/refining-technologies/value-creation",
+    "srcGrids": 1,
+    "edsGrids": 0,
+    "leak": 0,
+    "srcDetails": [
+      {
+        "heading": "Solutions in Action As the FCC industry leader, di",
+        "cards": 5
+      }
+    ]
+  },
+  {
+    "path": "/industries/refining-technologies/fcc-additive-solutions",
+    "srcGrids": 1,
+    "edsGrids": 0,
+    "leak": 0,
+    "srcDetails": [
+      {
+        "heading": "FCC Additive Applications Not all FCC additives ar",
+        "cards": 5
+      }
+    ]
+  },
+  {
+    "path": "/industries/refining-technologies/fcc-additive-solutions/sox-reduction",
+    "srcGrids": 1,
+    "edsGrids": 0,
+    "leak": 0,
+    "srcDetails": [
+      {
+        "heading": "Additive Solutions for FCC Not all FCC additives a",
+        "cards": 4
+      }
+    ]
+  },
+  {
+    "path": "/industries/refining-technologies/fcc-additive-solutions/gasoline-sulphur-reduction",
+    "srcGrids": 1,
+    "edsGrids": 0,
+    "leak": 0,
+    "srcDetails": [
+      {
+        "heading": "Additive Solutions for FCC Not all FCC additives a",
+        "cards": 4
+      }
+    ]
+  },
+  {
+    "path": "/industries/refining-technologies/fcc-additive-solutions/light-olefins",
+    "srcGrids": 1,
+    "edsGrids": 0,
+    "leak": 0,
+    "srcDetails": [
+      {
+        "heading": "Additive Solutions for FCC Not all FCC additives a",
+        "cards": 4
+      }
+    ]
+  },
+  {
+    "path": "/industries/refining-technologies/fcc-additive-solutions/nox-reduction",
+    "srcGrids": 1,
+    "edsGrids": 0,
+    "leak": 0,
+    "srcDetails": [
+      {
+        "heading": "Additive Solutions for FCC Not all FCC additives a",
+        "cards": 4
+      }
+    ]
+  },
+  {
+    "path": "/industries/refining-technologies/fcc-additive-solutions/combustion-promoter",
+    "srcGrids": 1,
+    "edsGrids": 0,
+    "leak": 0,
+    "srcDetails": [
+      {
+        "heading": "Additive Solutions for FCC Not all FCC additives a",
+        "cards": 4
+      }
+    ]
+  },
+  {
+    "path": "/industries/refining-technologies/hydroprocessing",
+    "srcGrids": 1,
+    "edsGrids": 0,
+    "leak": 0,
+    "srcDetails": [
+      {
+        "heading": "Catalyst System Solutions",
+        "cards": 3
+      }
+    ]
+  },
+  {
+    "path": "/industries/plastics-and-polymers/polyethylene-catalysts/pe-slurry",
+    "srcGrids": 1,
+    "edsGrids": 0,
+    "leak": 0,
+    "srcDetails": [
+      {
+        "heading": "Catalysts for Slurry PE Processes Slurry processes",
+        "cards": 5
+      }
+    ]
+  },
+  {
+    "path": "/industries/plastics-and-polymers/polyethylene-catalysts/pe-gas-phase",
+    "srcGrids": 1,
+    "edsGrids": 0,
+    "leak": 0,
+    "srcDetails": [
+      {
+        "heading": "Catalysts for Gas Phase PE Processes Gas processes",
+        "cards": 4
+      }
+    ]
+  },
+  {
+    "path": "/industries/plastics-and-polymers/polypropylene-catalysts/pp-bulk",
+    "srcGrids": 1,
+    "edsGrids": 0,
+    "leak": 0,
+    "srcDetails": [
+      {
+        "heading": "Catalysts for the PP Bulk Process Providing “drop-",
+        "cards": 4
+      }
+    ]
+  },
+  {
+    "path": "/industries/plastics-and-polymers/polypropylene-catalysts/pp-gas-phase",
+    "srcGrids": 1,
+    "edsGrids": 0,
+    "leak": 0,
+    "srcDetails": [
+      {
+        "heading": "Catalysts for PP Stirred Gas Processes The Global ",
+        "cards": 4
+      }
+    ]
+  }
+]

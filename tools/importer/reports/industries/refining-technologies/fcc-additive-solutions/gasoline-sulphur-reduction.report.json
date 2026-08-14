@@ -2,12 +2,13 @@
   "status": "success",
   "url": "https://grace.com/industries/refining-technologies/fcc-additive-solutions/gasoline-sulphur-reduction/",
   "path": "industries/refining-technologies/fcc-additive-solutions/gasoline-sulphur-reduction",
-  "timestamp": "2026-08-13T19:53:33.634Z",
+  "timestamp": "2026-08-14T08:55:23.031Z",
   "title": "Gasoline Sulphur Reduction",
   "pageType": "default",
   "blocks": [
     "hero-banner",
     "columns-horizontal-teaser-featured",
+    "cards-category-grid",
     "cards-featured-content",
     "banner-resource-download"
   ],

@@ -18,7 +18,12 @@ export default function parse(element, { document }) {
   const cta = element.querySelector('a[href], button[data-gated-id]');
   if (cta) { const p = document.createElement('p'); const a = document.createElement('a'); a.href = cta.getAttribute('href') || '#'; a.textContent = (cta.textContent || 'Download').trim(); p.append(a); c2.push(p); }
   if (!c1.length && !c2.length) return;
-  const block = WebImporter.Blocks.createBlock(document, { name: 'Banner (resource-download)', cells: [[c1, c2]] });
+  // TWO rows (image row, then content row) — NOT one row / two cells. The block's
+  // decorate() reads rows[0]=image, rows[1]=content (and the drafts sample authors it
+  // as two stacked rows). Emitting [[c1, c2]] as a single 2-cell row left rows[1]
+  // undefined, so the content cell (eyebrow + title + desc + CTA) was dropped and the
+  // banner rendered image-only with a blank right side.
+  const block = WebImporter.Blocks.createBlock(document, { name: 'Banner (resource-download)', cells: [[c1], [c2]] });
   const host = element.closest('.cmp-experiencefragment--resource-download') || element;
   host.replaceWith(block);
 }

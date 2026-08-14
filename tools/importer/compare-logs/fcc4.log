@@ -1,0 +1,121 @@
+[Bulk Import] Starting run with:
+  Import script: /backups/meejain/ema-grace/repo/tools/importer/import-grace-master.bundle.js
+  URLs file:     /backups/meejain/ema-grace/repo/tools/importer/compare-logs/fcc4-urls.txt
+  Output dir:    /workspace/current/content
+  URL count:     4
+
+  Browser:       Chromium (bundled) [Chrome unavailable: browserType.launch: Chromium distribution 'chrome' is not found at /opt/google/chrome/chrome
+Run "npx playwright install chrome"]
+[1/4] Starting https://grace.com/industries/refining-technologies/fcc-catalyst-application/maximize-propylene/
+[Browser Console] Mixed Content: The page at 'https://grace.com/industries/refining-technologies/fcc-catalyst-application/maximize-propylene/' was loaded over HTTPS, but requested an insecure script 'http://grace.com/error/404/'. This request has been blocked; the content must be served over HTTPS.
+[Browser Console] 🚀 container.buildInfo.environment is deprecated.Please use `container.environment.stage` instead
+[Browser Console] myhost is =grace.com
+[Browser Console] myhost is =grace.com
+[Browser Console] myhost is =grace.com
+[Browser Console] myhost is =grace.com
+[Browser Console] OT-Updated
+[Browser Console] requestStorageAccess: Permission denied.
+[1/4] ⚠️  Falling back to domcontentloaded...
+[Browser Console] Mixed Content: The page at 'https://grace.com/industries/refining-technologies/fcc-catalyst-application/maximize-propylene/' was loaded over HTTPS, but requested an insecure script 'http://grace.com/error/404/'. This request has been blocked; the content must be served over HTTPS.
+[Browser Console] 🚀 container.buildInfo.environment is deprecated.Please use `container.environment.stage` instead
+[Browser Console] myhost is =grace.com
+[Browser Console] myhost is =grace.com
+[Browser Console] myhost is =grace.com
+[Browser Console] myhost is =grace.com
+[Browser Console] OT-Updated
+[Browser Console] requestStorageAccess: Permission denied.
+[Browser Console] myhost is =grace.com
+[Browser Console] OT-Updated
+[Browser Console] get data url from a base64 image (): InvalidCharacterError: Failed to execute 'atob' on 'Window': The string to be decoded is not correctly encoded.
+    at KT.getDataUrlFromB64Img (<anonymous>:2:1903009)
+    at <anonymous>:2:1919086
+    at NodeList.forEach (<anonymous>)
+    at u.storageHandler.preProcess (<anonymous>:2:1918860)
+    at u.storageHandler.import (<anonymous>:2:1920086)
+    at async fk (<anonymous>:2:1926732)
+[1/4] ⚠️  Content completeness 60.9% (below 90.0%) — possible dropped content
+[1/4] ✅ Saved content to industries/refining-technologies/fcc-catalyst-application/maximize-propylene
+[2/4] Starting https://grace.com/industries/refining-technologies/fcc-catalyst-application/light-feed-performance/
+[Browser Console] Mixed Content: The page at 'https://grace.com/industries/refining-technologies/fcc-catalyst-application/light-feed-performance/' was loaded over HTTPS, but requested an insecure script 'http://grace.com/error/404/'. This request has been blocked; the content must be served over HTTPS.
+[Browser Console] 🚀 container.buildInfo.environment is deprecated.Please use `container.environment.stage` instead
+[Browser Console] myhost is =grace.com
+[Browser Console] myhost is =grace.com
+[Browser Console] myhost is =grace.com
+[Browser Console] myhost is =grace.com
+[Browser Console] OT-Updated
+[Browser Console] requestStorageAccess: Permission denied.
+[2/4] ⚠️  Falling back to domcontentloaded...
+[Browser Console] Mixed Content: The page at 'https://grace.com/industries/refining-technologies/fcc-catalyst-application/light-feed-performance/' was loaded over HTTPS, but requested an insecure script 'http://grace.com/error/404/'. This request has been blocked; the content must be served over HTTPS.
+[Browser Console] 🚀 container.buildInfo.environment is deprecated.Please use `container.environment.stage` instead
+[Browser Console] myhost is =grace.com
+[Browser Console] myhost is =grace.com
+[Browser Console] myhost is =grace.com
+[Browser Console] myhost is =grace.com
+[Browser Console] OT-Updated
+[Browser Console] requestStorageAccess: Permission denied.
+[Browser Console] get data url from a base64 image (): InvalidCharacterError: Failed to execute 'atob' on 'Window': The string to be decoded is not correctly encoded.
+    at KT.getDataUrlFromB64Img (<anonymous>:2:1903009)
+    at <anonymous>:2:1919086
+    at NodeList.forEach (<anonymous>)
+    at u.storageHandler.preProcess (<anonymous>:2:1918860)
+    at u.storageHandler.import (<anonymous>:2:1920086)
+    at async fk (<anonymous>:2:1926732)
+[2/4] ⚠️  Content completeness 59.1% (below 90.0%) — possible dropped content
+[2/4] ✅ Saved content to industries/refining-technologies/fcc-catalyst-application/light-feed-performance
+[3/4] Starting https://grace.com/industries/refining-technologies/fcc-catalyst-application/resid-conversion/
+[Browser Console] Mixed Content: The page at 'https://grace.com/industries/refining-technologies/fcc-catalyst-application/resid-conversion/' was loaded over HTTPS, but requested an insecure script 'http://grace.com/error/404/'. This request has been blocked; the content must be served over HTTPS.
+[Browser Console] 🚀 container.buildInfo.environment is deprecated.Please use `container.environment.stage` instead
+[Browser Console] myhost is =grace.com
+[Browser Console] myhost is =grace.com
+[Browser Console] myhost is =grace.com
+[Browser Console] myhost is =grace.com
+[Browser Console] OT-Updated
+[Browser Console] requestStorageAccess: Permission denied.
+[3/4] ⚠️  Falling back to domcontentloaded...
+[Browser Console] Mixed Content: The page at 'https://grace.com/industries/refining-technologies/fcc-catalyst-application/resid-conversion/' was loaded over HTTPS, but requested an insecure script 'http://grace.com/error/404/'. This request has been blocked; the content must be served over HTTPS.
+[Browser Console] 🚀 container.buildInfo.environment is deprecated.Please use `container.environment.stage` instead
+[Browser Console] myhost is =grace.com
+[Browser Console] myhost is =grace.com
+[Browser Console] myhost is =grace.com
+[Browser Console] myhost is =grace.com
+[Browser Console] OT-Updated
+[Browser Console] requestStorageAccess: Permission denied.
+[Browser Console] get data url from a base64 image (): InvalidCharacterError: Failed to execute 'atob' on 'Window': The string to be decoded is not correctly encoded.
+    at KT.getDataUrlFromB64Img (<anonymous>:2:1903009)
+    at <anonymous>:2:1919086
+    at NodeList.forEach (<anonymous>)
+    at u.storageHandler.preProcess (<anonymous>:2:1918860)
+    at u.storageHandler.import (<anonymous>:2:1920086)
+    at async fk (<anonymous>:2:1926732)
+[3/4] ⚠️  Content completeness 62.6% (below 90.0%) — possible dropped content
+[3/4] ✅ Saved content to industries/refining-technologies/fcc-catalyst-application/resid-conversion
+[4/4] Starting https://grace.com/industries/refining-technologies/fcc-catalyst-application/butylene-selectivity/
+[Browser Console] Mixed Content: The page at 'https://grace.com/industries/refining-technologies/fcc-catalyst-application/butylene-selectivity/' was loaded over HTTPS, but requested an insecure script 'http://grace.com/error/404/'. This request has been blocked; the content must be served over HTTPS.
+[Browser Console] 🚀 container.buildInfo.environment is deprecated.Please use `container.environment.stage` instead
+[Browser Console] myhost is =grace.com
+[Browser Console] myhost is =grace.com
+[Browser Console] myhost is =grace.com
+[Browser Console] myhost is =grace.com
+[Browser Console] OT-Updated
+[Browser Console] requestStorageAccess: Permission denied.
+[4/4] ⚠️  Falling back to domcontentloaded...
+[Browser Console] Mixed Content: The page at 'https://grace.com/industries/refining-technologies/fcc-catalyst-application/butylene-selectivity/' was loaded over HTTPS, but requested an insecure script 'http://grace.com/error/404/'. This request has been blocked; the content must be served over HTTPS.
+[Browser Console] 🚀 container.buildInfo.environment is deprecated.Please use `container.environment.stage` instead
+[Browser Console] myhost is =grace.com
+[Browser Console] myhost is =grace.com
+[Browser Console] myhost is =grace.com
+[Browser Console] myhost is =grace.com
+[Browser Console] OT-Updated
+[Browser Console] requestStorageAccess: Permission denied.
+[Browser Console] get data url from a base64 image (): InvalidCharacterError: Failed to execute 'atob' on 'Window': The string to be decoded is not correctly encoded.
+    at KT.getDataUrlFromB64Img (<anonymous>:2:1903009)
+    at <anonymous>:2:1919086
+    at NodeList.forEach (<anonymous>)
+    at u.storageHandler.preProcess (<anonymous>:2:1918860)
+    at u.storageHandler.import (<anonymous>:2:1920086)
+    at async fk (<anonymous>:2:1926732)
+[4/4] ⚠️  Content completeness 58.7% (below 90.0%) — possible dropped content
+[4/4] ✅ Saved content to industries/refining-technologies/fcc-catalyst-application/butylene-selectivity
+[Bulk Import] Completed. Success: 4/4, Failures: 0
+[Excel Export] Found 354 report file(s). Compiling to Excel...
+[Excel Export] ✅ Compiled 354 reports to: /workspace/current/tools/importer/reports/import-grace-master.report.xlsx

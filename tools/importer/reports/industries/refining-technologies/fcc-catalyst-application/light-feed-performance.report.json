@@ -2,11 +2,12 @@
   "status": "success",
   "url": "https://grace.com/industries/refining-technologies/fcc-catalyst-application/light-feed-performance/",
   "path": "industries/refining-technologies/fcc-catalyst-application/light-feed-performance",
-  "timestamp": "2026-08-13T19:47:12.911Z",
+  "timestamp": "2026-08-14T09:02:28.927Z",
   "title": "Light Feed Performance",
   "pageType": "default",
   "blocks": [
     "hero-banner",
+    "cards-category-grid",
     "cards-featured-content",
     "banner-resource-download"
   ],

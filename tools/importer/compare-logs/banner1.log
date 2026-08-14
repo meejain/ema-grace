@@ -1,0 +1,39 @@
+[Bulk Import] Starting run with:
+  Import script: /backups/meejain/ema-grace/repo/tools/importer/import-grace-master.bundle.js
+  URLs file:     /tmp/one-banner.txt
+  Output dir:    /workspace/current/content
+  URL count:     1
+
+  Browser:       Chromium (bundled) [Chrome unavailable: browserType.launch: Chromium distribution 'chrome' is not found at /opt/google/chrome/chrome
+Run "npx playwright install chrome"]
+[1/1] Starting https://grace.com/industries/refining-technologies/fcc-catalyst-application/
+[Browser Console] Mixed Content: The page at 'https://grace.com/industries/refining-technologies/fcc-catalyst-application/' was loaded over HTTPS, but requested an insecure script 'http://grace.com/error/404/'. This request has been blocked; the content must be served over HTTPS.
+[Browser Console] 🚀 container.buildInfo.environment is deprecated.Please use `container.environment.stage` instead
+[Browser Console] myhost is =grace.com
+[Browser Console] myhost is =grace.com
+[Browser Console] myhost is =grace.com
+[Browser Console] myhost is =grace.com
+[Browser Console] OT-Updated
+[Browser Console] requestStorageAccess: Permission denied.
+[1/1] ⚠️  Falling back to domcontentloaded...
+[Browser Console] Mixed Content: The page at 'https://grace.com/industries/refining-technologies/fcc-catalyst-application/' was loaded over HTTPS, but requested an insecure script 'http://grace.com/error/404/'. This request has been blocked; the content must be served over HTTPS.
+[Browser Console] 🚀 container.buildInfo.environment is deprecated.Please use `container.environment.stage` instead
+[Browser Console] myhost is =grace.com
+[Browser Console] myhost is =grace.com
+[Browser Console] myhost is =grace.com
+[Browser Console] myhost is =grace.com
+[Browser Console] OT-Updated
+[Browser Console] requestStorageAccess: Permission denied.
+[Browser Console] myhost is =grace.com
+[Browser Console] OT-Updated
+[Browser Console] get data url from a base64 image (): InvalidCharacterError: Failed to execute 'atob' on 'Window': The string to be decoded is not correctly encoded.
+    at KT.getDataUrlFromB64Img (<anonymous>:2:1903009)
+    at <anonymous>:2:1919086
+    at NodeList.forEach (<anonymous>)
+    at u.storageHandler.preProcess (<anonymous>:2:1918860)
+    at u.storageHandler.import (<anonymous>:2:1920086)
+[1/1] ⚠️  Content completeness 47.9% (below 90.0%) — possible dropped content
+[1/1] ✅ Saved content to industries/refining-technologies/fcc-catalyst-application
+[Bulk Import] Completed. Success: 1/1, Failures: 0
+[Excel Export] Found 354 report file(s). Compiling to Excel...
+[Excel Export] ✅ Compiled 354 reports to: /workspace/current/tools/importer/reports/import-grace-master.report.xlsx

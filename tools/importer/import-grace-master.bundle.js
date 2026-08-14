@@ -1697,7 +1697,7 @@ var CustomImportScript = (() => {
       c2.push(p);
     }
     if (!c1.length && !c2.length) return;
-    const block = WebImporter.Blocks.createBlock(document, { name: "Banner (resource-download)", cells: [[c1, c2]] });
+    const block = WebImporter.Blocks.createBlock(document, { name: "Banner (resource-download)", cells: [[c1], [c2]] });
     const host = element.closest(".cmp-experiencefragment--resource-download") || element;
     host.replaceWith(block);
   }
