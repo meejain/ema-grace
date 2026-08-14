@@ -1,0 +1,145 @@
+[
+  {
+    "i": 0,
+    "path": "/industries",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "skip",
+    "desktop": {
+      "cat": "skip",
+      "issues": [
+        "source failed to load"
+      ]
+    },
+    "mobile": {
+      "cat": "skip",
+      "issues": [
+        "source failed to load"
+      ]
+    },
+    "edsFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 1,
+      "h2s": [
+        "Page Not Found"
+      ],
+      "h3Count": 0,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 0,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": false,
+      "navRail": false,
+      "bullet": null,
+      "textLen": 26,
+      "mainH": 836
+    },
+    "srcFp": {
+      "error": "no main"
+    }
+  },
+  {
+    "i": 1,
+    "path": "/industries/refining-technologies",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "skip",
+    "desktop": {
+      "cat": "skip",
+      "issues": [
+        "source failed to load"
+      ]
+    },
+    "mobile": {
+      "cat": "skip",
+      "issues": [
+        "source failed to load"
+      ]
+    },
+    "edsFp": {
+      "h1": "FCC Catalyst and Additive Solutions",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 3,
+      "h2s": [
+        "FCC Catalyst Applications",
+        "A Broad Catalyst Portfolio",
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 6,
+      "grayBands": 1,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 2,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": false,
+      "navRail": false,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 1915,
+      "mainH": 3726
+    },
+    "srcFp": {
+      "error": "no main"
+    }
+  },
+  {
+    "i": 2,
+    "path": "/industries/refining-technologies/fcc-catalyst-application",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "skip",
+    "desktop": {
+      "cat": "skip",
+      "issues": [
+        "source failed to load"
+      ]
+    },
+    "mobile": {
+      "cat": "skip",
+      "issues": [
+        "source failed to load"
+      ]
+    },
+    "edsFp": {
+      "h1": "FCC Solutions",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 2,
+      "h2s": [
+        "FCC Catalyst Applications",
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 4,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 1,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": false,
+      "navRail": false,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 1823,
+      "mainH": 3462
+    },
+    "srcFp": {
+      "error": "no main"
+    }
+  }
+]

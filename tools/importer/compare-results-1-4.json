@@ -1,0 +1,199 @@
+[
+  {
+    "i": 1,
+    "path": "/industries/refining-technologies",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "cosmetic",
+    "desktop": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 3 vs src 1"
+      ]
+    },
+    "mobile": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 3 vs src 1"
+      ]
+    },
+    "edsFp": {
+      "h1": "FCC Catalyst and Additive Solutions",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 3,
+      "h2s": [
+        "FCC Catalyst Applications",
+        "A Broad Catalyst Portfolio",
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 6,
+      "grayBands": 1,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 2,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": false,
+      "navRail": false,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 1915,
+      "mainH": 3726
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 1,
+      "h2s": [
+        "FCC Catalyst Applications"
+      ],
+      "h3Count": 0,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 0,
+      "tables": 0,
+      "featured": 1,
+      "navSelect": false,
+      "navRail": false,
+      "bullet": null,
+      "textLen": 873,
+      "mainH": 1218
+    }
+  },
+  {
+    "i": 2,
+    "path": "/industries/refining-technologies/fcc-catalyst-application",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "good",
+    "desktop": {
+      "cat": "good",
+      "issues": []
+    },
+    "mobile": {
+      "cat": "good",
+      "issues": []
+    },
+    "edsFp": {
+      "h1": "FCC Solutions",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 2,
+      "h2s": [
+        "FCC Catalyst Applications",
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 4,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 1,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": false,
+      "navRail": false,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 1823,
+      "mainH": 3462
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 1,
+      "h2s": [
+        "FCC Catalyst Applications"
+      ],
+      "h3Count": 0,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 0,
+      "tables": 0,
+      "featured": 1,
+      "navSelect": false,
+      "navRail": false,
+      "bullet": null,
+      "textLen": 978,
+      "mainH": 1542
+    }
+  },
+  {
+    "i": 3,
+    "path": "/industries/refining-technologies/fcc-catalyst-application/maximize-propylene",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "good",
+    "desktop": {
+      "cat": "good",
+      "issues": []
+    },
+    "mobile": {
+      "cat": "good",
+      "issues": []
+    },
+    "edsFp": {
+      "h1": "Maximize Yields of C3= from the FCC",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 2,
+      "h2s": [
+        "Max Propylene Operations",
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 5,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 1,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 3782,
+      "mainH": 2461
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 1,
+      "h2s": [
+        "Max Propylene Operations"
+      ],
+      "h3Count": 4,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 0,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": null,
+      "textLen": 2882,
+      "mainH": 989
+    }
+  }
+]

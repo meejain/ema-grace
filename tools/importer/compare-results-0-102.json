@@ -1,0 +1,7008 @@
+[
+  {
+    "i": 0,
+    "path": "/industries",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "good",
+    "desktop": {
+      "cat": "good",
+      "issues": []
+    },
+    "mobile": {
+      "cat": "good",
+      "issues": []
+    },
+    "edsFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 1,
+      "h2s": [
+        "Page Not Found"
+      ],
+      "h3Count": 0,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 0,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": false,
+      "navRail": false,
+      "bullet": null,
+      "textLen": 26,
+      "mainH": 836
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 0,
+      "h2s": [],
+      "h3Count": 0,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 0,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": false,
+      "navRail": false,
+      "bullet": null,
+      "textLen": 315,
+      "mainH": 202
+    }
+  },
+  {
+    "i": 1,
+    "path": "/industries/refining-technologies",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "cosmetic",
+    "desktop": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 3 vs src 1"
+      ]
+    },
+    "mobile": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 3 vs src 1"
+      ]
+    },
+    "edsFp": {
+      "h1": "FCC Catalyst and Additive Solutions",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 3,
+      "h2s": [
+        "FCC Catalyst Applications",
+        "A Broad Catalyst Portfolio",
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 6,
+      "grayBands": 1,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 2,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": false,
+      "navRail": false,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 1915,
+      "mainH": 3726
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 1,
+      "h2s": [
+        "FCC Catalyst Applications"
+      ],
+      "h3Count": 0,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 0,
+      "tables": 0,
+      "featured": 1,
+      "navSelect": false,
+      "navRail": false,
+      "bullet": null,
+      "textLen": 873,
+      "mainH": 1218
+    }
+  },
+  {
+    "i": 2,
+    "path": "/industries/refining-technologies/fcc-catalyst-application",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "good",
+    "desktop": {
+      "cat": "good",
+      "issues": []
+    },
+    "mobile": {
+      "cat": "good",
+      "issues": []
+    },
+    "edsFp": {
+      "h1": "FCC Solutions",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 2,
+      "h2s": [
+        "FCC Catalyst Applications",
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 4,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 1,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": false,
+      "navRail": false,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 1823,
+      "mainH": 3462
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 1,
+      "h2s": [
+        "FCC Catalyst Applications"
+      ],
+      "h3Count": 0,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 0,
+      "tables": 0,
+      "featured": 1,
+      "navSelect": false,
+      "navRail": false,
+      "bullet": null,
+      "textLen": 978,
+      "mainH": 1542
+    }
+  },
+  {
+    "i": 3,
+    "path": "/industries/refining-technologies/fcc-catalyst-application/maximize-propylene",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "good",
+    "desktop": {
+      "cat": "good",
+      "issues": []
+    },
+    "mobile": {
+      "cat": "good",
+      "issues": []
+    },
+    "edsFp": {
+      "h1": "Maximize Yields of C3= from the FCC",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 2,
+      "h2s": [
+        "Max Propylene Operations",
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 5,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 1,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 3782,
+      "mainH": 2461
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 1,
+      "h2s": [
+        "Max Propylene Operations"
+      ],
+      "h3Count": 4,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 0,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": null,
+      "textLen": 2882,
+      "mainH": 989
+    }
+  },
+  {
+    "i": 4,
+    "path": "/industries/refining-technologies/fcc-catalyst-application/butylene-selectivity",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "good",
+    "desktop": {
+      "cat": "good",
+      "issues": []
+    },
+    "mobile": {
+      "cat": "good",
+      "issues": []
+    },
+    "edsFp": {
+      "h1": "Capture Value from Butylene Selectivity",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 1,
+      "h2s": [
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 6,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 1,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 3228,
+      "mainH": 2364
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 0,
+      "h2s": [],
+      "h3Count": 5,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 0,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": null,
+      "textLen": 2322,
+      "mainH": 904
+    }
+  },
+  {
+    "i": 5,
+    "path": "/industries/refining-technologies/fcc-catalyst-application/resid-conversion",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "good",
+    "desktop": {
+      "cat": "good",
+      "issues": []
+    },
+    "mobile": {
+      "cat": "good",
+      "issues": []
+    },
+    "edsFp": {
+      "h1": "Capture Value from Resid Conversion",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 2,
+      "h2s": [
+        "Resid Conversion",
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 4,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 1,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 4072,
+      "mainH": 2648
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 1,
+      "h2s": [
+        "Resid Conversion"
+      ],
+      "h3Count": 3,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 0,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "\"\"",
+        "bg": "rgb(0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 3131,
+      "mainH": 1263
+    }
+  },
+  {
+    "i": 6,
+    "path": "/industries/refining-technologies/fcc-catalyst-application/light-feed-performance",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "good",
+    "desktop": {
+      "cat": "good",
+      "issues": []
+    },
+    "mobile": {
+      "cat": "good",
+      "issues": []
+    },
+    "edsFp": {
+      "h1": "Capture Value from Light Feed Performance",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 1,
+      "h2s": [
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 6,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 1,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 3432,
+      "mainH": 2388
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 0,
+      "h2s": [],
+      "h3Count": 5,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 2,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": null,
+      "textLen": 2522,
+      "mainH": 928
+    }
+  },
+  {
+    "i": 7,
+    "path": "/industries/refining-technologies/value-creation",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "good",
+    "desktop": {
+      "cat": "good",
+      "issues": []
+    },
+    "mobile": {
+      "cat": "good",
+      "issues": []
+    },
+    "edsFp": {
+      "h1": "Value Delivered",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 2,
+      "h2s": [
+        "Grace’s Commitment",
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 2,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 1,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": false,
+      "navRail": false,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 1638,
+      "mainH": 3240
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 1,
+      "h2s": [
+        "Grace’s Commitment"
+      ],
+      "h3Count": 0,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 0,
+      "tables": 0,
+      "featured": 1,
+      "navSelect": false,
+      "navRail": false,
+      "bullet": null,
+      "textLen": 833,
+      "mainH": 1123
+    }
+  },
+  {
+    "i": 8,
+    "path": "/industries/refining-technologies/value-creation/technical-service-expertise",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "good",
+    "desktop": {
+      "cat": "good",
+      "issues": []
+    },
+    "mobile": {
+      "cat": "good",
+      "issues": []
+    },
+    "edsFp": {
+      "h1": "Here to Help as Part of your Team",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 1,
+      "h2s": [
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 5,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 1,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 3556,
+      "mainH": 3679
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": true,
+      "h2Count": 0,
+      "h2s": [],
+      "h3Count": 4,
+      "grayBands": 0,
+      "blueBorders": 2,
+      "geoHex": 0,
+      "cards": 4,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "\"\"",
+        "bg": "rgb(0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 2937,
+      "mainH": 2284
+    }
+  },
+  {
+    "i": 9,
+    "path": "/industries/refining-technologies/value-creation/specialized-evaluation-tools",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "good",
+    "desktop": {
+      "cat": "good",
+      "issues": []
+    },
+    "mobile": {
+      "cat": "good",
+      "issues": []
+    },
+    "edsFp": {
+      "h1": "Specialized Evaluation Tools",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 1,
+      "h2s": [
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 2,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 1,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": null,
+      "textLen": 2339,
+      "mainH": 2634
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 0,
+      "h2s": [],
+      "h3Count": 2,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 2,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": null,
+      "textLen": 1834,
+      "mainH": 1124
+    }
+  },
+  {
+    "i": 10,
+    "path": "/industries/refining-technologies/value-creation/sustainability",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "good",
+    "desktop": {
+      "cat": "good",
+      "issues": []
+    },
+    "mobile": {
+      "cat": "good",
+      "issues": []
+    },
+    "edsFp": {
+      "h1": "Sustainable Solutions for FCC",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 2,
+      "h2s": [
+        "FCC Catalyst Sustainability",
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 1,
+      "grayBands": 1,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 1,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 2604,
+      "mainH": 2169
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 1,
+      "h2s": [
+        "FCC Catalyst Sustainability"
+      ],
+      "h3Count": 1,
+      "grayBands": 1,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 2,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": null,
+      "textLen": 1862,
+      "mainH": 756
+    }
+  },
+  {
+    "i": 11,
+    "path": "/industries/refining-technologies/fcc-additive-solutions",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "good",
+    "desktop": {
+      "cat": "good",
+      "issues": []
+    },
+    "mobile": {
+      "cat": "good",
+      "issues": []
+    },
+    "edsFp": {
+      "h1": "FCC Solutions",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 2,
+      "h2s": [
+        "FCC Additive Applications",
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 4,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 1,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": false,
+      "navRail": false,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 1580,
+      "mainH": 2720
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 1,
+      "h2s": [
+        "FCC Additive Applications"
+      ],
+      "h3Count": 0,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 0,
+      "tables": 0,
+      "featured": 1,
+      "navSelect": false,
+      "navRail": false,
+      "bullet": null,
+      "textLen": 745,
+      "mainH": 904
+    }
+  },
+  {
+    "i": 12,
+    "path": "/industries/refining-technologies/fcc-additive-solutions/sox-reduction",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "cosmetic",
+    "desktop": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 3 vs src 1"
+      ]
+    },
+    "mobile": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 3 vs src 1"
+      ]
+    },
+    "edsFp": {
+      "h1": "Achieve Maximum SOx Emission Control",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 3,
+      "h2s": [
+        "SOx Reduction Additives",
+        "Additive Solutions for FCC",
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 1,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 1,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 1645,
+      "mainH": 2222
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 1,
+      "h2s": [
+        "SOx Reduction Additives"
+      ],
+      "h3Count": 0,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 0,
+      "tables": 0,
+      "featured": 1,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": null,
+      "textLen": 710,
+      "mainH": 473
+    }
+  },
+  {
+    "i": 13,
+    "path": "/industries/refining-technologies/fcc-additive-solutions/gasoline-sulphur-reduction",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "cosmetic",
+    "desktop": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 3 vs src 1"
+      ]
+    },
+    "mobile": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 3 vs src 1"
+      ]
+    },
+    "edsFp": {
+      "h1": "Gasoline Sulfur Reduction",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 3,
+      "h2s": [
+        "Gasoline Sulfur Reduction Technologies",
+        "Additive Solutions for FCC",
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 1,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 1,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 2063,
+      "mainH": 2388
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 1,
+      "h2s": [
+        "Gasoline Sulfur Reduction Technologies"
+      ],
+      "h3Count": 0,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 0,
+      "tables": 0,
+      "featured": 1,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "\"\"",
+        "bg": "rgb(0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 1095,
+      "mainH": 712
+    }
+  },
+  {
+    "i": 14,
+    "path": "/industries/refining-technologies/fcc-additive-solutions/light-olefins",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "cosmetic",
+    "desktop": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 5 vs src 3"
+      ]
+    },
+    "mobile": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 5 vs src 3"
+      ]
+    },
+    "edsFp": {
+      "h1": "Maximize Value from FCC with Light Olefin Additives",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 5,
+      "h2s": [
+        "Propylene and Butylene Selective Light Olefin Additives",
+        "Continuous vs. Opportunistic LPG Olefin Use",
+        "Industry Leading Expertise",
+        "Additive Solutions for FCC",
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 0,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 1,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 2670,
+      "mainH": 2221
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 3,
+      "h2s": [
+        "Propylene and Butylene Selective Light Olefin Additives",
+        "Continuous vs. Opportunistic LPG Olefin Use",
+        "Industry Leading Expertise"
+      ],
+      "h3Count": 0,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 1,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": null,
+      "textLen": 1756,
+      "mainH": 685
+    }
+  },
+  {
+    "i": 15,
+    "path": "/industries/refining-technologies/fcc-additive-solutions/nox-reduction",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "cosmetic",
+    "desktop": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 3 vs src 1"
+      ]
+    },
+    "mobile": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 3 vs src 1"
+      ]
+    },
+    "edsFp": {
+      "h1": "Reducing NOx Emissions in the FCC Unit",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 3,
+      "h2s": [
+        "NOx Reduction Additives",
+        "Additive Solutions for FCC",
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 1,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 1,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 1905,
+      "mainH": 2392
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 1,
+      "h2s": [
+        "NOx Reduction Additives"
+      ],
+      "h3Count": 0,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 0,
+      "tables": 0,
+      "featured": 1,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": null,
+      "textLen": 954,
+      "mainH": 615
+    }
+  },
+  {
+    "i": 16,
+    "path": "/industries/refining-technologies/fcc-additive-solutions/combustion-promoter",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "cosmetic",
+    "desktop": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 3 vs src 1"
+      ]
+    },
+    "mobile": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 3 vs src 1"
+      ]
+    },
+    "edsFp": {
+      "h1": "Effective Afterburn Control in the Regenerator",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 3,
+      "h2s": [
+        "Combustion Promoter",
+        "Additive Solutions for FCC",
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 1,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 1,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 1922,
+      "mainH": 2287
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 1,
+      "h2s": [
+        "Combustion Promoter"
+      ],
+      "h3Count": 0,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 0,
+      "tables": 0,
+      "featured": 1,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": null,
+      "textLen": 959,
+      "mainH": 523
+    }
+  },
+  {
+    "i": 17,
+    "path": "/industries/refining-technologies/hydroprocessing",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "good",
+    "desktop": {
+      "cat": "good",
+      "issues": []
+    },
+    "mobile": {
+      "cat": "good",
+      "issues": []
+    },
+    "edsFp": {
+      "h1": "A Better Perspective on Hydroprocessing",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 2,
+      "h2s": [
+        "ART Hydroprocessing",
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 2,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 1,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": false,
+      "navRail": false,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 1832,
+      "mainH": 1977
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 1,
+      "h2s": [
+        "ART Hydroprocessing"
+      ],
+      "h3Count": 1,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 0,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": false,
+      "navRail": false,
+      "bullet": null,
+      "textLen": 710,
+      "mainH": 304
+    }
+  },
+  {
+    "i": 18,
+    "path": "/industries/refining-technologies/hydroprocessing/resid-hydrotreating-solutions",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "cosmetic",
+    "desktop": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: nav rail missing"
+      ]
+    },
+    "mobile": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: nav rail missing"
+      ]
+    },
+    "edsFp": {
+      "h1": "Resid Hydrotreating Solutions",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 2,
+      "h2s": [
+        "ICR ® and HOP ® Catalyst Systems",
+        "UFR ® and OCR ® Catalyst Systems"
+      ],
+      "h3Count": 1,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 0,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": false,
+      "navRail": false,
+      "bullet": null,
+      "textLen": 2685,
+      "mainH": 2361
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 2,
+      "h2s": [
+        "ICR® and HOP® Catalyst Systems",
+        "UFR® and OCR® Catalyst Systems"
+      ],
+      "h3Count": 0,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 0,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": false,
+      "navRail": true,
+      "bullet": null,
+      "textLen": 2258,
+      "mainH": 991
+    }
+  },
+  {
+    "i": 19,
+    "path": "/industries/refining-technologies/hydroprocessing/resid-hydrocracking-solutions",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "cosmetic",
+    "desktop": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: nav rail missing"
+      ]
+    },
+    "mobile": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: nav rail missing"
+      ]
+    },
+    "edsFp": {
+      "h1": "Resid Hydrocracking Solutions",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 5,
+      "h2s": [
+        "DCS",
+        "ECAD",
+        "LS",
+        "HSLS",
+        "HCRC®"
+      ],
+      "h3Count": 1,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 0,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": false,
+      "navRail": false,
+      "bullet": null,
+      "textLen": 3599,
+      "mainH": 2811
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 5,
+      "h2s": [
+        "DCS",
+        "ECAD",
+        "LS",
+        "HSLS",
+        "HCRC®"
+      ],
+      "h3Count": 0,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 0,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": false,
+      "navRail": true,
+      "bullet": null,
+      "textLen": 3184,
+      "mainH": 1446
+    }
+  },
+  {
+    "i": 20,
+    "path": "/industries/refining-technologies/hydroprocessing/distillate-hydrotreating-solutions",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "cosmetic",
+    "desktop": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: nav rail missing",
+        "COSMETIC: cards missing (src 1)"
+      ]
+    },
+    "mobile": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: nav rail missing",
+        "COSMETIC: cards missing (src 1)"
+      ]
+    },
+    "edsFp": {
+      "h1": "Distillate Hydrotreating Solutions",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 3,
+      "h2s": [
+        "StART ® Catalyst Systems",
+        "SmART ® Catalyst Systems",
+        "ApART ® Catalyst Systems"
+      ],
+      "h3Count": 1,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 0,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": false,
+      "navRail": false,
+      "bullet": {
+        "content": "\"\"",
+        "bg": "rgb(0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 2646,
+      "mainH": 2414
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 3,
+      "h2s": [
+        "StART® Catalyst Systems",
+        "SmART® Catalyst Systems",
+        "ApART® Catalyst Systems"
+      ],
+      "h3Count": 0,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 1,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": false,
+      "navRail": true,
+      "bullet": {
+        "content": "\"\"",
+        "bg": "rgb(0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 2197,
+      "mainH": 1059
+    }
+  },
+  {
+    "i": 21,
+    "path": "/industries/refining-technologies/catalagram-archive",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "good",
+    "desktop": {
+      "cat": "good",
+      "issues": []
+    },
+    "mobile": {
+      "cat": "good",
+      "issues": []
+    },
+    "edsFp": {
+      "h1": "CATALAGRAM® Archive",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 0,
+      "h2s": [],
+      "h3Count": 0,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 0,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": false,
+      "navRail": false,
+      "bullet": null,
+      "textLen": 909,
+      "mainH": 1354
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 0,
+      "h2s": [],
+      "h3Count": 0,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 0,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": false,
+      "navRail": false,
+      "bullet": null,
+      "textLen": 640,
+      "mainH": 702
+    }
+  },
+  {
+    "i": 22,
+    "path": "/industries/chemical-processing",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "cosmetic",
+    "desktop": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 3 vs src 1"
+      ]
+    },
+    "mobile": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 3 vs src 1"
+      ]
+    },
+    "edsFp": {
+      "h1": "Chemical Processing",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 3,
+      "h2s": [
+        "A Partner for Your Specialty Catalysts and Catalyst Supports Needs",
+        "Experience Matters",
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 4,
+      "grayBands": 1,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 2,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": false,
+      "navRail": false,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 3011,
+      "mainH": 3099
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 1,
+      "h2s": [
+        "A Partner for Your Specialty Catalysts and Catalyst Supports Needs"
+      ],
+      "h3Count": 0,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 0,
+      "tables": 0,
+      "featured": 1,
+      "navSelect": false,
+      "navRail": false,
+      "bullet": {
+        "content": "\"\"",
+        "bg": "rgb(0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 1980,
+      "mainH": 1147
+    }
+  },
+  {
+    "i": 23,
+    "path": "/industries/chemical-processing/hydrogenation-catalysts",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "good",
+    "desktop": {
+      "cat": "good",
+      "issues": []
+    },
+    "mobile": {
+      "cat": "good",
+      "issues": []
+    },
+    "edsFp": {
+      "h1": "Hydrogenation Catalysts",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 3,
+      "h2s": [
+        "World-class supplier of Hydrogenation Solutions",
+        "Why are catalysts needed in hydrogenation?",
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 0,
+      "grayBands": 2,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 1,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 1782,
+      "mainH": 1773
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 2,
+      "h2s": [
+        "World-class supplier of Hydrogenation Solutions",
+        "Why are catalysts needed in hydrogenation?"
+      ],
+      "h3Count": 0,
+      "grayBands": 1,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 0,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "\"\"",
+        "bg": "rgb(0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 2411,
+      "mainH": 1246
+    }
+  },
+  {
+    "i": 24,
+    "path": "/industries/chemical-processing/catalyst-supports",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "good",
+    "desktop": {
+      "cat": "good",
+      "issues": []
+    },
+    "mobile": {
+      "cat": "good",
+      "issues": []
+    },
+    "edsFp": {
+      "h1": "DAVICAT® Catalyst Supports",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 1,
+      "h2s": [
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 0,
+      "grayBands": 1,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 1,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 1126,
+      "mainH": 1578
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 1,
+      "h2s": [
+        "A Partner for Your Catalyst Support Needs"
+      ],
+      "h3Count": 0,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 0,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "\"\"",
+        "bg": "rgb(0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 1421,
+      "mainH": 718
+    }
+  },
+  {
+    "i": 25,
+    "path": "/industries/chemical-processing/custom-development",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "good",
+    "desktop": {
+      "cat": "good",
+      "issues": []
+    },
+    "mobile": {
+      "cat": "good",
+      "issues": []
+    },
+    "edsFp": {
+      "h1": "DAVICAT® Custom Catalyst Development",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 3,
+      "h2s": [
+        "Working together. Sharing together. Succeeding together.",
+        "Commitment to your Future",
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 0,
+      "grayBands": 1,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 1,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 2750,
+      "mainH": 2206
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 2,
+      "h2s": [
+        "Working together. Sharing together. Succeeding together.",
+        "Commitment to your Future"
+      ],
+      "h3Count": 0,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 0,
+      "tables": 0,
+      "featured": 1,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "\"\"",
+        "bg": "rgb(0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 1929,
+      "mainH": 1056
+    }
+  },
+  {
+    "i": 26,
+    "path": "/industries/plastics-and-polymers",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "cosmetic",
+    "desktop": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 4 vs src 2"
+      ]
+    },
+    "mobile": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 4 vs src 2"
+      ]
+    },
+    "edsFp": {
+      "h1": "Plastics and Polymers",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 4,
+      "h2s": [
+        "Technology that Outperforms the Competition",
+        "Committed to Your Plant Lifetime Performance",
+        "Versatile Solutions for Your Needs",
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 6,
+      "grayBands": 1,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 2,
+      "tables": 0,
+      "featured": 1,
+      "navSelect": false,
+      "navRail": false,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 3099,
+      "mainH": 3115
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 2,
+      "h2s": [
+        "Technology that Outperforms the Competition",
+        "Committed to Your Plant Lifetime Performance"
+      ],
+      "h3Count": 0,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 0,
+      "tables": 0,
+      "featured": 1,
+      "navSelect": false,
+      "navRail": false,
+      "bullet": null,
+      "textLen": 1915,
+      "mainH": 1199
+    }
+  },
+  {
+    "i": 27,
+    "path": "/industries/plastics-and-polymers/polyethylene-catalysts",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "cosmetic",
+    "desktop": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 3 vs src 1"
+      ]
+    },
+    "mobile": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 3 vs src 1"
+      ]
+    },
+    "edsFp": {
+      "h1": "Polyethylene Catalysts",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 3,
+      "h2s": [
+        "PE Solutions to Fit Your Needs",
+        "Polyethylene Process Technologies",
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 9,
+      "grayBands": 1,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 2,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": false,
+      "navRail": false,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 3959,
+      "mainH": 3695
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 1,
+      "h2s": [
+        "PE Solutions to Fit Your Needs"
+      ],
+      "h3Count": 1,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 0,
+      "tables": 0,
+      "featured": 1,
+      "navSelect": false,
+      "navRail": false,
+      "bullet": {
+        "content": "\"\"",
+        "bg": "rgb(0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 2779,
+      "mainH": 1661
+    }
+  },
+  {
+    "i": 28,
+    "path": "/industries/plastics-and-polymers/polyethylene-catalysts/pe-catalyst-components-and-supports",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "good",
+    "desktop": {
+      "cat": "good",
+      "issues": []
+    },
+    "mobile": {
+      "cat": "good",
+      "issues": []
+    },
+    "edsFp": {
+      "h1": "PE Catalyst Supports and Components",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 2,
+      "h2s": [
+        "A Consistent and Dependable Supplier",
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 2,
+      "grayBands": 2,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 1,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 2960,
+      "mainH": 2412
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 1,
+      "h2s": [
+        "A Consistent and Dependable Supplier"
+      ],
+      "h3Count": 2,
+      "grayBands": 1,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 2,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "\"\"",
+        "bg": "rgb(0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 1986,
+      "mainH": 1187
+    }
+  },
+  {
+    "i": 29,
+    "path": "/industries/plastics-and-polymers/polyethylene-catalysts/pe-slurry",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "cosmetic",
+    "desktop": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 4 vs src 2"
+      ]
+    },
+    "mobile": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 4 vs src 2"
+      ]
+    },
+    "edsFp": {
+      "h1": "Slurry Process Technology for PE",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 4,
+      "h2s": [
+        "Profitability, Operability, Innovation",
+        "When our customers encounter problems, we're there to help",
+        "Catalysts for Slurry PE Processes",
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 1,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 1,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 3564,
+      "mainH": 2809
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 2,
+      "h2s": [
+        "Profitability, Operability, Innovation",
+        "When our customers encounter problems, we're there to help"
+      ],
+      "h3Count": 0,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 0,
+      "tables": 0,
+      "featured": 1,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "\"\"",
+        "bg": "rgb(0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 2435,
+      "mainH": 1250
+    }
+  },
+  {
+    "i": 30,
+    "path": "/industries/plastics-and-polymers/polyethylene-catalysts/pe-gas-phase",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "cosmetic",
+    "desktop": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 4 vs src 2"
+      ]
+    },
+    "mobile": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 4 vs src 2"
+      ]
+    },
+    "edsFp": {
+      "h1": "Gas Phase Process Technology for PE",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 4,
+      "h2s": [
+        "Low Cost, High Reliability, Maximum Throughput",
+        "When our customers encounter problems, we're there to help",
+        "Catalysts for Gas Phase PE Processes",
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 1,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 1,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 3670,
+      "mainH": 2830
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 2,
+      "h2s": [
+        "Low Cost, High Reliability, Maximum Throughput",
+        "When our customers encounter problems, we're there to help"
+      ],
+      "h3Count": 0,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 0,
+      "tables": 0,
+      "featured": 1,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "\"\"",
+        "bg": "rgb(0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 2546,
+      "mainH": 1288
+    }
+  },
+  {
+    "i": 31,
+    "path": "/industries/plastics-and-polymers/polyethylene-catalysts/pe-solution",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "good",
+    "desktop": {
+      "cat": "good",
+      "issues": []
+    },
+    "mobile": {
+      "cat": "good",
+      "issues": []
+    },
+    "edsFp": {
+      "h1": "Solution Process Technology for PE",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 2,
+      "h2s": [
+        "Custom Solutions for Custom Problems",
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 2,
+      "grayBands": 1,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 1,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 3531,
+      "mainH": 2795
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 1,
+      "h2s": [
+        "Custom Solutions for Custom Problems"
+      ],
+      "h3Count": 0,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 0,
+      "tables": 0,
+      "featured": 1,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": null,
+      "textLen": 1835,
+      "mainH": 914
+    }
+  },
+  {
+    "i": 32,
+    "path": "/industries/plastics-and-polymers/polyethylene-catalysts/pe-hybrid",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "good",
+    "desktop": {
+      "cat": "good",
+      "issues": []
+    },
+    "mobile": {
+      "cat": "good",
+      "issues": []
+    },
+    "edsFp": {
+      "h1": "Hybrid Process Technology for PE",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 2,
+      "h2s": [
+        "Flexibility, Innovation, Distinction",
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 0,
+      "grayBands": 1,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 1,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 2756,
+      "mainH": 2018
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 1,
+      "h2s": [
+        "Flexibility, Innovation, Distinction"
+      ],
+      "h3Count": 0,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 0,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "\"\"",
+        "bg": "rgb(0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 1839,
+      "mainH": 824
+    }
+  },
+  {
+    "i": 33,
+    "path": "/industries/plastics-and-polymers/polypropylene-catalysts",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "good",
+    "desktop": {
+      "cat": "good",
+      "issues": []
+    },
+    "mobile": {
+      "cat": "good",
+      "issues": []
+    },
+    "edsFp": {
+      "h1": "Polypropylene Catalysts",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 2,
+      "h2s": [
+        "Polypropylene Process Technologies",
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 8,
+      "grayBands": 1,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 3,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": false,
+      "navRail": false,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 1745,
+      "mainH": 2676
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 1,
+      "h2s": [
+        "Extending the range of PP applications"
+      ],
+      "h3Count": 2,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 4,
+      "tables": 0,
+      "featured": 1,
+      "navSelect": false,
+      "navRail": false,
+      "bullet": {
+        "content": "\"\"",
+        "bg": "rgb(0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 2121,
+      "mainH": 1892
+    }
+  },
+  {
+    "i": 34,
+    "path": "/industries/plastics-and-polymers/polypropylene-catalysts/pp-bulk",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "cosmetic",
+    "desktop": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 4 vs src 2"
+      ]
+    },
+    "mobile": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 4 vs src 2"
+      ]
+    },
+    "edsFp": {
+      "h1": "Bulk Process Technologies for PP",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 4,
+      "h2s": [
+        "Balancing Operability with Your Product Range",
+        "When Experience Matters",
+        "Catalysts for the PP Bulk Process",
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 2,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 1,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 3963,
+      "mainH": 2959
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 2,
+      "h2s": [
+        "Balancing Operability with Your Product Range",
+        "When Experience Matters"
+      ],
+      "h3Count": 0,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 0,
+      "tables": 0,
+      "featured": 1,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": null,
+      "textLen": 2344,
+      "mainH": 1224
+    }
+  },
+  {
+    "i": 35,
+    "path": "/industries/plastics-and-polymers/polypropylene-catalysts/pp-gas-phase",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "cosmetic",
+    "desktop": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 4 vs src 2"
+      ]
+    },
+    "mobile": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 4 vs src 2"
+      ]
+    },
+    "edsFp": {
+      "h1": "Stirred Gas Process Technology for PP",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 4,
+      "h2s": [
+        "Extend your product range with a strong catalyst partner",
+        "Overcoming limitations and creating profit",
+        "Catalysts for PP Stirred Gas Processes",
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 1,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 1,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 3034,
+      "mainH": 2689
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 2,
+      "h2s": [
+        "Extend your product range with a strong catalyst partner",
+        "Overcoming limitations and creating profit"
+      ],
+      "h3Count": 0,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 0,
+      "tables": 0,
+      "featured": 1,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "\"\"",
+        "bg": "rgb(0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 2025,
+      "mainH": 1186
+    }
+  },
+  {
+    "i": 36,
+    "path": "/industries/plastics-and-polymers/polypropylene-catalysts/pp-slurry",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "good",
+    "desktop": {
+      "cat": "good",
+      "issues": []
+    },
+    "mobile": {
+      "cat": "good",
+      "issues": []
+    },
+    "edsFp": {
+      "h1": "Slurry Process Technology for PP",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 3,
+      "h2s": [
+        "Choose a leader in slurry catalyst technology",
+        "Experience Matters",
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 2,
+      "grayBands": 1,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 1,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 3372,
+      "mainH": 2746
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 2,
+      "h2s": [
+        "Choose a leader in slurry catalyst technology",
+        "Experience Matters"
+      ],
+      "h3Count": 0,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 0,
+      "tables": 0,
+      "featured": 1,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "\"\"",
+        "bg": "rgb(0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 2430,
+      "mainH": 1382
+    }
+  },
+  {
+    "i": 37,
+    "path": "/industries/plastics-and-polymers/unipol-pp-process-technology",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "cosmetic",
+    "desktop": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 4 vs src 2"
+      ]
+    },
+    "mobile": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 4 vs src 2"
+      ]
+    },
+    "edsFp": {
+      "h1": "UNIPOL® Polypropylene Technology",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 4,
+      "h2s": [
+        "A Leader in the Polypropylene Manufacturing Process",
+        "Confidence and Commitment for the Lifetime of your Polypropylene Investment",
+        "Grace is a predominate independent polypropylene licensor",
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 10,
+      "grayBands": 2,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 2,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": false,
+      "navRail": false,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 4250,
+      "mainH": 4740
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 2,
+      "h2s": [
+        "A Leader in the Polypropylene Manufacturing Process",
+        "Confidence and Commitment for the Lifetime of your Polypropylene Investment"
+      ],
+      "h3Count": 2,
+      "grayBands": 1,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 0,
+      "tables": 0,
+      "featured": 1,
+      "navSelect": false,
+      "navRail": false,
+      "bullet": {
+        "content": "\"\"",
+        "bg": "rgb(0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 2827,
+      "mainH": 2362
+    }
+  },
+  {
+    "i": 38,
+    "path": "/industries/plastics-and-polymers/unipol-pp-process-technology/unipol-pp-process",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "good",
+    "desktop": {
+      "cat": "good",
+      "issues": []
+    },
+    "mobile": {
+      "cat": "good",
+      "issues": []
+    },
+    "edsFp": {
+      "h1": "UNIPOL® PP Process Technology",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 4,
+      "h2s": [
+        "The most successful gas phase PP polymerization technology",
+        "One of the most advantaged PP process technologies in the industry",
+        "How is gas phase polymerization technology used in the production of polypropylene?",
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 3,
+      "grayBands": 2,
+      "blueBorders": 1,
+      "geoHex": 0,
+      "cards": 1,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 6340,
+      "mainH": 4424
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 3,
+      "h2s": [
+        "The most successful gas phase PP polymerization technology",
+        "One of the most advantaged PP process technologies in the industry",
+        "How is gas phase polymerization technology used in the production of polypropylene?"
+      ],
+      "h3Count": 0,
+      "grayBands": 1,
+      "blueBorders": 2,
+      "geoHex": 0,
+      "cards": 0,
+      "tables": 0,
+      "featured": 1,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "\"\"",
+        "bg": "rgb(0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 5128,
+      "mainH": 2704
+    }
+  },
+  {
+    "i": 39,
+    "path": "/industries/plastics-and-polymers/unipol-pp-process-technology/unipol-pp-products",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "good",
+    "desktop": {
+      "cat": "good",
+      "issues": []
+    },
+    "mobile": {
+      "cat": "good",
+      "issues": []
+    },
+    "edsFp": {
+      "h1": "UNIPOL® PP Products",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 2,
+      "h2s": [
+        "Providing the Broadest PP Product Catalogue in the Industry",
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 3,
+      "grayBands": 1,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 1,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 4437,
+      "mainH": 3516
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 1,
+      "h2s": [
+        "Providing the Broadest PP Product Catalogue in the Industry"
+      ],
+      "h3Count": 0,
+      "grayBands": 1,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 0,
+      "tables": 0,
+      "featured": 1,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "\"\"",
+        "bg": "rgb(0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 3223,
+      "mainH": 2144
+    }
+  },
+  {
+    "i": 40,
+    "path": "/industries/plastics-and-polymers/unipol-pp-process-technology/unipol-pp-performance",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "good",
+    "desktop": {
+      "cat": "good",
+      "issues": []
+    },
+    "mobile": {
+      "cat": "good",
+      "issues": []
+    },
+    "edsFp": {
+      "h1": "PP Performance",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 2,
+      "h2s": [
+        "Versatile Technology | Innovative Solutions | Lifetime Value",
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 3,
+      "grayBands": 1,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 1,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 3949,
+      "mainH": 3136
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 1,
+      "h2s": [
+        "Versatile Technology | Innovative Solutions | Lifetime Value"
+      ],
+      "h3Count": 0,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 0,
+      "tables": 0,
+      "featured": 1,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "\"\"",
+        "bg": "rgb(0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 2729,
+      "mainH": 1523
+    }
+  },
+  {
+    "i": 41,
+    "path": "/industries/plastics-and-polymers/unipol-pp-process-technology/unipol-pp-services",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "good",
+    "desktop": {
+      "cat": "good",
+      "issues": []
+    },
+    "mobile": {
+      "cat": "good",
+      "issues": []
+    },
+    "edsFp": {
+      "h1": "UNIPOL® PP Technical Services",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 2,
+      "h2s": [
+        "Supporting your plant to enhance your performance",
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 3,
+      "grayBands": 1,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 1,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 3428,
+      "mainH": 3200
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 1,
+      "h2s": [
+        "Supporting your plant to enhance your performance"
+      ],
+      "h3Count": 0,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 0,
+      "tables": 0,
+      "featured": 1,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": null,
+      "textLen": 2194,
+      "mainH": 1227
+    }
+  },
+  {
+    "i": 42,
+    "path": "/industries/plastics-and-polymers/unipol-pp-process-technology/unipol-pp-technology-ppartner-program",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "cosmetic",
+    "desktop": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: nav rail missing"
+      ]
+    },
+    "mobile": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: nav rail missing"
+      ]
+    },
+    "edsFp": {
+      "h1": "PPartner Program™ Services to Improve your PP Resin Production",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 1,
+      "h2s": [
+        "Independent Licensor Who Meets Your APC Needs"
+      ],
+      "h3Count": 8,
+      "grayBands": 1,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 1,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": false,
+      "navRail": false,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 3641,
+      "mainH": 4015
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 0,
+      "h2s": [],
+      "h3Count": 1,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 2,
+      "tables": 0,
+      "featured": 1,
+      "navSelect": false,
+      "navRail": true,
+      "bullet": {
+        "content": "\"\"",
+        "bg": "rgb(0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 2996,
+      "mainH": 2504
+    }
+  },
+  {
+    "i": 43,
+    "path": "/industries/plastics-and-polymers/custom-catalysts",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "good",
+    "desktop": {
+      "cat": "good",
+      "issues": []
+    },
+    "mobile": {
+      "cat": "good",
+      "issues": []
+    },
+    "edsFp": {
+      "h1": "Custom Catalysts",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 2,
+      "h2s": [
+        "Your Partner for Success",
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 2,
+      "grayBands": 1,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 1,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": false,
+      "navRail": false,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 1753,
+      "mainH": 1701
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 1,
+      "h2s": [
+        "Your Partner for Success"
+      ],
+      "h3Count": 2,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 0,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": false,
+      "navRail": false,
+      "bullet": null,
+      "textLen": 810,
+      "mainH": 1448
+    }
+  },
+  {
+    "i": 44,
+    "path": "/industries/plastics-and-polymers/plastic-additives",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "cosmetic",
+    "desktop": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 2 vs src 0"
+      ]
+    },
+    "mobile": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 2 vs src 0"
+      ]
+    },
+    "edsFp": {
+      "h1": "Plastic Additives",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 2,
+      "h2s": [
+        "Plastic Additive Solutions",
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 5,
+      "grayBands": 1,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 2,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": false,
+      "navRail": false,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 2124,
+      "mainH": 2122
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 0,
+      "h2s": [],
+      "h3Count": 3,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 0,
+      "tables": 0,
+      "featured": 1,
+      "navSelect": false,
+      "navRail": false,
+      "bullet": null,
+      "textLen": 1282,
+      "mainH": 616
+    }
+  },
+  {
+    "i": 45,
+    "path": "/industries/plastics-and-polymers/plastic-additives/silica-anti-blocking-agents",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "good",
+    "desktop": {
+      "cat": "good",
+      "issues": []
+    },
+    "mobile": {
+      "cat": "good",
+      "issues": []
+    },
+    "edsFp": {
+      "h1": "Silica Anti-Blocking Agents",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 2,
+      "h2s": [
+        "Anti-blocking in polyethylene terephthalate (PET), polypropylene (PP), and polyethylene (PE) film applications",
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 3,
+      "grayBands": 1,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 1,
+      "tables": 3,
+      "featured": 0,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 5099,
+      "mainH": 3189
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 1,
+      "h2s": [
+        "Anti-blocking in polyethylene terephthalate (PET), polypropylene (PP), and polyethylene (PE) film applications"
+      ],
+      "h3Count": 3,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 2,
+      "tables": 3,
+      "featured": 0,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "\"\"",
+        "bg": "rgb(0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 4270,
+      "mainH": 1859
+    }
+  },
+  {
+    "i": 46,
+    "path": "/industries/plastics-and-polymers/plastic-additives/titanium-dioxide-extenders",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "good",
+    "desktop": {
+      "cat": "good",
+      "issues": []
+    },
+    "mobile": {
+      "cat": "good",
+      "issues": []
+    },
+    "edsFp": {
+      "h1": "Titanium Dioxide Extenders",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 2,
+      "h2s": [
+        "Drive efficiency and cost savings in white masterbatches",
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 2,
+      "grayBands": 1,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 1,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 3108,
+      "mainH": 3035
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 1,
+      "h2s": [
+        "Drive efficiency and cost savings in white masterbatches"
+      ],
+      "h3Count": 1,
+      "grayBands": 1,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 2,
+      "tables": 0,
+      "featured": 1,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "\"\"",
+        "bg": "rgb(0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 2260,
+      "mainH": 1378
+    }
+  },
+  {
+    "i": 47,
+    "path": "/industries/plastics-and-polymers/tire-and-rubber-additives",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "good",
+    "desktop": {
+      "cat": "good",
+      "issues": []
+    },
+    "mobile": {
+      "cat": "good",
+      "issues": []
+    },
+    "edsFp": {
+      "h1": "Tire and Rubber Additives",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 2,
+      "h2s": [
+        "Precipitated silica for synthetic rubber applications",
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 2,
+      "grayBands": 1,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 1,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": false,
+      "navRail": false,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 2802,
+      "mainH": 1981
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 1,
+      "h2s": [
+        "Precipitated silica for synthetic rubber applications"
+      ],
+      "h3Count": 2,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 0,
+      "tables": 0,
+      "featured": 1,
+      "navSelect": false,
+      "navRail": false,
+      "bullet": {
+        "content": "\"\"",
+        "bg": "rgb(0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 1926,
+      "mainH": 911
+    }
+  },
+  {
+    "i": 48,
+    "path": "/industries/coatings",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "cosmetic",
+    "desktop": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 4 vs src 1"
+      ]
+    },
+    "mobile": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 4 vs src 1"
+      ]
+    },
+    "edsFp": {
+      "h1": "Additives for Coatings",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 4,
+      "h2s": [
+        "Set a higher standard",
+        "Versatile Applications",
+        "Latest Insights from Grace",
+        "Join our newsletter program."
+      ],
+      "h3Count": 5,
+      "grayBands": 1,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 2,
+      "tables": 0,
+      "featured": 1,
+      "navSelect": false,
+      "navRail": false,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 2739,
+      "mainH": 3771
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 1,
+      "h2s": [
+        "Set a higher standard"
+      ],
+      "h3Count": 1,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 0,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": false,
+      "navRail": false,
+      "bullet": {
+        "content": "\"\"",
+        "bg": "rgb(0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 968,
+      "mainH": 1188
+    }
+  },
+  {
+    "i": 49,
+    "path": "/industries/coatings/wood",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "good",
+    "desktop": {
+      "cat": "good",
+      "issues": []
+    },
+    "mobile": {
+      "cat": "good",
+      "issues": []
+    },
+    "edsFp": {
+      "h1": "Wood Coatings",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 2,
+      "h2s": [
+        "Additives for Premium Performance Coatings",
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 3,
+      "grayBands": 1,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 1,
+      "tables": 0,
+      "featured": 1,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 2868,
+      "mainH": 2301
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 1,
+      "h2s": [
+        "Additives for Premium Performance Coatings"
+      ],
+      "h3Count": 3,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 0,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": null,
+      "textLen": 1477,
+      "mainH": 811
+    }
+  },
+  {
+    "i": 50,
+    "path": "/industries/coatings/coil",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "good",
+    "desktop": {
+      "cat": "good",
+      "issues": []
+    },
+    "mobile": {
+      "cat": "good",
+      "issues": []
+    },
+    "edsFp": {
+      "h1": "Coil Coatings",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 2,
+      "h2s": [
+        "Trusted, High-Performing Additives",
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 1,
+      "grayBands": 1,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 1,
+      "tables": 0,
+      "featured": 1,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 3734,
+      "mainH": 2203
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": true,
+      "h2Count": 1,
+      "h2s": [
+        "Trusted, High-Performing Additives"
+      ],
+      "h3Count": 1,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 1,
+      "tables": 0,
+      "featured": 1,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "\"\"",
+        "bg": "rgb(0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 2656,
+      "mainH": 1244
+    }
+  },
+  {
+    "i": 51,
+    "path": "/industries/coatings/architectural",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "good",
+    "desktop": {
+      "cat": "good",
+      "issues": []
+    },
+    "mobile": {
+      "cat": "good",
+      "issues": []
+    },
+    "edsFp": {
+      "h1": "Architectural Coatings",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 2,
+      "h2s": [
+        "Grace Has the Expertise and Technology to Solve Complex Problems",
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 1,
+      "grayBands": 1,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 1,
+      "tables": 0,
+      "featured": 1,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 2316,
+      "mainH": 2083
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 1,
+      "h2s": [
+        "Grace Has the Expertise and Technology to Solve Complex Problems"
+      ],
+      "h3Count": 1,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 0,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "\"\"",
+        "bg": "rgb(0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 1125,
+      "mainH": 564
+    }
+  },
+  {
+    "i": 52,
+    "path": "/industries/coatings/inks-paper",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "good",
+    "desktop": {
+      "cat": "good",
+      "issues": []
+    },
+    "mobile": {
+      "cat": "good",
+      "issues": []
+    },
+    "edsFp": {
+      "h1": "Inks and Paper",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 4,
+      "h2s": [
+        "Inkjet Absorption Capacity",
+        "High Gloss Finish",
+        "Paper Frictionizing",
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 0,
+      "grayBands": 1,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 1,
+      "tables": 0,
+      "featured": 1,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 4451,
+      "mainH": 2956
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 3,
+      "h2s": [
+        "Inkjet Absorption Capacity",
+        "High Gloss Finish",
+        "Paper Frictionizing"
+      ],
+      "h3Count": 0,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 0,
+      "tables": 0,
+      "featured": 1,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "\"\"",
+        "bg": "rgb(0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 3620,
+      "mainH": 2035
+    }
+  },
+  {
+    "i": 53,
+    "path": "/industries/coatings/general-industrial-coatings",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "good",
+    "desktop": {
+      "cat": "good",
+      "issues": []
+    },
+    "mobile": {
+      "cat": "good",
+      "issues": []
+    },
+    "edsFp": {
+      "h1": "General Industrial Coatings",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 2,
+      "h2s": [
+        "Premium Additives from a Global Leader",
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 1,
+      "grayBands": 1,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 1,
+      "tables": 0,
+      "featured": 1,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 3567,
+      "mainH": 2311
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": true,
+      "h2Count": 1,
+      "h2s": [
+        "Premium Additives from a Global Leader"
+      ],
+      "h3Count": 1,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 1,
+      "tables": 0,
+      "featured": 1,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "\"\"",
+        "bg": "rgb(0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 2462,
+      "mainH": 1303
+    }
+  },
+  {
+    "i": 54,
+    "path": "/industries/general-industrial",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "cosmetic",
+    "desktop": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 3 vs src 1"
+      ]
+    },
+    "mobile": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 3 vs src 1"
+      ]
+    },
+    "edsFp": {
+      "h1": "General Industrial",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 3,
+      "h2s": [
+        "A Wide Range of Solutions",
+        "Versatile Applications",
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 7,
+      "grayBands": 1,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 2,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": false,
+      "navRail": false,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 2057,
+      "mainH": 3268
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 1,
+      "h2s": [
+        "A Wide Range of Solutions"
+      ],
+      "h3Count": 0,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 0,
+      "tables": 0,
+      "featured": 1,
+      "navSelect": false,
+      "navRail": false,
+      "bullet": null,
+      "textLen": 993,
+      "mainH": 1230
+    }
+  },
+  {
+    "i": 55,
+    "path": "/industries/general-industrial/process-adsorbents",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "good",
+    "desktop": {
+      "cat": "good",
+      "issues": []
+    },
+    "mobile": {
+      "cat": "good",
+      "issues": []
+    },
+    "edsFp": {
+      "h1": "Process Adsorbents",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 4,
+      "h2s": [
+        "Natural Gas",
+        "Bio-Ethanol",
+        "Petrochemical and Refinery",
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 0,
+      "grayBands": 1,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 1,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 4501,
+      "mainH": 2812
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 3,
+      "h2s": [
+        "Natural Gas",
+        "Bio-Ethanol",
+        "Petrochemical and Refinery"
+      ],
+      "h3Count": 0,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 0,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "\"\"",
+        "bg": "rgb(0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 3692,
+      "mainH": 1779
+    }
+  },
+  {
+    "i": 56,
+    "path": "/industries/general-industrial/static-adsorbents",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "good",
+    "desktop": {
+      "cat": "good",
+      "issues": []
+    },
+    "mobile": {
+      "cat": "good",
+      "issues": []
+    },
+    "edsFp": {
+      "h1": "Static Adsorbents",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 4,
+      "h2s": [
+        "Insulating Glass Adsorbents",
+        "Pharmaceutical Packaging",
+        "Refrigeration Adsorbents",
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 0,
+      "grayBands": 1,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 1,
+      "tables": 1,
+      "featured": 0,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 5107,
+      "mainH": 2998
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 3,
+      "h2s": [
+        "Insulating Glass Adsorbents",
+        "Pharmaceutical Packaging",
+        "Refrigeration Adsorbents"
+      ],
+      "h3Count": 0,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 0,
+      "tables": 1,
+      "featured": 0,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "\"\"",
+        "bg": "rgb(0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 4115,
+      "mainH": 1809
+    }
+  },
+  {
+    "i": 57,
+    "path": "/industries/general-industrial/colloidal-silica-in-catalysts",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "good",
+    "desktop": {
+      "cat": "good",
+      "issues": []
+    },
+    "mobile": {
+      "cat": "good",
+      "issues": []
+    },
+    "edsFp": {
+      "h1": "Colloidal Silica in Catalysts",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 2,
+      "h2s": [
+        "The Role of Colloidal Silica in Catalysts",
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 3,
+      "grayBands": 1,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 1,
+      "tables": 1,
+      "featured": 0,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 3888,
+      "mainH": 3975
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 1,
+      "h2s": [
+        "The Role of Colloidal Silica in Catalysts"
+      ],
+      "h3Count": 2,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 0,
+      "tables": 1,
+      "featured": 1,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "\"\"",
+        "bg": "rgb(0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 3191,
+      "mainH": 2660
+    }
+  },
+  {
+    "i": 58,
+    "path": "/industries/general-industrial/investment-casting-binders",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "good",
+    "desktop": {
+      "cat": "good",
+      "issues": []
+    },
+    "mobile": {
+      "cat": "good",
+      "issues": []
+    },
+    "edsFp": {
+      "h1": "Precision Investment Casting Binders",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 2,
+      "h2s": [
+        "LUDOX® Colloidal Silicas in Precision Investment Casting",
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 1,
+      "grayBands": 1,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 1,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 3953,
+      "mainH": 2534
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 1,
+      "h2s": [
+        "LUDOX® Colloidal Silicas in Precision Investment Casting"
+      ],
+      "h3Count": 0,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 0,
+      "tables": 0,
+      "featured": 1,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "\"\"",
+        "bg": "rgb(0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 3099,
+      "mainH": 1338
+    }
+  },
+  {
+    "i": 59,
+    "path": "/industries/general-industrial/refractory-additives",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "good",
+    "desktop": {
+      "cat": "good",
+      "issues": []
+    },
+    "mobile": {
+      "cat": "good",
+      "issues": []
+    },
+    "edsFp": {
+      "h1": "Refractory Additives",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 2,
+      "h2s": [
+        "LUDOX® Colloidal Silicas in Refractory Insulation",
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 1,
+      "grayBands": 1,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 1,
+      "tables": 1,
+      "featured": 0,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 3090,
+      "mainH": 2916
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 1,
+      "h2s": [
+        "LUDOX® Colloidal Silicas in Refractory Insulation"
+      ],
+      "h3Count": 0,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 0,
+      "tables": 1,
+      "featured": 1,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "\"\"",
+        "bg": "rgb(0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 2334,
+      "mainH": 1993
+    }
+  },
+  {
+    "i": 60,
+    "path": "/industries/general-industrial/construction",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "good",
+    "desktop": {
+      "cat": "good",
+      "issues": []
+    },
+    "mobile": {
+      "cat": "good",
+      "issues": []
+    },
+    "edsFp": {
+      "h1": "Construction",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 1,
+      "h2s": [
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 3,
+      "grayBands": 1,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 1,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 2322,
+      "mainH": 2052
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 0,
+      "h2s": [],
+      "h3Count": 2,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 0,
+      "tables": 0,
+      "featured": 1,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": null,
+      "textLen": 1529,
+      "mainH": 864
+    }
+  },
+  {
+    "i": 61,
+    "path": "/industries/pharmaceutical-solutions",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "cosmetic",
+    "desktop": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 8 vs src 4"
+      ]
+    },
+    "mobile": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 8 vs src 4"
+      ]
+    },
+    "edsFp": {
+      "h1": "Pharmaceutical Solutions",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 8,
+      "h2s": [
+        "A portfolio of services and solutions supporting the pharmaceutical value chain",
+        "Custom engineered silica",
+        "Leading CDMO in North America",
+        "Pharmaceutical packaging",
+        "Discover our broad range of pharmaceutical services and solutions",
+        "Featured Products",
+        "Latest Insights from Grace",
+        "Join our newsletter program."
+      ],
+      "h3Count": 8,
+      "grayBands": 1,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 2,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": false,
+      "navRail": false,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 4646,
+      "mainH": 4931
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 4,
+      "h2s": [
+        "A portfolio of services and solutions supporting the pharmaceutical value chain",
+        "Custom engineered silica",
+        "Leading CDMO in North America",
+        "Pharmaceutical packaging"
+      ],
+      "h3Count": 1,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 0,
+      "tables": 0,
+      "featured": 1,
+      "navSelect": false,
+      "navRail": false,
+      "bullet": {
+        "content": "\"\"",
+        "bg": "rgb(0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 3206,
+      "mainH": 2026
+    }
+  },
+  {
+    "i": 62,
+    "path": "/industries/pharmaceutical-solutions/fine-chemicals",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "cosmetic",
+    "desktop": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 3 vs src 1"
+      ]
+    },
+    "mobile": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 3 vs src 1"
+      ]
+    },
+    "edsFp": {
+      "h1": "Fine Chemicals",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 3,
+      "h2s": [
+        "Fine chemicals synthesis experience",
+        "A Premier North American CDMO",
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 9,
+      "grayBands": 1,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 2,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": false,
+      "navRail": true,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 3476,
+      "mainH": 0
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 1,
+      "h2s": [
+        "Fine chemicals synthesis experience"
+      ],
+      "h3Count": 3,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 0,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "\"\"",
+        "bg": "rgb(0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 2722,
+      "mainH": 1952
+    }
+  },
+  {
+    "i": 63,
+    "path": "/industries/pharmaceutical-solutions/fine-chemicals/custom-apis",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "cosmetic",
+    "desktop": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 2 vs src 0"
+      ]
+    },
+    "mobile": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 2 vs src 0"
+      ]
+    },
+    "edsFp": {
+      "h1": "Custom API Manufacturing from a Leading CDMO",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 2,
+      "h2s": [
+        "A Premier North American CDMO",
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 8,
+      "grayBands": 1,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 2,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 3225,
+      "mainH": 3643
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 0,
+      "h2s": [],
+      "h3Count": 2,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 2,
+      "tables": 0,
+      "featured": 1,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "\"\"",
+        "bg": "rgb(0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 2326,
+      "mainH": 1540
+    }
+  },
+  {
+    "i": 64,
+    "path": "/industries/pharmaceutical-solutions/fine-chemicals/rsms-and-intermediates",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "cosmetic",
+    "desktop": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 2 vs src 0"
+      ]
+    },
+    "mobile": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 2 vs src 0"
+      ]
+    },
+    "edsFp": {
+      "h1": "Regulatory Starting Materials and Intermediates Provider",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 2,
+      "h2s": [
+        "A Premier North American CDMO",
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 10,
+      "grayBands": 1,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 2,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 3938,
+      "mainH": 3361
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 0,
+      "h2s": [],
+      "h3Count": 4,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 2,
+      "tables": 0,
+      "featured": 1,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": null,
+      "textLen": 3022,
+      "mainH": 1319
+    }
+  },
+  {
+    "i": 65,
+    "path": "/industries/pharmaceutical-solutions/fine-chemicals/generic-apis",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "cosmetic",
+    "desktop": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 2 vs src 0"
+      ]
+    },
+    "mobile": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 2 vs src 0"
+      ]
+    },
+    "edsFp": {
+      "h1": "Reliable, U.S. Generic API Supplier",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 2,
+      "h2s": [
+        "A Premier North American CDMO",
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 7,
+      "grayBands": 1,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 2,
+      "tables": 1,
+      "featured": 0,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 3249,
+      "mainH": 3590
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 0,
+      "h2s": [],
+      "h3Count": 1,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 2,
+      "tables": 1,
+      "featured": 1,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": null,
+      "textLen": 2403,
+      "mainH": 1396
+    }
+  },
+  {
+    "i": 66,
+    "path": "/industries/pharmaceutical-solutions/fine-chemicals/integrated-scale-up",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "cosmetic",
+    "desktop": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 2 vs src 0"
+      ]
+    },
+    "mobile": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 2 vs src 0"
+      ]
+    },
+    "edsFp": {
+      "h1": "Small to Full-Scale Services",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 2,
+      "h2s": [
+        "A Premier North American CDMO",
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 8,
+      "grayBands": 1,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 2,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 2931,
+      "mainH": 2983
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 0,
+      "h2s": [],
+      "h3Count": 2,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 2,
+      "tables": 0,
+      "featured": 1,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": null,
+      "textLen": 2045,
+      "mainH": 942
+    }
+  },
+  {
+    "i": 67,
+    "path": "/industries/pharmaceutical-solutions/fine-chemicals/consultative-services",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "cosmetic",
+    "desktop": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 4 vs src 2"
+      ]
+    },
+    "mobile": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 4 vs src 2"
+      ]
+    },
+    "edsFp": {
+      "h1": "cGMP Project Collaboration",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 4,
+      "h2s": [
+        "R&D and analytical support",
+        "Quality and compliance",
+        "Grace FCMS Consultative Services",
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 3,
+      "grayBands": 1,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 2,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 2223,
+      "mainH": 2474
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 2,
+      "h2s": [
+        "R&D and analytical support",
+        "Quality and compliance"
+      ],
+      "h3Count": 0,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 2,
+      "tables": 0,
+      "featured": 1,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "\"\"",
+        "bg": "rgb(0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 1476,
+      "mainH": 953
+    }
+  },
+  {
+    "i": 68,
+    "path": "/industries/pharmaceutical-solutions/fine-chemicals/consultative-services/r-d",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "cosmetic",
+    "desktop": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 2 vs src 0"
+      ]
+    },
+    "mobile": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 2 vs src 0"
+      ]
+    },
+    "edsFp": {
+      "h1": "Superior R&D and Process Services",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 2,
+      "h2s": [
+        "A Premier North American CDMO",
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 11,
+      "grayBands": 1,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 2,
+      "tables": 1,
+      "featured": 0,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "disc"
+      },
+      "textLen": 4435,
+      "mainH": 3809
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 0,
+      "h2s": [],
+      "h3Count": 4,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 2,
+      "tables": 1,
+      "featured": 1,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "\"\"",
+        "bg": "rgb(0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 3875,
+      "mainH": 2619
+    }
+  },
+  {
+    "i": 69,
+    "path": "/industries/pharmaceutical-solutions/fine-chemicals/consultative-services/quality-and-compliance",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "cosmetic",
+    "desktop": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 2 vs src 0"
+      ]
+    },
+    "mobile": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 2 vs src 0"
+      ]
+    },
+    "edsFp": {
+      "h1": "Quality Culture Protects All Concerned",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 2,
+      "h2s": [
+        "A Premier North American CDMO",
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 10,
+      "grayBands": 1,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 2,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 3828,
+      "mainH": 3442
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 0,
+      "h2s": [],
+      "h3Count": 3,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 0,
+      "tables": 0,
+      "featured": 1,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "\"\"",
+        "bg": "rgb(0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 2924,
+      "mainH": 1562
+    }
+  },
+  {
+    "i": 70,
+    "path": "/industries/pharmaceutical-solutions/fine-chemicals/facilities",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "cosmetic",
+    "desktop": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 2 vs src 0"
+      ]
+    },
+    "mobile": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 2 vs src 0"
+      ]
+    },
+    "edsFp": {
+      "h1": "U.S.-Based CDMO",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 2,
+      "h2s": [
+        "Grace FCMS Facilities",
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 6,
+      "grayBands": 1,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 2,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 3251,
+      "mainH": 2727
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 0,
+      "h2s": [],
+      "h3Count": 3,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 2,
+      "tables": 0,
+      "featured": 1,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": null,
+      "textLen": 2530,
+      "mainH": 1092
+    }
+  },
+  {
+    "i": 71,
+    "path": "/industries/pharmaceutical-solutions/fine-chemicals/facilities/south-haven",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "cosmetic",
+    "desktop": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 2 vs src 0"
+      ]
+    },
+    "mobile": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 2 vs src 0"
+      ]
+    },
+    "edsFp": {
+      "h1": "South Haven, MI",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 2,
+      "h2s": [
+        "A Premier North American CDMO",
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 8,
+      "grayBands": 1,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 2,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 5344,
+      "mainH": 3825
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 0,
+      "h2s": [],
+      "h3Count": 1,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 2,
+      "tables": 0,
+      "featured": 1,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "\"\"",
+        "bg": "rgb(0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 3993,
+      "mainH": 1235
+    }
+  },
+  {
+    "i": 72,
+    "path": "/industries/pharmaceutical-solutions/fine-chemicals/facilities/tyrone",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "cosmetic",
+    "desktop": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 2 vs src 0"
+      ]
+    },
+    "mobile": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 2 vs src 0"
+      ]
+    },
+    "edsFp": {
+      "h1": "Tyrone, PA",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 2,
+      "h2s": [
+        "A Premier North American CDMO",
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 9,
+      "grayBands": 1,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 2,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 4787,
+      "mainH": 3976
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 0,
+      "h2s": [],
+      "h3Count": 2,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 2,
+      "tables": 0,
+      "featured": 1,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "\"\"",
+        "bg": "rgb(0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 3464,
+      "mainH": 1395
+    }
+  },
+  {
+    "i": 73,
+    "path": "/industries/pharmaceutical-solutions/fine-chemicals/fcms-case-study",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "good",
+    "desktop": {
+      "cat": "good",
+      "issues": []
+    },
+    "mobile": {
+      "cat": "good",
+      "issues": []
+    },
+    "edsFp": {
+      "h1": "Case Studies",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 1,
+      "h2s": [
+        "See How We Solve Complex Chemistry Challenges"
+      ],
+      "h3Count": 3,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 0,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": false,
+      "navRail": false,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 1921,
+      "mainH": 1763
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 1,
+      "h2s": [
+        "See How We Solve Complex Chemistry Challenges"
+      ],
+      "h3Count": 0,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 0,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": false,
+      "navRail": false,
+      "bullet": null,
+      "textLen": 349,
+      "mainH": 180
+    }
+  },
+  {
+    "i": 74,
+    "path": "/industries/pharmaceutical-solutions/purification-formulation-delivery",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "cosmetic",
+    "desktop": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 2 vs src 0"
+      ]
+    },
+    "mobile": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 2 vs src 0"
+      ]
+    },
+    "edsFp": {
+      "h1": "Custom Pharmaceutical Silica Solutions",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 2,
+      "h2s": [
+        "Purification, Formulation, and Delivery",
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 9,
+      "grayBands": 1,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 2,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 4201,
+      "mainH": 3320
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 0,
+      "h2s": [],
+      "h3Count": 4,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 2,
+      "tables": 0,
+      "featured": 1,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "\"\"",
+        "bg": "rgb(0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 3317,
+      "mainH": 1838
+    }
+  },
+  {
+    "i": 75,
+    "path": "/industries/pharmaceutical-solutions/purification-formulation-delivery/chromatography",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "cosmetic",
+    "desktop": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 3 vs src 1"
+      ]
+    },
+    "mobile": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 3 vs src 1"
+      ]
+    },
+    "edsFp": {
+      "h1": "Chromatography Resins",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 3,
+      "h2s": [
+        "Highly efficient chromatography",
+        "Purification, Formulation, and Delivery",
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 7,
+      "grayBands": 1,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 2,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 4553,
+      "mainH": 4760
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 1,
+      "h2s": [
+        "Highly efficient chromatography"
+      ],
+      "h3Count": 4,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 0,
+      "tables": 0,
+      "featured": 1,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "\"\"",
+        "bg": "rgb(0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 3534,
+      "mainH": 2269
+    }
+  },
+  {
+    "i": 76,
+    "path": "/industries/pharmaceutical-solutions/purification-formulation-delivery/excipients",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "cosmetic",
+    "desktop": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 4 vs src 2"
+      ]
+    },
+    "mobile": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 4 vs src 2"
+      ]
+    },
+    "edsFp": {
+      "h1": "Formulation Excipients",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 4,
+      "h2s": [
+        "Uniquely functional excipients",
+        "Trust our renowned quality and exacting standards",
+        "Purification, Formulation, and Delivery",
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 5,
+      "grayBands": 1,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 2,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 5600,
+      "mainH": 4296
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 2,
+      "h2s": [
+        "Uniquely functional excipients",
+        "Trust our renowned quality and exacting standards"
+      ],
+      "h3Count": 1,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 0,
+      "tables": 0,
+      "featured": 1,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "\"\"",
+        "bg": "rgb(0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 4725,
+      "mainH": 2139
+    }
+  },
+  {
+    "i": 77,
+    "path": "/industries/pharmaceutical-solutions/purification-formulation-delivery/active-ingredient-delivery",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "cosmetic",
+    "desktop": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 3 vs src 1"
+      ]
+    },
+    "mobile": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 3 vs src 1"
+      ]
+    },
+    "edsFp": {
+      "h1": "Active Ingredient Delivery",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 3,
+      "h2s": [
+        "Exceptionally innovative active ingredient delivery",
+        "Purification, Formulation, and Delivery",
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 6,
+      "grayBands": 1,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 2,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 4040,
+      "mainH": 3494
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 1,
+      "h2s": [
+        "Exceptionally innovative active ingredient delivery"
+      ],
+      "h3Count": 2,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 0,
+      "tables": 0,
+      "featured": 1,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "\"\"",
+        "bg": "rgb(0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 2980,
+      "mainH": 1641
+    }
+  },
+  {
+    "i": 78,
+    "path": "/industries/pharmaceutical-solutions/packaging-adsorbents",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "cosmetic",
+    "desktop": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 3 vs src 1"
+      ]
+    },
+    "mobile": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 3 vs src 1"
+      ]
+    },
+    "edsFp": {
+      "h1": "Pharmaceutical Packaging Adsorbents",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 3,
+      "h2s": [
+        "Pharmaceutical packaging",
+        "Discover our broad range of pharmaceutical services and solutions",
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 3,
+      "grayBands": 1,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 2,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 2354,
+      "mainH": 2478
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 1,
+      "h2s": [
+        "Pharmaceutical packaging"
+      ],
+      "h3Count": 0,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 2,
+      "tables": 0,
+      "featured": 1,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "\"\"",
+        "bg": "rgb(0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 1546,
+      "mainH": 799
+    }
+  },
+  {
+    "i": 79,
+    "path": "/industries/nutraceutical-solutions",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "cosmetic",
+    "desktop": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 4 vs src 1"
+      ]
+    },
+    "mobile": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 4 vs src 1"
+      ]
+    },
+    "edsFp": {
+      "h1": "Nutraceutical Solutions",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 4,
+      "h2s": [
+        "Minimize product variability and increase bioavailability and shelf stability",
+        "Purification and Formulation in Nutraceuticals",
+        "Latest Insights from Grace",
+        "Join our newsletter program."
+      ],
+      "h3Count": 11,
+      "grayBands": 1,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 2,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": false,
+      "navRail": false,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 4907,
+      "mainH": 4422
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 1,
+      "h2s": [
+        "Minimize product variability and increase bioavailability and shelf stability"
+      ],
+      "h3Count": 3,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 0,
+      "tables": 0,
+      "featured": 1,
+      "navSelect": false,
+      "navRail": false,
+      "bullet": {
+        "content": "\"\"",
+        "bg": "rgb(0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 3191,
+      "mainH": 1610
+    }
+  },
+  {
+    "i": 80,
+    "path": "/industries/nutraceutical-solutions/vitamin-purification-formulation-delivery",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "cosmetic",
+    "desktop": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 5 vs src 3"
+      ]
+    },
+    "mobile": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 5 vs src 3"
+      ]
+    },
+    "edsFp": {
+      "h1": "Solutions for Vitamin and Nutraceutical Formulators",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 5,
+      "h2s": [
+        "Purification",
+        "Excipients for vitamin and supplement formulators",
+        "Vitamin-fortified food and beverages",
+        "Purification and Formulation in Nutraceuticals",
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 2,
+      "grayBands": 1,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 2,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 3176,
+      "mainH": 2812
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 3,
+      "h2s": [
+        "Purification",
+        "Excipients for vitamin and supplement formulators",
+        "Vitamin-fortified food and beverages"
+      ],
+      "h3Count": 0,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 2,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "\"\"",
+        "bg": "rgb(0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 2190,
+      "mainH": 1034
+    }
+  },
+  {
+    "i": 81,
+    "path": "/industries/nutraceutical-solutions/lipid-purification-formulation-delivery",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "cosmetic",
+    "desktop": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 2 vs src 0"
+      ]
+    },
+    "mobile": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 2 vs src 0"
+      ]
+    },
+    "edsFp": {
+      "h1": "Pure Fats from Fish Oil",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 2,
+      "h2s": [
+        "Purification and Formulation in Nutraceuticals",
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 5,
+      "grayBands": 1,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 2,
+      "tables": 0,
+      "featured": 1,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 4258,
+      "mainH": 3176
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 0,
+      "h2s": [],
+      "h3Count": 3,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 2,
+      "tables": 0,
+      "featured": 1,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "\"\"",
+        "bg": "rgb(0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 3317,
+      "mainH": 1599
+    }
+  },
+  {
+    "i": 82,
+    "path": "/industries/nutraceutical-solutions/cbd-purification-formulation-delivery",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "cosmetic",
+    "desktop": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 2 vs src 0"
+      ]
+    },
+    "mobile": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 2 vs src 0"
+      ]
+    },
+    "edsFp": {
+      "h1": "CBD Purification and Formulation",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 2,
+      "h2s": [
+        "Purification and Formulation in Nutraceuticals",
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 5,
+      "grayBands": 1,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 2,
+      "tables": 0,
+      "featured": 1,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 3730,
+      "mainH": 3012
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 0,
+      "h2s": [],
+      "h3Count": 3,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 2,
+      "tables": 0,
+      "featured": 1,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": null,
+      "textLen": 2749,
+      "mainH": 1373
+    }
+  },
+  {
+    "i": 83,
+    "path": "/industries/nutraceutical-solutions/nutraceutical-cdmo",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "cosmetic",
+    "desktop": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 3 vs src 1"
+      ]
+    },
+    "mobile": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 3 vs src 1"
+      ]
+    },
+    "edsFp": {
+      "h1": "U.S. Based cGMP Manufacturer",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 3,
+      "h2s": [
+        "High quality, high purity, made-to-order compounds",
+        "Purification and Formulation in Nutraceuticals",
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 5,
+      "grayBands": 1,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 2,
+      "tables": 0,
+      "featured": 1,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 3149,
+      "mainH": 2817
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 1,
+      "h2s": [
+        "High quality, high purity, made-to-order compounds"
+      ],
+      "h3Count": 2,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 2,
+      "tables": 0,
+      "featured": 1,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "\"\"",
+        "bg": "rgb(0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 2209,
+      "mainH": 1346
+    }
+  },
+  {
+    "i": 84,
+    "path": "/industries/nutraceutical-solutions/traditional-herbal-medicine",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "cosmetic",
+    "desktop": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: cards missing (src 1)"
+      ]
+    },
+    "mobile": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: cards missing (src 1)"
+      ]
+    },
+    "edsFp": {
+      "h1": "Traditional Herbal Medicine (THM) and Botanical Solutions",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 1,
+      "h2s": [
+        "Unlock the Power of SYLOID® Mesoporous Silica for Traditional Herbal Medicine (THM) and Botanical Formulations"
+      ],
+      "h3Count": 1,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 0,
+      "tables": 1,
+      "featured": 1,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 4193,
+      "mainH": 2948
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 1,
+      "h2s": [
+        "Unlock the Power of SYLOID® Mesoporous Silica for Traditional Herbal Medicine (THM) and Botanical Formulations"
+      ],
+      "h3Count": 1,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 1,
+      "tables": 1,
+      "featured": 1,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "\"\"",
+        "bg": "rgb(0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 3717,
+      "mainH": 2328
+    }
+  },
+  {
+    "i": 85,
+    "path": "/industries/agriculture",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "good",
+    "desktop": {
+      "cat": "good",
+      "issues": []
+    },
+    "mobile": {
+      "cat": "good",
+      "issues": []
+    },
+    "edsFp": {
+      "h1": "Agriculture",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 2,
+      "h2s": [
+        "Core applications",
+        "Animal feed and agricultural active solutions"
+      ],
+      "h3Count": 2,
+      "grayBands": 1,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 1,
+      "tables": 0,
+      "featured": 1,
+      "navSelect": false,
+      "navRail": false,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 1761,
+      "mainH": 1817
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 1,
+      "h2s": [
+        "Core applications"
+      ],
+      "h3Count": 0,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 0,
+      "tables": 0,
+      "featured": 1,
+      "navSelect": false,
+      "navRail": false,
+      "bullet": null,
+      "textLen": 1290,
+      "mainH": 1069
+    }
+  },
+  {
+    "i": 86,
+    "path": "/industries/agriculture/agriculture-cdmo",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "good",
+    "desktop": {
+      "cat": "good",
+      "issues": []
+    },
+    "mobile": {
+      "cat": "good",
+      "issues": []
+    },
+    "edsFp": {
+      "h1": "Custom Fine Chemicals for Agriculture",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 0,
+      "h2s": [],
+      "h3Count": 5,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 1,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 3008,
+      "mainH": 2767
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 0,
+      "h2s": [],
+      "h3Count": 3,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 2,
+      "tables": 0,
+      "featured": 1,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "\"\"",
+        "bg": "rgb(0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 2473,
+      "mainH": 1437
+    }
+  },
+  {
+    "i": 87,
+    "path": "/industries/agriculture/animal-feed-agricultural-active-solutions",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "good",
+    "desktop": {
+      "cat": "good",
+      "issues": []
+    },
+    "mobile": {
+      "cat": "good",
+      "issues": []
+    },
+    "edsFp": {
+      "h1": "Animal Feed and Agricultural Active Solutions",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 0,
+      "h2s": [],
+      "h3Count": 4,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 1,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 2690,
+      "mainH": 2330
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 0,
+      "h2s": [],
+      "h3Count": 2,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 2,
+      "tables": 0,
+      "featured": 1,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "\"\"",
+        "bg": "rgb(0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 2264,
+      "mainH": 1372
+    }
+  },
+  {
+    "i": 88,
+    "path": "/industries/personal-care",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "cosmetic",
+    "desktop": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 3 vs src 1"
+      ]
+    },
+    "mobile": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 3 vs src 1"
+      ]
+    },
+    "edsFp": {
+      "h1": "Personal Care",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 3,
+      "h2s": [
+        "Supporting Your Success in the Dynamic Personal Care Industry",
+        "Core Applications",
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 3,
+      "grayBands": 1,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 2,
+      "tables": 1,
+      "featured": 1,
+      "navSelect": false,
+      "navRail": false,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 2667,
+      "mainH": 3116
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 1,
+      "h2s": [
+        "Supporting Your Success in the Dynamic Personal Care Industry"
+      ],
+      "h3Count": 1,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 0,
+      "tables": 1,
+      "featured": 1,
+      "navSelect": false,
+      "navRail": false,
+      "bullet": {
+        "content": "\"\"",
+        "bg": "rgb(0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 1812,
+      "mainH": 2100
+    }
+  },
+  {
+    "i": 89,
+    "path": "/industries/personal-care/toothpaste",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "good",
+    "desktop": {
+      "cat": "good",
+      "issues": []
+    },
+    "mobile": {
+      "cat": "good",
+      "issues": []
+    },
+    "edsFp": {
+      "h1": "Toothpaste",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 2,
+      "h2s": [
+        "Toothpaste Abrasives and Thickeners​​",
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 1,
+      "grayBands": 1,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 1,
+      "tables": 1,
+      "featured": 0,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 2388,
+      "mainH": 2721
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 1,
+      "h2s": [
+        "Toothpaste Abrasives and Thickeners​​"
+      ],
+      "h3Count": 1,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 0,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "\"\"",
+        "bg": "rgb(0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 939,
+      "mainH": 720
+    }
+  },
+  {
+    "i": 90,
+    "path": "/industries/personal-care/cosmetics",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "good",
+    "desktop": {
+      "cat": "good",
+      "issues": []
+    },
+    "mobile": {
+      "cat": "good",
+      "issues": []
+    },
+    "edsFp": {
+      "h1": "Cosmetics",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 2,
+      "h2s": [
+        "Multi-functional Additives for Personal Care Formulations",
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 5,
+      "grayBands": 1,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 1,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 6253,
+      "mainH": 3788
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 1,
+      "h2s": [
+        "Multi-functional Additives for Personal Care Formulations"
+      ],
+      "h3Count": 5,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 0,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "\"\"",
+        "bg": "rgb(0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 5449,
+      "mainH": 2174
+    }
+  },
+  {
+    "i": 91,
+    "path": "/industries/food-beverage",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "cosmetic",
+    "desktop": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 3 vs src 1"
+      ]
+    },
+    "mobile": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 3 vs src 1"
+      ]
+    },
+    "edsFp": {
+      "h1": "Food and Beverage",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 3,
+      "h2s": [
+        "Meeting strict global demands",
+        "Food and beverage solutions",
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 5,
+      "grayBands": 1,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 2,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": false,
+      "navRail": false,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 2795,
+      "mainH": 2975
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 1,
+      "h2s": [
+        "Meeting strict global demands"
+      ],
+      "h3Count": 1,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 0,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": false,
+      "navRail": false,
+      "bullet": {
+        "content": "\"\"",
+        "bg": "rgb(0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 1882,
+      "mainH": 1198
+    }
+  },
+  {
+    "i": 92,
+    "path": "/industries/food-beverage/beer",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "cosmetic",
+    "desktop": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 3 vs src 0"
+      ]
+    },
+    "mobile": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 3 vs src 0"
+      ]
+    },
+    "edsFp": {
+      "h1": "Beer Stabilizers and Clarifiers",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 3,
+      "h2s": [
+        "DARACLAR® silica for beer stabilization and clarification",
+        "Food and beverage solutions",
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 3,
+      "grayBands": 1,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 2,
+      "tables": 1,
+      "featured": 0,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 7216,
+      "mainH": 4924
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 0,
+      "h2s": [],
+      "h3Count": 0,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 0,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": false,
+      "navRail": false,
+      "bullet": null,
+      "textLen": 0,
+      "mainH": 0
+    }
+  },
+  {
+    "i": 93,
+    "path": "/industries/food-beverage/edible-oil-refining",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "cosmetic",
+    "desktop": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 3 vs src 1"
+      ]
+    },
+    "mobile": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 3 vs src 1"
+      ]
+    },
+    "edsFp": {
+      "h1": "Edible Oils and Fats",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 3,
+      "h2s": [
+        "TRISYL® Silica for Edible Oil Refining",
+        "Food and beverage solutions",
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 5,
+      "grayBands": 1,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 2,
+      "tables": 1,
+      "featured": 0,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 4891,
+      "mainH": 3792
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 1,
+      "h2s": [
+        "TRISYL® Silica for Edible Oil Refining"
+      ],
+      "h3Count": 2,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 0,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "\"\"",
+        "bg": "rgb(0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 2948,
+      "mainH": 1642
+    }
+  },
+  {
+    "i": 94,
+    "path": "/industries/food-beverage/food-processing",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "cosmetic",
+    "desktop": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 3 vs src 1"
+      ]
+    },
+    "mobile": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 3 vs src 1"
+      ]
+    },
+    "edsFp": {
+      "h1": "Food Processing",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 3,
+      "h2s": [
+        "Silica safety",
+        "Food and beverage solutions",
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 8,
+      "grayBands": 1,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 2,
+      "tables": 1,
+      "featured": 0,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 4891,
+      "mainH": 3997
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 1,
+      "h2s": [
+        "Silica safety"
+      ],
+      "h3Count": 2,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 0,
+      "tables": 1,
+      "featured": 0,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "\"\"",
+        "bg": "rgb(0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 2017,
+      "mainH": 1167
+    }
+  },
+  {
+    "i": 95,
+    "path": "/industries/food-beverage/beverage",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "cosmetic",
+    "desktop": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 2 vs src 0"
+      ]
+    },
+    "mobile": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 2 vs src 0"
+      ]
+    },
+    "edsFp": {
+      "h1": "Beverage Fining and Fortification",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 2,
+      "h2s": [
+        "Food and beverage solutions",
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 5,
+      "grayBands": 1,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 2,
+      "tables": 1,
+      "featured": 1,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "\"\"",
+        "bg": "rgb(0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 3649,
+      "mainH": 3338
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 0,
+      "h2s": [],
+      "h3Count": 2,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 2,
+      "tables": 1,
+      "featured": 1,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "\"\"",
+        "bg": "rgb(0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 2834,
+      "mainH": 1795
+    }
+  },
+  {
+    "i": 96,
+    "path": "/industries/biofuels",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "cosmetic",
+    "desktop": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 3 vs src 1"
+      ]
+    },
+    "mobile": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 3 vs src 1"
+      ]
+    },
+    "edsFp": {
+      "h1": "Biofuels",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 3,
+      "h2s": [
+        "Renewable Technologies",
+        "Core Applications",
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 4,
+      "grayBands": 1,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 2,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": false,
+      "navRail": false,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 2377,
+      "mainH": 2525
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 1,
+      "h2s": [
+        "Renewable Technologies"
+      ],
+      "h3Count": 0,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 0,
+      "tables": 0,
+      "featured": 1,
+      "navSelect": false,
+      "navRail": false,
+      "bullet": null,
+      "textLen": 1481,
+      "mainH": 832
+    }
+  },
+  {
+    "i": 97,
+    "path": "/industries/biofuels/biomass-based-diesel",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "cosmetic",
+    "desktop": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 2 vs src 0"
+      ]
+    },
+    "mobile": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 2 vs src 0"
+      ]
+    },
+    "edsFp": {
+      "h1": "Biomass-based Diesel",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 2,
+      "h2s": [
+        "First Generation and Renewable Biodiesels",
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 7,
+      "grayBands": 1,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 3,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": false,
+      "navRail": false,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 2585,
+      "mainH": 2872
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 0,
+      "h2s": [],
+      "h3Count": 1,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 0,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": false,
+      "navRail": false,
+      "bullet": null,
+      "textLen": 500,
+      "mainH": 281
+    }
+  },
+  {
+    "i": 98,
+    "path": "/industries/biofuels/biomass-based-diesel/first-generation-biodiesel",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "cosmetic",
+    "desktop": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 3 vs src 0"
+      ]
+    },
+    "mobile": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 3 vs src 0"
+      ]
+    },
+    "edsFp": {
+      "h1": "First Generation Biodiesel",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 3,
+      "h2s": [
+        "Clean Biodiesel Feedstock Oil",
+        "Cost-Effective Alternative to Water Washing",
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 3,
+      "grayBands": 1,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 1,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 3381,
+      "mainH": 2677
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 0,
+      "h2s": [],
+      "h3Count": 0,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 0,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": null,
+      "textLen": 616,
+      "mainH": 205
+    }
+  },
+  {
+    "i": 99,
+    "path": "/industries/biofuels/biomass-based-diesel/renewable-diesel",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "cosmetic",
+    "desktop": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 3 vs src 0"
+      ]
+    },
+    "mobile": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 3 vs src 0"
+      ]
+    },
+    "edsFp": {
+      "h1": "Renewable Diesel",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 3,
+      "h2s": [
+        "Pre-Treatment Expertise in Difficult-to-Refine Feedstock",
+        "The Grace Difference",
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 6,
+      "grayBands": 1,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 2,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 4464,
+      "mainH": 4851
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 0,
+      "h2s": [],
+      "h3Count": 0,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 0,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": null,
+      "textLen": 1060,
+      "mainH": 757
+    }
+  },
+  {
+    "i": 100,
+    "path": "/industries/biofuels/bioethanol",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "good",
+    "desktop": {
+      "cat": "good",
+      "issues": []
+    },
+    "mobile": {
+      "cat": "good",
+      "issues": []
+    },
+    "edsFp": {
+      "h1": "Bioethanol",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 4,
+      "h2s": [
+        "SYLOBEAD® Molecular Sieves for Ethanol Dehydration",
+        "Molecular Sieve Technology",
+        "Strong Technical Service and Support",
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 0,
+      "grayBands": 1,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 1,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 3029,
+      "mainH": 2286
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 3,
+      "h2s": [
+        "SYLOBEAD® Molecular Sieves for Ethanol Dehydration",
+        "Molecular Sieve Technology",
+        "Strong Technical Service and Support"
+      ],
+      "h3Count": 0,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 0,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": true,
+      "navRail": true,
+      "bullet": {
+        "content": "\"\"",
+        "bg": "rgb(0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 2274,
+      "mainH": 1223
+    }
+  },
+  {
+    "i": 101,
+    "path": "/industries/biofuels/biodiesel",
+    "edsStatus": 200,
+    "srcStatus": 200,
+    "cat": "cosmetic",
+    "desktop": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 2 vs src 0"
+      ]
+    },
+    "mobile": {
+      "cat": "cosmetic",
+      "issues": [
+        "COSMETIC: h2 count eds 2 vs src 0"
+      ]
+    },
+    "edsFp": {
+      "h1": "Biomass-based Diesel",
+      "h1Present": true,
+      "heroPresent": true,
+      "heroHasImage": true,
+      "h2Count": 2,
+      "h2s": [
+        "First Generation and Renewable Biodiesels",
+        "Latest Insights from Grace"
+      ],
+      "h3Count": 7,
+      "grayBands": 1,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 3,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": false,
+      "navRail": false,
+      "bullet": {
+        "content": "none",
+        "bg": "rgba(0, 0, 0, 0)",
+        "listStyle": "none"
+      },
+      "textLen": 2585,
+      "mainH": 2872
+    },
+    "srcFp": {
+      "h1": "",
+      "h1Present": false,
+      "heroPresent": false,
+      "heroHasImage": false,
+      "h2Count": 0,
+      "h2s": [],
+      "h3Count": 1,
+      "grayBands": 0,
+      "blueBorders": 0,
+      "geoHex": 0,
+      "cards": 0,
+      "tables": 0,
+      "featured": 0,
+      "navSelect": false,
+      "navRail": false,
+      "bullet": null,
+      "textLen": 500,
+      "mainH": 281
+    }
+  }
+]

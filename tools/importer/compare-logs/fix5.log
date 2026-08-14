@@ -1,0 +1,148 @@
+[Bulk Import] Starting run with:
+  Import script: /backups/meejain/ema-grace/repo/tools/importer/import-grace-master.bundle.js
+  URLs file:     /backups/meejain/ema-grace/repo/tools/importer/compare-logs/fix5-urls.txt
+  Output dir:    /workspace/current/content
+  URL count:     5
+
+  Browser:       Chromium (bundled) [Chrome unavailable: browserType.launch: Chromium distribution 'chrome' is not found at /opt/google/chrome/chrome
+Run "npx playwright install chrome"]
+[1/5] Starting https://grace.com/industries/refining-technologies/hydroprocessing/resid-hydrotreating-solutions/
+[Browser Console] Mixed Content: The page at 'https://grace.com/industries/refining-technologies/hydroprocessing/resid-hydrotreating-solutions/' was loaded over HTTPS, but requested an insecure script 'http://grace.com/error/404/'. This request has been blocked; the content must be served over HTTPS.
+[Browser Console] 🚀 container.buildInfo.environment is deprecated.Please use `container.environment.stage` instead
+[Browser Console] myhost is =grace.com
+[Browser Console] myhost is =grace.com
+[Browser Console] myhost is =grace.com
+[Browser Console] myhost is =grace.com
+[Browser Console] OT-Updated
+[Browser Console] requestStorageAccess: Permission denied.
+[1/5] ⚠️  Falling back to domcontentloaded...
+[Browser Console] Mixed Content: The page at 'https://grace.com/industries/refining-technologies/hydroprocessing/resid-hydrotreating-solutions/' was loaded over HTTPS, but requested an insecure script 'http://grace.com/error/404/'. This request has been blocked; the content must be served over HTTPS.
+[Browser Console] 🚀 container.buildInfo.environment is deprecated.Please use `container.environment.stage` instead
+[Browser Console] myhost is =grace.com
+[Browser Console] myhost is =grace.com
+[Browser Console] myhost is =grace.com
+[Browser Console] myhost is =grace.com
+[Browser Console] OT-Updated
+[Browser Console] requestStorageAccess: Permission denied.
+[Browser Console] myhost is =grace.com
+[Browser Console] OT-Updated
+[1/5] ⚠️  Content completeness 57.1% (below 90.0%) — possible dropped content
+[1/5] ✅ Saved content to industries/refining-technologies/hydroprocessing/resid-hydrotreating-solutions
+[2/5] Starting https://grace.com/industries/refining-technologies/hydroprocessing/resid-hydrocracking-solutions/
+[Browser Console] Mixed Content: The page at 'https://grace.com/industries/refining-technologies/hydroprocessing/resid-hydrocracking-solutions/' was loaded over HTTPS, but requested an insecure script 'http://grace.com/error/404/'. This request has been blocked; the content must be served over HTTPS.
+[Browser Console] 🚀 container.buildInfo.environment is deprecated.Please use `container.environment.stage` instead
+[Browser Console] myhost is =grace.com
+[Browser Console] myhost is =grace.com
+[Browser Console] myhost is =grace.com
+[Browser Console] myhost is =grace.com
+[Browser Console] OT-Updated
+[Browser Console] requestStorageAccess: Permission denied.
+[2/5] ⚠️  Falling back to domcontentloaded...
+[Browser Console] Mixed Content: The page at 'https://grace.com/industries/refining-technologies/hydroprocessing/resid-hydrocracking-solutions/' was loaded over HTTPS, but requested an insecure script 'http://grace.com/error/404/'. This request has been blocked; the content must be served over HTTPS.
+[Browser Console] 🚀 container.buildInfo.environment is deprecated.Please use `container.environment.stage` instead
+[Browser Console] myhost is =grace.com
+[Browser Console] myhost is =grace.com
+[Browser Console] myhost is =grace.com
+[Browser Console] myhost is =grace.com
+[Browser Console] OT-Updated
+[Browser Console] requestStorageAccess: Permission denied.
+[2/5] ⚠️  Content completeness 68.3% (below 90.0%) — possible dropped content
+[2/5] ✅ Saved content to industries/refining-technologies/hydroprocessing/resid-hydrocracking-solutions
+[3/5] Starting https://grace.com/industries/refining-technologies/hydroprocessing/distillate-hydrotreating-solutions/
+[Browser Console] Mixed Content: The page at 'https://grace.com/industries/refining-technologies/hydroprocessing/distillate-hydrotreating-solutions/' was loaded over HTTPS, but requested an insecure script 'http://grace.com/error/404/'. This request has been blocked; the content must be served over HTTPS.
+[Browser Console] 🚀 container.buildInfo.environment is deprecated.Please use `container.environment.stage` instead
+[Browser Console] myhost is =grace.com
+[Browser Console] myhost is =grace.com
+[Browser Console] myhost is =grace.com
+[Browser Console] myhost is =grace.com
+[Browser Console] OT-Updated
+[Browser Console] requestStorageAccess: Permission denied.
+[3/5] ⚠️  Falling back to domcontentloaded...
+[Browser Console] Mixed Content: The page at 'https://grace.com/industries/refining-technologies/hydroprocessing/distillate-hydrotreating-solutions/' was loaded over HTTPS, but requested an insecure script 'http://grace.com/error/404/'. This request has been blocked; the content must be served over HTTPS.
+[Browser Console] 🚀 container.buildInfo.environment is deprecated.Please use `container.environment.stage` instead
+[Browser Console] myhost is =grace.com
+[Browser Console] myhost is =grace.com
+[Browser Console] myhost is =grace.com
+[Browser Console] myhost is =grace.com
+[Browser Console] OT-Updated
+[Browser Console] requestStorageAccess: Permission denied.
+[3/5] ⚠️  Content completeness 58.9% (below 90.0%) — possible dropped content
+[3/5] ✅ Saved content to industries/refining-technologies/hydroprocessing/distillate-hydrotreating-solutions
+[4/5] Starting https://grace.com/industries/agriculture/agriculture-cdmo/
+[Browser Console] Mixed Content: The page at 'https://grace.com/industries/agriculture/agriculture-cdmo/' was loaded over HTTPS, but requested an insecure script 'http://grace.com/error/404/'. This request has been blocked; the content must be served over HTTPS.
+[Browser Console] 🚀 container.buildInfo.environment is deprecated.Please use `container.environment.stage` instead
+[Browser Console] myhost is =grace.com
+[Browser Console] myhost is =grace.com
+[Browser Console] myhost is =grace.com
+[Browser Console] myhost is =grace.com
+[Browser Console] OT-Updated
+[Browser Console] requestStorageAccess: Permission denied.
+[4/5] ⚠️  Falling back to domcontentloaded...
+[Browser Console] Mixed Content: The page at 'https://grace.com/industries/agriculture/agriculture-cdmo/' was loaded over HTTPS, but requested an insecure script 'http://grace.com/error/404/'. This request has been blocked; the content must be served over HTTPS.
+[Browser Console] 🚀 container.buildInfo.environment is deprecated.Please use `container.environment.stage` instead
+[Browser Console] myhost is =grace.com
+[Browser Console] myhost is =grace.com
+[Browser Console] myhost is =grace.com
+[Browser Console] myhost is =grace.com
+[Browser Console] OT-Updated
+[Browser Console] requestStorageAccess: Permission denied.
+[Browser Console] get data url from a base64 image (): InvalidCharacterError: Failed to execute 'atob' on 'Window': The string to be decoded is not correctly encoded.
+    at KT.getDataUrlFromB64Img (<anonymous>:2:1903009)
+    at <anonymous>:2:1919086
+    at NodeList.forEach (<anonymous>)
+    at u.storageHandler.preProcess (<anonymous>:2:1918860)
+    at u.storageHandler.import (<anonymous>:2:1920086)
+    at async fk (<anonymous>:2:1926732)
+[Browser Console] get data url from a base64 image (): InvalidCharacterError: Failed to execute 'atob' on 'Window': The string to be decoded is not correctly encoded.
+    at KT.getDataUrlFromB64Img (<anonymous>:2:1903009)
+    at <anonymous>:2:1919086
+    at NodeList.forEach (<anonymous>)
+    at u.storageHandler.preProcess (<anonymous>:2:1918860)
+    at u.storageHandler.import (<anonymous>:2:1920086)
+    at async fk (<anonymous>:2:1926732)
+[Browser Console] get data url from a base64 image (): InvalidCharacterError: Failed to execute 'atob' on 'Window': The string to be decoded is not correctly encoded.
+    at KT.getDataUrlFromB64Img (<anonymous>:2:1903009)
+    at <anonymous>:2:1919086
+    at NodeList.forEach (<anonymous>)
+    at u.storageHandler.preProcess (<anonymous>:2:1918860)
+    at u.storageHandler.import (<anonymous>:2:1920086)
+    at async fk (<anonymous>:2:1926732)
+[4/5] ⚠️  Content completeness 45.1% (below 90.0%) — possible dropped content
+[4/5] ✅ Saved content to industries/agriculture/agriculture-cdmo
+[5/5] Starting https://grace.com/industries/agriculture/animal-feed-agricultural-active-solutions/
+[Browser Console] Mixed Content: The page at 'https://grace.com/industries/agriculture/animal-feed-agricultural-active-solutions/' was loaded over HTTPS, but requested an insecure script 'http://grace.com/error/404/'. This request has been blocked; the content must be served over HTTPS.
+[Browser Console] 🚀 container.buildInfo.environment is deprecated.Please use `container.environment.stage` instead
+[Browser Console] myhost is =grace.com
+[Browser Console] myhost is =grace.com
+[Browser Console] myhost is =grace.com
+[Browser Console] myhost is =grace.com
+[Browser Console] OT-Updated
+[Browser Console] requestStorageAccess: Permission denied.
+[5/5] ⚠️  Falling back to domcontentloaded...
+[Browser Console] Mixed Content: The page at 'https://grace.com/industries/agriculture/animal-feed-agricultural-active-solutions/' was loaded over HTTPS, but requested an insecure script 'http://grace.com/error/404/'. This request has been blocked; the content must be served over HTTPS.
+[Browser Console] 🚀 container.buildInfo.environment is deprecated.Please use `container.environment.stage` instead
+[Browser Console] myhost is =grace.com
+[Browser Console] myhost is =grace.com
+[Browser Console] myhost is =grace.com
+[Browser Console] myhost is =grace.com
+[Browser Console] OT-Updated
+[Browser Console] requestStorageAccess: Permission denied.
+[Browser Console] get data url from a base64 image (): InvalidCharacterError: Failed to execute 'atob' on 'Window': The string to be decoded is not correctly encoded.
+    at KT.getDataUrlFromB64Img (<anonymous>:2:1903009)
+    at <anonymous>:2:1919086
+    at NodeList.forEach (<anonymous>)
+    at u.storageHandler.preProcess (<anonymous>:2:1918860)
+    at u.storageHandler.import (<anonymous>:2:1920086)
+    at async fk (<anonymous>:2:1926732)
+[Browser Console] get data url from a base64 image (): InvalidCharacterError: Failed to execute 'atob' on 'Window': The string to be decoded is not correctly encoded.
+    at KT.getDataUrlFromB64Img (<anonymous>:2:1903009)
+    at <anonymous>:2:1919086
+    at NodeList.forEach (<anonymous>)
+    at u.storageHandler.preProcess (<anonymous>:2:1918860)
+    at u.storageHandler.import (<anonymous>:2:1920086)
+    at async fk (<anonymous>:2:1926732)
+[5/5] ⚠️  Content completeness 48.0% (below 90.0%) — possible dropped content
+[5/5] ✅ Saved content to industries/agriculture/animal-feed-agricultural-active-solutions
+[Bulk Import] Completed. Success: 5/5, Failures: 0
+[Excel Export] Found 354 report file(s). Compiling to Excel...
+[Excel Export] ✅ Compiled 354 reports to: /workspace/current/tools/importer/reports/import-grace-master.report.xlsx

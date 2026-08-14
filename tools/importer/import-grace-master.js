@@ -172,11 +172,18 @@ function isCategoryGrid(list) {
   if (!list || !list.querySelector) return false;
   const heading = list.querySelector(':scope > .heading, :scope > .card-list-header');
   if (!heading) return false;
-  const cards = Array.from(list.querySelectorAll('a.cmp-card.bio'));
-  if (cards.length < 2) return false;
-  // every card must be a simple image+title tile with NO descriptive body
-  return cards.every((c) => (c.querySelector('.image img, picture, img'))
-    && (c.querySelector('.h4.title, .title, .h4'))
+  // Match ANY `a.cmp-card` tile, not only `.bio` — the "promotion" grids on 5 industries
+  // solution pages use imageless text tiles (`a.cmp-card.text-on-bkgd.none-image.generic`) that
+  // are NOT `.bio`. Accept a SINGLE-card grid too (agriculture pages have one promotion tile).
+  const cards = Array.from(list.querySelectorAll('a.cmp-card'));
+  if (cards.length < 1) return false;
+  // A category/promotion tile has a `.h4`/`.title` card title AND a link, with NO descriptive
+  // body (`.spt-copy` / `<ul>`). Image is OPTIONAL — imageless `none-image` text tiles qualify.
+  // The `.h5` "PROMOTION" eyebrow is NOT part of this test (the parser drops it). The `.spt-copy`
+  // guard keeps product-DETAIL benefit grids (bullet-list bodies) out; the `> .heading`
+  // requirement above keeps product-HUB nav grids (no section heading) as Cards (product).
+  return cards.every((c) => (c.querySelector('.h4.title, .title, .h4'))
+    && (c.matches('a[href]') || c.querySelector('a[href]'))
     && !c.querySelector('.spt-copy, .content ul, .content ol, ul, ol'));
 }
 
@@ -406,7 +413,7 @@ const MATCHERS = {
     // ("Purification Solutions" on vyvid → /products/davisil…). Structural test (isCategoryGrid),
     // so it does NOT depend on the link target. Mutually exclusive with the product-hub nav grid
     // (no heading) and the benefit grid (has .spt-copy/<ul> bodies).
-    const categoryGrids = Array.from(doc.querySelectorAll('.cmp-card-list.grid.three-columns:has(a.cmp-card.bio)'))
+    const categoryGrids = Array.from(doc.querySelectorAll('.cmp-card-list.grid.three-columns:has(a.cmp-card)'))
       .filter((cl) => isCategoryGrid(cl))
       .map((cl) => cl.querySelector('.card-group'));
     return [...bare, ...categoryGrids].filter(Boolean);
