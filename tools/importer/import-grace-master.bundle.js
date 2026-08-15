@@ -1684,10 +1684,10 @@ var CustomImportScript = (() => {
       h.textContent = title.textContent.trim();
       c2.push(h);
     }
-    element.querySelectorAll(".subhead-large p, .content p, .text p").forEach((p) => {
-      if (p.textContent.trim()) c2.push(p.cloneNode(true));
+    element.querySelectorAll(".subhead-large p, .text p").forEach((p) => {
+      if (p.textContent.trim() && !p.querySelector("a, button")) c2.push(p.cloneNode(true));
     });
-    const cta = element.querySelector("a[href], button[data-gated-id]");
+    const cta = element.querySelector(".buttons a[href], .buttons button[data-gated-id], a[href], button[data-gated-id]");
     if (cta) {
       const p = document.createElement("p");
       const a = document.createElement("a");
@@ -2764,31 +2764,81 @@ var CustomImportScript = (() => {
     return WebImporter.Blocks.createBlock(document, { name: "Hero (banner)", cells: [[h1]] });
   }
   function buildSidebarNav(document) {
-    const navAnchors = Array.from(document.querySelectorAll(
-      'article [aria-label="Section navigation"] a, article .section-nav a, article .col-lg-2 a'
-    ));
-    if (!navAnchors.length) return null;
-    const seen = /* @__PURE__ */ new Set();
-    const ul = document.createElement("ul");
-    navAnchors.forEach((a) => {
+    const sourceUl = document.querySelector(
+      '.section-nav-container ul, article [aria-label="Section navigation"] ~ ul, article .section-navigation ul, article .section-nav ul'
+    );
+    const anchorInfo = (a) => {
       const text = (a.textContent || "").replace(/\s+/g, " ").trim();
       const href = a.getAttribute("href") || "";
-      if (!text || !href) return;
-      const norm = href.replace(/^\/content\/grace\/us\/en/, "").replace(/\.html$/, "").replace(/\/$/, "");
-      if (seen.has(norm)) return;
-      seen.add(norm);
+      return text && href ? { text, href } : null;
+    };
+    const mkLi = (info) => {
       const li = document.createElement("li");
       const link = document.createElement("a");
-      link.setAttribute("href", href);
-      link.textContent = text;
+      link.setAttribute("href", info.href);
+      link.textContent = info.text;
       li.append(link);
-      ul.append(li);
-    });
+      return li;
+    };
+    const ul = document.createElement("ul");
+    const parentLi = sourceUl && sourceUl.querySelector(":scope > li:has(> ul), :scope > li > ul") ? sourceUl.querySelector(":scope > li > ul") ? sourceUl.querySelector(":scope > li > ul").closest("li") : null : null;
+    if (parentLi) {
+      const pInfo = anchorInfo(parentLi.querySelector(":scope > a"));
+      const nested = parentLi.querySelector(":scope > ul");
+      const childInfos = Array.from(nested.querySelectorAll(":scope > li > a")).map(anchorInfo).filter(Boolean);
+      if (pInfo && childInfos.length) {
+        const pLi = mkLi(pInfo);
+        const childUl = document.createElement("ul");
+        const seenC = /* @__PURE__ */ new Set();
+        childInfos.forEach((ci) => {
+          const norm = ci.href.replace(/^\/content\/grace\/us\/en/, "").replace(/\.html$/, "").replace(/\/$/, "");
+          if (seenC.has(norm)) return;
+          seenC.add(norm);
+          childUl.append(mkLi(ci));
+        });
+        pLi.append(childUl);
+        ul.append(pLi);
+      }
+    }
+    if (!ul.children.length) {
+      const flatAnchors = sourceUl ? Array.from(sourceUl.querySelectorAll("a")) : Array.from(document.querySelectorAll('article [aria-label="Section navigation"] a, article .section-nav a'));
+      const seen = /* @__PURE__ */ new Set();
+      flatAnchors.map(anchorInfo).filter(Boolean).forEach((info) => {
+        const norm = info.href.replace(/^\/content\/grace\/us\/en/, "").replace(/\.html$/, "").replace(/\/$/, "");
+        if (seen.has(norm)) return;
+        seen.add(norm);
+        ul.append(mkLi(info));
+      });
+    }
     if (!ul.children.length) return null;
     const section = document.createElement("div");
     section.append(ul);
+    const promo = buildSidebarPromoCard(document);
+    if (promo) section.append(promo);
     section.append(createSectionMetadata(document, "sidebar-nav"));
     return section;
+  }
+  function buildSidebarPromoCard(document) {
+    const leftCol = document.querySelector("article .col-lg-2, article .row > .col-lg-2, .col-xs-12.col-lg-2");
+    if (!leftCol) return null;
+    const img = leftCol.querySelector(".embed img, img");
+    const headingLink = leftCol.querySelector("h6 a, h5 a, h4 a");
+    if (!img || !headingLink) return null;
+    const href = headingLink.getAttribute("href") || "";
+    const text = (headingLink.textContent || "").replace(/\s+/g, " ").trim();
+    if (!href || !text) return null;
+    const picImg = document.createElement("img");
+    let picSrc = img.getAttribute("src") || "";
+    if (picSrc.startsWith("/content/dam/")) picSrc = `https://grace.com${picSrc}`;
+    picImg.setAttribute("src", picSrc);
+    picImg.setAttribute("alt", img.getAttribute("alt") || text);
+    const link = document.createElement("a");
+    link.setAttribute("href", href);
+    link.textContent = text;
+    return WebImporter.Blocks.createBlock(document, {
+      name: "Cards (industry)",
+      cells: [[[picImg], [link]]]
+    });
   }
   function extractMainContent(document) {
     const mainCol = document.querySelector("article .col-lg-7") || document.querySelector("article h2") && document.querySelector("article h2").closest('[class*="col-"]');

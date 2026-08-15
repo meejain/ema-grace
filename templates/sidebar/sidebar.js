@@ -39,7 +39,14 @@ export default function decorate(main) {
     .map((seg) => seg.replace(/-{2,}/g, '-'))
     .join('/');
   const here = normalize(window.location.pathname);
-  const links = list.querySelectorAll(':scope > li > a');
+  // Collect nav links. Product-hub navs are a FLAT list (`> li > a`); the industries
+  // detail nav is NESTED — a parent hub `<li>` whose link sits in a `<p>` (`> li > p > a`)
+  // plus a nested `<ul>` of sibling-page options (`> li > ul > li > a`). Grab every anchor
+  // inside the nav list in document order so BOTH shapes populate the mobile <select>
+  // (a flat-only `> li > a` selector matched nothing on the nested nav → empty select →
+  // the hidden <ul> left the whole rail blank on mobile). The promo card lives in a
+  // SEPARATE sibling <ul> (its own cards block), so it is not part of `list`.
+  const links = list.querySelectorAll('a');
   links.forEach((a) => {
     const option = document.createElement('option');
     const href = a.getAttribute('href') || '';

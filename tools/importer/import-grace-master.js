@@ -724,36 +724,118 @@ function buildHeroBlock(document) {
   return WebImporter.Blocks.createBlock(document, { name: 'Hero (banner)', cells: [[h1]] });
 }
 
-/** Left section-nav as a leading section: a UL of sibling-page links, tagged with
- *  Section Metadata Style = sidebar-nav so templates/sidebar/sidebar.css pins it to col 1. */
+/** Left section-nav as a leading section, tagged Section Metadata Style=sidebar-nav so
+ *  templates/sidebar/sidebar.css pins it to col 1. The SOURCE nav is a 2-level list: a parent
+ *  <li> (the section hub, e.g. "FCC Catalyst Solutions") whose href is the current section root,
+ *  holding a nested <ul> of sibling-page options. We PRESERVE that hierarchy — parent <li> + a
+ *  child <ul> — so the CSS can style the parent as a bold title (border top/bottom of the whole
+ *  list) and indent the children (no per-item borders). Falls back to a flat <ul> when the source
+ *  has no nesting (older/simple nav rails), so existing sidebar pages are unaffected. */
 function buildSidebarNav(document) {
-  const navAnchors = Array.from(document.querySelectorAll(
-    'article [aria-label="Section navigation"] a, article .section-nav a, article .col-lg-2 a',
-  ));
-  if (!navAnchors.length) return null;
+  // Prefer the real nav LIST container (the desktop <ul>), NOT `.col-lg-2 a` — the left column also
+  // holds a resource card (e.g. "Iron Tolerance") whose link would otherwise leak into the nav.
+  const sourceUl = document.querySelector(
+    '.section-nav-container ul, article [aria-label="Section navigation"] ~ ul, article .section-navigation ul, article .section-nav ul',
+  );
 
-  const seen = new Set();
-  const ul = document.createElement('ul');
-  navAnchors.forEach((a) => {
+  const anchorInfo = (a) => {
     const text = (a.textContent || '').replace(/\s+/g, ' ').trim();
     const href = a.getAttribute('href') || '';
-    if (!text || !href) return;
-    const norm = href.replace(/^\/content\/grace\/us\/en/, '').replace(/\.html$/, '').replace(/\/$/, '');
-    if (seen.has(norm)) return;
-    seen.add(norm);
+    return (text && href) ? { text, href } : null;
+  };
+  const mkLi = (info) => {
     const li = document.createElement('li');
     const link = document.createElement('a');
-    link.setAttribute('href', href);
-    link.textContent = text;
+    link.setAttribute('href', info.href);
+    link.textContent = info.text;
     li.append(link);
-    ul.append(li);
-  });
+    return li;
+  };
+
+  const ul = document.createElement('ul');
+
+  // Structured path: source has a parent <li> with a nested <ul>.
+  const parentLi = sourceUl && sourceUl.querySelector(':scope > li:has(> ul), :scope > li > ul')
+    ? (sourceUl.querySelector(':scope > li > ul') ? sourceUl.querySelector(':scope > li > ul').closest('li') : null)
+    : null;
+  if (parentLi) {
+    const pInfo = anchorInfo(parentLi.querySelector(':scope > a'));
+    const nested = parentLi.querySelector(':scope > ul');
+    const childInfos = Array.from(nested.querySelectorAll(':scope > li > a')).map(anchorInfo).filter(Boolean);
+    if (pInfo && childInfos.length) {
+      const pLi = mkLi(pInfo);
+      const childUl = document.createElement('ul');
+      const seenC = new Set();
+      childInfos.forEach((ci) => {
+        const norm = ci.href.replace(/^\/content\/grace\/us\/en/, '').replace(/\.html$/, '').replace(/\/$/, '');
+        if (seenC.has(norm)) return;
+        seenC.add(norm);
+        childUl.append(mkLi(ci));
+      });
+      pLi.append(childUl);
+      ul.append(pLi);
+    }
+  }
+
+  // Flat fallback: no nested structure found → collect the nav-list anchors (NOT the whole column,
+  // so the resource card link is excluded). Only used when the structured path produced nothing.
+  if (!ul.children.length) {
+    const flatAnchors = sourceUl
+      ? Array.from(sourceUl.querySelectorAll('a'))
+      : Array.from(document.querySelectorAll('article [aria-label="Section navigation"] a, article .section-nav a'));
+    const seen = new Set();
+    flatAnchors.map(anchorInfo).filter(Boolean).forEach((info) => {
+      const norm = info.href.replace(/^\/content\/grace\/us\/en/, '').replace(/\.html$/, '').replace(/\/$/, '');
+      if (seen.has(norm)) return;
+      seen.add(norm);
+      ul.append(mkLi(info));
+    });
+  }
   if (!ul.children.length) return null;
 
   const section = document.createElement('div');
   section.append(ul);
+
+  // SIDEBAR PROMO CARD (e.g. "Iron Tolerance Advancements"): the left nav column can hold a resource
+  // card below the nav — an image + a heading/link (source: `.col-lg-2 .embed img` + a sibling
+  // `h6 > a`). It's NOT a nav item (excluded above), so re-emit it here as a Cards (industry) image
+  // card appended to the nav section, so it renders in the nav column beneath the links like source.
+  const promo = buildSidebarPromoCard(document);
+  if (promo) section.append(promo);
+
   section.append(createSectionMetadata(document, 'sidebar-nav'));
   return section;
+}
+
+/** Build a Cards (industry) image card from a left-column resource promo (image + heading link),
+ *  e.g. the "Iron Tolerance Advancements Download Now" whitepaper card. Returns the block or null. */
+function buildSidebarPromoCard(document) {
+  // The promo lives in the left column (col-lg-2), NOT in the wide content column (col-lg-7).
+  const leftCol = document.querySelector('article .col-lg-2, article .row > .col-lg-2, .col-xs-12.col-lg-2');
+  if (!leftCol) return null;
+  const img = leftCol.querySelector('.embed img, img');
+  // the promo link is a heading link (h6/h5) pointing OUT of the nav (not a sibling-page nav anchor)
+  const headingLink = leftCol.querySelector('h6 a, h5 a, h4 a');
+  if (!img || !headingLink) return null;
+  const href = headingLink.getAttribute('href') || '';
+  const text = (headingLink.textContent || '').replace(/\s+/g, ' ').trim();
+  if (!href || !text) return null;
+
+  const picImg = document.createElement('img');
+  // DAM assets (…/content/dam/…) are NOT part of the EDS tree — a root-relative src would resolve
+  // against the EDS host and 404. Anchor it to the absolute live grace.com URL (as line ~1016 does).
+  let picSrc = img.getAttribute('src') || '';
+  if (picSrc.startsWith('/content/dam/')) picSrc = `https://grace.com${picSrc}`;
+  picImg.setAttribute('src', picSrc);
+  picImg.setAttribute('alt', img.getAttribute('alt') || text);
+  const link = document.createElement('a');
+  link.setAttribute('href', href);
+  link.textContent = text;
+  // Cards (industry) = rows of [image cell][link cell]; one card here.
+  return WebImporter.Blocks.createBlock(document, {
+    name: 'Cards (industry)',
+    cells: [[[picImg], [link]]],
+  });
 }
 
 /** Extract the main content column (.col-lg-7 rich text) as clean default content;
