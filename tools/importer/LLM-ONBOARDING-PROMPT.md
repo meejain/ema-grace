@@ -104,17 +104,21 @@ side-by-side screenshots before you claim done. Do not publish to DA without my 
 - **Completed sets (already done + backed up):** insights (165), newsroom (28), products (34 = 28
   detail + 6 hubs — hubs fully closed 2026-08-12: the 2 late-hydrating hub lists, catalysts +
   synthetic-silicas, were reconstructed by hand from the LIVE source DOM; see playbook "Product hub /
-  sidebar recipe").
-- **NEXT UP → INDUSTRIES (102 pages) — step-1 analysis DONE, ready to build.** It is ONE template
-  ("Solution Detail") with optional sections (NOT 3 templates). Full analysis:
-  `tools/importer/INDUSTRIES-ANALYSIS.md` + playbook "Industries recipe". Richest-representative SET
-  (use BOTH — no single page covers all blocks): `industries/food-beverage/beverage/` (13 blocks:
-  gated-download, featured-products, table, both card variants) + `industries/pharmaceutical-solutions/
-  fine-chemicals/consultative-services/r-d/` (adds media-callout figure-pairs). Two likely-NEW blocks:
-  Featured-Products selector + media-callout figure-pairs; everything else reuses products/insights
-  blocks. NEXT: extend importer (reuse products default-path + `sectionizeFlatBody` + `template:contactus`)
-  → import the 2 reps → §4a visual gate → bulk 102 → snapshot `backups/industries/`.
-- **Then:** about-grace leadership bios (person-profile, ~30 uniform) → campaign → forms. FORMS is
+  sidebar recipe"), **INDUSTRIES (102) — COMPLETE, published to live + QA'd against source 2026-08-14.**
+- **INDUSTRIES — DONE (102 pages, live on `main--ema-grace--meejain.aem.live`).** Built as ONE template,
+  two dispatch branches keyed on section-nav presence (detail → `forceTemplate:sidebar`; landing →
+  `template:contactus`). Full record: `backups/industries/MANIFEST.md` (revs 1-6) + memory
+  `industries-migration.md` (revs 1-12). Live-vs-source parity audit + full 204-screenshot visual montage
+  pass done (`tools/importer/shots/VISUAL-FINDINGS.md`, `compare-logs/PARITY-AUDIT.md`; harnesses
+  `compare-eds-vs-source.mjs`, `audit-cardgrids.mjs`, `shoot-pairs.mjs`, `build-montage.sh`). Post-QA fixes
+  landed: (a) imageless promotion card-grids (`isCategoryGrid` relaxed → Cards(category-grid), 18 pages
+  reimported); (b) category-grid phantom-image empty cells (blocks/cards/cards.js drops empty cells —
+  runtime, global); (c) banner-resource-download was 1-row/2-cell → fixed to 2 rows so the CTA renders
+  (17 refining pages reimported). KNOWN-OPEN: `/industries` ROOT is 404 on live (exists on disk, not in
+  the client's publish list — needs DA publish); two cosmetic non-defects (landing Featured-Products
+  layout variant; biofuels benefit icons monochrome vs source green — Scene7 param). Screenshots are
+  gitignored under `tools/importer/shots/` (regenerable; do NOT commit — 291MB).
+- **NEXT UP → about-grace leadership bios** (person-profile, ~30 uniform) → campaign → forms. FORMS is
   fully scoped: `tools/importer/FORMS-INVENTORY.md` (6 templates; 200 form pages; 191 = one shared
   gated modal) + `FORMS-URLS.txt` (every form URL). Submission = server-side AEM `.pardot.handler` →
   Pardot; the endpoint won't exist on EDS — GET the Pardot form-handler URLs from the client before

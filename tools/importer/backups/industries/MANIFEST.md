@@ -85,4 +85,24 @@
   Coverage audit: 74 gray-band, 1 blue-border, 78 sidebar-template, 0 geo-hex (correct — industries
   Latest-Insights bands are plain gray; geo-hex only on `.geoAndHex` sources = products/insights).
   No re-snapshot needed (live bundle == frozen backup).
-- **snapshot date:** 2026-08-13 (rev 2; rev 3 reimport verified same bundle).
+- **REVISION 4 (2026-08-14, published to live + visual QA against source + 3 parser/block fixes):**
+  All 102 published to `main--ema-grace--meejain.aem.live` by the client. Ran a live-vs-source parity
+  pass: headless structural sweep (`tools/importer/compare-eds-vs-source.mjs`), a systematic per-page
+  card-grid audit (`audit-cardgrids.mjs`), and a FULL 204-screenshot visual montage
+  (`shoot-pairs.mjs` + `build-montage.sh` → `shots/`, gitignored). Findings +fixes:
+  1. **Imageless promotion card-grids dropped/undecorated** on 18 pages (refining + plastics subtree) —
+     the earlier full reimport ran with the pre-fix bundle. FIX in import-grace-master.js: relaxed
+     `isCategoryGrid` (accept `a.cmp-card` not only `.bio`; ≥1 card; image OPTIONAL; keep the `>.heading`
+     + no-`.spt-copy` guards so hub/product/related grids are untouched) + the cards-category-grid shape-2
+     matcher `:has(a.cmp-card)`. Reimported the 18. PROMOTION-leak now 0/102.
+  2. **category-grid phantom images** — imageless cards kept an EMPTY leading image `<div></div>` that
+     rendered as a blank gap. FIX (RUNTIME, blocks/cards/cards.js): drop empty cells per card. Global.
+  3. **banner-resource-download rendered image-only (no CTA)** — parser built `cells:[[c1,c2]]` (1 row/
+     2 cells) but the block's decorate() reads rows[0]=image, rows[1]=content → content dropped. FIX
+     (tools/importer/parsers/banner-resource-download.js): `cells:[[c1],[c2]]` (2 rows, matches the
+     drafts sample). Reimported the 17 refining pages carrying the banner.
+  Rebundled → **170850 bytes** (this frozen backup refreshed to match). Everything else visually in
+  parity across all clusters. TWO cosmetic non-defects left (design variants, not fixed): landing
+  Featured-Products layout; biofuels benefit icons monochrome vs source green (Scene7 param).
+  KNOWN-OPEN: `/industries` ROOT is 404 on live (on disk, not in client publish list → needs DA publish).
+- **snapshot date:** 2026-08-14 (rev 4 — QA-fixed bundle 170850, published to live).

@@ -29,6 +29,13 @@ body.sidebar main > .section.sidebar-nav {
   margin: var(--spacing-xs) 0;
 }
 
+/* Trademark/copyright DISCLAIMER (lone <h5> just above the footer): source spaces it
+   ~20px, not the global 50px section margin. Base rule (all widths); the >=900px block
+   re-asserts it too for the grid layout. */
+body.sidebar main > .section:has(> .default-content-wrapper > h5:only-child) {
+  margin-block: var(--spacing-s); /* 20px */
+}
+
 /* MOBILE: the contact-us widget section renders as a FIXED bottom bar (its own
    block JS pins it), so its in-flow section box is empty (h:0) but the global 50px
    section margins still push the filter ~50px below the hero. Zero them so the
@@ -338,6 +345,15 @@ body.sidebar main > .section.sidebar-nav.breadcrumb-container .breadcrumb nav ol
     margin-top: var(--spacing-l); /* 50px */
   }
 
+  /* Trademark/copyright DISCLAIMER — the last content section is a lone <h5>
+     (ART®/GRACE® trademarks + © line) that sits just above the footer. Source spaces
+     it ~20px above and below (tight), NOT the 50px content-section margin, which left
+     an oversized empty band above the footer. Signature: a section whose sole content
+     is one <h5>. Tighten its block margin to 20px. */
+  body.sidebar main > .section:has(> .default-content-wrapper > h5:only-child) {
+    margin-block: var(--spacing-s); /* 20px */
+  }
+
   /* Grid margins don't collapse, so two stacked content sections show
      50px (bottom) + 50px (top) = ~100px between them. On product hubs the gray
      reps callout must butt close under the preceding content (source gap ~21px,
@@ -394,12 +410,23 @@ body.sidebar main > .section.sidebar-nav.breadcrumb-container .breadcrumb nav ol
   }
 
   /* Full-width sections that break out of the content column and span the whole band on their
-     own row: the contact-split banner AND the Follow-Us social ribbon span all columns.
-     (Without this, social-follow inherits grid-column:3 = the 747px content column, so its dark
-     ribbon clips and the 3-card row overflows — the defect seen on colloidal-corrosion.) */
+     own row: the contact-split banner, the Follow-Us social ribbon, AND the resource-download
+     banner (Grace Essential Articles gray band) span all columns. (Without this, the section
+     inherits grid-column:3 = the 747px content column, so the banner's gray band is confined to
+     the narrow content column instead of running edge-to-edge like the source.) */
   body.sidebar main > .section:has(.banner.contact-split),
+  body.sidebar main > .section:has(.banner.resource-download),
   body.sidebar main > .section:has(.social.follow) {
     grid-column: 1 / -1;
+  }
+
+  /* Re-center the resource-download banner's own content within the full-width band and cap it
+     to the page container so the image + text don't stretch across the whole viewport
+     (matches source: full-bleed gray band, content centered in the 1280px container). */
+  body.sidebar main > .section:has(.banner.resource-download) > div {
+    max-width: 1280px;
+    margin-inline: auto;
+    padding-inline: 20px;
   }
 
   /* Insights related-articles cards: DEFAULT (most pages, e.g. the ML reference + 4-ways +

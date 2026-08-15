@@ -1,0 +1,9 @@
+# Visual-comparison screenshots are large, regenerable artifacts — never commit them.
+# (Re-create with tools/importer/shoot-pairs.mjs + build-montage.sh.)
+eds/
+src/
+pair/
+montage/
+composite/
+diff/
+*.png

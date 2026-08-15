@@ -157,10 +157,12 @@
   display: block;
 }
 
-/* body: centered text under image */
+/* body: centered text under image. Horizontal padding 40px (matches source
+   a.cmp-card 40px inset → 207px text width in a 287px card). 50px was too tight
+   (188px) and wrapped a two-word title like "Distillate Hydrotreating" to 2 lines. */
 .cards.category-grid .cards-card-body {
   margin: 0;
-  padding: 20px 50px 24px;
+  padding: 20px 40px 24px;
   text-align: center;
 }
 

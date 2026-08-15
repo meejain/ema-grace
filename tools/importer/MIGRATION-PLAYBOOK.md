@@ -337,7 +337,7 @@ migration fidelity, NOT that anything is published to DA (§0). Keep that distin
 | newsroom | 28 | 28 ✅ | 26 press-releases (default path + Hero (banner) + URL breadcrumb) + 2 landing (hero + year-accordion + featured cards) — DONE |
 | products (detail) | 28 | 28 ✅ | Product Detail template — DONE. Default path + `template: contactus` + Hero (product) + `sectionizeFlatBody`. See "Product Detail recipe" below |
 | products (hubs) | 6 | 6 ✅ | JS-hydrated CATEGORY-HUB pages (synthetic-silicas, adsorbents, catalysts, fine-chemicals, product-stewardship, quality-management). Imported via onLoad hydration-wait. The 2 hubs whose product-list didn't hydrate in time (catalysts, synthetic-silicas) were reconstructed by HAND from the LIVE source DOM (see "Product hub / sidebar recipe" below) — DONE 2026-08-12 |
-| industries | 102 | 102 ✅ | ONE template with TWO dispatch branches keyed on section-nav: DETAIL pages (depth ≥2, have section-nav) → `template: sidebar` 3-col (nav\|content\|widget); LANDINGS (depth-1, no nav) → `template: contactus` 2-col. All blocks reuse existing (Hero product + sidebar-nav + rich text + gated downloads + Table data-grid + Featured product-selector + Cards category-grid + Cards featured-content + geo-hex). DONE 2026-08-13 — see "Industries recipe" + `backups/industries/`. Hero image FIX: routes through buildDefaultPage so onLoad materializes inline bg-image → Hero (product) with photo |
+| industries | 102 | 102 ✅ | DONE + PUBLISHED TO LIVE + QA'd against source (2026-08-14). ONE template, TWO dispatch branches keyed on section-nav: DETAIL (depth ≥2, section-nav) → `template: sidebar` 3-col (nav\|content\|widget); LANDINGS (depth-1) → `template: contactus` 2-col. Blocks reuse existing (Hero product + sidebar-nav + rich text + gated downloads + Table data-grid + Featured product-selector + Cards category-grid + Cards featured-content + geo-hex + banner-resource-download). Hero image FIX: routes through buildDefaultPage so onLoad materializes inline bg-image → Hero (product) with photo. POST-QA fixes (2026-08-14, live-vs-source visual audit): (a) imageless promotion card-grids → `isCategoryGrid` relaxed to accept `a.cmp-card` (not only `.bio`), ≥1 card, image-optional → Cards(category-grid); 18 pages reimported; (b) category-grid phantom-image empty cells → blocks/cards/cards.js drops empty cells (runtime, global); (c) banner-resource-download emitted 1-row/2-cell → fixed parser to 2 rows (`cells:[[c1],[c2]]`) so the CTA renders; 17 refining pages reimported. See "Industries recipe" + `backups/industries/MANIFEST.md` (revs 1-6) + `shots/VISUAL-FINDINGS.md`. KNOWN-OPEN: `/industries` root 404 on live (on disk, not in client publish list → needs DA publish) |
 | about-grace | 39 | 8 | section pages + ~30 leadership bios (person-profile template) |
 | campaign | 17 | 2 | flat campaign/landing pages |
 | forms | 15 | 1 | DEFERRED → AEM Adaptive Forms pass |
@@ -348,10 +348,10 @@ migration fidelity, NOT that anything is published to DA (§0). Keep that distin
 | misc one-offs | ~10 | ~few | privacy/cookie/terms/search/404/etc. |
 
 Recommended order (ROI): ~~newsroom~~ ✅ → ~~products (detail)~~ ✅ → ~~products (hubs)~~ ✅ →
-**industries** (step-1 analysis DONE — ready to build, see "Industries recipe") → leadership bios
+~~industries~~ ✅ (102, published + QA'd 2026-08-14) → **leadership bios**
 (about-grace, person-profile template, ~30 uniform) → campaign → forms (Adaptive Forms pass —
 inventory + submission flow DONE, see `FORMS-INVENTORY.md`). Products set fully complete (28 detail +
-6 hubs).
+6 hubs). Industries fully complete (102) — next up is about-grace leadership bios.
 
 **Newsroom template notes (reference for similar default-path families):** press releases take the
 **default path** (`buildDefaultPage`) — no new page-type needed; the whole body (dateline, quotes,
@@ -527,9 +527,17 @@ folder and serve with `aem up --html-folder <tmp> --prefer-plain-html`, then fet
 `/<tmp>/<slug>.plain.html` and run the decoration in-browser. CSS/JS (blocks, templates, styles) ARE
 served locally and render immediately.
 
-### Industries recipe — STEP-1 ANALYSIS DONE (102 pages, 2026-08-12) — ready to build
+### Industries recipe — ✅ COMPLETE (102 pages, built 2026-08-13, published + QA'd 2026-08-14)
 
-Full analysis in `tools/importer/INDUSTRIES-ANALYSIS.md`. Summary for a fresh session:
+STATUS: all 102 imported, published to live, and visually QA'd against grace.com (full 204-screenshot
+montage pass + card-grid audit). Post-QA fixes landed — see the `industries` row in the scope table
+above for the fix list, `backups/industries/MANIFEST.md` (revs 1-6) for the frozen bundle record, and
+`shots/VISUAL-FINDINGS.md` + `compare-logs/PARITY-AUDIT.md` for the audit. Reusable QA harnesses:
+`compare-eds-vs-source.mjs` (structural sweep), `audit-cardgrids.mjs` (per-page card-grid parity),
+`shoot-pairs.mjs` + `build-montage.sh` (screenshot montage). ONE KNOWN-OPEN item: the `/industries`
+root landing is 404 on live (content on disk, not yet published to DA).
+
+Full original analysis in `tools/importer/INDUSTRIES-ANALYSIS.md`. Summary (kept for reference):
 
 - **It is ONE template ("Solution Detail") with optional sections**, NOT 3. block-intelligence.json
   labels 3 names (Solution Detail / Solution Content Page / Solution Detail Rich) but the rendered-DOM

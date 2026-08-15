@@ -1697,7 +1697,7 @@ var CustomImportScript = (() => {
       c2.push(p);
     }
     if (!c1.length && !c2.length) return;
-    const block = WebImporter.Blocks.createBlock(document, { name: "Banner (resource-download)", cells: [[c1, c2]] });
+    const block = WebImporter.Blocks.createBlock(document, { name: "Banner (resource-download)", cells: [[c1], [c2]] });
     const host = element.closest(".cmp-experiencefragment--resource-download") || element;
     host.replaceWith(block);
   }
@@ -2370,9 +2370,9 @@ var CustomImportScript = (() => {
     if (!list || !list.querySelector) return false;
     const heading = list.querySelector(":scope > .heading, :scope > .card-list-header");
     if (!heading) return false;
-    const cards = Array.from(list.querySelectorAll("a.cmp-card.bio"));
-    if (cards.length < 2) return false;
-    return cards.every((c) => c.querySelector(".image img, picture, img") && c.querySelector(".h4.title, .title, .h4") && !c.querySelector(".spt-copy, .content ul, .content ol, ul, ol"));
+    const cards = Array.from(list.querySelectorAll("a.cmp-card"));
+    if (cards.length < 1) return false;
+    return cards.every((c) => c.querySelector(".h4.title, .title, .h4") && (c.matches("a[href]") || c.querySelector("a[href]")) && !c.querySelector(".spt-copy, .content ul, .content ol, ul, ol"));
   }
   var MATCHERS = {
     "columns-image-left": (doc) => rowsByColumnOrder(doc, "image"),
@@ -2548,7 +2548,7 @@ var CustomImportScript = (() => {
     },
     "cards-category-grid": (doc) => {
       const bare = Array.from(doc.querySelectorAll(".cmp-card-list")).filter((cl) => !cl.classList.contains("grid") && cl.querySelector("a.cmp-card.small")).map((cl) => cl.querySelector(".card-group"));
-      const categoryGrids = Array.from(doc.querySelectorAll(".cmp-card-list.grid.three-columns:has(a.cmp-card.bio)")).filter((cl) => isCategoryGrid(cl)).map((cl) => cl.querySelector(".card-group"));
+      const categoryGrids = Array.from(doc.querySelectorAll(".cmp-card-list.grid.three-columns:has(a.cmp-card)")).filter((cl) => isCategoryGrid(cl)).map((cl) => cl.querySelector(".card-group"));
       return [...bare, ...categoryGrids].filter(Boolean);
     },
     // icon-grid: small icon+label+desc cards (generic cmp-card). Return ONE container (LCA) so
