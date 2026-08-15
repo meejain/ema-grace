@@ -1198,6 +1198,79 @@ body.sidebar main > .section.columns-container .default-content-wrapper:has(+ .c
   margin-bottom: 50px;
 }
 
+/* ===== agriculture-cdmo-style pages: Equipment + Tyrone teaser + download buttons =====
+   These content-column pages use a `columns horizontal-teaser featured-products` block for a
+   single dark "facility" teaser card (Tyrone). That block's container carries the Latest-Insights
+   hexagon-band padding (110–210px) + gray fill + a min-height card, which on these plain content
+   pages shows as a huge empty gap above/below the card. Source renders it as a compact dark card
+   inline in the content flow. Neutralize the decorative band treatment for the featured-products
+   variant sitting in the sidebar content column. */
+body.sidebar main > .section.columns-container:has(.columns.horizontal-teaser.featured-products) {
+  background-color: transparent;
+  padding: 0;
+  margin-block: var(--spacing-m); /* ~20px, compact — source gap Optimum→Equipment is ~21px */
+}
+
+/* Grid section margins don't collapse: the plain content section above this teaser keeps its 50px
+   bottom margin, which stacks with this section's top margin → ~100px gap. Pull the teaser section
+   up with a negative top margin so Equipment sits ~20px under "Optimum manufacturing solutions"
+   (source gap ~21px). Negative margin is robust regardless of the preceding section's own margin. */
+body.sidebar main > .section.columns-container:has(.columns.horizontal-teaser.featured-products) {
+  margin-top: -30px;
+}
+
+body.sidebar main > .section.columns-container:has(.columns.horizontal-teaser.featured-products)::before,
+body.sidebar main > .section.columns-container:has(.columns.horizontal-teaser.featured-products)::after {
+  content: none;
+}
+
+/* the Equipment default-content-wrapper (H3 + list) sits right above the teaser card — no extra gap */
+body.sidebar main > .section.columns-container:has(.columns.horizontal-teaser.featured-products) .columns-wrapper {
+  padding: 0;
+  margin-top: var(--spacing-m);
+}
+
+/* Download sell-sheet buttons: source lays the 3 primary CTAs SIDE BY SIDE (col-lg-4 each,
+   equal thirds). Our import emits them as consecutive `p.button-wrapper` (stacked, each sized to
+   its own text so only 2 fit per row). Constrain each to a third of the content column and let the
+   button fill its cell (text wraps) so all THREE sit in one row on desktop. Mobile stays stacked
+   full-width (source col-xs-12). */
+@media (width >= 900px) {
+  body.sidebar main > .section > .default-content-wrapper > p.button-wrapper:has(> a.button.primary) {
+    display: inline-block;
+    width: calc((100% - 40px) / 3);
+    margin-right: 20px;
+    vertical-align: top;
+  }
+
+  /* Vertical breathing room around the whole button group: source leaves ~25px above the first row
+     and ~25px below the last before the next heading. The buttons all share one row, so add top
+     margin to the first wrapper and bottom margin to the last. */
+  body.sidebar main > .section > .default-content-wrapper > p.button-wrapper:has(> a.button.primary) {
+    margin-top: 25px;
+    margin-bottom: 35px;
+  }
+
+  /* every 3rd wrapper ends the row — drop its right margin so the row spans exactly the column */
+  body.sidebar main > .section > .default-content-wrapper > p.button-wrapper:has(> a.button.primary):nth-of-type(3n) {
+    margin-right: 0;
+  }
+
+  /* button fills its third; allow the label to WRAP (override the global nowrap+ellipsis that
+     truncated "Download hydrogenation sell sheet" to "Download hydrogenation…"), center it, trim
+     horizontal padding to fit the narrower third-width cell. */
+  body.sidebar main > .section > .default-content-wrapper > p.button-wrapper:has(> a.button.primary) > a.button {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    padding-inline: 15px;
+    text-align: center;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+  }
+}
+
 /* stylelint-enable no-descending-specificity */
 
 /* FIX 8: related-content cards sit directly below the article on the source
@@ -1287,6 +1360,14 @@ body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section.ca
   /* Re-inset the card row into the nav+content band (cols 2–4) so the cards keep their width. */
   body.sidebar main > .section.gray-band.cards-container:has(.cards.featured-content, .cards.category-grid) > * {
     grid-column: 2 / 4;
+  }
+
+  /* A category-grid gray band that follows the LEFT-NAV rail (e.g. agriculture-cdmo "A Portfolio of
+     Solutions") shifts its content RIGHT into the content column only (source col-lg-9, aligned past
+     the nav), NOT starting at the nav column. Re-inset to cols 3–4 so the heading + cards line up
+     with the body copy above. Scoped to the plain (non-breadcrumb) sidebar layout. */
+  body.sidebar main:not(:has(> .section.sidebar-nav.breadcrumb-container)) > .section.gray-band.cards-container:has(.cards.category-grid) > * {
+    grid-column: 3 / 5;
   }
 
   /* PLAIN gray content box (NO cards, e.g. the "How is gas phase polymerization…" FAQ panel): the
