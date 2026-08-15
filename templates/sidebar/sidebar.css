@@ -1236,30 +1236,33 @@ body.sidebar main > .section.columns-container:has(.columns.horizontal-teaser.fe
    button fill its cell (text wraps) so all THREE sit in one row on desktop. Mobile stays stacked
    full-width (source col-xs-12). */
 @media (width >= 900px) {
-  body.sidebar main > .section > .default-content-wrapper > p.button-wrapper:has(> a.button.primary) {
+  /* ONLY buttons that are part of a GROUP (adjacent to another download button) lay out as equal
+     thirds in a row (source col-lg-4). A STANDALONE button (no button-wrapper sibling, e.g. the
+     single "Download PERKASIL…" CTA on animal-feed) is NOT matched and keeps its natural
+     text-sized width. Group membership = "is followed by a button-wrapper" (all but last) OR
+     "is preceded by a button-wrapper" (all but first); the union covers every group member.
+     NOTE: two SEPARATE :has() on the same element is valid; :has() must NOT be nested inside :has(). */
+  body.sidebar main > .section > .default-content-wrapper > p.button-wrapper:has(> a.button.primary):has(+ p.button-wrapper),
+  body.sidebar main > .section > .default-content-wrapper > p.button-wrapper:has(> a.button.primary) + p.button-wrapper:has(> a.button.primary) {
     display: inline-block;
-    width: calc((100% - 40px) / 3);
+    width: calc((100% - 44px) / 3);
+    margin-top: 25px;
     margin-right: 20px;
+    margin-bottom: 35px;
     vertical-align: top;
   }
 
-  /* Vertical breathing room around the whole button group: source leaves ~25px above the first row
-     and ~25px below the last before the next heading. The buttons all share one row, so add top
-     margin to the first wrapper and bottom margin to the last. */
-  body.sidebar main > .section > .default-content-wrapper > p.button-wrapper:has(> a.button.primary) {
-    margin-top: 25px;
-    margin-bottom: 35px;
-  }
-
-  /* every 3rd wrapper ends the row — drop its right margin so the row spans exactly the column */
-  body.sidebar main > .section > .default-content-wrapper > p.button-wrapper:has(> a.button.primary):nth-of-type(3n) {
+  /* the LAST button in the group (preceded by a button, NOT followed by one) drops its right margin
+     so 3 items + 2 gaps + inline-block whitespace fit the content column without wrapping the 3rd. */
+  body.sidebar main > .section > .default-content-wrapper > p.button-wrapper:has(> a.button.primary) + p.button-wrapper:has(> a.button.primary):not(:has(+ p.button-wrapper)) {
     margin-right: 0;
   }
 
-  /* button fills its third; allow the label to WRAP (override the global nowrap+ellipsis that
-     truncated "Download hydrogenation sell sheet" to "Download hydrogenation…"), center it, trim
-     horizontal padding to fit the narrower third-width cell. */
-  body.sidebar main > .section > .default-content-wrapper > p.button-wrapper:has(> a.button.primary) > a.button {
+  /* the button fills its third; allow the label to WRAP (override the global nowrap+ellipsis that
+     truncated "Download hydrogenation sell sheet" → "Download hydrogenation…"), centered, with
+     trimmed horizontal padding. Scoped to grouped buttons only (same two selectors). */
+  body.sidebar main > .section > .default-content-wrapper > p.button-wrapper:has(> a.button.primary):has(+ p.button-wrapper) > a.button,
+  body.sidebar main > .section > .default-content-wrapper > p.button-wrapper:has(> a.button.primary) + p.button-wrapper:has(> a.button.primary) > a.button {
     display: block;
     width: 100%;
     box-sizing: border-box;
