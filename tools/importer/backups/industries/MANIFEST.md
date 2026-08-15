@@ -133,5 +133,54 @@
   - **NOT yet published to live** — awaiting client go-ahead. resid-conversion validated desktop+mobile
     by the client; coatings/wood spot-checked (nested nav renders, top-aligned). Full 78 reimported
     on disk (78/78, 0 failures).
-- **snapshot date:** 2026-08-14 (rev 4 — QA-fixed bundle 170850, published to live).
-  rev 5 bundle (173453) is the working tree; refresh this frozen backup when rev 5 is published.
+- **REVISION 6 (2026-08-15, sidebar page-by-page QA — 78 left-nav pages reimported + 6 more fixes):**
+  Client validated resid-conversion (rev 5) then reimported ALL 78 sidebar-template pages with the
+  nested-nav + promo-card + banner-dedup bundle (batches of ~8; 78/78 saved, 0 failures). Then a
+  page-by-page visual QA against source surfaced 6 more issues — fixed as follows (importer = rebundle+
+  reimport; RUNTIME = CSS/JS, no reimport):
+  1. **agriculture-cdmo layout** (RUNTIME, templates/sidebar/sidebar.css): (a) the `columns
+     horizontal-teaser featured-products` teaser (single dark "Tyrone" facility card) carried the
+     Latest-Insights hexagon-band padding → huge empty gap; neutralized bg/padding/::before/::after +
+     negative top-margin so it sits ~20px under the preceding text. (b) 3 "Download …" CTAs now lay
+     side-by-side as equal thirds — SCOPED to GROUPED buttons only (`p.button-wrapper` adjacent to
+     another), so STANDALONE single buttons (e.g. animal-feed) keep natural text width; last-in-group
+     drops right-margin so 3 fit; label wraps (override global nowrap+ellipsis); 25px/35px group
+     margins. (c) "A Portfolio of Solutions" gray category-grid band re-inset to cols 3-5 (shifts
+     right into the content column, matching source col-lg-9).
+  2. **Latest-Insights gray band flush to footer** (RUNTIME): `.gray-band.cards-container:has(.cards
+     .featured-content):last-of-type { margin-bottom: 0 }` — killed the white strip between the band
+     and the footer. Applies to every page where the insights band is the last section.
+  3. **Product BENEFIT grid too narrow** (RUNTIME): `.cards-container:has(.cards.product)` spans cols
+     2-4 (was confined to the 707px content col → ~203px cards, heavy bullet wrap). Now ~275px/card,
+     left-aligned to the nav band (renewable-diesel "Improved Productivity / Reduced Environmental
+     Footprint / Safety and Handling").
+  4. **Multi-`.text`-block content DROPPED** (IMPORTER): the two-column-content matcher claimed a
+     `.rich-text.split-list` block that on some pages (hydrogenation-catalysts) is MIXED — 7 body
+     paragraphs + Contact button interleaved with the list — and `replaceWith`'d the whole block with
+     just the 2-col list, dropping the prose. FIX: matcher only claims LIST-DOMINANT split-lists
+     (≤1 substantial `<p>`); mixed blocks flow through as body content.
+  5. **Lazy body-diagram images vanished** (IMPORTER): AEM `.image` components ship as
+     `<div data-cmp-is="image" data-cmp-src="scene7…?wid={.width}" data-asset="/content/dam/…">` with
+     NO `<img>` until client JS hydrates (never happens headless), so body diagrams (RANEY flowchart)
+     were lost. FIX: new `materializeLazyImages()` (called in transform on the STATIC cleaned DOM —
+     NOT onLoad, where grace.com's lazy JS rewrites the src to a useless `blob:`) builds a real
+     `<img>` from `data-cmp-src` (strips `{.width}`) / falls back to `data-asset` absolutized to
+     grace.com; REPAIRS an already-hydrated `blob:` img back to the Scene7 URL; derives readable alt
+     from the asset filename (e.g. "Chart Raney Hydrogenation Catalysts") so it isn't the DM
+     "Image without alt text" sentinel. The existing grace-dm-images.js afterTransform then rewrites
+     it to a Scene7 carrier anchor (live reference), rebuilt to `<picture>` by scripts.js at render.
+  6. **Standalone image not its own section / too small** (IMPORTER + RUNTIME): `sectionizeFlatBody`
+     now treats a standalone `<img>`/`<picture>`/DM-carrier `<a>` (any link text) as a content LEAF
+     and `splitRun` breaks it into its OWN section (and the tail-peel skips runs whose head is a
+     gray-band fingerprint or that contain an image leaf) — so the flowchart sits on WHITE below the
+     gray "Why are catalysts" band, not merged into it. RUNTIME: a `.section` whose only content is a
+     picture spans cols 2-5 (full band) so a wide diagram renders large (~1200px, was ~667px).
+  - Rebundled → **178300 bytes** (this rev's frozen bundle: `backups/industries/rev6-2026-08-15/`,
+    alongside the importer source, the 2 touched parsers, and the runtime sidebar.css/sidebar.js/
+    cards.css for reference).
+  - **NOT published to live** — all 78 reimported on disk + all fixes local, awaiting client go-ahead.
+    Validated pages this session: resid-conversion, agriculture-cdmo, animal-feed, renewable-diesel,
+    bioethanol, hydrogenation-catalysts, coatings/wood.
+- **snapshot date:** 2026-08-15 (rev 6 — working-tree bundle 178300; frozen at
+  `backups/industries/rev6-2026-08-15/`). The top-level `backups/industries/import-grace-master.bundle.js`
+  still holds rev 4 (170850, the last PUBLISHED bundle) — refresh it when rev 6 is published to live.

@@ -2,12 +2,11 @@
   "status": "success",
   "url": "https://grace.com/industries/chemical-processing/hydrogenation-catalysts/",
   "path": "industries/chemical-processing/hydrogenation-catalysts",
-  "timestamp": "2026-08-15T18:41:15.992Z",
+  "timestamp": "2026-08-15T22:45:16.514Z",
   "title": "Hydrogenation Catalysts",
   "pageType": "default",
   "blocks": [
     "hero-banner",
-    "table-two-column-content",
     "cards-featured-content"
   ],
   "blocksLeftInPlace": [],

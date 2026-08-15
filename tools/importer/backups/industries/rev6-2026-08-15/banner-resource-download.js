@@ -1,0 +1,36 @@
+/* eslint-disable */
+/* global WebImporter */
+/**
+ * banner-resource-download -> EDS `Banner (resource-download)`
+ * Source: .resource-download-comp — .image <img> + .content .h5(issue) + .h2(title) +
+ * .subhead-large p + gated download CTA. Receives the .resource-download-comp.
+ * Emits image | (issue + title + desc + download link).
+ */
+export default function parse(element, { document }) {
+  const img = element.querySelector('.image picture, .image img, picture, img');
+  const c1 = img ? [img.cloneNode(true)] : [];
+  const c2 = [];
+  const issue = element.querySelector('.h5');
+  if (issue && issue.textContent.trim()) { const p = document.createElement('p'); p.textContent = issue.textContent.trim(); c2.push(p); }
+  const title = element.querySelector('.h2, h2, .title');
+  if (title && title.textContent.trim()) { const h = document.createElement('h2'); h.textContent = title.textContent.trim(); c2.push(h); }
+  // Description paragraphs ONLY — skip any <p> that itself carries a link/button (the
+  // download CTA is emitted once, below). Without this guard a `.content p` that already
+  // wraps the (button-converted) download anchor gets pushed here AND re-emitted as the
+  // CTA → two identical "Download Issue" links. Also scope the description to the main
+  // .subhead-large/.text (not the gated-modal's nested .content, which holds a duplicate).
+  element.querySelectorAll('.subhead-large p, .text p').forEach((p) => {
+    if (p.textContent.trim() && !p.querySelector('a, button')) c2.push(p.cloneNode(true));
+  });
+  const cta = element.querySelector('.buttons a[href], .buttons button[data-gated-id], a[href], button[data-gated-id]');
+  if (cta) { const p = document.createElement('p'); const a = document.createElement('a'); a.href = cta.getAttribute('href') || '#'; a.textContent = (cta.textContent || 'Download').trim(); p.append(a); c2.push(p); }
+  if (!c1.length && !c2.length) return;
+  // TWO rows (image row, then content row) — NOT one row / two cells. The block's
+  // decorate() reads rows[0]=image, rows[1]=content (and the drafts sample authors it
+  // as two stacked rows). Emitting [[c1, c2]] as a single 2-cell row left rows[1]
+  // undefined, so the content cell (eyebrow + title + desc + CTA) was dropped and the
+  // banner rendered image-only with a blank right side.
+  const block = WebImporter.Blocks.createBlock(document, { name: 'Banner (resource-download)', cells: [[c1], [c2]] });
+  const host = element.closest('.cmp-experiencefragment--resource-download') || element;
+  host.replaceWith(block);
+}
