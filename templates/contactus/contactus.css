@@ -51,6 +51,7 @@ body.contactus main .default-content-wrapper h4 {
    look: black header row with white bold text, 1px light-gray cell borders, top-aligned cells,
    Roboto body. The table scrolls horizontally on narrow viewports rather than crunching columns.
    Scoped to contactus default content so block-built tables and other templates are untouched. */
+
 /* The default-content-wrapper that holds a table becomes a horizontal-scroll container so the
    table SLIDES within its own bounds on narrow/mobile viewports instead of overflowing the page to
    the right (which widened the whole page). Mirrors the block-table variants' `-scroll` wrappers.
@@ -114,6 +115,7 @@ body.contactus .button-group .button-wrapper a.button {
 @media (width >= 900px) {
   body.contactus .button-group {
     flex-flow: row nowrap;
+
     /* Source lays the download buttons as an even row of equal-width blocks spanning the content
        width, with consistent gaps (labels wrap inside each). Equal flex tracks reproduce that. */
     justify-content: center;
@@ -131,4 +133,27 @@ body.contactus .button-group .button-wrapper a.button {
    so a single one stays a bare p.button-wrapper — center it. */
 body.contactus main .default-content-wrapper > p.button-wrapper {
   text-align: center;
+}
+
+/* ---- Full-width archive pages (e.g. catalagram-archive) ----
+   Some `contactus` pages are NOT the product-detail two-column layout: their main content is a
+   full-width news-archive accordion, and the source renders the Contact-Us widget as a full-width
+   band (`.contact-us__cmp.not-sticky`), NOT a floating right rail. On these pages the default
+   920px left-column narrowing + absolutely-positioned right-rail widget wrongly shift the archive
+   left and float the green box top-right. Detect the news-archive and revert to full width:
+   keep every section full-width, and render the contact widget in normal flow (no fixed rail). */
+@media (width >= 900px) {
+  body.contactus main:has(.custom-widget.news-archive) > .section:not(.hero-container) > div {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* widget in-flow: cancel the absolute/fixed right-rail so it sits as a normal full-width band */
+  body.contactus main:has(.custom-widget.news-archive) .custom-widget.contact-sticky .contact-sticky-desktop {
+    position: static;
+    width: 100%;
+    top: auto;
+    right: auto;
+  }
 }

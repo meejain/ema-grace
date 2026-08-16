@@ -2,13 +2,13 @@
   "status": "success",
   "url": "https://grace.com/industries/refining-technologies/value-creation/",
   "path": "industries/refining-technologies/value-creation",
-  "timestamp": "2026-08-14T08:58:56.509Z",
+  "timestamp": "2026-08-16T13:33:22.458Z",
   "title": "Value Creation",
   "pageType": "default",
   "blocks": [
     "hero-banner",
     "video-overlay",
-    "columns-image-teaser",
+    "columns-horizontal-teaser-featured",
     "cards-category-grid",
     "cards-featured-content",
     "banner-resource-download"

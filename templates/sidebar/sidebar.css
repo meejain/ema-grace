@@ -362,6 +362,45 @@ body.sidebar main > .section.sidebar-nav .cards.industry .cards-card-body a:hove
   color: var(--link-hover-color);
 }
 
+/* PROMOTION tile (imageless `.cards.industry.promotion`, e.g. technical-service-expertise
+   "Specialized Evaluation Tools"). The generic industry-nav rules above style the IMAGE-based
+   promo card (transparent li, plain underlined black link). The imageless promotion card is
+   different: source renders a light-gray geo-lines tile with a solid GREEN "Learn more" button
+   (black label + › chevron). These `.promotion`-scoped rules carry one extra class of specificity
+   so they win over the generic ones above. Verified against the live source computed styles. */
+/* stylelint-disable no-descending-specificity -- these .promotion overrides intentionally follow
+   the generic .cards.industry rules above; the extra class is what makes them win. */
+body.sidebar main > .section.sidebar-nav .cards.industry.promotion > ul > li {
+  /* padding comes from the block rule (blocks/cards/cards.css) which uses !important to win
+     over the base `.cards.industry > ul > li` reset that loads after this template sheet. */
+  background-color: rgb(230 231 232);
+  background-image: url('https://grace.scene7.com/is/image/grace/blue-green-lines');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+body.sidebar main > .section.sidebar-nav .cards.industry.promotion .cards-card-body a:any-link {
+  display: block;
+  margin-top: 40px;
+  padding: 10px;
+  background-color: rgb(122 193 67);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+/* Restore the › chevron the generic rule suppresses — the green button carries one. */
+body.sidebar main > .section.sidebar-nav .cards.industry.promotion .cards-card-body a::after {
+  content: ' \203A';
+  font-size: 1.1em;
+}
+
+body.sidebar main > .section.sidebar-nav .cards.industry.promotion .cards-card-body a:hover {
+  background-color: rgb(105 176 50);
+  color: var(--text-color);
+}
+/* stylelint-enable no-descending-specificity */
+
 /* PRODUCT HUBS — two-column product-nav list (catalysts, synthetic-silicas).
    Source lays the main-column product list as TWO side-by-side <ul> groups
    (~313px each, 40px gap). In our EDS output the two groups are consecutive
@@ -527,6 +566,14 @@ body.sidebar main > .section.sidebar-nav.breadcrumb-container .breadcrumb nav ol
     margin-top: 20px;
   }
 
+  /* Video (media-callout) section: grid margins don't collapse, so the preceding
+     content section's 50px bottom + this section's 50px top = 100px gap. Source is
+     ~46px (the video sits close under the intro). Zero this section's top margin so
+     the combined gap ≈ 50px, matching source. */
+  body.sidebar main > .section.video-container {
+    margin-top: 0;
+  }
+
   /* Hero band: row 1, full bleed across all columns (the hero block paints its
      own blue background and centers its own content). */
   body.sidebar main > .section.hero-container {
@@ -534,11 +581,16 @@ body.sidebar main > .section.sidebar-nav.breadcrumb-container .breadcrumb nav ol
     grid-row: 1;
   }
 
-  /* Left section-navigation: row 2, nav column. Static (NOT sticky) — the source
-     nav scrolls away with the page content, same as the right column. */
+  /* Left section-navigation: nav column, starting at row 2. SPAN many rows so the
+     rail's full height (nav list + promo card, ~470px) distributes DOWN col 2 across
+     the content rows instead of inflating row 2 alone. Without the span, row 2 grows
+     to the tall rail's height and the short intro paragraph beside it (col 3, row 2)
+     leaves a large empty gap before the next col-3 section (the video) — see the
+     source, where content flows at its natural top with no gap. align-self:start keeps
+     the rail pinned to its natural height at the top of the span. */
   body.sidebar main > .section.sidebar-nav {
     grid-column: 2;
-    grid-row: 2;
+    grid-row: 2 / span 999;
     align-self: start;
   }
 
@@ -574,11 +626,15 @@ body.sidebar main > .section.sidebar-nav.breadcrumb-container .breadcrumb nav ol
      banner (Grace Essential Articles gray band) span all columns. (Without this, the section
      inherits grid-column:3 = the 747px content column, so the banner's gray band is confined to
      the narrow content column instead of running edge-to-edge like the source.) */
+  /* stylelint-disable no-descending-specificity -- these full-width breakout selectors intentionally
+     follow the earlier h5-disclaimer rule; reordering them would break the grid override cascade. */
   body.sidebar main > .section:has(.banner.contact-split),
   body.sidebar main > .section:has(.banner.resource-download),
+  body.sidebar main > .section:has(.banner.cta),
   body.sidebar main > .section:has(.social.follow) {
     grid-column: 1 / -1;
   }
+  /* stylelint-enable no-descending-specificity */
 
   /* Re-center the resource-download banner's own content within the full-width band and cap it
      to the page container so the image + text don't stretch across the whole viewport
@@ -587,6 +643,18 @@ body.sidebar main > .section.sidebar-nav.breadcrumb-container .breadcrumb nav ol
     max-width: 1280px;
     margin-inline: auto;
     padding-inline: 20px;
+  }
+
+  /* Restore the section gap AFTER a full-width banner.cta. The banner block's global CSS zeroes its
+     section margins (`margin: 0 !important` for the campaign full-bleed band), which also collapses
+     the space above the FOLLOWING section (e.g. "Latest Insights" jammed against the e-catalysts
+     banner). The later cards-container rule (`…breadcrumb-container) > .section.cards-container`)
+     also zeroes margin-top; qualify both section classes here so this exception outranks it.
+     Source keeps ~40px there — give the next section its 50px top margin back. */
+  /* stylelint-disable no-descending-specificity -- this exception is intentionally more specific
+     than the cards-container grid rules that follow so it outranks the margin-top:0 zeroing rule. */
+  body.sidebar main > .section.banner-container:has(.banner.cta) + .section.cards-container {
+    margin-top: var(--spacing-l); /* 50px */
   }
 
   /* Insights related-articles cards: DEFAULT (most pages, e.g. the ML reference + 4-ways +
@@ -608,6 +676,7 @@ body.sidebar main > .section.sidebar-nav.breadcrumb-container .breadcrumb nav ol
   body.sidebar main > .section.cards-container:has(.cards.product) {
     grid-column: 2 / 4;
   }
+  /* stylelint-enable no-descending-specificity */
 
   /* A standalone CONTENT-IMAGE section (its only content is a picture/img — e.g. the
      hydrogenation-catalysts RANEY flowchart diagram). Source renders these `col-lg-12 full-width`
@@ -657,14 +726,15 @@ body.sidebar main > .section.sidebar-nav.breadcrumb-container .breadcrumb nav ol
     z-index: 20;
   }
 
-  /* Resting position (NON-stuck only): the widget-container's flow top sits ~80px
-     below the hero band top (grid row centers it), so offset the panel to land at
-     78px below the hero top — matching the source (hero 121-299, panel top 199),
-     straddling the 178px band. Scoped to :not(.is-stuck) so it does NOT override
+  /* Resting position (NON-stuck only): the widget-container's flow top coincides with
+     the hero band top. Source lands the panel ~173px below the hero top (measured at
+     1280px: hero 121→394, panel top 294), so its lower half straddles the hero's bottom
+     edge and hangs onto the white content band below — NOT tucked high inside the hero.
+     Offset the panel by that amount. Scoped to :not(.is-stuck) so it does NOT override
      the block's stuck landing spot (fixed, top:106). The block JS switches to
      .is-stuck once the panel's top reaches 106px on scroll. */
   body.sidebar .custom-widget.contact-sticky:not(.is-stuck) .contact-sticky-desktop {
-    top: 29px;
+    top: 173px;
   }
 }
 
@@ -1401,13 +1471,11 @@ body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section.ca
     grid-column: 2 / 4;
   }
 
-  /* A category-grid gray band that follows the LEFT-NAV rail (e.g. agriculture-cdmo "A Portfolio of
-     Solutions") shifts its content RIGHT into the content column only (source col-lg-9, aligned past
-     the nav), NOT starting at the nav column. Re-inset to cols 3–4 so the heading + cards line up
-     with the body copy above. Scoped to the plain (non-breadcrumb) sidebar layout. */
-  body.sidebar main:not(:has(> .section.sidebar-nav.breadcrumb-container)) > .section.gray-band.cards-container:has(.cards.category-grid) > * {
-    grid-column: 3 / 5;
-  }
+  /* NOTE: a category-grid gray band spans cols 2–4 (nav + content), left-aligned at the rail
+     (source x=20 → 940), via the `> *` rule above — matching both agriculture-cdmo "A Portfolio of
+     Solutions" AND pe-gas-phase "Catalysts for Gas Phase PE Processes" (both measured left:20→940
+     on source). An earlier `grid-column: 3 / 5` override wrongly shifted the content RIGHT into the
+     widget rail (233 → 1260) — the "shifted left/misaligned" defect — and has been removed. */
 
   /* PLAIN gray content box (NO cards, e.g. the "How is gas phase polymerization…" FAQ panel): the
      source CONFINES the gray fill to the 707px content column (233–940), NOT full-bleed. Keep it in

@@ -2,13 +2,14 @@
   "status": "success",
   "url": "https://grace.com/industries/refining-technologies/value-creation/technical-service-expertise/",
   "path": "industries/refining-technologies/value-creation/technical-service-expertise",
-  "timestamp": "2026-08-15T19:50:13.867Z",
+  "timestamp": "2026-08-16T13:31:46.637Z",
   "title": "Technical Service Expertise",
   "pageType": "default",
   "blocks": [
     "hero-banner",
     "video-overlay",
     "quote-highlight",
+    "banner-cta",
     "cards-featured-content",
     "banner-resource-download"
   ],

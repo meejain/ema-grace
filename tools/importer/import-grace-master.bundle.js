@@ -644,6 +644,28 @@ var CustomImportScript = (() => {
         "priority": 80
       },
       {
+        "name": "columns-two-column-text",
+        "family": "columns",
+        "render": "parse",
+        "matcher": "columnsTwoColumnText",
+        "selector": null,
+        "item": ".col-lg-6",
+        "emits": "Columns",
+        "note": "2-col row, BOTH columns text (no image) \u2192 base Columns block, side-by-side",
+        "priority": 85
+      },
+      {
+        "name": "columns-split-list",
+        "family": "columns",
+        "render": "parse",
+        "matcher": "columnsSplitList",
+        "selector": null,
+        "item": ".rich-text.split-list",
+        "emits": "Columns",
+        "note": "body split-list <ul> (no gated download) \u2192 2 balanced list cells, side-by-side",
+        "priority": 86
+      },
+      {
         "name": "table-contact-matrix",
         "family": "table",
         "render": "parse",
@@ -1203,7 +1225,13 @@ var CustomImportScript = (() => {
       return [imageCell, content];
     });
     const block = WebImporter.Blocks.createBlock(document, { name: "Cards (icon-grid)", cells });
-    element.replaceWith(block);
+    const childrenWithCards = Array.from(element.children).filter((child) => cards.some((card) => child === card || child.contains(card)));
+    if (childrenWithCards.length && childrenWithCards.length < element.children.length) {
+      element.insertBefore(block, childrenWithCards[0]);
+      childrenWithCards.forEach((child) => child.remove());
+    } else {
+      element.replaceWith(block);
+    }
   }
 
   // tools/importer/parsers/cards-category-grid.js
@@ -1384,6 +1412,21 @@ var CustomImportScript = (() => {
         if ((el.textContent || "").trim()) pushClone(el);
       });
     }
+    if (textbox) {
+      const doc = col.ownerDocument;
+      col.querySelectorAll(".button a[href], .button__section a[href], a.btn-primary, a.btn-secondary").forEach((a) => {
+        if (scope.contains(a)) return;
+        const label = (a.textContent || "").replace(/\s+/g, " ").trim();
+        const href = a.getAttribute("href") || "";
+        if (!label || !href) return;
+        const p = doc.createElement("p");
+        const link = doc.createElement("a");
+        link.setAttribute("href", href);
+        link.textContent = label;
+        p.append(link);
+        out.push(p);
+      });
+    }
     return out.length ? out : [scope.cloneNode(true)];
   }
   function buildTwoColumn(row, document, blockName) {
@@ -1406,45 +1449,76 @@ var CustomImportScript = (() => {
     if (block) element.replaceWith(block);
   }
 
-  // tools/importer/parsers/columns-history-item.js
+  // tools/importer/parsers/columns-two-column-text.js
   function parse23(element, { document }) {
+    const block = buildTwoColumn(element, document, "Columns");
+    if (block) element.replaceWith(block);
+  }
+
+  // tools/importer/parsers/columns-split-list.js
+  function parse24(element, { document }) {
+    const ul = element.querySelector(":scope > ul, :scope > div > ul, ul");
+    if (!ul) return;
+    const items = Array.from(ul.children).filter((li) => li.tagName === "LI");
+    if (items.length < 4) return;
+    const lead = [];
+    Array.from(element.querySelectorAll("p")).forEach((p) => {
+      if ((p.textContent || "").trim()) lead.push(p.cloneNode(true));
+    });
+    const mid = Math.ceil(items.length / 2);
+    const mkUl = (slice) => {
+      const list = document.createElement("ul");
+      slice.forEach((li) => list.appendChild(li.cloneNode(true)));
+      return list;
+    };
+    const cellA = [mkUl(items.slice(0, mid))];
+    const cellB = [mkUl(items.slice(mid))];
+    const block = WebImporter.Blocks.createBlock(document, { name: "Columns", cells: [[cellA, cellB]] });
+    const frag = document.createElement("div");
+    lead.forEach((p) => frag.appendChild(p));
+    frag.appendChild(block);
+    element.replaceWith(...frag.childNodes);
+  }
+
+  // tools/importer/parsers/columns-history-item.js
+  function parse25(element, { document }) {
     const block = buildTwoColumn(element, document, "Columns (history-item)");
     if (block) element.replaceWith(block);
   }
 
   // tools/importer/parsers/columns-profile-detail.js
-  function parse24(element, { document }) {
+  function parse26(element, { document }) {
     const block = buildTwoColumn(element, document, "Columns (profile-detail)");
     if (block) element.replaceWith(block);
   }
 
   // tools/importer/parsers/columns-location-detail.js
-  function parse25(element, { document }) {
+  function parse27(element, { document }) {
     const block = buildTwoColumn(element, document, "Columns (location-detail)");
     if (block) element.replaceWith(block);
   }
 
   // tools/importer/parsers/columns-app-promo.js
-  function parse26(element, { document }) {
+  function parse28(element, { document }) {
     const row = element.querySelector(":scope > .row, .row") || element;
     const block = buildTwoColumn(row, document, "Columns (app-promo)");
     if (block) element.replaceWith(block);
   }
 
   // tools/importer/parsers/columns-brochure-promo.js
-  function parse27(element, { document }) {
+  function parse29(element, { document }) {
     const block = buildTwoColumn(element, document, "Columns (brochure-promo)");
     if (block) element.replaceWith(block);
   }
 
   // tools/importer/parsers/columns-checklist.js
-  function parse28(element, { document }) {
+  function parse30(element, { document }) {
     const block = buildTwoColumn(element, document, "Columns (checklist)");
     if (block) element.replaceWith(block);
   }
 
   // tools/importer/parsers/columns-horizontal-teaser.js
-  function parse29(element, { document }) {
+  function parse31(element, { document }) {
     const items = Array.from(element.querySelectorAll("a.item")).filter((it) => !it.classList.contains("slate-bkgd") && !it.classList.contains("tab-img") && !it.querySelector(".image img, picture img"));
     if (!items.length) return;
     const cells = items.map((item) => {
@@ -1484,22 +1558,25 @@ var CustomImportScript = (() => {
   }
 
   // tools/importer/parsers/columns-horizontal-teaser-featured.js
-  function parse30(element, { document }) {
+  function parse32(element, { document }) {
     const items = Array.from(element.querySelectorAll("a.item.slate-bkgd"));
     if (!items.length) return;
+    const hasImage = items.some((it) => it.querySelector(".image img, .image picture, picture, img"));
     const cells = items.map((item) => {
       const titleEl = item.querySelector(".image p.h4, p.h4, .h4, .title");
       const bodyEl = item.querySelector(".spt-copy");
+      const img = item.querySelector(".image picture, .image img, picture, img");
       const href = item.getAttribute("href") || "";
-      const c1 = [];
+      const cImg = hasImage ? [img ? img.cloneNode(true) : ""] : null;
+      const cTitle = [];
       if (titleEl && titleEl.textContent.trim()) {
         const h = document.createElement("h3");
         h.textContent = titleEl.textContent.trim();
-        c1.push(h);
+        cTitle.push(h);
       }
-      const c2 = [];
+      const cBody = [];
       if (bodyEl) bodyEl.querySelectorAll("p").forEach((p) => {
-        if (p.textContent.trim()) c2.push(p.cloneNode(true));
+        if (p.textContent.trim()) cBody.push(p.cloneNode(true));
       });
       if (href) {
         const p = document.createElement("p");
@@ -1507,17 +1584,24 @@ var CustomImportScript = (() => {
         a.href = href;
         a.textContent = "Learn More";
         p.append(a);
-        c2.push(p);
+        cBody.push(p);
       }
-      return [c1, c2];
+      return cImg ? [cImg, cTitle, cBody] : [cTitle, cBody];
     });
     const block = WebImporter.Blocks.createBlock(document, { name: "Columns (horizontal-teaser, featured-products)", cells });
     const host = element.closest(".feature-set") || element;
-    host.replaceWith(block);
+    const label = element.querySelector && element.querySelector(".subhead-large") || host.querySelector && host.querySelector(".subhead-large");
+    if (label && label.textContent.trim()) {
+      const h = document.createElement("h2");
+      h.textContent = label.textContent.trim();
+      host.replaceWith(h, block);
+    } else {
+      host.replaceWith(block);
+    }
   }
 
   // tools/importer/parsers/columns-image-teaser.js
-  function parse31(element, { document }) {
+  function parse33(element, { document }) {
     const items = Array.from(element.querySelectorAll("a.item")).filter((it) => it.classList.contains("tab-img") || it.querySelector(".image img, picture img"));
     if (!items.length) return;
     const cells = items.map((item) => {
@@ -1576,7 +1660,7 @@ var CustomImportScript = (() => {
     }
     return [qCell, aCell];
   }
-  function parse32(element, { document }) {
+  function parse34(element, { document }) {
     const dls = Array.from(element.querySelectorAll("dl.accordion, .accordion-comp-list > dl, dl"));
     if (!dls.length) return;
     const cells = dls.map((dl) => qa(dl, document));
@@ -1617,7 +1701,7 @@ var CustomImportScript = (() => {
     }
     return cell;
   }
-  function parse33(element, { document }) {
+  function parse35(element, { document }) {
     const list = element.querySelector(":scope > .accordion-comp-list") || element;
     const dls = Array.from(list.children).filter((el) => el.tagName === "DL").concat(Array.from(list.querySelectorAll(":scope > dl")));
     const outer = dls.length ? dls : Array.from(element.querySelectorAll("dl"));
@@ -1638,7 +1722,7 @@ var CustomImportScript = (() => {
   }
 
   // tools/importer/parsers/quote-highlight.js
-  function parse34(element, { document }) {
+  function parse36(element, { document }) {
     const numberEl = element.querySelector(".h4.title, .h4, .title, .statistic-number");
     const captionEl = element.querySelector(".h6.spt-copy, .spt-copy, .h6, .caption");
     const number = numberEl ? numberEl.textContent.trim() : "";
@@ -1653,7 +1737,7 @@ var CustomImportScript = (() => {
   }
 
   // tools/importer/parsers/quote-testimonial.js
-  function parse35(element, { document }) {
+  function parse37(element, { document }) {
     const scope = element.querySelector(".quote-section") || element;
     const quoteEl = scope.querySelector(".quote-text, .quote-container p, blockquote, p");
     const authorEl = scope.querySelector(".citation .author, .author");
@@ -1668,7 +1752,7 @@ var CustomImportScript = (() => {
   }
 
   // tools/importer/parsers/banner-resource-download.js
-  function parse36(element, { document }) {
+  function parse38(element, { document }) {
     const img = element.querySelector(".image picture, .image img, picture, img");
     const c1 = img ? [img.cloneNode(true)] : [];
     const c2 = [];
@@ -1703,7 +1787,7 @@ var CustomImportScript = (() => {
   }
 
   // tools/importer/parsers/social-share.js
-  function parse37(element, { document }) {
+  function parse39(element, { document }) {
     const links = Array.from(element.querySelectorAll("a.social-link, .share-button, [data-channel]"));
     const channels = links.map((a) => (a.getAttribute("data-channel") || a.getAttribute("aria-label") || a.textContent || "").trim()).filter(Boolean);
     const uniq = [...new Set(channels.map((c) => c.replace(/^./, (m) => m.toUpperCase())))];
@@ -1713,7 +1797,7 @@ var CustomImportScript = (() => {
   }
 
   // tools/importer/parsers/social-follow.js
-  function parse38(element, { document }) {
+  function parse40(element, { document }) {
     const headingEl = element.querySelector(".heading h3, .heading, h3");
     const heading = headingEl ? headingEl.textContent.trim() : "Follow us";
     const cards = Array.from(element.querySelectorAll("a.cmp-card.style-icon, a.cmp-card[href], .card a[href]"));
@@ -1747,7 +1831,7 @@ var CustomImportScript = (() => {
   }
 
   // tools/importer/parsers/carousel.js
-  function parse39(element, { document }) {
+  function parse41(element, { document }) {
     const items = Array.from(element.querySelectorAll(".cmp-carousel__item, .carousel-item, .item"));
     if (!items.length) return;
     const cells = items.map((item) => {
@@ -1785,7 +1869,7 @@ var CustomImportScript = (() => {
   }
 
   // tools/importer/parsers/map-embedded.js
-  function parse40(element, { document }) {
+  function parse42(element, { document }) {
     const iframe = element.querySelector('iframe[src*="google.com/maps"], iframe[src*="maps.google"], iframe[src*="output=embed"]');
     const src = iframe ? iframe.getAttribute("src") : "";
     const cells = [];
@@ -1813,7 +1897,7 @@ var CustomImportScript = (() => {
   }
 
   // tools/importer/parsers/featured-product-selector.js
-  function parse41(element, { document }) {
+  function parse43(element, { document }) {
     const headingEl = element.querySelector(".subhead-large, .heading");
     const heading = headingEl ? headingEl.textContent.trim() : "Featured Products";
     const seen = /* @__PURE__ */ new Set();
@@ -1848,7 +1932,7 @@ var CustomImportScript = (() => {
   }
 
   // tools/importer/parsers/custom-widget-contact-panel.js
-  function parse42(element, { document }) {
+  function parse44(element, { document }) {
     const panel = element.querySelector(".contact-us__cmp, .contactus__content-desktop, .contactus__content") || element;
     const heading = (panel.querySelector(".contactus__heading, h2, h3, h4") || {}).textContent || "Contact Us";
     const tagline = (panel.querySelector(".contactus__text, p") || {}).textContent || "";
@@ -1870,7 +1954,7 @@ var CustomImportScript = (() => {
   }
 
   // tools/importer/parsers/custom-widget-news-archive.js
-  function parse43(element, { document }) {
+  function parse45(element, { document }) {
     const dls = Array.from(element.querySelectorAll("dl.accordion, .accordion-comp-list > dl, dl"));
     if (!dls.length) return;
     const cells = dls.map((dl) => {
@@ -1884,10 +1968,12 @@ var CustomImportScript = (() => {
           const link = cb.querySelector("a[href]");
           if (link) {
             const p = document.createElement("p");
+            const strong = document.createElement("strong");
             const a = document.createElement("a");
             a.href = link.getAttribute("href") || "#";
             a.textContent = (link.textContent || "Download").replace(/\s+/g, " ").trim();
-            p.append(a);
+            strong.append(a);
+            p.append(strong);
             content.push(p);
           }
         });
@@ -1902,7 +1988,7 @@ var CustomImportScript = (() => {
   }
 
   // tools/importer/parsers/banner-cta.js
-  function parse44(element, { document }) {
+  function parse46(element, { document }) {
     const title = element.querySelector("h2, h3, .h2, .h3, .subhead-large");
     const paras = Array.from(element.querySelectorAll(".text p, .rich-text p, p")).filter((p) => p.textContent.trim());
     const cta = element.querySelector(".button a, a.btn-primary, .cta a, a[href]");
@@ -1925,12 +2011,21 @@ var CustomImportScript = (() => {
       p.append(a);
       bodyCell.push(p);
     }
-    const block = WebImporter.Blocks.createBlock(document, { name: "Banner (cta)", cells: [[titleCell], [bodyCell]] });
-    element.replaceWith(block);
+    const bgHost = element.matches('[style*="background-image"]') ? element : element.closest('[style*="background-image"]');
+    let name = "Banner (cta)";
+    if (bgHost) {
+      const styleAttr = bgHost.getAttribute("style") || "";
+      const m = /background-image\s*:\s*url\((['"]?)([^'")]+)\1\)/i.exec(styleAttr);
+      const bgUrl = m && m[2];
+      if (bgUrl && /e-catalysts-banner/i.test(bgUrl)) name = "Banner (cta, bg-ecatalysts)";
+    }
+    const block = WebImporter.Blocks.createBlock(document, { name, cells: [[titleCell], [bodyCell]] });
+    const host = bgHost && bgHost.tagName === "SECTION" ? bgHost : element;
+    host.replaceWith(block);
   }
 
   // tools/importer/parsers/quote-cta.js
-  function parse45(element, { document }) {
+  function parse47(element, { document }) {
     if (element.querySelector(".quote-section")) return;
     const paras = Array.from(element.querySelectorAll("p")).filter((p) => p.textContent.trim());
     if (!paras.length) return;
@@ -1963,7 +2058,7 @@ var CustomImportScript = (() => {
     if (watch && /youtube/i.test(u)) return `https://www.youtube.com/watch?v=${watch[1]}`;
     return u;
   }
-  function parse46(element, { document }) {
+  function parse48(element, { document }) {
     const img = element.querySelector("picture, img");
     const link = element.querySelector("a[href], [data-video-url]");
     let href = link ? link.getAttribute("href") || link.getAttribute("data-video-url") || "" : "";
@@ -1996,7 +2091,7 @@ var CustomImportScript = (() => {
   }
 
   // tools/importer/parsers/banner-contact-split.js
-  function parse47(element, { document }) {
+  function parse49(element, { document }) {
     const titleEl = element.querySelector(".contact-us-title, h2");
     const title = titleEl ? (titleEl.textContent || "").replace(/\s+/g, " ").trim() : "Want to talk to an expert?";
     const cols = Array.from(element.querySelectorAll('.row.has-title > [class*="col-lg-6"], .row.has-title > [class*="col-"]'));
@@ -2033,7 +2128,7 @@ var CustomImportScript = (() => {
   }
 
   // tools/importer/parsers/cards-related-articles.js
-  function parse48(element, { document }) {
+  function parse50(element, { document }) {
     const container = element.classList && element.classList.contains("cmp-card-list") ? element : element.closest(".cmp-card-list") || element;
     const cards = Array.from(container.querySelectorAll("a.cmp-card.bio, .card a.cmp-card, a.cmp-card"));
     if (!cards.length) return;
@@ -2063,7 +2158,7 @@ var CustomImportScript = (() => {
   }
 
   // tools/importer/parsers/video-grid.js
-  function parse49(element, { document }) {
+  function parse51(element, { document }) {
     const vids = Array.from(element.querySelectorAll(".media-video"));
     if (vids.length < 2) return;
     const cells = vids.map((v) => {
@@ -2087,7 +2182,7 @@ var CustomImportScript = (() => {
   }
 
   // tools/importer/parsers/cards-featured-content.js
-  function parse50(element, { document, params }) {
+  function parse52(element, { document, params }) {
     const cmp = element.classList && element.classList.contains("featured-blog-cmp") ? element : element.closest(".featured-blog-cmp") || element;
     const items = Array.from(cmp.querySelectorAll(".featured-blog-list .item, a.item, .item"));
     if (!items.length) return;
@@ -2329,41 +2424,43 @@ var CustomImportScript = (() => {
     "cards-solution-grid": parse20,
     "columns-image-left": parse21,
     "columns-image-right": parse22,
-    "columns-history-item": parse23,
-    "columns-profile-detail": parse24,
-    "columns-location-detail": parse25,
-    "columns-app-promo": parse26,
-    "columns-brochure-promo": parse27,
-    "columns-checklist": parse28,
-    "columns-horizontal-teaser": parse29,
-    "columns-horizontal-teaser-featured": parse30,
-    "columns-image-teaser": parse31,
-    "accordion-faq": parse32,
-    "accordion-nested": parse33,
-    "quote-highlight": parse34,
-    "quote-testimonial": parse35,
-    "banner-resource-download": parse36,
-    "social-share": parse37,
-    "social-follow": parse38,
-    "carousel": parse39,
-    "map-embedded": parse40,
-    "featured-product-selector": parse41,
-    "custom-widget-contact-panel": parse42,
-    "custom-widget-news-archive": parse43,
+    "columns-two-column-text": parse23,
+    "columns-split-list": parse24,
+    "columns-history-item": parse25,
+    "columns-profile-detail": parse26,
+    "columns-location-detail": parse27,
+    "columns-app-promo": parse28,
+    "columns-brochure-promo": parse29,
+    "columns-checklist": parse30,
+    "columns-horizontal-teaser": parse31,
+    "columns-horizontal-teaser-featured": parse32,
+    "columns-image-teaser": parse33,
+    "accordion-faq": parse34,
+    "accordion-nested": parse35,
+    "quote-highlight": parse36,
+    "quote-testimonial": parse37,
+    "banner-resource-download": parse38,
+    "social-share": parse39,
+    "social-follow": parse40,
+    "carousel": parse41,
+    "map-embedded": parse42,
+    "featured-product-selector": parse43,
+    "custom-widget-contact-panel": parse44,
+    "custom-widget-news-archive": parse45,
     // These 3 have real per-page content on COMMON selectors, so they PARSE (not seed) — seeding
     // literal draft text onto every .media-callout / div.quote / .media-video would be destructive.
-    "banner-cta": parse44,
-    "quote-cta": parse45,
-    "video-overlay": parse46,
+    "banner-cta": parse46,
+    "quote-cta": parse47,
+    "video-overlay": parse48,
     // Default-path parser for the contact-split banner (sidebar pages build it via PATH A's
     // buildContactSplitBanner; this covers non-sidebar pages carrying the same fragment).
-    "banner-contact-split": parse47,
-    "cards-related-articles": parse48,
-    "video-grid": parse49,
+    "banner-contact-split": parse49,
+    "cards-related-articles": parse50,
+    "video-grid": parse51,
     // Real parser for the "Latest Insights"/related block — REPLACES the earlier seed-from-draft
     // (which injected placeholder draft images + wrong articles). Registering here makes the
     // seed-from-draft discovery branch fall through to this parser.
-    "cards-featured-content": parse50
+    "cards-featured-content": parse52
   };
   var transformers = [transform, transform2];
   function isCategoryGrid(list) {
@@ -2377,6 +2474,21 @@ var CustomImportScript = (() => {
   var MATCHERS = {
     "columns-image-left": (doc) => rowsByColumnOrder(doc, "image"),
     "columns-image-right": (doc) => rowsByColumnOrder(doc, "text"),
+    // two-column TEXT row (text|text, no image) → base Columns block (side-by-side ≥900px).
+    "columns-two-column-text": (doc) => rowsTwoColumnText(doc),
+    // split-list body LIST (source `.rich-text.split-list` renders its <ul> across 2 CSS columns,
+    // e.g. unipol-pp-process "…enables your success:" benefits list). NOT the davisil standalone
+    // two-column-content (that has a gated download → table-two-column-content). Claim a plain body
+    // split-list whose <ul> has ≥4 items and NO gated download in its section → Columns (2 balanced
+    // list cells, side-by-side). Excludes MIXED prose blocks (handled as inline body content).
+    "columns-split-list": (doc) => Array.from(doc.querySelectorAll(".rich-text.split-list")).filter((sl) => {
+      const section = sl.closest("section, article");
+      if (section && section.querySelector('.button__section, button[data-gated-id], a[href$=".pdf"]')) return false;
+      const ul = sl.querySelector(":scope > ul, :scope > div > ul, ul");
+      if (!ul || ul.children.length < 4) return false;
+      const paras = Array.from(sl.querySelectorAll("p")).filter((p) => (p.textContent || "").replace(/\s+/g, " ").trim().length > 40);
+      return paras.length <= 1;
+    }),
     // news-archive: an .accordion-comp whose dd's hold .media-callout PDF covers (per-year issue
     // archive). Checked before the other accordions so it wins that shell.
     "custom-widget-news-archive": (doc) => Array.from(doc.querySelectorAll(".accordion-comp")).filter((ac) => ac.querySelector('dd .media-callout, dd .col-lg-6 picture, dd a[href*="pdf"]') && !ac.closest("dd")),
@@ -2389,7 +2501,16 @@ var CustomImportScript = (() => {
     // banner-cta: a .media-callout that is a CTA banner — has a heading AND a real CTA link, but
     // is NOT the app-promo (no multi-paragraph intro) and not inside a card grid. Kept narrow so
     // it doesn't claim every .media-callout on the site.
-    "banner-cta": (doc) => Array.from(doc.querySelectorAll(".media-callout, .cmp-media-callout")).filter((mc) => mc.querySelector("h2, h3, .h2, .h3") && mc.querySelector(".button a, a.btn-primary, .cta a") && !mc.closest(".card-group, .cmp-card-list") && mc.querySelectorAll(".text p, .rich-text p, p").length <= 2),
+    "banner-cta": (doc) => {
+      const callouts = Array.from(doc.querySelectorAll(".media-callout, .cmp-media-callout")).filter((mc) => mc.querySelector("h2, h3, .h2, .h3") && mc.querySelector(".button a, a.btn-primary, .cta a") && !mc.closest(".card-group, .cmp-card-list") && mc.querySelectorAll(".text p, .rich-text p, p").length <= 2);
+      const bannerSections = Array.from(doc.querySelectorAll('section.background-image[style*="background-image"], section.none-bkgd[style*="background-image"]')).filter((sec) => {
+        if (sec.closest(".generic-hero, .hero__section")) return false;
+        const styleAttr = sec.getAttribute("style") || "";
+        if (!/background-image\s*:\s*url\(/i.test(styleAttr) || /gradient/i.test(styleAttr)) return false;
+        return sec.querySelector("h1, h2, h3, h4") && sec.querySelector(".button a, a.btn-primary, .cta a, a[href]");
+      });
+      return [...callouts, ...bannerSections];
+    },
     // quote-cta: a div.quote with a CTA link but NOT a testimonial (.quote-section) or a
     // statistic highlight (.cmp-card.statistic).
     "quote-cta": (doc) => Array.from(doc.querySelectorAll("div.quote")).filter((q) => q.querySelector("a[href]") && !q.querySelector(".quote-section") && !q.closest(".cmp-card.statistic") && !q.querySelector(".cmp-card.statistic")),
@@ -2418,8 +2539,12 @@ var CustomImportScript = (() => {
     "cards-related-articles": (doc) => Array.from(doc.querySelectorAll(".cmp-card-list.grid.three-columns, .card-list .cmp-card-list")).filter((cl) => /related articles/i.test((cl.querySelector(".heading, h3") || cl.previousElementSibling || {}).textContent || "") && cl.querySelector("a.cmp-card.bio, a.cmp-card")),
     // social-follow: a .cmp-card-list with a "Follow us" heading + external social icon links.
     "social-follow": (doc) => Array.from(doc.querySelectorAll(".card-list .cmp-card-list, .cmp-card-list")).filter((cl) => /follow us/i.test((cl.querySelector(".heading, h3") || {}).textContent || "") && cl.querySelector('a.cmp-card.style-icon, a.cmp-card[href^="http"]')),
-    // featured-product-selector: a feature-set carousel whose heading says "Featured Products".
-    "featured-product-selector": (doc) => Array.from(doc.querySelectorAll(".feature-set, .cmp-feature-set")).filter((fs) => /featured products/i.test((fs.querySelector(".subhead-large, .heading") || {}).textContent || "")).map((fs) => fs.closest(".feature-set") || fs).filter((v, i, a) => a.indexOf(v) === i),
+    // featured-product-selector: DISABLED. The grace.com "Featured Products" feature-set is a set of
+    // dark slate cards (a.item.slate-bkgd) with white text + chevron — visually identical to the
+    // `columns horizontal-teaser featured-products` block, NOT the tablist product-selector. Routing
+    // it here rendered transparent/black tablist tabs (wrong vs source). It now flows through the
+    // featureSetContainers('slate-bkgd') matcher below, which preserves the "Featured Products" label.
+    "featured-product-selector": () => [],
     // checklist: a .row.section-66-33 pairing a .quote with a checklist (.text h4 + ul steps).
     "columns-checklist": (doc) => Array.from(doc.querySelectorAll(".row.section-66-33")).filter((r) => r.querySelector(".quote") && r.querySelector(".text ul, .rich-text ul")),
     // history-item: .row.section-66-33 with a year <h2> + image, but NOT the checklist (no quote).
@@ -2429,8 +2554,9 @@ var CustomImportScript = (() => {
     //   horizontal-teaser = plain a.item (no image, not slate, not tab-img). Match the carousel
     //   CONTAINER whose items are predominantly the given variant, so each fires at most once.
     "columns-image-teaser": (doc) => featureSetContainers(doc, "tab-img"),
-    // Exclude carousels explicitly headed "Featured Products" — those are featured-product-selector.
-    "columns-horizontal-teaser-featured": (doc) => featureSetContainers(doc, "slate-bkgd").filter((fs) => !/featured products/i.test((fs.querySelector(".subhead-large, .heading") || {}).textContent || "")),
+    // ALL slate-bkgd feature-sets (dark cards) → featured columns block, INCLUDING carousels headed
+    // "Featured Products" (the tablist featured-product-selector routing was retired — see above).
+    "columns-horizontal-teaser-featured": (doc) => featureSetContainers(doc, "slate-bkgd"),
     "columns-horizontal-teaser": (doc) => featureSetContainers(doc, "plain"),
     // brochure-promo: a .row with a brochure cover + a gated DOWNLOAD (button/pdf) on one side
     // and a rich-text description with a bullet list on the other. The gated download + list
@@ -2580,6 +2706,29 @@ var CustomImportScript = (() => {
       return firstKind === "image" ? imageThenText : textThenImage;
     });
   }
+  function rowsTwoColumnText(doc) {
+    const rows = Array.from(doc.querySelectorAll("article .row, section .row"));
+    return rows.filter((row) => {
+      const cols = Array.from(row.children).filter((c) => /col-lg-6/.test(c.className));
+      if (cols.length !== 2) return false;
+      const hasImg = (c) => !!c.querySelector(".image, .cmp-image, picture, img");
+      const hasSubstantialText = (c) => {
+        if (c.querySelector("h1, h2, h3, h4, h5, h6")) return true;
+        return Array.from(c.querySelectorAll("p, li")).some((el) => {
+          const link = el.querySelector("a");
+          const txt = (el.textContent || "").replace(/\s+/g, " ").trim();
+          if (link && (link.textContent || "").replace(/\s+/g, " ").trim() === txt) return false;
+          return txt.length > 25;
+        });
+      };
+      if (hasImg(cols[0]) || hasImg(cols[1])) return false;
+      if (!hasSubstantialText(cols[0]) || !hasSubstantialText(cols[1])) return false;
+      const section = row.closest("section, article");
+      const siblingRows = section ? Array.from(section.querySelectorAll(".row")).filter((r) => Array.from(r.children).filter((c) => /col-lg-6/.test(c.className)).length === 2) : [row];
+      if (siblingRows.length > 2) return false;
+      return true;
+    });
+  }
   function hasImageAndText(c) {
     return !!c.querySelector(".image, .cmp-image, .media-callout, picture, img") && !!c.querySelector(".text, .rich-text, .embed, p, h3, h4");
   }
@@ -2617,8 +2766,8 @@ var CustomImportScript = (() => {
       const items = Array.from(root.querySelectorAll("a.item"));
       if (!items.length) return;
       const kindOf = (it) => {
-        if (it.classList.contains("tab-img") || it.querySelector(".image img, picture img")) return "tab-img";
         if (it.classList.contains("slate-bkgd")) return "slate-bkgd";
+        if (it.classList.contains("tab-img") || it.querySelector(".image img, picture img")) return "tab-img";
         return "plain";
       };
       const counts = { "tab-img": 0, "slate-bkgd": 0, plain: 0 };
@@ -2694,8 +2843,12 @@ var CustomImportScript = (() => {
     });
     return navSection;
   }
+  function contactWidgetEl(document) {
+    const els = Array.from(document.querySelectorAll(".contact-us-sticky, .contact-us__cmp, .contact-us-cmp"));
+    return els.find((el) => el.querySelector("button, a[href], .contactus__text, .contact-us-title, .contact-us-subtitle") || (el.textContent || "").replace(/\s+/g, " ").trim().length > 0) || null;
+  }
   function hasContactWidget(document) {
-    return !!document.querySelector(".contact-us-sticky, .contact-us__cmp, .contact-us-cmp");
+    return !!contactWidgetEl(document);
   }
   function executeTransformers(hookName, element, payload) {
     transformers.forEach((fn) => {
@@ -2825,22 +2978,53 @@ var CustomImportScript = (() => {
     if (!leftCol) return null;
     const img = leftCol.querySelector(".embed img, img");
     const headingLink = leftCol.querySelector("h6 a, h5 a, h4 a");
-    if (!img || !headingLink) return null;
-    const href = headingLink.getAttribute("href") || "";
-    const text = (headingLink.textContent || "").replace(/\s+/g, " ").trim();
-    if (!href || !text) return null;
-    const picImg = document.createElement("img");
-    let picSrc = img.getAttribute("src") || "";
-    if (picSrc.startsWith("/content/dam/")) picSrc = `https://grace.com${picSrc}`;
-    picImg.setAttribute("src", picSrc);
-    picImg.setAttribute("alt", img.getAttribute("alt") || text);
-    const link = document.createElement("a");
-    link.setAttribute("href", href);
-    link.textContent = text;
-    return WebImporter.Blocks.createBlock(document, {
-      name: "Cards (industry)",
-      cells: [[[picImg], [link]]]
-    });
+    if (img && headingLink) {
+      const href = headingLink.getAttribute("href") || "";
+      const text = (headingLink.textContent || "").replace(/\s+/g, " ").trim();
+      if (href && text) {
+        const picImg = document.createElement("img");
+        let picSrc = img.getAttribute("src") || "";
+        if (picSrc.startsWith("/content/dam/")) picSrc = `https://grace.com${picSrc}`;
+        picImg.setAttribute("src", picSrc);
+        picImg.setAttribute("alt", img.getAttribute("alt") || text);
+        const link = document.createElement("a");
+        link.setAttribute("href", href);
+        link.textContent = text;
+        return WebImporter.Blocks.createBlock(document, { name: "Cards (industry)", cells: [[[picImg], [link]]] });
+      }
+    }
+    const promoCard = leftCol.querySelector("a.cmp-card.promotion, a.cmp-card.none-image, a.cmp-card.text-on-bkgd");
+    if (promoCard) {
+      const href = promoCard.getAttribute("href") || "";
+      const titleEl = promoCard.querySelector(".h4.title, .h4, .title");
+      const title = titleEl ? titleEl.textContent.replace(/\s+/g, " ").trim() : "";
+      if (href && title) {
+        const eyebrowEl = promoCard.querySelector(".h5");
+        const bodyEl = promoCard.querySelector(".spt-copy, .subhead-small");
+        const cell = [];
+        if (eyebrowEl && eyebrowEl.textContent.trim()) {
+          const p = document.createElement("p");
+          p.textContent = eyebrowEl.textContent.replace(/\s+/g, " ").trim();
+          cell.push(p);
+        }
+        const h = document.createElement("h3");
+        h.textContent = title;
+        cell.push(h);
+        if (bodyEl) {
+          bodyEl.querySelectorAll("p").forEach((bp) => {
+            if (bp.textContent.trim()) cell.push(bp.cloneNode(true));
+          });
+        }
+        const p2 = document.createElement("p");
+        const a2 = document.createElement("a");
+        a2.setAttribute("href", href);
+        a2.textContent = "Learn more";
+        p2.append(a2);
+        cell.push(p2);
+        return WebImporter.Blocks.createBlock(document, { name: "Cards (industry, promotion)", cells: [[cell]] });
+      }
+    }
+    return null;
   }
   function materializeLazyImages(document) {
     document.querySelectorAll('[data-cmp-is="image"], [data-cmp-src]').forEach((el) => {
@@ -3039,7 +3223,7 @@ var CustomImportScript = (() => {
           }
           const before = new Set(document.querySelectorAll("table"));
           try {
-            parse30(featureSet, { document, url, params });
+            parse32(featureSet, { document, url, params });
           } catch (e) {
           }
           const created = Array.from(document.querySelectorAll("table")).find((t2) => !before.has(t2) && !t2.closest("td"));
@@ -3052,7 +3236,7 @@ var CustomImportScript = (() => {
         if (statCard) {
           const before = new Set(document.querySelectorAll("table"));
           try {
-            parse34(statCard, { document, url, params });
+            parse36(statCard, { document, url, params });
           } catch (e) {
           }
           const created = Array.from(document.querySelectorAll("table")).find((t2) => !before.has(t2) && !t2.closest("td"));
@@ -3065,7 +3249,7 @@ var CustomImportScript = (() => {
         if (quoteEl && (quoteEl.querySelector(".quote-text, .citation") || /quote-section/.test(quoteEl.className || ""))) {
           const before = new Set(document.querySelectorAll("table"));
           try {
-            parse35(quoteEl, { document, url, params });
+            parse37(quoteEl, { document, url, params });
           } catch (e) {
           }
           const created = Array.from(document.querySelectorAll("table")).find((t2) => !before.has(t2) && !t2.closest("td"));
@@ -3151,7 +3335,7 @@ var CustomImportScript = (() => {
           contentNodes.push(h2);
           const before = new Set(document.querySelectorAll("table"));
           try {
-            parse48(relCardList, { document, url, params });
+            parse50(relCardList, { document, url, params });
           } catch (e) {
           }
           const created = Array.from(document.querySelectorAll("table")).find((t2) => !before.has(t2) && !t2.closest("td"));
@@ -3524,6 +3708,19 @@ var CustomImportScript = (() => {
       if (a.closest(".hero, .cards, .columns, .card, .cmp-card, table, li, h1, h2, h3, h4, h5, h6, p")) return;
       if (leafParentOk(a)) leaves.push(a);
     });
+    Array.from(main.querySelectorAll("a[href]")).forEach((a) => {
+      const href = a.getAttribute("href") || "";
+      if (/\/is\/image\/|scene7/.test(href)) return;
+      if (href.startsWith("#") || !href.trim()) return;
+      if (a.querySelector("picture, img")) return;
+      if (!a.textContent.trim()) return;
+      if (a.closest(".hero, .cards, .columns, .card, .cmp-card, table, li, h1, h2, h3, h4, h5, h6, p, nav, .section-navigation")) return;
+      if (!leafParentOk(a)) return;
+      const p = document.createElement("p");
+      a.replaceWith(p);
+      p.appendChild(a);
+      leaves.push(p);
+    });
     const all = [...blocks, ...leaves].sort((a, b) => {
       if (a === b) return 0;
       return a.compareDocumentPosition(b) & 4 ? -1 : 1;
@@ -3555,14 +3752,18 @@ var CustomImportScript = (() => {
       if (run.length < 2) return [run];
       const out = [];
       let cur = [];
+      let curIsFp = false;
       run.forEach((el, idx) => {
         const t = (el.textContent || "").replace(/\s+/g, " ").trim().slice(0, 60);
         const fpBoundary = fpNorm.length && t && fpNorm.some((fp) => t.startsWith(fp) || fp.startsWith(t));
         const imgBoundary = isImageLeaf(el) || idx > 0 && isImageLeaf(run[idx - 1]);
-        if ((fpBoundary || imgBoundary) && cur.length) {
+        const fpEndBoundary = curIsFp && !fpBoundary && isHeading(el) && cur.length;
+        if ((fpBoundary || imgBoundary || fpEndBoundary) && cur.length) {
           out.push(cur);
           cur = [];
+          curIsFp = false;
         }
+        if (fpBoundary) curIsFp = true;
         cur.push(el);
       });
       if (cur.length) out.push(cur);
@@ -3592,7 +3793,17 @@ var CustomImportScript = (() => {
         const headFp = (tail[0].textContent || "").replace(/\s+/g, " ").trim().slice(0, 60);
         const headIsBand = fpNorm.length && headFp && fpNorm.some((fp) => headFp.startsWith(fp) || fp.startsWith(headFp));
         const hasImg = tail.some((el) => isImageLeaf(el));
-        if (headIsBand || hasImg) tail = [];
+        const tailBodyIsSubstantial = tail.slice(1).some((el) => {
+          if (/^(UL|OL)$/.test(el.tagName)) return true;
+          if (el.tagName === "P") {
+            const link = el.querySelector("a");
+            const txt = (el.textContent || "").replace(/\s+/g, " ").trim();
+            if (link && (link.textContent || "").replace(/\s+/g, " ").trim() === txt) return false;
+            return txt.length > 60;
+          }
+          return false;
+        });
+        if (headIsBand || hasImg || tailBodyIsSubstantial) tail = [];
       }
       const body = tail.length ? pending.slice(0, tailStart) : pending;
       if (body.length) flushBody(body);
@@ -3812,7 +4023,7 @@ var CustomImportScript = (() => {
         '.cmp-breadcrumb li, nav[aria-label*="readcrumb" i] li'
       ));
       params.sourceLastCrumb = crumbLis.length ? (crumbLis[crumbLis.length - 1].textContent || "").replace(/\s+/g, " ").trim() : "";
-      const cuWidget = document.querySelector(".contact-us-sticky, .contact-us__cmp, .contact-us-cmp");
+      const cuWidget = contactWidgetEl(document);
       params.sourceHadContactWidget = !!cuWidget;
       const featuredBlogEl = document.querySelector(".featured-blog-cmp");
       params.sourceFeaturedHasGeoHex = !!(featuredBlogEl && featuredBlogEl.closest(".geoAndHex"));

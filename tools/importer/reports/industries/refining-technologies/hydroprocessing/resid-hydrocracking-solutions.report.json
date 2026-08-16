@@ -2,7 +2,7 @@
   "status": "success",
   "url": "https://grace.com/industries/refining-technologies/hydroprocessing/resid-hydrocracking-solutions/",
   "path": "industries/refining-technologies/hydroprocessing/resid-hydrocracking-solutions",
-  "timestamp": "2026-08-15T19:46:08.362Z",
+  "timestamp": "2026-08-16T11:15:54.493Z",
   "title": "Resid Hydrocracking Solutions",
   "pageType": "default",
   "blocks": [
@@ -11,8 +11,6 @@
   ],
   "blocksLeftInPlace": [],
   "pageMetadata": [
-    "template",
-    "contactus",
     "breadcrumb",
     "breadcrumb-title"
   ],

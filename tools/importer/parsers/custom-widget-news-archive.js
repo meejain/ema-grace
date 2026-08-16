@@ -18,7 +18,20 @@ export default function parse(element, { document }) {
         const img = cb.querySelector('picture, img');
         if (img) content.push(img.cloneNode(true));
         const link = cb.querySelector('a[href]');
-        if (link) { const p = document.createElement('p'); const a = document.createElement('a'); a.href = link.getAttribute('href') || '#'; a.textContent = (link.textContent || 'Download').replace(/\s+/g, ' ').trim(); p.append(a); content.push(p); }
+        if (link) {
+          // Wrap the download link in <strong> so scripts.js decorateButtons() promotes it to
+          // a.button.primary, which custom-widget.css styles as the green "Download …" button
+          // (the block's CSS already targets `.custom-widget-news-archive-body a.button`). A bare
+          // <a> stayed a plain black underlined link — the catalagram-archive "buttons not green" defect.
+          const p = document.createElement('p');
+          const strong = document.createElement('strong');
+          const a = document.createElement('a');
+          a.href = link.getAttribute('href') || '#';
+          a.textContent = (link.textContent || 'Download').replace(/\s+/g, ' ').trim();
+          strong.append(a);
+          p.append(strong);
+          content.push(p);
+        }
       });
       if (!content.length) { dd.querySelectorAll('picture,img,a[href]').forEach((n) => content.push(n.cloneNode(true))); }
     }

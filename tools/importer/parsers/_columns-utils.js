@@ -45,6 +45,25 @@ export function cellNodes(col) {
       if ((el.textContent || '').trim()) pushClone(el);
     });
   }
+  // A CTA button/link often sits in a SIBLING `.button`/`.button__section` div OUTSIDE the
+  // `.text`/`.rich-text` box (e.g. the pe-solution "Learn more about our activators" link). When
+  // we scoped to the text box above, that CTA was dropped. Re-collect a button link that lives in
+  // the column but outside `scope`, wrapping it in a <p> so decorateButtons promotes it.
+  if (textbox) {
+    const doc = col.ownerDocument;
+    col.querySelectorAll('.button a[href], .button__section a[href], a.btn-primary, a.btn-secondary').forEach((a) => {
+      if (scope.contains(a)) return; // already captured inside the text box
+      const label = (a.textContent || '').replace(/\s+/g, ' ').trim();
+      const href = a.getAttribute('href') || '';
+      if (!label || !href) return;
+      const p = doc.createElement('p');
+      const link = doc.createElement('a');
+      link.setAttribute('href', href);
+      link.textContent = label;
+      p.append(link);
+      out.push(p);
+    });
+  }
   return out.length ? out : [scope.cloneNode(true)];
 }
 

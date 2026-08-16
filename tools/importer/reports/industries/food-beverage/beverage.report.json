@@ -2,13 +2,13 @@
   "status": "success",
   "url": "https://grace.com/industries/food-beverage/beverage/",
   "path": "industries/food-beverage/beverage",
-  "timestamp": "2026-08-15T18:48:07.441Z",
+  "timestamp": "2026-08-16T09:57:22.250Z",
   "title": "Beverage",
   "pageType": "default",
   "blocks": [
     "hero-banner",
     "table-data-grid",
-    "featured-product-selector",
+    "columns-horizontal-teaser-featured",
     "cards-category-grid",
     "cards-featured-content"
   ],

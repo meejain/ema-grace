@@ -1,21 +1,8 @@
 {
-  "status": "success",
+  "status": "failed",
   "url": "https://grace.com/products/silsol/",
   "path": "products/silsol",
-  "timestamp": "2026-08-13T12:09:37.042Z",
-  "title": "SILSOL®",
-  "pageType": "default",
-  "blocks": [
-    "hero-banner",
-    "columns-horizontal-teaser",
-    "cards-featured-content"
-  ],
-  "blocksLeftInPlace": [],
-  "pageMetadata": [
-    "template",
-    "contactus",
-    "contactus-tagline",
-    "breadcrumb"
-  ],
-  "hasForm": true
+  "timestamp": "2026-08-16T13:33:36.961Z",
+  "error": "page.goto: Target page, context or browser has been closed",
+  "errorStack": "page.goto: Target page, context or browser has been closed\n    at processUrl (/home/node/.excat-marketplaces/excat-marketplace/excat/skills/excat-content-import/scripts/run-bulk-import.js:469:18)\n    at async main (/home/node/.excat-marketplaces/excat-marketplace/excat/skills/excat-content-import/scripts/run-bulk-import.js:696:22)"
 }

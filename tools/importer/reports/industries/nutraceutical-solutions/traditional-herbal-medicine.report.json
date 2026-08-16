@@ -2,12 +2,12 @@
   "status": "success",
   "url": "https://grace.com/industries/nutraceutical-solutions/traditional-herbal-medicine/",
   "path": "industries/nutraceutical-solutions/traditional-herbal-medicine",
-  "timestamp": "2026-08-15T19:01:25.597Z",
+  "timestamp": "2026-08-16T09:58:16.056Z",
   "title": "Traditional Herbal Medicine (THM) and Botanical Solutions",
   "pageType": "default",
   "blocks": [
     "hero-banner",
-    "featured-product-selector"
+    "columns-horizontal-teaser-featured"
   ],
   "blocksLeftInPlace": [],
   "pageMetadata": [

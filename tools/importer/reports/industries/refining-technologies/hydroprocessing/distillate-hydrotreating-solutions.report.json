@@ -2,7 +2,7 @@
   "status": "success",
   "url": "https://grace.com/industries/refining-technologies/hydroprocessing/distillate-hydrotreating-solutions/",
   "path": "industries/refining-technologies/hydroprocessing/distillate-hydrotreating-solutions",
-  "timestamp": "2026-08-15T19:45:13.703Z",
+  "timestamp": "2026-08-16T11:16:47.688Z",
   "title": "Distillate Hydrotreating Solutions",
   "pageType": "default",
   "blocks": [
@@ -11,8 +11,6 @@
   ],
   "blocksLeftInPlace": [],
   "pageMetadata": [
-    "template",
-    "contactus",
     "breadcrumb",
     "breadcrumb-title"
   ],

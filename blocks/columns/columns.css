@@ -777,6 +777,15 @@
   border-color: rgb(39 133 60);
 }
 
+/* featured IMAGE card: source keeps the chevron white on hover (no green cue, no flip) */
+.columns.horizontal-teaser.featured-products .columns-horizontal-teaser-card-media:hover .columns-horizontal-teaser-arrow {
+  color: var(--white);
+}
+
+.columns.horizontal-teaser.featured-products .columns-horizontal-teaser-card-media:hover .columns-horizontal-teaser-arrow-icon {
+  border-color: var(--white);
+}
+
 /* title */
 .columns.horizontal-teaser .columns-horizontal-teaser-title {
   font-family: var(--heading-font-family);
@@ -958,6 +967,85 @@
   line-height: 1.3; /* 20.8px, matches source */
 }
 
+/* ---- featured (dark) card WITH an image (value-creation, chemical-processing) ----
+   Source: a.item.slate-bkgd.tab-img.
+   MOBILE (base): the image FILLS the card as a background (330×330 square) with a dark overlay
+   for legibility; the title + copy sit stacked near the top and "Learn More" pins to the bottom,
+   all overlaid white on the image (measured live: title top:40, copy top:86, CTA near bottom).
+   DESKTOP (>=900, below): reverts to a 159px banner row — 214px image left, copy right, chevron. */
+.columns.horizontal-teaser.featured-products .columns-horizontal-teaser-card-media {
+  position: relative;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  min-height: 336px;
+  padding: 40px 20px 34px;
+  text-align: center;
+  overflow: hidden;
+  gap: 12px;
+}
+
+/* image as the full-card background layer */
+.columns.horizontal-teaser.featured-products .columns-horizontal-teaser-media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  line-height: 0;
+}
+
+.columns.horizontal-teaser.featured-products .columns-horizontal-teaser-media picture,
+.columns.horizontal-teaser.featured-products .columns-horizontal-teaser-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* dark overlay over the image so the white text stays legible (source .image .overlay) */
+.columns.horizontal-teaser.featured-products .columns-horizontal-teaser-media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: rgb(0 0 0 / 35%);
+}
+
+/* title: in normal flow on mobile (near the top), white centered, above the image */
+.columns.horizontal-teaser.featured-products .columns-horizontal-teaser-card-media .columns-horizontal-teaser-title-overlay {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+
+.columns.horizontal-teaser.featured-products .columns-horizontal-teaser-title-overlay p,
+.columns.horizontal-teaser.featured-products .columns-horizontal-teaser-title-overlay h2,
+.columns.horizontal-teaser.featured-products .columns-horizontal-teaser-title-overlay h3 {
+  margin: 0;
+  color: var(--white);
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.2;
+  text-align: center;
+}
+
+/* copy: overlaid white, centered, below the title. Source uses the BODY font (Roboto), NOT the
+   Roboto Slab the base featured-products desc rule applies — restore it here. */
+.columns.horizontal-teaser.featured-products .columns-horizontal-teaser-card-media .columns-horizontal-teaser-desc {
+  position: relative;
+  z-index: 1;
+  padding: 0;
+  text-align: center;
+}
+
+.columns.horizontal-teaser.featured-products .columns-horizontal-teaser-card-media .columns-horizontal-teaser-desc p {
+  font-family: var(--body-font-family);
+}
+
+/* the appended "Learn More" arrow overlays the image too, pinned to the bottom (margin-top:auto) */
+.columns.horizontal-teaser.featured-products .columns-horizontal-teaser-card-media .columns-horizontal-teaser-arrow {
+  position: relative;
+  z-index: 1;
+}
+
 /* hover: card flips to white with black text/chevron. Desktop only — mobile
    has no hover (tap would leave the card stuck in the hovered state), so the
    flip is scoped to >= 900px to match the source's touch behaviour. */
@@ -966,6 +1054,50 @@
   .columns.horizontal-teaser.featured-products .columns-horizontal-teaser-card {
     min-height: 159px;
     padding: 0;
+  }
+
+  /* image-left featured banner: 214px image | flowing copy | chevron, 159px tall row.
+     Reset the mobile full-bleed background layout back to an inline left image. */
+  .columns.horizontal-teaser.featured-products .columns-horizontal-teaser-card-media {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 159px;
+    padding: 0;
+    overflow: visible;
+    text-align: left;
+  }
+
+  .columns.horizontal-teaser.featured-products .columns-horizontal-teaser-card-media .columns-horizontal-teaser-media {
+    position: relative;
+    inset: auto;
+    flex: 0 0 214px;
+    width: 214px;
+    height: 159px;
+    align-self: stretch;
+  }
+
+  /* no dark scrim on desktop — the image occupies only the left 214px, title overlaid on it */
+  .columns.horizontal-teaser.featured-products .columns-horizontal-teaser-card-media .columns-horizontal-teaser-media::after {
+    content: none;
+  }
+
+  /* desktop: title overlays the 214px image, centered white */
+  .columns.horizontal-teaser.featured-products .columns-horizontal-teaser-card-media .columns-horizontal-teaser-title-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 214px;
+    padding: 0 12px;
+  }
+
+  .columns.horizontal-teaser.featured-products .columns-horizontal-teaser-card-media .columns-horizontal-teaser-desc {
+    flex: 1 1 auto;
+    padding: 0 0 0 30px;
+    text-align: left;
   }
 
   .columns.horizontal-teaser.featured-products .columns-horizontal-teaser-desc {
@@ -978,21 +1110,24 @@
     line-height: 1.8;
   }
 
-  .columns.horizontal-teaser.featured-products .columns-horizontal-teaser-card:hover {
+  /* hover flip (dark → white) ONLY for the imageless "Featured Products" cards. The image
+     cards (value-creation, chemical-processing) keep their photo + white text on hover — the
+     source does NOT flip them — so exclude .columns-horizontal-teaser-card-media. */
+  .columns.horizontal-teaser.featured-products .columns-horizontal-teaser-card:not(.columns-horizontal-teaser-card-media):hover {
     background-color: var(--white);
     box-shadow: 0 0 12px rgb(0 0 0 / 20%);
   }
 
-  .columns.horizontal-teaser.featured-products .columns-horizontal-teaser-card:hover .columns-horizontal-teaser-title,
-  .columns.horizontal-teaser.featured-products .columns-horizontal-teaser-card:hover .columns-horizontal-teaser-title p,
-  .columns.horizontal-teaser.featured-products .columns-horizontal-teaser-card:hover .columns-horizontal-teaser-title h2,
-  .columns.horizontal-teaser.featured-products .columns-horizontal-teaser-card:hover .columns-horizontal-teaser-title h3,
-  .columns.horizontal-teaser.featured-products .columns-horizontal-teaser-card:hover .columns-horizontal-teaser-desc p,
-  .columns.horizontal-teaser.featured-products .columns-horizontal-teaser-card:hover .columns-horizontal-teaser-arrow {
+  .columns.horizontal-teaser.featured-products .columns-horizontal-teaser-card:not(.columns-horizontal-teaser-card-media):hover .columns-horizontal-teaser-title,
+  .columns.horizontal-teaser.featured-products .columns-horizontal-teaser-card:not(.columns-horizontal-teaser-card-media):hover .columns-horizontal-teaser-title p,
+  .columns.horizontal-teaser.featured-products .columns-horizontal-teaser-card:not(.columns-horizontal-teaser-card-media):hover .columns-horizontal-teaser-title h2,
+  .columns.horizontal-teaser.featured-products .columns-horizontal-teaser-card:not(.columns-horizontal-teaser-card-media):hover .columns-horizontal-teaser-title h3,
+  .columns.horizontal-teaser.featured-products .columns-horizontal-teaser-card:not(.columns-horizontal-teaser-card-media):hover .columns-horizontal-teaser-desc p,
+  .columns.horizontal-teaser.featured-products .columns-horizontal-teaser-card:not(.columns-horizontal-teaser-card-media):hover .columns-horizontal-teaser-arrow {
     color: var(--text-color);
   }
 
-  .columns.horizontal-teaser.featured-products .columns-horizontal-teaser-card:hover .columns-horizontal-teaser-arrow-icon {
+  .columns.horizontal-teaser.featured-products .columns-horizontal-teaser-card:not(.columns-horizontal-teaser-card-media):hover .columns-horizontal-teaser-arrow-icon {
     border-color: var(--text-color);
   }
 }

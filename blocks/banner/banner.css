@@ -264,6 +264,12 @@
   text-align: center;
 }
 
+/* Option: bg-ecatalysts — use the e-catalysts geo-hex Scene7 banner graphic instead of the default
+   flasks photo (source e-catalysts "Sample Analysis and Technical Service Portal" promo). */
+.banner.cta.bg-ecatalysts {
+  background-image: url('https://grace.scene7.com/is/image/grace/e-catalysts-banner');
+}
+
 /* content + actions stacked and centered within a max-width container */
 .banner.cta .banner-cta-content,
 .banner.cta .banner-cta-actions {

@@ -2,7 +2,8 @@
   "sites": {
     "ema-grace": {
       "previewOrg": "meejain",
-      "previewSite": "ema-grace"
+      "previewSite": "ema-grace",
+      "contentHostUrl": "https://content.da.live/meejain/ema-grace/"
     }
   }
 }

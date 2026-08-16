@@ -2,12 +2,13 @@
   "status": "success",
   "url": "https://grace.com/industries/plastics-and-polymers/polyethylene-catalysts/pe-solution/",
   "path": "industries/plastics-and-polymers/polyethylene-catalysts/pe-solution",
-  "timestamp": "2026-08-15T19:27:23.349Z",
+  "timestamp": "2026-08-16T12:19:04.849Z",
   "title": "PE Solution",
   "pageType": "default",
   "blocks": [
     "hero-banner",
     "columns-horizontal-teaser-featured",
+    "columns-two-column-text",
     "cards-featured-content"
   ],
   "blocksLeftInPlace": [],

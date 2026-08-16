@@ -2,12 +2,12 @@
   "status": "success",
   "url": "https://grace.com/industries/nutraceutical-solutions/lipid-purification-formulation-delivery/",
   "path": "industries/nutraceutical-solutions/lipid-purification-formulation-delivery",
-  "timestamp": "2026-08-15T18:59:36.759Z",
+  "timestamp": "2026-08-16T10:00:56.851Z",
   "title": "Lipid Purfication, Formulation and Delivery",
   "pageType": "default",
   "blocks": [
     "hero-banner",
-    "featured-product-selector",
+    "columns-horizontal-teaser-featured",
     "cards-category-grid",
     "cards-featured-content"
   ],

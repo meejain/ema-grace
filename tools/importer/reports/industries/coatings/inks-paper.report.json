@@ -2,12 +2,12 @@
   "status": "success",
   "url": "https://grace.com/industries/coatings/inks-paper/",
   "path": "industries/coatings/inks-paper",
-  "timestamp": "2026-08-15T18:45:27.129Z",
+  "timestamp": "2026-08-16T09:53:40.524Z",
   "title": "Inks and Paper",
   "pageType": "default",
   "blocks": [
     "hero-banner",
-    "featured-product-selector",
+    "columns-horizontal-teaser-featured",
     "cards-featured-content"
   ],
   "blocksLeftInPlace": [],
