@@ -82,6 +82,11 @@ export async function openFormModal(triggerHref, { triggerEl, title } = {}) {
   closeBtn.setAttribute('aria-label', CLOSE_LABEL);
   closeBtn.innerHTML = CLOSE_ICON;
 
+  // Fixed header (stays put); the form heading is moved here after load so only
+  // the fields scroll — mirrors the source lightbox .header + .content split.
+  const header = document.createElement('div');
+  header.className = 'modal-header';
+
   const content = document.createElement('div');
   content.className = 'modal-content';
 
@@ -90,7 +95,7 @@ export async function openFormModal(triggerHref, { triggerEl, title } = {}) {
   loading.textContent = 'Loading…';
   content.append(loading);
 
-  dialog.append(closeBtn, content);
+  dialog.append(closeBtn, header, content);
   document.body.append(dialog);
   currentDialog = dialog;
   document.body.classList.add('modal-open');
@@ -183,6 +188,11 @@ export async function openFormModal(triggerHref, { triggerEl, title } = {}) {
     if (headingText) headingText.textContent = title;
   }
 
+  // Move the heading into the fixed header so it stays put while the fields
+  // scroll (matches the source: fixed .header, scrollable .content).
+  const headingField = wrapper.querySelector('.field-heading');
+  if (headingField) header.append(headingField);
+
   // Show the placeholder ("Please select") as the default on any select whose
   // value didn't match an option (the form leaves the field empty, so a first
   // option with a non-empty value like "Please select" would otherwise render
@@ -220,9 +230,10 @@ export async function openFormModal(triggerHref, { triggerEl, title } = {}) {
     }
   });
 
-  // Label the dialog from the heading (h1/h2 or the plain-text heading field) and
-  // move focus into the form.
-  const heading = wrapper.querySelector('h1, h2, .field-heading p, .field-heading');
+  // Label the dialog from the heading (now in the fixed header) and move focus
+  // into the form.
+  const heading = header.querySelector('.field-heading p, .field-heading')
+    || wrapper.querySelector('h1, h2');
   if (heading) {
     if (!heading.id) heading.id = 'modal-form-heading';
     dialog.setAttribute('aria-labelledby', heading.id);
