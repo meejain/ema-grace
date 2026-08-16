@@ -175,6 +175,30 @@
   background-size: cover, cover;
 }
 
+/* Campaign WITHOUT an image (e.g. the Contact Us form-page banner): a solid
+   dark-blue (#004990) band instead of a photo. Reuses all campaign layout + the
+   geo+hex bottom edge above; only swaps the background, drops the photo gradient,
+   and makes the copy white. Source:
+   grace.com/forms/contact-us-product-and-services-single. */
+.hero.campaign.no-image {
+  background-color: #004990;
+}
+
+.hero.campaign.no-image::after {
+  content: none;
+}
+
+.hero.campaign.no-image :is(h1, p) {
+  color: var(--white);
+}
+
+/* Subhead under the Contact Us heading (source: 20px, sits below the h1 with a
+   ~30px gap). */
+.hero.campaign.no-image :is(p) {
+  margin: 30px 0 0;
+  font-size: 20px;
+}
+
 /* === Variant: event === left-aligned title + date/location band.
    Source: grace.com/campaign/emea-fcc-workshop. A dark-blue panel (#004990) with
    a black-to-transparent gradient overlay that darkens the left edge to solid
@@ -538,6 +562,18 @@
     min-height: 342px;
     padding: 68px 0 30px;
     box-sizing: border-box;
+  }
+
+  /* Desktop no-image campaign (Contact Us banner): solid-blue band whose height
+     scales with the viewport like the source (~35vw: 448px @ 1280, 504px @ 1440),
+     42px heading. Layout/inset come from the campaign rules above. */
+  .hero.campaign.no-image {
+    min-height: 35vw;
+    padding: 81px 0 0;
+  }
+
+  .hero.campaign.no-image :is(h1) {
+    font-size: 42px;
   }
 
   /* Align the hero content column with the Grace logo and the body content

@@ -490,14 +490,24 @@ function decorateFormModalButtons(main) {
     if (!isDownload && !isMarked) return;
     a.classList.add('modal-form-button');
     a.setAttribute('role', 'button');
+
+    // Per-page heading override, authored as VISIBLE text right after the
+    // Download button: a paragraph starting with "Before you download …". We
+    // read it as the modal heading and hide it from the page (the modal shows
+    // it instead). No authoring if omitted — the form's default heading is used.
+    let modalTitle;
+    const wrapper = a.closest('.button-wrapper') || a.closest('p') || a;
+    let sib = wrapper.nextElementSibling;
+    while (sib && sib.textContent.trim() === '') sib = sib.nextElementSibling;
+    if (sib && /^before you download\b/i.test(sib.textContent.trim())) {
+      modalTitle = sib.textContent.trim();
+      sib.classList.add('modal-heading-source');
+      sib.setAttribute('hidden', '');
+    }
+
     a.addEventListener('click', async (e) => {
       e.preventDefault();
       const { openFormModal } = await import(`${window.hlx.codeBasePath}/blocks/modal/modal.js`);
-      // Per-page title override: the link's `title` attribute, when set to
-      // something other than the (auto-populated) button label, replaces the
-      // form's default heading. Authors set it via the link's title in DA.
-      const linkTitle = a.getAttribute('title');
-      const modalTitle = linkTitle && linkTitle.trim() !== text ? linkTitle.trim() : undefined;
       openFormModal(a.href, { triggerEl: a, title: modalTitle });
     });
   });
