@@ -28,7 +28,7 @@
 .download-form form {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 24px 32px;
+  gap: 28px 48px;
   align-items: start;
 }
 

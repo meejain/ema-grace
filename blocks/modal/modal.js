@@ -183,6 +183,43 @@ export async function openFormModal(triggerHref, { triggerEl, title } = {}) {
     if (headingText) headingText.textContent = title;
   }
 
+  // Show the placeholder ("Please select") as the default on any select whose
+  // value didn't match an option (the form leaves the field empty, so a first
+  // option with a non-empty value like "Please select" would otherwise render
+  // as a blank box — the source shows the placeholder selected).
+  wrapper.querySelectorAll('select').forEach((sel) => {
+    if (sel.selectedIndex === -1 && sel.options.length) sel.selectedIndex = 0;
+  });
+
+  // Restore the commas in the long-form country names. The shared form parser
+  // splits the Options column on commas, so the source labels (e.g. "Bolivia,
+  // Plurinational State of") are authored comma-free in download.json to survive
+  // parsing; we re-insert the commas here for display parity. Scoped to the
+  // download form only — does not touch the shared parser or other forms.
+  const COUNTRY_COMMA_LABELS = [
+    'Bolivia, Plurinational State of',
+    'Bonaire, Sint Eustatius and Saba',
+    'Congo, the Democratic Republic of the',
+    'Iran, Islamic Republic of',
+    'Macedonia, the former Yugoslav Republic of',
+    'Moldova, Republic of',
+    'Palestinian Territory, Occupied',
+    'Saint Helena, Ascension and Tristan da Cunha',
+    'Samoa,American',
+    'Tanzania, United Republic of',
+    'Virgin Islands, British',
+  ];
+  const commaByStripped = new Map(
+    COUNTRY_COMMA_LABELS.map((label) => [label.replace(/,\s*/g, ' ').replace(/\s+/g, ' ').trim(), label]),
+  );
+  wrapper.querySelectorAll('select[name="country"] option').forEach((opt) => {
+    const canonical = commaByStripped.get(opt.textContent.trim());
+    if (canonical) {
+      opt.textContent = canonical;
+      opt.value = canonical;
+    }
+  });
+
   // Label the dialog from the heading (h1/h2 or the plain-text heading field) and
   // move focus into the form.
   const heading = wrapper.querySelector('h1, h2, .field-heading p, .field-heading');
