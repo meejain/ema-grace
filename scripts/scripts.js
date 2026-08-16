@@ -493,7 +493,12 @@ function decorateFormModalButtons(main) {
     a.addEventListener('click', async (e) => {
       e.preventDefault();
       const { openFormModal } = await import(`${window.hlx.codeBasePath}/blocks/modal/modal.js`);
-      openFormModal(a.href, { triggerEl: a });
+      // Per-page title override: the link's `title` attribute, when set to
+      // something other than the (auto-populated) button label, replaces the
+      // form's default heading. Authors set it via the link's title in DA.
+      const linkTitle = a.getAttribute('title');
+      const modalTitle = linkTitle && linkTitle.trim() !== text ? linkTitle.trim() : undefined;
+      openFormModal(a.href, { triggerEl: a, title: modalTitle });
     });
   });
 }

@@ -34,9 +34,11 @@ function isAllowedUrl(url) {
  *   If it points to a forms JSON, that form is shown on its own; otherwise the
  *   href is treated as the download asset (e.g. a PDF) gated behind the shared
  *   download form and opened in a new tab on successful submit.
- * @param {{ triggerEl?: Element }} [options]
+ * @param {{ triggerEl?: Element, title?: string }} [options]
+ *   title — optional per-page heading that REPLACES the form's default heading
+ *   (the form JSON's `heading` field remains the default when no title is given).
  */
-export async function openFormModal(triggerHref, { triggerEl } = {}) {
+export async function openFormModal(triggerHref, { triggerEl, title } = {}) {
   if (currentDialog) return; // never stack two dialogs
 
   let url;
@@ -124,11 +126,11 @@ export async function openFormModal(triggerHref, { triggerEl } = {}) {
     const badge = document.createElement('span');
     badge.className = 'modal-thankyou-badge';
     badge.innerHTML = CHECK_ICON;
-    const title = document.createElement('h2');
-    title.textContent = 'Thank you!';
+    const thankYouTitle = document.createElement('h2');
+    thankYouTitle.textContent = 'Thank you!';
     const msg = document.createElement('p');
     msg.textContent = 'Enjoy your download.';
-    panel.append(badge, title, msg);
+    panel.append(badge, thankYouTitle, msg);
     content.append(panel);
     dialog.setAttribute('aria-label', 'Thank you');
     closeBtn.focus();
@@ -139,8 +141,12 @@ export async function openFormModal(triggerHref, { triggerEl } = {}) {
   link.href = formUrl;
   link.textContent = formUrl;
   const formBlock = buildBlock('form', link);
+  // `download-form` is the scoping hook for the dedicated download-form styles
+  // (blocks/form/download.css). The form block lives inside dialog.modal, i.e.
+  // OUTSIDE <main>, so the main `main .form` rules never reach it.
+  formBlock.classList.add('download-form');
   const wrapper = document.createElement('div');
-  wrapper.className = 'form-wrapper';
+  wrapper.className = 'form-wrapper download-form-wrapper';
   wrapper.append(formBlock);
 
   // Intercept a VALID submit before the form block's own handler runs (capture
@@ -170,8 +176,16 @@ export async function openFormModal(triggerHref, { triggerEl } = {}) {
   loading.remove();
   content.append(wrapper);
 
-  // Label the dialog from the form heading and move focus into the form.
-  const heading = wrapper.querySelector('h1, h2');
+  // Per-page title override: if the author supplied a title, replace the form's
+  // default heading text with it (the form JSON heading is the fallback default).
+  if (title) {
+    const headingText = wrapper.querySelector('.field-heading p, .field-heading');
+    if (headingText) headingText.textContent = title;
+  }
+
+  // Label the dialog from the heading (h1/h2 or the plain-text heading field) and
+  // move focus into the form.
+  const heading = wrapper.querySelector('h1, h2, .field-heading p, .field-heading');
   if (heading) {
     if (!heading.id) heading.id = 'modal-form-heading';
     dialog.setAttribute('aria-labelledby', heading.id);

@@ -41,6 +41,15 @@ Document Authoring, not code — edit that sheet and republish to change the for
 for every page at once). Each page only supplies its own PDF via the button
 href, so the same form serves all gated pages.
 
+### Per-page title (overriding the default heading)
+
+The form JSON's `heading` ("Before you download the sales sheet, can we get some
+information?") is the **default** and shows on every page unless overridden. To
+change it per page, set the download link's **title attribute** to the desired
+heading (e.g. "Before you download the eBook, can we get some information?").
+When the link title differs from the button label, it replaces the form heading;
+otherwise the default from the JSON stays. Nothing in code needs changing.
+
 ### Alternative: link directly to a form JSON
 
 If the href points at a forms JSON ending with `#modal`
