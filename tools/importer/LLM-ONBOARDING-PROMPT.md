@@ -123,6 +123,12 @@ side-by-side screenshots before you claim done. Do not publish to DA without my 
   gated modal) + `FORMS-URLS.txt` (every form URL). Submission = server-side AEM `.pardot.handler` →
   Pardot; the endpoint won't exist on EDS — GET the Pardot form-handler URLs from the client before
   building submit (FORMS-INVENTORY §D2). See playbook §5 for the full scope table + status.
+- **Forms-page hero + hexagon sharpness:** contact-us form pages use a dark-blue `hero campaign
+  no-image` banner with the `geoAndHexBottom` pattern (h1 + subhead in ONE cell; `template: contactus`
+  + `contactus: true` metadata; relative form-JSON href). The hex/geo crispness is an ASSET-RESOLUTION
+  matter, not CSS — swap in the SOURCE's high-res PNGs and downscale with ImageMagick (hex → 3000w,
+  geo → 2000w/64-color) into `blocks/hero/hero-hex-mask.png` + `hero-geo-lines.png`. Full steps +
+  source asset URLs in playbook "Hero (contact) + hexagon/geo background recipe".
 - **Hand-editing `.plain.html`:** after any manual merge/split, verify `<div>` open/close balance AND
   run `aem.decorateSections` on the served file — an off-by-one div silently merges sections and leaks
   `Style:` metadata onto the wrong section (see playbook "DIV-BALANCE LESSON").
