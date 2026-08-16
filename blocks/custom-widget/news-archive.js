@@ -25,8 +25,9 @@ export default function decorate(block) {
     const dt = document.createElement('dt');
     dt.className = 'custom-widget-news-archive-heading';
 
-    // First (latest) year is expanded by default, matching grace.com.
-    const openByDefault = index === 0;
+    // All years start COLLAPSED, matching grace.com (the source loads every accordion closed;
+    // the user opens a year to reveal its issues). Do NOT auto-expand the first year.
+    const openByDefault = false;
 
     const button = document.createElement('button');
     button.type = 'button';

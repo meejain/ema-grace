@@ -2,12 +2,12 @@
   "status": "success",
   "url": "https://grace.com/industries/plastics-and-polymers/",
   "path": "industries/plastics-and-polymers",
-  "timestamp": "2026-08-13T19:43:23.544Z",
+  "timestamp": "2026-08-16T09:47:58.416Z",
   "title": "Plastics and Polymers",
   "pageType": "default",
   "blocks": [
     "hero-banner",
-    "featured-product-selector",
+    "columns-horizontal-teaser-featured",
     "cards-category-grid",
     "cards-featured-content"
   ],

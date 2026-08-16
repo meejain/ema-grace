@@ -2,12 +2,12 @@
   "status": "success",
   "url": "https://grace.com/industries/nutraceutical-solutions/nutraceutical-cdmo/",
   "path": "industries/nutraceutical-solutions/nutraceutical-cdmo",
-  "timestamp": "2026-08-13T19:49:38.195Z",
+  "timestamp": "2026-08-16T10:00:02.222Z",
   "title": "Nutraceutical CDMO",
   "pageType": "default",
   "blocks": [
     "hero-banner",
-    "featured-product-selector",
+    "columns-horizontal-teaser-featured",
     "cards-category-grid",
     "cards-featured-content"
   ],

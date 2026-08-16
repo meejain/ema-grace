@@ -23,16 +23,22 @@ export function cellNodes(col) {
   // Image (picture preferred so srcset/DM variants survive).
   const img = col.querySelector('.image picture, .cmp-image picture, picture, .image img, img');
 
-  // Text container, else the column itself.
-  const textbox = col.querySelector('.text, .rich-text');
+  // Text container, else the column itself. A column may hold MULTIPLE `.text`/`.rich-text` boxes
+  // (e.g. the hydroprocessing col-lg-9: box1 = <h2>, box2 = <h3> + intro <p>). Scoping to only the
+  // first box would drop the rest, so when there are several, gather their children in order.
+  const textboxes = Array.from(col.querySelectorAll('.text, .rich-text'))
+    // keep only OUTERMOST text boxes (a .text wrapping a .rich-text would double-count)
+    .filter((tb, _i, arr) => !arr.some((other) => other !== tb && other.contains(tb)));
+  const textbox = textboxes[0] || null;
   const scope = textbox || col;
 
   // If the column is purely an image, emit just the image.
-  const textEls = Array.from(scope.children).filter((el) => {
-    if (/^(SCRIPT|STYLE|NOSCRIPT|LINK|IFRAME)$/.test(el.tagName)) return false;
-    if (el.matches('.image, .cmp-image, picture') || el.tagName === 'IMG') return false;
-    return (el.textContent || '').trim() || el.querySelector('a, img');
-  });
+  const textEls = (textboxes.length ? textboxes : [scope]).flatMap((box) => Array.from(box.children)
+    .filter((el) => {
+      if (/^(SCRIPT|STYLE|NOSCRIPT|LINK|IFRAME)$/.test(el.tagName)) return false;
+      if (el.matches('.image, .cmp-image, picture') || el.tagName === 'IMG') return false;
+      return (el.textContent || '').trim() || el.querySelector('a, img');
+    }));
 
   if (img && !textEls.length) return [img.cloneNode(true)];
 
@@ -43,6 +49,25 @@ export function cellNodes(col) {
   } else {
     scope.querySelectorAll('h1,h2,h3,h4,h5,h6,p,ul,ol,a').forEach((el) => {
       if ((el.textContent || '').trim()) pushClone(el);
+    });
+  }
+  // A CTA button/link often sits in a SIBLING `.button`/`.button__section` div OUTSIDE the
+  // `.text`/`.rich-text` box (e.g. the pe-solution "Learn more about our activators" link). When
+  // we scoped to the text box above, that CTA was dropped. Re-collect a button link that lives in
+  // the column but outside `scope`, wrapping it in a <p> so decorateButtons promotes it.
+  if (textbox) {
+    const doc = col.ownerDocument;
+    col.querySelectorAll('.button a[href], .button__section a[href], a.btn-primary, a.btn-secondary').forEach((a) => {
+      if (scope.contains(a)) return; // already captured inside the text box
+      const label = (a.textContent || '').replace(/\s+/g, ' ').trim();
+      const href = a.getAttribute('href') || '';
+      if (!label || !href) return;
+      const p = doc.createElement('p');
+      const link = doc.createElement('a');
+      link.setAttribute('href', href);
+      link.textContent = label;
+      p.append(link);
+      out.push(p);
     });
   }
   return out.length ? out : [scope.cloneNode(true)];

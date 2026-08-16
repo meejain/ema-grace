@@ -2,12 +2,12 @@
   "status": "success",
   "url": "https://grace.com/industries/personal-care/",
   "path": "industries/personal-care",
-  "timestamp": "2026-08-13T19:54:08.546Z",
+  "timestamp": "2026-08-16T09:56:20.816Z",
   "title": "Personal Care",
   "pageType": "default",
   "blocks": [
     "hero-banner",
-    "featured-product-selector",
+    "columns-horizontal-teaser-featured",
     "table-product-comparison",
     "cards-category-grid",
     "cards-featured-content"

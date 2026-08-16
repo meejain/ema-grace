@@ -1,0 +1,1713 @@
+.cards > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(257px, 1fr));
+  gap: 24px;
+}
+
+.cards > ul > li {
+  border: 1px solid #dadada;
+  background-color: var(--background-color);
+}
+
+.cards .cards-card-body {
+  margin: 16px;
+}
+
+.cards .cards-card-image {
+  line-height: 0;
+}
+
+.cards > ul > li img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+
+/* Each variant below is scoped to its own .cards.{variant} class, so
+   same-specificity rules from different variants never actually cascade against
+   each other. Disable descending-specificity for the consolidated variants. */
+/* stylelint-disable no-descending-specificity */
+
+/* ===================== Variant: benefits-grid ===================== */
+
+/* Section heading – Roboto Slab, centered (source: 24px mobile / 30px desktop, weight 300) */
+.cards-container:has(.cards.benefits-grid) h2 {
+  font-family: var(--heading-font-family);
+  font-size: 24px;
+  font-weight: 300;
+  line-height: 1.3;
+  text-align: center;
+  margin: 0 0 10px;
+}
+
+/* Card grid – mobile: 1 column (source is single column until lg breakpoint) */
+.cards.benefits-grid > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+}
+
+/* Individual card – transparent, no border */
+.cards.benefits-grid > ul > li {
+  border: 0;
+  background-color: transparent;
+}
+
+/* Card image – landscape display matching source (~2:1, not cropped-distorted) */
+.cards.benefits-grid .cards-card-image {
+  line-height: 0;
+}
+
+.cards.benefits-grid > ul > li img {
+  width: 100%;
+  aspect-ratio: 2 / 1;
+  object-fit: cover;
+  display: block;
+}
+
+/* Card text body – text sits below image with a clear gap (matches source) */
+.cards.benefits-grid .cards-card-body {
+  margin: 0;
+  padding: 20px 0 0;
+}
+
+/* Card heading – Roboto Slab, 20px mobile (line-height 1.3), no top margin */
+.cards.benefits-grid .cards-card-body h3 {
+  font-family: var(--heading-font-family);
+  font-size: var(--heading-font-size-l);
+  font-weight: 300;
+  line-height: 1.3;
+  color: var(--text-color);
+  margin: 0 0 20px;
+  text-align: left;
+}
+
+/* Card paragraph – Roboto 14px, line-height 1.3 mobile */
+.cards.benefits-grid .cards-card-body p {
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m);
+  font-weight: 400;
+  line-height: 1.3;
+  color: var(--text-color);
+  margin: 0 0 21px;
+  text-align: left;
+}
+
+/* Tablet (>= 600px): heading grows to 30px (source) */
+@media (width >= 600px) {
+  .cards-container:has(.cards.benefits-grid) h2 {
+    font-size: 30px;
+  }
+}
+
+/* Desktop (>= 900px, source lg breakpoint): 2 columns, larger heading */
+@media (width >= 900px) {
+  .cards-container:has(.cards.benefits-grid) h2 {
+    line-height: 1.7;
+  }
+
+  .cards.benefits-grid > ul {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+  }
+
+  .cards.benefits-grid .cards-card-body h3 {
+    line-height: 1.15;
+  }
+
+  .cards.benefits-grid .cards-card-body p {
+    line-height: 1.7;
+  }
+}
+
+/* ===================== Variant: category-grid ===================== */
+
+/* Cards Category Grid - image cards with centered green title + "Learn more" CTA */
+.cards.category-grid > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+.cards.category-grid > ul > li {
+  border: 0;
+  background-color: var(--white);
+  overflow: hidden;
+}
+
+/* image */
+.cards.category-grid .cards-card-image {
+  line-height: 0;
+}
+
+.cards.category-grid .cards-card-image img {
+  width: 100%;
+  aspect-ratio: 11 / 5;
+  object-fit: cover;
+  display: block;
+}
+
+/* body: centered text under image. Horizontal padding 40px (matches source
+   a.cmp-card 40px inset → 207px text width in a 287px card). 50px was too tight
+   (188px) and wrapped a two-word title like "Distillate Hydrotreating" to 2 lines. */
+.cards.category-grid .cards-card-body {
+  margin: 0;
+  padding: 20px 40px 24px;
+  text-align: center;
+}
+
+/* category title */
+.cards.category-grid .cards-card-body p:first-child,
+.cards.category-grid .cards-card-body h3 {
+  margin: 0;
+  font-family: var(--heading-font-family);
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.7;
+  color: var(--accent-color-hover);
+}
+
+/* "Learn more" cta link */
+.cards.category-grid .cards-card-body a:any-link {
+  display: inline-block;
+  margin-top: 4px;
+  font-family: var(--heading-font-family);
+  font-size: var(--body-font-size-m);
+  font-weight: 400;
+  line-height: 1.7;
+  color: var(--text-color);
+  text-decoration: none;
+  transition: color var(--transition-speed) ease;
+}
+
+.cards.category-grid .cards-card-body a::after {
+  content: ' \203A';
+  font-size: 1.2em;
+}
+
+.cards.category-grid .cards-card-body a:hover {
+  color: var(--accent-color-hover);
+}
+
+@media (width >= 900px) {
+  .cards.category-grid > ul {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 35px 28px;
+  }
+}
+
+/* ===================== Variant: contact-options ===================== */
+
+/* Source: grace.com/contact-us "How can we help you?" — three white cards on a
+   light-grey section (#e6e7e8). Each card: icon image, centered Roboto Slab
+   title, a left-aligned bulleted option list, and a green CTA button.
+   Mobile-first single column; 3 equal columns with a 40px gap from 1200px up. */
+
+/* Grey full-bleed section background (source .light-gray-bkgd). */
+.cards-container:has(.cards.contact-options) {
+  background-color: #e6e7e8;
+  padding: 45px 0;
+}
+
+/* Section heading – "How can we help you?" (Roboto Slab 30px, weight 300, centered) */
+.cards-container:has(.cards.contact-options) h2 {
+  text-align: center;
+  font-family: var(--heading-font-family);
+  font-size: var(--heading-font-size-xxl);
+  font-weight: 300;
+  color: var(--text-color);
+  line-height: 1.7;
+  margin: 0 0 30px;
+}
+
+/* Card grid – single column mobile-first, 40px gap */
+.cards.contact-options > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+}
+
+/* Individual cards – white boxes with 20px padding */
+.cards.contact-options > ul > li {
+  border: 0;
+  background-color: var(--white);
+  padding: 20px;
+  text-align: left;
+}
+
+/* Card icon/banner image – full width, native ~2.27 aspect ratio */
+.cards.contact-options .cards-card-image {
+  line-height: 0;
+  margin-bottom: 20px;
+}
+
+.cards.contact-options .cards-card-image img {
+  width: 100%;
+  aspect-ratio: 340 / 150;
+  object-fit: contain;
+  display: block;
+}
+
+/* Card body */
+.cards.contact-options .cards-card-body {
+  margin: 0;
+  padding: 0;
+}
+
+/* Card title – Roboto Slab, weight 600, centered, black; 18px */
+.cards.contact-options .cards-card-body h4 {
+  font-family: var(--heading-font-family);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-color);
+  line-height: 1.7;
+  text-align: center;
+  margin: 0 0 30px;
+}
+
+/* List of options – no bullets, Roboto 14px, left aligned, white-dot bullets */
+.cards.contact-options .cards-card-body ul {
+  list-style: none;
+  margin: 0 0 21px;
+  padding: 0;
+  text-align: left;
+}
+
+.cards.contact-options .cards-card-body li {
+  position: relative;
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m);
+  font-weight: 400;
+  color: var(--text-color);
+  line-height: 1.7;
+  margin: 0;
+  padding: 0 0 0 14px;
+}
+
+.cards.contact-options .cards-card-body li::before {
+  content: '';
+  position: absolute;
+  top: 0.75em;
+  left: 0;
+  width: 4px;
+  height: 4px;
+  border-radius: 4px;
+  background-color: var(--text-color);
+}
+
+/* Links inside list */
+.cards.contact-options .cards-card-body li a:any-link {
+  color: var(--text-color);
+  text-decoration: underline;
+  font-size: var(--body-font-size-m);
+  transition: color var(--transition-speed) ease;
+}
+
+.cards.contact-options .cards-card-body li a:hover {
+  color: var(--link-hover-color);
+}
+
+/* CTA – green button (source .btn-primary-green): Roboto Slab 14px/600, black
+   text, no radius, padding 18px 30px, with a trailing chevron. */
+.cards.contact-options .cards-card-body .button-container,
+.cards.contact-options .cards-card-body p {
+  margin: 0;
+  text-align: left;
+}
+
+.cards.contact-options .cards-card-body a.button:any-link,
+.cards.contact-options .cards-card-body p a:any-link {
+  display: inline-block;
+  box-sizing: border-box;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  padding: 18px 30px;
+  background-color: var(--accent-color);
+  color: var(--text-color);
+  font-family: var(--heading-font-family);
+  font-size: var(--body-font-size-m);
+  font-weight: 600;
+  line-height: 1;
+  text-align: center;
+  text-decoration: none;
+  text-transform: none;
+  transition: all var(--transition-speed) ease;
+}
+
+.cards.contact-options .cards-card-body a.button:any-link::after,
+.cards.contact-options .cards-card-body p a:any-link::after {
+  content: ' \203A';
+  font-size: 1.2em;
+}
+
+.cards.contact-options .cards-card-body a.button:hover,
+.cards.contact-options .cards-card-body p a:hover {
+  background-color: var(--accent-color-hover);
+  color: var(--white);
+}
+
+/* Desktop: source keeps a single column until >1200px, then switches to 3 equal columns */
+@media (width >= 1200px) {
+  .cards.contact-options > ul {
+    grid-template-columns: repeat(3, 1fr);
+    align-items: start;
+  }
+}
+
+/* ===================== Variant: featured-content ===================== */
+
+/* Source: grace.com/industries/plastics-and-polymers/ "Latest Insights from
+   Grace" — horizontal article cards (thumbnail left, text right) on a white
+   background, arranged in a 2-column grid on desktop. Section header carries
+   a left-aligned title and a right-aligned "View all articles" link. */
+
+/* Section break — vertical spacing above and below the whole section. */
+.cards-container:has(.cards.featured-content) {
+  padding-top: var(--spacing-xl);
+  padding-bottom: var(--spacing-xl);
+}
+
+/* Section header row — mobile: stacked + centered (carousel layout) */
+.cards-container:has(.cards.featured-content) div:has(> h2):has(> p) {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: var(--spacing-l);
+  text-align: center;
+}
+
+.cards-container:has(.cards.featured-content) h2 {
+  text-align: center;
+  margin: 0;
+}
+
+/* Insights "Latest Insights from Grace" header: H2 on the LEFT, "View all articles ›" link
+   on the RIGHT, sharing the same baseline (source layout). Override the centered-column
+   default for the geo-hex insights variant. */
+body.sidebar main > .section.cards-container.geo-hex:has(.cards.featured-content) div:has(> h2):has(> p) {
+  flex-direction: row;
+  align-items: baseline;
+  justify-content: space-between;
+  text-align: left;
+}
+
+body.sidebar main > .section.cards-container.geo-hex:has(.cards.featured-content) div:has(> h2) > p a::after {
+  content: ' ›';
+}
+
+.cards-container:has(.cards.featured-content) div:has(> h2) > p {
+  margin: 0;
+}
+
+.cards-container:has(.cards.featured-content) div:has(> h2) > p a:any-link {
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m);
+  font-weight: 700;
+  color: var(--text-color);
+  text-decoration: none;
+  transition: color var(--transition-speed) ease;
+}
+
+.cards-container:has(.cards.featured-content) div:has(> h2) > p a:hover {
+  color: var(--link-hover-color);
+}
+
+/* Mobile: horizontal scroll-snap carousel — one full-width card per view */
+.cards.featured-content > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  gap: 0;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.cards.featured-content > ul::-webkit-scrollbar {
+  display: none;
+}
+
+/* Each slide fills the viewport width and snaps into place */
+.cards.featured-content > ul > li {
+  flex: 0 0 100%;
+  scroll-snap-align: center;
+  display: grid;
+  grid-template-columns: 1fr;
+  align-content: start;
+  gap: 20px;
+  border: 0;
+  background-color: transparent;
+}
+
+/* Dot pagination (visible only on mobile) */
+.cards.featured-content .cards-carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 30px;
+}
+
+.cards.featured-content .cards-carousel-dot {
+  width: 12px;
+  height: 12px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background-color: #d0d0d0;
+  cursor: pointer;
+  transition: background-color var(--transition-speed) ease;
+}
+
+.cards.featured-content .cards-carousel-dot.active {
+  background-color: var(--text-color);
+}
+
+/* Thumbnail — fixed square crop matching source */
+.cards.featured-content .cards-card-image {
+  line-height: 0;
+}
+
+.cards.featured-content .cards-card-image picture,
+.cards.featured-content .cards-card-image img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  display: block;
+}
+
+/* Text column */
+.cards.featured-content .cards-card-body {
+  margin: 0;
+  padding: 0;
+}
+
+/* Eyebrow / category label — Roboto 10px weight 700, uppercase, BLACK
+   (live insights card category is black, not green; line-height 17px = 1.7). */
+.cards.featured-content .cards-card-body strong:first-child {
+  display: block;
+  font-family: var(--body-font-family);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  line-height: 1.7;
+  text-transform: uppercase;
+  color: var(--text-color);
+  margin-bottom: 12px;
+}
+
+/* Title — Roboto (SANS-SERIF) weight 400, black (source /insights/ card title:
+   Roboto 20px/400, line-height 34px = 1.7). NOT Roboto Slab/300. Larger on mobile
+   (carousel) to match the source's single-card emphasis. */
+.cards.featured-content .cards-card-body a:not(strong a) {
+  display: block;
+  font-family: var(--body-font-family);
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 1.7;
+  color: var(--text-color);
+  text-decoration: none;
+  margin-bottom: 15px;
+  transition: color var(--transition-speed) ease;
+}
+
+.cards.featured-content .cards-card-body a:not(strong a):hover {
+  color: var(--link-hover-color);
+}
+
+/* EDS wraps the body cell contents in a single <p>; reset it as a plain block */
+.cards.featured-content .cards-card-body > p {
+  margin: 0;
+  font: inherit;
+}
+
+/* "Read more" link — Roboto 14px weight 700, black with chevron */
+.cards.featured-content .cards-card-body strong:last-child {
+  display: block;
+}
+
+.cards.featured-content .cards-card-body strong:last-child a:any-link {
+  display: inline-block;
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m);
+  font-weight: 700;
+
+  /* Live "Read more ›" line-height is 23.8px (1.7), which contributes to the card height. */
+  line-height: 1.7;
+  color: var(--text-color);
+  text-decoration: none;
+  transition: color var(--transition-speed) ease;
+}
+
+.cards.featured-content .cards-card-body strong:last-child a:hover {
+  color: var(--link-hover-color);
+}
+
+/* Tablet+: carousel reverts to a static grid; header row goes back to
+   left title + right link; dots are hidden. */
+@media (width >= 600px) {
+  /* Header row: title left, "View all articles" right */
+  .cards-container:has(.cards.featured-content) div:has(> h2):has(> p) {
+    flex-flow: row wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 8px 24px;
+    text-align: left;
+  }
+
+  .cards-container:has(.cards.featured-content) h2 {
+    text-align: left;
+  }
+
+  /* List becomes a single-column grid of horizontal cards. Column gap matches the source
+     related-articles grid (28px between the two card columns); row gap 40px. */
+  .cards.featured-content > ul {
+    display: grid;
+    grid-template-columns: 1fr;
+    overflow: visible;
+    gap: 40px 28px;
+    scroll-snap-type: none;
+  }
+
+  /* Horizontal card: source image is 126×126 with the text butting right up against it
+     (~24px gap), NOT a 150px thumbnail with a wide 30px gutter. */
+  .cards.featured-content > ul > li {
+    flex: initial;
+    scroll-snap-align: none;
+    grid-template-columns: 126px 1fr;
+    gap: 24px;
+  }
+
+  .cards.featured-content .cards-card-image picture,
+  .cards.featured-content .cards-card-image img {
+    aspect-ratio: 1 / 1;
+  }
+
+  /* Title shrinks back to the grid size (source /insights/: 20px / 1.2) */
+  .cards.featured-content .cards-card-body a:not(strong a) {
+    font-size: 20px;
+
+    /* Live card title: Roboto (sans-serif) 20px / weight 400 / line-height 34px (1.7).
+       The 1.7 rhythm makes titles wrap to live's card heights (~267/199px). */
+    line-height: 1.7;
+  }
+
+  /* Hide carousel dots outside mobile */
+  .cards.featured-content .cards-carousel-dots {
+    display: none;
+  }
+}
+
+/* Desktop: 2-column grid of cards */
+@media (width >= 900px) {
+  .cards.featured-content > ul {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ===================== Variant: icon-grid ===================== */
+
+/* Icon card grid – centered icon + green label + short description.
+   Source: grace.com PP catalysts "Lighter/Cleaner/Clearer/Faster" cards
+   (a.cmp-card.generic, col-lg-6 → 2 cols at desktop). */
+
+/* Card grid – 1 column on mobile. The source constrains the icon-card block to
+   a ~920px centered container (each column ~460px) rather than the full section
+   width, which keeps the icons proportionally larger within each cell. */
+.cards.icon-grid > ul {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  max-width: 920px;
+}
+
+/* Individual cards – transparent, no border, centered content.
+   Source card padding 30px 40px. */
+.cards.icon-grid > ul > li {
+  border: 0;
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 30px 40px;
+}
+
+/* Icon – centered square. Source: 50px mobile → 70px desktop, margin below 18px. */
+.cards.icon-grid .cards-card-image {
+  width: 50px;
+  margin: 0 auto 18px;
+  line-height: 0;
+}
+
+.cards.icon-grid .cards-card-image img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: contain;
+  display: block;
+}
+
+/* Text block */
+.cards.icon-grid .cards-card-body {
+  margin: 0;
+  padding: 0;
+}
+
+/* Title / label – Roboto Slab (serif) 18px weight 600 green, centered.
+   Source: .cmp-card .title { font-family: 'Roboto Slab'; font-size:18px;
+   font-weight:600; color:#27853c }. */
+.cards.icon-grid .cards-card-body p:first-child {
+  font-family: var(--heading-font-family);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--link-hover-color);
+  line-height: 1.7;
+  margin: 0 0 15px;
+  text-align: center;
+}
+
+/* Description – Roboto 14px black, centered.
+   Source: .spt-copy p. */
+.cards.icon-grid .cards-card-body p:last-child {
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m);
+  font-weight: 400;
+  color: var(--text-color);
+  line-height: 1.3;
+  margin: 0;
+  text-align: center;
+}
+
+/* Tablet (source 600–899px): icon grows to 75px. */
+@media (width >= 600px) {
+  .cards.icon-grid .cards-card-image {
+    width: 75px;
+  }
+}
+
+/* Desktop (source col-lg-6 → 2 columns, col gap 40px). Icon 70px.
+   Description line-height loosens to 1.7. */
+@media (width >= 900px) {
+  .cards.icon-grid > ul {
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 40px;
+  }
+
+  .cards.icon-grid .cards-card-image {
+    width: 70px;
+  }
+
+  .cards.icon-grid .cards-card-body p:last-child {
+    line-height: 1.7;
+  }
+}
+
+/* ===================== Variant: image-text-grid ===================== */
+
+/* Cards Image Text Grid – image on top, lead-in bold + body text below.
+   Source: grace.com/about-grace/community/ (Bootstrap .row / .col-lg-6 layout:
+   1 column on mobile, 2 columns from the large breakpoint). */
+
+/* The source renders this block inside a narrow content column (~707px shared
+   with a sidebar), so each image column is ~313px. Cap the grid to a comparable
+   centered content width so images match the source scale rather than filling
+   the full section. */
+.cards.image-text-grid > ul {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 30px 40px;
+  max-width: 720px;
+}
+
+/* Individual card – no border/background, blends with the section */
+.cards.image-text-grid > ul > li {
+  border: 0;
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Card image – full column width, natural aspect ratio (source preserves the
+   image's own ratio; it is not cropped). */
+.cards.image-text-grid .cards-card-image {
+  line-height: 0;
+}
+
+.cards.image-text-grid > ul > li img {
+  width: 100%;
+  height: auto;
+
+  /* override the base .cards img crop so the image keeps its natural ratio */
+  aspect-ratio: auto;
+  object-fit: fill;
+  display: block;
+}
+
+/* Card text */
+.cards.image-text-grid .cards-card-body {
+  margin: 0;
+  padding: 20px 0 0;
+}
+
+.cards.image-text-grid .cards-card-body p {
+  margin: 0;
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m);
+  font-weight: 400;
+  line-height: 1.3;
+  color: var(--text-color);
+  text-align: left;
+}
+
+/* Lead-in label – bold, same size/color as the body copy */
+.cards.image-text-grid .cards-card-body p strong {
+  font-weight: 700;
+  color: var(--text-color);
+}
+
+/* Large: 2 columns, wider line-height to match source desktop */
+@media (width >= 900px) {
+  .cards.image-text-grid > ul {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .cards.image-text-grid .cards-card-body p {
+    line-height: 1.7;
+  }
+}
+
+/* ===================== Variant: industry ===================== */
+
+/* Industries section - light background with heading left, cards right */
+.cards-container:has(.cards.industry) {
+  background-color: #e8eef2;
+  color: var(--text-color);
+  padding: var(--spacing-l) 0;
+  margin: 0;
+}
+
+.cards-container:has(.cards.industry) h3 {
+  color: var(--text-color);
+  font-family: var(--heading-font-family);
+  font-size: var(--heading-font-size-l);
+  font-weight: 300;
+  line-height: 1.15;
+  margin-bottom: var(--spacing-s);
+}
+
+/* "View all Industries" button */
+.cards-container:has(.cards.industry) .default-content-wrapper:last-child .button-wrapper {
+  margin-top: var(--spacing-s);
+}
+
+.cards-container:has(.cards.industry) .default-content-wrapper:last-child a.button:any-link {
+  background-color: var(--white);
+  color: var(--text-color);
+  font-family: var(--heading-font-family);
+  font-size: var(--body-font-size-m);
+  font-weight: 600;
+  padding: 18px 30px;
+  border: 0;
+}
+
+.cards-container:has(.cards.industry) .default-content-wrapper:last-child a.button:hover {
+  background-color: var(--accent-color-hover);
+  color: var(--white);
+}
+
+/* cards grid – single column on mobile (source stacks full-width cards) */
+.cards.industry > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 35px 26px;
+}
+
+.cards.industry > ul > li {
+  border: 0;
+  background-color: transparent;
+  position: relative;
+  overflow: hidden;
+}
+
+.cards.industry .cards-card-image {
+  line-height: 0;
+}
+
+.cards.industry > ul > li img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  display: block;
+}
+
+/* green label banner below image – short, single-line, text centered */
+.cards.industry .cards-card-body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--accent-color);
+  text-align: center;
+}
+
+.cards.industry .cards-card-body a:any-link {
+  display: block;
+  font-family: var(--heading-font-family);
+  font-size: var(--body-font-size-m);
+  font-weight: 600;
+  line-height: 1;
+  color: var(--text-color);
+  text-decoration: none;
+  padding: 14px 25px;
+  white-space: nowrap;
+  transition: all var(--transition-speed) ease;
+}
+
+.cards.industry .cards-card-body a::after {
+  content: ' \203A';
+  font-size: 1.2em;
+}
+
+.cards.industry .cards-card-body a:hover {
+  background-color: var(--accent-color-hover);
+  color: var(--white);
+}
+
+@media (width >= 900px) {
+  .cards-container:has(.cards.industry) {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 0 32px;
+    align-items: start;
+    padding-left: max(32px, 50% - 624px);
+    padding-right: max(32px, 50% - 624px);
+  }
+
+  .cards-container:has(.cards.industry) > .default-content-wrapper,
+  .cards-container:has(.cards.industry) > .cards-wrapper {
+    max-width: none;
+    padding: 0;
+  }
+
+  .cards-container:has(.cards.industry) > .default-content-wrapper:first-child {
+    grid-column: 1;
+    grid-row: 1 / 3;
+  }
+
+  .cards-container:has(.cards.industry) > .cards-wrapper {
+    grid-column: 2;
+  }
+
+  .cards.industry > ul {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .cards.industry > ul > li img {
+    aspect-ratio: 254 / 115;
+  }
+}
+
+/* ===================== Variant: insight ===================== */
+
+/* Section sits on a light-grey band (source homepage #blogs .light-gray-bkgd
+   { background-color:#e6e7e8 }). */
+.cards-container:has(.cards.insight) {
+  background-color: var(--light-color);
+  padding: 45px 0;
+}
+
+/* Section heading (source: centered, 24px mobile / 30px desktop). */
+.cards-container:has(.cards.insight) h2 {
+  text-align: center;
+  margin: 0 0 18px;
+}
+
+@media (width >= 900px) {
+  .cards-container:has(.cards.insight) h2 {
+    margin: 0 0 22px;
+  }
+}
+
+/* Card grid */
+.cards.insight > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+/* Individual cards – no border, transparent bg (blends with light-gray section) */
+.cards.insight > ul > li {
+  border: 0;
+  background-color: transparent;
+}
+
+/* Card image */
+.cards.insight .cards-card-image {
+  line-height: 0;
+}
+
+.cards.insight > ul > li img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  display: block;
+}
+
+/* Card text */
+.cards.insight .cards-card-body {
+  margin: 0;
+  padding: 20px 0;
+}
+
+/* Category label (eyebrow) – Roboto 10px weight 500, first strong only so the
+   "Read more" strong is not affected. */
+.cards.insight .cards-card-body strong:first-child {
+  font-family: var(--body-font-family);
+  font-size: var(--heading-font-size-xs);
+  font-weight: 500;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+/* Title / description text – Roboto 14px weight 400 */
+.cards.insight .cards-card-body p {
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m);
+  font-weight: 400;
+  line-height: 1.7;
+  margin: 0 0 4px;
+  text-align: left;
+}
+
+/* Links */
+.cards.insight .cards-card-body a:any-link {
+  color: var(--text-color);
+  text-decoration: none;
+  font-size: var(--body-font-size-m);
+  transition: color var(--transition-speed) ease;
+}
+
+.cards.insight .cards-card-body a:hover {
+  color: var(--link-hover-color);
+}
+
+/* "Read more" bold link — on the source it sits on its own line beneath the
+   title (authored as a separate paragraph). Force the trailing strong onto a
+   new line to match. */
+.cards.insight .cards-card-body strong:last-child {
+  display: block;
+  margin-top: 8px;
+}
+
+.cards.insight .cards-card-body strong:last-child a:any-link {
+  font-weight: 700;
+  font-size: var(--body-font-size-m);
+}
+
+/* "View all insights" button – green accent, full-width (source spans the
+   insights column width on both mobile and desktop). */
+.cards-container:has(.cards.insight) .button-wrapper a.button:any-link,
+.cards-container:has(.cards.insight) > div > .default-content-wrapper:last-child p > strong > a:any-link {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  background-color: var(--accent-color);
+  color: var(--text-color);
+  padding: 13px;
+  border-radius: 0;
+  font-family: var(--heading-font-family);
+  font-size: var(--body-font-size-m);
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+}
+
+.cards-container:has(.cards.insight) .button-wrapper a.button:hover,
+.cards-container:has(.cards.insight) > div > .default-content-wrapper:last-child p > strong > a:hover {
+  background-color: var(--accent-color-hover);
+  color: var(--white);
+}
+
+/* Tablet (source keeps a single stacked column until the lg breakpoint). */
+
+/* Desktop: 2-column layout – big card left, 3 stacked cards right */
+@media (width >= 900px) {
+  .cards.insight > ul {
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  /* First card spans all rows in column 1 */
+  .cards.insight > ul > li:first-child {
+    grid-row: 1 / 4;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .cards.insight > ul > li:first-child .cards-card-image {
+    flex: 1;
+  }
+
+  .cards.insight > ul > li:first-child img {
+    aspect-ratio: unset;
+    height: 100%;
+  }
+
+  /* Small cards (2nd–4th): horizontal layout, text LEFT image RIGHT.
+     Image column is a fixed width so the picture keeps a strict 16:9 ratio
+     (source: 209×117), matching grace.com. */
+  .cards.insight > ul > li:not(:first-child) {
+    display: grid;
+    grid-template-columns: 1fr 209px;
+    align-items: start;
+    gap: 0;
+  }
+
+  /* Swap order: body (text) first, image second */
+  .cards.insight > ul > li:not(:first-child) .cards-card-body {
+    order: -1;
+    padding: 0 20px 0 0;
+  }
+
+  .cards.insight > ul > li:not(:first-child) img {
+    aspect-ratio: 16 / 9;
+    height: auto;
+  }
+
+  /* "View all insights" reverts to a compact, text-sized button on desktop
+     (the full-width treatment above is mobile-only – source shows an
+     inline-block button aligned to the left of the insights column). */
+  .cards-container:has(.cards.insight) .button-wrapper a.button:any-link,
+  .cards-container:has(.cards.insight) > div > .default-content-wrapper:last-child p > strong > a:any-link {
+    display: inline-block;
+    width: auto;
+    padding: 18px 30px;
+  }
+}
+
+/* ===================== Variant: location-grid ===================== */
+
+/* Card grid – 1 column mobile */
+.cards.location-grid > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+/* Individual cards – no border, transparent bg */
+.cards.location-grid > ul > li {
+  border: 0;
+  background-color: transparent;
+}
+
+/* Card image – 16:9 landscape to match source (source images are 16:9). */
+.cards.location-grid .cards-card-image {
+  line-height: 0;
+}
+
+.cards.location-grid > ul > li img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  display: block;
+  margin-bottom: 11px;
+}
+
+/* Card text body */
+.cards.location-grid .cards-card-body,
+.cards.location-grid > ul > li > p {
+  margin: 0;
+  padding: 0;
+}
+
+/* Facility name – Roboto 14px weight 700, black */
+.cards.location-grid > ul > li strong {
+  display: block;
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m);
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--text-color);
+  margin: 0;
+}
+
+/* Type-indicator icons before the facility name (source uses Font Awesome
+   factory/building/flask/pin glyphs). Render inline at text size, black. */
+.cards.location-grid > ul > li strong .icon {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  vertical-align: middle;
+  margin-right: 3px;
+}
+
+.cards.location-grid > ul > li strong .icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* Facility name link – underlined, black */
+.cards.location-grid > ul > li strong a:any-link {
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m);
+  font-weight: 700;
+  color: var(--text-color);
+  text-decoration: underline;
+}
+
+.cards.location-grid > ul > li strong a:hover {
+  color: var(--link-hover-color);
+}
+
+/* keep the underline off the leading type-indicator icons */
+.cards.location-grid > ul > li strong a .icon {
+  text-decoration: none;
+}
+
+/* Address paragraphs – Roboto 14px weight 400, black */
+.cards.location-grid > ul > li p {
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m);
+  font-weight: 400;
+  line-height: 1.3;
+  color: var(--text-color);
+  margin: 0 0 21px;
+  text-align: left;
+}
+
+/* Desktop: 3 columns, looser line-height matches source. The source renders
+   this grid inside a ~920px content column (shared with a left sidebar), so
+   cap the width and center it to keep cards/images at the source scale rather
+   than filling the full section. */
+@media (width >= 900px) {
+  .cards.location-grid > ul {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    max-width: 920px;
+    margin: 0;
+  }
+
+  .cards.location-grid > ul > li strong,
+  .cards.location-grid > ul > li p {
+    line-height: 1.7;
+  }
+}
+
+/* ===================== Variant: product ===================== */
+.cards-container:has(.cards.product) {
+  padding: var(--spacing-l) 0;
+}
+
+.cards-container:has(.cards.product) h2 {
+  text-align: center;
+}
+
+/* Mobile/tablet: the source product grid stacks to a single full-width
+   column; the 3-across grid only kicks in on desktop. */
+.cards.product > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 35px;
+}
+
+.cards.product > ul > li {
+  position: relative;
+  border: 0;
+  background-color: transparent;
+  text-align: center;
+  padding-bottom: 30px;
+}
+
+.cards.product .cards-card-image {
+  line-height: 0;
+}
+
+.cards.product > ul > li img {
+  width: 100%;
+  aspect-ratio: 287 / 130;
+  object-fit: cover;
+}
+
+.cards.product .cards-card-body {
+  margin: 0;
+  padding: 30px 50px 0;
+}
+
+.cards.product .cards-card-body strong {
+  display: block;
+  font-family: var(--heading-font-family);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--link-hover-color);
+  margin-bottom: 4px;
+}
+
+/* Product-detail "benefit" cards (e.g. TRISYL XGE: Increase Refinery Productivity / Improve
+   Sustainability / Maintain Edible Oil Integrity) carry an <h3> title + a <ul> of bullets in the
+   body instead of the homepage's <strong>+overlay-link. Source: GREEN centered title; bullets are
+   solid-disc markers with LEFT-aligned text. The base `.cards.product > ul > li { text-align:center }`
+   centered the bullet text and default styling showed hollow-circle markers — fix both here. Only
+   affects benefit cards (normal product tiles have no h3/ul in the body). */
+.cards.product .cards-card-body h3 {
+  font-family: var(--heading-font-family);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--link-hover-color);
+  text-align: center;
+  margin: 0 0 16px;
+}
+
+.cards.product .cards-card-body ul {
+  margin: 0;
+  padding-left: 20px;
+  text-align: left;
+  list-style: disc;
+}
+
+.cards.product .cards-card-body ul li {
+  font-family: var(--heading-font-family);
+  font-size: var(--body-font-size-m);
+  font-weight: 400;
+  color: var(--text-color);
+  line-height: 1.7;
+  margin-bottom: 8px;
+}
+
+.cards.product .cards-card-body p {
+  margin: 0;
+  font-family: var(--heading-font-family);
+  font-size: var(--body-font-size-m);
+  font-weight: 400;
+  color: var(--text-color);
+  line-height: 1.7;
+}
+
+/* link covers entire card as clickable overlay */
+.cards.product .cards-card-body a:any-link {
+  position: absolute;
+  inset: 0;
+  color: transparent;
+  font-size: 0;
+  text-decoration: none;
+  z-index: 1;
+}
+
+/* CTA option (authored `Cards (product, cta)` → `.cards.product.cta`). Opt-in: any product-card
+   block given the `cta` option surfaces each card's link as a VISIBLE black "Read more ›" below
+   the title, instead of the default invisible full-card overlay. Used by the insights
+   "Related Articles" block; homepage product tiles (no `cta` option) keep the overlay. */
+.cards.product.cta > ul > li .cards-card-body a:any-link {
+  position: static;
+  inset: auto;
+  display: inline-block;
+  margin-top: 12px;
+  color: var(--text-color);
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m);
+  font-weight: 400;
+}
+
+.cards.product.cta > ul > li .cards-card-body a:any-link::after {
+  content: ' ›';
+}
+
+@media (width >= 900px) {
+  /* Source lays all products out in a single row (grace.com uses a 4-across
+     flex row for the 4 product tiles), so match with 4 equal columns. */
+  .cards.product > ul {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 35px 28px;
+  }
+
+  .cards.product > ul > li {
+    padding-bottom: 55px;
+  }
+
+  /* The CTA option (insights "Related Articles") is a 3-up grid, not the homepage's 4-across
+     product row — the 4-col template collapsed the 4th track and made the 3 cards uneven/overflow.
+     minmax(0,1fr) keeps the three tracks exactly equal regardless of title length (plain 1fr
+     lets a long title/image min-content widen one track → uneven images). On the 707px insights
+     content column with a 22px column gap this computes to 221px per card, matching live grace.com. */
+  .cards.product.cta > ul {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    column-gap: 22px;
+  }
+
+  /* Product-detail "benefit" grids (e.g. TRISYL XGE: Increase Refinery Productivity /
+     Improve Sustainability / Maintain Edible Oil Integrity) have exactly 3 cards, not the
+     homepage's 4. The base repeat(4,1fr) squeezed 3 cards into 3 of 4 tracks (~1/4 width each),
+     forcing every bullet to wrap to 2-3 words. Detect the exactly-3 case (3rd li is also the
+     last) and lay them out as an even 3-up grid — matches the source's 3 wide columns. Excludes
+     the .cta insights variant (already handled above). */
+  .cards.product:not(.cta):has(> ul > li:nth-child(3):last-child) > ul {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* ===================== Variant: profile-grid ===================== */
+
+/* Section sits on a light-grey band; cards are white tiles (source layout). */
+.cards-container:has(.cards.profile-grid) {
+  background-color: #e6e7e8;
+  padding: 45px 0;
+}
+
+/* Section heading (e.g. "Meet the Grace Leadership Team") */
+.cards-container:has(.cards.profile-grid) h2 {
+  text-align: center;
+}
+
+/* Card grid — mobile first: single column */
+.cards.profile-grid > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+}
+
+/* Individual profile card — white tile with inset padding (source: white-bkgd
+   card, padding 25px 20px 20px so the headshot has a white border). */
+.cards.profile-grid > ul > li {
+  border: 0;
+  background-color: var(--white);
+  padding: 25px 20px 20px;
+  text-align: center;
+}
+
+/* Headshot — 16:9 ratio (source .img padding-top:56.25%), cropped and centered */
+.cards.profile-grid .cards-card-image,
+.cards.profile-grid > ul > li > picture {
+  display: block;
+  line-height: 0;
+}
+
+.cards.profile-grid .cards-card-image picture {
+  display: block;
+  width: 100%;
+}
+
+.cards.profile-grid > ul > li img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+/* Text block — centered, spaced below the headshot */
+.cards.profile-grid .cards-card-body {
+  margin: 0;
+  padding: 25px 0 0;
+  text-align: center;
+}
+
+/* Name (h3) — Roboto Slab 20px / 300 / black (mobile) */
+.cards.profile-grid .cards-card-body h3 {
+  font-family: var(--heading-font-family);
+  font-size: 20px;
+  font-weight: 300;
+  color: var(--text-color);
+  line-height: 1.3;
+  margin: 0 0 20px;
+  text-align: center;
+}
+
+/* Title (h4) — Roboto Slab 16px / 600 / black (mobile) */
+.cards.profile-grid .cards-card-body h4 {
+  font-family: var(--heading-font-family);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-color);
+  line-height: 1.3;
+  margin: 0 0 30px;
+  text-align: center;
+}
+
+/* "Read more" link — Roboto Slab 14px / 600 / black, no transform/underline */
+.cards.profile-grid .cards-card-body p {
+  margin: 0;
+  text-align: center;
+}
+
+.cards.profile-grid .cards-card-body a:any-link {
+  font-family: var(--heading-font-family);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-color);
+  text-transform: none;
+  text-decoration: none;
+  letter-spacing: normal;
+  transition: color var(--transition-speed) ease;
+}
+
+.cards.profile-grid .cards-card-body a:hover {
+  color: var(--link-hover-color);
+}
+
+
+/* Desktop: 2 columns, 40px column gap; larger name/title fonts */
+@media (width >= 900px) {
+  .cards.profile-grid > ul {
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 40px;
+  }
+
+  .cards.profile-grid .cards-card-body h3 {
+    font-size: 26px;
+    line-height: 1.15;
+  }
+
+  .cards.profile-grid .cards-card-body h4 {
+    font-size: 18px;
+    line-height: 1.7;
+  }
+}
+
+/* ===================== Variant: solution-grid ===================== */
+
+/* Solution cards grid — text-only cards on a light-gray tile.
+   Source: grace.com UNIPOL UNIPPAC solution feature set.
+   Mobile/tablet: single column. Desktop: rows [1,1,2,1] — the 3rd + 4th
+   cards sit side-by-side, all others span full width. */
+
+.cards.solution-grid > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px; /* source vertical gap between cards */
+}
+
+/* Individual card tile */
+.cards.solution-grid > ul > li {
+  border: 0;
+  background-color: var(--light-color); /* #e6e7e8 rgb(230 231 232) */
+  padding: 10px 20px; /* source: article 10px + inner col 0 10px → 20px sides */
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Card body (text) */
+.cards.solution-grid .cards-card-body {
+  margin: 0;
+  text-align: center;
+}
+
+/* Card title — Roboto Slab, weight 300, centered */
+.cards.solution-grid .cards-card-body h2,
+.cards.solution-grid .cards-card-body h3,
+.cards.solution-grid .cards-card-body h4 {
+  font-family: var(--heading-font-family);
+  font-size: 24px; /* mobile/tablet */
+  font-weight: 300;
+  line-height: 1.3; /* 31.2px */
+  color: var(--text-color);
+  margin: 0 0 10px;
+  text-align: center;
+}
+
+/* Card description — Roboto 14px weight 400, centered.
+   Source keeps a 21px bottom margin on the description, giving each tile the
+   extra breathing room below the text. */
+.cards.solution-grid .cards-card-body p {
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m); /* 14px */
+  font-weight: 400;
+  line-height: 1.3; /* 18.2px mobile/tablet */
+  color: var(--text-color);
+  margin: 0 0 21px;
+  text-align: center;
+}
+
+/* Optional card image (kept generic in case of icon/image variant) */
+.cards.solution-grid .cards-card-image {
+  line-height: 0;
+  margin: 0 0 10px;
+  text-align: center;
+}
+
+.cards.solution-grid .cards-card-image img {
+  max-width: 100%;
+  display: inline-block;
+}
+
+/* Desktop: larger padding/type, and 3rd + 4th cards side-by-side.
+   Source switches near 992px; project breakpoint is 900px. */
+@media (width >= 900px) {
+  .cards.solution-grid > ul {
+    grid-template-columns: 1fr 1fr;
+    gap: 20px 40px; /* row 20px (vertical) / column 40px (paired horizontal) */
+  }
+
+  .cards.solution-grid > ul > li {
+    padding: 20px 40px; /* source: article 20px + inner col 0 20px → 40px sides */
+    grid-column: 1 / -1; /* full-width by default */
+  }
+
+  /* 3rd and 4th cards share a row, 50/50 */
+  .cards.solution-grid > ul > li:nth-child(3),
+  .cards.solution-grid > ul > li:nth-child(4) {
+    grid-column: auto;
+  }
+
+  .cards.solution-grid .cards-card-body h2,
+  .cards.solution-grid .cards-card-body h3,
+  .cards.solution-grid .cards-card-body h4 {
+    font-size: 30px;
+    line-height: 1.7; /* 51px */
+  }
+
+  .cards.solution-grid .cards-card-body p {
+    line-height: 1.7; /* 23.8px */
+  }
+}
+
+/* ===================== Variant: people ===================== */
+
+/* Flat, unboxed people cards — image, centered paragraph (with a bold inline
+   phrase) and a centered CTA link. Source: grace.com homepage "We compete with
+   our chemistry..." section. No border/shadow/radius; transparent background.
+   Mobile-first: cards stack full-width; 2-up side-by-side at >=900px. */
+.cards.people > ul {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cards.people > ul > li {
+  display: flex;
+  flex-direction: column;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  background: none;
+  padding: 0 10px; /* source mobile card padding */
+  text-align: center;
+}
+
+.cards.people .cards-card-image {
+  line-height: 0;
+}
+
+.cards.people .cards-card-image a,
+.cards.people .cards-card-image picture {
+  display: block;
+}
+
+/* source displays the full uncropped image (natural 600x265 => 2.264:1,
+   renders 560x247 in a 600px card). Match that ratio so nothing is cropped. */
+.cards.people .cards-card-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 600 / 265;
+  object-fit: cover;
+}
+
+.cards.people .cards-card-body {
+  margin: 0; /* reset base .cards-card-body 16px margin so text spans the same width as the image */
+  padding: 0;
+  text-align: center;
+}
+
+.cards.people .cards-card-body p {
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m); /* 14px */
+  font-weight: 400;
+  line-height: 1.3; /* 18.2px mobile */
+  color: var(--text-color);
+  text-align: center;
+  margin: 16px 0 0;
+}
+
+/* the bold inline phrase ("we win with our people,") */
+.cards.people .cards-card-body p strong {
+  font-weight: 700;
+}
+
+/* CTA link — Roboto Slab 14px/600, black, no underline, with a ">" chevron */
+.cards.people .cards-card-body a:any-link {
+  display: block;
+  margin-top: 18px;
+  font-family: var(--heading-font-family);
+  font-size: var(--body-font-size-m);
+  font-weight: 600;
+  color: var(--text-color);
+  text-align: center;
+  text-decoration: none;
+  transition: color var(--transition-speed) ease;
+}
+
+.cards.people .cards-card-body a:not(:has(img))::after {
+  content: ' \203A';
+  font-size: 1.2em;
+}
+
+.cards.people .cards-card-body a:hover,
+.cards.people .cards-card-body a:focus-visible {
+  color: var(--link-hover-color);
+}
+
+@media (width >= 900px) {
+  /* two cards side-by-side, each 50%, no gap (source .row) */
+  .cards.people > ul {
+    flex-direction: row;
+    gap: 0;
+  }
+
+  .cards.people > ul > li {
+    flex: 1 1 50%;
+    max-width: 50%;
+    padding: 0 20px 20px; /* source desktop card padding */
+  }
+
+  .cards.people .cards-card-body p {
+    line-height: 1.7; /* 23.8px desktop */
+    margin-top: 21px;
+  }
+}

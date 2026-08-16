@@ -54,6 +54,13 @@ function decorateImageRight(block) {
     const imgCol = row.querySelector('.columns-image-right-img-col');
     if (imgCol && imgCol !== row.lastElementChild) row.appendChild(imgCol);
   });
+  // Mark the block when its image is the ART logo (a small brand logo shown at natural size on the
+  // right, e.g. the hydroprocessing ART pages), so CSS can give it the WIDE 72/25 text:logo split
+  // instead of the bullet-list-beside-large-diagram 33/67 treatment (trisyl). Keyed on the DM/
+  // scene7 `ART-Logo` asset that the client auto-block rebuilds into the <picture>'s <img> src.
+  const img = block.querySelector('.columns-image-right-img-col img');
+  const src = img ? (img.getAttribute('src') || img.currentSrc || '') : '';
+  if (/art-logo/i.test(src)) block.classList.add('columns-image-right-logo');
 }
 
 function decorateLocationDetail(block) {
@@ -217,12 +224,27 @@ function setupTeaserCarousel(block) {
 function decorateHorizontalTeaser(block) {
   [...block.children].forEach((row) => {
     const cells = [...row.children];
-    const titleCell = cells[0];
-    const bodyCell = cells[1] || cells[0];
-    if (titleCell) titleCell.classList.add('columns-horizontal-teaser-title');
+    // Optional leading image cell (featured dark banner card, image-left): when the first cell
+    // holds an image, tag it and offset the title/body cells by one. Source overlays the title on
+    // the image (white, bottom-left) with the copy in the flowing column to its right, so move the
+    // title element INTO the media cell as an overlay caption.
+    const firstPic = cells[0] && cells[0].querySelector('picture, img');
+    const hasImg = !!(firstPic && cells.length >= 3);
+    const imgCell = hasImg ? cells[0] : null;
+    const titleCell = hasImg ? cells[1] : cells[0];
+    const bodyCell = hasImg ? cells[2] : (cells[1] || cells[0]);
+    if (imgCell) {
+      imgCell.classList.add('columns-horizontal-teaser-media');
+      // Keep the title as a normal flex child of the card (so on mobile it flows near the top,
+      // overlaid on the full-bleed image); CSS absolutely positions it over the image on desktop.
+      if (titleCell) titleCell.classList.add('columns-horizontal-teaser-title', 'columns-horizontal-teaser-title-overlay');
+    } else if (titleCell) {
+      titleCell.classList.add('columns-horizontal-teaser-title');
+    }
     if (bodyCell) bodyCell.classList.add('columns-horizontal-teaser-desc');
 
     row.classList.add('columns-horizontal-teaser-card');
+    if (hasImg) row.classList.add('columns-horizontal-teaser-card-media');
 
     /* the whole card links to the destination if the body has a link */
     const link = bodyCell ? bodyCell.querySelector('a') : null;

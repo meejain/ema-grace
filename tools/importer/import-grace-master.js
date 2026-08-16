@@ -52,6 +52,8 @@ import cardsProfileGridParser from './parsers/cards-profile-grid.js';
 import cardsSolutionGridParser from './parsers/cards-solution-grid.js';
 import columnsImageLeftParser from './parsers/columns-image-left.js';
 import columnsImageRightParser from './parsers/columns-image-right.js';
+import columnsTwoColumnTextParser from './parsers/columns-two-column-text.js';
+import columnsSplitListParser from './parsers/columns-split-list.js';
 import columnsHistoryItemParser from './parsers/columns-history-item.js';
 import columnsProfileDetailParser from './parsers/columns-profile-detail.js';
 import columnsLocationDetailParser from './parsers/columns-location-detail.js';
@@ -119,6 +121,8 @@ const parsers = {
   'cards-solution-grid': cardsSolutionGridParser,
   'columns-image-left': columnsImageLeftParser,
   'columns-image-right': columnsImageRightParser,
+  'columns-two-column-text': columnsTwoColumnTextParser,
+  'columns-split-list': columnsSplitListParser,
   'columns-history-item': columnsHistoryItemParser,
   'columns-profile-detail': columnsProfileDetailParser,
   'columns-location-detail': columnsLocationDetailParser,
@@ -193,6 +197,24 @@ function isCategoryGrid(list) {
 const MATCHERS = {
   'columns-image-left': (doc) => rowsByColumnOrder(doc, 'image'),
   'columns-image-right': (doc) => rowsByColumnOrder(doc, 'text'),
+  // two-column TEXT row (text|text, no image) → base Columns block (side-by-side ≥900px).
+  'columns-two-column-text': (doc) => rowsTwoColumnText(doc),
+  // split-list body LIST (source `.rich-text.split-list` renders its <ul> across 2 CSS columns,
+  // e.g. unipol-pp-process "…enables your success:" benefits list). NOT the davisil standalone
+  // two-column-content (that has a gated download → table-two-column-content). Claim a plain body
+  // split-list whose <ul> has ≥4 items and NO gated download in its section → Columns (2 balanced
+  // list cells, side-by-side). Excludes MIXED prose blocks (handled as inline body content).
+  'columns-split-list': (doc) => Array.from(doc.querySelectorAll('.rich-text.split-list'))
+    .filter((sl) => {
+      const section = sl.closest('section, article');
+      if (section && section.querySelector('.button__section, button[data-gated-id], a[href$=".pdf"]')) return false;
+      const ul = sl.querySelector(':scope > ul, :scope > div > ul, ul');
+      if (!ul || ul.children.length < 4) return false;
+      // list-dominant: no substantial prose paragraphs besides a short lead-in (≤1 non-trivial <p>).
+      const paras = Array.from(sl.querySelectorAll('p'))
+        .filter((p) => (p.textContent || '').replace(/\s+/g, ' ').trim().length > 40);
+      return paras.length <= 1;
+    }),
   // news-archive: an .accordion-comp whose dd's hold .media-callout PDF covers (per-year issue
   // archive). Checked before the other accordions so it wins that shell.
   'custom-widget-news-archive': (doc) => Array.from(doc.querySelectorAll('.accordion-comp'))
@@ -212,11 +234,25 @@ const MATCHERS = {
   // banner-cta: a .media-callout that is a CTA banner — has a heading AND a real CTA link, but
   // is NOT the app-promo (no multi-paragraph intro) and not inside a card grid. Kept narrow so
   // it doesn't claim every .media-callout on the site.
-  'banner-cta': (doc) => Array.from(doc.querySelectorAll('.media-callout, .cmp-media-callout'))
-    .filter((mc) => mc.querySelector('h2, h3, .h2, .h3')
-      && mc.querySelector('.button a, a.btn-primary, .cta a')
-      && !mc.closest('.card-group, .cmp-card-list')
-      && mc.querySelectorAll('.text p, .rich-text p, p').length <= 2),
+  'banner-cta': (doc) => {
+    const callouts = Array.from(doc.querySelectorAll('.media-callout, .cmp-media-callout'))
+      .filter((mc) => mc.querySelector('h2, h3, .h2, .h3')
+        && mc.querySelector('.button a, a.btn-primary, .cta a')
+        && !mc.closest('.card-group, .cmp-card-list')
+        && mc.querySelectorAll('.text p, .rich-text p, p').length <= 2);
+    // ALSO: a decorative background-image banner SECTION (source `section.none-bkgd.background-image`
+    // carrying a Scene7 geo-hex bg, e.g. e-catalysts "Sample Analysis and Technical Service Portal")
+    // that holds a heading + a CTA link. This is the full-width `Banner (cta)` treatment (white text
+    // over the photo/graphic). NOT a hero. The parser reads the section's bg URL for the image.
+    const bannerSections = Array.from(doc.querySelectorAll('section.background-image[style*="background-image"], section.none-bkgd[style*="background-image"]'))
+      .filter((sec) => {
+        if (sec.closest('.generic-hero, .hero__section')) return false;
+        const styleAttr = sec.getAttribute('style') || '';
+        if (!/background-image\s*:\s*url\(/i.test(styleAttr) || /gradient/i.test(styleAttr)) return false;
+        return sec.querySelector('h1, h2, h3, h4') && sec.querySelector('.button a, a.btn-primary, .cta a, a[href]');
+      });
+    return [...callouts, ...bannerSections];
+  },
   // quote-cta: a div.quote with a CTA link but NOT a testimonial (.quote-section) or a
   // statistic highlight (.cmp-card.statistic).
   'quote-cta': (doc) => Array.from(doc.querySelectorAll('div.quote'))
@@ -271,11 +307,12 @@ const MATCHERS = {
   'social-follow': (doc) => Array.from(doc.querySelectorAll('.card-list .cmp-card-list, .cmp-card-list'))
     .filter((cl) => /follow us/i.test((cl.querySelector('.heading, h3') || {}).textContent || '')
       && cl.querySelector('a.cmp-card.style-icon, a.cmp-card[href^="http"]')),
-  // featured-product-selector: a feature-set carousel whose heading says "Featured Products".
-  'featured-product-selector': (doc) => Array.from(doc.querySelectorAll('.feature-set, .cmp-feature-set'))
-    .filter((fs) => /featured products/i.test((fs.querySelector('.subhead-large, .heading') || {}).textContent || ''))
-    .map((fs) => fs.closest('.feature-set') || fs)
-    .filter((v, i, a) => a.indexOf(v) === i),
+  // featured-product-selector: DISABLED. The grace.com "Featured Products" feature-set is a set of
+  // dark slate cards (a.item.slate-bkgd) with white text + chevron — visually identical to the
+  // `columns horizontal-teaser featured-products` block, NOT the tablist product-selector. Routing
+  // it here rendered transparent/black tablist tabs (wrong vs source). It now flows through the
+  // featureSetContainers('slate-bkgd') matcher below, which preserves the "Featured Products" label.
+  'featured-product-selector': () => [],
   // checklist: a .row.section-66-33 pairing a .quote with a checklist (.text h4 + ul steps).
   'columns-checklist': (doc) => Array.from(doc.querySelectorAll('.row.section-66-33'))
     .filter((r) => r.querySelector('.quote') && r.querySelector('.text ul, .rich-text ul')),
@@ -289,9 +326,9 @@ const MATCHERS = {
   //   horizontal-teaser = plain a.item (no image, not slate, not tab-img). Match the carousel
   //   CONTAINER whose items are predominantly the given variant, so each fires at most once.
   'columns-image-teaser': (doc) => featureSetContainers(doc, 'tab-img'),
-  // Exclude carousels explicitly headed "Featured Products" — those are featured-product-selector.
-  'columns-horizontal-teaser-featured': (doc) => featureSetContainers(doc, 'slate-bkgd')
-    .filter((fs) => !/featured products/i.test((fs.querySelector('.subhead-large, .heading') || {}).textContent || '')),
+  // ALL slate-bkgd feature-sets (dark cards) → featured columns block, INCLUDING carousels headed
+  // "Featured Products" (the tablist featured-product-selector routing was retired — see above).
+  'columns-horizontal-teaser-featured': (doc) => featureSetContainers(doc, 'slate-bkgd'),
   'columns-horizontal-teaser': (doc) => featureSetContainers(doc, 'plain'),
   // brochure-promo: a .row with a brochure cover + a gated DOWNLOAD (button/pdf) on one side
   // and a rich-text description with a bullet list on the other. The gated download + list
@@ -389,7 +426,16 @@ const MATCHERS = {
   'table-two-column-content': (doc) => Array.from(doc.querySelectorAll('.rich-text.split-list'))
     .filter((sl) => {
       const section = sl.closest('section, article');
-      return section && section.querySelector('.button__section, button[data-gated-id], a[href$=".pdf"]');
+      if (!(section && section.querySelector('.button__section, button[data-gated-id], a[href$=".pdf"]'))) return false;
+      // The davisil split-list is a STANDALONE two-column <ul> (the whole block IS the list).
+      // On some pages (e.g. hydrogenation-catalysts) `.rich-text.split-list` is a MIXED rich-text
+      // block: several body paragraphs + a Contact button INTERLEAVED with the list. Claiming it
+      // would replaceWith() the 2-col list table and DROP all those paragraphs. Only claim when the
+      // block is list-DOMINANT — i.e. it has no substantial paragraph prose besides a short list
+      // lead-in (≤1 non-trivial <p>). Otherwise leave it as inline body content.
+      const paras = Array.from(sl.querySelectorAll(':scope > p, :scope > div > p'))
+        .filter((p) => (p.textContent || '').replace(/\s+/g, ' ').trim().length > 40);
+      return paras.length <= 1;
     }),
   'video-grid': (doc) => {
     const vids = Array.from(doc.querySelectorAll('.media-video'));
@@ -435,7 +481,26 @@ const MATCHERS = {
 function rowsByColumnOrder(doc, firstKind) {
   const rows = Array.from(doc.querySelectorAll('article .row, section .row'));
   return rows.filter((row) => {
-    const cols = Array.from(row.children).filter((c) => /col-lg-6/.test(c.className));
+    // Accept a balanced 50/50 row (two col-lg-6) OR a wide text|image split:
+    //  • `.section-75-25` with col-lg-9 text + col-lg-3 image (parent hydroprocessing "ART
+    //    Hydroprocessing" intro), OR
+    //  • a plain `.row` with col-lg-7 text + col-lg-3 image (hydroprocessing SUB-pages —
+    //    resid-hydrotreating / resid-hydrocracking / distillate-hydrotreating: body text left,
+    //    ART logo right).
+    // In every case, text left + ART logo right → columns-image-right. Match exactly TWO columns.
+    let cols = Array.from(row.children).filter((c) => /col-lg-6/.test(c.className));
+    let isWideSplit = false;
+    if (cols.length === 0) {
+      const wideCols = Array.from(row.children)
+        .filter((c) => /col-lg-9|col-lg-8|col-lg-7|col-lg-3/.test(c.className));
+      const hasWideText = wideCols.some((c) => /col-lg-9|col-lg-8|col-lg-7/.test(c.className));
+      const hasNarrowImg = wideCols.some((c) => /col-lg-3/.test(c.className));
+      if (wideCols.length === 2 && hasWideText && hasNarrowImg) {
+        cols = wideCols;
+        isWideSplit = true;
+      }
+    }
+    const is7525 = isWideSplit; // (kept name for the grid-guard skip below)
     if (cols.length !== 2) return false;
     const col0Image = !!cols[0].querySelector('.image, .cmp-image, picture, img');
     const col1Image = !!cols[1].querySelector('.image, .cmp-image, picture, img');
@@ -446,13 +511,58 @@ function rowsByColumnOrder(doc, firstKind) {
     const textThenImage = col1Image && !col1Text && col0Text;
     if (!imageThenText && !textThenImage) return false;
     // Exclude rows that belong to a multi-item grid: count sibling 2-col rows in the section.
+    // (75/25 splits are always standalone page rows, never grids — skip the grid guard for them.)
+    if (!is7525) {
+      const section = row.closest('section, article');
+      const siblingRows = section
+        ? Array.from(section.querySelectorAll('.row')).filter((r) => Array.from(r.children)
+          .filter((c) => /col-lg-6/.test(c.className)).length === 2)
+        : [row];
+      if (siblingRows.length > 2) return false; // part of a grid, not a standalone feature row
+    }
+    return firstKind === 'image' ? imageThenText : textThenImage;
+  });
+}
+
+/**
+ * Standalone TWO-COLUMN TEXT rows (text|text) — both `.col-lg-6` children hold text (heading /
+ * paragraph / list / button), NEITHER holds an image. Source lays these side-by-side (e.g.
+ * pe-solution "Grace Solution Process Offerings" → Activators | Metallocenes). These are missed by
+ * rowsByColumnOrder (which requires exactly ONE image column) and would otherwise flatten into a
+ * single stacked run. Returns the `.row` containers. Kept narrow: exactly two col-lg-6 text
+ * columns, not part of a 3+ card grid.
+ */
+function rowsTwoColumnText(doc) {
+  const rows = Array.from(doc.querySelectorAll('article .row, section .row'));
+  return rows.filter((row) => {
+    const cols = Array.from(row.children).filter((c) => /col-lg-6/.test(c.className));
+    if (cols.length !== 2) return false;
+    const hasImg = (c) => !!c.querySelector('.image, .cmp-image, picture, img');
+    // Require SUBSTANTIAL text (a heading, or a paragraph/list with real prose) in EACH column —
+    // not merely a button. A row of two download buttons (e.g. trisyl) is NOT a two-column-text
+    // feature; it should fall through to the normal button-group handling.
+    const hasSubstantialText = (c) => {
+      if (c.querySelector('h1, h2, h3, h4, h5, h6')) return true;
+      return Array.from(c.querySelectorAll('p, li')).some((el) => {
+        // Ignore a paragraph that is JUST a button/link (a gated download wrapped as
+        // <p><strong><a>… by normalizeGatedDownloads) — that's a CTA, not prose.
+        const link = el.querySelector('a');
+        const txt = (el.textContent || '').replace(/\s+/g, ' ').trim();
+        if (link && (link.textContent || '').replace(/\s+/g, ' ').trim() === txt) return false;
+        return txt.length > 25;
+      });
+    };
+    // BOTH columns substantial text, NEITHER image.
+    if (hasImg(cols[0]) || hasImg(cols[1])) return false;
+    if (!hasSubstantialText(cols[0]) || !hasSubstantialText(cols[1])) return false;
+    // Not part of a 3+ two-col grid (keep it a standalone feature pair).
     const section = row.closest('section, article');
     const siblingRows = section
       ? Array.from(section.querySelectorAll('.row')).filter((r) => Array.from(r.children)
         .filter((c) => /col-lg-6/.test(c.className)).length === 2)
       : [row];
-    if (siblingRows.length > 2) return false; // part of a grid, not a standalone feature row
-    return firstKind === 'image' ? imageThenText : textThenImage;
+    if (siblingRows.length > 2) return false;
+    return true;
   });
 }
 
@@ -511,8 +621,11 @@ function featureSetContainers(doc, variant) {
     const items = Array.from(root.querySelectorAll('a.item'));
     if (!items.length) return;
     const kindOf = (it) => {
-      if (it.classList.contains('tab-img') || it.querySelector('.image img, picture img')) return 'tab-img';
+      // slate-bkgd wins over tab-img: a dark "Featured" card can carry BOTH classes
+      // (e.g. value-creation, chemical-processing — a slate card WITH a left image).
+      // Those belong to the featured (dark) treatment, not the white image-teaser overlay.
       if (it.classList.contains('slate-bkgd')) return 'slate-bkgd';
+      if (it.classList.contains('tab-img') || it.querySelector('.image img, picture img')) return 'tab-img';
       return 'plain';
     };
     const counts = { 'tab-img': 0, 'slate-bkgd': 0, plain: 0 };
@@ -612,9 +725,19 @@ function extractAndRemoveSidebarNav(document) {
   return navSection;
 }
 
-/** Contact-us sticky widget present (metadata-driven, auto-built by scripts.js). */
+/** A contact-us sticky/cmp element that actually carries CONTENT (a button, an inquiry link, or a
+ * tagline) — NOT an empty placeholder. Some pages (e.g. hydroprocessing) ship an empty
+ * `.contact-us-sticky` wrapper that renders nothing; treating its mere presence as "has widget"
+ * wrongly emits `contactus: true` and reserves a right rail (shifting content left). */
+function contactWidgetEl(document) {
+  const els = Array.from(document.querySelectorAll('.contact-us-sticky, .contact-us__cmp, .contact-us-cmp'));
+  return els.find((el) => el.querySelector('button, a[href], .contactus__text, .contact-us-title, .contact-us-subtitle')
+    || (el.textContent || '').replace(/\s+/g, ' ').trim().length > 0) || null;
+}
+
+/** Contact-us sticky widget present WITH content (metadata-driven, auto-built by scripts.js). */
 function hasContactWidget(document) {
-  return !!document.querySelector('.contact-us-sticky, .contact-us__cmp, .contact-us-cmp');
+  return !!contactWidgetEl(document);
 }
 
 // ---------------------------------------------------------------------------
@@ -724,36 +847,223 @@ function buildHeroBlock(document) {
   return WebImporter.Blocks.createBlock(document, { name: 'Hero (banner)', cells: [[h1]] });
 }
 
-/** Left section-nav as a leading section: a UL of sibling-page links, tagged with
- *  Section Metadata Style = sidebar-nav so templates/sidebar/sidebar.css pins it to col 1. */
+/** Left section-nav as a leading section, tagged Section Metadata Style=sidebar-nav so
+ *  templates/sidebar/sidebar.css pins it to col 1. The SOURCE nav is a 2-level list: a parent
+ *  <li> (the section hub, e.g. "FCC Catalyst Solutions") whose href is the current section root,
+ *  holding a nested <ul> of sibling-page options. We PRESERVE that hierarchy — parent <li> + a
+ *  child <ul> — so the CSS can style the parent as a bold title (border top/bottom of the whole
+ *  list) and indent the children (no per-item borders). Falls back to a flat <ul> when the source
+ *  has no nesting (older/simple nav rails), so existing sidebar pages are unaffected. */
 function buildSidebarNav(document) {
-  const navAnchors = Array.from(document.querySelectorAll(
-    'article [aria-label="Section navigation"] a, article .section-nav a, article .col-lg-2 a',
-  ));
-  if (!navAnchors.length) return null;
+  // Prefer the real nav LIST container (the desktop <ul>), NOT `.col-lg-2 a` — the left column also
+  // holds a resource card (e.g. "Iron Tolerance") whose link would otherwise leak into the nav.
+  const sourceUl = document.querySelector(
+    '.section-nav-container ul, article [aria-label="Section navigation"] ~ ul, article .section-navigation ul, article .section-nav ul',
+  );
 
-  const seen = new Set();
-  const ul = document.createElement('ul');
-  navAnchors.forEach((a) => {
+  const anchorInfo = (a) => {
     const text = (a.textContent || '').replace(/\s+/g, ' ').trim();
     const href = a.getAttribute('href') || '';
-    if (!text || !href) return;
-    const norm = href.replace(/^\/content\/grace\/us\/en/, '').replace(/\.html$/, '').replace(/\/$/, '');
-    if (seen.has(norm)) return;
-    seen.add(norm);
+    return (text && href) ? { text, href } : null;
+  };
+  const mkLi = (info) => {
     const li = document.createElement('li');
     const link = document.createElement('a');
-    link.setAttribute('href', href);
-    link.textContent = text;
+    link.setAttribute('href', info.href);
+    link.textContent = info.text;
     li.append(link);
-    ul.append(li);
-  });
+    return li;
+  };
+
+  const ul = document.createElement('ul');
+
+  // Structured path: source has a parent <li> with a nested <ul>.
+  const parentLi = sourceUl && sourceUl.querySelector(':scope > li:has(> ul), :scope > li > ul')
+    ? (sourceUl.querySelector(':scope > li > ul') ? sourceUl.querySelector(':scope > li > ul').closest('li') : null)
+    : null;
+  if (parentLi) {
+    const pInfo = anchorInfo(parentLi.querySelector(':scope > a'));
+    const nested = parentLi.querySelector(':scope > ul');
+    const childInfos = Array.from(nested.querySelectorAll(':scope > li > a')).map(anchorInfo).filter(Boolean);
+    if (pInfo && childInfos.length) {
+      const pLi = mkLi(pInfo);
+      const childUl = document.createElement('ul');
+      const seenC = new Set();
+      childInfos.forEach((ci) => {
+        const norm = ci.href.replace(/^\/content\/grace\/us\/en/, '').replace(/\.html$/, '').replace(/\/$/, '');
+        if (seenC.has(norm)) return;
+        seenC.add(norm);
+        childUl.append(mkLi(ci));
+      });
+      pLi.append(childUl);
+      ul.append(pLi);
+    }
+  }
+
+  // Flat fallback: no nested structure found → collect the nav-list anchors (NOT the whole column,
+  // so the resource card link is excluded). Only used when the structured path produced nothing.
+  if (!ul.children.length) {
+    const flatAnchors = sourceUl
+      ? Array.from(sourceUl.querySelectorAll('a'))
+      : Array.from(document.querySelectorAll('article [aria-label="Section navigation"] a, article .section-nav a'));
+    const seen = new Set();
+    flatAnchors.map(anchorInfo).filter(Boolean).forEach((info) => {
+      const norm = info.href.replace(/^\/content\/grace\/us\/en/, '').replace(/\.html$/, '').replace(/\/$/, '');
+      if (seen.has(norm)) return;
+      seen.add(norm);
+      ul.append(mkLi(info));
+    });
+  }
   if (!ul.children.length) return null;
 
   const section = document.createElement('div');
   section.append(ul);
+
+  // SIDEBAR PROMO CARD (e.g. "Iron Tolerance Advancements"): the left nav column can hold a resource
+  // card below the nav — an image + a heading/link (source: `.col-lg-2 .embed img` + a sibling
+  // `h6 > a`). It's NOT a nav item (excluded above), so re-emit it here as a Cards (industry) image
+  // card appended to the nav section, so it renders in the nav column beneath the links like source.
+  const promo = buildSidebarPromoCard(document);
+  if (promo) section.append(promo);
+
   section.append(createSectionMetadata(document, 'sidebar-nav'));
   return section;
+}
+
+/** Build a Cards (industry) image card from a left-column resource promo (image + heading link),
+ *  e.g. the "Iron Tolerance Advancements Download Now" whitepaper card. Returns the block or null. */
+function buildSidebarPromoCard(document) {
+  // The promo lives in the left column (col-lg-2), NOT in the wide content column (col-lg-7).
+  const leftCol = document.querySelector('article .col-lg-2, article .row > .col-lg-2, .col-xs-12.col-lg-2');
+  if (!leftCol) return null;
+
+  // CASE 1 — IMAGE promo (e.g. resid-conversion "Iron Tolerance Advancements"): an image + a
+  // heading link (h6/h5/h4 > a) pointing OUT of the nav. Emits Cards (industry) [image][link].
+  const img = leftCol.querySelector('.embed img, img');
+  const headingLink = leftCol.querySelector('h6 a, h5 a, h4 a');
+  if (img && headingLink) {
+    const href = headingLink.getAttribute('href') || '';
+    const text = (headingLink.textContent || '').replace(/\s+/g, ' ').trim();
+    if (href && text) {
+      const picImg = document.createElement('img');
+      // DAM assets (…/content/dam/…) are NOT part of the EDS tree — a root-relative src would resolve
+      // against the EDS host and 404. Anchor it to the absolute live grace.com URL.
+      let picSrc = img.getAttribute('src') || '';
+      if (picSrc.startsWith('/content/dam/')) picSrc = `https://grace.com${picSrc}`;
+      picImg.setAttribute('src', picSrc);
+      picImg.setAttribute('alt', img.getAttribute('alt') || text);
+      const link = document.createElement('a');
+      link.setAttribute('href', href);
+      link.textContent = text;
+      return WebImporter.Blocks.createBlock(document, { name: 'Cards (industry)', cells: [[[picImg], [link]]] });
+    }
+  }
+
+  // CASE 2 — IMAGE-LESS "PROMOTION" tile (e.g. technical-service-expertise "Specialized Evaluation
+  // Tools"): a dark-background `a.cmp-card.none-image.promotion` in the left column, with a
+  // `.h5` PROMOTION eyebrow, `.h4.title` title, a `.spt-copy` description, and the card href. Emits
+  // Cards (industry, promotion) — one text cell holding eyebrow + title + description + Learn-more
+  // link, styled as the dark promo tile by blocks/cards/cards.css.
+  const promoCard = leftCol.querySelector('a.cmp-card.promotion, a.cmp-card.none-image, a.cmp-card.text-on-bkgd');
+  if (promoCard) {
+    const href = promoCard.getAttribute('href') || '';
+    const titleEl = promoCard.querySelector('.h4.title, .h4, .title');
+    const title = titleEl ? titleEl.textContent.replace(/\s+/g, ' ').trim() : '';
+    if (href && title) {
+      const eyebrowEl = promoCard.querySelector('.h5');
+      const bodyEl = promoCard.querySelector('.spt-copy, .subhead-small');
+      const cell = [];
+      if (eyebrowEl && eyebrowEl.textContent.trim()) {
+        const p = document.createElement('p');
+        p.textContent = eyebrowEl.textContent.replace(/\s+/g, ' ').trim();
+        cell.push(p);
+      }
+      const h = document.createElement('h3');
+      h.textContent = title;
+      cell.push(h);
+      if (bodyEl) {
+        bodyEl.querySelectorAll('p').forEach((bp) => {
+          if (bp.textContent.trim()) cell.push(bp.cloneNode(true));
+        });
+      }
+      const p2 = document.createElement('p');
+      const a2 = document.createElement('a');
+      a2.setAttribute('href', href);
+      a2.textContent = 'Learn more';
+      p2.append(a2);
+      cell.push(p2);
+      // Emit the `promotion` option so cards.css renders the dark background tile; single text cell
+      // (no image) — the imageless promo shape.
+      return WebImporter.Blocks.createBlock(document, { name: 'Cards (industry, promotion)', cells: [[cell]] });
+    }
+  }
+
+  return null;
+}
+
+/** Materialize AEM lazy image components as real <img> so they survive extraction and get rewritten
+ *  by the DM/Scene7 transformer into carrier anchors. Grace's `.image` components ship as
+ *  `<div data-cmp-is="image" data-cmp-src="scene7…?wid={.width}" data-asset="/content/dam/…">` with
+ *  NO plain <img> until client JS hydrates (which doesn't happen in the headless importer) — so body
+ *  diagrams like the hydrogenation-catalysts RANEY flowchart vanished. Prefer the Scene7 `data-cmp-src`
+ *  (kept as a LIVE reference by grace-dm-images.js), fall back to the DAM `data-asset` absolutized to
+ *  grace.com. Idempotent: skips components that already contain an <img>/<picture>. */
+function materializeLazyImages(document) {
+  document.querySelectorAll('[data-cmp-is="image"], [data-cmp-src]').forEach((el) => {
+    // pick the component root (the element carrying the cmp attrs).
+    const root = el.hasAttribute('data-cmp-src') ? el : (el.querySelector('[data-cmp-src]') || el);
+    if (root.closest('picture')) return;
+    // resolve the real Scene7/DAM src from the component attrs.
+    let src = root.getAttribute('data-cmp-src') || '';
+    // strip AEM responsive width template tokens so the URL resolves to a real asset.
+    src = src.replace(/([?&])wid=(%7B|\{)[^&]*(%7D|\})/i, '$1').replace(/\{\.width\}/g, '')
+      .replace(/[?&]$/, '');
+    if (!src) {
+      const asset = root.getAttribute('data-asset') || '';
+      if (asset.startsWith('/content/dam/')) src = `https://grace.com${asset}`;
+    }
+    if (!src) return;
+    // If grace.com's lazy-load JS already hydrated this component into an <img> — often with a
+    // useless runtime `blob:` src (or a low-res placeholder) — REPAIR that <img>'s src to the real
+    // Scene7 URL instead of adding a duplicate. Otherwise create a fresh <img>.
+    const existing = root.querySelector('img');
+    if (existing) {
+      const cur = existing.getAttribute('src') || '';
+      if (/^blob:/i.test(cur) || (!/\/is\/image\//.test(cur) && !cur.startsWith('https://grace.com/content/dam/'))) {
+        existing.setAttribute('src', src);
+        existing.removeAttribute('srcset');
+      }
+      if (!(existing.getAttribute('alt') || '').trim()) {
+        const asset2 = root.getAttribute('data-asset') || '';
+        let base2 = asset2 ? asset2.split('/').pop().replace(/\.[a-z0-9]+$/i, '') : '';
+        if (!base2) { try { base2 = new URL(src).pathname.split('/').pop(); } catch (e) { base2 = ''; } }
+        const a2 = base2.replace(/[-_]+/g, ' ').replace(/\s+/g, ' ').trim().replace(/\b\w/g, (c) => c.toUpperCase());
+        if (a2) existing.setAttribute('alt', a2);
+      }
+      return;
+    }
+    const img = document.createElement('img');
+    img.setAttribute('src', src);
+    let alt = (root.getAttribute('alt') || root.getAttribute('data-cmp-alt')
+      || root.getAttribute('aria-label') || '').replace(/<[^>]*>/g, '').trim();
+    // No authored alt on these AEM image components. Derive a readable alt from the asset/Scene7
+    // filename (e.g. `chart-raney-hydrogenation-catalysts` → "Chart Raney Hydrogenation Catalysts")
+    // so the DM carrier doesn't fall back to the "Image without alt text" sentinel and the published
+    // image has meaningful, accessible alt text.
+    if (!alt) {
+      const asset = root.getAttribute('data-asset') || '';
+      let base = '';
+      if (asset) {
+        base = asset.split('/').pop().replace(/\.[a-z0-9]+$/i, '');
+      } else {
+        try { base = new URL(src).pathname.split('/').pop(); } catch (e) { base = ''; }
+      }
+      alt = base.replace(/[-_]+/g, ' ').replace(/\s+/g, ' ').trim()
+        .replace(/\b\w/g, (c) => c.toUpperCase());
+    }
+    img.setAttribute('alt', alt);
+    (root.querySelector('.cmp-image') || root).appendChild(img);
+  });
 }
 
 /** Extract the main content column (.col-lg-7 rich text) as clean default content;
@@ -1666,6 +1976,14 @@ function sectionizeFlatBody(main, document, splitFingerprints = []) {
   // nested inside another leaf (e.g. a <p> inside an <li>). querySelectorAll returns them in
   // document order; interleave with the block tables (also in document order) to form `seq`.
   const LEAF = 'h1, h2, h3, h4, h5, h6, p, ul, ol, blockquote, pre, figure';
+  // A standalone CONTENT image (e.g. the hydrogenation-catalysts RANEY flowchart diagram) is its
+  // own `.image` component in the body flow. It isn't in LEAF (which is text-flow only), so it never
+  // became a content leaf and vanished. Treat a top-level content <picture>/<img> as a leaf too —
+  // but ONLY when it's NOT inside a block table, a card/hero/teaser wrapper, or a link (those are
+  // handled by their own parsers). leafParentOk already rejects TABLE/LI/A ancestors; also reject
+  // the block-ish component wrappers so we don't double-count card/hero imagery.
+  const IMG_LEAF = 'picture, img';
+  const imgAncestorBad = (el) => !!el.closest('.hero, .cards, .columns, .card, .cmp-card, table, picture');
   const isBlock = (el) => el.tagName === 'TABLE';
   const leafParentOk = (el) => {
     let p = el.parentElement;
@@ -1676,6 +1994,47 @@ function sectionizeFlatBody(main, document, splitFingerprints = []) {
     return true;
   };
   const leaves = Array.from(main.querySelectorAll(LEAF)).filter(leafParentOk);
+  // Add standalone content images as leaves (a bare <img> whose closest LEAF-image is itself).
+  Array.from(main.querySelectorAll(IMG_LEAF)).forEach((img) => {
+    if (img.tagName === 'IMG' && img.closest('picture')) return; // the <picture> is the leaf
+    if (imgAncestorBad(img) && img.tagName === 'IMG') return;
+    if (img.tagName === 'PICTURE' && img.closest('.hero, .cards, .columns, .card, .cmp-card, table')) return;
+    if (leafParentOk(img)) leaves.push(img);
+  });
+  // Add standalone DM/Scene7 image CARRIER ANCHORS as leaves. The afterTransform DM transformer
+  // (grace-dm-images.js) runs BEFORE this and rewrites a materialized content <img> into an
+  // `<a href="scene7…">alt</a>` carrier (the round-trip-safe form the client auto-block rebuilds into
+  // a <picture>). Such an anchor is neither a LEAF nor a block table, so it was dropped when the body
+  // was rebuilt — the RANEY flowchart defect. Collect a carrier anchor that is a DIRECT flow element
+  // (not inside a card/hero/teaser/list/heading, which own their imagery) as its own content leaf.
+  Array.from(main.querySelectorAll('a[href*="/is/image/"], a[href*="scene7"]')).forEach((a) => {
+    if (a.closest('.hero, .cards, .columns, .card, .cmp-card, table, li, h1, h2, h3, h4, h5, h6, p')) return;
+    // must be a bare image carrier (no other meaningful text/among siblings handled elsewhere)
+    if (leafParentOk(a)) leaves.push(a);
+  });
+  // Add standalone CTA anchors as leaves. A bare text link that is a DIRECT flow child (e.g. the
+  // "Learn more" → /about-grace/sustainability/ inside the value-creation/sustainability callout)
+  // is neither a LEAF (h*/p/ul/…) nor an image carrier, so it was dropped when the body was rebuilt.
+  // Wrap it in `<p><strong>…</strong></p>` so it survives AND `scripts.js` decorateButtons()
+  // promotes it to a green PRIMARY button (source renders these standalone CTAs as solid green
+  // buttons — the `.cta`/`btn` styling; decorateButtons only buttonizes a <strong>-wrapped anchor,
+  // a bare <a> stays plain text). Skip image carriers (handled above), links already inside a
+  // leaf/list/heading/card/block, and empty/anchor-only-fragment links.
+  Array.from(main.querySelectorAll('a[href]')).forEach((a) => {
+    const href = a.getAttribute('href') || '';
+    if (/\/is\/image\/|scene7/.test(href)) return; // image carrier — handled above
+    if (href.startsWith('#') || !href.trim()) return; // in-page/empty
+    if (a.querySelector('picture, img')) return; // image link
+    if (!a.textContent.trim()) return; // no visible label
+    if (a.closest('.hero, .cards, .columns, .card, .cmp-card, table, li, h1, h2, h3, h4, h5, h6, p, nav, .section-navigation')) return;
+    if (!leafParentOk(a)) return;
+    const p = document.createElement('p');
+    const strong = document.createElement('strong');
+    a.replaceWith(p);
+    strong.appendChild(a);
+    p.appendChild(strong);
+    leaves.push(p);
+  });
   // Merge blocks + leaves into one document-ordered sequence.
   const all = [...blocks, ...leaves].sort((a, b) => {
     if (a === b) return 0;
@@ -1698,14 +2057,56 @@ function sectionizeFlatBody(main, document, splitFingerprints = []) {
   // a captured fingerprint. Returns an array of runs (one when no split points). No-op when
   // splitFingerprints is empty (products/other families keep byte-identical single-run behaviour).
   const fpNorm = (splitFingerprints || []).map((s) => (s || '').replace(/\s+/g, ' ').trim().slice(0, 60)).filter(Boolean);
+  // A standalone content IMAGE (a DM/Scene7 carrier anchor, or a bare <img>/<picture> leaf) is its
+  // OWN source section on grace.com — e.g. the RANEY flowchart sits on white BELOW the gray "Why are
+  // catalysts" band, NOT inside it. Detect such an image leaf so splitRun breaks it into its own
+  // section (and the content after it starts fresh too), so it doesn't inherit the preceding band.
+  const isImageLeaf = (el) => {
+    if (!el) return false;
+    if (el.tagName === 'IMG' || el.tagName === 'PICTURE') return true;
+    if (el.tagName === 'A') {
+      // A DM/Scene7 carrier anchor IS an image leaf regardless of its link text — the text is the
+      // image's alt (e.g. "Chart Raney Hydrogenation Catalysts"), not prose. Its href points at the
+      // Scene7 asset and it has no child element other than (optionally) a picture/img.
+      const href = el.getAttribute('href') || '';
+      if (!/\/is\/image\/|scene7/.test(href)) return false;
+      const childEls = Array.from(el.children).filter((c) => !/^(BR|SOURCE)$/.test(c.tagName));
+      return childEls.length === 0 || childEls.every((c) => c.tagName === 'PICTURE' || c.tagName === 'IMG');
+    }
+    // a <p> whose only meaningful child is an image carrier anchor OR a <picture>/<img>
+    if (el.tagName === 'P') {
+      if (el.querySelector(':scope > picture, :scope > img')) return true;
+      const a = el.querySelector(':scope > a[href*="/is/image/"], :scope > a[href*="scene7"]');
+      if (!a) return false;
+      // treat as an image leaf whenever the <p>'s only meaningful content is that carrier anchor
+      // (regardless of the anchor's link text — it's the image's alt, not prose).
+      const pText = (el.textContent || '').replace(/\s+/g, ' ').trim();
+      const aText = (a.textContent || '').replace(/\s+/g, ' ').trim();
+      return pText === aText;
+    }
+    return false;
+  };
   const splitRun = (run) => {
-    if (!fpNorm.length || run.length < 2) return [run];
+    if (run.length < 2) return [run];
     const out = [];
     let cur = [];
-    run.forEach((el) => {
+    // Tracks when the current sub-run was STARTED by a gray/blue fingerprint (a banded promo box,
+    // e.g. unipol "Read how UNIPOL…"). Such a box is short (its heading + a CTA link) and must NOT
+    // absorb the NEXT section's heading + prose — otherwise the band bleeds over the following body
+    // (the "banner merging with text below" defect). So once inside a fingerprint-started sub-run,
+    // break again BEFORE the next heading (which begins non-banded content).
+    let curIsFp = false;
+    run.forEach((el, idx) => {
       const t = (el.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 60);
-      const isBoundary = t && fpNorm.some((fp) => t.startsWith(fp) || fp.startsWith(t));
-      if (isBoundary && cur.length) { out.push(cur); cur = []; }
+      const fpBoundary = fpNorm.length && t && fpNorm.some((fp) => t.startsWith(fp) || fp.startsWith(t));
+      // break BEFORE an image leaf (it starts its own section) and BEFORE the element that follows
+      // one (so the image is isolated). Combined with the fingerprint boundary.
+      const imgBoundary = isImageLeaf(el) || (idx > 0 && isImageLeaf(run[idx - 1]));
+      // close a fingerprint-started sub-run when a NEW heading appears (start of the next section),
+      // so the banded box keeps only its own heading + CTA.
+      const fpEndBoundary = curIsFp && !fpBoundary && isHeading(el) && cur.length;
+      if ((fpBoundary || imgBoundary || fpEndBoundary) && cur.length) { out.push(cur); cur = []; curIsFp = false; }
+      if (fpBoundary) curIsFp = true;
       cur.push(el);
     });
     if (cur.length) out.push(cur);
@@ -1723,7 +2124,33 @@ function sectionizeFlatBody(main, document, splitFingerprints = []) {
       if (isHeading(pending[i])) { tailStart = i; break; }
     }
     // only peel when the heading is near the end of the run (its tail is ≤3 nodes: heading + CTA/p)
-    const tail = (tailStart >= 0 && pending.length - tailStart <= 3) ? pending.slice(tailStart) : [];
+    let tail = (tailStart >= 0 && pending.length - tailStart <= 3) ? pending.slice(tailStart) : [];
+    // Do NOT peel a tail that (a) leads with a heading matching a gray-band/blue-border fingerprint —
+    // that's a STANDALONE banded content section, not this block's header (e.g. the "Why are catalysts"
+    // gray band must not merge into the following Latest-Insights block); or (b) contains a standalone
+    // image leaf (e.g. the RANEY flowchart) — those must split into their own section via flushBody.
+    if (tail.length) {
+      const headFp = (tail[0].textContent || '').replace(/\s+/g, ' ').trim().slice(0, 60);
+      const headIsBand = fpNorm.length && headFp && fpNorm.some((fp) => headFp.startsWith(fp) || fp.startsWith(headFp));
+      const hasImg = tail.some((el) => isImageLeaf(el));
+      // A block-header tail is a heading + a SHORT CTA (link/eyebrow), NOT a heading followed by real
+      // body prose or a list. When the tail after its heading carries a substantial paragraph
+      // (>60 chars, not just a link) or a <ul>/<ol>, it's a STANDALONE content section — do NOT merge
+      // it into the following block (e.g. the "Assistance" h3 + GCT paragraph + services list must
+      // stay its own content section, not get absorbed into the following e-catalysts banner-cta,
+      // which would drag the prose full-width with the banner).
+      const tailBodyIsSubstantial = tail.slice(1).some((el) => {
+        if (/^(UL|OL)$/.test(el.tagName)) return true;
+        if (el.tagName === 'P') {
+          const link = el.querySelector('a');
+          const txt = (el.textContent || '').replace(/\s+/g, ' ').trim();
+          if (link && (link.textContent || '').replace(/\s+/g, ' ').trim() === txt) return false; // CTA-only <p>
+          return txt.length > 60;
+        }
+        return false;
+      });
+      if (headIsBand || hasImg || tailBodyIsSubstantial) tail = [];
+    }
     const body = tail.length ? pending.slice(0, tailStart) : pending;
     if (body.length) flushBody(body);
     sections.push([...tail, item.el]);
@@ -1768,6 +2195,15 @@ function buildDefaultPage(document, url, params) {
   // Contact-us widget presence + tagline are captured in params BEFORE cleanup removes the
   // widget (see transform()); fall back to a live query for any caller that didn't pre-capture.
   const hasCU = (params && params.sourceHadContactWidget) || hasContactWidget(document);
+  // An /industries/ LANDING page (banner hero, NO left section-nav, NO contact widget — e.g.
+  // hydroprocessing) still uses the SAME constrained/left-aligned content layout as the contactus
+  // template on the source (content column ~920px, not full-bleed centered). Give it the contactus
+  // template + per-block sectionization so its body doesn't stretch edge-to-edge and its
+  // category-grid can sit in its own gray band. It gets NO contactus widget/tagline (there is none).
+  const isIndustriesLanding = !hasCU
+    && !(params && params.industriesNav)
+    && /\/industries\//.test((params && params.originalURL) || url || '')
+    && !!(params && params.sourceHadBannerHero);
   if (hasCU) {
     // `template: contactus` drives templates/contactus/contactus.css — it narrows + left-aligns the
     // content column (max 920px) leaving a right gutter for the sticky Contact Us widget (source
@@ -1780,6 +2216,9 @@ function buildDefaultPage(document, url, params) {
     pageMeta.push(['contactus', 'true']);
     const tagline = (params && params.contactWidgetTagline) || '';
     if (tagline) pageMeta.push(['contactus-tagline', tagline]);
+  } else if (isIndustriesLanding) {
+    // contactus layout WITHOUT the widget: constrained/left-aligned content column, no right rail.
+    pageMeta.push(['template', 'contactus']);
   }
 
   // Breadcrumb is ON by default (hero banner auto-derives it from the URL). When the SOURCE
@@ -1849,8 +2288,10 @@ function buildDefaultPage(document, url, params) {
   // Sectionize the flat body so each block gets its own EDS section (prevents the columns-container
   // hexa background from spanning the whole page). Gated to contactus/product pages — the template
   // that needs per-block section isolation — so already-validated flat default pages (newsroom,
-  // compliance) keep their current single-section output. `hasCU` is the product-detail signal.
-  if (hasCU) {
+  // compliance) keep their current single-section output. `hasCU` is the product-detail signal;
+  // an industries LANDING page (hydroprocessing) also needs it so its ART intro + category grid +
+  // insights each become their own section (and the gray-band tag can land on the grid).
+  if (hasCU || isIndustriesLanding) {
     // Pass gray-band/blue-border fingerprints so those banded content runs each become their OWN
     // section (the section style then applies only to them). Empty on non-industries pages → no-op.
     const splitFps = [...(params.sourceGrayBands || []), ...(params.sourceBlueBorders || [])];
@@ -2040,6 +2481,11 @@ export default {
       // prepend so it reads as the section's leading image (hero image row)
       el.insertBefore(img, el.firstChild);
     });
+
+    // NOTE: do NOT materialize lazy component images HERE (in-browser onLoad). grace.com's own
+    // lazy-load JS is live in this context and rewrites a freshly-inserted <img src="scene7…"> into a
+    // runtime `blob:` URL, which is useless once serialized. Materialization happens in transform()
+    // instead — on the cleaned, STATIC DOM where no site JS runs — so the Scene7 src is preserved.
   },
   transform: (payload) => {
     const { document, url, params } = payload;
@@ -2066,7 +2512,10 @@ export default {
     // Capture the contact-us sticky widget BEFORE cleanup removes it. beforeTransform's
     // grace-cleanup strips `.contact-us-sticky`, but the default path decides the `contactus`
     // metadata AFTER cleanup — so read presence + tagline here or detection always sees nothing.
-    const cuWidget = document.querySelector('.contact-us-sticky, .contact-us__cmp, .contact-us-cmp');
+    // Use the content-aware check: an EMPTY `.contact-us-sticky` placeholder (hydroprocessing) must
+    // NOT count as a widget — otherwise the page gets `contactus: true` + a reserved right rail that
+    // shifts its content left with nothing in the rail.
+    const cuWidget = contactWidgetEl(document);
     params.sourceHadContactWidget = !!cuWidget;
 
     // Capture the SOURCE background band around the "Latest Insights" related-articles block BEFORE
@@ -2145,6 +2594,12 @@ export default {
 
     // 1. site-wide chrome cleanup
     executeTransformers('beforeTransform', document.body, payload);
+
+    // 1.5. materialize AEM lazy image components (data-cmp-src / data-asset) into real <img> on the
+    //      cleaned DOM — belt-and-suspenders with the onLoad pass (headless lazy images never hydrate,
+    //      so body diagrams like the RANEY flowchart otherwise vanish). Runs before dispatch/discovery
+    //      so both sectionizeFlatBody and the DM/Scene7 carrier-anchor transformer see the image.
+    materializeLazyImages(document);
 
     // 2. form detection (deferred handling — flag only)
     const hasForm = detectForm(document);

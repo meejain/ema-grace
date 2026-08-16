@@ -104,7 +104,9 @@ side-by-side screenshots before you claim done. Do not publish to DA without my 
 - **Completed sets (already done + backed up):** insights (165), newsroom (28), products (34 = 28
   detail + 6 hubs — hubs fully closed 2026-08-12: the 2 late-hydrating hub lists, catalysts +
   synthetic-silicas, were reconstructed by hand from the LIVE source DOM; see playbook "Product hub /
-  sidebar recipe"), **INDUSTRIES (102) — COMPLETE, published to live + QA'd against source 2026-08-14.**
+  sidebar recipe"), **INDUSTRIES (102) — COMPLETE, published to live 2026-08-14; a further sidebar
+  page-by-page QA pass (rev 5-6, 2026-08-15) reimported the 78 left-nav pages + landed 9 more fixes,
+  local-only, awaiting client publish go-ahead.**
 - **INDUSTRIES — DONE (102 pages, live on `main--ema-grace--meejain.aem.live`).** Built as ONE template,
   two dispatch branches keyed on section-nav presence (detail → `forceTemplate:sidebar`; landing →
   `template:contactus`). Full record: `backups/industries/MANIFEST.md` (revs 1-6) + memory
@@ -118,6 +120,34 @@ side-by-side screenshots before you claim done. Do not publish to DA without my 
   the client's publish list — needs DA publish); two cosmetic non-defects (landing Featured-Products
   layout variant; biofuels benefit icons monochrome vs source green — Scene7 param). Screenshots are
   gitignored under `tools/importer/shots/` (regenerable; do NOT commit — 291MB).
+- **INDUSTRIES rev 5-6 sidebar QA (2026-08-15) — what changed since the published rev 4.** All local,
+  NOT yet published (client must give go-ahead). Bundle grew 170850 → **178300**; frozen at
+  `backups/industries/rev6-2026-08-15/` (bundle + importer source + the 2 touched parsers + runtime
+  sidebar.css/sidebar.js/cards.css). The 78 left-nav (sidebar-template) pages were all reimported.
+  Full detail in `backups/industries/MANIFEST.md` REVISION 5 + 6 and memory `industries-migration.md`.
+  Key durable lessons a new session must know:
+  - **NESTED section-nav** (importer `buildSidebarNav`): builds a parent-hub `<li>` + nested child
+    `<ul>` when the SOURCE nav nests (`.collapse` sub-list); flat fallback otherwise. RUNTIME CSS in
+    templates/sidebar/sidebar.css styles parent (Roboto 900, top+bottom border) vs children (500,
+    indented). `sidebar.js` mobile `<select>` collects ALL nested anchors (a flat-only `> li > a`
+    selector blanked the mobile nav). Agriculture/hydroprocessing etc. are genuinely FLAT in source —
+    flat output there is correct, not a regression.
+  - **Iron Tolerance promo card** (`buildSidebarPromoCard`): only resid-conversion has it in source.
+  - **Lazy body-diagram images** (`materializeLazyImages`, IMPORTER): AEM `.image` components carry
+    `data-cmp-src`/`data-asset` and NO `<img>` until JS hydrates (never headless). Materialize on the
+    STATIC cleaned DOM in transform() — NOT onLoad (grace.com lazy JS turns a fresh `<img>` into a
+    useless `blob:` there). It also REPAIRS a `blob:` img back to Scene7 and derives alt from the
+    filename. grace-dm-images.js then makes it a Scene7 carrier anchor (live ref → `<picture>` at render).
+  - **sectionizeFlatBody image handling**: a standalone `<img>`/`<picture>`/Scene7 carrier `<a>` is now
+    a content LEAF and `splitRun` gives it its OWN section (tail-peel skips gray-band-fingerprint heads
+    and image leaves) — so a diagram sits on white BELOW a preceding gray band, not merged in.
+  - **Mixed `.rich-text.split-list`**: the two-column-content matcher only claims LIST-DOMINANT blocks
+    (≤1 substantial `<p>`) — a mixed block (prose + list + button) flows through as body content, else
+    `replaceWith` drops the prose.
+  - **RUNTIME sidebar layout rules** (templates/sidebar/sidebar.css): grouped download buttons → equal
+    thirds (standalone buttons keep natural width); `.cards.product` benefit grid spans cols 2-4;
+    a picture-only `.section` spans cols 2-5 (wide diagrams); Latest-Insights gray band flush to footer
+    (`:last-of-type { margin-bottom:0 }`); category-grid gray band re-inset to cols 3-5.
 - **NEXT UP → about-grace leadership bios** (person-profile, ~30 uniform) → campaign → forms. FORMS is
   fully scoped: `tools/importer/FORMS-INVENTORY.md` (6 templates; 200 form pages; 191 = one shared
   gated modal) + `FORMS-URLS.txt` (every form URL). Submission = server-side AEM `.pardot.handler` →

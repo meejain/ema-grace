@@ -2,12 +2,12 @@
   "status": "success",
   "url": "https://grace.com/industries/agriculture/",
   "path": "industries/agriculture",
-  "timestamp": "2026-08-13T19:51:26.890Z",
+  "timestamp": "2026-08-16T09:55:27.443Z",
   "title": "Agriculture",
   "pageType": "default",
   "blocks": [
     "hero-banner",
-    "featured-product-selector",
+    "columns-horizontal-teaser-featured",
     "cards-category-grid"
   ],
   "blocksLeftInPlace": [],

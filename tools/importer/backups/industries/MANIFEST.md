@@ -105,4 +105,82 @@
   parity across all clusters. TWO cosmetic non-defects left (design variants, not fixed): landing
   Featured-Products layout; biofuels benefit icons monochrome vs source green (Scene7 param).
   KNOWN-OPEN: `/industries` ROOT is 404 on live (on disk, not in client publish list → needs DA publish).
-- **snapshot date:** 2026-08-14 (rev 4 — QA-fixed bundle 170850, published to live).
+- **REVISION 5 (2026-08-15, sidebar-nav parity pass — nested nav + promo card + banner de-dup):**
+  Deep visual QA of the left-nav (sidebar-template) pages against source, driven page-by-page on
+  refining-technologies/fcc-catalyst-application/resid-conversion, then rolled out to all 78
+  sidebar-template industries pages. Fixes:
+  1. **NESTED section-nav** — importer `buildSidebarNav` builds a parent-hub `<li>` + nested child
+     `<ul>` when the SOURCE nav nests (source `.collapse` sub-list); flat fallback when the source
+     nav is genuinely single-level. Result across 78: 70 nested, 8 flat (agriculture ×2,
+     custom-catalysts, unipol ppartner-program, hydroprocessing ×4 — all verified single-level or
+     nav-less in source, NOT regressions).
+  2. **Iron Tolerance promo card** — new `buildSidebarPromoCard()` extracts the left-column
+     whitepaper promo (`.embed img` + heading link) and emits a `Cards (industry)` block appended to
+     the nav section. Only resid-conversion carries it in source (verified: sibling FCC pages do NOT —
+     the earlier "ironsolution" hits were false positives from the global nav-menu JSON blob). DAM
+     image src absolutized to `https://grace.com/content/dam/…` (root-relative 404s on the EDS host).
+  3. **banner-resource-download DE-DUP** — parser emitted TWO identical "Download Issue" links (the
+     description-paragraph sweep grabbed the gated-modal's duplicate anchor, then the CTA was added
+     again). FIX: skip any `<p>` that already contains a link/button, scope description to
+     `.subhead-large/.text` (not the modal's nested `.content`), and pull the CTA from `.buttons`.
+     dup-download now 0/78.
+  - RUNTIME (templates/sidebar/*, blocks/cards/*): nested-nav CSS (parent 900/bordered top+bottom,
+    children 500/indented), promo-card styling (image within nav column + divider borders on desktop,
+    centered ~330px + 10px gutter on mobile, underlined 16px link, no chevron), and sidebar.js mobile
+    `<select>` now collects nested anchors (flat-only selector had blanked the mobile nav). Nav +
+    content top-aligned (both margin-block 50px desktop).
+  - Rebundled → **173453 bytes** (frozen backup NOT yet refreshed — do so at publish time).
+  - **NOT yet published to live** — awaiting client go-ahead. resid-conversion validated desktop+mobile
+    by the client; coatings/wood spot-checked (nested nav renders, top-aligned). Full 78 reimported
+    on disk (78/78, 0 failures).
+- **REVISION 6 (2026-08-15, sidebar page-by-page QA — 78 left-nav pages reimported + 6 more fixes):**
+  Client validated resid-conversion (rev 5) then reimported ALL 78 sidebar-template pages with the
+  nested-nav + promo-card + banner-dedup bundle (batches of ~8; 78/78 saved, 0 failures). Then a
+  page-by-page visual QA against source surfaced 6 more issues — fixed as follows (importer = rebundle+
+  reimport; RUNTIME = CSS/JS, no reimport):
+  1. **agriculture-cdmo layout** (RUNTIME, templates/sidebar/sidebar.css): (a) the `columns
+     horizontal-teaser featured-products` teaser (single dark "Tyrone" facility card) carried the
+     Latest-Insights hexagon-band padding → huge empty gap; neutralized bg/padding/::before/::after +
+     negative top-margin so it sits ~20px under the preceding text. (b) 3 "Download …" CTAs now lay
+     side-by-side as equal thirds — SCOPED to GROUPED buttons only (`p.button-wrapper` adjacent to
+     another), so STANDALONE single buttons (e.g. animal-feed) keep natural text width; last-in-group
+     drops right-margin so 3 fit; label wraps (override global nowrap+ellipsis); 25px/35px group
+     margins. (c) "A Portfolio of Solutions" gray category-grid band re-inset to cols 3-5 (shifts
+     right into the content column, matching source col-lg-9).
+  2. **Latest-Insights gray band flush to footer** (RUNTIME): `.gray-band.cards-container:has(.cards
+     .featured-content):last-of-type { margin-bottom: 0 }` — killed the white strip between the band
+     and the footer. Applies to every page where the insights band is the last section.
+  3. **Product BENEFIT grid too narrow** (RUNTIME): `.cards-container:has(.cards.product)` spans cols
+     2-4 (was confined to the 707px content col → ~203px cards, heavy bullet wrap). Now ~275px/card,
+     left-aligned to the nav band (renewable-diesel "Improved Productivity / Reduced Environmental
+     Footprint / Safety and Handling").
+  4. **Multi-`.text`-block content DROPPED** (IMPORTER): the two-column-content matcher claimed a
+     `.rich-text.split-list` block that on some pages (hydrogenation-catalysts) is MIXED — 7 body
+     paragraphs + Contact button interleaved with the list — and `replaceWith`'d the whole block with
+     just the 2-col list, dropping the prose. FIX: matcher only claims LIST-DOMINANT split-lists
+     (≤1 substantial `<p>`); mixed blocks flow through as body content.
+  5. **Lazy body-diagram images vanished** (IMPORTER): AEM `.image` components ship as
+     `<div data-cmp-is="image" data-cmp-src="scene7…?wid={.width}" data-asset="/content/dam/…">` with
+     NO `<img>` until client JS hydrates (never happens headless), so body diagrams (RANEY flowchart)
+     were lost. FIX: new `materializeLazyImages()` (called in transform on the STATIC cleaned DOM —
+     NOT onLoad, where grace.com's lazy JS rewrites the src to a useless `blob:`) builds a real
+     `<img>` from `data-cmp-src` (strips `{.width}`) / falls back to `data-asset` absolutized to
+     grace.com; REPAIRS an already-hydrated `blob:` img back to the Scene7 URL; derives readable alt
+     from the asset filename (e.g. "Chart Raney Hydrogenation Catalysts") so it isn't the DM
+     "Image without alt text" sentinel. The existing grace-dm-images.js afterTransform then rewrites
+     it to a Scene7 carrier anchor (live reference), rebuilt to `<picture>` by scripts.js at render.
+  6. **Standalone image not its own section / too small** (IMPORTER + RUNTIME): `sectionizeFlatBody`
+     now treats a standalone `<img>`/`<picture>`/DM-carrier `<a>` (any link text) as a content LEAF
+     and `splitRun` breaks it into its OWN section (and the tail-peel skips runs whose head is a
+     gray-band fingerprint or that contain an image leaf) — so the flowchart sits on WHITE below the
+     gray "Why are catalysts" band, not merged into it. RUNTIME: a `.section` whose only content is a
+     picture spans cols 2-5 (full band) so a wide diagram renders large (~1200px, was ~667px).
+  - Rebundled → **178300 bytes** (this rev's frozen bundle: `backups/industries/rev6-2026-08-15/`,
+    alongside the importer source, the 2 touched parsers, and the runtime sidebar.css/sidebar.js/
+    cards.css for reference).
+  - **NOT published to live** — all 78 reimported on disk + all fixes local, awaiting client go-ahead.
+    Validated pages this session: resid-conversion, agriculture-cdmo, animal-feed, renewable-diesel,
+    bioethanol, hydrogenation-catalysts, coatings/wood.
+- **snapshot date:** 2026-08-15 (rev 6 — working-tree bundle 178300; frozen at
+  `backups/industries/rev6-2026-08-15/`). The top-level `backups/industries/import-grace-master.bundle.js`
+  still holds rev 4 (170850, the last PUBLISHED bundle) — refresh it when rev 6 is published to live.

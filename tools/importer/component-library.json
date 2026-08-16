@@ -597,6 +597,28 @@
       "priority": 80
     },
     {
+      "name": "columns-two-column-text",
+      "family": "columns",
+      "render": "parse",
+      "matcher": "columnsTwoColumnText",
+      "selector": null,
+      "item": ".col-lg-6",
+      "emits": "Columns",
+      "note": "2-col row, BOTH columns text (no image) → base Columns block, side-by-side",
+      "priority": 85
+    },
+    {
+      "name": "columns-split-list",
+      "family": "columns",
+      "render": "parse",
+      "matcher": "columnsSplitList",
+      "selector": null,
+      "item": ".rich-text.split-list",
+      "emits": "Columns",
+      "note": "body split-list <ul> (no gated download) → 2 balanced list cells, side-by-side",
+      "priority": 86
+    },
+    {
       "name": "table-contact-matrix",
       "family": "table",
       "render": "parse",

@@ -2,12 +2,11 @@
   "status": "success",
   "url": "https://grace.com/industries/chemical-processing/catalyst-supports/",
   "path": "industries/chemical-processing/catalyst-supports",
-  "timestamp": "2026-08-13T19:41:35.387Z",
+  "timestamp": "2026-08-16T10:17:24.658Z",
   "title": "Catalyst Supports",
   "pageType": "default",
   "blocks": [
     "hero-banner",
-    "table-two-column-content",
     "cards-featured-content"
   ],
   "blocksLeftInPlace": [],

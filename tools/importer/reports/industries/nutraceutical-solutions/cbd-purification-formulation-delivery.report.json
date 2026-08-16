@@ -2,12 +2,12 @@
   "status": "success",
   "url": "https://grace.com/industries/nutraceutical-solutions/cbd-purification-formulation-delivery/",
   "path": "industries/nutraceutical-solutions/cbd-purification-formulation-delivery",
-  "timestamp": "2026-08-13T19:48:43.394Z",
+  "timestamp": "2026-08-16T09:59:08.877Z",
   "title": "CBD Purfication, Formulation and Delivery",
   "pageType": "default",
   "blocks": [
     "hero-banner",
-    "featured-product-selector",
+    "columns-horizontal-teaser-featured",
     "cards-category-grid",
     "cards-featured-content"
   ],

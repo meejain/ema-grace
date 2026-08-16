@@ -931,6 +931,103 @@ body.sidebar main > .section.cards-container.geo-hex:has(.cards.featured-content
   }
 }
 
+/* ---- industry option: promotion (sidebar text tile) ----
+   The image-less "PROMOTION" card in a sidebar column (e.g. technical-service-expertise
+   "Specialized Evaluation Tools"). Source (`a.cmp-card.none-image.promotion`) renders it as a
+   light-gray tile carrying the decorative `blue-green-lines` geo artwork (cover, centred), with:
+   a small uppercase eyebrow (PROMOTION), a LIGHT serif title (Roboto Slab 300, wraps in the narrow
+   rail), a short body paragraph, and a solid GREEN "Learn more" button (grace green, black text,
+   › chevron). Full-width tile in the nav column. Verified against the live source computed styles. */
+.cards-container:has(.cards.industry.promotion) {
+  background-color: transparent;
+  padding: 0;
+}
+
+.cards.industry.promotion {
+  margin-top: var(--spacing-m);
+}
+
+.cards.industry.promotion > ul {
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+
+/* Gray tile with the blue-green-lines geo artwork behind the content (source: li background).
+   Source padding is 22px 17px 60px — the generous 60px BOTTOM lets the geo-line triangles show
+   below the button (they're part of the tile bg, not a separate element). The base
+   `.cards > ul > li` and `.cards.industry > ul > li` rules reset/omit padding; use the shorthand
+   here (higher specificity) so all four sides apply. */
+.cards.industry.promotion > ul > li {
+  padding: 22px 17px 60px !important;
+  background-color: rgb(230 231 232);
+  background-image: url('https://grace.scene7.com/is/image/grace/blue-green-lines');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.cards.industry.promotion .cards-card-body {
+  margin: 0;
+  padding: 0;
+  background-color: transparent;
+  text-align: left;
+}
+
+/* eyebrow (PROMOTION): small, uppercase, bold */
+.cards.industry.promotion .cards-card-body p:first-child {
+  margin: 0 0 10px;
+  font-family: var(--heading-font-family);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: normal;
+  text-transform: uppercase;
+  color: var(--text-color);
+}
+
+/* title: LIGHT serif (source Roboto Slab 300, 16px/1.7), wraps in the narrow rail */
+.cards.industry.promotion .cards-card-body h3 {
+  margin: 0 0 20px;
+  font-family: var(--heading-font-family);
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-color);
+}
+
+.cards.industry.promotion .cards-card-body p {
+  margin: 0;
+  font-family: var(--body-font-family);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.7;
+  color: var(--text-color);
+}
+
+/* "Learn more": solid GREEN button that FILLS the tile content width (source: display block,
+   padding 10px), black bold serif label + › chevron. 40px gap above it (source). */
+.cards.industry.promotion .cards-card-body a:any-link {
+  display: block;
+  margin-top: 40px;
+  padding: 10px;
+  background-color: rgb(122 193 67);
+  font-family: var(--heading-font-family);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-color);
+  text-decoration: none;
+  white-space: normal;
+}
+
+.cards.industry.promotion .cards-card-body a::after {
+  content: ' \203A';
+  font-size: 1.1em;
+}
+
+.cards.industry.promotion .cards-card-body a:hover {
+  background-color: rgb(105 176 50);
+  color: var(--text-color);
+}
+
 /* ===================== Variant: insight ===================== */
 
 /* Section sits on a light-grey band (source homepage #blogs .light-gray-bkgd

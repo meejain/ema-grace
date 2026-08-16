@@ -2,12 +2,12 @@
   "status": "success",
   "url": "https://grace.com/industries/chemical-processing/",
   "path": "industries/chemical-processing",
-  "timestamp": "2026-08-13T20:01:39.575Z",
+  "timestamp": "2026-08-16T09:41:58.625Z",
   "title": "Chemical Processing",
   "pageType": "default",
   "blocks": [
     "hero-banner",
-    "columns-image-teaser",
+    "columns-horizontal-teaser-featured",
     "cards-category-grid",
     "cards-featured-content"
   ],

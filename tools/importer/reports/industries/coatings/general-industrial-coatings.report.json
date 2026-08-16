@@ -2,12 +2,12 @@
   "status": "success",
   "url": "https://grace.com/industries/coatings/general-industrial-coatings/",
   "path": "industries/coatings/general-industrial-coatings",
-  "timestamp": "2026-08-13T19:47:04.958Z",
+  "timestamp": "2026-08-16T09:54:34.336Z",
   "title": "General Industrial Coatings",
   "pageType": "default",
   "blocks": [
     "hero-banner",
-    "featured-product-selector",
+    "columns-horizontal-teaser-featured",
     "cards-featured-content"
   ],
   "blocksLeftInPlace": [],
