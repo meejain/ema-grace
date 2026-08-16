@@ -1,0 +1,228 @@
+/*
+ * Dedicated styles for the gated DOWNLOAD form as rendered inside the modal
+ * dialog (blocks/modal/). Scoped entirely to `.download-form` so it is fully
+ * independent of the main `main .form` rules — the download form lives inside
+ * `dialog.modal`, outside <main>, so those rules never reach it. Imported from
+ * form.css. To style a different form type, add another scoped file the same way.
+ *
+ * Target: the grace.com gated "Before you download …" lightbox — serif centered
+ * heading, 2-column field grid, bold labels above bordered inputs, green submit.
+ */
+
+.download-form {
+  /* Tokens measured from the source grace.com gated lightbox */
+  --download-accent: #7ac143;
+  --download-accent-hover: #27853c;
+  --download-border: #ced4da;
+  --download-label: #000;
+  --download-text: #000;
+
+  color: var(--download-text);
+  font-family: var(--body-font-family);
+}
+
+/* the raw <a>/<pre> the form block replaces */
+.download-form pre {
+  display: none;
+}
+
+.download-form form {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 30px;
+  align-items: start;
+}
+
+/* Heading — serif, centered, spans full width */
+.download-form .field-heading {
+  grid-column: 1 / -1;
+  margin: 0 0 8px;
+}
+
+.download-form .field-heading p {
+  margin: 0;
+  font-family: var(--heading-font-family);
+  font-size: 30px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--download-label);
+  text-align: center;
+}
+
+/* Field wrappers — label stacked above the control */
+.download-form .field-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+
+.download-form label {
+  margin-bottom: 8px;
+  font-family: var(--body-font-family);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--download-label);
+}
+
+.download-form [data-required="true"] > label::after,
+.download-form label.required::after {
+  content: "*";
+  padding-inline-start: 4px;
+  color: var(--download-label);
+}
+
+/* No asterisk on the consent checkbox (matches source) */
+.download-form .checkbox-wrapper > label::after {
+  content: none;
+}
+
+/* Inputs + select */
+.download-form input,
+.download-form select {
+  width: 100%;
+  height: 44px;
+  padding: 0 14px;
+  font-family: var(--body-font-family);
+  font-size: 12px;
+  color: var(--download-text);
+  background-color: #fff;
+  border: 1px solid var(--download-border);
+  border-radius: 0;
+}
+
+.download-form select {
+  appearance: none;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" stroke="%23555" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 20px;
+  padding-right: 40px;
+  color: #767676;
+}
+
+/* Green border on focus + hover (matches source) */
+.download-form input:hover,
+.download-form select:hover {
+  border-color: var(--download-accent);
+}
+
+.download-form input:focus,
+.download-form select:focus,
+.download-form input:focus-visible,
+.download-form select:focus-visible {
+  outline: none;
+  border-color: var(--download-accent);
+  box-shadow: 0 0 0 1px var(--download-accent);
+}
+
+/* Consent checkbox + privacy — full width, normal weight */
+.download-form .checkbox-wrapper {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: start;
+  gap: 12px;
+  margin: 0;
+}
+
+.download-form .checkbox-wrapper input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  height: auto;
+  margin-top: 4px;
+  accent-color: var(--download-accent);
+}
+
+.download-form .checkbox-wrapper label {
+  margin: 0;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--download-text);
+}
+
+.download-form .field-privacy {
+  grid-column: 1 / -1;
+}
+
+.download-form .field-privacy p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--download-text);
+}
+
+/* Submit — green, auto-width, right-aligned (matches source: content-sized
+   button ~172px, not full-width). */
+.download-form .submit-wrapper {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  margin-top: 8px;
+}
+
+.download-form button[type="submit"] {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  width: auto;
+  height: 50px;
+  justify-content: center;
+  padding: 0 40px;
+  font-family: var(--heading-font-family);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--download-label);
+  background-color: var(--download-accent);
+  border: 0;
+  border-radius: 0;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.download-form button[type="submit"]::after {
+  content: "›";
+  font-size: 20px;
+  line-height: 1;
+}
+
+.download-form button[type="submit"]:hover,
+.download-form button[type="submit"]:focus-visible {
+  color: #fff;
+  background-color: var(--download-accent-hover);
+}
+
+.download-form button[type="submit"]:focus-visible {
+  outline: 2px solid var(--download-accent-hover);
+  outline-offset: 2px;
+}
+
+/* Validation */
+.download-form .field-invalid input,
+.download-form .field-invalid select {
+  border-color: #ff5f3f;
+}
+
+.download-form .field-description {
+  margin-top: 6px;
+  font-size: 13px;
+  color: #666;
+}
+
+.download-form .field-invalid .field-description {
+  color: #ff5f3f;
+}
+
+/* Two-column layout on wider viewports (matches the source lightbox) */
+@media (width >= 600px) {
+  .download-form form {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .download-form .field-heading {
+    margin-bottom: 16px;
+  }
+}

@@ -471,6 +471,49 @@ function decorateExternalLinks(main) {
 }
 
 /**
+ * Wires "form-modal buttons": any link whose visible text begins with "Download"
+ * opens the shared gated-download form in a modal instead of navigating away.
+ * The link's own href is the per-page download asset (e.g. a PDF under /assets/…),
+ * which is opened in a new tab only after the form is submitted; the form itself
+ * is a shared definition resolved inside the modal module. This text convention is
+ * robust through Document Authoring (unlike a `#modal` hash, which DA slugifies);
+ * an explicit `#modal` marker on the href is still honored as an alternative.
+ * The modal module + form block load lazily, only on the first click.
+ * @param {Element} main The main element
+ */
+function decorateFormModalButtons(main) {
+  main.querySelectorAll('a[href]').forEach((a) => {
+    const href = a.getAttribute('href') || '';
+    const text = a.textContent.trim();
+    const isDownload = /^download\b/i.test(text);
+    const isMarked = /#modal$/i.test(href);
+    if (!isDownload && !isMarked) return;
+    a.classList.add('modal-form-button');
+    a.setAttribute('role', 'button');
+
+    // Per-page heading override, authored as VISIBLE text right after the
+    // Download button: a paragraph starting with "Before you download …". We
+    // read it as the modal heading and hide it from the page (the modal shows
+    // it instead). No authoring if omitted — the form's default heading is used.
+    let modalTitle;
+    const wrapper = a.closest('.button-wrapper') || a.closest('p') || a;
+    let sib = wrapper.nextElementSibling;
+    while (sib && sib.textContent.trim() === '') sib = sib.nextElementSibling;
+    if (sib && /^before you download\b/i.test(sib.textContent.trim())) {
+      modalTitle = sib.textContent.trim();
+      sib.classList.add('modal-heading-source');
+      sib.setAttribute('hidden', '');
+    }
+
+    a.addEventListener('click', async (e) => {
+      e.preventDefault();
+      const { openFormModal } = await import(`${window.hlx.codeBasePath}/blocks/modal/modal.js`);
+      openFormModal(a.href, { triggerEl: a, title: modalTitle });
+    });
+  });
+}
+
+/**
  * Decorates the main element.
  * @param {Element} main The main element
  */
@@ -483,6 +526,7 @@ export function decorateMain(main) {
   decorateButtons(main);
   removeEmptyLinks(main);
   decorateExternalLinks(main);
+  decorateFormModalButtons(main);
 }
 
 /**

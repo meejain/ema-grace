@@ -1,0 +1,172 @@
+/* stylelint-disable no-descending-specificity */
+
+/* Modal dialog that hosts the shared gated-download form. Scope every selector
+   to .modal / dialog.modal — the form block owns its own internals. */
+
+body.modal-open {
+  overflow: hidden;
+}
+
+/* Dimensions mirror the source grace.com lightbox: max-width 81.6rem (816px),
+   generous internal padding, square corners. */
+dialog.modal {
+  display: flex;
+  flex-direction: column;
+  width: calc(100% - 32px);
+  max-width: 816px;
+  max-height: calc(100vh - 160px);
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  box-shadow: 0 24px 60px rgb(0 0 0 / 30%);
+  overflow: hidden;
+}
+
+/* When the dialog is closed it must not take layout space or capture clicks. */
+dialog.modal:not([open]) {
+  display: none;
+}
+
+/* The dialog itself receives focus from showModal(); suppress the browser's
+   default focus ring on the container (source has no border on the modal). */
+dialog.modal:focus,
+dialog.modal:focus-visible {
+  outline: none;
+}
+
+dialog.modal::backdrop {
+  background: rgb(51 51 51 / 75%);
+}
+
+/* Fixed header (stays put); holds the form heading, does not scroll. */
+.modal .modal-header {
+  flex: 0 0 auto;
+  padding: 15px 10px 0;
+}
+
+.modal .modal-header:empty {
+  display: none;
+}
+
+.modal .modal-header .field-heading p,
+.modal .modal-header .field-heading {
+  margin: 0;
+  font-family: var(--heading-font-family);
+  font-size: 30px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: #000;
+  text-align: center;
+}
+
+/* Scrollable body — only the fields scroll, not the heading. */
+.modal .modal-content {
+  flex: 1 1 auto;
+  padding: 15px 10px 10px;
+  overflow-y: auto;
+}
+
+.modal .modal-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  color: #1a1a1a;
+  background: transparent;
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.modal .modal-close svg {
+  width: 22px;
+  height: 22px;
+}
+
+.modal .modal-close:hover {
+  background: rgb(0 0 0 / 8%);
+}
+
+.modal .modal-close:focus-visible {
+  outline: 2px solid #004990;
+  outline-offset: 2px;
+}
+
+.modal .modal-loading {
+  padding: 24px 0;
+  color: #555;
+  text-align: center;
+}
+
+/* Thank-you confirmation state (mirrors the source download-thank-you page). */
+.modal .modal-thankyou {
+  padding: 24px 8px 16px;
+  text-align: center;
+}
+
+.modal .modal-thankyou-badge {
+  display: inline-flex;
+  width: 64px;
+  height: 64px;
+  margin-bottom: 16px;
+}
+
+.modal .modal-thankyou-badge svg circle {
+  fill: #1a1a1a;
+}
+
+.modal .modal-thankyou h2 {
+  margin: 0 0 8px;
+}
+
+.modal .modal-thankyou p {
+  margin: 0;
+  color: #333;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  dialog.modal[open] {
+    animation: modal-in 0.2s ease-out;
+  }
+
+  @keyframes modal-in {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+@media (width >= 900px) {
+  /* Fixed header: source = 30px lightbox top + 24px header margin-top = 54px top,
+     90px sides. */
+  .modal .modal-header {
+    padding: 54px 90px 0;
+  }
+
+  .modal .modal-header .field-heading p,
+  .modal .modal-header .field-heading {
+    font-size: 30px;
+  }
+
+  /* Scrollable body: 90px sides, 80px bottom; ~30px gap under the heading. */
+  .modal .modal-content {
+    padding: 30px 90px 80px;
+  }
+
+  .modal .modal-close {
+    top: 30px;
+    right: 30px;
+  }
+}

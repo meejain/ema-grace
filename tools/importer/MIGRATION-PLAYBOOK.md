@@ -398,6 +398,40 @@ Breadcrumb is auto-derived from the URL by the hero `banner` variant and shows B
   reads `getMetadata('breadcrumb')` and skips the breadcrumb only when it's `false`/`no`/`off`. So:
   source has breadcrumb → shows; source lacks it → `breadcrumb:false` → hidden. Faithful per page.
 
+### Hero (contact) + hexagon/geo background recipe — form pages (Contact Us)
+
+Standalone `/forms/contact-us-*` pages use a dark-blue banner with the source's
+`geoAndHexBottom` decoration (triangle line-network behind a white hexagon mask).
+Author as **`hero campaign no-image`** (reuse the campaign variant — do NOT make a
+new `hero contact` variant). Put the `<h1>` AND the subhead `<p>` in ONE content
+cell (the campaign desktop inset targets `> div:last-child`; two cells leave the
+h1 un-inset/clipped). `blocks/hero/hero.css` `.hero.campaign.no-image` adds:
+solid `#004990` bg, white copy, suppressed photo gradient (`::after{content:none}`),
+`min-height:35vw` (source scales ~35vw: 448px @1280, 504px @1440), h1 42px/weight 100,
+subhead 20px. Also set page metadata `template: contactus` + `contactus: true`
+(green sticky widget) and a relative form-JSON href (`/forms/….json`, NOT absolute
+— absolute cross-origin fails CORS on preview).
+
+**HEX/GEO SHARPNESS (asset-resolution rule).** The geoAndHex bottom edge is drawn
+with two PNG masks (`blocks/hero/hero-hex-mask.png` = white hexagon mask,
+`hero-geo-lines.png` = triangle network), rendered `background-size:cover`. It is
+NOT a missing CSS property — sharpness depends entirely on **source PNG
+resolution**. The original low-res crops looked dull/blurry when scaled up. To make
+the hexagons + lines crisp and bright, swap in the SOURCE's own high-res assets:
+- Hex mask: `https://grace.com/etc.clientlibs/grace/clientlibs/clientlib-site/resources/WR_Grace_hexagon_pattern_mask_final.png` (13083×1372)
+- Geo lines: `https://grace.com/etc.clientlibs/grace/clientlibs/clientlib-site/resources/WR_Grace_Home_triangle_pattern_1_mobile.png` (5949×1171)
+
+Full-res is heavy (~438KB total). Downscale with ImageMagick to stay crisp but lean
+(committed-asset budget), preserving alpha:
+```
+convert WR_Grace_hexagon_pattern_mask_final.png -resize 3000x -strip hero-hex-mask.png      # ~24KB
+convert WR_Grace_Home_triangle_pattern_1_mobile.png -resize 2000x -colors 64 -strip hero-geo-lines.png   # ~132KB
+```
+Overwrite `blocks/hero/hero-hex-mask.png` + `hero-geo-lines.png`. No CSS change
+needed — same `cover` rendering, just higher-res source artwork. The source uses the
+SAME technique (verified in `clientlib-site.min.css`: `.geoAndHexBottom:before/:after`),
+so crispness is purely an asset-resolution matter.
+
 ### Product Detail recipe — the accumulated, PER-SOURCE truth (28 pages, DONE)
 
 `grace.com/products/<slug>/` detail pages take the **default path** (`buildDefaultPage`) — no new
