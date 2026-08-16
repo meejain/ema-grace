@@ -118,13 +118,14 @@ dialog.modal::backdrop {
 }
 
 @media (width >= 900px) {
-  /* Match source lightbox padding: 30px 30px 80px */
+  /* Match source: lightbox padding 30px 30px 80px PLUS the inner .content
+     padding 0 60px → 90px total horizontal inset, 30px top, 80px bottom. */
   .modal .modal-content {
-    padding: 30px 30px 80px;
+    padding: 30px 90px 80px;
   }
 
   .modal .modal-close {
-    top: 24px;
-    right: 24px;
+    top: 30px;
+    right: 30px;
   }
 }
