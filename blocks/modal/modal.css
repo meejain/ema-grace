@@ -10,7 +10,7 @@ body.modal-open {
 dialog.modal {
   width: calc(100% - 32px);
   max-width: 816px;
-  max-height: calc(100vh - 32px);
+  max-height: calc(100vh - 160px);
   padding: 0;
   border: 0;
   border-radius: 0;
@@ -30,8 +30,8 @@ dialog.modal::backdrop {
 }
 
 .modal .modal-content {
-  max-height: calc(100vh - 32px);
-  padding: 24px 16px 16px;
+  max-height: calc(100vh - 160px);
+  padding: 15px 10px 10px;
   overflow-y: auto;
 }
 
