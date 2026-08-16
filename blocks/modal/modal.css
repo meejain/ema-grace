@@ -149,10 +149,10 @@ dialog.modal::backdrop {
 }
 
 @media (width >= 900px) {
-  /* Fixed header: 30px top + 90px sides (matches source inset), no bottom so it
-     sits close to the fields below it. */
+  /* Fixed header: source = 30px lightbox top + 24px header margin-top = 54px top,
+     90px sides. */
   .modal .modal-header {
-    padding: 30px 90px 0;
+    padding: 54px 90px 0;
   }
 
   .modal .modal-header .field-heading p,
@@ -160,9 +160,9 @@ dialog.modal::backdrop {
     font-size: 30px;
   }
 
-  /* Scrollable body: 90px sides, 80px bottom; small top gap under the heading. */
+  /* Scrollable body: 90px sides, 80px bottom; ~30px gap under the heading. */
   .modal .modal-content {
-    padding: 16px 90px 80px;
+    padding: 30px 90px 80px;
   }
 
   .modal .modal-close {
