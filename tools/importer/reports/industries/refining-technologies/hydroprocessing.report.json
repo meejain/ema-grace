@@ -2,17 +2,19 @@
   "status": "success",
   "url": "https://grace.com/industries/refining-technologies/hydroprocessing/",
   "path": "industries/refining-technologies/hydroprocessing",
-  "timestamp": "2026-08-16T11:13:13.201Z",
+  "timestamp": "2026-08-16T19:39:08.024Z",
   "title": "Hydroprocessing",
   "pageType": "default",
   "blocks": [
     "hero-banner",
+    "columns-image-right",
     "cards-category-grid",
     "cards-featured-content",
     "banner-resource-download"
   ],
   "blocksLeftInPlace": [],
   "pageMetadata": [
+    "template",
     "breadcrumb-title"
   ],
   "hasForm": true

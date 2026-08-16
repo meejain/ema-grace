@@ -549,9 +549,19 @@ body.sidebar main > .section.sidebar-nav.breadcrumb-container .breadcrumb nav ol
      it ~20px above and below (tight), NOT the 50px content-section margin, which left
      an oversized empty band above the footer. Signature: a section whose sole content
      is one <h5>. Tighten its block margin to 20px. */
+  /* stylelint-disable no-descending-specificity -- this disclaimer rule intentionally follows the
+     earlier grid-column rules; the :has() lone-<h5> signature is what makes it win. */
   body.sidebar main > .section:has(> .default-content-wrapper > h5:only-child) {
     margin-block: var(--spacing-s); /* 20px */
+    grid-column: 1 / -1; /* span the full band; the wrapper below centers it (source is centered) */
   }
+
+  body.sidebar main > .section:has(> .default-content-wrapper > h5:only-child) > .default-content-wrapper {
+    max-width: 690px;
+    margin-inline: auto;
+    text-align: center;
+  }
+  /* stylelint-enable no-descending-specificity */
 
   /* Grid margins don't collapse, so two stacked content sections show
      50px (bottom) + 50px (top) = ~100px between them. On product hubs the gray
@@ -1334,6 +1344,18 @@ body.sidebar main > .section.columns-container:has(.columns.horizontal-teaser.fe
 body.sidebar main > .section.columns-container:has(.columns.horizontal-teaser.featured-products) .columns-wrapper {
   padding: 0;
   margin-top: var(--spacing-m);
+}
+
+/* A `columns 2-cols` (split-list) section — a single source list rendered as two text columns
+   (e.g. unipol-pp-process "Lowest CAPEX / Low emissions"). In the source this list flows directly
+   under its intro paragraph (~21px gap), but our importer emits it as its OWN section, so the 50px
+   top + 50px bottom section margins stack with the neighbours' 50px → ~100px gap above AND below.
+   Pull it tight: a small own margin plus a negative top margin that cancels the preceding section's
+   bottom margin, so it reads as part of the surrounding text flow (source gap ~21px). Negative top
+   is robust regardless of the preceding section's own margin — same technique as the teaser above. */
+body.sidebar main > .section.columns-container:has(.columns.columns-2-cols) {
+  margin-top: -30px;
+  margin-bottom: -30px; /* cancel most of the next section's 50px top margin → ~20px gap below */
 }
 
 /* Download sell-sheet buttons: source lays the 3 primary CTAs SIDE BY SIDE (col-lg-4 each,

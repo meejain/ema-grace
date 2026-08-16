@@ -481,7 +481,26 @@ const MATCHERS = {
 function rowsByColumnOrder(doc, firstKind) {
   const rows = Array.from(doc.querySelectorAll('article .row, section .row'));
   return rows.filter((row) => {
-    const cols = Array.from(row.children).filter((c) => /col-lg-6/.test(c.className));
+    // Accept a balanced 50/50 row (two col-lg-6) OR a wide text|image split:
+    //  • `.section-75-25` with col-lg-9 text + col-lg-3 image (parent hydroprocessing "ART
+    //    Hydroprocessing" intro), OR
+    //  • a plain `.row` with col-lg-7 text + col-lg-3 image (hydroprocessing SUB-pages —
+    //    resid-hydrotreating / resid-hydrocracking / distillate-hydrotreating: body text left,
+    //    ART logo right).
+    // In every case, text left + ART logo right → columns-image-right. Match exactly TWO columns.
+    let cols = Array.from(row.children).filter((c) => /col-lg-6/.test(c.className));
+    let isWideSplit = false;
+    if (cols.length === 0) {
+      const wideCols = Array.from(row.children)
+        .filter((c) => /col-lg-9|col-lg-8|col-lg-7|col-lg-3/.test(c.className));
+      const hasWideText = wideCols.some((c) => /col-lg-9|col-lg-8|col-lg-7/.test(c.className));
+      const hasNarrowImg = wideCols.some((c) => /col-lg-3/.test(c.className));
+      if (wideCols.length === 2 && hasWideText && hasNarrowImg) {
+        cols = wideCols;
+        isWideSplit = true;
+      }
+    }
+    const is7525 = isWideSplit; // (kept name for the grid-guard skip below)
     if (cols.length !== 2) return false;
     const col0Image = !!cols[0].querySelector('.image, .cmp-image, picture, img');
     const col1Image = !!cols[1].querySelector('.image, .cmp-image, picture, img');
@@ -492,12 +511,15 @@ function rowsByColumnOrder(doc, firstKind) {
     const textThenImage = col1Image && !col1Text && col0Text;
     if (!imageThenText && !textThenImage) return false;
     // Exclude rows that belong to a multi-item grid: count sibling 2-col rows in the section.
-    const section = row.closest('section, article');
-    const siblingRows = section
-      ? Array.from(section.querySelectorAll('.row')).filter((r) => Array.from(r.children)
-        .filter((c) => /col-lg-6/.test(c.className)).length === 2)
-      : [row];
-    if (siblingRows.length > 2) return false; // part of a grid, not a standalone feature row
+    // (75/25 splits are always standalone page rows, never grids — skip the grid guard for them.)
+    if (!is7525) {
+      const section = row.closest('section, article');
+      const siblingRows = section
+        ? Array.from(section.querySelectorAll('.row')).filter((r) => Array.from(r.children)
+          .filter((c) => /col-lg-6/.test(c.className)).length === 2)
+        : [row];
+      if (siblingRows.length > 2) return false; // part of a grid, not a standalone feature row
+    }
     return firstKind === 'image' ? imageThenText : textThenImage;
   });
 }
@@ -1993,9 +2015,11 @@ function sectionizeFlatBody(main, document, splitFingerprints = []) {
   // Add standalone CTA anchors as leaves. A bare text link that is a DIRECT flow child (e.g. the
   // "Learn more" → /about-grace/sustainability/ inside the value-creation/sustainability callout)
   // is neither a LEAF (h*/p/ul/…) nor an image carrier, so it was dropped when the body was rebuilt.
-  // Wrap it in a <p> so it survives AND `scripts.js` decorateButtons() promotes it to a button.
-  // Skip image carriers (handled above), links already inside a leaf/list/heading/card/block, and
-  // empty/anchor-only-fragment links.
+  // Wrap it in `<p><strong>…</strong></p>` so it survives AND `scripts.js` decorateButtons()
+  // promotes it to a green PRIMARY button (source renders these standalone CTAs as solid green
+  // buttons — the `.cta`/`btn` styling; decorateButtons only buttonizes a <strong>-wrapped anchor,
+  // a bare <a> stays plain text). Skip image carriers (handled above), links already inside a
+  // leaf/list/heading/card/block, and empty/anchor-only-fragment links.
   Array.from(main.querySelectorAll('a[href]')).forEach((a) => {
     const href = a.getAttribute('href') || '';
     if (/\/is\/image\/|scene7/.test(href)) return; // image carrier — handled above
@@ -2005,8 +2029,10 @@ function sectionizeFlatBody(main, document, splitFingerprints = []) {
     if (a.closest('.hero, .cards, .columns, .card, .cmp-card, table, li, h1, h2, h3, h4, h5, h6, p, nav, .section-navigation')) return;
     if (!leafParentOk(a)) return;
     const p = document.createElement('p');
+    const strong = document.createElement('strong');
     a.replaceWith(p);
-    p.appendChild(a);
+    strong.appendChild(a);
+    p.appendChild(strong);
     leaves.push(p);
   });
   // Merge blocks + leaves into one document-ordered sequence.
@@ -2169,6 +2195,15 @@ function buildDefaultPage(document, url, params) {
   // Contact-us widget presence + tagline are captured in params BEFORE cleanup removes the
   // widget (see transform()); fall back to a live query for any caller that didn't pre-capture.
   const hasCU = (params && params.sourceHadContactWidget) || hasContactWidget(document);
+  // An /industries/ LANDING page (banner hero, NO left section-nav, NO contact widget — e.g.
+  // hydroprocessing) still uses the SAME constrained/left-aligned content layout as the contactus
+  // template on the source (content column ~920px, not full-bleed centered). Give it the contactus
+  // template + per-block sectionization so its body doesn't stretch edge-to-edge and its
+  // category-grid can sit in its own gray band. It gets NO contactus widget/tagline (there is none).
+  const isIndustriesLanding = !hasCU
+    && !(params && params.industriesNav)
+    && /\/industries\//.test((params && params.originalURL) || url || '')
+    && !!(params && params.sourceHadBannerHero);
   if (hasCU) {
     // `template: contactus` drives templates/contactus/contactus.css — it narrows + left-aligns the
     // content column (max 920px) leaving a right gutter for the sticky Contact Us widget (source
@@ -2181,6 +2216,9 @@ function buildDefaultPage(document, url, params) {
     pageMeta.push(['contactus', 'true']);
     const tagline = (params && params.contactWidgetTagline) || '';
     if (tagline) pageMeta.push(['contactus-tagline', tagline]);
+  } else if (isIndustriesLanding) {
+    // contactus layout WITHOUT the widget: constrained/left-aligned content column, no right rail.
+    pageMeta.push(['template', 'contactus']);
   }
 
   // Breadcrumb is ON by default (hero banner auto-derives it from the URL). When the SOURCE
@@ -2250,8 +2288,10 @@ function buildDefaultPage(document, url, params) {
   // Sectionize the flat body so each block gets its own EDS section (prevents the columns-container
   // hexa background from spanning the whole page). Gated to contactus/product pages — the template
   // that needs per-block section isolation — so already-validated flat default pages (newsroom,
-  // compliance) keep their current single-section output. `hasCU` is the product-detail signal.
-  if (hasCU) {
+  // compliance) keep their current single-section output. `hasCU` is the product-detail signal;
+  // an industries LANDING page (hydroprocessing) also needs it so its ART intro + category grid +
+  // insights each become their own section (and the gray-band tag can land on the grid).
+  if (hasCU || isIndustriesLanding) {
     // Pass gray-band/blue-border fingerprints so those banded content runs each become their OWN
     // section (the section style then applies only to them). Empty on non-industries pages → no-op.
     const splitFps = [...(params.sourceGrayBands || []), ...(params.sourceBlueBorders || [])];

@@ -54,6 +54,13 @@ function decorateImageRight(block) {
     const imgCol = row.querySelector('.columns-image-right-img-col');
     if (imgCol && imgCol !== row.lastElementChild) row.appendChild(imgCol);
   });
+  // Mark the block when its image is the ART logo (a small brand logo shown at natural size on the
+  // right, e.g. the hydroprocessing ART pages), so CSS can give it the WIDE 72/25 text:logo split
+  // instead of the bullet-list-beside-large-diagram 33/67 treatment (trisyl). Keyed on the DM/
+  // scene7 `ART-Logo` asset that the client auto-block rebuilds into the <picture>'s <img> src.
+  const img = block.querySelector('.columns-image-right-img-col img');
+  const src = img ? (img.getAttribute('src') || img.currentSrc || '') : '';
+  if (/art-logo/i.test(src)) block.classList.add('columns-image-right-logo');
 }
 
 function decorateLocationDetail(block) {

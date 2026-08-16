@@ -23,16 +23,22 @@ export function cellNodes(col) {
   // Image (picture preferred so srcset/DM variants survive).
   const img = col.querySelector('.image picture, .cmp-image picture, picture, .image img, img');
 
-  // Text container, else the column itself.
-  const textbox = col.querySelector('.text, .rich-text');
+  // Text container, else the column itself. A column may hold MULTIPLE `.text`/`.rich-text` boxes
+  // (e.g. the hydroprocessing col-lg-9: box1 = <h2>, box2 = <h3> + intro <p>). Scoping to only the
+  // first box would drop the rest, so when there are several, gather their children in order.
+  const textboxes = Array.from(col.querySelectorAll('.text, .rich-text'))
+    // keep only OUTERMOST text boxes (a .text wrapping a .rich-text would double-count)
+    .filter((tb, _i, arr) => !arr.some((other) => other !== tb && other.contains(tb)));
+  const textbox = textboxes[0] || null;
   const scope = textbox || col;
 
   // If the column is purely an image, emit just the image.
-  const textEls = Array.from(scope.children).filter((el) => {
-    if (/^(SCRIPT|STYLE|NOSCRIPT|LINK|IFRAME)$/.test(el.tagName)) return false;
-    if (el.matches('.image, .cmp-image, picture') || el.tagName === 'IMG') return false;
-    return (el.textContent || '').trim() || el.querySelector('a, img');
-  });
+  const textEls = (textboxes.length ? textboxes : [scope]).flatMap((box) => Array.from(box.children)
+    .filter((el) => {
+      if (/^(SCRIPT|STYLE|NOSCRIPT|LINK|IFRAME)$/.test(el.tagName)) return false;
+      if (el.matches('.image, .cmp-image, picture') || el.tagName === 'IMG') return false;
+      return (el.textContent || '').trim() || el.querySelector('a, img');
+    }));
 
   if (img && !textEls.length) return [img.cloneNode(true)];
 

@@ -1396,13 +1396,14 @@ var CustomImportScript = (() => {
       if (el) out.push(el.cloneNode(true));
     };
     const img = col.querySelector(".image picture, .cmp-image picture, picture, .image img, img");
-    const textbox = col.querySelector(".text, .rich-text");
+    const textboxes = Array.from(col.querySelectorAll(".text, .rich-text")).filter((tb, _i, arr) => !arr.some((other) => other !== tb && other.contains(tb)));
+    const textbox = textboxes[0] || null;
     const scope = textbox || col;
-    const textEls = Array.from(scope.children).filter((el) => {
+    const textEls = (textboxes.length ? textboxes : [scope]).flatMap((box) => Array.from(box.children).filter((el) => {
       if (/^(SCRIPT|STYLE|NOSCRIPT|LINK|IFRAME)$/.test(el.tagName)) return false;
       if (el.matches(".image, .cmp-image, picture") || el.tagName === "IMG") return false;
       return (el.textContent || "").trim() || el.querySelector("a, img");
-    });
+    }));
     if (img && !textEls.length) return [img.cloneNode(true)];
     if (img && col.contains(img) && scope.contains(img)) pushClone(img);
     if (textEls.length) {
@@ -1962,21 +1963,35 @@ var CustomImportScript = (() => {
       const dd = dl.querySelector("dd");
       const content = [];
       if (dd) {
-        dd.querySelectorAll(".media-callout, .col-lg-6, .col-lg-4").forEach((cb) => {
-          const img = cb.querySelector("picture, img");
-          if (img) content.push(img.cloneNode(true));
-          const link = cb.querySelector("a[href]");
-          if (link) {
-            const p = document.createElement("p");
-            const strong = document.createElement("strong");
-            const a = document.createElement("a");
-            a.href = link.getAttribute("href") || "#";
-            a.textContent = (link.textContent || "Download").replace(/\s+/g, " ").trim();
-            strong.append(a);
-            p.append(strong);
-            content.push(p);
+        let blocks = Array.from(dd.querySelectorAll(".media-callout"));
+        if (!blocks.length) blocks = Array.from(dd.querySelectorAll(".col-lg-6, .col-lg-4"));
+        const seenImg = /* @__PURE__ */ new Set();
+        const seenLink = /* @__PURE__ */ new Set();
+        const pushImg = (cb) => {
+          const img = cb.querySelector("picture img, img");
+          const key = img ? img.getAttribute("src") || img.currentSrc || img.outerHTML : "";
+          if (img && !seenImg.has(key)) {
+            seenImg.add(key);
+            content.push((cb.querySelector("picture") || img).cloneNode(true));
           }
-        });
+        };
+        const pushLink = (cb) => {
+          const link = cb.querySelector("a[href]");
+          if (!link) return;
+          const href = link.getAttribute("href") || "#";
+          if (seenLink.has(href)) return;
+          seenLink.add(href);
+          const p = document.createElement("p");
+          const strong = document.createElement("strong");
+          const a = document.createElement("a");
+          a.href = href;
+          a.textContent = (link.textContent || "Download").replace(/\s+/g, " ").trim();
+          strong.append(a);
+          p.append(strong);
+          content.push(p);
+        };
+        blocks.forEach(pushImg);
+        Array.from(dd.querySelectorAll(".col-lg-6, .col-lg-4, .media-callout")).forEach(pushLink);
         if (!content.length) {
           dd.querySelectorAll("picture,img,a[href]").forEach((n) => content.push(n.cloneNode(true)));
         }
@@ -2691,7 +2706,18 @@ var CustomImportScript = (() => {
   function rowsByColumnOrder(doc, firstKind) {
     const rows = Array.from(doc.querySelectorAll("article .row, section .row"));
     return rows.filter((row) => {
-      const cols = Array.from(row.children).filter((c) => /col-lg-6/.test(c.className));
+      let cols = Array.from(row.children).filter((c) => /col-lg-6/.test(c.className));
+      let isWideSplit = false;
+      if (cols.length === 0) {
+        const wideCols = Array.from(row.children).filter((c) => /col-lg-9|col-lg-8|col-lg-7|col-lg-3/.test(c.className));
+        const hasWideText = wideCols.some((c) => /col-lg-9|col-lg-8|col-lg-7/.test(c.className));
+        const hasNarrowImg = wideCols.some((c) => /col-lg-3/.test(c.className));
+        if (wideCols.length === 2 && hasWideText && hasNarrowImg) {
+          cols = wideCols;
+          isWideSplit = true;
+        }
+      }
+      const is7525 = isWideSplit;
       if (cols.length !== 2) return false;
       const col0Image = !!cols[0].querySelector(".image, .cmp-image, picture, img");
       const col1Image = !!cols[1].querySelector(".image, .cmp-image, picture, img");
@@ -2700,9 +2726,11 @@ var CustomImportScript = (() => {
       const imageThenText = col0Image && !col0Text && col1Text;
       const textThenImage = col1Image && !col1Text && col0Text;
       if (!imageThenText && !textThenImage) return false;
-      const section = row.closest("section, article");
-      const siblingRows = section ? Array.from(section.querySelectorAll(".row")).filter((r) => Array.from(r.children).filter((c) => /col-lg-6/.test(c.className)).length === 2) : [row];
-      if (siblingRows.length > 2) return false;
+      if (!is7525) {
+        const section = row.closest("section, article");
+        const siblingRows = section ? Array.from(section.querySelectorAll(".row")).filter((r) => Array.from(r.children).filter((c) => /col-lg-6/.test(c.className)).length === 2) : [row];
+        if (siblingRows.length > 2) return false;
+      }
       return firstKind === "image" ? imageThenText : textThenImage;
     });
   }
@@ -3717,8 +3745,10 @@ var CustomImportScript = (() => {
       if (a.closest(".hero, .cards, .columns, .card, .cmp-card, table, li, h1, h2, h3, h4, h5, h6, p, nav, .section-navigation")) return;
       if (!leafParentOk(a)) return;
       const p = document.createElement("p");
+      const strong = document.createElement("strong");
       a.replaceWith(p);
-      p.appendChild(a);
+      strong.appendChild(a);
+      p.appendChild(strong);
       leaves.push(p);
     });
     const all = [...blocks, ...leaves].sort((a, b) => {
@@ -3831,11 +3861,14 @@ var CustomImportScript = (() => {
     executeTransformers("afterTransform", main, { document, url, params });
     const pageMeta = [];
     const hasCU = params && params.sourceHadContactWidget || hasContactWidget(document);
+    const isIndustriesLanding = !hasCU && !(params && params.industriesNav) && /\/industries\//.test(params && params.originalURL || url || "") && !!(params && params.sourceHadBannerHero);
     if (hasCU) {
       pageMeta.push(["template", params && params.forceTemplate || "contactus"]);
       pageMeta.push(["contactus", "true"]);
       const tagline = params && params.contactWidgetTagline || "";
       if (tagline) pageMeta.push(["contactus-tagline", tagline]);
+    } else if (isIndustriesLanding) {
+      pageMeta.push(["template", "contactus"]);
     }
     if (params && params.sourceHadBannerHero && params.sourceHadBreadcrumb === false) {
       pageMeta.push(["breadcrumb", "false"]);
@@ -3874,7 +3907,7 @@ var CustomImportScript = (() => {
     main.querySelectorAll("img[alt]").forEach((img) => {
       if (/<\/?[a-z][^>]*>/i.test(img.getAttribute("alt") || "")) img.setAttribute("alt", "");
     });
-    if (hasCU) {
+    if (hasCU || isIndustriesLanding) {
       const splitFps = [...params.sourceGrayBands || [], ...params.sourceBlueBorders || []];
       sectionizeFlatBody(main, document, splitFps);
     }

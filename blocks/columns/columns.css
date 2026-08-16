@@ -1338,6 +1338,38 @@
     font-size: 26px;
     line-height: 1.15;
   }
+
+  /* WIDE image-right (~72/25) — the hydroprocessing ART pages (parent "ART Hydroprocessing" intro
+     AND the resid/distillate SUB-pages). Source: a wide text column left + a small ART LOGO right
+     shown at natural size, spanning the FULL content width (NOT the 880px centered cap). Keyed on
+     `.columns-image-right-logo` (columns.js adds it when the image is the scene7 ART-Logo asset),
+     so it reliably covers both the h2+h3 parent shape and the h2+bullet-list sub-page shape, while
+     leaving the centered 50/50 "Strategic Partner" image-right and the trisyl large-diagram case
+     untouched. */
+  .columns.image-right.columns-image-right-logo .columns-image-right-row {
+    max-width: none;
+    margin: 0;
+    gap: 60px;
+  }
+
+  .columns.image-right.columns-image-right-logo .columns-image-right-text-col {
+    flex: 0 0 72%;
+    max-width: 72%;
+  }
+
+  .columns.image-right.columns-image-right-logo .columns-image-right-img-col {
+    flex: 0 0 25%;
+    max-width: 25%;
+    align-self: flex-start;
+  }
+
+  /* logo shown at natural size (no cover-crop / forced aspect ratio) */
+  .columns.image-right.columns-image-right-logo .columns-image-right-img-col picture,
+  .columns.image-right.columns-image-right-logo .columns-image-right-img-col img {
+    aspect-ratio: auto;
+    object-fit: contain;
+    height: auto;
+  }
 }
 
 /* Product pages (body.contactus) reuse image-right for a bullet list beside a
@@ -1364,21 +1396,44 @@ body.contactus .columns.image-right .columns-image-right-text-col li {
 }
 
 @media (width >= 900px) {
-  /* full-width row, 1/3 : 2/3 split (text : diagram), top-aligned */
-  body.contactus .columns.image-right .columns-image-right-row {
+  /* full-width row, 1/3 : 2/3 split (text : diagram), top-aligned. Scoped to the bullet-list shape
+     (text cell holds a <ul>) but EXCLUDING the ART-logo pages — those also have bullet lists but
+     need the wide 72/25 text-left split (a small logo, not a large diagram). */
+  body.contactus .columns.image-right:has(.columns-image-right-text-col ul):not(.columns-image-right-logo) .columns-image-right-row {
     max-width: none;
     gap: 48px;
     align-items: center;
   }
 
-  body.contactus .columns.image-right .columns-image-right-text-col {
+  body.contactus .columns.image-right:has(.columns-image-right-text-col ul):not(.columns-image-right-logo) .columns-image-right-text-col {
     flex: 0 0 calc(33.333% - 24px);
     max-width: calc(33.333% - 24px);
   }
 
-  body.contactus .columns.image-right .columns-image-right-img-col {
+  body.contactus .columns.image-right:has(.columns-image-right-text-col ul):not(.columns-image-right-logo) .columns-image-right-img-col {
     flex: 0 0 calc(66.667% - 24px);
     max-width: calc(66.667% - 24px);
+  }
+
+  /* Hydroprocessing ART pages on the contactus template (parent intro AND resid/distillate
+     sub-pages): WIDE 72/25 (wide text left, small ART logo right), full-width row. Keyed on the
+     `.columns-image-right-logo` marker (columns.js) so it wins over the base 50/50 cap AND the
+     bullet-list 33/67 rule above. */
+  body.contactus .columns.image-right.columns-image-right-logo .columns-image-right-row {
+    max-width: none;
+    margin: 0;
+    gap: 60px;
+    align-items: flex-start;
+  }
+
+  body.contactus .columns.image-right.columns-image-right-logo .columns-image-right-text-col {
+    flex: 0 0 72%;
+    max-width: 72%;
+  }
+
+  body.contactus .columns.image-right.columns-image-right-logo .columns-image-right-img-col {
+    flex: 0 0 25%;
+    max-width: 25%;
   }
 }
 

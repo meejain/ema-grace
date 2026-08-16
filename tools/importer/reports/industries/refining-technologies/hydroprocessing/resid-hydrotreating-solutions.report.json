@@ -2,15 +2,17 @@
   "status": "success",
   "url": "https://grace.com/industries/refining-technologies/hydroprocessing/resid-hydrotreating-solutions/",
   "path": "industries/refining-technologies/hydroprocessing/resid-hydrotreating-solutions",
-  "timestamp": "2026-08-16T11:14:59.646Z",
+  "timestamp": "2026-08-16T19:48:37.280Z",
   "title": "Resid Hydrotreating Solutions",
   "pageType": "default",
   "blocks": [
     "hero-banner",
+    "columns-image-right",
     "cards-category-grid"
   ],
   "blocksLeftInPlace": [],
   "pageMetadata": [
+    "template",
     "breadcrumb",
     "breadcrumb-title"
   ],

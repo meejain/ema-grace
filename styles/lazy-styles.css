@@ -210,6 +210,18 @@ main .section.gray-band:has(.cards.featured-content, .cards.category-grid) {
   padding: var(--spacing-l) 0;
 }
 
+/* CTA CALLOUT gray band (heading + short body + a single button, e.g. the value-creation/
+   sustainability "Sustainability at Grace" panel). Source centers the heading, body, AND button.
+   Signature: a gray band with a `.button-wrapper` (the CTA) and NO cards — this distinguishes it
+   from the left-aligned FAQ/intro gray panels (which have no button). */
+main .section.gray-band:has(.button-wrapper):not(:has(.cards)) .default-content-wrapper {
+  text-align: center;
+}
+
+main .section.gray-band:has(.button-wrapper):not(:has(.cards)) .button-wrapper {
+  text-align: center;
+}
+
 /* ===== Section style: blue-border — GLOBAL =====
    A content section authored with Section Metadata Style `blue-border` gets a 5px Grace-blue
    (#004990) bar across the TOP and BOTTOM — the source `.divider-line` bars that bracket a text
