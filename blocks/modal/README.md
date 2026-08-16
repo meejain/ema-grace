@@ -4,22 +4,35 @@ Opens the shared gated-download **form** in a native `<dialog>` when an authored
 button is clicked. The form block (`blocks/form/`) is reused as-is — the modal
 adds only the dialog shell, open/close/focus behavior, and the submit behavior.
 
-## Authoring convention — the `#modal` button
+## Authoring convention — the "Download" button
 
 Author a **normal button** (a bold link, so `decorateButtons` styles it as a
-button) whose href is the **download asset** for that page, with a `#modal`
-hash appended as the marker:
+button) whose **visible text begins with "Download"** and whose href is the
+**download asset** for that page:
 
 ```
-[**Download DARACLAR® FA 300 silica technical data sheet**](/assets/insights/a-brewers-challenge/daraclar-fa-300-technical-data-sheet.pdf#modal)
+[**Download DARACLAR® FA 300 silica technical data sheet**](/assets/insights/a-brewers-challenge/daraclar-fa-300-technical-data-sheet.pdf)
 ```
 
-- Any anchor whose href **ends with `#modal`** (case-insensitive) is a
-  "form-modal button". The `#modal` hash is the marker — its presence means
-  "open the shared form in a modal."
-- On a **valid submit**, the modal opens the asset (the href, minus `#modal`) in
-  a new tab **and** shows a "Thank you! Enjoy your download." confirmation.
-- Remove `#modal` and the button reverts to a plain link.
+- Any link whose text **starts with "Download"** (case-insensitive) is a
+  "form-modal button" — clicking it opens the shared form in a modal instead of
+  navigating. This text rule is robust through Document Authoring, which
+  slugifies `#modal`-style hash markers and `.pdf` extensions.
+- On a **valid submit**, the modal opens the asset (the link's href) in a new
+  tab **and** shows a "Thank you! Enjoy your download." confirmation.
+- Change the button text so it no longer starts with "Download" and it reverts
+  to a plain link.
+
+> Alternative marker: an href ending in `#modal` (case-insensitive) is also
+> honored, for buttons whose label is not "Download …". Prefer the text rule for
+> DA-authored pages.
+
+## Authoring the link in Document Authoring
+
+The href must be a **real anchor to a clean URL** (use DA's link tool). A raw
+path typed into the doc body gets slugified — `.pdf` becomes `-pdf` and any
+hash is dropped — which breaks the download target. Link text still controls
+whether the modal opens, but the download only works if the href is intact.
 
 ### Which form is shown
 

@@ -471,18 +471,23 @@ function decorateExternalLinks(main) {
 }
 
 /**
- * Wires "form-modal buttons": any anchor whose href ends with `#modal` opens the
- * shared gated-download form in a modal instead of navigating. The href's target
- * is the per-page download asset (e.g. a PDF under /assets/…); the form itself is
- * a shared definition resolved inside the modal module. A plain link without
- * `#modal` behaves normally, so removing the marker reverts to a normal link.
+ * Wires "form-modal buttons": any link whose visible text begins with "Download"
+ * opens the shared gated-download form in a modal instead of navigating away.
+ * The link's own href is the per-page download asset (e.g. a PDF under /assets/…),
+ * which is opened in a new tab only after the form is submitted; the form itself
+ * is a shared definition resolved inside the modal module. This text convention is
+ * robust through Document Authoring (unlike a `#modal` hash, which DA slugifies);
+ * an explicit `#modal` marker on the href is still honored as an alternative.
  * The modal module + form block load lazily, only on the first click.
  * @param {Element} main The main element
  */
 function decorateFormModalButtons(main) {
   main.querySelectorAll('a[href]').forEach((a) => {
     const href = a.getAttribute('href') || '';
-    if (!/#modal$/i.test(href)) return;
+    const text = a.textContent.trim();
+    const isDownload = /^download\b/i.test(text);
+    const isMarked = /#modal$/i.test(href);
+    if (!isDownload && !isMarked) return;
     a.classList.add('modal-form-button');
     a.setAttribute('role', 'button');
     a.addEventListener('click', async (e) => {
