@@ -179,6 +179,12 @@ body.sidebar main:not(:has(> .section.sidebar-nav.breadcrumb-container)) > .sect
   border-top: 1px solid rgb(196 196 196);
 }
 
+/* The LAST nav item also carries a bottom border in the source, closing the
+   bordered list (otherwise the final label has no divider beneath it). */
+body.sidebar main:not(:has(> .section.sidebar-nav.breadcrumb-container)) > .section.sidebar-nav li:last-child {
+  border-bottom: 1px solid rgb(196 196 196);
+}
+
 body.sidebar main > .section.sidebar-nav a {
   color: #000;
   font-family: var(--heading-font-family);

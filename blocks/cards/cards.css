@@ -204,6 +204,15 @@
     grid-template-columns: repeat(3, 1fr);
     gap: 35px 28px;
   }
+
+  /* A category-grid promo band with a SINGLE card (e.g. industries/agriculture's
+     "A Portfolio of Solutions") centers that card in the content column on the
+     source, rather than parking it in the left grid track. Constrain the lone card
+     to one card-width track and center it. Multi-card grids keep the 3-col layout. */
+  .cards.category-grid > ul:has(> li:only-child) {
+    grid-template-columns: minmax(0, 280px);
+    justify-content: center;
+  }
 }
 
 /* ===================== Variant: contact-options ===================== */
@@ -394,6 +403,14 @@
 .cards-container:has(.cards.featured-content) h2 {
   text-align: center;
   margin: 0;
+}
+
+/* "A Portfolio of Solutions in …" promo band (category-grid cards on a gray band,
+   e.g. industries/agriculture): source CENTER-aligns the heading + subhead. Our
+   default-content header renders left-aligned. Center the header wrapper (heading
+   AND subhead) for the category-grid promo band. Applies across all such pages. */
+.cards-container:has(.cards.category-grid) .default-content-wrapper:has(> h2) {
+  text-align: center;
 }
 
 /* Gap between the "Latest Insights from Grace" heading and the cards grid. The
