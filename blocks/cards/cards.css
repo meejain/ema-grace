@@ -568,9 +568,12 @@ body.sidebar main > .section.cards-container.geo-hex:has(.cards.featured-content
 }
 
 /* "Read more" — Roboto 14px weight 700, BLACK, on its own line with a chevron.
-   In the imported DOM it's a <strong> nested INSIDE the title <a> (a > strong),
-   so target it there and drop it onto its own line below the title. */
-.cards.featured-content .cards-card-body a:not(strong a) strong:last-child {
+   Two DOM shapes exist across imports: nested inside the title <a> (a > strong),
+   OR as a trailing sibling <strong> that wraps its own <a> (> p > strong:last-child,
+   used on the industry landing "Latest Insights" cards). Target both so the block
+   drops onto its own line below the title with the source's 23.8px line-height. */
+.cards.featured-content .cards-card-body a:not(strong a) strong:last-child,
+.cards.featured-content .cards-card-body > p > strong:last-child {
   display: block;
   margin-top: 10px;
   font-family: var(--body-font-family);
@@ -578,6 +581,12 @@ body.sidebar main > .section.cards-container.geo-hex:has(.cards.featured-content
   font-weight: 700;
   line-height: 1.7; /* 23.8px, matches source and contributes to card height */
   color: var(--text-color);
+}
+
+.cards.featured-content .cards-card-body > p > strong:last-child a:any-link {
+  font-size: var(--body-font-size-m);
+  font-weight: 700;
+  line-height: 1.7;
 }
 
 /* Tablet+: carousel reverts to a static grid; header row goes back to
@@ -606,13 +615,28 @@ body.sidebar main > .section.cards-container.geo-hex:has(.cards.featured-content
     scroll-snap-type: none;
   }
 
-  /* Horizontal card: source image is 126×126 with the text butting right up against it
-     (~24px gap), NOT a 150px thumbnail with a wide 30px gutter. */
+  /* Horizontal card: source image is 126×126 with a 40px gap to a fixed 226px text
+     column. The narrow 226px column is what makes the title wrap to ~4 lines (source
+     title block = 136px), giving the card its full 233px height (parity). */
   .cards.featured-content > ul > li {
     flex: initial;
     scroll-snap-align: none;
-    grid-template-columns: 126px 1fr;
-    gap: 24px;
+    grid-template-columns: 126px 226px;
+    gap: 40px;
+    justify-content: start;
+  }
+
+  /* Body top-padding (source: 15px) — nudges the text block down so the card body
+     reaches the source's 233px height alongside the wrapped title + read-more spacing. */
+  .cards.featured-content .cards-card-body {
+    padding-top: 15px;
+  }
+
+  /* Read more sits 21px above the card bottom in the source — the last piece of the
+     233px body height. */
+  .cards.featured-content .cards-card-body a:not(strong a) strong:last-child,
+  .cards.featured-content .cards-card-body > p > strong:last-child {
+    margin-bottom: 21px;
   }
 
   .cards.featured-content .cards-card-image picture,
