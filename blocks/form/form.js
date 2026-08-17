@@ -571,8 +571,18 @@ export default async function decorate(block) {
   let formDef;
   let pathname;
   if (container) {
-    ({ pathname } = new URL(container.href));
-    formDef = await fetchForm(container.href);
+    const formUrl = new URL(container.href, window.location.href);
+    ({ pathname } = formUrl);
+    // The form definition is always same-site content. If it was authored as an
+    // absolute cross-origin URL (e.g. a `.aem.live` href baked into the imported
+    // content), fetching it from another origin/preview host fails CORS and the
+    // form silently never renders. Resolve it against the CURRENT origin so the
+    // fetch is same-origin in every environment (aem.page/aem.live/localhost/preview).
+    let fetchUrl = container.href;
+    if (formUrl.origin !== window.location.origin) {
+      fetchUrl = `${pathname}${formUrl.search}`;
+    }
+    formDef = await fetchForm(fetchUrl);
   } else {
     ({ container, formDef } = extractFormDefinition(block));
   }
