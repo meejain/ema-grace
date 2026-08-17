@@ -180,8 +180,11 @@ body.sidebar main:not(:has(> .section.sidebar-nav.breadcrumb-container)) > .sect
 }
 
 /* The LAST nav item also carries a bottom border in the source, closing the
-   bordered list (otherwise the final label has no divider beneath it). */
-body.sidebar main:not(:has(> .section.sidebar-nav.breadcrumb-container)) > .section.sidebar-nav li:last-child {
+   bordered list (otherwise the final label has no divider beneath it). Applies
+   ONLY to FLAT product-hub lists — the NESTED nav (parent hub + child <ul>) draws
+   its single closing border on the parent <li>, so a last-child border there would
+   double up with it. Exclude the nested shape via :not(:has(> div > ul > li > ul)). */
+body.sidebar main:not(:has(> .section.sidebar-nav.breadcrumb-container)) > .section.sidebar-nav:not(:has(> div > ul > li > ul)) li:last-child {
   border-bottom: 1px solid rgb(196 196 196);
 }
 
@@ -718,6 +721,22 @@ body.sidebar main > .section.sidebar-nav.breadcrumb-container .breadcrumb nav ol
   body.sidebar main > .section:not([class*="-container"]):has(> .default-content-wrapper > picture:only-child) picture img {
     width: 100%;
     height: auto;
+  }
+
+  /* Wide DATA TABLE (data-grid): the source renders these product-property tables
+     ~920px wide (full content article), but confined to the 707px content column
+     (col 3) the table's min-width forces horizontal overflow + scroll, cramping the
+     cells. Span the nav+content+widget band (cols 2–4) so the table gets its source
+     width and the boxes read full-size. The sticky widget rests far above these
+     tables (they sit well below the fold), so there is no collision. */
+  body.sidebar main > .section.table-container:has(.table.data-grid),
+  body.sidebar main > .section.table-container:has(.table.three-column) {
+    grid-column: 2 / 4;
+  }
+
+  body.sidebar main > .section.table-container:has(.table.data-grid) > div,
+  body.sidebar main > .section.table-container:has(.table.three-column) > div {
+    max-width: none;
   }
 
   /* Let the banner's own content re-center within the band (undo the nav/content

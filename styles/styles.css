@@ -304,6 +304,19 @@ p.button-wrapper {
   margin: 12px 0;
 }
 
+/* Paired DOWNLOAD buttons: the source lays two consecutive download CTAs SIDE BY
+   SIDE in one row across the content column (e.g. bioethanol "Download SYLOBEAD®
+   brochure" + "handling brochure", food-processing SYLOID pair). The import puts
+   each in its own <p class="button-wrapper">, which stacks them vertically at the
+   left. Flow the download-button wrappers inline so a consecutive pair sits on one
+   row; a lone one is unaffected (still left, content-width). Scoped to the download
+   (modal-form) buttons so hero/section CTAs that intentionally stack are untouched. */
+main .default-content-wrapper p.button-wrapper:has(> a.button.modal-form-button) {
+  display: inline-block;
+  margin-right: 20px;
+  vertical-align: top;
+}
+
 a.button:any-link,
 button.button {
   box-sizing: border-box;

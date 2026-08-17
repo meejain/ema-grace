@@ -30,6 +30,18 @@ function buildCell(cell, tag, { scope, unwrapP = false, keepHTML = false } = {})
   return el;
 }
 
+/* A "category" / section-band row is one the source authors as a SINGLE cell
+   spanning the whole table width (e.g. the toothpaste "Cleaning" / "Sensorial" /
+   "Thickening" bands). The importer duplicates that one label into every column,
+   so the row arrives with N identical cells. Detect it (2+ cells, all same
+   non-empty text) so we can render it as one colspanning cell instead. */
+function isSpanRow(cells) {
+  if (cells.length < 2) return false;
+  const first = (cells[0].textContent || '').trim();
+  if (!first) return false;
+  return cells.every((c) => (c.textContent || '').trim() === first);
+}
+
 /* ---- data-grid: simple multi-column with header + scroll wrapper ---- */
 function decorateDataGrid(block) {
   const rows = [...block.children];
@@ -40,7 +52,18 @@ function decorateDataGrid(block) {
   rows.forEach((row, i) => {
     const tr = document.createElement('tr');
     const isHeader = i === 0;
-    [...row.children].forEach((cell) => tr.append(buildCell(cell, isHeader ? 'th' : 'td', { scope: isHeader ? 'col' : undefined })));
+    const cells = [...row.children];
+    // Collapse a duplicated category band into ONE cell spanning all columns
+    // (source parity: single full-width row, not the same label repeated N times).
+    if (!isHeader && isSpanRow(cells)) {
+      const el = buildCell(cells[0], 'td');
+      el.setAttribute('colspan', String(cells.length));
+      el.classList.add('table-band');
+      tr.append(el);
+      tbody.append(tr);
+      return;
+    }
+    cells.forEach((cell) => tr.append(buildCell(cell, isHeader ? 'th' : 'td', { scope: isHeader ? 'col' : undefined })));
     (isHeader ? thead : tbody).append(tr);
   });
   table.append(thead);
