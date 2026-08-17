@@ -348,10 +348,13 @@ migration fidelity, NOT that anything is published to DA (§0). Keep that distin
 | misc one-offs | ~10 | ~few | privacy/cookie/terms/search/404/etc. |
 
 Recommended order (ROI): ~~newsroom~~ ✅ → ~~products (detail)~~ ✅ → ~~products (hubs)~~ ✅ →
-~~industries~~ ✅ (102, published + QA'd 2026-08-14) → **leadership bios**
+~~industries~~ ✅ (102, published + QA'd 2026-08-14) → **industries page-by-page validation pass
+(IN PROGRESS 2026-08-16/17 — batch 1 of ~3 done, ~40 pages, LOCAL-ONLY, awaiting reimport+publish
+go-ahead; see "Industries — page-by-page validation pass" below)** → leadership bios
 (about-grace, person-profile template, ~30 uniform) → campaign → forms (Adaptive Forms pass —
 inventory + submission flow DONE, see `FORMS-INVENTORY.md`). Products set fully complete (28 detail +
-6 hubs). Industries fully complete (102) — next up is about-grace leadership bios.
+6 hubs). Industries: 102 built/published; a deeper per-page parity validation is underway — next
+session resumes with the NEXT 40 industries URLs (batch 2).
 
 **Newsroom template notes (reference for similar default-path families):** press releases take the
 **default path** (`buildDefaultPage`) — no new page-type needed; the whole body (dateline, quotes,
@@ -570,6 +573,67 @@ above for the fix list, `backups/industries/MANIFEST.md` (revs 1-6) for the froz
 `compare-eds-vs-source.mjs` (structural sweep), `audit-cardgrids.mjs` (per-page card-grid parity),
 `shoot-pairs.mjs` + `build-montage.sh` (screenshot montage). ONE KNOWN-OPEN item: the `/industries`
 root landing is 404 on live (content on disk, not yet published to DA).
+
+#### Industries — page-by-page validation pass (IN PROGRESS, 2026-08-16/17) — batch 1 of ~3 done
+
+Deep per-page validation against LIVE grace.com, family by family, targeting 100% visual + content
+parity. **~40 pages validated so far (refining-technologies + a handful cross-family), all fixes
+landed LOCAL-ONLY (localhost:3000) — NOT yet published to DA. Live bundle is 190679 bytes and DOES
+contain this pass's importer fixes; it must be re-snapshotted to `backups/industries/` and the 40
+pages reimported/published on client go-ahead.**
+
+RESUME HERE next session: the user wants the **NEXT 40 industries URLs** validated. Batch 1 (done)
+was refining-heavy; batch 2 = Agriculture, Biofuels, Chemical-Processing, Coatings, Food-Beverage,
+General-Industrial, Nutraceutical, Personal-Care (40 URLs, listed to the user). Batch 3 = the rest of
+Pharmaceutical-Solutions + Plastics-and-Polymers + remaining Refining. Preview base for clickable
+review = `https://enable-forms--ema-grace--meejain.aem.live/…` (the enable-forms branch; note its
+content may lag these local fixes until reimported there).
+
+Fixes landed this pass (each verified vs source; grep the bundle/CSS to confirm before re-deriving):
+
+IMPORTER (rebundled — needs reimport of affected pages to propagate):
+- **`isIndustriesLanding`** (buildDefaultPage): an `/industries/` LANDING page with a banner hero,
+  NO left section-nav, and NO contact widget (e.g. hydroprocessing + its resid/distillate sub-pages)
+  now gets `template: contactus` + `sectionizeFlatBody` — constrained left content column + per-block
+  sections (so a category-grid can sit in its own gray band) instead of one full-width section.
+- **`rowsByColumnOrder` extended** to a WIDE text|image split: `.section-75-25` (col-lg-9 text +
+  col-lg-3 image) AND a plain `.row` with col-lg-7/8/9 text + col-lg-3 image → `columns-image-right`.
+  This is the hydroprocessing "ART Hydroprocessing" intro (text left, ART logo right). `cellNodes`
+  (_columns-utils.js) now collects from ALL `.text`/`.rich-text` boxes in a column (source splits the
+  heading and body into separate boxes; grabbing only the first dropped the h3 + intro).
+- **news-archive parser dedup** (custom-widget-news-archive.js): the source nests `.media-callout`
+  INSIDE `.col-lg-6`; iterating over both pushed the cover image TWICE ("2 images per year" defect).
+  Now collects media-callouts as the primary unit with de-dup by image src + link href.
+- **standalone CTA → green button**: the standalone-CTA leaf collector in `sectionizeFlatBody` wraps a
+  bare flow-child `<a>` in `<strong>` so `decorateButtons` promotes it to `.button.primary` (green) —
+  the value-creation/sustainability "Learn more" was rendering as plain text.
+
+RUNTIME (blocks/templates — NO reimport needed):
+- **columns.js `decorateImageRight`** adds `.columns-image-right-logo` when the image src matches
+  `ART-Logo`; columns.css keys the WIDE 72/25 text-left split on that class (covers both the h2+h3
+  parent and the h2+bullet-list sub-pages), and the trisyl bullet-list 33/67 rule now excludes it.
+- **templates/contactus/contactus.css**: wide ART section breaks its inner div to the full 1240px band
+  (logo sits at the right edge); ART section margins tightened (50px top / 20px bottom) and the gray
+  band butts flush below; the news-archive accordion (its own `.custom-widget-container` section) is
+  capped to the 920px left column so its `+` toggles don't slide UNDER the Contact-Us widget; trademark
+  lone-`<h5>` disclaimer centered in a 690px box. REMOVED the earlier WRONG full-width-band override for
+  the catalagram-archive contact widget (source is the standard compact right-rail panel, not a band).
+- **templates/sidebar/sidebar.css**: `columns-2-cols` (split-list) section pulled tight with negative
+  top+bottom margins (~20px each side, was ~100px); trademark lone-`<h5>` spans the full band + centered.
+- **blocks/custom-widget/news-archive.js**: accordions start ALL COLLAPSED (`openByDefault = false`) —
+  matches source (was auto-expanding the first year).
+- **blocks/cards/cards.css**: the imageless `.cards.industry.promotion` tile restyled to the source
+  (gray blue-green-lines geo tile + light serif heading + solid green "Learn more ›" button, geo-lines
+  visible in the 60px bottom padding). Template overrides in sidebar.css scoped with `.promotion`.
+- **contactus template widget resting offset** (templates/…): the sticky Contact-Us panel straddles the
+  hero's bottom edge (top offset raised to 173px) to match source, not tucked high inside the hero.
+
+STALE-IMPORT lesson: `insights/a-brewers-challenge` "Featured" card wasn't clickable because an OLD
+bundle emitted the merged token `columns horizontal-teaser-featured` (one class); columns.js
+`getVariant()` can't match it so decoration never ran. The CURRENT parser emits the correct 2-token
+`Columns (horizontal-teaser, featured-products)` → whole card becomes a `role=link`. Fix = just
+reimport with the live bundle (no code change). Other insights pages from the old bundle likely share
+this — batch-reimport candidate.
 
 Full original analysis in `tools/importer/INDUSTRIES-ANALYSIS.md`. Summary (kept for reference):
 

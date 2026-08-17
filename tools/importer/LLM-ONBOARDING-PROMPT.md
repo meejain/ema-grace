@@ -107,6 +107,23 @@ side-by-side screenshots before you claim done. Do not publish to DA without my 
   sidebar recipe"), **INDUSTRIES (102) — COMPLETE, published to live 2026-08-14; a further sidebar
   page-by-page QA pass (rev 5-6, 2026-08-15) reimported the 78 left-nav pages + landed 9 more fixes,
   local-only, awaiting client publish go-ahead.**
+- **IN PROGRESS — INDUSTRIES page-by-page parity validation (2026-08-16/17), batch 1 of ~3 done.**
+  Deep validation vs LIVE grace.com, family by family, for 100% visual + content parity. ~40 pages
+  validated (refining-heavy) with fixes landed **LOCAL-ONLY** (localhost:3000) — NOT published. Live
+  bundle (190679 bytes) DOES carry this pass's importer fixes but the affected pages must be reimported
+  and a fresh `backups/industries/` snapshot taken on go-ahead. Full fix list + the durable lessons are
+  in the playbook under "Industries — page-by-page validation pass". **RESUME:** validate the NEXT 40
+  industries URLs (batch 2 = Agriculture, Biofuels, Chemical-Processing, Coatings, Food-Beverage,
+  General-Industrial, Nutraceutical, Personal-Care). Clickable review base for the client =
+  `https://enable-forms--ema-grace--meejain.aem.live/…` (enable-forms branch — its content may lag the
+  local fixes until reimported there). Headline fixes this pass: `isIndustriesLanding` (landing pages →
+  contactus template + sectionize); `rowsByColumnOrder` extended to 75/25 + col-lg-7/col-lg-3 text|image
+  → columns-image-right, with a `.columns-image-right-logo` (ART logo) wide 72/25 treatment;
+  news-archive parser image de-dup + accordions default-collapsed; standalone CTA → green button;
+  catalagram-archive contact widget reverted to the compact right-rail panel; trademark lone-`<h5>`
+  centered; several sidebar/contactus spacing tightenings. STALE-IMPORT gotcha: old-bundle insights
+  pages emitted the merged `columns horizontal-teaser-featured` token (not clickable) — reimport with
+  the current bundle emits the correct 2-token class and the whole Featured card becomes a link.
 - **INDUSTRIES — DONE (102 pages, live on `main--ema-grace--meejain.aem.live`).** Built as ONE template,
   two dispatch branches keyed on section-nav presence (detail → `forceTemplate:sidebar`; landing →
   `template:contactus`). Full record: `backups/industries/MANIFEST.md` (revs 1-6) + memory
