@@ -150,9 +150,16 @@ side-by-side screenshots before you claim done. Do not publish to DA without my 
     (`:last-of-type { margin-bottom:0 }`); category-grid gray band re-inset to cols 3-5.
 - **NEXT UP → about-grace leadership bios** (person-profile, ~30 uniform) → campaign → forms. FORMS is
   fully scoped: `tools/importer/FORMS-INVENTORY.md` (6 templates; 200 form pages; 191 = one shared
-  gated modal) + `FORMS-URLS.txt` (every form URL). Submission = server-side AEM `.pardot.handler` →
-  Pardot; the endpoint won't exist on EDS — GET the Pardot form-handler URLs from the client before
-  building submit (FORMS-INVENTORY §D2). See playbook §5 for the full scope table + status.
+  gated modal) + `FORMS-URLS.txt` (every form URL). **FORMS ARE PARTLY BUILT — read FORMS-INVENTORY
+  §G (implementation history) before touching forms.** Shipped so far: the shared **gated "Download"
+  modal** (`blocks/modal/*`, `blocks/form/download.css`, `decorateFormModalButtons` in scripts.js;
+  shared def `/forms/download.json`; pilot `a-brewers-challenge`) and the inline **Contact–Product &
+  Services single-col** page (live at `/forms/contact-us-product-and-services-single`). Both use the
+  boilerplate **doc-based `blocks/form`** (spreadsheet-JSON), NOT Adaptive Forms. Watch the DA slug
+  trap: a `.json`/`.pdf` link typed as raw text becomes `-json`/`-pdf` and 404s — author it as a REAL
+  anchor. Submission (Pardot) is STILL deferred for all forms: server-side AEM `.pardot.handler` won't
+  exist on EDS — GET the Pardot form-handler URLs from the client before building submit
+  (FORMS-INVENTORY §D2). Remaining templates + rollout in §F. See playbook §5 for the scope table.
 - **Forms-page hero + hexagon sharpness:** contact-us form pages use a dark-blue `hero campaign
   no-image` banner with the `geoAndHexBottom` pattern (h1 + subhead in ONE cell; `template: contactus`
   + `contactus: true` metadata; relative form-JSON href). The hex/geo crispness is an ASSET-RESOLUTION

@@ -17,7 +17,10 @@ selects + reCAPTCHA. Two exceptions are iframe embeds (see below). For the EDS m
 **Adaptive Form JSON**; the conditional branches (Select Your Request / Role / Industry→Segment
 cascades) are the main complexity.
 
-Last updated: 2026-08-12. Status: **INVENTORY (no forms migrated yet — 0/‹count›).**
+Last updated: 2026-08-17. Status: **IN PROGRESS.** The **gated-modal template** (§C, the 191-page
+form) is BUILT + validated, and the **Contact – Product & Services (single-column)** form page is
+BUILT + published live. Submission (Pardot) is still deferred (see §D2). See the new **§G —
+Implementation history** below for exactly what exists, how it works, and what remains.
 
 ---
 
@@ -222,13 +225,127 @@ Field names (`first_name`, `email_address`, `form_type`, …) + reCAPTCHA site k
 
 ---
 
-## F. Next steps (Adaptive Forms pass — NOT started)
+## F. Next steps (remaining templates)
 
-- Enable the `forms-excat` plugin (AEM Forms migration tools — HTML form → Adaptive Form JSON).
-- Build the 6 templates above as Adaptive Forms; wire the conditional branches + reCAPTCHA + GDPR
-  consent + Pardot/endpoint mapping. **See §D2 for the submission flow — the current `action` is a
-  server-side AEM `.pardot.handler` servlet that won't exist on EDS; get the Pardot form-handler
-  endpoint URLs from the client before building submit.**
-- Map thank-you pages as redirect targets.
+> Progress note: the gated-modal template and the single-column Contact form page are DONE — see
+> **§G** for the history and the reusable pattern. The items below are what is still OUTSTANDING.
+
+- Build the remaining conditional templates as doc-based forms: **Contact – Product & Services**
+  (full 2-col), **Contact – Corporate**, **SDS** (product rows), **Newsletter** (1 template × 4
+  topic presets), **Tradeshow**. Reuse the §G doc-form approach (`:type:sheet` JSON + `blocks/form`),
+  adding the Role→Request→Industry→Segment conditional show/hide the source uses.
+- **Submission is still deferred for ALL forms.** Today a valid submit only opens the gated PDF +
+  shows a thank-you (gated modal) or does nothing server-side (contact page). Wiring the real
+  Pardot POST is blocked on the client — see §D2. The current `action` is a server-side AEM
+  `.pardot.handler` servlet that won't exist on EDS; GET the Pardot form-handler endpoint URLs from
+  the client before building submit.
+- Map thank-you pages as redirect / confirmation targets.
 - Decide iframe (`contact-us-customer-service`) strategy.
+- Roll the gated modal out to the other ~190 pages (only `a-brewers-challenge` is wired so far).
 - Track per-template migration status here as it proceeds.
+- (Optional) enable the `forms-excat` plugin if a HTML→Adaptive-Form-JSON conversion is wanted for
+  the richer conditional forms; the two templates shipped so far were built directly (see §G).
+
+---
+
+## G. Implementation history — what has actually been BUILT (2026-08-16 → 08-17)
+
+This section is the running record for a NEW session. It documents the two things shipped so far, the
+runtime code that powers them, the gotchas that cost time, and how to reproduce/extend them. Read it
+before touching forms — the mechanism is deliberately simple and reused, do not rebuild it.
+
+### G0. Approach chosen (and why)
+
+We did **NOT** use AEM Adaptive Forms / the `forms-excat` HTML→JSON converter for these two. Instead
+we used the boilerplate **doc-based form** block already in the repo (`blocks/form/`), which renders a
+form from a **spreadsheet JSON** (`:type: sheet`, columns Name/Type/Label/Mandatory/Options/Value/
+Required Error Message) authored in Document Authoring. Rationale: authors edit the form as a DA
+sheet (no code deploy to change fields), it's zero-build, and one shared JSON can serve every gated
+page. The conditional cascades (Role→Industry→Segment) of the bigger contact forms are the only part
+that will need more than this.
+
+### G1. The gated "Before you download" modal — BUILT ✅ (the 191-page form)
+
+**What it does:** an authored **"Download …" button** opens the shared gated-download form in a native
+`<dialog>`. On a valid submit it opens that page's PDF in a new tab **and** shows a "Thank you! Enjoy
+your download." panel. One shared form serves all pages; each page supplies only its own PDF.
+
+**Runtime code (all on `main`):**
+- `blocks/modal/modal.js` — `openFormModal(triggerHref, {triggerEl, title})`. Builds the `form` block
+  via `buildBlock('form', link)`, adds a `download-form` scope class, moves the heading into a fixed
+  `.modal-header` (only the fields scroll), intercepts a valid submit (capture phase) to open the PDF +
+  show the thank-you, restores commas in long country names (`COUNTRY_COMMA_LABELS`), defaults empty
+  selects to "Please select" (`selectedIndex = 0`), and enforces same-origin / `*.aem.page|live`
+  URL allow-listing (`isAllowedUrl`). Per-page `title` overrides the JSON heading.
+- `blocks/modal/modal.css` — the dialog shell: max-width 816px, square corners, fixed header /
+  scrollable body split, close button, thank-you panel. Tuned to match the source lightbox tokens.
+- `blocks/form/download.css` — the scoped `.download-form` field styling (2-col grid, green focus,
+  green auto-width Submit with `›` chevron). Pulled in via `@import` at the top of `blocks/form/form.css`.
+- `scripts/scripts.js` — `decorateFormModalButtons(main)`: any link whose visible text starts with
+  "Download" (or href ends `#modal`) becomes a modal trigger; a following paragraph starting "Before
+  you download …" is read as the per-page heading (hidden from the page). Lazy-imports `modal.js` on click.
+- Shared form definition: **`/forms/download.json`** (authored in DA, 18 fields). Editing that sheet +
+  republishing changes the form for every gated page at once.
+- Authoring doc: `blocks/modal/README.md`.
+
+**Validated on:** `/insights/a-brewers-challenge/` (the pilot). PDF stored under
+`content/assets/insights/a-brewers-challenge/`, uploaded to DA, previewed + published.
+
+**Key gotchas learned (do not re-hit these):**
+- **DA slugifies raw text links.** A `.pdf`/`.json` URL typed as plain text in a DA doc becomes
+  `-pdf` / `-json` (dot → hyphen) and 404s. ALWAYS author the target as a REAL anchor (DA link tool);
+  the label can be anything. This is why the modal keys off BUTTON TEXT ("Download"), not the href.
+- CSS scope: the form block lives inside `dialog.modal`, i.e. OUTSIDE `<main>`, so `main .form` rules
+  never reach it — hence the `download-form` class + `download.css` `@import`.
+- Country names lose commas because the form parser splits Options on commas; they're authored
+  comma-free in the JSON and re-inserted at runtime.
+
+### G2. Contact – Product & Services (single-column) page — BUILT + LIVE ✅
+
+**Page:** `/forms/contact-us-product-and-services-single` (live on `main`). Not a modal — the form is
+rendered INLINE in a page section.
+
+- Content: `content/forms/contact-us-product-and-services-single.plain.html` — a `hero campaign
+  no-image` banner (dark-blue with the hexagon/geo pattern; h1 "Contact Us" + subhead "Product and
+  Services" in ONE cell), a `form` block whose single cell is an anchor to the form JSON, and a
+  `metadata` section (`template: contactus`, `contactus: true`, `contactus-tagline`).
+- Form definition: **`/forms/contact-us-product-and-services-single.json`** (DA sheet, 18 fields;
+  heading field "How may we help you?").
+- The `contactus: true` + `template: contactus` metadata turns on the sticky "Contact Us / Want to
+  talk to an expert?" widget (`buildContactStickyBlock` in scripts.js + `templates/contactus/`).
+- Hero: reuses the existing `hero campaign no-image` variant (`blocks/hero/hero.css`). Hex/geo
+  crispness came from swapping in the SOURCE's high-res PNGs (`hero-hex-mask.png` +
+  `hero-geo-lines.png`, downscaled with ImageMagick) — see the playbook "Hero (contact) + hexagon/geo
+  background recipe". It's an asset-resolution fix, NOT CSS.
+
+**Gotchas learned on this page:**
+- Same DA slug trap as G1: the form-JSON link MUST be a real anchor, or `.json` → `-json` and the
+  block renders the raw URL instead of the form. (Both a friendly label and the full URL work, as long
+  as it's an actual link.)
+- After publish, a stale CDN 404 for a freshly-deployed block file can linger; force a code-cache
+  refresh with `POST https://admin.hlx.page/code/{org}/{repo}/main/blocks/form/form.js` (and siblings)
+  and load in a clean browser context to verify.
+- The `form` block loads its JS from `blocks/form/form.js` + dynamic imports of its subdirs
+  (`rules-doc/`, `components/`, `models/`, …). `_form.json` / `models/_form.json` 404 BY DESIGN
+  (`.hlxignore` blocks `_*`) — that's fine, doc-based forms don't need them at runtime.
+
+### G3. How to REPRODUCE / DEPLOY a doc-based form page
+
+1. Author the form JSON as a DA sheet at `/forms/<name>.json` (columns: Name, Type, Label, Mandatory,
+   Options, Value, Required Error Message). `Type: plain-text` renders the heading; `select` +
+   comma-separated Options for dropdowns; `submit` for the button.
+2. In the page, add a `form` block whose one cell is a **real anchor** to `/forms/<name>.json`
+   (never a raw-typed URL). For a MODAL instead, author a "Download …" button linking to the asset.
+3. Upload via the DA source API (preserves hrefs verbatim — the editor is what slug-mangles):
+   `curl -X POST -F "data=@<file>.html;type=text/html" "https://admin.da.live/source/{org}/{repo}/<path>.html"`
+   then preview + publish via `admin.hlx.page/preview|live/{org}/{repo}/main/<path>`.
+4. Verify in a CLEAN browser context that the fields render (not the raw JSON URL).
+
+### G4. Still deferred / open
+
+- **Submission (Pardot) is NOT wired** for either form — see §D2 (blocked on client endpoint URLs).
+  Today: gated modal opens the PDF + thank-you on valid submit; the contact page form has no
+  server-side target yet.
+- Remaining templates (full 2-col contact, corporate, SDS, newsletter ×4, tradeshow) — see §F.
+- Gated modal is wired on ONE page only (`a-brewers-challenge`); the other ~190 need their Download
+  buttons + PDFs authored the same way.
