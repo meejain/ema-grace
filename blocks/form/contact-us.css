@@ -110,10 +110,11 @@ body.contactus main .form .field-privacy p {
   margin-bottom: 0;
 }
 
-/* Submit — Roboto Slab 14px / 600, BLACK text on Grace green, square, auto width,
-   left-aligned (source). Overrides the shared blue full-width button. */
+/* Submit — Roboto Slab 14px / 600, BLACK text on Grace green, square.
+   Mobile-first: FULL-WIDTH bar (source fills the column on phones); desktop reverts
+   to auto width (≥600px). Overrides the shared blue button. */
 body.contactus main .form button {
-  width: unset;
+  width: 100%;
   font-family: var(--heading-font-family);
   font-size: 14px;
   font-weight: 600;
@@ -126,6 +127,13 @@ body.contactus main .form button {
 
 body.contactus main .form button:hover {
   background: #6cb033;
+}
+
+/* Desktop: source submit is auto-width (~115px), left-aligned under the form. */
+@media (width >= 600px) {
+  body.contactus main .form button {
+    width: unset;
+  }
 }
 
 /* BOX WIDTHS — match the source, which does NOT stretch fields to the column.
