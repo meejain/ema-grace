@@ -499,18 +499,21 @@ body.sidebar main > .section.cards-container.geo-hex:has(.cards.featured-content
   padding: 0;
 }
 
-/* Eyebrow / category label — Roboto 10px weight 700, uppercase, BLACK
-   (live insights card category is black, not green; line-height 17px = 1.7). */
-.cards.featured-content .cards-card-body strong:first-child {
+/* Eyebrow / category label — Roboto 10px weight 700, uppercase, GREEN
+   (source insights card category = rgb(39 133 60); line-height 17px = 1.7,
+   margin-bottom 10px). Scoped to the strong that is a DIRECT child of the body
+   paragraph so it does NOT also match the "Read more" strong nested in the link. */
+.cards.featured-content .cards-card-body > p > strong:first-child,
+.cards.featured-content .cards-card-body > strong:first-child {
   display: block;
   font-family: var(--body-font-family);
   font-size: 10px;
   font-weight: 700;
-  letter-spacing: 0.5px;
+  letter-spacing: normal;
   line-height: 1.7;
   text-transform: uppercase;
-  color: var(--text-color);
-  margin-bottom: 12px;
+  color: rgb(39 133 60);
+  margin-bottom: 10px;
 }
 
 /* Title — Roboto (SANS-SERIF) weight 400, black (source /insights/ card title:
@@ -538,26 +541,17 @@ body.sidebar main > .section.cards-container.geo-hex:has(.cards.featured-content
   font: inherit;
 }
 
-/* "Read more" link — Roboto 14px weight 700, black with chevron */
-.cards.featured-content .cards-card-body strong:last-child {
+/* "Read more" — Roboto 14px weight 700, BLACK, on its own line with a chevron.
+   In the imported DOM it's a <strong> nested INSIDE the title <a> (a > strong),
+   so target it there and drop it onto its own line below the title. */
+.cards.featured-content .cards-card-body a:not(strong a) strong:last-child {
   display: block;
-}
-
-.cards.featured-content .cards-card-body strong:last-child a:any-link {
-  display: inline-block;
+  margin-top: 10px;
   font-family: var(--body-font-family);
-  font-size: var(--body-font-size-m);
+  font-size: var(--body-font-size-m); /* 14px */
   font-weight: 700;
-
-  /* Live "Read more ›" line-height is 23.8px (1.7), which contributes to the card height. */
-  line-height: 1.7;
+  line-height: 1.7; /* 23.8px, matches source and contributes to card height */
   color: var(--text-color);
-  text-decoration: none;
-  transition: color var(--transition-speed) ease;
-}
-
-.cards.featured-content .cards-card-body strong:last-child a:hover {
-  color: var(--link-hover-color);
 }
 
 /* Tablet+: carousel reverts to a static grid; header row goes back to

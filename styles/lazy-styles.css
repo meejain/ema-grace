@@ -67,7 +67,7 @@ main .section.geo-hex:has(.cards.featured-content, .cards.category-grid) > * {
      background-size:contain) — same technique as the sidebar rule. Top clearance so the heading
      clears the hexagons; bottom room for the hex space below the last card row (matches sidebar). */
   main .section.geo-hex:has(.cards.featured-content, .cards.category-grid) {
-    padding-top: 250px;
+    padding-top: 206px; /* source parity: heading sits 206px below the gray-band top */
     padding-bottom: 140px;
   }
 

@@ -1449,7 +1449,7 @@ body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section.ca
       minmax(0, 747px)
       minmax(0, 320px)
       minmax(20px, 1fr);
-    padding-top: 250px;
+    padding-top: 206px; /* source parity: heading sits 206px below the gray-band top */
     padding-bottom: 140px;
   }
 
