@@ -22,13 +22,33 @@ body.contactus main .form form {
   max-width: 707px;
 }
 
-/* "How may we help you?" heading — Roboto Slab 30px / weight 300, black. */
+/* Center the whole form on the page so the "How may we help you?" heading sits at
+   the page center. The contactus template normally pins this section's inner div to
+   a 920px LEFT column (leaving room for the sticky widget); for the form section we
+   instead let it use the full centered content band and center the 707px form in it.
+   Scoped to the section that actually contains the form so other contactus sections
+   (and the sticky widget) are untouched. */
+@media (width >= 900px) {
+  body.contactus main > .section:has(.form.block) > div {
+    max-width: 1240px; /* full centered band, not the 920px left column */
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  body.contactus main .form form {
+    margin-inline: auto;
+  }
+}
+
+/* "How may we help you?" heading — Roboto Slab 30px / weight 300, black,
+   CENTERED across the form column (source: text-align:center). */
 body.contactus main .form .field-heading p {
   font-family: var(--heading-font-family);
   font-size: 30px;
   font-weight: 300;
   line-height: 1.7;
   color: var(--text-color);
+  text-align: center;
   margin: 0 0 22px;
 }
 
@@ -108,15 +128,87 @@ body.contactus main .form button:hover {
   background: #6cb033;
 }
 
-/* Two-column rows: pair name/email/title fields side-by-side like the source.
-   Mobile-first base leaves them full-width (span 12); pair up from 600px. */
+/* BOX WIDTHS — match the source, which does NOT stretch fields to the column.
+   The shared boilerplate forces `width:100%` on every control; the source instead
+   uses two width regimes:
+     • Top block (Role, Request, Product Name(s), Country of Use, additional info,
+       Industry, Description) → NATURAL narrow boxes (~180–215px), not full width.
+     • Personal block (First/Last, Email/Phone, Job/Company, Country) → 333px,
+       laid out two-per-row.
+   Mobile-first base keeps everything full width (stacked); the desktop rules below
+   (≥600px) restore the source's narrow top block + 2-column personal block. */
+
+/* Desktop: the top-block controls sit on their OWN line under the label and take
+   a narrow, source-matched width (NOT the full column). display:block drops each
+   control below its inline-block label; the widths mirror the live source boxes. */
 @media (width >= 600px) {
+  body.contactus main .form form .field-wrapper input,
+  body.contactus main .form form .field-wrapper select,
+  body.contactus main .form form .field-wrapper textarea {
+    display: block;
+    max-width: 100%;
+  }
+
+  /* Selects (Role ~183, Request ~214, Industry ~204) size to their content. */
+  body.contactus main .form form .field-role select,
+  body.contactus main .form form .field-request select,
+  body.contactus main .form form .field-industry select {
+    width: fit-content;
+    min-width: 183px;
+  }
+
+  /* Short text input (Country of Use) — ~180px in the source. */
+  body.contactus main .form form .field-countryofuse input {
+    width: 180px;
+  }
+
+  /* Textareas — Product Name(s), additional info, Description are all big ~173px
+     boxes in the source (Product Name(s) is a TEXTAREA there, not a text input). */
+  body.contactus main .form form .field-productnames textarea,
+  body.contactus main .form form .field-additionalinfo textarea,
+  body.contactus main .form form .field-description textarea {
+    width: 173px;
+  }
+
+  /* Source quirk: for Product Name(s) and Description the label is inline-block and
+     the textarea sits INLINE to the RIGHT of it (offset ≈ the label width), so the
+     box appears shifted right. Reproduce by flowing the label + textarea on one
+     line. (The long CHEMTREC "additional info" label wraps full width in the source,
+     so its textarea stays at the left — we leave that one alone.) */
+  body.contactus main .form form .field-productnames label,
+  body.contactus main .form form .field-description label {
+    display: inline-block;
+    vertical-align: top;
+    margin-bottom: 0;
+  }
+
+  body.contactus main .form form .field-productnames textarea,
+  body.contactus main .form form .field-description textarea {
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 0;
+    margin-left: 8px;
+  }
+
+  /* Personal block: two fields per row, each filling its half-column (~333px). */
   body.contactus main .form form .field-firstname,
   body.contactus main .form form .field-lastname,
   body.contactus main .form form .field-businessemail,
   body.contactus main .form form .field-phone,
   body.contactus main .form form .field-jobtitle,
-  body.contactus main .form form .field-company {
+  body.contactus main .form form .field-company,
+  body.contactus main .form form .field-country {
     grid-column: span 6;
+  }
+
+  /* Those personal-block controls DO fill their (half) cell, like the source. */
+  body.contactus main .form form .field-firstname input,
+  body.contactus main .form form .field-lastname input,
+  body.contactus main .form form .field-businessemail input,
+  body.contactus main .form form .field-phone input,
+  body.contactus main .form form .field-jobtitle input,
+  body.contactus main .form form .field-company input,
+  body.contactus main .form form .field-country select {
+    width: 100%;
   }
 }
