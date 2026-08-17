@@ -2,6 +2,7 @@
    The download/modal form (blocks/modal/) renders outside <main>, so it needs
    its own scoped stylesheet. Add further form-type stylesheets the same way. */
 @import url('./download.css');
+@import url('./contact-us.css');
 
 :root {
     --background-color-primary: #fff;

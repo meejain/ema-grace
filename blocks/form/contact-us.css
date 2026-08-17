@@ -1,0 +1,122 @@
+/* Contact-form (inline, doc-based) — source parity for grace.com Contact Us forms.
+   Scoped to `body.contactus` so the shared `main .form` defaults and the gated
+   download modal (`.download-form`, rendered in a <dialog> outside <main>) are
+   left untouched. Imported from blocks/form/form.css alongside download.css.
+
+   Source reference: https://grace.com/forms/contact-us-product-and-services-single/
+   (measured computed styles at 1280px). */
+
+/* The shared boilerplate wraps the form in a white rounded "card" (.form-wrapper:
+   shadow + 12px radius + 40px padding). The source Contact Us form has no card —
+   it sits flush on the page background. Neutralize it for this template. */
+body.contactus main div.form-wrapper {
+  background: none;
+  padding: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+/* The source form column is ~707px wide (a narrow left column beside the sticky
+   Contact-Us widget). Cap the form so its proportions and two-column rows match. */
+body.contactus main .form form {
+  max-width: 707px;
+}
+
+/* "How may we help you?" heading — Roboto Slab 30px / weight 300, black. */
+body.contactus main .form .field-heading p {
+  font-family: var(--heading-font-family);
+  font-size: 30px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-color);
+  margin: 0 0 22px;
+}
+
+/* Field labels — Roboto 14px / weight 700, black, 10px above the control. */
+body.contactus main .form label,
+body.contactus main .form fieldset.checkbox-group-wrapper legend,
+body.contactus main .form fieldset:not(.checkbox-group-wrapper, .radio-group-wrapper) legend {
+  font-family: var(--body-font-family);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-color);
+  margin-bottom: 10px;
+}
+
+/* Inputs, selects, textarea — 12px text, light-gray border, square corners. */
+body.contactus main .form input,
+body.contactus main .form select,
+body.contactus main .form textarea {
+  font-family: var(--body-font-family);
+  font-size: 12px;
+  color: var(--text-color);
+  border: 1px solid #ced4da;
+  border-radius: 0;
+  padding: 14px 15px;
+  margin-top: 10px;
+  margin-bottom: 0;
+}
+
+body.contactus main .form input {
+  height: 44px;
+}
+
+/* Base `main .form select` zeroes vertical padding — restore the source 14px. */
+body.contactus main .form select {
+  height: 46px;
+  padding-top: 14px;
+  padding-bottom: 14px;
+}
+
+body.contactus main .form textarea {
+  min-height: 144px;
+  padding: 15px;
+}
+
+body.contactus main .form input:hover,
+body.contactus main .form select:hover {
+  border-color: #adb5bd;
+}
+
+/* Consent acknowledgement + privacy copy are regular weight (only field labels
+   are bold), 14px black — override the bold label rule above. */
+body.contactus main .form .checkbox-wrapper label,
+body.contactus main .form .field-privacy p {
+  font-family: var(--body-font-family);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.7;
+  color: var(--text-color);
+  margin-bottom: 0;
+}
+
+/* Submit — Roboto Slab 14px / 600, BLACK text on Grace green, square, auto width,
+   left-aligned (source). Overrides the shared blue full-width button. */
+body.contactus main .form button {
+  width: unset;
+  font-family: var(--heading-font-family);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-color);
+  background: var(--accent-color);
+  border: 0;
+  border-radius: 0;
+  padding: 18px 30px;
+}
+
+body.contactus main .form button:hover {
+  background: #6cb033;
+}
+
+/* Two-column rows: pair name/email/title fields side-by-side like the source.
+   Mobile-first base leaves them full-width (span 12); pair up from 600px. */
+@media (width >= 600px) {
+  body.contactus main .form form .field-firstname,
+  body.contactus main .form form .field-lastname,
+  body.contactus main .form form .field-businessemail,
+  body.contactus main .form form .field-phone,
+  body.contactus main .form form .field-jobtitle,
+  body.contactus main .form form .field-company {
+    grid-column: span 6;
+  }
+}
