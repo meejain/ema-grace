@@ -746,6 +746,17 @@ body.sidebar main > .section.sidebar-nav.breadcrumb-container .breadcrumb nav ol
   body.sidebar .custom-widget.contact-sticky:not(.is-stuck) .contact-sticky-desktop {
     top: 173px;
   }
+
+  /* INSIGHTS pages (breadcrumb-container marker) have NO hero band — the content
+     column starts at the article top. The source lands the Contact-Us green panel
+     ~100px BELOW the article/H1 top (measured at 1280px: H1 top 121, panel top 221),
+     not straddling a hero (there is none) and not tucked to the very top. The
+     product-hub 173px offset above was tuned for a 121→394 hero band and sits too
+     low here. Set the insights resting offset to 100px. Product hubs (no
+     breadcrumb-container) keep 173px; product-detail pages use body.contactus. */
+  body.sidebar:has(main > .section.sidebar-nav.breadcrumb-container) .custom-widget.contact-sticky:not(.is-stuck) .contact-sticky-desktop {
+    top: 100px;
+  }
 }
 
 /* =====================================================================
@@ -1231,6 +1242,21 @@ body.sidebar main .columns.horizontal-teaser-featured > div::after {
     grid-row: 2;
     align-self: start;
   }
+
+  /* INSIGHTS ONLY: pin the full-width trailing sections (geo-hex "Latest Insights"
+     band + the follow-us banner) to grid-row 3 — the row immediately after the
+     content row (row 2). Without this they auto-place AFTER the nav rail's
+     `2 / span 999` span, which reserves ~300px of phantom implicit rows and opens
+     a large empty gap between the Featured card and the Latest Insights band.
+     Scoped to the full-bleed sections (grid-column 1/-1) so the content column and
+     rail alignment are untouched. */
+  body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section.geo-hex {
+    grid-row: 3;
+  }
+
+  body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section.banner-container {
+    grid-row: 4;
+  }
 }
 
 /* M4: mobile content inset is 10px on the source (migrated inherits the global
@@ -1356,6 +1382,14 @@ body.sidebar main > .section.columns-container:has(.columns.horizontal-teaser.fe
 body.sidebar main > .section.columns-container:has(.columns.columns-2-cols) {
   margin-top: -30px;
   margin-bottom: -30px; /* cancel most of the next section's 50px top margin → ~20px gap below */
+}
+
+/* …EXCEPT when this split-list section is the LAST content section before the
+   "Latest Insights" cards band: the -30px bottom pulled the band up so its heading
+   nearly touched the references/text above (e.g. the ML-in-PD-workflows article).
+   Restore the normal bottom margin in that case so Latest Insights keeps its gap. */
+body.sidebar main > .section.columns-container:has(.columns.columns-2-cols):has(+ .section.cards-container) {
+  margin-bottom: var(--spacing-l);
 }
 
 /* Download sell-sheet buttons: source lays the 3 primary CTAs SIDE BY SIDE (col-lg-4 each,

@@ -396,6 +396,15 @@
   margin: 0;
 }
 
+/* Gap between the "Latest Insights from Grace" heading and the cards grid. The
+   geo-hex variant sets this via a .cards-wrapper margin (styles/lazy-styles.css);
+   the PLAIN cards-container (no geo-hex band, e.g. the ML-in-PD-workflows article,
+   whose header has only an <h2> and no "View all" link) got 0 gap and the heading
+   sat directly on the first card. Add the source ~80px heading→cards gap. */
+.cards-container:has(.cards.featured-content):not(.geo-hex) .cards-wrapper:has(.cards.featured-content) {
+  margin-top: var(--spacing-xl);
+}
+
 /* Insights "Latest Insights from Grace" header: H2 on the LEFT, "View all articles ›" link
    on the RIGHT, sharing the same baseline (source layout). Override the centered-column
    default for the geo-hex insights variant. */

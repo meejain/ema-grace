@@ -436,6 +436,14 @@ main > .section {
   margin: var(--spacing-l) 0;
 }
 
+/* Empty sections (no content — occasionally emitted by the importer as a stray
+   `<div class="section">`) must not occupy space or open a phantom gap between
+   real sections (e.g. the gap between the Featured card and the geo-hex "Latest
+   Insights" band on insights pages). Collapse them entirely. */
+main > .section:empty {
+  display: none;
+}
+
 main > .section > div {
   max-width: 1200px;
   margin: auto;
