@@ -210,6 +210,20 @@ main .section.gray-band:has(.cards.featured-content, .cards.category-grid) {
   padding: var(--spacing-l) 0;
 }
 
+/* A truly-empty authored section (e.g. a trailing empty `<div></div>` in the source) renders
+   as a bare section that still carries the default 50px block margins — collapse it away. */
+main .section:empty {
+  display: none;
+  margin: 0;
+}
+
+/* When a full-bleed gray band is the last content before the footer (only an empty trailing
+   section follows), drop its bottom margin so the gray fill sits flush against the footer
+   instead of leaving a white gap. */
+main .section.gray-band:has(+ .section:empty) {
+  margin-bottom: 0;
+}
+
 /* CTA CALLOUT gray band (heading + short body + a single button, e.g. the value-creation/
    sustainability "Sustainability at Grace" panel). Source centers the heading, body, AND button.
    Signature: a gray band with a `.button-wrapper` (the CTA) and NO cards — this distinguishes it
