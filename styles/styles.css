@@ -309,9 +309,15 @@ p.button-wrapper {
    brochure" + "handling brochure", food-processing SYLOID pair). The import puts
    each in its own <p class="button-wrapper">, which stacks them vertically at the
    left. Flow the download-button wrappers inline so a consecutive pair sits on one
-   row; a lone one is unaffected (still left, content-width). Scoped to the download
-   (modal-form) buttons so hero/section CTAs that intentionally stack are untouched. */
-main .default-content-wrapper p.button-wrapper:has(> a.button.modal-form-button) {
+   row. Scoped to the download (modal-form) buttons so hero/section CTAs that
+   intentionally stack are untouched, AND to GROUP MEMBERS ONLY (a wrapper followed
+   by, or preceded by, another button-wrapper) so a LONE download button keeps
+   block display — letting the insights `text-align: center` actually center it
+   (an inline-block wrapper shrinks to content width and sits left, defeating the
+   centering). Group membership = "followed by a button-wrapper" (all but last) OR
+   "preceded by a button-wrapper" (all but first); the union covers every member. */
+main .default-content-wrapper p.button-wrapper:has(> a.button.modal-form-button):has(+ p.button-wrapper),
+main .default-content-wrapper p.button-wrapper:has(> a.button.modal-form-button) + p.button-wrapper:has(> a.button.modal-form-button) {
   display: inline-block;
   margin-right: 20px;
   vertical-align: top;
