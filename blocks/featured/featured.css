@@ -111,7 +111,10 @@
   color: inherit;
 }
 
-/* description takes the middle and is vertically centred in the free space */
+/* description takes the middle and is vertically centred in the free space.
+   The source CLAMPS it to 3 lines with a trailing ellipsis (…) so a long blurb
+   like "SYLOID® amorphous silica matting agents offer exceptional performance when…"
+   fits the card instead of overflowing/being cut mid-line. */
 .featured.product-selector .featured-product-selector-desc {
   margin: auto 0;
   padding: 0 30px;
@@ -120,6 +123,10 @@
   font-weight: 500;
   line-height: 1.8;
   color: inherit;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
 }
 
 .featured.product-selector .featured-product-selector-cta {

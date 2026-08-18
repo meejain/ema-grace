@@ -456,6 +456,15 @@ body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section.co
   margin-top: 0;
 }
 
+/* Insights ARTICLE download CTA: the source CENTERS a standalone "Download …" button within the
+   article column (e.g. a-brewers-challenge "Download DARACLAR® FA 300 silica technical data
+   sheet"). Industry-page download buttons stay left-aligned (verified on food-processing), so this
+   is scoped to the insights article layout (rail carries .breadcrumb-container) — center the
+   paragraph that holds a lone modal-form-button. */
+body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) .default-content-wrapper p:has(> a.modal-form-button:only-child) {
+  text-align: center;
+}
+
 body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section.sidebar-nav.breadcrumb-container {
   order: 2;
 }
