@@ -178,6 +178,8 @@ With this information, you can construct URLs for the preview environment (same 
 - **Production Live**: `https://main--{repo}--{owner}.aem.live/`
 - **Feature Preview**: `https://{branch}--{repo}--{owner}.aem.page/`
 
+> **CODE lives in git, not DA.** `localhost:3000` serves your **working copy** CSS/JS immediately (even uncommitted). The `.aem.page`/`.aem.live` URLs serve CSS/JS from the **pushed branch** (content comes from DA, but code comes from GitHub). So a CSS/JS change that looks right on `localhost:3000` will NOT appear on any `.aem.page`/`.aem.live` URL until it is committed AND pushed AND AEM Code Sync rebuilds. If asked "why isn't my change on the preview/live URL?", the answer is almost always "it's local-only — push it." (Content/authoring edits are the opposite: they flow from DA, independent of git.)
+
 ### Publishing Process
 1. Push changes to a feature branch
 2. AEM Code Sync automatically processes changes making them available on feature preview environment for that branch

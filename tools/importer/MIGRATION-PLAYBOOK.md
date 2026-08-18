@@ -635,6 +635,53 @@ bundle emitted the merged token `columns horizontal-teaser-featured` (one class)
 reimport with the live bundle (no code change). Other insights pages from the old bundle likely share
 this — batch-reimport candidate.
 
+#### Industries — page-by-page validation pass — BATCH 2 (2026-08-17/18, coatings + tables + featured)
+
+Batch 2 covered Coatings, General-Industrial, Nutraceutical, Personal-Care, Food-Beverage, Biofuels.
+All fixes LOCAL-ONLY on localhost:3000 unless noted PUSHED; the button-center rule was pushed then
+REVERTED at user request (source re-check: see below). Re-snapshot the bundle + reimport affected
+pages on go-ahead. Fixes (each verified vs LIVE source — grep before re-deriving):
+
+RUNTIME — table block (blocks/table/table.js + table.css), covers ALL tables of a shape site-wide:
+- **Rowspan MERGE for `three-column` (table.js `decorateThreeColumn`)**: source authors a full-column
+  span (e.g. static-adsorbents "3Å type zeolites" / Application spanning all 3 rows); importer flattens
+  it to the value repeated per row. FIX merges a column into `rowspan` ONLY when the WHOLE column is one
+  identical non-empty value (≥3 body rows, colCount>1, value length>2). Heuristic caveat learned the
+  hard way: partial/consecutive-run matching WRONGLY merges coincidentally-repeated data
+  (colloidal-silica-in-catalysts NH4+/Na+/230; herbal-medicine "x" matrix). Full-column-only is the safe
+  rule — verified merge on static-adsorbents; NO false merge on colloidal-silica, refractory-additives,
+  herbal-medicine, syloid-mx110, generic-apis.
+- **`comparison-matrix` detection (table.js)**: a `three-column` whose non-label grid is ≥40% empty
+  (sparse "x"/✓ product×feature matrix, e.g. herbal-medicine) gets class `comparison-matrix`. CSS then
+  applies zebra striping (even rows rgb(245 245 245)), roomy 18px cells, left row-labels, centered
+  markers; sidebar.css spans it cols 2/4 (wide, ~880px). Dense property tables never match.
+- **Banded `data-grid` (table.css `:has(.table-band)`)**: toothpaste "Global Silica Product Portfolio"
+  with Cleaning/Sensorial/Thickening band rows → roomy 16px cells, all-centered, centered bold bands.
+  Plain cookie-policy data-grid (no band) keeps its compact left look.
+- **Merged application `three-column` look (`:has(td[rowspan])`)**: left header + roomy 20px cells +
+  vertically-centered text; sidebar.css confines it to the CONTENT column (min-width:0 desktop) so it
+  lines up with body copy above/below (static-adsorbents), UNLIKE the wide data-grid which spans 2/4.
+
+RUNTIME — other blocks:
+- **featured product-selector desc CLAMP (featured.css)**: source clamps the tile description to 3 lines
+  with an ellipsis (`-webkit-line-clamp: 3`); ours overflowed the card with full text. coatings/wood.
+- **video caption (video.css)**: italic `<p><em>` caption below a video renders 12px gray rgb(95 96 98);
+  collapse the stacked section margins so the gap to the poster is ~20px not ~120px. renewable-diesel.
+
+IMPORTER — video-overlay parser: capture `.subhead-large` title (emit `<h3>` before block) AND the
+`.caption` div (emit trailing `<p><em>` after block). accordion-faq parser: group sibling
+`.accordion-comp` into ONE block (cosmetics). featured matcher keys the SELECTOR variant on
+`.feature-set-section.tab` vs the stacked-banner `.list` (do NOT key on the "Featured Products" label —
+both layouts use it; that mistake changed the block for ALL pages once).
+
+REVERTED (source re-check discipline): the "center the standalone Download button on insights articles"
+rule was added to sidebar.css, pushed, then REVERTED. Measuring LIVE grace.com per-page is mandatory:
+insights article bodies DO center it, industry pages (food-processing) LEFT-align — but the user's
+canonical target here was left, so it was pulled. Lesson: confirm the *specific page's* source
+alignment by measuring `getComputedStyle` on live before styling, and a fix only reflects on
+aem.page/aem.live AFTER commit+push+Code-Sync — the LOCAL dev preview (localhost:3000) shows working-copy
+CSS/JS immediately, the AEM Preview serves code from the pushed `main` branch.
+
 Full original analysis in `tools/importer/INDUSTRIES-ANALYSIS.md`. Summary (kept for reference):
 
 - **It is ONE template ("Solution Detail") with optional sections**, NOT 3. block-intelligence.json
