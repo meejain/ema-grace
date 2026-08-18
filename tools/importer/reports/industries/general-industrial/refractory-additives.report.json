@@ -2,11 +2,12 @@
   "status": "success",
   "url": "https://grace.com/industries/general-industrial/refractory-additives/",
   "path": "industries/general-industrial/refractory-additives",
-  "timestamp": "2026-08-15T18:56:47.195Z",
+  "timestamp": "2026-08-18T04:58:20.673Z",
   "title": "Refractory Additives",
   "pageType": "default",
   "blocks": [
     "hero-banner",
+    "columns-split-list",
     "columns-horizontal-teaser-featured",
     "cards-featured-content"
   ],

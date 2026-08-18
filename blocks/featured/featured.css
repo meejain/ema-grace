@@ -217,7 +217,13 @@
     top: 50%;
     height: 160px;
     justify-content: center;
-    padding: 24px 20px;
+
+    /* Narrow horizontal padding so a collapsed one-line title uses nearly the full 250px tile
+       width — the source gives the title the full width, so "SYLOSIV® Zeolite Powder" (~209px)
+       sits on ONE line aligned with "LUDOX® Colloidal Silica". At the old 20px pad only 210px
+       was free and the ® superscript tipped it to 2 lines. 12px leaves ~226px — tab 3 fits on
+       one line while the longer tab 1 title still wraps to 2 lines, matching source. */
+    padding: 24px 12px;
     background-color: transparent;
     transform: translateY(-50%);
     transition: height var(--transition-speed) ease,

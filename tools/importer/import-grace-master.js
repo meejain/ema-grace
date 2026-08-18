@@ -307,12 +307,13 @@ const MATCHERS = {
   'social-follow': (doc) => Array.from(doc.querySelectorAll('.card-list .cmp-card-list, .cmp-card-list'))
     .filter((cl) => /follow us/i.test((cl.querySelector('.heading, h3') || {}).textContent || '')
       && cl.querySelector('a.cmp-card.style-icon, a.cmp-card[href^="http"]')),
-  // featured-product-selector: DISABLED. The grace.com "Featured Products" feature-set is a set of
-  // dark slate cards (a.item.slate-bkgd) with white text + chevron — visually identical to the
-  // `columns horizontal-teaser featured-products` block, NOT the tablist product-selector. Routing
-  // it here rendered transparent/black tablist tabs (wrong vs source). It now flows through the
-  // featureSetContainers('slate-bkgd') matcher below, which preserves the "Featured Products" label.
-  'featured-product-selector': () => [],
+  // featured-product-selector: a slate-bkgd feature-set explicitly headed "Featured Products"
+  // (subhead-large / heading). The runtime block renders these as dark SELECTABLE product tiles
+  // (title → reveals description + Learn More) exactly matching source. Only claim the ones with
+  // the "Featured Products" label; other slate-bkgd carousels (value-creation, chemical-processing
+  // dark teasers) stay on the columns-horizontal-teaser-featured path below.
+  'featured-product-selector': (doc) => featureSetContainers(doc, 'slate-bkgd')
+    .filter((root) => isFeaturedProductsSet(root)),
   // checklist: a .row.section-66-33 pairing a .quote with a checklist (.text h4 + ul steps).
   'columns-checklist': (doc) => Array.from(doc.querySelectorAll('.row.section-66-33'))
     .filter((r) => r.querySelector('.quote') && r.querySelector('.text ul, .rich-text ul')),
@@ -326,9 +327,10 @@ const MATCHERS = {
   //   horizontal-teaser = plain a.item (no image, not slate, not tab-img). Match the carousel
   //   CONTAINER whose items are predominantly the given variant, so each fires at most once.
   'columns-image-teaser': (doc) => featureSetContainers(doc, 'tab-img'),
-  // ALL slate-bkgd feature-sets (dark cards) → featured columns block, INCLUDING carousels headed
-  // "Featured Products" (the tablist featured-product-selector routing was retired — see above).
-  'columns-horizontal-teaser-featured': (doc) => featureSetContainers(doc, 'slate-bkgd'),
+  // slate-bkgd feature-sets (dark cards) → featured columns block, EXCEPT the ones headed
+  // "Featured Products" (those route to featured-product-selector above — dark selectable tiles).
+  'columns-horizontal-teaser-featured': (doc) => featureSetContainers(doc, 'slate-bkgd')
+    .filter((root) => !isFeaturedProductsSet(root)),
   'columns-horizontal-teaser': (doc) => featureSetContainers(doc, 'plain'),
   // brochure-promo: a .row with a brochure cover + a gated DOWNLOAD (button/pdf) on one side
   // and a rich-text description with a bullet list on the other. The gated download + list
@@ -610,6 +612,22 @@ function cardGridContainers(doc, itemSel, accept, minItems) {
  * Returns the carousel containers (.feature-set / .cmp-feature-set) whose items are
  * predominantly the requested variant.
  */
+/** A feature-set that renders as the interactive PRODUCT-SELECTOR (a white label tile beside a
+ *  single ROW of dark selectable tiles) → routes to the featured-product-selector block.
+ *  Grace distinguishes the two dark "Featured Products"-style layouts purely by the
+ *  feature-set-section variant (NOT the heading text — the same "Featured Product(s)" label is
+ *  used for both):
+ *    • `.feature-set-section.tab`  → interactive SELECTOR, ONE row of tiles (wood "Featured
+ *      Products"; nutraceutical "Products for Nutraceutical Formulators").
+ *    • `.feature-set-section.list` → STACKED horizontal banners, title|desc|chevron per card
+ *      (general-industrial-coatings "Featured Products"; nutraceutical "Featured Product") — these
+ *      stay on the columns-horizontal-teaser-featured path, which reproduces the stacked-banner look.
+ *  Key on the `.tab` section; a `.list` (or no `.tab`) feature-set is NOT a selector. */
+function isFeaturedProductsSet(root) {
+  if (root.querySelector('.feature-set-section.list')) return false;
+  return !!root.querySelector('.feature-set-section.tab');
+}
+
 function featureSetContainers(doc, variant) {
   const carousels = Array.from(doc.querySelectorAll('.feature-set, .cmp-feature-set, .feature-set-section.list'));
   const seen = new Set();
@@ -2371,6 +2389,14 @@ function buildDefaultPage(document, url, params) {
   // tag the section that holds both the heading and a `cards category-grid` table.
   if (params && params.sourceGrayCategoryHeadings && params.sourceGrayCategoryHeadings.length) {
     const norm = (s) => (s || '').replace(/\s+/g, ' ').trim().slice(0, 60);
+    const matchesGrayHeading = (fpText) => !!fpText && params.sourceGrayCategoryHeadings.some(
+      (fp) => fp && (fpText.startsWith(fp) || fp.startsWith(fpText)),
+    );
+    const tagGray = (sec) => {
+      if (sec && sec.nodeType === 1 && !sec.querySelector('.section-metadata')) {
+        sec.append(createSectionMetadata(document, 'gray-band'));
+      }
+    };
     Array.from(main.children).forEach((sec) => {
       if (sec.nodeType !== 1 || sec.tagName !== 'DIV') return;
       if (sec.querySelector('.section-metadata')) return;
@@ -2381,9 +2407,25 @@ function buildDefaultPage(document, url, params) {
       if (!catTable) return;
       const h = sec.querySelector('h1, h2, h3');
       const secFp = norm(h && h.textContent);
-      if (secFp && params.sourceGrayCategoryHeadings.some((fp) => fp
-        && (secFp.startsWith(fp) || fp.startsWith(secFp)))) {
-        sec.append(createSectionMetadata(document, 'gray-band'));
+      if (matchesGrayHeading(secFp)) { tagGray(sec); return; }
+      // SPLIT CASE (e.g. coatings/general-industrial "Versatile Applications"): the grid's own
+      // heading + intro were sectionized into the PRECEDING sibling, so this grid section's first
+      // heading is a card title ("Wood Coatings"), not the gray heading. If the previous section's
+      // heading matches a captured gray heading AND that section has no cards of its own (just the
+      // heading+intro), treat them as one band — tag BOTH so the gray fill is continuous.
+      // Walk backward past EMPTY separator sections (sectionizeFlatBody can leave a blank <div>
+      // between the split-off heading/intro and the grid) to find the real preceding heading section.
+      let prev = sec.previousElementSibling;
+      while (prev && prev.nodeType === 1
+        && !prev.querySelector('h1, h2, h3, table')
+        && !(prev.textContent || '').trim()) {
+        prev = prev.previousElementSibling;
+      }
+      const prevH = prev && prev.nodeType === 1 ? prev.querySelector('h1, h2, h3') : null;
+      const prevFp = norm(prevH && prevH.textContent);
+      if (prev && !prev.querySelector('table, .section-metadata') && matchesGrayHeading(prevFp)) {
+        tagGray(prev);
+        tagGray(sec);
       }
     });
   }

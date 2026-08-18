@@ -230,6 +230,25 @@
   color: var(--link-hover-color);
 }
 
+/* Category-BANDED data-grid (e.g. toothpaste "Global Silica Product Portfolio" with Cleaning /
+   Sensorial / Thickening band rows — detected by the presence of a `.table-band` colspan cell).
+   The source renders this as a roomy, fully-CENTERED product-property table (generous cell height,
+   every value centred, category bands centred bold spanning the full width). Scope via
+   :has(.table-band) so the plain cookie-policy data-grid keeps its compact left-aligned look. */
+.table.data-grid:has(.table-band) th,
+.table.data-grid:has(.table-band) td {
+  padding: 16px 12px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+/* category band row: centered bold label across all columns */
+.table.data-grid:has(.table-band) td.table-band {
+  font-weight: 700;
+  text-align: center;
+  vertical-align: middle;
+}
+
 /* ===================== Variant: link-list ===================== */
 
 /* Table Link List
@@ -494,6 +513,85 @@ body.contactus .table.three-column td ul {
 body.contactus .table.three-column td li {
   padding-left: 0;
   margin-bottom: 4px;
+}
+
+/* Application/data three-column table on a sidebar page (e.g. static-adsorbents "Silica Type /
+   Product Grade / Application / Grade Usage"). It carries merged (rowspan) cells — the signature
+   that distinguishes it from the compliance ADDRESS table (which has no merged cells and keeps the
+   centered look). The source renders it as a data table: LEFT-aligned header, generous cell
+   padding, and ALL cell text vertically CENTERED (middle). Scope via :has(td[rowspan]) so only the
+   merged application table is affected. */
+.table.three-column:has(td[rowspan]) thead th {
+  text-align: left;
+  vertical-align: middle;
+}
+
+/* roomy cells + vertically-centered text across every cell (source ~20px vertical / 18px
+   horizontal padding, middle-aligned) */
+.table.three-column:has(td[rowspan]) th,
+.table.three-column:has(td[rowspan]) td {
+  padding: 20px 18px;
+  vertical-align: middle;
+}
+
+.table.three-column:has(td[rowspan]) tbody td {
+  text-align: left;
+  vertical-align: middle;
+}
+
+.table.three-column:has(td[rowspan]) tbody td:first-child {
+  text-align: left;
+}
+
+/* On desktop the sidebar confines this table to the ~667px content column so it lines up with the
+   body copy above/below. Drop the 700px min-width there so the columns wrap to fit the column
+   (source keeps it inside the article width) instead of overflow-scrolling. Mobile keeps the base
+   min-width + horizontal scroll. */
+@media (width >= 900px) {
+  body.sidebar .table.three-column:has(td[rowspan]) table {
+    min-width: 0;
+  }
+}
+
+/* COMPARISON MATRIX three-column table (e.g. herbal-medicine feature×product grid). Tagged
+   `.comparison-matrix` in JS when the body is a sparse grid of "x"/✓ markers. The source styles it
+   as a striped matrix: alternating row shading rgb(245,245,245), roomy cells, LEFT-aligned row
+   labels (col 1) vertically centered, and CENTERED markers in the product columns. Scoped to the
+   tagged block so dense property tables are untouched. */
+.table.three-column.comparison-matrix th,
+.table.three-column.comparison-matrix td {
+  padding: 18px;
+  vertical-align: middle;
+}
+
+/* zebra striping: even data rows get the light shade (source alternates from the first data row) */
+.table.three-column.comparison-matrix tbody tr:nth-child(even) td {
+  background-color: rgb(245 245 245);
+}
+
+/* row-label column: left-aligned; marker columns: centered */
+.table.three-column.comparison-matrix thead th {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.table.three-column.comparison-matrix thead th:first-child {
+  text-align: left;
+}
+
+.table.three-column.comparison-matrix tbody td {
+  text-align: center;
+}
+
+.table.three-column.comparison-matrix tbody td:first-child {
+  text-align: left;
+}
+
+/* the matrix keeps its natural full width on desktop (source ~980px, wider than a prose column) */
+@media (width >= 900px) {
+  body.sidebar .table.three-column.comparison-matrix table {
+    min-width: 0;
+  }
 }
 
 /* ===================== Variant: two-column-content ===================== */

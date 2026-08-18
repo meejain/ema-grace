@@ -2,12 +2,12 @@
   "status": "success",
   "url": "https://grace.com/industries/coatings/wood/",
   "path": "industries/coatings/wood",
-  "timestamp": "2026-08-16T09:50:29.678Z",
+  "timestamp": "2026-08-18T04:52:54.425Z",
   "title": "Wood",
   "pageType": "default",
   "blocks": [
     "hero-banner",
-    "columns-horizontal-teaser-featured",
+    "featured-product-selector",
     "cards-featured-content"
   ],
   "blocksLeftInPlace": [],

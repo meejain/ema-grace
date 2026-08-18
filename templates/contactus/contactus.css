@@ -72,6 +72,31 @@
     margin-bottom: 0;
     padding-block: var(--spacing-l); /* 50px inner band padding (source ~48px) */
   }
+
+  /* Featured PRODUCT-SELECTOR overflow (nutraceutical "Products for Nutraceutical Formulators").
+     Source: the dark product strip OVERFLOWS ~50% UP into the gray "Purification and Formulation"
+     band that sits ABOVE it — the strip's vertical centre lands on the gray→white boundary (top
+     half on gray, bottom half on white). This is the MIRROR of the wood page (which overflows DOWN
+     into the band below). Reproduce by pulling the featured section UP so the tile strip crosses the
+     boundary: the 160px tile row is centred in the 224px section (32px transparent pad top), and on
+     this page the section top sat ~112px below the gray band bottom (32px transparent pad + an ~80px
+     flow gap). A -112px top margin lands the tile strip's TOP exactly on the gray-band bottom edge
+     and its centre ~80px below — i.e. the top half (80px) overlaps UP into the gray band, bottom
+     half on white (50%). z-index keeps the tiles above the gray fill. Desktop only — mobile stacks. */
+  body.contactus main > .section.featured-container:has(.featured.product-selector) {
+    position: relative;
+    z-index: 2;
+    margin-top: -112px;
+  }
+
+  /* The gray band ABOVE the overflowing selector must keep its last card row clear of the strip's
+     upper half — the source leaves ~95px of empty gray between the last card and the strip top. Add
+     bottom padding to the gray band that immediately PRECEDES the overflowing product-selector so
+     its cards end well above the boundary the strip crosses (otherwise the strip's top overlaps the
+     last card row). Scoped to a gray-band section directly followed by the featured selector. */
+  body.contactus main > .section.gray-band.cards-container:has(+ .section.featured-container .featured.product-selector) {
+    padding-bottom: 130px;
+  }
 }
 
 /* Trademark/copyright DISCLAIMER section — a lone <h5> just above the footer (ART®/GRACE®

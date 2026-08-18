@@ -2,7 +2,7 @@
   "status": "success",
   "url": "https://grace.com/industries/coatings/",
   "path": "industries/coatings",
-  "timestamp": "2026-08-16T09:49:35.990Z",
+  "timestamp": "2026-08-18T06:33:03.425Z",
   "title": "Coatings",
   "pageType": "default",
   "blocks": [
@@ -11,7 +11,8 @@
     "table-two-column-content",
     "columns-horizontal-teaser-featured",
     "cards-category-grid",
-    "cards-featured-content"
+    "cards-featured-content",
+    "banner-cta"
   ],
   "blocksLeftInPlace": [],
   "pageMetadata": [

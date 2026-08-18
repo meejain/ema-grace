@@ -52,17 +52,30 @@ export default function parse(element, { document }) {
   const titleEl = captionScope.querySelector('.subhead-large');
   const captionTitle = titleEl ? (titleEl.textContent || '').replace(/\s+/g, ' ').trim() : '';
 
-  // ONE content row, TWO cells: [ poster image | source link ] — the repo contract.
+  // Descriptive CAPTION beneath the video (source: `.media-callout .caption`, e.g. coatings
+  // "From cabinets to cars to the paint on our walls…"). DISTINCT from the subhead-large overlay
+  // title — it's the italic descriptive line the source renders below the poster. Previously
+  // dropped. Emit as a trailing italic <p><em> AFTER the block (default content in the same
+  // section); the block table stays the standard [name] + [poster|source] shape.
+  const capEl = captionScope.querySelector('.caption');
+  const captionText = capEl ? (capEl.textContent || '').replace(/\s+/g, ' ').trim() : '';
+
+  // Standard Video block table: row 1 = name, row 2 = [ poster <picture> | source <a> ].
   const imageCell = img ? [img.cloneNode(true)] : [];
   const linkCell = [];
   if (href) { const a = document.createElement('a'); a.href = href; a.textContent = href; linkCell.push(a); }
 
   const block = WebImporter.Blocks.createBlock(document, { name: 'Video (overlay)', cells: [[imageCell, linkCell]] });
-  if (captionTitle) {
-    const h = document.createElement('h3');
-    h.textContent = captionTitle;
-    element.replaceWith(h, block);
-  } else {
-    element.replaceWith(block);
+
+  const before = [];
+  if (captionTitle) { const h = document.createElement('h3'); h.textContent = captionTitle; before.push(h); }
+  const after = [];
+  if (captionText) {
+    const p = document.createElement('p');
+    const em = document.createElement('em');
+    em.textContent = captionText;
+    p.append(em);
+    after.push(p);
   }
+  element.replaceWith(...before, block, ...after);
 }

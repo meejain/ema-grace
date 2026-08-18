@@ -729,14 +729,74 @@ body.sidebar main > .section.sidebar-nav.breadcrumb-container .breadcrumb nav ol
      cells. Span the nav+content+widget band (cols 2–4) so the table gets its source
      width and the boxes read full-size. The sticky widget rests far above these
      tables (they sit well below the fold), so there is no collision. */
-  body.sidebar main > .section.table-container:has(.table.data-grid),
-  body.sidebar main > .section.table-container:has(.table.three-column) {
+  body.sidebar main > .section.table-container:has(.table.data-grid) {
     grid-column: 2 / 4;
   }
 
-  body.sidebar main > .section.table-container:has(.table.data-grid) > div,
+  body.sidebar main > .section.table-container:has(.table.data-grid) > div {
+    max-width: none;
+  }
+
+  /* Three-column APPLICATION table (e.g. static-adsorbents "Silica Type / Product Grade /
+     Application / Grade Usage"): UNLIKE the wide data-grid, the source keeps this table INSIDE
+     the article/content column so its left edge lines up with the body copy above (the bullet
+     list) and the heading below ("Pharmaceutical Packaging"). Leaving it in the default content
+     cell (col 3) achieves that; we only widen the wrapper so the table fills the column and let
+     the columns wrap to fit (see table.css min-width override) instead of overflow-scrolling. */
   body.sidebar main > .section.table-container:has(.table.three-column) > div {
     max-width: none;
+  }
+
+  /* COMPARISON-MATRIX three-column table (herbal-medicine feature×product grid): UNLIKE the
+     application table, the source renders this wide striped matrix across the nav+content band
+     (~980px), not confined to the prose column. Span cols 2–4 so it gets its source width. Repeats
+     the :has() twice to out-specify the plain three-column rule above. */
+  body.sidebar main > .section.table-container:has(.table.three-column.comparison-matrix) {
+    grid-column: 2 / 4;
+  }
+
+  /* Featured PRODUCT-SELECTOR: source lays the white label tile + dark product
+     strip across the FULL content article (~973px, left edge aligned), not the
+     707px content column — confined to col 3 the tiles crush to ~148px and titles
+     wrap to 4 lines. Span the nav+content+widget band (cols 2–4) so the strip gets
+     source-comparable width and each tile is ~230–250px. Sits below the fold, so no
+     widget collision. */
+  body.sidebar main > .section.featured-container:has(.featured.product-selector) {
+    /* Span into the widget column so the strip can reach the source's ~973px width (label 223
+       + 3 tiles × 250). Cols 2–4 only gave 920px (tiles ~219). The widget rests far above this
+       block, so extending into its column doesn't collide. */
+    grid-column: 2 / 5;
+  }
+
+  body.sidebar main > .section.featured-container:has(.featured.product-selector) > div {
+    /* Source strip is exactly 973px wide (label 223 + 3 tiles × 250; spans x=40→1013 at 1280).
+       Cap the inner wrapper to 973px so the strip matches rather than stretching the full band. */
+    max-width: 973px;
+    margin-inline: 0;
+  }
+
+  /* Source: the dark product strip OVERFLOWS ~50% DOWN into the following gray "Latest
+     Insights" band — the strip's vertical centre lands exactly on the white→gray boundary
+     (top half on white, bottom half on gray). Reproduce by pulling the next section up under
+     the strip's lower half: the tile row is 160px tall, centred inside the 224px section (32px
+     transparent pad top+bottom), so its centre is 112px above the section bottom (32px pad +
+     80px half-tile). A -112px bottom margin moves the gray band up to that centre line; the
+     featured section is lifted above the gray fill so the tiles stay on top. Spacing ABOVE the
+     strip (from the last text section) is untouched. Desktop only — mobile stacks a carousel. */
+  body.sidebar main > .section.featured-container:has(.featured.product-selector) {
+    position: relative;
+    z-index: 2;
+    margin-bottom: -112px;
+  }
+
+  /* The gray band pulled up under the strip must still start its OWN content (heading + cards)
+     BELOW the overflowing strip — the source clears the strip's lower half (~80px) then adds its
+     usual ~31px gap before "Latest Insights". The gray section's default 40px top-pad would let
+     the strip's bottom half cover the heading, so bump the top pad to ~111px for the gray band
+     that immediately follows the overflowing product-selector. */
+  body.sidebar main > .section.featured-container:has(.featured.product-selector)
+    + .section.gray-band.cards-container {
+    padding-top: 111px;
   }
 
   /* Let the banner's own content re-center within the band (undo the nav/content

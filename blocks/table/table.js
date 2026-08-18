@@ -93,7 +93,60 @@ function decorateThreeColumn(block) {
   };
   const [headerRow, ...dataRows] = rows;
   thead.append(buildRow(headerRow, 'th'));
-  dataRows.forEach((row) => tbody.append(buildRow(row, 'td')));
+  const bodyTrs = dataRows.map((row) => buildRow(row, 'td'));
+  bodyTrs.forEach((tr) => tbody.append(tr));
+
+  // Vertical MERGE (rowspan) — the source authors columns like "Silica Type" / "Application" with a
+  // single cell spanning EVERY data row (rowspan). The importer flattens that into the same value
+  // repeated on every row. We reproduce the source rowspan, but ONLY for a FULL-COLUMN span: a
+  // column merges just when every body row holds the identical non-empty value.
+  //
+  // Why full-column-only (not consecutive runs): repeated *data* values are indistinguishable from
+  // authored spans by run-matching. A data table like colloidal-silica-in-catalysts has "NH4+" in
+  // 3 rows and "Na+" in 5 (independent per-row data), and a comparison matrix repeats "x" —
+  // merging those coincidental runs corrupts the table. Requiring the WHOLE column to be one value
+  // keeps the merge to genuine spanning cells (static-adsorbents "3Å type zeolites" / App) only.
+  //
+  // Capture the ORIGINAL grid of cell refs FIRST — removing a cell shifts a row's child indices, so
+  // decide against the pre-removal matrix, then apply. Only tables with 3+ body rows (a lone dup
+  // could be coincidence) and at least 2 distinct values elsewhere are considered.
+  const grid = bodyTrs.map((tr) => [...tr.children]);
+  const colCount = grid.length ? grid[0].length : 0;
+  const norm = (c) => (c ? (c.textContent || '').replace(/\s+/g, ' ').trim() : '');
+  const toRemove = [];
+  if (grid.length >= 3) {
+    for (let col = 0; col < colCount; col += 1) {
+      // every body row must have a cell in this column with the SAME non-empty value
+      const first = norm(grid[0][col]);
+      const fullSpan = first
+        && grid.every((row) => row[col] && norm(row[col]) === first);
+      // guard: don't merge a column that is the ONLY column (degenerate) or where the value is a
+      // short marker token (≤2 chars, e.g. an all-"x" column) — those aren't real spanning content.
+      if (fullSpan && colCount > 1 && first.length > 2) {
+        for (let i = 1; i < grid.length; i += 1) toRemove.push(grid[i][col]);
+        grid[0][col].setAttribute('rowspan', String(grid.length));
+      }
+    }
+  }
+  toRemove.forEach((c) => c.remove());
+
+  // Detect a COMPARISON MATRIX (e.g. herbal-medicine feature×product grid): a first-column of
+  // row labels, the rest of the grid mostly EMPTY with sparse "x"/✓ markers. The source styles it
+  // differently from a dense data table — zebra row striping + roomy cells + centered markers — so
+  // tag it for CSS. Signature: 3+ body rows and a high empty-cell ratio in the non-label columns
+  // (a dense data table like colloidal-silica has ~0 empties). Guarded so property tables skip it.
+  if (grid.length >= 3 && colCount >= 3) {
+    let empties = 0;
+    let dataCells = 0;
+    for (let r = 0; r < grid.length; r += 1) {
+      for (let col = 1; col < colCount; col += 1) {
+        dataCells += 1;
+        if (!norm(grid[r][col])) empties += 1;
+      }
+    }
+    if (dataCells && empties / dataCells >= 0.4) block.classList.add('comparison-matrix');
+  }
+
   table.append(thead);
   if (dataRows.length) table.append(tbody);
   const scroller = document.createElement('div');

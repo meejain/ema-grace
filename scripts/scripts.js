@@ -56,10 +56,16 @@ function buildScene7Rendition(src, { width, format }) {
   const pairs = query.split('&').filter((p) => p);
   const filtered = pairs.filter((p) => {
     const k = p.split('=')[0];
-    return k !== 'wid' && k !== 'fmt';
+    return k !== 'wid' && k !== 'fmt' && k !== 'fit';
   });
   filtered.push(`wid=${width}`);
   filtered.push(`fmt=${format}`);
+  // fit=constrain preserves the asset's aspect ratio within the requested width and
+  // never upscales past native. Without it, requesting wid beyond the asset's real
+  // width makes Scene7 keep the native HEIGHT and widen the crop — e.g. a 1200x675
+  // infographic at wid=2000 comes back 2000x675 (2.96:1, squashed short). constrain
+  // returns the native 1200x675 instead, matching how grace.com serves these images.
+  filtered.push('fit=constrain');
   return `${base}?${filtered.join('&')}`;
 }
 

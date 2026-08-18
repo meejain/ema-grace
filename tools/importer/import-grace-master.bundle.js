@@ -1662,11 +1662,26 @@ var CustomImportScript = (() => {
     return [qCell, aCell];
   }
   function parse34(element, { document }) {
-    const dls = Array.from(element.querySelectorAll("dl.accordion, .accordion-comp-list > dl, dl"));
+    const wrapper = element.closest(".accordion") || element;
+    const container = wrapper.parentElement || element.parentElement;
+    let comps = [element];
+    if (container) {
+      const all = Array.from(container.querySelectorAll(".accordion-comp")).filter((c) => !(c.parentElement && c.parentElement.closest(".accordion-comp")));
+      if (all.length > 1 && all.includes(element)) comps = all;
+    }
+    const dls = [];
+    comps.forEach((comp) => {
+      Array.from(comp.querySelectorAll("dl.accordion, .accordion-comp-list > dl, dl")).forEach((dl) => dls.push(dl));
+    });
     if (!dls.length) return;
     const cells = dls.map((dl) => qa(dl, document));
     const block = WebImporter.Blocks.createBlock(document, { name: "Accordion (faq)", cells });
-    element.replaceWith(block);
+    const firstWrapper = comps[0].closest(".accordion") || comps[0];
+    firstWrapper.replaceWith(block);
+    comps.slice(1).forEach((comp) => {
+      const w = comp.closest(".accordion") || comp;
+      if (w.parentNode) w.remove();
+    });
   }
 
   // tools/importer/parsers/accordion-nested.js
@@ -2087,6 +2102,8 @@ var CustomImportScript = (() => {
     const captionScope = element.closest(".media-callout, .cmp-media-callout") || element;
     const titleEl = captionScope.querySelector(".subhead-large");
     const captionTitle = titleEl ? (titleEl.textContent || "").replace(/\s+/g, " ").trim() : "";
+    const capEl = captionScope.querySelector(".caption");
+    const captionText = capEl ? (capEl.textContent || "").replace(/\s+/g, " ").trim() : "";
     const imageCell = img ? [img.cloneNode(true)] : [];
     const linkCell = [];
     if (href) {
@@ -2096,13 +2113,21 @@ var CustomImportScript = (() => {
       linkCell.push(a);
     }
     const block = WebImporter.Blocks.createBlock(document, { name: "Video (overlay)", cells: [[imageCell, linkCell]] });
+    const before = [];
     if (captionTitle) {
       const h = document.createElement("h3");
       h.textContent = captionTitle;
-      element.replaceWith(h, block);
-    } else {
-      element.replaceWith(block);
+      before.push(h);
     }
+    const after = [];
+    if (captionText) {
+      const p = document.createElement("p");
+      const em = document.createElement("em");
+      em.textContent = captionText;
+      p.append(em);
+      after.push(p);
+    }
+    element.replaceWith(...before, block, ...after);
   }
 
   // tools/importer/parsers/banner-contact-split.js
@@ -2554,12 +2579,12 @@ var CustomImportScript = (() => {
     "cards-related-articles": (doc) => Array.from(doc.querySelectorAll(".cmp-card-list.grid.three-columns, .card-list .cmp-card-list")).filter((cl) => /related articles/i.test((cl.querySelector(".heading, h3") || cl.previousElementSibling || {}).textContent || "") && cl.querySelector("a.cmp-card.bio, a.cmp-card")),
     // social-follow: a .cmp-card-list with a "Follow us" heading + external social icon links.
     "social-follow": (doc) => Array.from(doc.querySelectorAll(".card-list .cmp-card-list, .cmp-card-list")).filter((cl) => /follow us/i.test((cl.querySelector(".heading, h3") || {}).textContent || "") && cl.querySelector('a.cmp-card.style-icon, a.cmp-card[href^="http"]')),
-    // featured-product-selector: DISABLED. The grace.com "Featured Products" feature-set is a set of
-    // dark slate cards (a.item.slate-bkgd) with white text + chevron — visually identical to the
-    // `columns horizontal-teaser featured-products` block, NOT the tablist product-selector. Routing
-    // it here rendered transparent/black tablist tabs (wrong vs source). It now flows through the
-    // featureSetContainers('slate-bkgd') matcher below, which preserves the "Featured Products" label.
-    "featured-product-selector": () => [],
+    // featured-product-selector: a slate-bkgd feature-set explicitly headed "Featured Products"
+    // (subhead-large / heading). The runtime block renders these as dark SELECTABLE product tiles
+    // (title → reveals description + Learn More) exactly matching source. Only claim the ones with
+    // the "Featured Products" label; other slate-bkgd carousels (value-creation, chemical-processing
+    // dark teasers) stay on the columns-horizontal-teaser-featured path below.
+    "featured-product-selector": (doc) => featureSetContainers(doc, "slate-bkgd").filter((root) => isFeaturedProductsSet(root)),
     // checklist: a .row.section-66-33 pairing a .quote with a checklist (.text h4 + ul steps).
     "columns-checklist": (doc) => Array.from(doc.querySelectorAll(".row.section-66-33")).filter((r) => r.querySelector(".quote") && r.querySelector(".text ul, .rich-text ul")),
     // history-item: .row.section-66-33 with a year <h2> + image, but NOT the checklist (no quote).
@@ -2569,9 +2594,9 @@ var CustomImportScript = (() => {
     //   horizontal-teaser = plain a.item (no image, not slate, not tab-img). Match the carousel
     //   CONTAINER whose items are predominantly the given variant, so each fires at most once.
     "columns-image-teaser": (doc) => featureSetContainers(doc, "tab-img"),
-    // ALL slate-bkgd feature-sets (dark cards) → featured columns block, INCLUDING carousels headed
-    // "Featured Products" (the tablist featured-product-selector routing was retired — see above).
-    "columns-horizontal-teaser-featured": (doc) => featureSetContainers(doc, "slate-bkgd"),
+    // slate-bkgd feature-sets (dark cards) → featured columns block, EXCEPT the ones headed
+    // "Featured Products" (those route to featured-product-selector above — dark selectable tiles).
+    "columns-horizontal-teaser-featured": (doc) => featureSetContainers(doc, "slate-bkgd").filter((root) => !isFeaturedProductsSet(root)),
     "columns-horizontal-teaser": (doc) => featureSetContainers(doc, "plain"),
     // brochure-promo: a .row with a brochure cover + a gated DOWNLOAD (button/pdf) on one side
     // and a rich-text description with a bullet list on the other. The gated download + list
@@ -2782,6 +2807,10 @@ var CustomImportScript = (() => {
     if (items.length < (minItems || 2)) return [];
     const lca = lowestCommonAncestor(items);
     return lca ? [lca] : [];
+  }
+  function isFeaturedProductsSet(root) {
+    if (root.querySelector(".feature-set-section.list")) return false;
+    return !!root.querySelector(".feature-set-section.tab");
   }
   function featureSetContainers(doc, variant) {
     const carousels = Array.from(doc.querySelectorAll(".feature-set, .cmp-feature-set, .feature-set-section.list"));
@@ -3959,6 +3988,14 @@ var CustomImportScript = (() => {
     }
     if (params && params.sourceGrayCategoryHeadings && params.sourceGrayCategoryHeadings.length) {
       const norm = (s) => (s || "").replace(/\s+/g, " ").trim().slice(0, 60);
+      const matchesGrayHeading = (fpText) => !!fpText && params.sourceGrayCategoryHeadings.some(
+        (fp) => fp && (fpText.startsWith(fp) || fp.startsWith(fpText))
+      );
+      const tagGray = (sec) => {
+        if (sec && sec.nodeType === 1 && !sec.querySelector(".section-metadata")) {
+          sec.append(createSectionMetadata(document, "gray-band"));
+        }
+      };
       Array.from(main.children).forEach((sec) => {
         if (sec.nodeType !== 1 || sec.tagName !== "DIV") return;
         if (sec.querySelector(".section-metadata")) return;
@@ -3969,8 +4006,19 @@ var CustomImportScript = (() => {
         if (!catTable) return;
         const h = sec.querySelector("h1, h2, h3");
         const secFp = norm(h && h.textContent);
-        if (secFp && params.sourceGrayCategoryHeadings.some((fp) => fp && (secFp.startsWith(fp) || fp.startsWith(secFp)))) {
-          sec.append(createSectionMetadata(document, "gray-band"));
+        if (matchesGrayHeading(secFp)) {
+          tagGray(sec);
+          return;
+        }
+        let prev = sec.previousElementSibling;
+        while (prev && prev.nodeType === 1 && !prev.querySelector("h1, h2, h3, table") && !(prev.textContent || "").trim()) {
+          prev = prev.previousElementSibling;
+        }
+        const prevH = prev && prev.nodeType === 1 ? prev.querySelector("h1, h2, h3") : null;
+        const prevFp = norm(prevH && prevH.textContent);
+        if (prev && !prev.querySelector("table, .section-metadata") && matchesGrayHeading(prevFp)) {
+          tagGray(prev);
+          tagGray(sec);
         }
       });
     }

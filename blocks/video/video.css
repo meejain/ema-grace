@@ -333,3 +333,35 @@
 .video.overlay .video-overlay-watch::after {
   content: " \203a"; /* › */
 }
+
+/* Video descriptive CAPTION — the italic line the source renders BELOW the poster (source
+   `.media-callout .caption`, e.g. coatings "From cabinets to cars…", renewable-diesel "Thanks to
+   our century of experience…"): italic, 12px, gray rgb(95 96 98), ~20px above. The importer emits
+   it as a `<p><em>` that lands in the SECTION immediately AFTER the video section (aem.js splits
+   sections apart). Two shapes occur:
+     • coatings — the caption is the ONLY content in the following section's wrapper.
+     • renewable-diesel — the caption is the FIRST paragraph of a wrapper that also holds the next
+       heading/body, so match a leading `p > em:only-child` too.
+   Both scope to `.video-container + .section` so an ordinary italic elsewhere isn't caught. */
+main > .section.video-container + .section > .default-content-wrapper:only-child > p:only-child > em:only-child,
+main > .section.video-container + .section > .default-content-wrapper > p:first-child > em:only-child {
+  display: block;
+  margin-top: 0;
+  color: rgb(95 96 98);
+  font-size: 12px;
+  font-style: italic;
+  line-height: 1.5;
+}
+
+/* Collapse the stacked section margins between the video and its caption. The video section's 50px
+   bottom margin + the caption section's 50px top margin opened a ~120px gap; the source sits the
+   caption ~20px below the poster. Zero the video's bottom margin and pull the caption section up so
+   only a ~20px gap remains. Scoped to a video section immediately followed by a caption section
+   (its wrapper leads with an italic-only paragraph). */
+main > .section.video-container:has(+ .section > .default-content-wrapper > p:first-child > em:only-child) {
+  margin-bottom: 0;
+}
+
+main > .section.video-container + .section:has(> .default-content-wrapper > p:first-child > em:only-child) {
+  margin-top: 20px;
+}

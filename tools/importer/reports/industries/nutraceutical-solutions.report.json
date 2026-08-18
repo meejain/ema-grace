@@ -2,15 +2,16 @@
   "status": "success",
   "url": "https://grace.com/industries/nutraceutical-solutions/",
   "path": "industries/nutraceutical-solutions",
-  "timestamp": "2026-08-13T19:46:04.850Z",
+  "timestamp": "2026-08-18T04:53:48.796Z",
   "title": "Nutraceutical Solutions",
   "pageType": "default",
   "blocks": [
     "hero-banner",
     "columns-horizontal-teaser-featured",
     "cards-category-grid",
-    "columns-horizontal-teaser-featured",
-    "cards-featured-content"
+    "featured-product-selector",
+    "cards-featured-content",
+    "banner-cta"
   ],
   "blocksLeftInPlace": [],
   "pageMetadata": [
