@@ -1,0 +1,16 @@
+{
+  "status": "success",
+  "url": "https://grace.com/about-grace/locations/lake-charles/",
+  "path": "about-grace/locations/lake-charles",
+  "timestamp": "2026-08-19T14:42:38.373Z",
+  "title": "Lake Charles, LA",
+  "pageType": "default",
+  "blocks": [
+    "columns-location-detail"
+  ],
+  "blocksLeftInPlace": [],
+  "pageMetadata": [
+    "template"
+  ],
+  "hasForm": false
+}

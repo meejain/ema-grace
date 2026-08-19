@@ -184,3 +184,27 @@
 - **snapshot date:** 2026-08-15 (rev 6 — working-tree bundle 178300; frozen at
   `backups/industries/rev6-2026-08-15/`). The top-level `backups/industries/import-grace-master.bundle.js`
   still holds rev 4 (170850, the last PUBLISHED bundle) — refresh it when rev 6 is published to live.
+
+- **REVISION 7 (2026-08-18, pre-about-grace snapshot — freeze live bundle before next family):**
+  Taken per playbook §7 ("snapshot BEFORE starting the next family; the live bundle is overwritten on
+  the next rebundle"). About to kick off the `about-grace` family, which will rebundle the shared
+  importer — so the current live bundle (carrying the batch-1 + batch-2 page-by-page validation
+  importer fixes) is frozen here first so it is not lost.
+  - **Frozen at:** `backups/industries/rev7-2026-08-18/` — `import-grace-master.bundle.js`
+    (**192840 bytes**), `import-grace-master.js` (157436, the importer source), plus the runtime files
+    touched during the batch-1/2 validation passes for reference: `sidebar.css`, `sidebar.js`,
+    `contactus.css`, `columns.js`, `columns.css`, `cards.css`, `table.js`, `table.css`, `featured.css`,
+    `video.css`, `news-archive.js`.
+  - **provenance:** committed at git sha `2302375` ("Update importer"), clean working tree (the bundle
+    is the committed file, not a dirty working copy).
+  - **delta over rev 6 (178300 → 192840 bytes):** carries the IMPORTER fixes from the industries
+    page-by-page validation batches 1 & 2 (grep-verified present in the bundle): `isIndustriesLanding`
+    (landing pages → `template:contactus` + `sectionizeFlatBody`), `rowsByColumnOrder` extended to the
+    wide text|image 75/25 + col-lg-7/3 split → `columns-image-right`, news-archive parser image de-dup,
+    standalone-CTA → green button, video-overlay caption capture, accordion-faq sibling grouping,
+    featured matcher keyed on `.feature-set-section.tab`. RUNTIME batch-2 fixes (table rowspan merge,
+    `comparison-matrix`, banded data-grid, featured desc clamp, video caption) live in the frozen
+    `blocks/*` copies here — they are NOT in the bundle (they are render-time).
+  - **NOT published to live** — batch-1/2 validation fixes remain LOCAL-ONLY; the affected industries
+    pages still need reimport + publish on client go-ahead. This snapshot is the rollback net only.
+  - **snapshot date:** 2026-08-18.

@@ -1,0 +1,16 @@
+{
+  "status": "success",
+  "url": "https://grace.com/about-grace/locations/south-haven/",
+  "path": "about-grace/locations/south-haven",
+  "timestamp": "2026-08-19T14:46:21.539Z",
+  "title": "South Haven, MI, USA",
+  "pageType": "default",
+  "blocks": [
+    "columns-location-detail"
+  ],
+  "blocksLeftInPlace": [],
+  "pageMetadata": [
+    "template"
+  ],
+  "hasForm": false
+}

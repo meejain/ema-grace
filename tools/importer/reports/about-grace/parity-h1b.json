@@ -1,0 +1,1461 @@
+[
+  {
+    "path": "/about-grace",
+    "cat": "OK",
+    "issues": [],
+    "loc": {
+      "ok": true,
+      "status": 200,
+      "textLen": 446,
+      "headings": [
+        "H1:About Grace",
+        "H3:Awards & Recognition",
+        "H3:Community",
+        "H3:Environmental, Health & Safety",
+        "H3:Leadership Team",
+        "H3:Locations",
+        "H3:Our History",
+        "H3:Sustainability",
+        "H3:This is Grace"
+      ],
+      "headingCount": 9,
+      "paraCount": 0,
+      "paras": [],
+      "liCount": 8,
+      "linkCount": 8,
+      "imgTotal": 10,
+      "imgLoaded": 10,
+      "imgSrcs": [
+        "about-grace-ecat-lab-woman-labcoat-v2-30",
+        "img_awards_about_grace_800px.jpg",
+        "Employee-Appreciation-Day_GVETS_680x300.",
+        "ehs-people-diversity-inclusion-employee-",
+        "img_leadership_about_grace_800px.jpg",
+        "img_locations_about_grace_800px.jpg",
+        "img_history_about_grace_800px.jpg",
+        "ehs-sustainability-green-molecules?wid=2",
+        "img_awards_this_is_grace_800px.jpg",
+        "Standard-RGB?ts=1755785246097&dpr=off&wi"
+      ]
+    },
+    "src": {
+      "ok": true,
+      "status": 200,
+      "textLen": 208,
+      "headings": [],
+      "headingCount": 0,
+      "paraCount": 0,
+      "paras": [],
+      "liCount": 0,
+      "linkCount": 8,
+      "imgTotal": 8,
+      "imgLoaded": 8,
+      "imgSrcs": [
+        "img_awards_about_grace_800px.jpg",
+        "Employee-Appreciation-Day_GVETS_680x300.",
+        "ehs-people-diversity-inclusion-employee-",
+        "img_leadership_about_grace_800px.jpg",
+        "img_locations_about_grace_800px.jpg",
+        "img_history_about_grace_800px.jpg",
+        "ehs-sustainability-green-molecules",
+        "img_awards_this_is_grace_800px.jpg"
+      ]
+    }
+  },
+  {
+    "path": "/about-grace/awards-and-recognition",
+    "cat": "OK",
+    "issues": [],
+    "loc": {
+      "ok": true,
+      "status": 200,
+      "textLen": 3098,
+      "headings": [
+        "H1:Recognized by Our Industries",
+        "H2:Built on Innovation. Powered by People.",
+        "H4:Reflecting breakthrough chemistries, trusted technical exper",
+        "H4:2026",
+        "H4:2025",
+        "H4:2024",
+        "H4:2023",
+        "H4:2022",
+        "H4:2021",
+        "H2:Latest Insights from Grace"
+      ],
+      "headingCount": 10,
+      "paraCount": 4,
+      "paras": [
+        "RefiningCATALAGRAM® Magazine: Practical Insights to Help You Navigate a Complex ",
+        "CoatingsMatte Finishes, Reimagined: How to Achieve Lasting Coatings Performance ",
+        "Plastics and PolymersUnlock premium film performance with ActivCat® 104 catalyst",
+        "General IndustrialFrom Adhesion to Zeolite Synthesis: The Many Manufacturing Cha"
+      ],
+      "liCount": 30,
+      "linkCount": 32,
+      "imgTotal": 5,
+      "imgLoaded": 5,
+      "imgSrcs": [
+        "awards-banner-crystal.jpg",
+        "blog-hero-catalagram-131?wid=2000&fmt=we",
+        "blog-hero-wood-kitchen-floors-table-cabi",
+        "blog-hero-standup-plastic-pouch?wid=2000",
+        "blog-airplane-sunset?wid=2000&fmt=webp&f"
+      ]
+    },
+    "src": {
+      "ok": true,
+      "status": 200,
+      "textLen": 2585,
+      "headings": [
+        "H2:Built on Innovation. Powered by People.",
+        "H4:Reflecting breakthrough chemistries, trusted technical exper",
+        "H4:2026",
+        "H4:2025",
+        "H4:2024",
+        "H4:2023",
+        "H4:2022",
+        "H4:2021"
+      ],
+      "headingCount": 8,
+      "paraCount": 0,
+      "paras": [],
+      "liCount": 26,
+      "linkCount": 23,
+      "imgTotal": 0,
+      "imgLoaded": 0,
+      "imgSrcs": []
+    }
+  },
+  {
+    "path": "/about-grace/community",
+    "cat": "OK",
+    "issues": [],
+    "loc": {
+      "ok": true,
+      "status": 200,
+      "textLen": 5265,
+      "headings": [
+        "H1:Supporting the Communities Where We Live and Work",
+        "H2:Our Commitment to Community",
+        "H3:The W. R. Grace Foundation",
+        "H3:Employee Impact and Local Engagement",
+        "H4:Matching Program",
+        "H4:Employees in Action",
+        "H4:Community-Connected Grants Funding",
+        "H3:Environmental Impact",
+        "H3:Questions?"
+      ],
+      "headingCount": 9,
+      "paraCount": 16,
+      "paras": [
+        "At Grace, we know that strong communities create a strong world. That’s why, acr",
+        "Since 1961, the W. R. Grace Foundation has supported hundreds of charitable orga",
+        "We encourage employees to support causes that matter to them and the communities",
+        "The W. R. Grace Foundation provides matching donations to the charities employee",
+        "Employees are encouraged to volunteer to support the communities where we live a",
+        "Our plant and site teams are deeply involved in their local communities, buildin",
+        "Opening Doors for Youth: At our Curtis Bay, Maryland site, employees hosted high",
+        "Supporting Families: Volunteers from our Columbia, Maryland headquarters and Cur",
+        "Providing Hurricane Preparedness Support: Pasadena, Texas employees helped equip",
+        "Caring for Children in Transition: Our Baton Rouge, Louisiana team collected 46 ",
+        "Fighting Hunger: Grace employees raised much-needed funds for No Kid Hungry thro",
+        "Each year, the W. R. Grace Foundation provides grants to nonprofits in the U.S. ",
+        "Nonprofits interested in applying should connect directly with a Grace employee ",
+        "We do not accept grant applications without an employee or site referral.",
+        "Through partnerships with organizations like Tandem Global, Grace sites worldwid",
+        "If you have questions about our community initiatives or would like to connect w"
+      ],
+      "liCount": 11,
+      "linkCount": 1,
+      "imgTotal": 6,
+      "imgLoaded": 6,
+      "imgSrcs": [
+        "ehs-supporting-communities-industries-pl",
+        "Curtis%20Bay%20Boys%20and%20Girls%20Club",
+        "United%20Way%20Family%20Center?qlt=85&ts",
+        "Hurricane%20Preparedness%20Workshop?qlt=",
+        "Baton%20Rouge%20Love%20Suitcase%20Drive?",
+        "No%20Kid%20Hungry%20Columbia%20Event?qlt"
+      ]
+    },
+    "src": {
+      "ok": true,
+      "status": 200,
+      "textLen": 5234,
+      "headings": [
+        "H2:Our Commitment to Community",
+        "H3:The W. R. Grace Foundation",
+        "H3:Employee Impact and Local Engagement",
+        "H4:Matching Program",
+        "H4:Employees in Action",
+        "H4:Community-Connected Grants Funding",
+        "H3:Environmental Impact",
+        "H3:Questions?"
+      ],
+      "headingCount": 8,
+      "paraCount": 16,
+      "paras": [
+        "At Grace, we know that strong communities create a strong world. That’s why, acr",
+        "Since 1961, the W. R. Grace Foundation has supported hundreds of charitable orga",
+        "We encourage employees to support causes that matter to them and the communities",
+        "The W. R. Grace Foundation provides matching donations to the charities employee",
+        "Employees are encouraged to volunteer to support the communities where we live a",
+        "Our plant and site teams are deeply involved in their local communities, buildin",
+        "Opening Doors for Youth: At our Curtis Bay, Maryland site, employees hosted high",
+        "Supporting Families: Volunteers from our Columbia, Maryland headquarters and Cur",
+        "Providing Hurricane Preparedness Support: Pasadena, Texas employees helped equip",
+        "Caring for Children in Transition: Our Baton Rouge, Louisiana team collected 46 ",
+        "Fighting Hunger: Grace employees raised much-needed funds for No Kid Hungry thro",
+        "Each year, the W. R. Grace Foundation provides grants to nonprofits in the U.S. ",
+        "Nonprofits interested in applying should connect directly with a Grace employee ",
+        "We do not accept grant applications without an employee or site referral.",
+        "Through partnerships with organizations like Tandem Global, Grace sites worldwid",
+        "If you have questions about our community initiatives or would like to connect w"
+      ],
+      "liCount": 7,
+      "linkCount": 1,
+      "imgTotal": 5,
+      "imgLoaded": 5,
+      "imgSrcs": [
+        "yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
+        "yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
+        "yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
+        "yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
+        "yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+      ]
+    }
+  },
+  {
+    "path": "/about-grace/environmental-health-and-safety",
+    "cat": "OK",
+    "issues": [],
+    "loc": {
+      "ok": true,
+      "status": 200,
+      "textLen": 5519,
+      "headings": [
+        "H1:EHS Management System",
+        "H4:Contact Us",
+        "H2:Global Policy",
+        "H2:EHSS and Responsible Care® Certification",
+        "H2:Grace Safety Tenets & Implementing Procedures (IPs)",
+        "H2:Sustainability at Grace",
+        "H2:Stakeholder Engagement",
+        "H2:Emergency Response Program",
+        "H2:Customer and Regulatory Audits",
+        "H2:Policy & Certification Adherence and Compliance"
+      ],
+      "headingCount": 10,
+      "paraCount": 21,
+      "paras": [
+        "Across our locations worldwide, Grace is committed to preserving and protecting ",
+        "We hold ourselves to high standards in environmental, health, safety and securit",
+        "Our policy sets forth a standard to guide all aspects of our operations, includi",
+        "Our global EHSS policy is designed to support three objectives:",
+        "Across our manufacturing sites and our global headquarters in Columbia, Maryland",
+        "Grace has initiated global certification efforts to seek a multi-site certificat",
+        "Grace’s adherence to the EHS and Responsible Care® Management System will be aud",
+        "In alignment with our management system, Grace maintains safety tenets and imple",
+        "Our ten Grace Tenets are global commitments that guide our daily behaviors and d",
+        "Grace’s IPs include global standards and expectations to ensure safe, reliable a",
+        "Below is an illustrative list of example topic areas that our tenets and procedu",
+        "The discipline of continually improving the efficiency and performance of our ma",
+        "In efforts to improve the efficiency of our customers' processes, Grace products",
+        "You can read more about our Sustainability efforts here.",
+        "We regularly communicate our EHSS performance, programs and initiatives to our i",
+        "All Grace facilities maintain emergency response programs and plans. Emergency p",
+        "Across our facilities, we have emergency programs in place, including specialize",
+        "Many of our facilities are subject to periodic customer and regulatory audits to",
+        "Our FDA-regulated fine chemicals facility in South Haven, Michigan, routinely ho",
+        "Grace’s corporate EHSS and Product Stewardship functions are responsible for the",
+        "These functions meet routinely to track progress and report on EHS Management Sy"
+      ],
+      "liCount": 26,
+      "linkCount": 8,
+      "imgTotal": 1,
+      "imgLoaded": 1,
+      "imgSrcs": [
+        "ehs-people-diversity-inclusion-employee?"
+      ]
+    },
+    "src": {
+      "ok": true,
+      "status": 200,
+      "textLen": 5292,
+      "headings": [
+        "H2:Global Policy",
+        "H2:EHSS and Responsible Care® Certification",
+        "H2:Grace Safety Tenets & Implementing Procedures (IPs)",
+        "H2:Sustainability at Grace",
+        "H2:Stakeholder Engagement",
+        "H2:Emergency Response Program",
+        "H2:Customer and Regulatory Audits",
+        "H2:Policy & Certification Adherence and Compliance"
+      ],
+      "headingCount": 8,
+      "paraCount": 21,
+      "paras": [
+        "Across our locations worldwide, Grace is committed to preserving and protecting ",
+        "We hold ourselves to high standards in environmental, health, safety and securit",
+        "Our policy sets forth a standard to guide all aspects of our operations, includi",
+        "Our global EHSS policy is designed to support three objectives:",
+        "Across our manufacturing sites and our global headquarters in Columbia, Maryland",
+        "Grace has initiated global certification efforts to seek a multi-site certificat",
+        "Grace’s adherence to the EHS and Responsible Care® Management System will be aud",
+        "In alignment with our management system, Grace maintains safety tenets and imple",
+        "Our ten Grace Tenets are global commitments that guide our daily behaviors and d",
+        "Grace’s IPs include global standards and expectations to ensure safe, reliable a",
+        "Below is an illustrative list of example topic areas that our tenets and procedu",
+        "The discipline of continually improving the efficiency and performance of our ma",
+        "In efforts to improve the efficiency of our customers' processes, Grace products",
+        "You can read more about our Sustainability efforts here.",
+        "We regularly communicate our EHSS performance, programs and initiatives to our i",
+        "All Grace facilities maintain emergency response programs and plans. Emergency p",
+        "Across our facilities, we have emergency programs in place, including specialize",
+        "Many of our facilities are subject to periodic customer and regulatory audits to",
+        "Our FDA-regulated fine chemicals facility in South Haven, Michigan, routinely ho",
+        "Grace’s corporate EHSS and Product Stewardship functions are responsible for the",
+        "These functions meet routinely to track progress and report on EHS Management Sy"
+      ],
+      "liCount": 26,
+      "linkCount": 3,
+      "imgTotal": 0,
+      "imgLoaded": 0,
+      "imgSrcs": []
+    }
+  },
+  {
+    "path": "/about-grace/leadership-team",
+    "cat": "OK",
+    "issues": [],
+    "loc": {
+      "ok": true,
+      "status": 200,
+      "textLen": 1055,
+      "headings": [
+        "H1:Grace Leadership Team",
+        "H2:Meet the Grace Leadership Team",
+        "H3:Ed Sparks",
+        "H4:Chief Executive Officer",
+        "H3:Ed Baiden",
+        "H4:Senior Vice President, Strategy and Planning",
+        "H3:Michael Brown",
+        "H4:Senior Vice President, Chief Financial Officer",
+        "H3:Mark Cluff",
+        "H4:President, Global Operations and Environmental, Health, Safe",
+        "H3:Thomas Deman",
+        "H4:President, Performance Catalyst Solutions",
+        "H3:Brenda Kelly",
+        "H4:President, Materials Technologies",
+        "H3:Jeff Sherman",
+        "H4:Senior Vice President, Chief Information Officer",
+        "H3:Kerrie L. Wolfe",
+        "H4:Senior Vice President HR and Communications, Chief Human Res",
+        "H3:Anthony Yoo",
+        "H4:Senior Vice President, General Counsel and Secretary",
+        "H2:Latest Insights from Grace"
+      ],
+      "headingCount": 21,
+      "paraCount": 5,
+      "paras": [
+        "Experienced Executives Led by Chief Executive Officer Ed Sparks",
+        "Our CultureWomen Engineers of Grace: Leading with PurposeRead more >",
+        "Our CultureGiving Grace Building Stronger Communities TogetherRead more >",
+        "Pharmaceutical SolutionsMolecule.one Wins Standard Industries Chemical Innovatio",
+        "CoatingsFrom Water Glass to Wind Turbines: Driving Energy Efficiencies in German"
+      ],
+      "liCount": 13,
+      "linkCount": 9,
+      "imgTotal": 13,
+      "imgLoaded": 13,
+      "imgSrcs": [
+        "ed-sparks-formal-bio-full-width.jpg",
+        "ed-baiden-formal-bio-full-width.jpg",
+        "michael-brown-formal-bio-full-width?wid=",
+        "mark-cluff-formal-bio-full-width.jpg",
+        "thomas-deman-formal-bio-full-width?wid=2",
+        "brenda-kelly-formal-bio-full-width-new.j",
+        "jeff-sherman-formal-bio-full-width.jpg",
+        "kerrie-wolfe-formal-bio-full-width?wid=2",
+        "anthony-yoo-formal-bio-full-width?wid=20",
+        "blog-Corp-hero-Ariana-Cruz-Employee?wid=",
+        "blog-Corp-hero-community-giving?wid=2000",
+        "blog-hero-Intelligent-Machine-GettyImage",
+        "blog-MT-hero-worms-germany-facility-aeri"
+      ]
+    },
+    "src": {
+      "ok": true,
+      "status": 200,
+      "textLen": 30,
+      "headings": [
+        "H2:Meet the Grace Leadership Team"
+      ],
+      "headingCount": 1,
+      "paraCount": 0,
+      "paras": [],
+      "liCount": 0,
+      "linkCount": 0,
+      "imgTotal": 0,
+      "imgLoaded": 0,
+      "imgSrcs": []
+    }
+  },
+  {
+    "path": "/about-grace/leadership-team/anthony-yoo",
+    "cat": "OK",
+    "issues": [],
+    "loc": {
+      "ok": true,
+      "status": 200,
+      "textLen": 1792,
+      "headings": [
+        "H1:Anthony Yoo",
+        "H4:Senior Vice President, General Counsel and Secretary",
+        "H2:Latest Insights from Grace"
+      ],
+      "headingCount": 3,
+      "paraCount": 8,
+      "paras": [
+        "Anthony Yoo is Grace’s Senior Vice President, General Counsel and Secretary. He ",
+        "Anthony came to Grace with more than 25 years of legal experience at Fortune 500",
+        "Throughout his career, Anthony has gained skills and knowledge in counseling and",
+        "Anthony has a bachelor’s degree in chemistry with honors and a Juris Doctor from",
+        "Our CultureWomen Engineers of Grace: Leading with PurposeRead more >",
+        "Our CultureGiving Grace Building Stronger Communities TogetherRead more >",
+        "Pharmaceutical SolutionsMolecule.one Wins Standard Industries Chemical Innovatio",
+        "CoatingsFrom Water Glass to Wind Turbines: Driving Energy Efficiencies in German"
+      ],
+      "liCount": 4,
+      "linkCount": 9,
+      "imgTotal": 5,
+      "imgLoaded": 5,
+      "imgSrcs": [
+        "anthony-yoo-formal-bio-full-width?wid=20",
+        "blog-Corp-hero-Ariana-Cruz-Employee?wid=",
+        "blog-Corp-hero-community-giving?wid=2000",
+        "blog-hero-Intelligent-Machine-GettyImage",
+        "blog-MT-hero-worms-germany-facility-aeri"
+      ]
+    },
+    "src": {
+      "ok": true,
+      "status": 200,
+      "textLen": 1404,
+      "headings": [
+        "H1:Anthony Yoo",
+        "H4:Senior Vice President, General Counsel and Secretary"
+      ],
+      "headingCount": 2,
+      "paraCount": 4,
+      "paras": [
+        "Anthony Yoo is Grace’s Senior Vice President, General Counsel and Secretary. He ",
+        "Anthony came to Grace with more than 25 years of legal experience at Fortune 500",
+        "Throughout his career, Anthony has gained skills and knowledge in counseling and",
+        "Anthony has a bachelor’s degree in chemistry with honors and a Juris Doctor from"
+      ],
+      "liCount": 0,
+      "linkCount": 0,
+      "imgTotal": 1,
+      "imgLoaded": 1,
+      "imgSrcs": [
+        "anthony-yoo-formal-bio-full-width"
+      ]
+    }
+  },
+  {
+    "path": "/about-grace/leadership-team/brenda-kelly",
+    "cat": "OK",
+    "issues": [],
+    "loc": {
+      "ok": true,
+      "status": 200,
+      "textLen": 2143,
+      "headings": [
+        "H1:Brenda Kelly",
+        "H4:President, Materials Technologies",
+        "H2:Latest Insights from Grace"
+      ],
+      "headingCount": 3,
+      "paraCount": 10,
+      "paras": [
+        "Brenda Kelly joined Grace in 2021 and was named President of Grace’s Materials T",
+        "Prior to this role, Brenda was Vice President, Marketing for Materials Technolog",
+        "Before joining Grace, Brenda was Vice President of Marketing & Commercial Excell",
+        "Earlier in her career, Brenda spent over 20 years in the specialty chemicals ind",
+        "Brenda brings extensive experience building global teams, executing business str",
+        "Brenda earned a bachelor’s degree Agricultural Economics with honors from Texas ",
+        "Our CultureWomen Engineers of Grace: Leading with PurposeRead more >",
+        "Our CultureGiving Grace Building Stronger Communities TogetherRead more >",
+        "Pharmaceutical SolutionsMolecule.one Wins Standard Industries Chemical Innovatio",
+        "CoatingsFrom Water Glass to Wind Turbines: Driving Energy Efficiencies in German"
+      ],
+      "liCount": 4,
+      "linkCount": 9,
+      "imgTotal": 5,
+      "imgLoaded": 5,
+      "imgSrcs": [
+        "brenda-kelly-formal-bio-full-width-new.j",
+        "blog-Corp-hero-Ariana-Cruz-Employee?wid=",
+        "blog-Corp-hero-community-giving?wid=2000",
+        "blog-hero-Intelligent-Machine-GettyImage",
+        "blog-MT-hero-worms-germany-facility-aeri"
+      ]
+    },
+    "src": {
+      "ok": true,
+      "status": 200,
+      "textLen": 1757,
+      "headings": [
+        "H1:Brenda Kelly",
+        "H4:President, Materials Technologies"
+      ],
+      "headingCount": 2,
+      "paraCount": 6,
+      "paras": [
+        "Brenda Kelly joined Grace in 2021 and was named President of Grace’s Materials T",
+        "Prior to this role, Brenda was Vice President, Marketing for Materials Technolog",
+        "Before joining Grace, Brenda was Vice President of Marketing & Commercial Excell",
+        "Earlier in her career, Brenda spent over 20 years in the specialty chemicals ind",
+        "Brenda brings extensive experience building global teams, executing business str",
+        "Brenda earned a bachelor’s degree Agricultural Economics with honors from Texas "
+      ],
+      "liCount": 0,
+      "linkCount": 0,
+      "imgTotal": 1,
+      "imgLoaded": 1,
+      "imgSrcs": [
+        "brenda-kelly-formal-bio-full-width-new.j"
+      ]
+    }
+  },
+  {
+    "path": "/about-grace/leadership-team/ed-baiden",
+    "cat": "OK",
+    "issues": [],
+    "loc": {
+      "ok": true,
+      "status": 200,
+      "textLen": 1526,
+      "headings": [
+        "H1:Ed Baiden",
+        "H4:Senior Vice President, Strategy and Planning",
+        "H2:Latest Insights from Grace"
+      ],
+      "headingCount": 3,
+      "paraCount": 9,
+      "paras": [
+        "Ed Baiden joined Grace as Senior Vice President, Strategy, Planning and Sustaina",
+        "An accomplished executive with a track record of driving sustainable growth, Ed ",
+        "Prior to Grace, Ed spent seven years with PPG Industries where he held roles of ",
+        "Ed held various commercial and marketing roles with GE and DuPont in the U.S., C",
+        "He earned his MBA from the Georgia Institute of Technology and his bachelor’s de",
+        "Our CultureWomen Engineers of Grace: Leading with PurposeRead more >",
+        "Our CultureGiving Grace Building Stronger Communities TogetherRead more >",
+        "Pharmaceutical SolutionsMolecule.one Wins Standard Industries Chemical Innovatio",
+        "CoatingsFrom Water Glass to Wind Turbines: Driving Energy Efficiencies in German"
+      ],
+      "liCount": 4,
+      "linkCount": 9,
+      "imgTotal": 5,
+      "imgLoaded": 5,
+      "imgSrcs": [
+        "ed-baiden-formal-bio-full-width.jpg",
+        "blog-Corp-hero-Ariana-Cruz-Employee?wid=",
+        "blog-Corp-hero-community-giving?wid=2000",
+        "blog-hero-Intelligent-Machine-GettyImage",
+        "blog-MT-hero-worms-germany-facility-aeri"
+      ]
+    },
+    "src": {
+      "ok": true,
+      "status": 200,
+      "textLen": 1139,
+      "headings": [
+        "H1:Ed Baiden",
+        "H4:Senior Vice President, Strategy and Planning"
+      ],
+      "headingCount": 2,
+      "paraCount": 5,
+      "paras": [
+        "Ed Baiden joined Grace as Senior Vice President, Strategy, Planning and Sustaina",
+        "An accomplished executive with a track record of driving sustainable growth, Ed ",
+        "Prior to Grace, Ed spent seven years with PPG Industries where he held roles of ",
+        "Ed held various commercial and marketing roles with GE and DuPont in the U.S., C",
+        "He earned his MBA from the Georgia Institute of Technology and his bachelor’s de"
+      ],
+      "liCount": 0,
+      "linkCount": 0,
+      "imgTotal": 1,
+      "imgLoaded": 1,
+      "imgSrcs": [
+        "ed-baiden-formal-bio-full-width.jpg"
+      ]
+    }
+  },
+  {
+    "path": "/about-grace/leadership-team/ed-sparks",
+    "cat": "OK",
+    "issues": [],
+    "loc": {
+      "ok": true,
+      "status": 200,
+      "textLen": 1534,
+      "headings": [
+        "H1:Ed Sparks",
+        "H2:Chief Executive Officer",
+        "H2:Latest Insights from Grace"
+      ],
+      "headingCount": 3,
+      "paraCount": 8,
+      "paras": [
+        "Ed Sparks joined Grace as Chief Executive Officer in April 2023, with a focus on",
+        "Prior to joining Grace, Ed was President, Titanium Technology and Chemical Solut",
+        "Over more than 30 years in the industry, Ed worked at Dow, DuPont and Chemours, ",
+        "Ed holds a Bachelor of Science degree in chemical engineering from Tennessee Tec",
+        "Our CultureWomen Engineers of Grace: Leading with PurposeRead more >",
+        "Our CultureGiving Grace Building Stronger Communities TogetherRead more >",
+        "Pharmaceutical SolutionsMolecule.one Wins Standard Industries Chemical Innovatio",
+        "CoatingsFrom Water Glass to Wind Turbines: Driving Energy Efficiencies in German"
+      ],
+      "liCount": 4,
+      "linkCount": 9,
+      "imgTotal": 5,
+      "imgLoaded": 5,
+      "imgSrcs": [
+        "ed-sparks-formal-bio-full-width.jpg",
+        "blog-Corp-hero-Ariana-Cruz-Employee?wid=",
+        "blog-Corp-hero-community-giving?wid=2000",
+        "blog-hero-Intelligent-Machine-GettyImage",
+        "blog-MT-hero-worms-germany-facility-aeri"
+      ]
+    },
+    "src": {
+      "ok": true,
+      "status": 200,
+      "textLen": 1146,
+      "headings": [
+        "H1:Ed Sparks",
+        "H2:Chief Executive Officer"
+      ],
+      "headingCount": 2,
+      "paraCount": 4,
+      "paras": [
+        "Ed Sparks joined Grace as Chief Executive Officer in April 2023, with a focus on",
+        "Prior to joining Grace, Ed was President, Titanium Technology and Chemical Solut",
+        "Over more than 30 years in the industry, Ed worked at Dow, DuPont and Chemours, ",
+        "Ed holds a Bachelor of Science degree in chemical engineering from Tennessee Tec"
+      ],
+      "liCount": 0,
+      "linkCount": 0,
+      "imgTotal": 1,
+      "imgLoaded": 1,
+      "imgSrcs": [
+        "ed-sparks-formal-bio-full-width.jpg"
+      ]
+    }
+  },
+  {
+    "path": "/about-grace/leadership-team/jeff-sherman",
+    "cat": "OK",
+    "issues": [],
+    "loc": {
+      "ok": true,
+      "status": 200,
+      "textLen": 1691,
+      "headings": [
+        "H1:Jeff Sherman",
+        "H4:Senior Vice President, Chief Information Officer",
+        "H2:Latest Insights from Grace"
+      ],
+      "headingCount": 3,
+      "paraCount": 7,
+      "paras": [
+        "Jeff Sherman joined Grace as Senior Vice President, Chief Information Officer (C",
+        "A seasoned executive with a background in both IT and the chemical industry, Jef",
+        "Jeff earned a Bachelor of Science degree in Chemistry and Biochemistry from Cent",
+        "Our CultureWomen Engineers of Grace: Leading with PurposeRead more >",
+        "Our CultureGiving Grace Building Stronger Communities TogetherRead more >",
+        "Pharmaceutical SolutionsMolecule.one Wins Standard Industries Chemical Innovatio",
+        "CoatingsFrom Water Glass to Wind Turbines: Driving Energy Efficiencies in German"
+      ],
+      "liCount": 4,
+      "linkCount": 9,
+      "imgTotal": 5,
+      "imgLoaded": 5,
+      "imgSrcs": [
+        "jeff-sherman-formal-bio-full-width.jpg",
+        "blog-Corp-hero-Ariana-Cruz-Employee?wid=",
+        "blog-Corp-hero-community-giving?wid=2000",
+        "blog-hero-Intelligent-Machine-GettyImage",
+        "blog-MT-hero-worms-germany-facility-aeri"
+      ]
+    },
+    "src": {
+      "ok": true,
+      "status": 200,
+      "textLen": 1302,
+      "headings": [
+        "H1:Jeff Sherman",
+        "H4:Senior Vice President, Chief Information Officer"
+      ],
+      "headingCount": 2,
+      "paraCount": 3,
+      "paras": [
+        "Jeff Sherman joined Grace as Senior Vice President, Chief Information Officer (C",
+        "A seasoned executive with a background in both IT and the chemical industry, Jef",
+        "Jeff earned a Bachelor of Science degree in Chemistry and Biochemistry from Cent"
+      ],
+      "liCount": 0,
+      "linkCount": 0,
+      "imgTotal": 1,
+      "imgLoaded": 1,
+      "imgSrcs": [
+        "jeff-sherman-formal-bio-full-width.jpg"
+      ]
+    }
+  },
+  {
+    "path": "/about-grace/leadership-team/kerrie-l-wolfe",
+    "cat": "OK",
+    "issues": [],
+    "loc": {
+      "ok": true,
+      "status": 200,
+      "textLen": 1942,
+      "headings": [
+        "H1:Kerrie L. Wolfe",
+        "H4:Senior Vice President HR and Communications, Chief Human Res",
+        "H2:Latest Insights from Grace"
+      ],
+      "headingCount": 3,
+      "paraCount": 7,
+      "paras": [
+        "Kerrie L. Wolfe was appointed Grace’s Senior Vice President HR and Communication",
+        "Kerrie came to Grace from The Hershey Company, where she held HR leadership role",
+        "Kerrie graduated from Pennsylvania State University with a Bachelor of Science i",
+        "Our CultureWomen Engineers of Grace: Leading with PurposeRead more >",
+        "Our CultureGiving Grace Building Stronger Communities TogetherRead more >",
+        "Pharmaceutical SolutionsMolecule.one Wins Standard Industries Chemical Innovatio",
+        "CoatingsFrom Water Glass to Wind Turbines: Driving Energy Efficiencies in German"
+      ],
+      "liCount": 4,
+      "linkCount": 9,
+      "imgTotal": 5,
+      "imgLoaded": 5,
+      "imgSrcs": [
+        "kerrie-wolfe-formal-bio-full-width?wid=2",
+        "blog-Corp-hero-Ariana-Cruz-Employee?wid=",
+        "blog-Corp-hero-community-giving?wid=2000",
+        "blog-hero-Intelligent-Machine-GettyImage",
+        "blog-MT-hero-worms-germany-facility-aeri"
+      ]
+    },
+    "src": {
+      "ok": true,
+      "status": 200,
+      "textLen": 1553,
+      "headings": [
+        "H1:Kerrie L. Wolfe",
+        "H4:Senior Vice President HR and Communications, Chief Human Res"
+      ],
+      "headingCount": 2,
+      "paraCount": 3,
+      "paras": [
+        "Kerrie L. Wolfe was appointed Grace’s Senior Vice President HR and Communication",
+        "Kerrie came to Grace from The Hershey Company, where she held HR leadership role",
+        "Kerrie graduated from Pennsylvania State University with a Bachelor of Science i"
+      ],
+      "liCount": 0,
+      "linkCount": 0,
+      "imgTotal": 1,
+      "imgLoaded": 1,
+      "imgSrcs": [
+        "kerrie-wolfe-formal-bio-full-width"
+      ]
+    }
+  },
+  {
+    "path": "/about-grace/leadership-team/mark-cluff",
+    "cat": "OK",
+    "issues": [],
+    "loc": {
+      "ok": true,
+      "status": 200,
+      "textLen": 2455,
+      "headings": [
+        "H1:Mark Cluff",
+        "H4:President, Global Operations and Environmental, Health, Safe",
+        "H2:Latest Insights from Grace"
+      ],
+      "headingCount": 3,
+      "paraCount": 11,
+      "paras": [
+        "Mark Cluff has over 20 years of experience driving enterprise transformation in ",
+        "As President, Global Operations and Environmental, Health, Safety, Security and ",
+        "Prior to Grace, Mark worked eight years with the Williams Companies, spending ov",
+        "Before joining Williams and for 15 years, Mark led roles of progressive responsi",
+        "Mark’s early career experience includes time in project management with ExxonMob",
+        "Mark earned his bachelor’s degree in chemical engineering from Brigham Young Uni",
+        "Mark is active in his community and faith and has served on the Indian Nations C",
+        "Our CultureWomen Engineers of Grace: Leading with PurposeRead more >",
+        "Our CultureGiving Grace Building Stronger Communities TogetherRead more >",
+        "Pharmaceutical SolutionsMolecule.one Wins Standard Industries Chemical Innovatio",
+        "CoatingsFrom Water Glass to Wind Turbines: Driving Energy Efficiencies in German"
+      ],
+      "liCount": 4,
+      "linkCount": 9,
+      "imgTotal": 5,
+      "imgLoaded": 5,
+      "imgSrcs": [
+        "mark-cluff-formal-bio-full-width.jpg",
+        "blog-Corp-hero-Ariana-Cruz-Employee?wid=",
+        "blog-Corp-hero-community-giving?wid=2000",
+        "blog-hero-Intelligent-Machine-GettyImage",
+        "blog-MT-hero-worms-germany-facility-aeri"
+      ]
+    },
+    "src": {
+      "ok": true,
+      "status": 200,
+      "textLen": 2070,
+      "headings": [
+        "H1:Mark Cluff",
+        "H4:President, Global Operations and Environmental, Health, Safe"
+      ],
+      "headingCount": 2,
+      "paraCount": 7,
+      "paras": [
+        "Mark Cluff has over 20 years of experience driving enterprise transformation in ",
+        "As President, Global Operations and Environmental, Health, Safety, Security and ",
+        "Prior to Grace, Mark worked eight years with the Williams Companies, spending ov",
+        "Before joining Williams and for 15 years, Mark led roles of progressive responsi",
+        "Mark’s early career experience includes time in project management with ExxonMob",
+        "Mark earned his bachelor’s degree in chemical engineering from Brigham Young Uni",
+        "Mark is active in his community and faith and has served on the Indian Nations C"
+      ],
+      "liCount": 0,
+      "linkCount": 0,
+      "imgTotal": 1,
+      "imgLoaded": 1,
+      "imgSrcs": [
+        "mark-cluff-formal-bio-full-width.jpg"
+      ]
+    }
+  },
+  {
+    "path": "/about-grace/leadership-team/michael-brown",
+    "cat": "OK",
+    "issues": [],
+    "loc": {
+      "ok": true,
+      "status": 200,
+      "textLen": 1589,
+      "headings": [
+        "H1:Michael Brown",
+        "H4:Senior Vice President, Chief Financial Officer",
+        "H2:Latest Insights from Grace"
+      ],
+      "headingCount": 3,
+      "paraCount": 9,
+      "paras": [
+        "Michael Brown was named Senior Vice President, Chief Financial Officer and Infor",
+        "Michael joined Grace in 1999 and has held several significant leadership roles i",
+        "Michael was most recently Vice President, Controller with a significant role in ",
+        "Prior to joining Grace, Michael held finance leadership roles at MedStar Health ",
+        "Michael earned a bachelor’s degree in accounting from Loyola University, Marylan",
+        "Our CultureWomen Engineers of Grace: Leading with PurposeRead more >",
+        "Our CultureGiving Grace Building Stronger Communities TogetherRead more >",
+        "Pharmaceutical SolutionsMolecule.one Wins Standard Industries Chemical Innovatio",
+        "CoatingsFrom Water Glass to Wind Turbines: Driving Energy Efficiencies in German"
+      ],
+      "liCount": 4,
+      "linkCount": 9,
+      "imgTotal": 5,
+      "imgLoaded": 5,
+      "imgSrcs": [
+        "michael-brown-formal-bio-full-width?wid=",
+        "blog-Corp-hero-Ariana-Cruz-Employee?wid=",
+        "blog-Corp-hero-community-giving?wid=2000",
+        "blog-hero-Intelligent-Machine-GettyImage",
+        "blog-MT-hero-worms-germany-facility-aeri"
+      ]
+    },
+    "src": {
+      "ok": true,
+      "status": 200,
+      "textLen": 1202,
+      "headings": [
+        "H1:Michael Brown",
+        "H4:Senior Vice President, Chief Financial Officer"
+      ],
+      "headingCount": 2,
+      "paraCount": 5,
+      "paras": [
+        "Michael Brown was named Senior Vice President, Chief Financial Officer and Infor",
+        "Michael joined Grace in 1999 and has held several significant leadership roles i",
+        "Michael was most recently Vice President, Controller with a significant role in ",
+        "Prior to joining Grace, Michael held finance leadership roles at MedStar Health ",
+        "Michael earned a bachelor’s degree in accounting from Loyola University, Marylan"
+      ],
+      "liCount": 0,
+      "linkCount": 0,
+      "imgTotal": 1,
+      "imgLoaded": 1,
+      "imgSrcs": [
+        "michael-brown-formal-bio-full-width"
+      ]
+    }
+  },
+  {
+    "path": "/about-grace/leadership-team/thomas-deman",
+    "cat": "OK",
+    "issues": [],
+    "loc": {
+      "ok": true,
+      "status": 200,
+      "textLen": 2251,
+      "headings": [
+        "H1:Thomas Deman",
+        "H4:President, Performance Catalyst Solutions",
+        "H2:Latest Insights from Grace"
+      ],
+      "headingCount": 3,
+      "paraCount": 11,
+      "paras": [
+        "Thomas Deman is an accomplished corporate executive with over 25 years of experi",
+        "As President of Performance Catalyst Solutions, Thomas leads Grace’s unified cat",
+        "Prior to his current role, Thomas served as President, Global Operations with ov",
+        "Prior to Grace, as Venture Executive, Major Growth Ventures for ExxonMobil Chemi",
+        "Thomas hails from Belgium where he began his career with Exxon Chemical Europe i",
+        "From 2014 to 2016, Thomas was a Steering Board member of Plastics Europe, the in",
+        "Thomas earned two master’s degrees: his first in electrical engineering from the",
+        "Our CultureWomen Engineers of Grace: Leading with PurposeRead more >",
+        "Our CultureGiving Grace Building Stronger Communities TogetherRead more >",
+        "Pharmaceutical SolutionsMolecule.one Wins Standard Industries Chemical Innovatio",
+        "CoatingsFrom Water Glass to Wind Turbines: Driving Energy Efficiencies in German"
+      ],
+      "liCount": 4,
+      "linkCount": 9,
+      "imgTotal": 5,
+      "imgLoaded": 5,
+      "imgSrcs": [
+        "thomas-deman-formal-bio-full-width?wid=2",
+        "blog-Corp-hero-Ariana-Cruz-Employee?wid=",
+        "blog-Corp-hero-community-giving?wid=2000",
+        "blog-hero-Intelligent-Machine-GettyImage",
+        "blog-MT-hero-worms-germany-facility-aeri"
+      ]
+    },
+    "src": {
+      "ok": true,
+      "status": 200,
+      "textLen": 1866,
+      "headings": [
+        "H1:Thomas Deman",
+        "H4:President, Performance Catalyst Solutions"
+      ],
+      "headingCount": 2,
+      "paraCount": 7,
+      "paras": [
+        "Thomas Deman is an accomplished corporate executive with over 25 years of experi",
+        "As President of Performance Catalyst Solutions, Thomas leads Grace’s unified cat",
+        "Prior to his current role, Thomas served as President, Global Operations with ov",
+        "Prior to Grace, as Venture Executive, Major Growth Ventures for ExxonMobil Chemi",
+        "Thomas hails from Belgium where he began his career with Exxon Chemical Europe i",
+        "From 2014 to 2016, Thomas was a Steering Board member of Plastics Europe, the in",
+        "Thomas earned two master’s degrees: his first in electrical engineering from the"
+      ],
+      "liCount": 0,
+      "linkCount": 0,
+      "imgTotal": 1,
+      "imgLoaded": 1,
+      "imgSrcs": [
+        "thomas-deman-formal-bio-full-width"
+      ]
+    }
+  },
+  {
+    "path": "/about-grace/locations",
+    "cat": "MAJOR",
+    "issues": [
+      "MAJOR: text short local=3261 src=5110",
+      "paras: local 35 vs src 45",
+      "IMG: local loaded 30/32 vs src 42",
+      "IMG broken local: 30/32 loaded"
+    ],
+    "loc": {
+      "ok": true,
+      "status": 200,
+      "textLen": 3261,
+      "headings": [
+        "H2:Locations Worldwide",
+        "H2:Americas",
+        "H2:Asia",
+        "H2:Europe and Middle East",
+        "H4:Legend"
+      ],
+      "headingCount": 5,
+      "paraCount": 35,
+      "paras": [
+        "_________________________________________",
+        "_________________________________________",
+        "Europe and Middle East Plant Sites",
+        "Worldwide Headquarters 7500 Grace Drive Columbia, MD 21044",
+        "213 Kaolin Road Rt. 1 North Aiken, SC 29807",
+        "Paseo San Isidro No. 400 – 11 Pte. Interior 221 Barrio de Santa Cruz, Metepec, M",
+        "1201 Gulf States Road Baton Rouge, LA 70805",
+        "4000 North Hawthorne Street Chattanooga, TN 37406",
+        "4099 W. 71st Street Chicago, IL 60629",
+        "7500 Grace Drive Columbia, MD 21044",
+        "​5500 Chemical Road Baltimore, MD 21226",
+        "6610 Cabot Dr. Baltimore, MD 21226",
+        "5215 Kennedy Avenue East Chicago, IN 46312",
+        "17434 Mojave Street Hesperia, CA 92345",
+        "4750 Blaffer St.​​​ Houston, TX 77026 USA",
+        "1800 Davison Road Sulphur, LA 70665",
+        "16122 River Road Norco, LA 70079",
+        "10001 Chemical Road Pasadena, TX 77507",
+        "W. R. GRACE BRASIL ICPQ LTDA Av. Paraná 4690 Cajuru do Sul, Rua 2 Sorocaba, São ",
+        "1421 Kalamazoo St South Haven, MI 49090",
+        "2858 Back Vail Rd. Tyrone, PA 16686",
+        "42 rue Fabre Salaberry-de-Valleyfield, QC J6S 4K7 Canada",
+        "W. R. Grace Korea Inc. 14FL, G. Square Tower, Hogye-dong 180, Simin-daero, Donga",
+        "Grace Davison Chemicals India Pvt. Ltd. 2nd Floor (Part Mod 3) Block A Global In",
+        "Grace Davison Chemicals India Pvt. Ltd Suite 212, Bldg 450 Neovantage Innovation",
+        "16/F, 700 Nathan Road Kowloon, Hong Kong",
+        "W. R. Grace Specialty Chemicals Gebeng Industrial Area Lot 114, Jalan Gebeng 1/1",
+        "Grace Products (Singapore) Pte. Ltd., 390 Orchard Road #15-02/03 Palais Renaissa",
+        "W. R. Grace Korea, Ltd. 26, Jindalle-gil Yeosu-si Jeollanam-do South Korea 59614",
+        "Emaar Business Park, The Greens Building 4, Office 310 Dubai, UAE",
+        "Kreuzauer Str. 46 Düren​​, 52355 Germany",
+        "Grace GmbH (Sp. z o.o.) Oddział w Polsce Grunwaldzka 186 60-166 Poznań, Poland",
+        "Industrivagen Stenungsund, 444 32 Sweden Tel: +46 303.3510.00",
+        "C-35, Carretera Nacional 340, km 1.156 Tarragona, Spain, 43006",
+        "Grace GmbH In der Hollerhecke 1 Worms, 67547 Germany Tel: +49 6241.40300"
+      ],
+      "liCount": 30,
+      "linkCount": 25,
+      "imgTotal": 32,
+      "imgLoaded": 30,
+      "imgSrcs": [
+        "location_ColumbiaHQ_1920x1080?qlt=85&ts=",
+        "location_aiken_800px?qlt=85&ts=175338550",
+        "location_business_v2_800px?qlt=85&ts=175",
+        "location_baton_rouge_800px?qlt=85&ts=175",
+        "location_chattanooga_800px?qlt=85&ts=175",
+        "location_chicago_71st_800px?qlt=85&ts=17",
+        "columbia-maryland-headquarters-building-",
+        "location_curtis_bay_800px?qlt=85&ts=1753",
+        "location_business_800px?qlt=85&ts=175432",
+        "location_east_chicago_800px?qlt=85&ts=17",
+        "location_hesperia_800px?qlt=85&ts=175338",
+        "location_houston_warehouse_800px?qlt=85&",
+        "location_lake_charles_800px?qlt=85&ts=17",
+        "location_norco_800px?qlt=85&ts=175338743",
+        "location_pasadena_800px?qlt=85&ts=175338",
+        "location_sorocaba_800px?qlt=85&ts=175338",
+        "location_south_haven_800px?qlt=85&ts=175",
+        "location_tyrone_800px?qlt=85&ts=17533882",
+        "location_valleyfield_800px?qlt=85&ts=175",
+        "location_business_v2_800px?qlt=85&ts=175",
+        "location_chennai_800px?qlt=85&ts=1753474",
+        "location_business_v2_800px?qlt=85&ts=175",
+        "Hongkong-office-location?qlt=85&ts=17815",
+        "kuantan-malaysia-grace-facility?qlt=85&t",
+        "location_singapore_800x450?qlt=85&ts=178",
+        "location_yesou_800px?qlt=85&ts=178150927",
+        "location_dubai_800x450?qlt=85&ts=1753476",
+        "location_duren_800px?qlt=85&ts=175345330",
+        "location_poznan_800px?qlt=85&ts=17534532",
+        "location_stenungsund_800px?qlt=85&ts=175",
+        "location_tarragona_800px?qlt=85&ts=17534",
+        "location_worms_800px?qlt=85&ts=175345323"
+      ]
+    },
+    "src": {
+      "ok": true,
+      "status": 200,
+      "textLen": 5110,
+      "headings": [
+        "H2:Locations Worldwide",
+        "H2:Americas",
+        "H2:Asia",
+        "H2:Europe and Middle East",
+        "H4:Legend"
+      ],
+      "headingCount": 5,
+      "paraCount": 45,
+      "paras": [
+        "_________________________________________",
+        "_________________________________________",
+        "Europe and Middle East Plant Sites",
+        "Worldwide Headquarters 7500 Grace Drive Columbia, MD 21044",
+        "213 Kaolin Road Rt. 1 North Aiken, SC 29807",
+        "Paseo San Isidro No. 400 – 11 Pte. Interior 221 Barrio de Santa Cruz, Metepec, M",
+        "1201 Gulf States Road Baton Rouge, LA 70805",
+        "4000 North Hawthorne Street Chattanooga, TN 37406",
+        "4099 W. 71st Street Chicago, IL 60629",
+        "7500 Grace Drive Columbia, MD 21044",
+        "​5500 Chemical Road Baltimore, MD 21226",
+        "6610 Cabot Dr. Baltimore, MD 21226",
+        "5215 Kennedy Avenue East Chicago, IN 46312",
+        "17434 Mojave Street Hesperia, CA 92345",
+        "Two Allen Center 1200 Smith Street, Suite 720 Houston, TX 77002",
+        "4750 Blaffer St.​​​ Houston, TX 77026 USA",
+        "1800 Davison Road Sulphur, LA 70665",
+        "16122 River Road Norco, LA 70079",
+        "10001 Chemical Road Pasadena, TX 77507",
+        "W. R. GRACE BRASIL ICPQ LTDA Av. Paraná 4690 Cajuru do Sul, Rua 2 Sorocaba, São ",
+        "1421 Kalamazoo St South Haven, MI 49090",
+        "2858 Back Vail Rd. Tyrone, PA 16686",
+        "42 rue Fabre Salaberry-de-Valleyfield, QC J6S 4K7 Canada",
+        "W. R. Grace Korea Inc. 14FL, G. Square Tower, Hogye-dong 180, Simin-daero, Donga",
+        "Grace Kazakhstan Catalysts LLP 92 Auezov Str., Atyrau Atyrau Region 060001 Kazak",
+        "3503, Building A, No.8 Jianguomenwai Avenue Chaoyang District, Beijing People’s ",
+        "Grace Davison Chemicals India Pvt. Ltd. 2nd Floor (Part Mod 3) Block A Global In",
+        "Grace Davison Chemicals India Pvt. Ltd Suite 212, Bldg 450 Neovantage Innovation",
+        "16/F, 700 Nathan Road Kowloon, Hong Kong",
+        "W. R. Grace Specialty Chemicals Gebeng Industrial Area Lot 114, Jalan Gebeng 1/1",
+        "Grace Global Business Services Inc. 24th Floor Filinvest Axis Tower Two Building",
+        "Office No. 10, 11th Floor Remi Commercio Off. Veera Desai Road, Anheri (West)",
+        "2 F Elegance / 294 CST Road (Regus-New Delhi Elegance)",
+        "Grace Trading Ltd. 1906, K.Wah Center, No. 1010 Middle Huai Hai Road Xu Hui Dist",
+        "Grace Products (Singapore) Pte. Ltd., 390 Orchard Road #15-02/03 Palais Renaissa",
+        "Kouken New River Bld. 3F, 2-21-18 Shinkawa, Chuo-ku Tokyo, Japan",
+        "W. R. Grace Korea, Ltd. 26, Jindalle-gil Yeosu-si Jeollanam-do South Korea 59614",
+        "Grace GmbH Belgium Jan van Gentstraat 7 Antwerpen Antwerp 2000 Belgium",
+        "Emaar Business Park, The Greens Building 4, Office 310 Dubai, UAE",
+        "Kreuzauer Str. 46 Düren​​, 52355 Germany",
+        "Grace GmbH (Sp. z o.o.) Oddział w Polsce Grunwaldzka 186 60-166 Poznań, Poland",
+        "Sohar University Building 2, Zone 1 and 2​ Sohar 311, Oman",
+        "Industrivagen Stenungsund, 444 32 Sweden Tel: +46 303.3510.00",
+        "C-35, Carretera Nacional 340, km 1.156 Tarragona, Spain, 43006",
+        "Grace GmbH In der Hollerhecke 1 Worms, 67547 Germany Tel: +49 6241.40300"
+      ],
+      "liCount": 3,
+      "linkCount": 48,
+      "imgTotal": 42,
+      "imgLoaded": 42,
+      "imgSrcs": [
+        "location_ColumbiaHQ_1920x1080?qlt=85&wid",
+        "location_aiken_800px?qlt=85&wid=320&ts=1",
+        "location_business_v2_800px?qlt=85&wid=32",
+        "location_baton_rouge_800px?qlt=85&wid=32",
+        "location_chattanooga_800px?qlt=85&wid=32",
+        "location_chicago_71st_800px?qlt=85&wid=3",
+        "columbia-maryland-headquarters-building-",
+        "yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
+        "yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
+        "yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
+        "yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
+        "yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
+        "yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
+        "yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
+        "yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
+        "yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
+        "yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
+        "yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
+        "yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
+        "yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
+        "yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
+        "yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
+        "yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
+        "yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
+        "yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
+        "yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
+        "yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
+        "yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
+        "yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
+        "yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
+        "yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
+        "yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
+        "yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
+        "yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
+        "yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
+        "yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
+        "yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
+        "yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
+        "yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
+        "yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
+        "location_tarragona_800px?qlt=85&wid=320&",
+        "location_worms_800px?qlt=85&wid=320&ts=1"
+      ]
+    }
+  },
+  {
+    "path": "/about-grace/locations/aiken",
+    "cat": "OK",
+    "issues": [],
+    "loc": {
+      "ok": true,
+      "status": 200,
+      "textLen": 1952,
+      "headings": [
+        "H1:Grace in Aiken, South Carolina",
+        "H4:Find your next job at our Aiken plant and grow your career a",
+        "H4:Aiken Info",
+        "H4:Community Relations"
+      ],
+      "headingCount": 4,
+      "paraCount": 4,
+      "paras": [
+        "W. R. Grace & Co. 213 Kaolin Road Aiken, SC 29801 70665 +1 803.649.4133",
+        "The National Kaolin Products Company was founded in Aiken, SC April 1941.",
+        "The business supplied bagged and bulk kaolin to the rubber industry. In May 1980",
+        "Kaolin is a member of the clay family of minerals, found in vast sheet-like depo"
+      ],
+      "liCount": 32,
+      "linkCount": 24,
+      "imgTotal": 1,
+      "imgLoaded": 1,
+      "imgSrcs": [
+        "location_aiken_800px?qlt=85&ts=175225922"
+      ]
+    },
+    "src": {
+      "ok": true,
+      "status": 200,
+      "textLen": 1981,
+      "headings": [
+        "H1:Grace in Aiken, South Carolina",
+        "H4:Find your next job at our Aiken plant and grow your career a",
+        "H4:Aiken Info",
+        "H4:Community Relations"
+      ],
+      "headingCount": 4,
+      "paraCount": 4,
+      "paras": [
+        "W. R. Grace & Co. 213 Kaolin Road Aiken, SC 29801 70665 +1 803.649.4133",
+        "The National Kaolin Products Company was founded in Aiken, SC April 1941.",
+        "The business supplied bagged and bulk kaolin to the rubber industry. In May 1980",
+        "Kaolin is a member of the clay family of minerals, found in vast sheet-like depo"
+      ],
+      "liCount": 32,
+      "linkCount": 24,
+      "imgTotal": 1,
+      "imgLoaded": 1,
+      "imgSrcs": [
+        "location_aiken_800px?qlt=85&wid=480&ts=1"
+      ]
+    }
+  },
+  {
+    "path": "/about-grace/locations/baton-rouge",
+    "cat": "OK",
+    "issues": [],
+    "loc": {
+      "ok": true,
+      "status": 200,
+      "textLen": 1791,
+      "headings": [
+        "H1:Grace in Baton Rouge, Louisiana",
+        "H4:Find your next job at our Baton Rouge plant and grow your ca",
+        "H4:Baton Rouge Info",
+        "H4:Community Relations"
+      ],
+      "headingCount": 4,
+      "paraCount": 3,
+      "paras": [
+        "W. R. Grace & Co. 1201 Gulf States Road Baton Rouge, LA 70805",
+        "Originally opened in 1936 by Ethyl Corporation, Grace acquired the Baton Rouge f",
+        "In addition to full-scale manufacturing, our Baton Rouge site has a process tech"
+      ],
+      "liCount": 36,
+      "linkCount": 24,
+      "imgTotal": 1,
+      "imgLoaded": 1,
+      "imgSrcs": [
+        "location_baton_rouge_800px?qlt=85&ts=175"
+      ]
+    },
+    "src": {
+      "ok": true,
+      "status": 200,
+      "textLen": 1820,
+      "headings": [
+        "H1:Grace in Baton Rouge, Louisiana",
+        "H4:Find your next job at our Baton Rouge plant and grow your ca",
+        "H4:Baton Rouge Info",
+        "H4:Community Relations"
+      ],
+      "headingCount": 4,
+      "paraCount": 3,
+      "paras": [
+        "W. R. Grace & Co. 1201 Gulf States Road Baton Rouge, LA 70805",
+        "Originally opened in 1936 by Ethyl Corporation, Grace acquired the Baton Rouge f",
+        "In addition to full-scale manufacturing, our Baton Rouge site has a process tech"
+      ],
+      "liCount": 36,
+      "linkCount": 24,
+      "imgTotal": 1,
+      "imgLoaded": 1,
+      "imgSrcs": [
+        "location_baton_rouge_800px?qlt=85&wid=48"
+      ]
+    }
+  },
+  {
+    "path": "/about-grace/locations/chattanooga",
+    "cat": "OK",
+    "issues": [],
+    "loc": {
+      "ok": true,
+      "status": 200,
+      "textLen": 2483,
+      "headings": [
+        "H1:Grace in Chattanooga, Tennessee",
+        "H4:Find your next job at our Chattanooga plant and grow your ca",
+        "H4:Chattanooga Info",
+        "H4:Community Relations"
+      ],
+      "headingCount": 4,
+      "paraCount": 3,
+      "paras": [
+        "W. R. Grace & Co. ​4000 N. Hawthorne Street Chattanooga, TN 37406",
+        "Grace's Chattanooga plant was originally opened in 1957 to supply the federal go",
+        "Grace’s Chattanooga facility is located on 71 acres along the South Chickamauga "
+      ],
+      "liCount": 41,
+      "linkCount": 24,
+      "imgTotal": 2,
+      "imgLoaded": 2,
+      "imgSrcs": [
+        "location_chattanooga_800px?qlt=85&ts=175",
+        "Grace-Chattanooga.jpg"
+      ]
+    },
+    "src": {
+      "ok": true,
+      "status": 200,
+      "textLen": 2562,
+      "headings": [
+        "H1:Grace in Chattanooga, Tennessee",
+        "H4:Find your next job at our Chattanooga plant and grow your ca",
+        "H4:Chattanooga Info",
+        "H4:Community Relations"
+      ],
+      "headingCount": 4,
+      "paraCount": 3,
+      "paras": [
+        "W. R. Grace & Co. ​4000 N. Hawthorne Street Chattanooga, TN 37406",
+        "Grace's Chattanooga plant was originally opened in 1957 to supply the federal go",
+        "Grace’s Chattanooga facility is located on 71 acres along the South Chickamauga "
+      ],
+      "liCount": 41,
+      "linkCount": 24,
+      "imgTotal": 2,
+      "imgLoaded": 2,
+      "imgSrcs": [
+        "location_chattanooga_800px?qlt=85&wid=48",
+        "Grace-Chattanooga.jpg"
+      ]
+    }
+  },
+  {
+    "path": "/about-grace/locations/chicago",
+    "cat": "OK",
+    "issues": [],
+    "loc": {
+      "ok": true,
+      "status": 200,
+      "textLen": 1599,
+      "headings": [
+        "H1:Grace in Chicago, Illinois",
+        "H4:Find your next job at our Chicago plant and grow your career",
+        "H4:Chicago Info",
+        "H4:Community Relations"
+      ],
+      "headingCount": 4,
+      "paraCount": 2,
+      "paras": [
+        "W. R. Grace & Co. 4099 W. 71st Street Chicago, IL 60629",
+        "Grace’s Chicago 71st Street site produces hydroprocessing catalysts used in petr"
+      ],
+      "liCount": 32,
+      "linkCount": 24,
+      "imgTotal": 1,
+      "imgLoaded": 1,
+      "imgSrcs": [
+        "location_chicago_71st_800px?qlt=85&ts=17"
+      ]
+    },
+    "src": {
+      "ok": true,
+      "status": 200,
+      "textLen": 1627,
+      "headings": [
+        "H1:Grace in Chicago, Illinois",
+        "H4:Find your next job at our Chicago plant and grow your career",
+        "H4:Chicago Info",
+        "H4:Community Relations"
+      ],
+      "headingCount": 4,
+      "paraCount": 2,
+      "paras": [
+        "W. R. Grace & Co. 4099 W. 71st Street Chicago, IL 60629",
+        "Grace’s Chicago 71st Street site produces hydroprocessing catalysts used in petr"
+      ],
+      "liCount": 32,
+      "linkCount": 24,
+      "imgTotal": 1,
+      "imgLoaded": 1,
+      "imgSrcs": [
+        "location_chicago_71st_800px?qlt=85&wid=4"
+      ]
+    }
+  },
+  {
+    "path": "/about-grace/locations/duren",
+    "cat": "OK",
+    "issues": [],
+    "loc": {
+      "ok": true,
+      "status": 200,
+      "textLen": 1920,
+      "headings": [
+        "H1:Grace in Düren, Germany",
+        "H4:Find your next job at our Düren plant and grow your career a",
+        "H4:Düren Info"
+      ],
+      "headingCount": 3,
+      "paraCount": 3,
+      "paras": [
+        "W. R. Grace & Co. Kreuzauer Str. 46 Düren​​, 52355 Germany",
+        "Grace's Düren plant, part of the Niederau Industry Park, is located in midwester",
+        "Today, the plant produces precipitated silica and sodium-aluminum-silicate and i"
+      ],
+      "liCount": 30,
+      "linkCount": 24,
+      "imgTotal": 1,
+      "imgLoaded": 1,
+      "imgSrcs": [
+        "location_duren_800px?qlt=85&ts=175336548"
+      ]
+    },
+    "src": {
+      "ok": true,
+      "status": 200,
+      "textLen": 1949,
+      "headings": [
+        "H1:Grace in Düren, Germany",
+        "H4:Find your next job at our Düren plant and grow your career a",
+        "H4:Düren Info"
+      ],
+      "headingCount": 3,
+      "paraCount": 3,
+      "paras": [
+        "W. R. Grace & Co. Kreuzauer Str. 46 Düren​​, 52355 Germany",
+        "Grace's Düren plant, part of the Niederau Industry Park, is located in midwester",
+        "Today, the plant produces precipitated silica and sodium-aluminum-silicate and i"
+      ],
+      "liCount": 30,
+      "linkCount": 24,
+      "imgTotal": 1,
+      "imgLoaded": 1,
+      "imgSrcs": [
+        "location_duren_800px?qlt=85&wid=480&ts=1"
+      ]
+    }
+  }
+]

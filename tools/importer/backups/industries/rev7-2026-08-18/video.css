@@ -1,0 +1,367 @@
+/* Consolidated video block: variants scoped to .video.{variant}. */
+/* stylelint-disable no-descending-specificity */
+
+/* ===================== Variant: grid ===================== */
+
+/*
+ * Video Grid Block
+ * Grid of media-callout teasers: centered title above a 16:9 poster with a
+ * centered white play button, and a "Video ansehen" label below.
+ * Tokens extracted from grace.com/ausbildung/ (cmp-media-callout).
+ */
+
+.video.grid .video-grid-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-l, 50px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.video.grid .video-grid-card {
+  margin: 0;
+  padding: 0;
+}
+
+.video.grid .video-grid-card-has-video {
+  cursor: pointer;
+}
+
+/* Mobile-first: title stacks ABOVE the image, "Video ansehen" BELOW it, both in
+   black text (source stacks on mobile; overlays on desktop — see media query). */
+.video.grid .video-grid-title {
+  margin: 0 0 25px;
+  padding: 0;
+  color: var(--text-color, #000);
+  font-family: var(--heading-font-family, 'Roboto Slab', serif);
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 24px;
+  text-align: center;
+}
+
+.video.grid .video-grid-media {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  background-color: var(--dark-color, #1e1e1e);
+}
+
+.video.grid .video-grid-poster,
+.video.grid .video-grid-poster img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Dark gradient tint over the poster (desktop overlay only — hidden on mobile
+   where the text sits outside the image). */
+.video.grid .video-grid-tint {
+  display: none;
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to left, rgb(0 0 0) 15%, rgb(0 0 0 / 0%) 50%);
+  opacity: 0.58;
+  pointer-events: none;
+}
+
+.video.grid .video-grid-card-playing .video-grid-play,
+.video.grid .video-grid-card-playing .video-grid-tint,
+.video.grid .video-grid-card-playing .video-grid-title,
+.video.grid .video-grid-card-playing .video-grid-watch {
+  display: none;
+}
+
+/* white circular play button with a dark triangle, centered on the poster */
+.video.grid .video-grid-play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60px;
+  height: 60px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background-color: var(--white, #fff);
+  cursor: pointer;
+  transition: transform var(--transition-speed, 0.25s) ease;
+}
+
+.video.grid .video-grid-play::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-40%, -50%);
+  border-style: solid;
+  border-width: 8px 0 8px 13px;
+  border-color: transparent transparent transparent var(--text-color, #000);
+}
+
+.video.grid .video-grid-play:focus-visible {
+  outline: none;
+  transform: translate(-50%, -50%) scale(1.08);
+}
+
+.video.grid .video-grid-card-has-video:hover .video-grid-play {
+  transform: translate(-50%, -50%) scale(1.08);
+}
+
+/* "Video ansehen" label — mobile: black, left-aligned below the image (source
+   uses text-align:start / black); desktop repositions it as a white overlay. */
+.video.grid .video-grid-watch {
+  margin: 20px 0 0;
+  color: var(--text-color, #000);
+  font-family: var(--body-font-family, 'Roboto', sans-serif);
+  font-size: var(--body-font-size-xs, 10px);
+  font-weight: 500;
+  line-height: 1.3;
+  text-align: left;
+  text-transform: none;
+}
+
+.video.grid .video-grid-watch::after {
+  content: ' \203A';
+  font-size: 1.2em;
+}
+
+/* inline iframe once a video plays */
+.video.grid .video-grid-iframe {
+  position: absolute;
+  inset: 0;
+}
+
+.video.grid .video-grid-iframe iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* Desktop and up: two-column grid; the title + "Video ansehen" become white
+   overlays centered on the poster, with the dark gradient tint behind them
+   (source overlays text on the image at desktop). */
+@media (width >= 900px) {
+  .video.grid .video-grid-list {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+  }
+
+  /* The card becomes a positioning context so the title/watch overlay the media. */
+  .video.grid .video-grid-card {
+    position: relative;
+  }
+
+  .video.grid .video-grid-tint {
+    display: block;
+  }
+
+  /* Title overlaid on the upper-middle of the poster, white. */
+  .video.grid .video-grid-title {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    z-index: 2;
+    margin: 0;
+    padding: 0 20px;
+    box-sizing: border-box;
+    transform: translateY(-100%);
+    color: var(--white, #fff);
+    line-height: 30px;
+    pointer-events: none;
+  }
+
+  /* "Video ansehen" overlaid just below center, white and centered. */
+  .video.grid .video-grid-watch {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    z-index: 2;
+    margin: 60px 0 0;
+    color: var(--white, #fff);
+    text-align: center;
+    pointer-events: none;
+  }
+
+  .video.grid .video-grid-play {
+    width: 98px;
+    height: 98px;
+  }
+}
+
+/* ===================== Variant: overlay ===================== */
+
+/*
+ * Video Overlay Block
+ * Poster + white circular play button that swaps in an autoplay iframe.
+ * Tokens mirror Grace's cmp-media-callout: 16:9 poster (padding-top 56.25%),
+ * white circle play button (~90px), black play glyph, no dark tint.
+ */
+
+.video.overlay {
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* 16:9 frame that holds either the poster or the loaded iframe */
+.video.overlay .video-overlay-frame {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%;
+  overflow: hidden;
+  background-color: var(--dark-color);
+}
+
+/* iframe fills the frame once loaded */
+.video.overlay .video-overlay-frame iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* poster overlay sits on top of the frame */
+.video.overlay .video-overlay-poster {
+  position: absolute;
+  inset: 0;
+  cursor: pointer;
+}
+
+.video.overlay .video-overlay-poster picture,
+.video.overlay .video-overlay-poster img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+}
+
+.video.overlay .video-overlay-poster img {
+  transition: transform 0.3s;
+}
+
+.video.overlay .video-overlay-poster:hover img {
+  transform: scale(1.03);
+}
+
+/* white circular play button, centered */
+.video.overlay .video-overlay-play {
+  box-sizing: border-box;
+  position: absolute;
+  z-index: 10;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90px;
+  height: 90px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background-color: var(--white);
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+/* black play triangle (Font Awesome fa-play equivalent) */
+.video.overlay .video-overlay-play::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-top: 11px solid transparent;
+  border-bottom: 11px solid transparent;
+  border-left: 18px solid var(--text-color);
+  transform: translate(-40%, -50%);
+}
+
+.video.overlay .video-overlay-poster:hover .video-overlay-play {
+  transform: translate(-50%, -50%) scale(1.08);
+}
+
+/* Dark scrim over the poster so the white caption title + "Watch video" affordance stay readable
+   over a light still (source darkens the poster the same way). Sits above the image, below the
+   title/play/watch (which are z-index'd above). */
+.video.overlay .video-overlay-poster::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background-color: rgb(0 0 0 / 35%);
+}
+
+/* Caption title over the poster (source: white, Roboto Slab, centered above the play button). */
+.video.overlay .video-overlay-title {
+  position: absolute;
+  z-index: 10;
+  top: 28%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  margin: 0;
+  text-align: center;
+  color: var(--white);
+  font-family: var(--heading-font-family);
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 1.3;
+  text-shadow: 0 1px 3px rgb(0 0 0 / 40%);
+}
+
+/* "Watch video ›" affordance below the play button (source: small white, uppercase-ish label). */
+.video.overlay .video-overlay-watch {
+  position: absolute;
+  z-index: 10;
+  top: calc(50% + 60px);
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--white);
+  font-family: var(--body-font-family);
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.video.overlay .video-overlay-watch::after {
+  content: " \203a"; /* › */
+}
+
+/* Video descriptive CAPTION — the italic line the source renders BELOW the poster (source
+   `.media-callout .caption`, e.g. coatings "From cabinets to cars…", renewable-diesel "Thanks to
+   our century of experience…"): italic, 12px, gray rgb(95 96 98), ~20px above. The importer emits
+   it as a `<p><em>` that lands in the SECTION immediately AFTER the video section (aem.js splits
+   sections apart). Two shapes occur:
+     • coatings — the caption is the ONLY content in the following section's wrapper.
+     • renewable-diesel — the caption is the FIRST paragraph of a wrapper that also holds the next
+       heading/body, so match a leading `p > em:only-child` too.
+   Both scope to `.video-container + .section` so an ordinary italic elsewhere isn't caught. */
+main > .section.video-container + .section > .default-content-wrapper:only-child > p:only-child > em:only-child,
+main > .section.video-container + .section > .default-content-wrapper > p:first-child > em:only-child {
+  display: block;
+  margin-top: 0;
+  color: rgb(95 96 98);
+  font-size: 12px;
+  font-style: italic;
+  line-height: 1.5;
+}
+
+/* Collapse the stacked section margins between the video and its caption. The video section's 50px
+   bottom margin + the caption section's 50px top margin opened a ~120px gap; the source sits the
+   caption ~20px below the poster. Zero the video's bottom margin and pull the caption section up so
+   only a ~20px gap remains. Scoped to a video section immediately followed by a caption section
+   (its wrapper leads with an italic-only paragraph). */
+main > .section.video-container:has(+ .section > .default-content-wrapper > p:first-child > em:only-child) {
+  margin-bottom: 0;
+}
+
+main > .section.video-container + .section:has(> .default-content-wrapper > p:first-child > em:only-child) {
+  margin-top: 20px;
+}

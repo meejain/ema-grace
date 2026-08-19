@@ -225,9 +225,9 @@
       "name": "columns-location-detail",
       "family": "columns",
       "render": "parse",
-      "selector": "section.none-bkgd .row:has(.text):has(.button):has(.image)",
+      "selector": "section.none-bkgd .row:has(> [class*=\"col-lg-6\"] .button):has(> [class*=\"col-lg-6\"] .image)",
       "item": null,
-      "note": "address+jobs CTA+image",
+      "note": "address+jobs CTA+image; tightened to the inner two-half row (not the col-lg-3/9 layout wrapper) so the location PHOTO cell is captured",
       "priority": 20
     },
     {

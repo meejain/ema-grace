@@ -5,6 +5,9 @@
   padding: 0;
   list-style: none;
   font-size: 10px;
+
+  /* source breadcrumb is Roboto 10px SEMIBOLD (600) uppercase — was inheriting 400 */
+  font-weight: 600;
   line-height: 1.4;
   letter-spacing: 0.04em;
   text-transform: uppercase;

@@ -1,0 +1,16 @@
+{
+  "status": "success",
+  "url": "https://grace.com/about-grace/locations/chicago/",
+  "path": "about-grace/locations/chicago",
+  "timestamp": "2026-08-19T14:34:03.242Z",
+  "title": "Chicago, IL, USA",
+  "pageType": "default",
+  "blocks": [
+    "columns-location-detail"
+  ],
+  "blocksLeftInPlace": [],
+  "pageMetadata": [
+    "template"
+  ],
+  "hasForm": false
+}

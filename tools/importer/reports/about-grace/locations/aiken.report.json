@@ -2,22 +2,15 @@
   "status": "success",
   "url": "https://grace.com/about-grace/locations/aiken/",
   "path": "about-grace/locations/aiken",
-  "timestamp": "2026-08-05T20:52:27.772Z",
+  "timestamp": "2026-08-19T14:31:21.988Z",
   "title": "Aiken, SC, USA",
-  "pageType": "sidebar",
-  "pageMetadata": [
-    "template",
-    "contactus",
-    "contactus-tagline",
-    "breadcrumb-title"
-  ],
-  "sidebarNav": false,
-  "contentNodes": 0,
-  "contactSplitBanner": false,
+  "pageType": "default",
   "blocks": [
-    "columns-location-detail",
     "columns-location-detail"
   ],
   "blocksLeftInPlace": [],
+  "pageMetadata": [
+    "template"
+  ],
   "hasForm": false
 }

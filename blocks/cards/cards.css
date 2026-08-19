@@ -1520,6 +1520,15 @@ body.sidebar main > .section.cards-container.geo-hex:has(.cards.featured-content
   .cards.product:not(.cta):has(> ul > li:nth-child(3):last-child) > ul {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
+
+  /* Section landing grids (e.g. about-grace root: 8 topic tiles) lay out 3-per-row on the
+     source, not the homepage's 4-across single row. The homepage product row has exactly 4
+     tiles; any product grid with MORE than 4 cards (5th li exists) is a section landing, so
+     switch it to an even 3-up grid to match grace.com (3-3-2 for 8 tiles). Excludes the .cta
+     insights variant (handled above). */
+  .cards.product:not(.cta):has(> ul > li:nth-child(5)) > ul {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }
 
 /* ===================== Variant: profile-grid ===================== */

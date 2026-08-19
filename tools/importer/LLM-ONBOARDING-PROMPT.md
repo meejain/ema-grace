@@ -165,7 +165,23 @@ side-by-side screenshots before you claim done. Do not publish to DA without my 
     thirds (standalone buttons keep natural width); `.cards.product` benefit grid spans cols 2-4;
     a picture-only `.section` spans cols 2-5 (wide diagrams); Latest-Insights gray band flush to footer
     (`:last-of-type { margin-bottom:0 }`); category-grid gray band re-inset to cols 3-5.
-- **NEXT UP → about-grace leadership bios** (person-profile, ~30 uniform) → campaign → forms. FORMS is
+- **ABOUT-GRACE — DONE (39 pages, 2026-08-19, LOCAL-ONLY — NOT published to DA, gated on go-ahead).**
+  ONE master importer, 2 NEW dispatch predicates: `isAboutGraceDetailPage` (all `/about-grace/*` except
+  bios → `buildDefaultPage` + `forceTemplate:sidebar` + canonical about-grace nav fallback, since source
+  section-navs are JS-hydrated/empty in static HTML) + `isAboutGraceTextSidebar` (text-only
+  asbestos-trusts → `buildSidebarPage`). Clusters: root card landing, leadership-team + locations
+  landings, 5 section pages, our-history timeline + asbestos-trusts, 9 leadership bios (profile-detail),
+  20 location details. All blocks REUSE existing. Importer/parser fixes: canonical nav fallback,
+  `extractMainContent` all outermost text boxes, columns-location-detail selector+innermost-row filter
+  (photo restored), columns-profile-detail text-first (avoids auto-hero), `_columns-utils` no
+  double-emit headshot, cards-product drops `.h5`/`.h4.title` (no "PROMOTION"+dup title). RUNTIME CSS
+  (repo, no reimport): cards 3-up section landings, banner-hero 50px header gap, bio
+  alignment/breadcrumb-weight/spacing, sidebar image+no-widget rules. Parity 37 OK/2 false-pos; 39/39
+  imported 0 tiny/empty; regression-proven vs newsroom/insights/industries. Frozen bundle + urls +
+  detail: `backups/about-grace/MANIFEST.md` + `ABOUT-GRACE-ANALYSIS.md`. REMAINING: a11y sweep on reps
+  + DA publish. Product hubs must NOT be reimported (hand-reconstructed).
+- **NEXT UP → campaign** (17, largest remaining) / people-and-careers / resources / vendor-suppliers /
+  compliance, OR resume industries page-by-page batch 2 (NEXT 40 industries URLs). Then → forms. FORMS is
   fully scoped: `tools/importer/FORMS-INVENTORY.md` (6 templates; 200 form pages; 191 = one shared
   gated modal) + `FORMS-URLS.txt` (every form URL). **FORMS ARE PARTLY BUILT — read FORMS-INVENTORY
   §G (implementation history) before touching forms.** Shipped so far: the shared **gated "Download"

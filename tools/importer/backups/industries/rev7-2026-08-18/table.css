@@ -1,0 +1,680 @@
+/* Consolidated table block: variants scoped to .table.{variant}. */
+/* stylelint-disable no-descending-specificity */
+
+/* ===================== Variant: contact-matrix ===================== */
+
+/* Table Contact Matrix — contacts organized by industry/region.
+   Tokens extracted from grace.com/forms/contact-us-customer-service/
+   computed styles (390 / 768 / 1440):
+   header (Industries / Customer Service Number):
+     Roboto Slab / 300 / rgb(0,0,0) / margin-bottom 20px
+     mobile: 20px / line-height 26px   desktop: 26px / line-height 29.9px
+   body cell text: Roboto 14px / 400 / rgb(0,0,0) / margin-bottom 21px
+     mobile: line-height 18.2px         desktop: line-height 23.8px
+   row separator: 2px solid rgb(196,196,196)
+   column padding: 0 20px; columns 50/50, stacked below large desktop.
+   Links (tel/mailto) render as plain black text like the source. */
+
+.table.contact-matrix .table-contact-matrix-scroll {
+  width: 100%;
+}
+
+.table.contact-matrix table {
+  width: 100%;
+  margin: 0;
+  border-collapse: collapse;
+  table-layout: fixed;
+  background-color: transparent;
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m);
+  color: var(--text-color);
+  text-align: left;
+}
+
+/* mobile-first: source stacks the two columns full width, so the table,
+   its row groups, rows and cells all render as block-level elements */
+.table.contact-matrix table,
+.table.contact-matrix thead,
+.table.contact-matrix tbody,
+.table.contact-matrix tr,
+.table.contact-matrix th,
+.table.contact-matrix td {
+  display: block;
+  width: 100%;
+}
+
+/* each authored row keeps the source 2px divider (source draws one under the
+   header, between rows, AND below the final row). */
+.table.contact-matrix tr {
+  border-bottom: 2px solid rgb(196 196 196);
+}
+
+/* header row: Roboto Slab, light weight, black */
+.table.contact-matrix thead th {
+  padding: 0 20px 20px;
+  font-family: var(--heading-font-family);
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 26px;
+  color: var(--text-color);
+  text-align: left;
+}
+
+/* second stacked header ("Customer Service Number") sits directly below */
+.table.contact-matrix thead th + th {
+  padding-top: 0;
+}
+
+/* data cells: Roboto body, black text. Lines within a cell stack tightly at
+   line-height 18.2px (source), so multi-line phone/industry lists don't spread. */
+.table.contact-matrix tbody td {
+  padding: 20px 20px 0;
+  font-size: var(--body-font-size-m);
+  font-weight: 400;
+  line-height: 18.2px;
+  color: var(--text-color);
+  text-align: left;
+}
+
+.table.contact-matrix tbody td:last-child {
+  padding-bottom: 20px;
+}
+
+/* Lines within a cell stack tightly — spacing comes from line-height only, NOT
+   inter-paragraph margin (source: each phone/industry line is one row of the
+   same block, no gap between them). */
+.table.contact-matrix th p,
+.table.contact-matrix td p {
+  margin: 0;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  color: inherit;
+}
+
+/* phone / email links match source plain black text */
+.table.contact-matrix td a:any-link {
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+.table.contact-matrix td a:hover,
+.table.contact-matrix td a:focus {
+  color: var(--link-hover-color);
+  text-decoration: underline;
+}
+
+/* large desktop: source switches to a true 50/50 two-column layout */
+@media (width >= 900px) {
+  .table.contact-matrix table,
+  .table.contact-matrix thead,
+  .table.contact-matrix tbody {
+    display: table;
+    width: 100%;
+  }
+
+  .table.contact-matrix thead {
+    display: table-header-group;
+  }
+
+  .table.contact-matrix tbody {
+    display: table-row-group;
+  }
+
+  .table.contact-matrix tr {
+    display: table-row;
+    border-bottom: 0;
+  }
+
+  .table.contact-matrix th,
+  .table.contact-matrix td {
+    display: table-cell;
+    width: 50%;
+    vertical-align: top;
+    border-bottom: 2px solid rgb(196 196 196);
+  }
+
+  .table.contact-matrix thead th {
+    padding: 0 20px 20px;
+    font-size: 20px;
+    line-height: 26px;
+    vertical-align: bottom;
+  }
+
+  .table.contact-matrix thead th + th {
+    padding-top: 0;
+  }
+
+  .table.contact-matrix tbody td {
+    padding: 20px;
+    line-height: 18.2px;
+  }
+
+  .table.contact-matrix tbody td:last-child {
+    padding-bottom: 20px;
+  }
+}
+
+/* ===================== Variant: data-grid ===================== */
+
+/* Table Data Grid — dense multi-column data table.
+   Tokens extracted from grace.com/cookie-policy computed styles:
+   header bg #000 / #fff text; cells #fff bg / #000 text; 14px/400;
+   padding 7px 10.5px; 1px solid rgb(218,218,218) borders; text-align left;
+   no row striping; border-collapse. Source uses AUTO table-layout: columns keep
+   their natural width and the table overflows its container, which scrolls
+   horizontally on narrow viewports (the table does NOT crunch to fit). */
+
+/* the wrapper scrolls horizontally when the table is wider than the viewport
+   (source: overflow content in the rich-text container, ~730px table). */
+.table.data-grid .table-data-grid-scroll {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.table.data-grid table {
+  border-collapse: collapse;
+  table-layout: auto;
+  width: 100%;
+
+  /* keep columns readable — the table overflows and the wrapper scrolls rather
+     than crunching cells (source behaviour on mobile). */
+  min-width: 730px;
+  margin: 0;
+  background-color: transparent;
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m);
+}
+
+.table.data-grid th,
+.table.data-grid td {
+  border: 1px solid rgb(218 218 218);
+  padding: 7px 10.5px;
+  font-size: var(--body-font-size-m);
+  font-weight: 400;
+  line-height: 1.7;
+  text-align: left;
+}
+
+/* header row: black background, white text */
+.table.data-grid thead th {
+  background-color: var(--text-color);
+  color: var(--white);
+  vertical-align: middle;
+}
+
+/* data cells: white background, black text */
+.table.data-grid tbody td {
+  background-color: var(--white);
+  color: var(--text-color);
+  vertical-align: top;
+}
+
+/* collapse authored paragraph margins inside cells */
+.table.data-grid th p,
+.table.data-grid td p {
+  margin: 0;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: 1.7;
+  color: inherit;
+}
+
+.table.data-grid td a:any-link {
+  color: var(--link-color);
+  text-decoration: underline;
+}
+
+.table.data-grid td a:hover {
+  color: var(--link-hover-color);
+}
+
+/* Category-BANDED data-grid (e.g. toothpaste "Global Silica Product Portfolio" with Cleaning /
+   Sensorial / Thickening band rows — detected by the presence of a `.table-band` colspan cell).
+   The source renders this as a roomy, fully-CENTERED product-property table (generous cell height,
+   every value centred, category bands centred bold spanning the full width). Scope via
+   :has(.table-band) so the plain cookie-policy data-grid keeps its compact left-aligned look. */
+.table.data-grid:has(.table-band) th,
+.table.data-grid:has(.table-band) td {
+  padding: 16px 12px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+/* category band row: centered bold label across all columns */
+.table.data-grid:has(.table-band) td.table-band {
+  font-weight: 700;
+  text-align: center;
+  vertical-align: middle;
+}
+
+/* ===================== Variant: link-list ===================== */
+
+/* Table Link List
+ * Tokens extracted from grace.com/about-grace/sustainability/
+ * header cell bg rgb(0,0,0) / text rgb(255,255,255)
+ * body cell bg rgb(255,255,255) / text rgb(0,0,0)
+ * borders 1px solid rgb(218,218,218); padding 7px 10.5px
+ * font 14px / line-height 23.8px / weight 400; links underlined
+ */
+
+.table.link-list {
+  overflow-x: auto;
+}
+
+.table.link-list table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: auto;
+  margin: 0;
+  background-color: transparent;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 23.8px;
+}
+
+.table.link-list th,
+.table.link-list td {
+  padding: 7px 10.5px;
+  border: 1px solid rgb(218 218 218);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 23.8px;
+}
+
+.table.link-list th {
+  background-color: rgb(0 0 0);
+  color: rgb(255 255 255);
+  vertical-align: middle;
+  font-weight: 400;
+}
+
+.table.link-list td {
+  background-color: rgb(255 255 255);
+  color: rgb(0 0 0);
+  vertical-align: top;
+}
+
+.table.link-list th p,
+.table.link-list td p {
+  margin: 0 0 21px;
+  padding: 0;
+  font-size: 14px;
+  line-height: 23.8px;
+}
+
+.table.link-list td a:any-link {
+  color: rgb(0 0 0);
+  text-decoration: underline;
+}
+
+.table.link-list td a:hover {
+  color: var(--link-hover-color);
+  text-decoration: underline;
+}
+
+/* ===================== Variant: product-comparison ===================== */
+
+/*
+ * Table Product Comparison
+ * Products compared down the rows, attributes across the top.
+ * Tokens extracted from grace.com/industries/food-beverage/beer/:
+ *   header: bg rgb(0,0,0), color #fff, bold (700), center, va top, pad 7px 10.5px
+ *   cells: bg #fff, color #000, border 1px solid rgb(218,218,218)
+ *   font Roboto 14px, line-height 1.7 (23.8px)
+ * The source table uses AUTO layout: columns keep their natural width (~140px
+ * each, ~706px total) and the table overflows / scrolls horizontally on narrow
+ * viewports rather than crunching. We mirror that with a scrolling wrapper.
+ */
+
+/* the wrapper scrolls horizontally when the table is wider than the viewport
+   (source table content is ~706px; columns don't crunch to fit). */
+.table.product-comparison .table-product-comparison-scroll {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.table.product-comparison table {
+  border-collapse: collapse;
+  width: 100%;
+  table-layout: auto;
+
+  /* keep columns readable — table overflows and the wrapper scrolls rather than
+     crunching cells (source behaviour on mobile). */
+  min-width: 700px;
+  background-color: transparent;
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m);
+  line-height: 1.3; /* 18.2px / 14px, matches source */
+}
+
+/* shared cell styling */
+.table.product-comparison th,
+.table.product-comparison td {
+  border: 1px solid rgb(218 218 218);
+  padding: 7px 10.5px;
+  font-size: var(--body-font-size-m);
+  line-height: 1.3; /* 18.2px, matches source */
+  text-align: center;
+  vertical-align: top;
+}
+
+/* desktop: match the source column proportions
+   (~174 / 180 / 174 / 210 / 180 -> 19 / 20 / 19 / 22 / 20) */
+@media (width >= 900px) {
+  .table.product-comparison thead th:nth-child(1),
+  .table.product-comparison thead th:nth-child(3) {
+    width: 19%;
+  }
+
+  .table.product-comparison thead th:nth-child(2),
+  .table.product-comparison thead th:nth-child(5) {
+    width: 20%;
+  }
+
+  .table.product-comparison thead th:nth-child(4) {
+    width: 22%;
+  }
+}
+
+/* body cells */
+.table.product-comparison td,
+.table.product-comparison tbody th {
+  background-color: var(--white);
+  color: var(--text-color);
+  font-weight: 400;
+}
+
+/* the grade product name is emphasized; availability is italic */
+.table.product-comparison tbody td strong,
+.table.product-comparison tbody th strong {
+  font-weight: 700;
+}
+
+.table.product-comparison tbody em {
+  font-style: italic;
+}
+
+/* column header row: black background, bold white text */
+.table.product-comparison thead th {
+  background-color: var(--text-color);
+  color: var(--white);
+  font-weight: 700;
+}
+
+.table.product-comparison thead th strong {
+  font-weight: 700;
+}
+
+/* footnotes below the table */
+.table.product-comparison p em {
+  color: var(--text-color);
+  font-style: italic;
+}
+
+/* ===================== Variant: three-column ===================== */
+
+/* Table Three Column - exact tokens from grace.com Seveso Directive III (Worms) */
+
+/* Mobile-first: the table keeps its natural column widths and the wrapper
+   scrolls horizontally (source slides left-to-right on narrow screens rather
+   than crunching each column to one letter per line). */
+.table.three-column .table-three-column-scroll {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.table.three-column table {
+  width: 100%;
+  min-width: 700px;
+  border-collapse: collapse;
+  border-spacing: 0;
+  table-layout: auto;
+  background-color: transparent;
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m); /* 14px */
+  line-height: 1.7; /* 23.8px / 14px */
+  color: var(--text-color); /* #000 */
+}
+
+.table.three-column th,
+.table.three-column td {
+  padding: 7px 10.5px;
+  border: 1px solid rgb(218 218 218);
+  font-size: var(--body-font-size-m);
+  font-weight: 400;
+  line-height: 1.7;
+}
+
+/* header row: black background, white centered text */
+.table.three-column thead th {
+  background-color: var(--text-color); /* #000 */
+  color: var(--white); /* #fff */
+  text-align: center;
+  vertical-align: top;
+}
+
+/* data cells: white background, black text */
+.table.three-column tbody td {
+  background-color: var(--white);
+  color: var(--text-color);
+  text-align: left;
+  vertical-align: top;
+}
+
+/* first data column is centered and middle-aligned (address column) */
+.table.three-column tbody td:first-child {
+  text-align: center;
+  vertical-align: middle;
+}
+
+/* tighten authored paragraphs/lists inside cells */
+.table.three-column th > *,
+.table.three-column td > * {
+  margin: 0;
+}
+
+/* source lists render without bullets; each item is indented 14px */
+.table.three-column td ul,
+.table.three-column td ol {
+  margin: 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+.table.three-column td li {
+  padding-left: 14px;
+}
+
+/* Product-detail (body.contactus) reuse of the three-column table (e.g. vydac resin portfolio).
+   The base three-column tokens are tuned for the compliance ADDRESS table (body.sidebar): centered
+   header + centered/middle first column + BULLETLESS lists. The product resin table needs the
+   source's data-table look instead — LEFT-aligned header, LEFT/TOP-aligned resin column, and
+   visible disc bullets on the separations list. Scoped to body.contactus so the compliance tables
+   are untouched. */
+body.contactus .table.three-column thead th {
+  text-align: left;
+}
+
+body.contactus .table.three-column tbody td:first-child {
+  text-align: left;
+  vertical-align: top;
+}
+
+body.contactus .table.three-column td ul {
+  padding-left: 18px;
+  list-style: disc;
+}
+
+body.contactus .table.three-column td li {
+  padding-left: 0;
+  margin-bottom: 4px;
+}
+
+/* Application/data three-column table on a sidebar page (e.g. static-adsorbents "Silica Type /
+   Product Grade / Application / Grade Usage"). It carries merged (rowspan) cells — the signature
+   that distinguishes it from the compliance ADDRESS table (which has no merged cells and keeps the
+   centered look). The source renders it as a data table: LEFT-aligned header, generous cell
+   padding, and ALL cell text vertically CENTERED (middle). Scope via :has(td[rowspan]) so only the
+   merged application table is affected. */
+.table.three-column:has(td[rowspan]) thead th {
+  text-align: left;
+  vertical-align: middle;
+}
+
+/* roomy cells + vertically-centered text across every cell (source ~20px vertical / 18px
+   horizontal padding, middle-aligned) */
+.table.three-column:has(td[rowspan]) th,
+.table.three-column:has(td[rowspan]) td {
+  padding: 20px 18px;
+  vertical-align: middle;
+}
+
+.table.three-column:has(td[rowspan]) tbody td {
+  text-align: left;
+  vertical-align: middle;
+}
+
+.table.three-column:has(td[rowspan]) tbody td:first-child {
+  text-align: left;
+}
+
+/* On desktop the sidebar confines this table to the ~667px content column so it lines up with the
+   body copy above/below. Drop the 700px min-width there so the columns wrap to fit the column
+   (source keeps it inside the article width) instead of overflow-scrolling. Mobile keeps the base
+   min-width + horizontal scroll. */
+@media (width >= 900px) {
+  body.sidebar .table.three-column:has(td[rowspan]) table {
+    min-width: 0;
+  }
+}
+
+/* COMPARISON MATRIX three-column table (e.g. herbal-medicine feature×product grid). Tagged
+   `.comparison-matrix` in JS when the body is a sparse grid of "x"/✓ markers. The source styles it
+   as a striped matrix: alternating row shading rgb(245,245,245), roomy cells, LEFT-aligned row
+   labels (col 1) vertically centered, and CENTERED markers in the product columns. Scoped to the
+   tagged block so dense property tables are untouched. */
+.table.three-column.comparison-matrix th,
+.table.three-column.comparison-matrix td {
+  padding: 18px;
+  vertical-align: middle;
+}
+
+/* zebra striping: even data rows get the light shade (source alternates from the first data row) */
+.table.three-column.comparison-matrix tbody tr:nth-child(even) td {
+  background-color: rgb(245 245 245);
+}
+
+/* row-label column: left-aligned; marker columns: centered */
+.table.three-column.comparison-matrix thead th {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.table.three-column.comparison-matrix thead th:first-child {
+  text-align: left;
+}
+
+.table.three-column.comparison-matrix tbody td {
+  text-align: center;
+}
+
+.table.three-column.comparison-matrix tbody td:first-child {
+  text-align: left;
+}
+
+/* the matrix keeps its natural full width on desktop (source ~980px, wider than a prose column) */
+@media (width >= 900px) {
+  body.sidebar .table.three-column.comparison-matrix table {
+    min-width: 0;
+  }
+}
+
+/* ===================== Variant: two-column-content ===================== */
+
+/* Table Two Column Content
+ * Exact tokens from grace.com/products/davisil (DAVISIL Sphere section).
+ * NOT a data table — a content layout: two side-by-side columns, each holding
+ * a bulleted list and a green "Download" button. Columns stack into one on
+ * mobile. Bullet is a 4px black dot; body text Roboto 14px / 23.8px.
+ * Scoped to .table.two-column-content.
+ */
+
+.table.two-column-content .table-two-column-content-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-m) var(--spacing-s); /* row 30px / column 20px */
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m); /* 14px */
+  line-height: 1.7; /* 23.8px / 14px, source list line-height */
+  color: var(--text-color); /* #000 */
+}
+
+.table.two-column-content .table-two-column-content-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* list: custom 4px black round bullet, no default marker (source) */
+.table.two-column-content .table-two-column-content-cell ul,
+.table.two-column-content .table-two-column-content-cell ol {
+  margin: 0 0 21px; /* source list margin-bottom */
+  padding: 0;
+  list-style: none;
+}
+
+.table.two-column-content .table-two-column-content-cell li {
+  position: relative;
+  padding-left: 14px;
+  line-height: 1.7; /* 23.8px */
+}
+
+.table.two-column-content .table-two-column-content-cell li::before {
+  content: '';
+  position: absolute;
+  top: 0.6em;
+  left: 0;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: var(--text-color);
+}
+
+/* paragraphs inside a column */
+.table.two-column-content .table-two-column-content-cell p {
+  margin: 0 0 21px;
+}
+
+/* green "Download" button pinned to the bottom of the column (source);
+   mobile spans the column width (source stacks full-width buttons) */
+.table.two-column-content .table-two-column-content-cell .button-wrapper {
+  align-self: stretch;
+  margin: auto 0 0;
+}
+
+.table.two-column-content .table-two-column-content-cell a.button {
+  display: block;
+  width: 100%;
+  white-space: normal; /* long labels wrap rather than clip */
+}
+
+/* ---- Tablet / desktop: two side-by-side columns; buttons size to label ---- */
+@media (width >= 600px) {
+  .table.two-column-content .table-two-column-content-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .table.two-column-content .table-two-column-content-cell .button-wrapper {
+    align-self: flex-start;
+  }
+
+  .table.two-column-content .table-two-column-content-cell a.button {
+    display: inline-block;
+    width: auto;
+  }
+}

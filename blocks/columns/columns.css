@@ -1823,6 +1823,38 @@ body.contactus .columns.image-right .columns-image-right-text-col li {
 
 /* Columns Profile Detail - headshot column + name/title/bio column */
 
+/* --- Leadership BIO page alignment + spacing (source parity) ---------------------------------
+   The bio page (breadcrumb + profile-detail + Latest-Insights) must align its content to the SAME
+   left line as the GRACE logo (header gutter = 20px), and use the source's tight breadcrumb→image
+   spacing. The global content container insets content to 40px (max-width 1200 + 32px pad) and the
+   section margins add an 80px breadcrumb→image gap; both differ from source (content at 20px, gap
+   ~25px). Scope these overrides to the bio page ONLY via `main:has(> .section > div > .breadcrumb)`
+   + the profile-detail presence, so no other family/template is affected. */
+main:has(.columns.profile-detail) > .section > div {
+  /* pull the inner container's left edge from 40px → 20px to sit under the logo (source parity);
+     widen max-width by the reclaimed 40px so the right edge is unchanged. */
+  padding-inline: 20px;
+  max-width: 1240px;
+}
+
+@media (width >= 900px) {
+  /* Source vertical rhythm (measured @1280): the breadcrumb HUGS the header (~1px below it), then a
+     large ~125px whitespace precedes the image. Reproduce that: pull the breadcrumb section up tight
+     to the header (near-zero top margin) and push the profile section down so the image lands ~125px
+     below the breadcrumb text. The global 80px section margins produce the inverse (80px above, ~25px
+     below), so override both. */
+  main:has(.columns.profile-detail) > .section:has(.breadcrumb) {
+    /* source: breadcrumb sits ~45px BELOW the header (it does NOT touch it) */
+    margin-top: 45px;
+    margin-bottom: 0;
+  }
+
+  main:has(.columns.profile-detail) > .section:has(.columns.profile-detail) {
+    /* source gap breadcrumb-text-bottom → image-top ≈ 70px */
+    margin-top: 68px;
+  }
+}
+
 .columns.profile-detail > div {
   display: flex;
   flex-direction: column;
@@ -1886,6 +1918,10 @@ body.contactus .columns.image-right .columns-image-right-text-col li {
   .columns.profile-detail > div {
     flex-direction: row;
     align-items: flex-start;
+
+    /* Source column model: image col 33.3% + text col 66.7% with a ~40px gutter between the photo
+       and the copy — matches grace.com's Bootstrap col-lg-4 / col-lg-8 split (image 387px, ~40px
+       to the H1 at a 1280 viewport). */
     gap: 40px;
   }
 

@@ -1,0 +1,292 @@
+/* Consolidated featured block: variants scoped to .featured.{variant}. */
+/* stylelint-disable no-descending-specificity */
+
+/* ===================== Variant: product-selector ===================== */
+
+/* Featured Product Selector
+ * A label column beside a row of dark product tiles acting as an accessible
+ * selector. Tiles are solid dark panels with a centered title; selecting a
+ * tile turns it light, reveals the description + "Learn More" CTA.
+ * Mobile-first: tiles stack and show their details; desktop shows a single
+ * row where details are revealed on the active/hovered tile. */
+
+.featured.product-selector {
+  display: flex;
+  flex-direction: column;
+}
+
+/* section label */
+.featured.product-selector .featured-product-selector-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 25px;
+  padding: 0 20px;
+  font-family: var(--heading-font-family);
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 1.2;
+  color: var(--text-color);
+  text-align: center;
+}
+
+/* tiles container — mobile: swipeable "peek" carousel (horizontal scroll-snap
+   track). The source (Owl carousel) centres the active card at ~86% of the
+   viewport with slivers of the prev/next cards peeking on each edge and a 10px
+   gap between cards. Desktop reverts to a static row (see the >= 900px block). */
+.featured.product-selector .featured-product-selector-list {
+  display: flex;
+  gap: 10px;
+  padding: 0 17px;
+  overflow: auto hidden;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.featured.product-selector .featured-product-selector-list::-webkit-scrollbar {
+  display: none;
+}
+
+/* tile — one 86vw slide per view on mobile (neighbours peek at the edges) */
+.featured.product-selector .featured-product-selector-tile {
+  position: relative;
+  display: block;
+  flex: 0 0 86vw;
+  scroll-snap-align: center;
+  min-height: 336px;
+  background-color: var(--dark-color);
+  color: var(--white);
+  text-decoration: none;
+  transition: color var(--transition-speed), background-color var(--transition-speed), box-shadow var(--transition-speed);
+}
+
+/* carousel dots (mobile only; hidden on desktop) */
+.featured.product-selector .featured-product-selector-dots {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.featured.product-selector .featured-product-selector-dot {
+  width: 10px;
+  height: 10px;
+  padding: 0;
+  border: 1px solid var(--text-color);
+  border-radius: 50%;
+  background-color: transparent;
+  cursor: pointer;
+  transition: background-color var(--transition-speed) ease;
+}
+
+.featured.product-selector .featured-product-selector-dot.active {
+  background-color: var(--text-color);
+}
+
+.featured.product-selector .featured-product-selector-tile:any-link {
+  color: var(--white);
+}
+
+/* content overlay — mobile distributes title (top), description (middle) and
+   "Learn More" (bottom) across the 336px tile like the source, rather than
+   centring them as a group. */
+.featured.product-selector .featured-product-selector-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 40px 20px 34px;
+  text-align: center;
+}
+
+.featured.product-selector .featured-product-selector-title {
+  margin: 0;
+  font-family: var(--heading-font-family);
+  font-size: 16px; /* mobile 16px; desktop bumps to 18px */
+  font-weight: 600;
+  line-height: 1.3;
+  color: inherit;
+}
+
+/* description takes the middle and is vertically centred in the free space.
+   The source CLAMPS it to 3 lines with a trailing ellipsis (…) so a long blurb
+   like "SYLOID® amorphous silica matting agents offer exceptional performance when…"
+   fits the card instead of overflowing/being cut mid-line. */
+.featured.product-selector .featured-product-selector-desc {
+  margin: auto 0;
+  padding: 0 30px;
+  font-family: var(--body-font-family);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.8;
+  color: inherit;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+
+.featured.product-selector .featured-product-selector-cta {
+  font-family: var(--body-font-family);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1;
+  color: inherit;
+}
+
+.featured.product-selector .featured-product-selector-cta::after {
+  content: ' \203A';
+  font-size: 1.2em;
+}
+
+/* tablet and up: label beside the tiles, tiles in a single row */
+@media (width >= 900px) {
+  .featured.product-selector {
+    flex-direction: row;
+
+    /* centre the 160px label tile against the 224px tile row so it lines up
+       with the dark tiles (which are centred in that row) instead of sitting
+       higher/top-aligned. */
+    align-items: center;
+  }
+
+  /* label sits in its own white tile that floats above the strip with a soft
+     shadow (source: white bg, 0 4px 8px + 0 6px 20px black shadows). */
+  .featured.product-selector .featured-product-selector-label {
+    box-sizing: border-box;
+    flex: 0 0 223px;
+    width: 223px;
+    min-width: 0;
+    height: 160px;
+    margin-bottom: 0;
+    padding: 0 45px;
+    background-color: var(--white);
+    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+    position: relative;
+    z-index: 3; /* keep the label tile above the dark strip */
+  }
+
+  /* Reserve the expanded height (224px) on the row so a hovered tile can pop
+     out without shifting the content below. Tiles sit 160px tall, centred in
+     that band (source: dark tiles 160px, list track lets the hovered card
+     overflow to 224px). */
+  .featured.product-selector .featured-product-selector-list {
+    flex: 1 1 auto;
+    flex-direction: row;
+    align-items: center;
+    gap: 0;
+    min-height: 224px;
+
+    /* desktop is a static row, not a carousel */
+    padding: 0;
+    overflow: visible;
+    scroll-snap-type: none;
+  }
+
+  /* dots are carousel-only (mobile) */
+  .featured.product-selector .featured-product-selector-dots {
+    display: none;
+  }
+
+  .featured.product-selector .featured-product-selector-tile {
+    flex: 1 1 0;
+    min-height: 160px;
+    height: 160px;
+    overflow: visible; /* let the expanded card pop out over neighbours */
+
+    /* thin grey separators between tiles (source: 1px solid #5f6062) */
+    border-right: 1px solid rgb(95 96 98);
+  }
+
+  .featured.product-selector .featured-product-selector-tile:last-child {
+    border-right: 0;
+  }
+
+  /* The content layer carries the tile's look. Normally it fills the 160px
+     dark tile (transparent, showing the dark tile behind); on hover it turns
+     into a white 224px card, centred vertically, that overlaps neighbours. */
+  .featured.product-selector .featured-product-selector-title {
+    font-size: 18px; /* desktop title 18px (source) */
+    line-height: 30.6px;
+  }
+
+  /* The content layer is a fixed 160px card centred vertically over the tile.
+     On hover it grows to 224px; because it is pinned at top:50% with a
+     translateY(-50%), the extra height expands equally up AND down from the
+     centre — the source's smooth scaleY(1.4) grow. Height is animatable, so
+     the whole thing eases over .3s instead of jumping. */
+  .featured.product-selector .featured-product-selector-content {
+    box-sizing: border-box;
+    inset: auto 0;
+    top: 50%;
+    height: 160px;
+    justify-content: center;
+
+    /* Narrow horizontal padding so a collapsed one-line title uses nearly the full 250px tile
+       width — the source gives the title the full width, so "SYLOSIV® Zeolite Powder" (~209px)
+       sits on ONE line aligned with "LUDOX® Colloidal Silica". At the old 20px pad only 210px
+       was free and the ® superscript tipped it to 2 lines. 12px leaves ~226px — tab 3 fits on
+       one line while the longer tab 1 title still wraps to 2 lines, matching source. */
+    padding: 24px 12px;
+    background-color: transparent;
+    transform: translateY(-50%);
+    transition: height var(--transition-speed) ease,
+      background-color var(--transition-speed) ease,
+      box-shadow var(--transition-speed) ease;
+  }
+
+  /* details start collapsed (zero height, faded out) so the collapsed card
+     centres just the title; they expand + fade in on hover. max-height/opacity
+     are animatable, giving the source's smooth reveal (no display jump). */
+  .featured.product-selector .featured-product-selector-desc,
+  .featured.product-selector .featured-product-selector-cta {
+    max-height: 0;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height var(--transition-speed) ease,
+      opacity var(--transition-speed) ease;
+  }
+
+  /* hover/focus: raise the tile so its card overlaps siblings */
+  .featured.product-selector .featured-product-selector-tile:hover,
+  .featured.product-selector .featured-product-selector-tile:focus-within {
+    z-index: 2;
+    color: var(--text-color);
+  }
+
+  /* the white card grows centred to 224px, gains a shadow, reveals text */
+  .featured.product-selector .featured-product-selector-tile:hover .featured-product-selector-content,
+  .featured.product-selector .featured-product-selector-tile:focus-within .featured-product-selector-content {
+    height: 224px;
+    background-color: var(--white);
+    box-shadow: 0 0 12px 0 rgb(0 0 0 / 20%);
+  }
+
+  /* on hover the title truncates to a single line with an ellipsis (source:
+     nowrap + text-overflow: ellipsis, e.g. "LUDOX® Colloidal Sil...") so the
+     revealed description + CTA fit within the expanded card. */
+  .featured.product-selector .featured-product-selector-tile:hover .featured-product-selector-title,
+  .featured.product-selector .featured-product-selector-tile:focus-within .featured-product-selector-title {
+    max-width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .featured.product-selector .featured-product-selector-tile:hover .featured-product-selector-desc,
+  .featured.product-selector .featured-product-selector-tile:focus-within .featured-product-selector-desc {
+    max-height: 130px;
+    opacity: 1;
+  }
+
+  .featured.product-selector .featured-product-selector-tile:hover .featured-product-selector-cta,
+  .featured.product-selector .featured-product-selector-tile:focus-within .featured-product-selector-cta {
+    max-height: 40px;
+    opacity: 1;
+  }
+}

@@ -640,6 +640,15 @@ body.sidebar main > .section.sidebar-nav.breadcrumb-container .breadcrumb nav ol
     grid-column: 3;
   }
 
+  /* about-grace SECTION pages have NO contact-sticky widget, so the source gives the content the
+     FULL remaining width (nav col-lg-3 + content col-lg-12 ≈ 920px reaching the right edge) rather
+     than reserving the 320px right widget gutter. Detected via the about-grace family nav in the
+     rail AND the absence of a widget section. Span content sections across cols 3–4 so the copy
+     extends to the right like the source (was capped at the 747px content column → looked condensed). */
+  body.sidebar main:has(> .section.sidebar-nav a[href*="/about-grace/"]):not(:has(> .section.custom-widget-container)) > .section:not(.hero-container, .sidebar-nav, .custom-widget-container) {
+    grid-column: 3 / 5;
+  }
+
   /* Full-width sections that break out of the content column and span the whole band on their
      own row: the contact-split banner, the Follow-Us social ribbon, AND the resource-download
      banner (Grace Essential Articles gray band) span all columns. (Without this, the section
@@ -708,6 +717,19 @@ body.sidebar main > .section.sidebar-nav.breadcrumb-container .breadcrumb nav ol
     /* span the FULL band (nav + content + widget gutter) so a wide diagram renders large, matching
        the source's col-lg-12 full-width treatment. */
     grid-column: 2 / 5;
+  }
+
+  /* EXCEPTION — about-grace SECTION pages (this-is-grace etc.): their standalone content images
+     (Grace Global Leaders, Grace Scientist…) are NOT full-band diagrams — the source keeps them in
+     the CONTENT column stacked with their text. Spanning them cols 2/5 (the diagram rule above) put
+     each image on its own full-band row, breaking the nav+content side-by-side flow (the whole page
+     stacked: nav on top, content far below). Keep about-grace image sections in col 3 so they flow
+     down the content column beside the nav. Detected via the about-grace family nav in the rail. */
+  body.sidebar main:has(> .section.sidebar-nav a[href*="/about-grace/"]) > .section:not([class*="-container"]):has(> .default-content-wrapper > picture:only-child),
+  body.sidebar main:has(> .section.sidebar-nav a[href*="/about-grace/"]) > .section:not([class*="-container"]):has(> .default-content-wrapper > p:only-child > picture:only-child) {
+    /* keep about-grace lead images in the content column; span 3–4 to match the full-width content
+       (these pages have no widget gutter — see the content-column widening rule below). */
+    grid-column: 3 / 5;
   }
 
   /* let the diagram image fill that full-band width (the global picture max-width is fine, but ensure

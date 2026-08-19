@@ -338,7 +338,7 @@ migration fidelity, NOT that anything is published to DA (§0). Keep that distin
 | products (detail) | 28 | 28 ✅ | Product Detail template — DONE. Default path + `template: contactus` + Hero (product) + `sectionizeFlatBody`. See "Product Detail recipe" below |
 | products (hubs) | 6 | 6 ✅ | JS-hydrated CATEGORY-HUB pages (synthetic-silicas, adsorbents, catalysts, fine-chemicals, product-stewardship, quality-management). Imported via onLoad hydration-wait. The 2 hubs whose product-list didn't hydrate in time (catalysts, synthetic-silicas) were reconstructed by HAND from the LIVE source DOM (see "Product hub / sidebar recipe" below) — DONE 2026-08-12 |
 | industries | 102 | 102 ✅ | DONE + PUBLISHED TO LIVE + QA'd against source (2026-08-14). ONE template, TWO dispatch branches keyed on section-nav: DETAIL (depth ≥2, section-nav) → `template: sidebar` 3-col (nav\|content\|widget); LANDINGS (depth-1) → `template: contactus` 2-col. Blocks reuse existing (Hero product + sidebar-nav + rich text + gated downloads + Table data-grid + Featured product-selector + Cards category-grid + Cards featured-content + geo-hex + banner-resource-download). Hero image FIX: routes through buildDefaultPage so onLoad materializes inline bg-image → Hero (product) with photo. POST-QA fixes (2026-08-14, live-vs-source visual audit): (a) imageless promotion card-grids → `isCategoryGrid` relaxed to accept `a.cmp-card` (not only `.bio`), ≥1 card, image-optional → Cards(category-grid); 18 pages reimported; (b) category-grid phantom-image empty cells → blocks/cards/cards.js drops empty cells (runtime, global); (c) banner-resource-download emitted 1-row/2-cell → fixed parser to 2 rows (`cells:[[c1],[c2]]`) so the CTA renders; 17 refining pages reimported. See "Industries recipe" + `backups/industries/MANIFEST.md` (revs 1-6) + `shots/VISUAL-FINDINGS.md`. KNOWN-OPEN: `/industries` root 404 on live (on disk, not in client publish list → needs DA publish) |
-| about-grace | 39 | 8 | section pages + ~30 leadership bios (person-profile template) |
+| about-grace | 39 | 39 ✅ | DONE (LOCAL-ONLY, 2026-08-19) — NOT yet published to DA (gated on client go-ahead). ONE master importer, 2 NEW dispatch predicates: `isAboutGraceDetailPage` (all `/about-grace/*` except bios → `buildDefaultPage` + `forceTemplate:sidebar` + canonical about-grace nav fallback, since source navs are JS-hydrated/empty in static HTML) and `isAboutGraceTextSidebar` (text-only history sub-page → `buildSidebarPage`). Clusters: root card landing (1) + landings (leadership-team, locations) + section pages (5) + history (our-history timeline, asbestos-trusts) + leadership bios (9, profile-detail) + location details (20). Blocks REUSE existing. Importer/parser fixes: canonical nav fallback, `extractMainContent` gathers all outermost text boxes, columns-location-detail selector+innermost-row filter (photo restored), columns-profile-detail text-first (auto-hero avoided), `_columns-utils` no double-emit headshot, cards-product drops `.h5`/`.h4.title` (no "PROMOTION"+dup title). RUNTIME CSS (repo, no reimport): cards 3-up section landings, banner-hero 50px header gap, bio alignment/breadcrumb-weight/spacing, sidebar image+no-widget rules. Parity 37 OK/2 false-pos; 39/39 imported, 0 tiny/empty; regression-proven vs newsroom/insights/industries. See `ABOUT-GRACE-ANALYSIS.md` + `backups/about-grace/MANIFEST.md`. REMAINING: a11y sweep on reps + DA publish. |
 | campaign | 17 | 2 | flat campaign/landing pages |
 | forms | 15 | 1 | DEFERRED → AEM Adaptive Forms pass |
 | vendor-suppliers | 12 | 0 | — |
@@ -350,11 +350,16 @@ migration fidelity, NOT that anything is published to DA (§0). Keep that distin
 Recommended order (ROI): ~~newsroom~~ ✅ → ~~products (detail)~~ ✅ → ~~products (hubs)~~ ✅ →
 ~~industries~~ ✅ (102, published + QA'd 2026-08-14) → **industries page-by-page validation pass
 (IN PROGRESS 2026-08-16/17 — batch 1 of ~3 done, ~40 pages, LOCAL-ONLY, awaiting reimport+publish
-go-ahead; see "Industries — page-by-page validation pass" below)** → leadership bios
-(about-grace, person-profile template, ~30 uniform) → campaign → forms (Adaptive Forms pass —
-inventory + submission flow DONE, see `FORMS-INVENTORY.md`). Products set fully complete (28 detail +
-6 hubs). Industries: 102 built/published; a deeper per-page parity validation is underway — next
-session resumes with the NEXT 40 industries URLs (batch 2).
+go-ahead; see "Industries — page-by-page validation pass" below)** → ~~about-grace~~ ✅ (39, all
+clusters incl. leadership bios, DONE 2026-08-19, LOCAL-ONLY — a11y sweep + DA publish remaining) →
+campaign → forms (Adaptive Forms pass — inventory + submission flow DONE, see `FORMS-INVENTORY.md`).
+Products set fully complete (28 detail + 6 hubs).
+
+**NEXT SET (this session, pending user pick):** remaining unmigrated families are **campaign** (17,
+2 done — flat landing pages), **vendor-suppliers** (12, 0), **compliance** (11, 1 — sidebar),
+**people-and-careers** (7, 1), **resources** (5, 0), **misc one-offs** (~10). Highest ROI = campaign
+(largest remaining) or people-and-careers/resources (small, likely reuse existing blocks). Also still
+open: the industries page-by-page validation batch 2 (NEXT 40 industries URLs) if resuming that track.
 
 **Newsroom template notes (reference for similar default-path families):** press releases take the
 **default path** (`buildDefaultPage`) — no new page-type needed; the whole body (dateline, quotes,

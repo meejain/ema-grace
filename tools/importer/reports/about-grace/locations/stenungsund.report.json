@@ -1,0 +1,16 @@
+{
+  "status": "success",
+  "url": "https://grace.com/about-grace/locations/stenungsund/",
+  "path": "about-grace/locations/stenungsund",
+  "timestamp": "2026-08-19T14:47:15.886Z",
+  "title": "Stenungsund, Sweden",
+  "pageType": "default",
+  "blocks": [
+    "columns-location-detail"
+  ],
+  "blocksLeftInPlace": [],
+  "pageMetadata": [
+    "template"
+  ],
+  "hasForm": false
+}

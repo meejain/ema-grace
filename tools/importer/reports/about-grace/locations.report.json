@@ -2,21 +2,28 @@
   "status": "success",
   "url": "https://grace.com/about-grace/locations/",
   "path": "about-grace/locations",
-  "timestamp": "2026-08-05T16:10:56.918Z",
+  "timestamp": "2026-08-19T14:26:21.617Z",
   "title": "Locations",
-  "pageType": "sidebar",
-  "pageMetadata": [
-    "template",
-    "contactus",
-    "contactus-tagline",
-    "breadcrumb-title"
-  ],
-  "sidebarNav": false,
-  "contentNodes": 1,
-  "contactSplitBanner": false,
+  "pageType": "default",
   "blocks": [
+    "cards-location-grid",
+    "cards-location-grid",
+    "cards-location-grid",
+    "cards-location-grid",
+    "cards-location-grid",
+    "cards-location-grid",
+    "cards-location-grid",
+    "cards-location-grid",
+    "cards-location-grid",
+    "cards-location-grid",
+    "cards-location-grid",
+    "cards-location-grid",
+    "cards-location-grid",
     "cards-location-grid"
   ],
   "blocksLeftInPlace": [],
+  "pageMetadata": [
+    "template"
+  ],
   "hasForm": false
 }

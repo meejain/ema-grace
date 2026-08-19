@@ -1,0 +1,16 @@
+{
+  "status": "success",
+  "url": "https://grace.com/about-grace/locations/yeosu/",
+  "path": "about-grace/locations/yeosu",
+  "timestamp": "2026-08-19T14:52:04.532Z",
+  "title": "Yeosu, South Korea​​",
+  "pageType": "default",
+  "blocks": [
+    "columns-location-detail"
+  ],
+  "blocksLeftInPlace": [],
+  "pageMetadata": [
+    "template"
+  ],
+  "hasForm": false
+}

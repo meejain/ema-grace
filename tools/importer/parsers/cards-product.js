@@ -69,10 +69,23 @@ export default function parse(element, { document }) {
     const descHost = card.querySelector('.spt-copy') || card.querySelector('.content .text');
     const descNodes = [];
     if (descHost) {
-      const rich = Array.from(descHost.children).filter((c) => /^(UL|OL|P|H4|H5|H6)$/.test(c.tagName));
+      const rich = Array.from(descHost.children).filter((c) => {
+        if (!/^(UL|OL|P|H4|H5|H6)$/.test(c.tagName)) return false;
+        // EXCLUDE the eyebrow label (`.h5`, e.g. "PROMOTION") and the TITLE (`.h4.title`/`.title`/
+        // `.h4` — already emitted as the card <h3> above). Otherwise a card with NO real description
+        // (the about-grace root section cards) wrongly emits "PROMOTION" + a DUPLICATE title as body.
+        if (c.matches('.h5')) return false;
+        if (title && (c === title || c.matches('.h4.title, .title, .h4'))) return false;
+        return true;
+      });
+      // structured children that ARE description candidates (before the eyebrow/title exclusion).
+      const anyStructured = Array.from(descHost.children).some((c) => /^(UL|OL|P|H4|H5|H6)$/.test(c.tagName));
       if (rich.length) {
         rich.forEach((c) => descNodes.push(c.cloneNode(true)));
-      } else {
+      } else if (!anyStructured) {
+        // ONLY fall back to raw text when there were no structured children at all (a bare-text
+        // description). If the children existed but were all the eyebrow (`.h5`) + title (`.h4`),
+        // there is NO real description — emit nothing (don't dump "PROMOTION" + the duplicate title).
         const txt = (descHost.textContent || '').trim();
         if (txt) { const p = document.createElement('p'); p.textContent = txt; descNodes.push(p); }
       }

@@ -2,20 +2,20 @@
   "status": "success",
   "url": "https://grace.com/about-grace/sustainability/",
   "path": "about-grace/sustainability",
-  "timestamp": "2026-08-05T17:30:35.796Z",
+  "timestamp": "2026-08-19T14:54:47.386Z",
   "title": "Sustainability",
-  "pageType": "sidebar",
+  "pageType": "default",
+  "blocks": [
+    "hero-banner",
+    "table-link-list",
+    "columns-image-right"
+  ],
+  "blocksLeftInPlace": [],
   "pageMetadata": [
     "template",
     "contactus",
-    "contactus-tagline"
+    "contactus-tagline",
+    "breadcrumb"
   ],
-  "sidebarNav": false,
-  "contentNodes": 4,
-  "contactSplitBanner": false,
-  "blocks": [
-    "table-link-list"
-  ],
-  "blocksLeftInPlace": [],
   "hasForm": false
 }

@@ -2,7 +2,7 @@
   "status": "success",
   "url": "https://grace.com/about-grace/leadership-team/",
   "path": "about-grace/leadership-team",
-  "timestamp": "2026-08-09T09:11:14.382Z",
+  "timestamp": "2026-08-19T14:10:49.585Z",
   "title": "Leadership Team",
   "pageType": "default",
   "blocks": [
@@ -11,6 +11,8 @@
     "cards-featured-content"
   ],
   "blocksLeftInPlace": [],
-  "pageMetadata": [],
+  "pageMetadata": [
+    "template"
+  ],
   "hasForm": false
 }

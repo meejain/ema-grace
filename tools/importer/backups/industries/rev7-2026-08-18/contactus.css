@@ -1,0 +1,225 @@
+/*
+ * Template: contactus
+ * Applied when a page's `template` metadata is `contactus`. Reserves the right
+ * side of the centered content column for the sticky "Contact Us" widget so the
+ * main content flows in a narrower LEFT column and never sits under the widget
+ * (source layout: grace.com/products/ludox).
+ *
+ * The widget itself (.custom-widget.contact-sticky) is a viewport-anchored fixed
+ * panel on the right; this template only narrows + left-shifts the main content
+ * so it leaves clean space for it. Desktop only — on mobile the widget is a
+ * bottom bar and content stays full width.
+ */
+
+@media (width >= 900px) {
+  /* The global rule centers each section's inner div at 1200px. On contactus
+     pages, left-align that column inside a 1240px band and cap its width so the
+     content sits in a LEFT column with a clean right gutter for the widget.
+     Source: content column ~920px, widget ~279px on the right. */
+  body.contactus main > .section:not(.hero-container, .custom-widget-container) > div {
+    max-width: 920px;
+    margin-left: max(20px, calc((100% - 1240px) / 2));
+    margin-right: 0;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  /* The news-archive accordion lives in its OWN `.custom-widget-container` section, which the rule
+     above excludes (that exclusion is for the floating contact-sticky widget, which must stay full
+     width). But the accordion IS body content and must sit in the same 920px LEFT column — otherwise
+     it stretches to the global 1200px width and its right-edge `+` toggles slide UNDER the Contact
+     Us widget. Constrain the news-archive wrapper to the same left column. */
+  body.contactus main > .section.custom-widget-container:has(.custom-widget.news-archive) > div {
+    max-width: 920px;
+    margin-left: max(20px, calc((100% - 1240px) / 2));
+    margin-right: 0;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  /* brochure-promo white panel: it sits over the metal-roof photo band and needs inner padding on
+     all sides (source ~40px inset before the cover image + text). The generic column rule above
+     zeroes side padding on contactus sections, so restore it here at matching specificity for the
+     brochure-promo section's inner div. */
+  body.contactus main > .section.columns-container:has(.columns.brochure-promo) > div {
+    padding: var(--spacing-l);
+  }
+
+
+  /* WIDE ART image-right section (hydroprocessing parent intro + resid/distillate sub-pages — text
+     + far-right ART logo). Source spans this row across the FULL 1240px content band (NOT the 920px
+     body cap) so the logo sits at the right edge. Let this section's inner div use the full band
+     width. Keyed on the `.columns-image-right-logo` marker (columns.js) so it matches every ART
+     page regardless of heading/list shape. */
+  body.contactus main > .section.columns-container:has(.columns.image-right.columns-image-right-logo) > div {
+    max-width: 1240px;
+  }
+
+  /* The WIDE ART section carries the global 80px top+bottom section margin, which leaves far more
+     whitespace than the source (ART block ~50px above, ~20px before the gray band below). Tighten
+     it: modest top gap, small bottom gap so the gray band follows closely. */
+  body.contactus main > .section.columns-container:has(.columns.image-right.columns-image-right-logo) {
+    margin-top: var(--spacing-l); /* 50px, source lead-in above the ART block */
+    margin-bottom: var(--spacing-s); /* ~20px gap before the gray band (source: 21px) */
+  }
+
+  /* A full-bleed gray-band section (e.g. hydroprocessing "Catalyst System Solutions") butts
+     directly against the content above it on the source (0 gap) and paints its own top/bottom
+     padding. Zero its section margins so the 80px global gap doesn't open a white strip above the
+     band; the band supplies its own internal spacing (styles/lazy-styles.css + sidebar rules). */
+  body.contactus main > .section.gray-band {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-block: var(--spacing-l); /* 50px inner band padding (source ~48px) */
+  }
+
+  /* Featured PRODUCT-SELECTOR overflow (nutraceutical "Products for Nutraceutical Formulators").
+     Source: the dark product strip OVERFLOWS ~50% UP into the gray "Purification and Formulation"
+     band that sits ABOVE it — the strip's vertical centre lands on the gray→white boundary (top
+     half on gray, bottom half on white). This is the MIRROR of the wood page (which overflows DOWN
+     into the band below). Reproduce by pulling the featured section UP so the tile strip crosses the
+     boundary: the 160px tile row is centred in the 224px section (32px transparent pad top), and on
+     this page the section top sat ~112px below the gray band bottom (32px transparent pad + an ~80px
+     flow gap). A -112px top margin lands the tile strip's TOP exactly on the gray-band bottom edge
+     and its centre ~80px below — i.e. the top half (80px) overlaps UP into the gray band, bottom
+     half on white (50%). z-index keeps the tiles above the gray fill. Desktop only — mobile stacks. */
+  body.contactus main > .section.featured-container:has(.featured.product-selector) {
+    position: relative;
+    z-index: 2;
+    margin-top: -112px;
+  }
+
+  /* The gray band ABOVE the overflowing selector must keep its last card row clear of the strip's
+     upper half — the source leaves ~95px of empty gray between the last card and the strip top. Add
+     bottom padding to the gray band that immediately PRECEDES the overflowing product-selector so
+     its cards end well above the boundary the strip crosses (otherwise the strip's top overlaps the
+     last card row). Scoped to a gray-band section directly followed by the featured selector. */
+  body.contactus main > .section.gray-band.cards-container:has(+ .section.featured-container .featured.product-selector) {
+    padding-bottom: 130px;
+  }
+}
+
+/* Trademark/copyright DISCLAIMER section — a lone <h5> just above the footer (ART®/GRACE®
+   trademark line). The global 80px section margins + default h5 sizing make it a tall band; the
+   source renders it TIGHT (article ~63px, ~20px breathing room, 10px/1.7 text). Shrink the section
+   margins so it doesn't leave an oversized empty band above the footer. */
+body.contactus main > .section:has(> .default-content-wrapper > h5:only-child) {
+  margin-block: var(--spacing-s); /* 20px */
+}
+
+/* Center the trademark block like the source: its <h5> sits in a NARROW box (~683px) that is
+   horizontally centered in the content band, so the whole disclaimer appears centered (the text
+   itself stays left-aligned, wrapping within the narrow box). Cap the wrapper width + auto-center. */
+body.contactus main > .section:has(> .default-content-wrapper > h5:only-child) > .default-content-wrapper {
+  max-width: 690px;
+  margin-inline: auto;
+}
+
+/* Body sub-headings on product-detail pages (e.g. "Primer and direct-to-metal applications",
+   "Coil coating primer applications") are authored as <h4>. The global h4 rule renders them small
+   + muted gray (14px, #696969, Roboto). Source renders these body h4s at 18px, weight 600, BLACK,
+   in the Roboto Slab heading font. Scope to contactus body content (default-content-wrapper) so
+   block-internal h4s and other templates are untouched. */
+body.contactus main .default-content-wrapper h4 {
+  font-family: var(--heading-font-family);
+  font-size: var(--heading-font-size-m); /* 18px base */
+  font-weight: 600;
+  color: var(--text-color);
+  line-height: 1.4;
+}
+
+/* Native data tables authored in default content on product pages (e.g. the syloid-mx "Applications
+   and Grades" matrix, which has rowspan/colspan merges no block variant supports). Match the source
+   look: black header row with white bold text, 1px light-gray cell borders, top-aligned cells,
+   Roboto body. The table scrolls horizontally on narrow viewports rather than crunching columns.
+   Scoped to contactus default content so block-built tables and other templates are untouched. */
+
+/* The default-content-wrapper that holds a table becomes a horizontal-scroll container so the
+   table SLIDES within its own bounds on narrow/mobile viewports instead of overflowing the page to
+   the right (which widened the whole page). Mirrors the block-table variants' `-scroll` wrappers.
+   -webkit-overflow-scrolling keeps momentum scroll on iOS. */
+/* stylelint-disable-next-line no-descending-specificity */
+body.contactus main .default-content-wrapper:has(> table) {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+body.contactus main .default-content-wrapper table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m);
+  line-height: 1.7;
+  color: var(--text-color);
+
+  /* keep columns readable — below this width the wrapper scrolls rather than crunching cells
+     to one letter per line (source behavior). */
+  min-width: 680px;
+}
+
+body.contactus main .default-content-wrapper table th,
+body.contactus main .default-content-wrapper table td {
+  border: 1px solid rgb(218 218 218);
+  padding: 16px 20px;
+  text-align: left;
+  vertical-align: top;
+}
+
+body.contactus main .default-content-wrapper table th {
+  background-color: var(--text-color); /* #000 */
+  color: var(--white);
+  font-weight: 700;
+}
+
+/* A run of consecutive button CTAs (e.g. the two "Download …" buttons) is grouped by
+   templates/contactus/contactus.js into a `.button-group`. Stack + center on mobile; on desktop
+   lay them out in a centered horizontal row (matches grace.com's centered product download buttons).
+   Scoped under body.contactus so it only affects this template. */
+body.contactus .button-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  margin: 12px 0;
+}
+
+body.contactus .button-group .button-wrapper {
+  margin: 0;
+}
+
+/* Buttons in a group share the row evenly and their labels WRAP (source: e.g. "Download SYLOID® MX
+   application overview" sits on two lines). The global `.button { white-space: nowrap }` would force
+   each button as wide as its longest line, breaking the even row — override to normal here. */
+body.contactus .button-group .button-wrapper a.button {
+  white-space: normal;
+  width: 100%;
+}
+
+@media (width >= 900px) {
+  body.contactus .button-group {
+    flex-flow: row nowrap;
+
+    /* Source lays the download buttons as an even row of equal-width blocks spanning the content
+       width, with consistent gaps (labels wrap inside each). Equal flex tracks reproduce that. */
+    justify-content: center;
+    gap: 30px;
+  }
+
+  body.contactus .button-group .button-wrapper {
+    flex: 1 1 0;
+  }
+}
+
+/* A LONE download button that is NOT part of a group (e.g. vydac "Download VYDAC® Sales Sheet"
+   below the table) should sit CENTERED under the content, matching source. decorateButtons wraps
+   each CTA paragraph as p.button-wrapper; contactus.js only wraps RUNS of ≥2 into .button-group,
+   so a single one stays a bare p.button-wrapper — center it. */
+body.contactus main .default-content-wrapper > p.button-wrapper {
+  text-align: center;
+}
+
+/* NOTE: the catalagram-archive (news-archive accordion) page uses the STANDARD contactus layout —
+   a ~920px left-aligned content column + the compact floating right-rail Contact-Us widget (source
+   measured: archive content 225→998, widget a 279px right-anchored panel). An earlier override that
+   forced this page full-width with a full-width contact band was WRONG (it did not match the source)
+   and has been removed so the page inherits the default contactus rules above. */

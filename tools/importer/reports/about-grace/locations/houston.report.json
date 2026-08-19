@@ -1,0 +1,16 @@
+{
+  "status": "success",
+  "url": "https://grace.com/about-grace/locations/houston/",
+  "path": "about-grace/locations/houston",
+  "timestamp": "2026-08-19T14:09:57.066Z",
+  "title": "Houston, TX, USA",
+  "pageType": "default",
+  "blocks": [
+    "columns-location-detail"
+  ],
+  "blocksLeftInPlace": [],
+  "pageMetadata": [
+    "template"
+  ],
+  "hasForm": false
+}

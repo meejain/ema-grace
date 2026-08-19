@@ -2,23 +2,18 @@
   "status": "success",
   "url": "https://grace.com/about-grace/this-is-grace/",
   "path": "about-grace/this-is-grace",
-  "timestamp": "2026-08-05T16:31:05.106Z",
+  "timestamp": "2026-08-19T14:55:41.102Z",
   "title": "This is Grace",
-  "pageType": "sidebar",
-  "pageMetadata": [
-    "template",
-    "contactus",
-    "contactus-tagline",
-    "breadcrumb-title"
-  ],
-  "sidebarNav": false,
-  "contentNodes": 0,
-  "contactSplitBanner": false,
+  "pageType": "default",
   "blocks": [
-    "columns-image-left",
+    "hero-banner",
     "columns-image-right",
+    "columns-image-left",
     "columns-image-right"
   ],
   "blocksLeftInPlace": [],
+  "pageMetadata": [
+    "template"
+  ],
   "hasForm": false
 }

@@ -37,7 +37,16 @@ export function cellNodes(col) {
     .filter((el) => {
       if (/^(SCRIPT|STYLE|NOSCRIPT|LINK|IFRAME)$/.test(el.tagName)) return false;
       if (el.matches('.image, .cmp-image, picture') || el.tagName === 'IMG') return false;
-      return (el.textContent || '').trim() || el.querySelector('a, img');
+      // An image-only WRAPPER (e.g. a `.media-callout` holding just the headshot + an empty
+      // video-modal shell) must NOT count as a text element — otherwise it is emitted in ADDITION
+      // to the standalone `img` captured below, duplicating the image (leadership-bio profile photo
+      // rendered twice). Treat a subtree with a real text run OR an anchor as content; a subtree
+      // whose only substantive node is the same image we already have is not.
+      const hasText = (el.textContent || '').replace(/\s+/g, ' ').trim().length > 0;
+      const hasLink = !!el.querySelector('a[href]');
+      if (hasText || hasLink) return true;
+      // no text, no link: keep only if it carries an image that is NOT the one captured above.
+      return !!el.querySelector('img') && !(img && (el === img || el.contains(img)));
     }));
 
   if (img && !textEls.length) return [img.cloneNode(true)];

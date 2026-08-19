@@ -1,0 +1,16 @@
+{
+  "status": "success",
+  "url": "https://grace.com/about-grace/locations/worms/",
+  "path": "about-grace/locations/worms",
+  "timestamp": "2026-08-19T14:50:50.565Z",
+  "title": "Worms, Germany",
+  "pageType": "default",
+  "blocks": [
+    "columns-location-detail"
+  ],
+  "blocksLeftInPlace": [],
+  "pageMetadata": [
+    "template"
+  ],
+  "hasForm": false
+}

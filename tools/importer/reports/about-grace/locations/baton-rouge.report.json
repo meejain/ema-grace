@@ -1,0 +1,16 @@
+{
+  "status": "success",
+  "url": "https://grace.com/about-grace/locations/baton-rouge/",
+  "path": "about-grace/locations/baton-rouge",
+  "timestamp": "2026-08-19T14:32:16.325Z",
+  "title": "Baton Rouge, LA, USA",
+  "pageType": "default",
+  "blocks": [
+    "columns-location-detail"
+  ],
+  "blocksLeftInPlace": [],
+  "pageMetadata": [
+    "template"
+  ],
+  "hasForm": false
+}

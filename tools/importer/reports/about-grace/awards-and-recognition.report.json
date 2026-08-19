@@ -1,0 +1,18 @@
+{
+  "status": "success",
+  "url": "https://grace.com/about-grace/awards-and-recognition/",
+  "path": "about-grace/awards-and-recognition",
+  "timestamp": "2026-08-19T14:08:10.543Z",
+  "title": "Awards and Recognition",
+  "pageType": "default",
+  "blocks": [
+    "hero-banner",
+    "cards-featured-content"
+  ],
+  "blocksLeftInPlace": [],
+  "pageMetadata": [
+    "template",
+    "breadcrumb"
+  ],
+  "hasForm": false
+}

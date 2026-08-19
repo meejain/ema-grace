@@ -1,0 +1,1970 @@
+.columns > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.columns img {
+  width: 100%;
+}
+
+.columns > div > div {
+  order: 1;
+}
+
+.columns > div > .columns-img-col {
+  order: 0;
+}
+
+.columns > div > .columns-img-col img {
+  display: block;
+}
+
+@media (width >= 900px) {
+  .columns > div {
+    align-items: center;
+    flex-direction: unset;
+    gap: 24px;
+  }
+
+  .columns > div > div {
+    flex: 1;
+    order: unset;
+  }
+}
+
+
+/* Consolidated variants: each scoped to its own .columns.{variant} class. */
+/* stylelint-disable no-descending-specificity */
+
+/* ===================== Variant: app-promo ===================== */
+.columns-container:has(.columns.app-promo) {
+  padding: var(--spacing-l) 0;
+}
+
+/* Row: mobile stacks vertically (text below image) */
+.columns.app-promo > div {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: center;
+}
+
+.columns.app-promo > div > div {
+  width: 100%;
+}
+
+/* Image column */
+.columns.app-promo .columns-app-promo-img-col {
+  line-height: 0;
+}
+
+.columns.app-promo .columns-app-promo-img-col picture {
+  display: block;
+}
+
+.columns.app-promo .columns-app-promo-img-col img {
+  width: 100%;
+  height: auto;
+  display: block;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+/* Text column — left-aligned at all breakpoints (matches source). */
+.columns.app-promo .columns-app-promo-text-col {
+  text-align: left;
+}
+
+.columns.app-promo .columns-app-promo-text-col h2 {
+  font-family: var(--heading-font-family);
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.7;
+  color: var(--text-color);
+  margin: 0 0 13.5px;
+  text-transform: none;
+}
+
+.columns.app-promo .columns-app-promo-text-col p {
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m);
+  font-weight: 400;
+  line-height: 1.7;
+  color: var(--text-color);
+  margin: 0 0 23.8px; /* source: one blank line of spacing between paragraphs */
+}
+
+.columns.app-promo .columns-app-promo-text-col a:any-link {
+  color: var(--link-color);
+  font-weight: 400;
+  text-decoration: none;
+  transition: color var(--transition-speed) ease;
+}
+
+.columns.app-promo .columns-app-promo-text-col a:hover {
+  color: var(--link-hover-color);
+}
+
+
+/* Desktop: side-by-side, text left + image right (source row-reverse) */
+@media (width >= 900px) {
+  .columns.app-promo > div {
+    flex-flow: row-reverse nowrap;
+    align-items: flex-start;
+    gap: 40px;
+  }
+
+  .columns.app-promo .columns-app-promo-img-col {
+    flex: 0 0 46%;
+    max-width: 46%;
+    min-width: 0;
+  }
+
+  .columns.app-promo .columns-app-promo-text-col {
+    flex: 1 1 auto;
+    width: auto;
+    min-width: 0;
+  }
+
+  .columns.app-promo .columns-app-promo-text-col p {
+    line-height: 1.7;
+  }
+}
+
+/* Bottom separator rule below the promo — 2px black, slightly inset on mobile,
+   ~124px inset on desktop (source hr: 992 within a 1240 content wrapper). */
+.columns-container:has(.columns.app-promo)::after {
+  content: '';
+  display: block;
+  height: 2px;
+  margin: 20px 20px 0;
+  background-color: var(--text-color);
+}
+
+@media (width >= 900px) {
+  .columns-container:has(.columns.app-promo)::after {
+    margin: 20px 124px 0;
+  }
+}
+
+/* ===================== Variant: brochure-promo ===================== */
+
+/* Full-bleed photographic background band behind the brochure-promo (source: the shieldex
+   brochure sits on a `none-bkgd black background-image` section using the metal-roof photo,
+   background-size:cover). The brochure card itself is a white panel floating over it. The image
+   URL is authored per-instance in Section Metadata Style `brochure-bg` + a --brochure-bg custom
+   property; falls back to the shieldex metal-roof asset. Scoped to the section that contains the
+   block so only brochure-promo sections get the band. */
+.columns-container:has(.columns.brochure-promo) {
+  position: relative;
+  background-image: var(--brochure-bg, url('https://grace.scene7.com/is/image/grace/mt-shieldex-metal-roof-blue'));
+  background-size: cover;
+  background-position: center;
+  padding: var(--spacing-l) 0;
+}
+
+/* The block content is a white card panel over the photo (source: white-bkgd inner panel).
+   NOTE: the white-panel PADDING lives in templates/contactus/contactus.css — the contactus
+   column rule (`body.contactus main > .section … > div { padding-left:0 }`) out-specifies a
+   plain selector here and would zero it out, so it must be set at matching specificity there.
+   This rule only sets the background so it applies on any template that uses brochure-promo. */
+.columns-container:has(.columns.brochure-promo) > div {
+  background-color: var(--white);
+}
+
+.columns.brochure-promo > div {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.columns.brochure-promo > div > div {
+  display: flex;
+  flex-direction: column;
+}
+
+/* image column: brochure cover + download button */
+.columns.brochure-promo .columns-brochure-promo-img-col {
+  gap: 20px;
+}
+
+.columns.brochure-promo .columns-brochure-promo-img {
+  margin: 0;
+  line-height: 0;
+}
+
+.columns.brochure-promo .columns-brochure-promo-img-col picture {
+  display: block;
+}
+
+.columns.brochure-promo .columns-brochure-promo-img-col img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+/* download button (EDS decorates <strong><a> -> a.button.primary) */
+.columns.brochure-promo .columns-brochure-promo-img-col .button-wrapper {
+  margin: 0;
+  line-height: normal;
+}
+
+.columns.brochure-promo .columns-brochure-promo-img-col a.button.primary {
+  display: block;
+  width: 100%;
+  padding: 13px;
+  font-family: var(--heading-font-family);
+  font-size: var(--body-font-size-m);
+  font-weight: 600;
+  line-height: 1;
+}
+
+.columns.brochure-promo .columns-brochure-promo-img-col a.button.primary::after {
+  content: none;
+}
+
+/* text column: heading + copy + checklist */
+.columns.brochure-promo .columns-brochure-promo-text-col h4 {
+  margin: 0 0 var(--spacing-m);
+  font-family: var(--heading-font-family);
+  font-size: var(--body-font-size-l);
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--text-color);
+}
+
+.columns.brochure-promo .columns-brochure-promo-text-col p {
+  margin: 0 0 21px;
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m);
+  font-weight: 400;
+  line-height: 1.3;
+  color: var(--text-color);
+}
+
+.columns.brochure-promo .columns-brochure-promo-text-col ul {
+  margin: 0 0 21px;
+  padding: 0 0 0 20px;
+  list-style: disc;
+}
+
+.columns.brochure-promo .columns-brochure-promo-text-col li {
+  margin: 0;
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m);
+  font-weight: 400;
+  line-height: 1.3;
+  color: var(--text-color);
+}
+
+@media (width >= 900px) {
+  .columns.brochure-promo > div {
+    flex-direction: row;
+    gap: 40px;
+  }
+
+  .columns.brochure-promo > div > div {
+    flex: 1;
+  }
+
+  /* desktop matches source: larger heading + relaxed line-height */
+  .columns.brochure-promo .columns-brochure-promo-text-col h4 {
+    font-size: 18px;
+    line-height: 1.7;
+  }
+
+  .columns.brochure-promo .columns-brochure-promo-text-col p,
+  .columns.brochure-promo .columns-brochure-promo-text-col li {
+    line-height: 1.7;
+  }
+
+  .columns.brochure-promo .columns-brochure-promo-img-col .button-wrapper {
+    text-align: center;
+  }
+
+  .columns.brochure-promo .columns-brochure-promo-img-col a.button.primary {
+    display: inline-block;
+    width: auto;
+    padding: 18px 30px;
+  }
+}
+
+/* ===================== Variant: checklist ===================== */
+.columns-container:has(.columns.checklist) {
+  padding: var(--spacing-l) 0;
+}
+
+/* rows stack on mobile */
+.columns.checklist > div {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.columns.checklist > div > div {
+  display: block;
+}
+
+/* media / profile column */
+.columns.checklist .columns-checklist-media-col {
+  text-align: center;
+}
+
+.columns.checklist .columns-checklist-media-col picture {
+  display: block;
+  line-height: 0;
+}
+
+.columns.checklist .columns-checklist-media-col img {
+  width: 100%;
+  max-width: 387px;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  display: block;
+  margin: 0 auto;
+}
+
+.columns.checklist .columns-checklist-media-col p {
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m);
+  font-weight: 400;
+  line-height: 1.7;
+  color: rgb(0 73 144);
+  text-align: center;
+  margin: 0 0 3px;
+}
+
+/* quote + citation group – blue rules above and below (source .quote-container).
+   Mobile uses tighter padding; desktop values are set in the 900px block. */
+.columns.checklist .columns-checklist-quote-container {
+  max-width: 387px;
+  margin: 29px auto 0;
+
+  /* no side padding on mobile so the one-line quote isn't squeezed – the
+     container has no side borders, so this is visually identical to the
+     source while reclaiming the width our section side-padding takes. */
+  padding: 24px 0 28px;
+  border-top: 4px solid rgb(0 73 144);
+  border-bottom: 4px solid rgb(0 73 144);
+}
+
+/* the quote is the first paragraph after the image (20px mobile / 26px desktop) */
+.columns.checklist .columns-checklist-media-col .columns-checklist-quote {
+  font-family: var(--heading-font-family);
+  font-size: 20px;
+  font-weight: 100;
+  line-height: 1.2;
+  margin: 0 0 30px;
+}
+
+/* short blue divider between the quote and the name */
+.columns.checklist .columns-checklist-quote::after {
+  content: "";
+  display: block;
+  width: 50px;
+  height: 1px;
+  margin: 30px auto 0;
+  background-color: rgb(0 73 144);
+}
+
+.columns.checklist .columns-checklist-media-col p:last-child {
+  margin-bottom: 0;
+}
+
+/* checklist column */
+.columns.checklist .columns-checklist-list-col h3 {
+  font-family: var(--heading-font-family);
+  font-size: 26px;
+  font-weight: 300;
+  line-height: 1.15;
+  color: var(--text-color);
+  text-align: left;
+  margin: 0 0 20px;
+}
+
+/* section heading rows - dark bar, centered like the source */
+.columns.checklist .columns-checklist-heading {
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m);
+  font-weight: 700;
+  line-height: 1.7;
+  color: var(--white);
+  background-color: var(--text-color);
+  border-bottom: 1px solid rgb(218 218 218);
+  margin: 0;
+  padding: 7px 10.5px;
+  text-align: center;
+}
+
+/* checklist items - rows sit flush against the next section heading (source
+   tables have no vertical spacing between them). */
+.columns.checklist .columns-checklist-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.columns.checklist .columns-checklist-list li {
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m);
+  font-weight: 400;
+  line-height: 1.7;
+  color: var(--text-color);
+  border-bottom: 1px solid rgb(218 218 218);
+  margin: 0;
+  padding: 7px 10.5px;
+}
+
+/* zebra striping - source alternates light gray / white, restarting under
+   each black section heading (each section is its own list). */
+.columns.checklist .columns-checklist-list li:nth-child(odd) {
+  background-color: rgb(244 244 244);
+}
+
+.columns.checklist .columns-checklist-list li:nth-child(even) {
+  background-color: var(--white);
+}
+
+.columns.checklist .columns-checklist-list li strong {
+  font-weight: 700;
+}
+
+/* CTA - green button centred below the checklist (source: #7ac143 bg,
+   black text, no radius, arrow suffix) */
+.columns.checklist .columns-checklist-list-col .button-wrapper {
+  margin-top: var(--spacing-m);
+  text-align: center;
+}
+
+.columns.checklist .columns-checklist-list-col a.button:any-link {
+  display: inline-block;
+  margin: 0;
+  padding: 18px 30px;
+  border: 0;
+  border-radius: 0;
+  background-color: var(--accent-color);
+  color: var(--text-color);
+  font-family: var(--heading-font-family);
+  font-size: var(--body-font-size-m);
+  font-weight: 600;
+  line-height: 1;
+  text-align: center;
+  white-space: normal;
+}
+
+.columns.checklist .columns-checklist-list-col a.button:any-link:hover {
+  background-color: var(--accent-color-hover);
+  color: var(--white);
+}
+
+@media (width >= 900px) {
+  .columns.checklist > div {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 0;
+  }
+
+  /* larger quote + roomier padding on desktop (source: 26px, 48px padding) */
+  .columns.checklist .columns-checklist-quote-container {
+    margin-top: 32px;
+    padding: 48px 12px;
+  }
+
+  .columns.checklist .columns-checklist-media-col .columns-checklist-quote {
+    font-size: 26px;
+    line-height: 1.4;
+    margin-bottom: 39px;
+  }
+
+  .columns.checklist .columns-checklist-quote::after {
+    margin-top: 39px;
+  }
+
+  /* 1 : 2 split matching the source (33% / 67%). border-box keeps the 20px
+     side padding inside the flex basis so the columns don't overflow. */
+  .columns.checklist .columns-checklist-media-col {
+    box-sizing: border-box;
+    flex: 0 0 33.333%;
+    max-width: 33.333%;
+    padding: 0 20px;
+  }
+
+  .columns.checklist .columns-checklist-list-col {
+    box-sizing: border-box;
+    flex: 0 0 66.667%;
+    max-width: 66.667%;
+    padding: 0 20px;
+  }
+}
+
+/* ===================== Variant: history-item ===================== */
+
+/* Columns History Item - timeline entry: year heading + description + image */
+
+.columns.history-item > div {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-s); /* 20px */
+  margin-bottom: var(--spacing-s); /* 20px between timeline items (source) */
+}
+
+.columns.history-item > div > div {
+  display: block;
+}
+
+/* Image column */
+.columns.history-item .columns-history-item-img-col {
+  line-height: 0;
+}
+
+.columns.history-item .columns-history-item-img-col picture {
+  display: block;
+}
+
+.columns.history-item .columns-history-item-img-col img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Text column: year heading + description */
+.columns.history-item .columns-history-item-text-col h2 {
+  font-family: var(--heading-font-family);
+  font-size: 24px; /* mobile/tablet */
+  font-weight: 300;
+  line-height: 1.3; /* 31.2px at 24px */
+  color: var(--text-color);
+  margin: 0 0 10px;
+  padding: 0;
+  text-align: left;
+}
+
+.columns.history-item .columns-history-item-text-col p {
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m); /* 14px */
+  font-weight: 400;
+  line-height: 1.3; /* mobile: 18.2px at 14px */
+  color: var(--text-color);
+  margin: 0 0 21px;
+  padding: 0;
+  text-align: left;
+}
+
+.columns.history-item .columns-history-item-text-col a:any-link {
+  color: var(--link-color);
+  text-decoration: underline;
+  transition: color var(--transition-speed) ease;
+}
+
+.columns.history-item .columns-history-item-text-col a:hover {
+  color: var(--link-hover-color);
+}
+
+/* Desktop: 66.6 / 33.4 split, image beside text */
+@media (width >= 900px) {
+  .columns.history-item > div {
+    flex-direction: row;
+    align-items: center; /* source vertically centres the text against the image */
+    gap: 0; /* source gutter comes from column inner padding */
+  }
+
+  .columns.history-item .columns-history-item-text-col {
+    flex: 0 0 66.6%;
+    width: 66.6%;
+    padding-right: var(--spacing-s); /* 20px inner gutter */
+  }
+
+  .columns.history-item .columns-history-item-img-col {
+    flex: 0 0 33.4%;
+    width: 33.4%;
+    padding-left: var(--spacing-s); /* 20px inner gutter */
+  }
+
+  .columns.history-item .columns-history-item-text-col h2 {
+    font-size: 30px;
+    line-height: 1.7; /* 51px at 30px */
+  }
+
+  .columns.history-item .columns-history-item-text-col p {
+    line-height: 1.7; /* 23.8px at 14px */
+  }
+}
+
+/* ===================== Variant: horizontal-teaser =====================
+   "This product is used in the following processes" – white full-width
+   process cards (title | description | chevron) over a light-gray section
+   with a white hexagon top edge and a faint geometric line-network pattern
+   (same decorative artwork as the hero campaign variant). */
+
+/* full-bleed light-gray patterned section; content kept above the decorative
+   layers via position/z-index */
+.columns-horizontal-teaser-wrapper {
+  position: relative;
+  z-index: 2;
+  max-width: 100% !important;
+  padding: 0 !important;
+}
+
+.columns-container:has(.columns.horizontal-teaser) {
+  position: relative;
+  background-color: rgb(230 231 232);
+
+  /* mobile: clear the ~90px hexagon band; desktop bumps this up in the 900px
+     block to clear the taller proportional band (source ~210px intro offset) */
+  padding: 110px 0 40px;
+  overflow: hidden;
+}
+
+/* lift all real content above the decorative hexagon/geo layers */
+.columns-container:has(.columns.horizontal-teaser) > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* Decorative brand artwork (exact grace.com assets):
+   ::before = faint triangle line-network filling the whole section,
+   ::after  = white hexagon band along the top edge. The hex artwork is
+   hexagons-over-solid-white, so it is flipped vertically (scaleY) to put the
+   solid edge at the top (blending into the white page above) and the hexagons
+   hanging down into the gray section – matching the source. */
+.columns-container:has(.columns.horizontal-teaser)::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: url('./teaser-geo-lines.png');
+  background-repeat: no-repeat;
+  background-position: 50% 100%;
+  background-size: 100% auto;
+  transform: scaleX(-1); /* mirror so the denser artwork sits on the left (matches source) */
+}
+
+.columns-container:has(.columns.horizontal-teaser)::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+
+  /* Mobile: a fixed-height band with background-size:cover keeps the hexagons
+     large (matching the source / hero campaign, which crop the wide artwork
+     rather than shrinking it). Desktop switches to the full-width proportional
+     fit in the media query below. */
+  height: 90px;
+  z-index: 1;
+  pointer-events: none;
+  background-image: url('./teaser-hex-mask.png');
+  background-repeat: no-repeat;
+  background-position: 50% 100%;
+  background-size: cover;
+  transform: scale(-1, -1); /* vertical flip (solid edge on top) + horizontal mirror to match source */
+}
+
+@media (width >= 900px) {
+  .columns-container:has(.columns.horizontal-teaser) {
+    padding: 210px 0 60px;
+  }
+
+  .columns-container:has(.columns.horizontal-teaser)::after {
+    height: auto;
+    aspect-ratio: 13083 / 1372;
+    background-position: 50% 0;
+    background-size: 100% 100%;
+  }
+}
+
+/* intro line ("This product is used in the following processes:") –
+   source renders a small thin serif heading, not the large default h2 */
+.columns-container:has(.columns.horizontal-teaser) .default-content-wrapper h2 {
+  max-width: 1240px;
+  margin: 0 auto 25px;
+  padding: 0 20px;
+  font-family: var(--heading-font-family);
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 1.2;
+  color: var(--text-color);
+  text-align: center; /* mobile centered (source); desktop left-aligns below */
+}
+
+@media (width >= 900px) {
+  .columns-container:has(.columns.horizontal-teaser) .default-content-wrapper h2 {
+    text-align: left;
+  }
+}
+
+/* Mobile: swipeable single-card carousel (horizontal scroll-snap track).
+   All slides are equal height (align-items: stretch) so sliding is a pure
+   horizontal move with no height change – this is what makes it seamless,
+   matching the source (Owl carousel with equal-height items). No gap between
+   slides so a single card fills the viewport (no white edge of the next one). */
+.columns.horizontal-teaser {
+  box-sizing: border-box;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  overflow: auto hidden;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.columns.horizontal-teaser::-webkit-scrollbar {
+  display: none;
+}
+
+/* one process card – mobile stacks title, description, chevron, centered
+   vertically within the equal-height slide (matches source carousel slides) */
+.columns.horizontal-teaser .columns-horizontal-teaser-card {
+  flex: 0 0 100%;
+  scroll-snap-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* top-align content (source); no vertical centering */
+  gap: 12px;
+  padding: 40px 30px;
+  background-color: var(--white);
+  text-align: center;
+  cursor: pointer;
+  transition: box-shadow var(--transition-speed) ease;
+}
+
+
+/* keep DOM order (title, description, chevron) – a global columns rule sets
+   order on child cells, which would otherwise float the chevron to the top */
+.columns.horizontal-teaser .columns-horizontal-teaser-card > * {
+  order: 0;
+}
+
+/* carousel dots (mobile only) */
+.columns-horizontal-teaser-dots {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.columns-horizontal-teaser-dot {
+  width: 10px;
+  height: 10px;
+  padding: 0;
+  border: 1px solid var(--text-color);
+  border-radius: 50%;
+  background-color: transparent;
+  cursor: pointer;
+  transition: background-color var(--transition-speed) ease;
+}
+
+.columns-horizontal-teaser-dot.active {
+  background-color: var(--text-color);
+}
+
+/* hover: soft even glow around the card (source: 0 0 12px rgba(0,0,0,.2)) */
+.columns.horizontal-teaser .columns-horizontal-teaser-card:hover {
+  box-shadow: 0 0 12px rgb(0 0 0 / 20%);
+}
+
+/* hover: CTA turns Grace green (source .white-bkgd a:hover) */
+.columns.horizontal-teaser .columns-horizontal-teaser-card:hover .columns-horizontal-teaser-arrow {
+  color: rgb(39 133 60);
+}
+
+.columns.horizontal-teaser .columns-horizontal-teaser-card:hover .columns-horizontal-teaser-arrow-icon {
+  border-color: rgb(39 133 60);
+}
+
+/* featured IMAGE card: source keeps the chevron white on hover (no green cue, no flip) */
+.columns.horizontal-teaser.featured-products .columns-horizontal-teaser-card-media:hover .columns-horizontal-teaser-arrow {
+  color: var(--white);
+}
+
+.columns.horizontal-teaser.featured-products .columns-horizontal-teaser-card-media:hover .columns-horizontal-teaser-arrow-icon {
+  border-color: var(--white);
+}
+
+/* title */
+.columns.horizontal-teaser .columns-horizontal-teaser-title {
+  font-family: var(--heading-font-family);
+  font-weight: 700;
+  color: var(--text-color);
+}
+
+.columns.horizontal-teaser .columns-horizontal-teaser-title p,
+.columns.horizontal-teaser .columns-horizontal-teaser-title h2,
+.columns.horizontal-teaser .columns-horizontal-teaser-title h3 {
+  margin: 0;
+  font-family: var(--heading-font-family);
+  font-size: 16px; /* title: 16px mobile, 18px desktop (in the 900px block) */
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--text-color);
+}
+
+/* description – 14px at all breakpoints */
+.columns.horizontal-teaser .columns-horizontal-teaser-desc p {
+  margin: 0 0 12px;
+  font-family: var(--heading-font-family);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--text-color);
+}
+
+.columns.horizontal-teaser .columns-horizontal-teaser-desc p:last-child {
+  margin-bottom: 0;
+}
+
+/* CTA – mobile shows "Learn More ›" centered near the card bottom (source),
+   desktop shows the chevron only (label hidden). margin-top:auto pushes it to
+   the bottom of the flex-column card while the title/description stay on top. */
+.columns.horizontal-teaser .columns-horizontal-teaser-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: auto;
+  font-family: var(--body-font-family);
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--text-color);
+}
+
+.columns.horizontal-teaser .columns-horizontal-teaser-arrow-icon {
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid var(--text-color);
+  border-bottom: 2px solid var(--text-color);
+  transform: rotate(-45deg);
+}
+
+/* Desktop: stacked full-width rows (no carousel); title | description | chevron */
+@media (width >= 900px) {
+  .columns.horizontal-teaser {
+    flex-direction: column;
+    gap: 40px;
+    overflow-x: visible;
+    scroll-snap-type: none;
+  }
+
+  .columns.horizontal-teaser .columns-horizontal-teaser-card {
+    flex: none;
+    display: grid;
+
+    /* source split: narrow title column (wraps to 2 lines), wide description
+       column (~3 lines), narrow chevron column. No card padding — the source
+       card has padding 0 and relies on min-height for the ~159px row. */
+    grid-template-columns: 214px 1fr 105px;
+    align-items: center;
+    gap: 0;
+    padding: 0;
+    text-align: left; /* description left-aligned (source); title centered below */
+    min-height: 159px;
+  }
+
+  /* desktop typography matches source: title 18px/30.6px weight 600 (centered,
+     narrow column so it wraps to 2 lines); description 14px/25.2px weight 500
+     left-aligned in the wide column (wraps to ~3 lines). */
+  .columns.horizontal-teaser .columns-horizontal-teaser-title p,
+  .columns.horizontal-teaser .columns-horizontal-teaser-title h2,
+  .columns.horizontal-teaser .columns-horizontal-teaser-title h3 {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.7;
+  }
+
+  .columns.horizontal-teaser .columns-horizontal-teaser-desc {
+    padding-left: 30px;
+  }
+
+  .columns.horizontal-teaser .columns-horizontal-teaser-desc p {
+    font-weight: 500;
+    line-height: 1.8;
+  }
+
+  .columns.horizontal-teaser .columns-horizontal-teaser-title {
+    text-align: center;
+  }
+
+  /* desktop: chevron only (hide the "Learn More" label), centered in its column */
+  .columns.horizontal-teaser .columns-horizontal-teaser-arrow {
+    justify-self: center;
+    margin-top: 0;
+  }
+
+  .columns.horizontal-teaser .columns-horizontal-teaser-arrow-label {
+    display: none;
+  }
+
+  .columns.horizontal-teaser .columns-horizontal-teaser-arrow-icon {
+    width: 14px;
+    height: 14px;
+  }
+
+  /* dots are carousel-only */
+  .columns-horizontal-teaser-dots {
+    display: none;
+  }
+}
+
+/* ---- horizontal-teaser modifier: featured-products ----
+   Same card layout as horizontal-teaser (title / description / chevron rows,
+   159px tall) but with inverted colours to match the grace.com "Featured
+   Products" feature-set: dark slate cards with white text by default that
+   flip to a white card with black text on hover (source .slate-bkgd + the
+   feature-set item:hover rule). */
+
+/* The base horizontal-teaser section paints a gray band + hexagon/geo-line artwork. The
+   featured-products variant sits on PLAIN WHITE in source (measured live on shieldex — the slate
+   cards provide the contrast, there is no gray hex band behind them). Suppress the band + both
+   decorative layers when the teaser carries the featured-products modifier. */
+.columns-container:has(.columns.horizontal-teaser.featured-products) {
+  background-color: transparent;
+  padding: var(--spacing-l) 0;
+}
+
+.columns-container:has(.columns.horizontal-teaser.featured-products)::before,
+.columns-container:has(.columns.horizontal-teaser.featured-products)::after {
+  content: none;
+}
+
+/* featured-products mobile (base): each card is a tall 336px slate tile —
+   title near the top, a larger 16px centred description in the middle, and
+   "Learn More ›" pinned near the bottom (the base card's margin-top:auto on
+   the CTA handles the bottom placement). Desktop reverts to the 159px banner
+   row inside the >= 900px block below. */
+.columns.horizontal-teaser.featured-products .columns-horizontal-teaser-card {
+  min-height: 336px;
+  padding: 40px 20px 34px;
+  box-sizing: border-box; /* 336px is the total tile height (source), not + padding */
+  background-color: rgb(30 30 30);
+  box-shadow: none;
+}
+
+.columns.horizontal-teaser.featured-products .columns-horizontal-teaser-title,
+.columns.horizontal-teaser.featured-products .columns-horizontal-teaser-title p,
+.columns.horizontal-teaser.featured-products .columns-horizontal-teaser-title h2,
+.columns.horizontal-teaser.featured-products .columns-horizontal-teaser-title h3,
+.columns.horizontal-teaser.featured-products .columns-horizontal-teaser-desc p,
+.columns.horizontal-teaser.featured-products .columns-horizontal-teaser-arrow {
+  color: var(--white);
+}
+
+.columns.horizontal-teaser.featured-products .columns-horizontal-teaser-arrow-icon {
+  border-color: var(--white);
+}
+
+.columns.horizontal-teaser.featured-products .columns-horizontal-teaser-desc {
+  padding: 0 30px;
+}
+
+.columns.horizontal-teaser.featured-products .columns-horizontal-teaser-desc p {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.3; /* 20.8px, matches source */
+}
+
+/* ---- featured (dark) card WITH an image (value-creation, chemical-processing) ----
+   Source: a.item.slate-bkgd.tab-img.
+   MOBILE (base): the image FILLS the card as a background (330×330 square) with a dark overlay
+   for legibility; the title + copy sit stacked near the top and "Learn More" pins to the bottom,
+   all overlaid white on the image (measured live: title top:40, copy top:86, CTA near bottom).
+   DESKTOP (>=900, below): reverts to a 159px banner row — 214px image left, copy right, chevron. */
+.columns.horizontal-teaser.featured-products .columns-horizontal-teaser-card-media {
+  position: relative;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  min-height: 336px;
+  padding: 40px 20px 34px;
+  text-align: center;
+  overflow: hidden;
+  gap: 12px;
+}
+
+/* image as the full-card background layer */
+.columns.horizontal-teaser.featured-products .columns-horizontal-teaser-media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  line-height: 0;
+}
+
+.columns.horizontal-teaser.featured-products .columns-horizontal-teaser-media picture,
+.columns.horizontal-teaser.featured-products .columns-horizontal-teaser-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* dark overlay over the image so the white text stays legible (source .image .overlay) */
+.columns.horizontal-teaser.featured-products .columns-horizontal-teaser-media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: rgb(0 0 0 / 35%);
+}
+
+/* title: in normal flow on mobile (near the top), white centered, above the image */
+.columns.horizontal-teaser.featured-products .columns-horizontal-teaser-card-media .columns-horizontal-teaser-title-overlay {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+
+.columns.horizontal-teaser.featured-products .columns-horizontal-teaser-title-overlay p,
+.columns.horizontal-teaser.featured-products .columns-horizontal-teaser-title-overlay h2,
+.columns.horizontal-teaser.featured-products .columns-horizontal-teaser-title-overlay h3 {
+  margin: 0;
+  color: var(--white);
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.2;
+  text-align: center;
+}
+
+/* copy: overlaid white, centered, below the title. Source uses the BODY font (Roboto), NOT the
+   Roboto Slab the base featured-products desc rule applies — restore it here. */
+.columns.horizontal-teaser.featured-products .columns-horizontal-teaser-card-media .columns-horizontal-teaser-desc {
+  position: relative;
+  z-index: 1;
+  padding: 0;
+  text-align: center;
+}
+
+.columns.horizontal-teaser.featured-products .columns-horizontal-teaser-card-media .columns-horizontal-teaser-desc p {
+  font-family: var(--body-font-family);
+}
+
+/* the appended "Learn More" arrow overlays the image too, pinned to the bottom (margin-top:auto) */
+.columns.horizontal-teaser.featured-products .columns-horizontal-teaser-card-media .columns-horizontal-teaser-arrow {
+  position: relative;
+  z-index: 1;
+}
+
+/* hover: card flips to white with black text/chevron. Desktop only — mobile
+   has no hover (tap would leave the card stuck in the hovered state), so the
+   flip is scoped to >= 900px to match the source's touch behaviour. */
+@media (width >= 900px) {
+  /* revert the mobile tile sizing back to the 159px desktop banner row */
+  .columns.horizontal-teaser.featured-products .columns-horizontal-teaser-card {
+    min-height: 159px;
+    padding: 0;
+  }
+
+  /* image-left featured banner: 214px image | flowing copy | chevron, 159px tall row.
+     Reset the mobile full-bleed background layout back to an inline left image. */
+  .columns.horizontal-teaser.featured-products .columns-horizontal-teaser-card-media {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 159px;
+    padding: 0;
+    overflow: visible;
+    text-align: left;
+  }
+
+  .columns.horizontal-teaser.featured-products .columns-horizontal-teaser-card-media .columns-horizontal-teaser-media {
+    position: relative;
+    inset: auto;
+    flex: 0 0 214px;
+    width: 214px;
+    height: 159px;
+    align-self: stretch;
+  }
+
+  /* no dark scrim on desktop — the image occupies only the left 214px, title overlaid on it */
+  .columns.horizontal-teaser.featured-products .columns-horizontal-teaser-card-media .columns-horizontal-teaser-media::after {
+    content: none;
+  }
+
+  /* desktop: title overlays the 214px image, centered white */
+  .columns.horizontal-teaser.featured-products .columns-horizontal-teaser-card-media .columns-horizontal-teaser-title-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 214px;
+    padding: 0 12px;
+  }
+
+  .columns.horizontal-teaser.featured-products .columns-horizontal-teaser-card-media .columns-horizontal-teaser-desc {
+    flex: 1 1 auto;
+    padding: 0 0 0 30px;
+    text-align: left;
+  }
+
+  .columns.horizontal-teaser.featured-products .columns-horizontal-teaser-desc {
+    padding: 0 0 0 30px;
+  }
+
+  .columns.horizontal-teaser.featured-products .columns-horizontal-teaser-desc p {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.8;
+  }
+
+  /* hover flip (dark → white) ONLY for the imageless "Featured Products" cards. The image
+     cards (value-creation, chemical-processing) keep their photo + white text on hover — the
+     source does NOT flip them — so exclude .columns-horizontal-teaser-card-media. */
+  .columns.horizontal-teaser.featured-products .columns-horizontal-teaser-card:not(.columns-horizontal-teaser-card-media):hover {
+    background-color: var(--white);
+    box-shadow: 0 0 12px rgb(0 0 0 / 20%);
+  }
+
+  .columns.horizontal-teaser.featured-products .columns-horizontal-teaser-card:not(.columns-horizontal-teaser-card-media):hover .columns-horizontal-teaser-title,
+  .columns.horizontal-teaser.featured-products .columns-horizontal-teaser-card:not(.columns-horizontal-teaser-card-media):hover .columns-horizontal-teaser-title p,
+  .columns.horizontal-teaser.featured-products .columns-horizontal-teaser-card:not(.columns-horizontal-teaser-card-media):hover .columns-horizontal-teaser-title h2,
+  .columns.horizontal-teaser.featured-products .columns-horizontal-teaser-card:not(.columns-horizontal-teaser-card-media):hover .columns-horizontal-teaser-title h3,
+  .columns.horizontal-teaser.featured-products .columns-horizontal-teaser-card:not(.columns-horizontal-teaser-card-media):hover .columns-horizontal-teaser-desc p,
+  .columns.horizontal-teaser.featured-products .columns-horizontal-teaser-card:not(.columns-horizontal-teaser-card-media):hover .columns-horizontal-teaser-arrow {
+    color: var(--text-color);
+  }
+
+  .columns.horizontal-teaser.featured-products .columns-horizontal-teaser-card:not(.columns-horizontal-teaser-card-media):hover .columns-horizontal-teaser-arrow-icon {
+    border-color: var(--text-color);
+  }
+}
+
+/* ===================== Variant: image-left ===================== */
+.columns-container:has(.columns.image-left) {
+  padding: var(--spacing-l) 0;
+}
+
+/* row: stacks vertically on mobile (image on top, text below) */
+.columns.image-left > div {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.columns.image-left > div > div {
+  display: flex;
+  flex-direction: column;
+}
+
+/* image cell */
+.columns.image-left .columns-image-left-img-col {
+  line-height: 0;
+}
+
+.columns.image-left .columns-image-left-img-col picture {
+  display: block;
+}
+
+.columns.image-left .columns-image-left-img-col img {
+  width: 100%;
+  height: auto;
+  display: block;
+  aspect-ratio: 420 / 226;
+  object-fit: cover;
+}
+
+/* text cell (top-aligned; image keeps its natural height on the left) */
+.columns.image-left .columns-image-left-text-col {
+  justify-content: flex-start;
+}
+
+/* heading tokens match source: weight 400 (source wraps the title in <strong>,
+   which renders heavier than the base 300). Mobile is 20px/1.3, scaling up to
+   26px/1.15 on desktop. */
+.columns.image-left .columns-image-left-text-col h2 {
+  font-family: var(--heading-font-family);
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.3;
+  color: var(--text-color);
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+.columns.image-left .columns-image-left-text-col p {
+  font-family: var(--body-font-family);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.7;
+  color: var(--text-color);
+  margin-top: 0;
+  margin-bottom: 21px;
+}
+
+.columns.image-left .columns-image-left-text-col p:last-child {
+  margin-bottom: 0;
+}
+
+@media (width >= 900px) {
+  /* side-by-side: image left, text right, both top-aligned. The source row is
+     only ~880px wide (two 420px columns + 40px gap), NOT the full content
+     width. Capping the row keeps the image small (420px → ~226px tall) and
+     lets the 420px-wide text wrap into more lines, so the text column runs
+     taller than the image — matching the source exactly. */
+  .columns.image-left > div {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 40px;
+    max-width: 880px;
+    margin: 0 auto;
+  }
+
+  /* 50/50 split within the capped row (420px each) */
+  .columns.image-left .columns-image-left-img-col {
+    flex: 0 0 calc(50% - 20px);
+    max-width: calc(50% - 20px);
+  }
+
+  .columns.image-left .columns-image-left-text-col {
+    flex: 0 0 calc(50% - 20px);
+    max-width: calc(50% - 20px);
+  }
+
+  /* desktop heading scales up to source's 26px / 1.15 */
+  .columns.image-left .columns-image-left-text-col h2 {
+    font-size: 26px;
+    line-height: 1.15;
+  }
+}
+
+/* ===================== Variant: image-right ===================== */
+
+/* Columns Image Right — text left, image right (mirror of image-left).
+   Source: grace.com "Strategic Partner" section on /about-grace/this-is-grace/ */
+
+/* row: stacks vertically on mobile (image on top, text below — same as source) */
+.columns.image-right .columns-image-right-row {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.columns.image-right .columns-image-right-text-col,
+.columns.image-right .columns-image-right-img-col {
+  display: flex;
+  flex-direction: column;
+}
+
+/* text cell (top-aligned) */
+.columns.image-right .columns-image-right-text-col {
+  justify-content: flex-start;
+}
+
+/* image cell */
+.columns.image-right .columns-image-right-img-col {
+  line-height: 0;
+}
+
+.columns.image-right .columns-image-right-img-col picture,
+.columns.image-right .columns-image-right-img-col img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 480 / 271;
+  object-fit: cover;
+}
+
+/* heading tokens match source: weight 300 (this section's title is NOT wrapped
+   in <strong>). Mobile 20px/1.3 → desktop 26px/1.15. */
+.columns.image-right .columns-image-right-text-col h2 {
+  font-family: var(--heading-font-family);
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 1.3;
+  color: var(--text-color);
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+/* this section's title is NOT bold on the source (weight 300); keep any
+   <strong> the import may add at the heading's own weight */
+.columns.image-right .columns-image-right-text-col h2 strong {
+  font-weight: inherit;
+}
+
+.columns.image-right .columns-image-right-text-col p {
+  font-family: var(--body-font-family);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.7;
+  color: var(--text-color);
+  margin-top: 0;
+  margin-bottom: 21px;
+}
+
+.columns.image-right .columns-image-right-text-col p:last-child {
+  margin-bottom: 0;
+}
+
+.columns.image-right .columns-image-right-text-col a:any-link {
+  color: var(--link-color);
+  font-weight: 600;
+  text-decoration: none;
+  transition: color var(--transition-speed) ease;
+}
+
+.columns.image-right .columns-image-right-text-col a:not(:has(img))::after {
+  content: ' \203A';
+  font-size: 1.2em;
+}
+
+.columns.image-right .columns-image-right-text-col a:hover {
+  color: var(--link-hover-color);
+}
+
+@media (width >= 900px) {
+  /* side-by-side: text left, image right, both top-aligned. Source row is only
+     ~880px wide (two 420px columns + 40px gap), NOT the full content width. */
+  .columns.image-right .columns-image-right-row {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 40px;
+    max-width: 880px;
+    margin: 0 auto;
+  }
+
+  /* 50/50 split within the capped row (420px each) */
+  .columns.image-right .columns-image-right-text-col,
+  .columns.image-right .columns-image-right-img-col {
+    flex: 0 0 calc(50% - 20px);
+    max-width: calc(50% - 20px);
+  }
+
+  /* desktop heading scales up to source's 26px / 1.15 */
+  .columns.image-right .columns-image-right-text-col h2 {
+    font-size: 26px;
+    line-height: 1.15;
+  }
+
+  /* WIDE image-right (~72/25) — the hydroprocessing ART pages (parent "ART Hydroprocessing" intro
+     AND the resid/distillate SUB-pages). Source: a wide text column left + a small ART LOGO right
+     shown at natural size, spanning the FULL content width (NOT the 880px centered cap). Keyed on
+     `.columns-image-right-logo` (columns.js adds it when the image is the scene7 ART-Logo asset),
+     so it reliably covers both the h2+h3 parent shape and the h2+bullet-list sub-page shape, while
+     leaving the centered 50/50 "Strategic Partner" image-right and the trisyl large-diagram case
+     untouched. */
+  .columns.image-right.columns-image-right-logo .columns-image-right-row {
+    max-width: none;
+    margin: 0;
+    gap: 60px;
+  }
+
+  .columns.image-right.columns-image-right-logo .columns-image-right-text-col {
+    flex: 0 0 72%;
+    max-width: 72%;
+  }
+
+  .columns.image-right.columns-image-right-logo .columns-image-right-img-col {
+    flex: 0 0 25%;
+    max-width: 25%;
+    align-self: flex-start;
+  }
+
+  /* logo shown at natural size (no cover-crop / forced aspect ratio) */
+  .columns.image-right.columns-image-right-logo .columns-image-right-img-col picture,
+  .columns.image-right.columns-image-right-logo .columns-image-right-img-col img {
+    aspect-ratio: auto;
+    object-fit: contain;
+    height: auto;
+  }
+}
+
+/* Product pages (body.contactus) reuse image-right for a bullet list beside a
+   full diagram (e.g. trisyl-silica benefits + circular benefits chart). The
+   diagram is an infographic, so it must render UNCROPPED at its natural ratio
+   — override the default 480/271 cover crop. Source splits ~1/3 text : 2/3
+   image (Bootstrap col-4 / col-8), and the row spans the full content width. */
+body.contactus .columns.image-right .columns-image-right-img-col picture,
+body.contactus .columns.image-right .columns-image-right-img-col img {
+  aspect-ratio: auto;
+  object-fit: contain;
+}
+
+body.contactus .columns.image-right .columns-image-right-text-col ul {
+  padding-left: 18px;
+  margin: 0;
+}
+
+body.contactus .columns.image-right .columns-image-right-text-col li {
+  font-family: var(--body-font-family);
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+
+@media (width >= 900px) {
+  /* full-width row, 1/3 : 2/3 split (text : diagram), top-aligned. Scoped to the bullet-list shape
+     (text cell holds a <ul>) but EXCLUDING the ART-logo pages — those also have bullet lists but
+     need the wide 72/25 text-left split (a small logo, not a large diagram). */
+  body.contactus .columns.image-right:has(.columns-image-right-text-col ul):not(.columns-image-right-logo) .columns-image-right-row {
+    max-width: none;
+    gap: 48px;
+    align-items: center;
+  }
+
+  body.contactus .columns.image-right:has(.columns-image-right-text-col ul):not(.columns-image-right-logo) .columns-image-right-text-col {
+    flex: 0 0 calc(33.333% - 24px);
+    max-width: calc(33.333% - 24px);
+  }
+
+  body.contactus .columns.image-right:has(.columns-image-right-text-col ul):not(.columns-image-right-logo) .columns-image-right-img-col {
+    flex: 0 0 calc(66.667% - 24px);
+    max-width: calc(66.667% - 24px);
+  }
+
+  /* Hydroprocessing ART pages on the contactus template (parent intro AND resid/distillate
+     sub-pages): WIDE 72/25 (wide text left, small ART logo right), full-width row. Keyed on the
+     `.columns-image-right-logo` marker (columns.js) so it wins over the base 50/50 cap AND the
+     bullet-list 33/67 rule above. */
+  body.contactus .columns.image-right.columns-image-right-logo .columns-image-right-row {
+    max-width: none;
+    margin: 0;
+    gap: 60px;
+    align-items: flex-start;
+  }
+
+  body.contactus .columns.image-right.columns-image-right-logo .columns-image-right-text-col {
+    flex: 0 0 72%;
+    max-width: 72%;
+  }
+
+  body.contactus .columns.image-right.columns-image-right-logo .columns-image-right-img-col {
+    flex: 0 0 25%;
+    max-width: 25%;
+  }
+}
+
+/* ===================== Variant: image-teaser ===================== */
+
+/* Columns Image Teaser
+ * Horizontal teaser: image with an overlaid title on the left,
+ * caption + "Learn More" chevron on the right. Tokens extracted from
+ * grace.com "Latest Insights from Grace" teaser cards.
+ */
+
+/* source section sits on a light-gray background (rgb(230,231,232)); this is
+   what makes the white hover card visibly "pop" */
+.columns-container:has(.columns.image-teaser) {
+  background-color: rgb(230 231 232);
+  padding: var(--spacing-l) 0;
+}
+
+/* Mobile: swipeable "peek" carousel (horizontal scroll-snap track).
+   The source (Owl carousel) centers the active card at ~86% of the viewport
+   (336px of 390) with ~17px slivers of the prev/next cards peeking on each
+   edge and a 10px gap between cards. We reproduce that with a centered
+   scroll-snap track: the track keeps a small inline padding so the centered
+   card sits inset, and each card is 86vw wide. Dots below track the active
+   slide. At >=900px this reverts to a vertical stack (see media query). */
+.columns.image-teaser > div:not(.columns-image-teaser-dots) {
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 10px;
+  padding: 0 17px;
+  overflow: auto hidden;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.columns.image-teaser > div:not(.columns-image-teaser-dots)::-webkit-scrollbar {
+  display: none;
+}
+
+.columns.image-teaser .columns-image-teaser-card {
+  flex: 0 0 86vw;
+  scroll-snap-align: center;
+}
+
+.columns.image-teaser .columns-image-teaser-card a:any-link {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  color: var(--text-color);
+  text-decoration: none;
+  transition: background-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+}
+
+/* carousel dots (mobile only) — source: 7px black dots, 10px gap (margin 0 5px),
+   container margin-top 20px */
+.columns.image-teaser .columns-image-teaser-dots {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.columns-image-teaser-dot {
+  width: 7px;
+  height: 7px;
+  padding: 0;
+  border: 1px solid var(--text-color);
+  border-radius: 50%;
+  background-color: transparent;
+  cursor: pointer;
+  transition: background-color var(--transition-speed) ease;
+}
+
+.columns-image-teaser-dot.active {
+  background-color: var(--text-color);
+}
+
+/* image box with overlaid title */
+.columns.image-teaser .columns-image-teaser-img {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.columns.image-teaser .columns-image-teaser-img picture,
+.columns.image-teaser .columns-image-teaser-img img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.columns.image-teaser .columns-image-teaser-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgb(0 0 0 / 50%);
+  z-index: 1;
+}
+
+/* desktop title (overlaid on the small image) — hidden on mobile, where the
+   body overlays the whole stack instead */
+.columns.image-teaser .columns-image-teaser-title {
+  display: none;
+}
+
+/* MOBILE: the source overlays the title + caption + "Learn More" together,
+   centered on the image. The body is absolutely positioned over the image. */
+.columns.image-teaser .columns-image-teaser-body {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 24px;
+  text-align: center;
+  color: var(--white);
+}
+
+.columns.image-teaser .columns-image-teaser-title-mobile {
+  margin: 0;
+  padding: 0;
+  font-family: var(--heading-font-family);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.7;
+  color: var(--white);
+  text-align: center;
+}
+
+.columns.image-teaser .columns-image-teaser-caption {
+  margin: 0;
+  padding: 0;
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m);
+  font-weight: 500;
+  line-height: 1.8;
+  color: var(--white);
+  text-align: center;
+}
+
+/* mobile CTA "Learn More >" — source: black, 14px/400 Roboto, sits lower in
+   the image (extra top gap). Hidden on desktop, where the chevron shows. */
+.columns.image-teaser .columns-image-teaser-cta {
+  margin-top: 24px;
+  font-family: var(--body-font-family);
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--text-color);
+}
+
+.columns.image-teaser .columns-image-teaser-cta::after {
+  content: ' \203A';
+  font-size: 1.2em;
+}
+
+/* chevron on the far right — CSS-drawn ">" matching the source's solid
+   FontAwesome chevron-right (chunkier than a "\203A" glyph) */
+.columns.image-teaser .columns-image-teaser-chevron {
+  display: none;
+  flex: 0 0 auto;
+  align-self: center;
+  width: 65px;
+  height: 100%;
+}
+
+.columns.image-teaser .columns-image-teaser-chevron::before {
+  content: '';
+  display: block;
+  width: 12px;
+  height: 12px;
+  margin: 0 auto;
+  border-top: 3px solid var(--text-color);
+  border-right: 3px solid var(--text-color);
+  transform: rotate(45deg);
+  transition: border-color var(--transition-speed) ease;
+}
+
+/* hover: whole card turns white with a soft even glow — the ONLY hover change
+   on the source (.cmp-feature-set .list .item:hover: white bg + 0 0 12px
+   rgba(0,0,0,.2)). The chevron and caption stay black.
+   Triggered off BOTH the anchor (a:hover) and its parent card
+   (.columns-image-teaser-card:hover), applied to the same <a> (which is the
+   visual card). Identical visual outcome in a normal browser, but resilient to
+   viewers that disable pointer-events on <a> (so the effect still shows when
+   the parent card — which keeps pointer-events — is hovered). :focus-visible
+   covers keyboard focus. */
+.columns.image-teaser .columns-image-teaser-card a:hover,
+.columns.image-teaser .columns-image-teaser-card a:focus-visible,
+.columns.image-teaser .columns-image-teaser-card:hover a {
+  background-color: var(--white);
+  box-shadow: 0 0 12px rgb(0 0 0 / 20%);
+}
+
+@media (width >= 900px) {
+  /* revert the mobile carousel track to a vertical stack, capped at ~920px
+     (source) so cards keep a consistent width across wide viewports */
+  .columns.image-teaser > div:not(.columns-image-teaser-dots) {
+    flex-direction: column;
+    gap: 40px;
+    padding: 0;
+    max-width: 920px;
+    overflow: visible;
+    scroll-snap-type: none;
+  }
+
+  .columns.image-teaser .columns-image-teaser-card {
+    flex: 0 0 auto;
+    scroll-snap-align: none;
+  }
+
+  .columns.image-teaser .columns-image-teaser-card a:any-link {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .columns.image-teaser .columns-image-teaser-img {
+    flex: 0 0 214px;
+    width: 214px;
+    aspect-ratio: 214 / 159;
+  }
+
+  /* desktop: title overlays the small image (centered), caption sits beside it */
+  .columns.image-teaser .columns-image-teaser-title {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 18px 12px;
+    font-family: var(--heading-font-family);
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.7;
+    color: var(--white);
+    text-align: center;
+  }
+
+  /* desktop: body reverts to a normal right-hand column (not overlaid) */
+  .columns.image-teaser .columns-image-teaser-body {
+    position: static;
+    z-index: auto;
+    flex: 1;
+    align-items: stretch;
+    justify-content: center;
+    gap: 0;
+    padding: 0 0 0 30px;
+    color: var(--text-color);
+    text-align: left;
+  }
+
+  .columns.image-teaser .columns-image-teaser-caption {
+    color: var(--text-color);
+    text-align: left;
+  }
+
+  /* mobile-only title + CTA are hidden on desktop (chevron shows instead) */
+  .columns.image-teaser .columns-image-teaser-title-mobile,
+  .columns.image-teaser .columns-image-teaser-cta {
+    display: none;
+  }
+
+  .columns.image-teaser .columns-image-teaser-chevron {
+    display: block;
+  }
+
+  /* dots are mobile-only */
+  .columns.image-teaser .columns-image-teaser-dots {
+    display: none;
+  }
+}
+
+/* ===================== Variant: location-detail ===================== */
+.columns.location-detail > div {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* mobile: source button-to-image gap is 10px */
+}
+
+.columns.location-detail > div > div {
+  display: block;
+}
+
+/* text / detail column */
+.columns.location-detail .columns-location-detail-text-col p {
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m);
+  font-weight: 400;
+  line-height: 1.3;
+  color: var(--text-color);
+  margin: 0 0 21px;
+}
+
+.columns.location-detail .columns-location-detail-text-col h4 {
+  font-family: var(--heading-font-family);
+  font-size: var(--body-font-size-l);
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--text-color);
+  margin: 0 0 30px;
+  text-transform: none;
+}
+
+/* Join the Grace Team button (matches source green primary) */
+.columns.location-detail .columns-location-detail-text-col .button-container {
+  margin: 0;
+}
+
+/* the button sits in a plain <p> (last child of the text column); drop its
+   inherited trailing margin so only the 10px column gap separates it from the
+   stacked image on mobile (source button-to-image gap = 10px) */
+.columns.location-detail .columns-location-detail-text-col p:last-child {
+  margin-bottom: 0;
+}
+
+.columns.location-detail .columns-location-detail-text-col a.button:any-link {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 13px;
+  border-radius: 0;
+  font-family: var(--heading-font-family);
+  font-size: var(--body-font-size-m);
+  font-weight: 600;
+  line-height: 1;
+  text-transform: none;
+  background-color: var(--accent-color);
+  color: var(--text-color);
+}
+
+.columns.location-detail .columns-location-detail-text-col a.button:hover,
+.columns.location-detail .columns-location-detail-text-col a.button:focus-visible {
+  background-color: var(--accent-color-hover);
+  color: var(--white);
+}
+
+/* image column */
+.columns.location-detail .columns-location-detail-img-col {
+  line-height: 0;
+}
+
+.columns.location-detail .columns-location-detail-img-col img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+@media (width >= 900px) {
+  .columns.location-detail > div {
+    flex-direction: row;
+    gap: 40px;
+    align-items: center;
+  }
+
+  .columns.location-detail > div > div {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .columns.location-detail .columns-location-detail-text-col p {
+    line-height: 1.7;
+  }
+
+  .columns.location-detail .columns-location-detail-text-col h4 {
+    font-size: 18px;
+    line-height: 1.7;
+  }
+
+  .columns.location-detail .columns-location-detail-text-col a.button:any-link {
+    display: inline-block;
+    width: auto;
+    padding: 18px 30px;
+  }
+}
+
+/* ===================== Variant: profile-detail ===================== */
+
+/* Columns Profile Detail - headshot column + name/title/bio column */
+
+.columns.profile-detail > div {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+/* image column - displayed first even though authored second (avoids auto-hero) */
+.columns.profile-detail .columns-profile-detail-img-col {
+  order: -1;
+  line-height: 0;
+}
+
+.columns.profile-detail .columns-profile-detail-img-col picture,
+.columns.profile-detail .columns-profile-detail-img-col a {
+  display: block;
+}
+
+.columns.profile-detail .columns-profile-detail-img-col img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 0;
+}
+
+/* text column - name, title, bio */
+.columns.profile-detail .columns-profile-detail-text-col h1 {
+  font-family: var(--heading-font-family);
+  font-size: var(--heading-font-size-xxl);
+  font-weight: 100;
+  line-height: 1.3;
+  color: var(--text-color);
+  margin: 0 0 7.5px;
+}
+
+.columns.profile-detail .columns-profile-detail-text-col h4 {
+  font-family: var(--heading-font-family);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--text-color);
+  margin: 0 0 30px;
+}
+
+.columns.profile-detail .columns-profile-detail-text-col p {
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m);
+  font-weight: 400;
+  line-height: 1.3;
+  color: var(--text-color);
+  margin: 0 0 21px;
+}
+
+.columns.profile-detail .columns-profile-detail-text-col p:last-child {
+  margin-bottom: 0;
+}
+
+/* stacked -> 2-column at the desktop breakpoint (source uses Bootstrap's 992px
+   col-lg; snapped to the project's sanctioned 900px per The Breakpoint Rule) */
+@media (width >= 900px) {
+  .columns.profile-detail > div {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 40px;
+  }
+
+  .columns.profile-detail .columns-profile-detail-img-col {
+    flex: 0 0 33.333%;
+  }
+
+  .columns.profile-detail .columns-profile-detail-text-col {
+    flex: 1;
+  }
+
+  .columns.profile-detail .columns-profile-detail-text-col h1 {
+    font-size: var(--heading-font-size-xxl);
+    line-height: 1.7;
+  }
+
+  .columns.profile-detail .columns-profile-detail-text-col h4 {
+    font-size: 18px;
+    line-height: 1.7;
+  }
+
+  .columns.profile-detail .columns-profile-detail-text-col p {
+    line-height: 1.7;
+  }
+}
+
+/* ===================== Variant: media-figures =====================
+   Two (or more) captioned insight images. Mobile: stacked, each full width.
+   Desktop: side by side, equal columns. Matches the source's paired figures
+   (e.g. 80-years-of-fcc: two ~313px images with small italic gray captions). */
+.columns.media-figures {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+
+  /* Breathing room above and below the paired-figure block so it doesn't butt
+     against the surrounding body copy. */
+  margin: 40px 0;
+}
+
+.columns.media-figures > div {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.columns.media-figures .columns-media-figures-col {
+  display: block;
+}
+
+.columns.media-figures .columns-media-figures-col picture {
+  display: block;
+}
+
+.columns.media-figures .columns-media-figures-col img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 313 / 176;
+  object-fit: cover;
+}
+
+.columns.media-figures .columns-media-figures-caption {
+  margin: 6px 0 0;
+  font-size: 12px;
+  font-style: italic;
+  line-height: 1.4;
+  color: rgb(95 96 98);
+}
+
+@media (width >= 900px) {
+  .columns.media-figures > div {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 28px;
+  }
+
+  .columns.media-figures .columns-media-figures-col {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+}

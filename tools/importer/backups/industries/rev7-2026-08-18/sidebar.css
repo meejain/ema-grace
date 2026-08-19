@@ -1,0 +1,1635 @@
+/*
+ * Template: sidebar
+ * Applied when a page's `template` metadata is `sidebar` (adds body.sidebar).
+ *
+ * Reproduces the grace.com content-page layout:
+ *   - a full-width blue hero band (the EXISTING `hero` block, banner variant —
+ *     #004990, reduce-height, auto-breadcrumb + title) across the top;
+ *   - below it, a left section-navigation column + a wide main-content column;
+ *   - the green "Contact Us" widget (existing contact-sticky block) floats at the
+ *     top-right, straddling the hero, then sticks (fixed, top:106px) on scroll —
+ *     its own block JS/CSS drives that animation; this template only positions
+ *     its resting spot for the shorter sidebar-page hero.
+ *
+ * Source (measured live, grace.com/compliance/compliance-gdpr-de):
+ *   hero band #004990 ~178px; content band 1280px; nav col-lg-2 (213px) +
+ *   main col-lg-7 (747px) + widget col-lg-3 (320px). Widget rests static at
+ *   top:199 (over the hero), switches to fixed top:106 once scrolled ~400px.
+ *   Multi-column engages at 992px -> mapped to the project's 900px breakpoint.
+ *
+ * Mobile-first: base = single column. >=900px: nav+content grid engages.
+ */
+
+/* MOBILE (<900px): the section-nav collapses into the <select> "filter". Source
+   sits it tight under the hero (~10px above) with ~10px before the first content
+   heading — NOT the global 50px section margin (`main > .section`), which on mobile
+   leaves a big empty band above and below the filter. Pull the margin in to 10px
+   on both ends. The >=900px grid block below restores the desktop rail spacing. */
+body.sidebar main > .section.sidebar-nav {
+  margin: var(--spacing-xs) 0;
+}
+
+/* Trademark/copyright DISCLAIMER (lone <h5> just above the footer): source spaces it
+   ~20px, not the global 50px section margin. Base rule (all widths); the >=900px block
+   re-asserts it too for the grid layout. */
+body.sidebar main > .section:has(> .default-content-wrapper > h5:only-child) {
+  margin-block: var(--spacing-s); /* 20px */
+}
+
+/* MOBILE: the contact-us widget section renders as a FIXED bottom bar (its own
+   block JS pins it), so its in-flow section box is empty (h:0) but the global 50px
+   section margins still push the filter ~50px below the hero. Zero them so the
+   filter butts tight under the hero like the source. (>=900px the widget floats in
+   the right gutter — the grid block below handles that, unaffected by this base
+   rule.) */
+body.sidebar main > .section.custom-widget-container {
+  margin: 0;
+}
+
+/* MOBILE: the first content section after the filter inherits the global 50px top
+   margin, leaving a big gap below the filter. Source is ~10px. Tighten it; the
+   >=900px grid block re-sets content-section margins to 50px. */
+body.sidebar main > .section.sidebar-nav + .section {
+  margin-top: var(--spacing-xs);
+}
+
+/* ---- Section-nav styling (matches source .section-navigation) ---- */
+/* Thin gray divider above the list, plain link list (no bullets), 12px links. */
+/* Divider spans the full column width (source .section-navigation top rule),
+   sitting above the inset link list. */
+body.sidebar main > .section.sidebar-nav > div {
+  padding-top: 20px;
+  border-top: 1px solid #d2d2d2;
+}
+
+/* PRODUCT HUBS (plain sidebar-nav): the per-<li> top borders (added below) are
+   the dividers, so drop the container's own top border + padding to avoid a
+   doubled line at the top of the list. */
+body.sidebar main:not(:has(> .section.sidebar-nav.breadcrumb-container)) > .section.sidebar-nav > div {
+  padding-top: 0;
+  border-top: 0;
+}
+
+/* PRODUCT HUBS: the "Products" heading above the nav list (source
+   .section-navigation h4). Roboto Slab 18px/600 black, with 30px space below it
+   before the first nav item (source margin-bottom:30px). */
+body.sidebar main:not(:has(> .section.sidebar-nav.breadcrumb-container)) > .section.sidebar-nav h4 {
+  margin: 0 0 30px;
+  padding: 0;
+  font-family: var(--heading-font-family);
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.7;
+  color: var(--text-color);
+}
+
+body.sidebar main:not(:has(> .section.sidebar-nav.breadcrumb-container)) > .section.sidebar-nav h4 strong {
+  font-weight: 600;
+}
+
+/* PRODUCT HUBS — mobile section-nav "filter" (<900px). Source collapses the nav
+   list into a native <select>: current hub selected, choosing another navigates.
+   templates/sidebar/sidebar.js builds the <select> from the authored <ul>. Base
+   (mobile) = show the select, hide the list; >=900px flips it (list shows, select
+   hidden). Select styling matches source: bg #efefef, 1px #c4c4c4, no radius,
+   Roboto 16px/500, padding 0 30px 0 15px, appearance:none + a "+" indicator. */
+body.sidebar main:not(:has(> .section.sidebar-nav.breadcrumb-container)) > .section.sidebar-nav .section-nav-select-wrapper {
+  position: relative;
+  margin: 0;
+}
+
+body.sidebar main:not(:has(> .section.sidebar-nav.breadcrumb-container)) > .section.sidebar-nav .section-nav-select {
+  width: 100%;
+  height: 40px;
+  box-sizing: border-box;
+  padding: 0 30px 0 15px;
+  border: 1px solid rgb(196 196 196);
+  border-radius: 0;
+  background-color: rgb(239 239 239);
+  color: var(--text-color);
+  font-family: var(--body-font-family);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 40px;
+  appearance: none;
+  cursor: pointer;
+}
+
+/* "+" indicator on the right edge of the box (source .fas.fa-plus) */
+body.sidebar main:not(:has(> .section.sidebar-nav.breadcrumb-container)) > .section.sidebar-nav .section-nav-select-wrapper::after {
+  content: '+';
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+  font-family: var(--body-font-family);
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--text-color);
+  pointer-events: none;
+}
+
+body.sidebar main:not(:has(> .section.sidebar-nav.breadcrumb-container)) > .section.sidebar-nav .section-nav-select:focus-visible {
+  outline: 2px solid var(--accent-color-hover, #27853c);
+  outline-offset: 2px;
+}
+
+/* Mobile: hide the desktop nav <ul> (the <select> is the nav). Scoped to the nav LIST
+   (inside .default-content-wrapper) so the sibling Iron Tolerance promo card — a Cards
+   block whose <ul> lives in .cards-wrapper — stays visible on mobile, matching source. */
+body.sidebar main:not(:has(> .section.sidebar-nav.breadcrumb-container)) > .section.sidebar-nav .default-content-wrapper ul {
+  display: none;
+}
+
+@media (width >= 900px) {
+  /* Desktop: show the list, hide the mobile select. */
+  body.sidebar main:not(:has(> .section.sidebar-nav.breadcrumb-container)) > .section.sidebar-nav .default-content-wrapper ul {
+    display: block;
+  }
+
+  body.sidebar main:not(:has(> .section.sidebar-nav.breadcrumb-container)) > .section.sidebar-nav .section-nav-select-wrapper {
+    display: none;
+  }
+}
+
+body.sidebar main > .section.sidebar-nav ul {
+  margin: 0;
+  /* Symmetric 20px inset (source .section-navigation padding-left AND padding-right):
+     the left inset starts the link text ~20px into the column; the RIGHT inset
+     constrains the text box so nav links wrap earlier and leave a clear gutter
+     before the content column (source: nav text box 173px wide within the 213px
+     column, ~80px visual gap to the content — WITHOUT the right inset the links run
+     to the column edge and crowd the content). */
+  padding: 0 20px;
+  list-style: none;
+}
+
+body.sidebar main > .section.sidebar-nav li {
+  margin: 0 0 16px;
+}
+
+/* PRODUCT HUBS (plain sidebar-nav, NOT the insights breadcrumb rail): the source
+   section-navigation draws a thin gray divider ABOVE each item (border-top 1px
+   #c4c4c4) with 12px vertical padding, so the links read as a bordered list
+   rather than a plain margin-separated stack. Scoped away from insights
+   (.breadcrumb-container), whose rail has no per-item dividers. */
+body.sidebar main:not(:has(> .section.sidebar-nav.breadcrumb-container)) > .section.sidebar-nav li {
+  margin: 0;
+  padding: 12px 0;
+  border-top: 1px solid rgb(196 196 196);
+}
+
+/* The LAST nav item also carries a bottom border in the source, closing the
+   bordered list (otherwise the final label has no divider beneath it). Applies
+   ONLY to FLAT product-hub lists — the NESTED nav (parent hub + child <ul>) draws
+   its single closing border on the parent <li>, so a last-child border there would
+   double up with it. Exclude the nested shape via :not(:has(> div > ul > li > ul)). */
+body.sidebar main:not(:has(> .section.sidebar-nav.breadcrumb-container)) > .section.sidebar-nav:not(:has(> div > ul > li > ul)) li:last-child {
+  border-bottom: 1px solid rgb(196 196 196);
+}
+
+body.sidebar main > .section.sidebar-nav a {
+  color: #000;
+  font-family: var(--heading-font-family);
+  font-size: 12px;
+  font-weight: 500; /* source sub-items: weight 500 */
+  line-height: 1.4;
+  text-decoration: none;
+}
+
+/* Source: the first item ("Compliance", the section root) is bold 900. */
+body.sidebar main > .section.sidebar-nav li:first-child a {
+  font-weight: 900;
+}
+
+/* PRODUCT HUBS: source renders ALL section-nav links bold (weight 900), not just
+   the first — the list is the 6 product categories, each a heavy link. */
+body.sidebar main:not(:has(> .section.sidebar-nav.breadcrumb-container)) > .section.sidebar-nav a {
+  font-weight: 900;
+}
+
+body.sidebar main > .section.sidebar-nav a:hover {
+  color: var(--accent-color-hover, #27853c);
+  text-decoration: underline;
+}
+
+/* ===== NESTED section-nav (industries detail: a parent hub <li> + a child <ul> of options) =====
+   Source structure: ONE parent <li> ("FCC Catalyst Solutions", the section hub) with borders top+
+   bottom of the whole list, bold (Roboto 900), then an indented nested <ul> of options (Roboto 500,
+   no per-item borders). Scoped to `:has(> div > ul > li > ul)` so product-hub FLAT lists and the
+   insights breadcrumb rail (no nesting) keep their existing per-item-border styling untouched.
+   Font is Roboto (body), NOT Roboto Slab. NOTE: the product-hub rules above use a
+   `main:not(:has(> .section.sidebar-nav.breadcrumb-container))` prefix that out-specifies a plain
+   `main > .section.sidebar-nav …` selector, so these rules REUSE that same prefix to win the cascade
+   (industries detail navs are not breadcrumb-container, so they'd otherwise inherit the hub's
+   all-bold + per-item-border styling). */
+body.sidebar main:not(:has(> .section.sidebar-nav.breadcrumb-container)) > .section.sidebar-nav:has(> div > ul > li > ul) li {
+  margin: 0;
+  padding: 0;
+  border-top: 0; /* undo the per-item border the flat-list/hub rule adds */
+  border-bottom: 0;
+}
+
+/* Parent hub row: the ONLY bordered element — 1px #c4c4c4 top + bottom, 12px vertical padding. */
+body.sidebar main:not(:has(> .section.sidebar-nav.breadcrumb-container)) > .section.sidebar-nav:has(> div > ul > li > ul) > div > ul > li {
+  padding: 12px 0;
+  border-top: 1px solid rgb(196 196 196);
+  border-bottom: 1px solid rgb(196 196 196);
+}
+
+/* Parent hub link: bold (900). */
+body.sidebar main:not(:has(> .section.sidebar-nav.breadcrumb-container)) > .section.sidebar-nav:has(> div > ul > li > ul) > div > ul > li > p,
+body.sidebar main:not(:has(> .section.sidebar-nav.breadcrumb-container)) > .section.sidebar-nav:has(> div > ul > li > ul) > div > ul > li > p a,
+body.sidebar main:not(:has(> .section.sidebar-nav.breadcrumb-container)) > .section.sidebar-nav:has(> div > ul > li > ul) > div > ul > li > a {
+  margin: 0;
+  font-family: var(--body-font-family);
+  font-size: 12px;
+  font-weight: 900;
+  line-height: 1.7;
+}
+
+/* Nested child <ul>: indent 10px (source), tight; children are lighter (500). */
+body.sidebar main:not(:has(> .section.sidebar-nav.breadcrumb-container)) > .section.sidebar-nav:has(> div > ul > li > ul) ul ul {
+  margin: 10px 0 0 10px;
+  padding: 0;
+  list-style: none;
+}
+
+body.sidebar main:not(:has(> .section.sidebar-nav.breadcrumb-container)) > .section.sidebar-nav:has(> div > ul > li > ul) ul ul li {
+  padding: 0;
+  margin: 0 0 7px;
+  border: 0;
+}
+
+body.sidebar main:not(:has(> .section.sidebar-nav.breadcrumb-container)) > .section.sidebar-nav:has(> div > ul > li > ul) ul ul li a {
+  font-family: var(--body-font-family);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.7;
+}
+
+/* ===== SIDEBAR PROMO CARD (e.g. "Iron Tolerance Advancements" whitepaper) =====
+   The left nav column can carry a resource-promo card beneath the links. The importer emits it as a
+   `Cards (industry)` block so it inherits image+link markup — but that variant's SECTION styling
+   (`.cards-container:has(.cards.industry)` in cards.css) is the HOMEPAGE full-bleed 1fr/2fr grid with
+   a green label banner, which blows the card out of the narrow nav column. Inside the sidebar-nav
+   rail, neutralize that: render a simple stacked image + plain text link that stays within the column,
+   matching the source's small whitepaper card. */
+body.sidebar main > .section.sidebar-nav.cards-container {
+  display: block;
+  background-color: transparent;
+  padding: 0;
+
+  /* NOTE: do NOT set margin here — the section-margin rules (base + desktop grid)
+     must keep governing the nav's top margin so it stays top-aligned with the
+     content column. This override only neutralizes the homepage container's
+     background/padding/grid, not its vertical rhythm. */
+}
+
+body.sidebar main > .section.sidebar-nav .cards-wrapper {
+  max-width: none;
+
+  /* MOBILE: match the 10px content gutter so the promo image + link don't sit flush
+     to the viewport edge (source insets it like the body copy). Desktop resets to 0 —
+     the card then aligns to the nav rail's left edge in the grid column. */
+  padding: 0 10px;
+  margin: 24px 0 0;
+}
+
+@media (width >= 900px) {
+  /* DESKTOP: inset the card by 20px each side to match the nav list's own padding, so the
+     promo image + link sit WITHIN the nav divider borders (the bordered parent <li> spans
+     the 20px-inset content box, x=40→213). Without this the card ran the full column width
+     (x=20→233) and bled ~20px past the divider on both sides. Source keeps it within. */
+  body.sidebar main > .section.sidebar-nav .cards-wrapper {
+    padding: 0 20px;
+  }
+}
+
+body.sidebar main > .section.sidebar-nav .cards.industry > ul {
+  display: block;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+body.sidebar main > .section.sidebar-nav .cards.industry > ul > li {
+  border: 0;
+  background: transparent;
+  overflow: visible;
+}
+
+body.sidebar main > .section.sidebar-nav .cards.industry > ul > li img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: auto;
+  object-fit: contain;
+  display: block;
+
+  /* MOBILE: the promo image is centered at a constrained width (source ~330px),
+     not full viewport width. Desktop resets to fill the narrow nav column. */
+  max-width: 330px;
+  margin-inline: auto;
+}
+
+@media (width >= 900px) {
+  body.sidebar main > .section.sidebar-nav .cards.industry > ul > li img {
+    max-width: none;
+    margin-inline: 0;
+  }
+}
+
+/* Link: plain black text below the image (NOT the green centered banner) */
+body.sidebar main > .section.sidebar-nav .cards.industry .cards-card-body {
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  text-align: left;
+}
+
+body.sidebar main > .section.sidebar-nav .cards.industry .cards-card-body a:any-link {
+  display: block;
+  padding: 16px 0 0;
+  font-family: var(--heading-font-family);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--text-color);
+  text-decoration: underline;
+  white-space: normal;
+  transition: color var(--transition-speed) ease;
+}
+
+/* the base .cards.industry rule appends a ' ›' chevron via ::after — the source
+   promo link has none, so suppress it in the sidebar rail. */
+body.sidebar main > .section.sidebar-nav .cards.industry .cards-card-body a::after {
+  content: none;
+}
+
+body.sidebar main > .section.sidebar-nav .cards.industry .cards-card-body a:hover {
+  background: transparent;
+  color: var(--link-hover-color);
+}
+
+/* PROMOTION tile (imageless `.cards.industry.promotion`, e.g. technical-service-expertise
+   "Specialized Evaluation Tools"). The generic industry-nav rules above style the IMAGE-based
+   promo card (transparent li, plain underlined black link). The imageless promotion card is
+   different: source renders a light-gray geo-lines tile with a solid GREEN "Learn more" button
+   (black label + › chevron). These `.promotion`-scoped rules carry one extra class of specificity
+   so they win over the generic ones above. Verified against the live source computed styles. */
+/* stylelint-disable no-descending-specificity -- these .promotion overrides intentionally follow
+   the generic .cards.industry rules above; the extra class is what makes them win. */
+body.sidebar main > .section.sidebar-nav .cards.industry.promotion > ul > li {
+  /* padding comes from the block rule (blocks/cards/cards.css) which uses !important to win
+     over the base `.cards.industry > ul > li` reset that loads after this template sheet. */
+  background-color: rgb(230 231 232);
+  background-image: url('https://grace.scene7.com/is/image/grace/blue-green-lines');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+body.sidebar main > .section.sidebar-nav .cards.industry.promotion .cards-card-body a:any-link {
+  display: block;
+  margin-top: 40px;
+  padding: 10px;
+  background-color: rgb(122 193 67);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+/* Restore the › chevron the generic rule suppresses — the green button carries one. */
+body.sidebar main > .section.sidebar-nav .cards.industry.promotion .cards-card-body a::after {
+  content: ' \203A';
+  font-size: 1.1em;
+}
+
+body.sidebar main > .section.sidebar-nav .cards.industry.promotion .cards-card-body a:hover {
+  background-color: rgb(105 176 50);
+  color: var(--text-color);
+}
+/* stylelint-enable no-descending-specificity */
+
+/* PRODUCT HUBS — two-column product-nav list (catalysts, synthetic-silicas).
+   Source lays the main-column product list as TWO side-by-side <ul> groups
+   (~313px each, 40px gap). In our EDS output the two groups are consecutive
+   top-level <ul> children of the content .default-content-wrapper. Only engage
+   the 2-col layout when there ARE two groups (`:has(> ul + ul)`), so single-list
+   hubs (adsorbents, fine-chemicals) stay full-width. Base = stacked (mobile);
+   from 600px the two groups sit side by side. Scoped away from insights. */
+body.sidebar main:not(:has(> .section.sidebar-nav.breadcrumb-container)) > .section .default-content-wrapper:has(> ul + ul) > ul {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+@media (width >= 600px) {
+  body.sidebar main:not(:has(> .section.sidebar-nav.breadcrumb-container)) > .section .default-content-wrapper:has(> ul + ul) > ul {
+    display: inline-block;
+    width: calc(50% - 20px);
+    vertical-align: top;
+  }
+
+  /* the second group gets the 40px inter-column gap (source) */
+  body.sidebar main:not(:has(> .section.sidebar-nav.breadcrumb-container)) > .section .default-content-wrapper:has(> ul + ul) > ul + ul {
+    margin-left: 40px;
+  }
+}
+
+/* M2 (mobile): on the insights article the source stacks the ARTICLE first and
+   drops the SHARE/breadcrumb/POSTED rail to the END. In our DOM the sidebar-nav
+   rail comes before the content, so on mobile flip the order. Scoped via :has() to
+   the insights layout (the rail carries .breadcrumb-container) so the compliance
+   section-nav page keeps its natural nav-then-content order. The >=900px grid
+   below re-establishes explicit column placement. */
+body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) {
+  display: flex;
+  flex-direction: column;
+}
+
+/* MB1 (mobile): the article (columns-container, order:1) must sit right under the
+   header like live (H1 top ~61px), not ~214px. The global `main > .section` 50px
+   block margin — plus the empty custom-widget's 50px — pushed it down ~150px. On
+   mobile zero the top margin of the first content section (which also holds order:1).
+   The >=900px grid re-applies desktop spacing. */
+body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section.columns-container {
+  order: 1;
+  margin-top: 0;
+}
+
+body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section.sidebar-nav.breadcrumb-container {
+  order: 2;
+}
+
+/* MF4 (mobile): the related-cards section sits directly under the POSTED/INDUSTRY
+   rail on the source (~87px gap). Because the mobile layout is a flex column, the
+   rail's margin-bottom (50px) and this section's margin-top (50px) DON'T collapse,
+   and the cards block adds an 80px top padding — stacking to ~196px of dead space.
+   Zero the top margin and trim the top padding so the cards butt up under the rail
+   like live. The >=900px grid restores desktop spacing. */
+body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section.cards-container {
+  order: 3;
+  margin-top: 0;
+  padding-top: 20px;
+}
+
+/* "Follow Us" social-follow block: full-width dark ribbon that sits AFTER the related cards
+   and BEFORE the contact banner (source order). Like cards + banner it needs an explicit
+   `order` — without it the section defaults to order:0 and CSS Grid auto-placement floats it
+   ABOVE the cards, AND it inherits grid-column:3 (the 747px content column) so the dark ribbon
+   clips/overflows instead of spanning the band. Give it order:4 and full-bleed. */
+body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section:has(.social.follow) {
+  order: 4;
+}
+
+/* The "Want to talk to an expert?" contact-split banner sits ABOVE the footer — i.e. LAST,
+   after the related cards + Follow Us. It comes last in the DOM already, but the cards carry
+   order:3 for the mobile flex column; give the banner order:5 so it stays last on mobile AND —
+   critically — on the >=900px grid, where CSS Grid auto-placement also honours `order`. Without
+   this the banner (default order:0) would be auto-placed into an earlier grid row than the
+   order:3 cards, rendering the banner above the cards and pushing the cards onto the footer. */
+body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section:has(.banner.contact-split) {
+  order: 5;
+}
+
+body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .custom-widget-container {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+/* MF2 + MF5 (mobile): the sidebar rail wrappers (breadcrumb/social/post-meta) inherit
+   the global 20px section inset. Align the rail to the same 10px content edge as the
+   body, AND center everything — on mobile the source CENTERS the whole rail (breadcrumb,
+   SHARE label, icons, POSTED/INDUSTRY labels+values, full-width dividers). Desktop
+   restores the left-aligned rail at x=100 (padding-left:20px + text-align:left) at
+   >=900px below. */
+body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section.sidebar-nav.breadcrumb-container > div {
+  padding-left: 10px;
+  padding-right: 10px;
+  text-align: center;
+}
+
+/* MF5 (mobile): a block-level <ol> won't honour the wrapper's text-align:center, so
+   make the breadcrumb list inline-block to center it as a group. (Inline-block also
+   sits flush-left under the desktop text-align:left, so this is safe at all widths.) */
+body.sidebar main > .section.sidebar-nav.breadcrumb-container .breadcrumb nav ol {
+  display: inline-block;
+}
+
+/* ---- >=900px: engage the nav + content band ---- */
+@media (width >= 900px) {
+  /* main is a FULL-WIDTH grid so the hero band bleeds edge-to-edge. The content
+     columns are centered in a 1280px band via flexible gutter tracks. Columns
+     match source: nav col-lg-2 (213px) | main col-lg-7 (747px) | widget col-lg-3
+     (320px, the gutter the floating widget overlays). */
+  body.sidebar main,
+  body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) {
+    display: grid;
+    position: relative;
+    grid-template-columns:
+      minmax(20px, 1fr)
+      minmax(0, 213px)
+      minmax(0, 747px)
+      minmax(0, 320px)
+      minmax(20px, 1fr);
+    align-items: start;
+  }
+
+  /* Source spacing: content sits 50px below the hero band (source article
+     padding-top: 5rem = 50px), not the global desktop section margin of
+     --spacing-xl (80px). Scope 50px to sidebar pages so the hero-to-content gap
+     matches the live site; the homepage and other templates keep their 80px.
+     Exclude the hero-container — it must stay margin:0 (this selector is more
+     specific than the global `.section.hero-container { margin: 0 }` reset, so
+     without the :not() it would give the hero a 50px bottom margin → 100px gap). */
+  body.sidebar main > .section:not(.hero-container, .custom-widget-container) {
+    margin-block: var(--spacing-l); /* 50px */
+  }
+
+  /* Restore the 50px top margin on the content section that follows the nav rail
+     — the mobile rule (`.sidebar-nav + .section { margin-top: 10px }`, which tightens
+     the gap under the collapsed <select> filter) is more specific than the rule
+     above, so re-assert it here for desktop where the nav is the left grid column. */
+  body.sidebar main > .section.sidebar-nav + .section {
+    margin-top: var(--spacing-l); /* 50px */
+  }
+
+  /* Trademark/copyright DISCLAIMER — the last content section is a lone <h5>
+     (ART®/GRACE® trademarks + © line) that sits just above the footer. Source spaces
+     it ~20px above and below (tight), NOT the 50px content-section margin, which left
+     an oversized empty band above the footer. Signature: a section whose sole content
+     is one <h5>. Tighten its block margin to 20px. */
+  /* stylelint-disable no-descending-specificity -- this disclaimer rule intentionally follows the
+     earlier grid-column rules; the :has() lone-<h5> signature is what makes it win. */
+  body.sidebar main > .section:has(> .default-content-wrapper > h5:only-child) {
+    margin-block: var(--spacing-s); /* 20px */
+    grid-column: 1 / -1; /* span the full band; the wrapper below centers it (source is centered) */
+  }
+
+  body.sidebar main > .section:has(> .default-content-wrapper > h5:only-child) > .default-content-wrapper {
+    max-width: 690px;
+    margin-inline: auto;
+    text-align: center;
+  }
+  /* stylelint-enable no-descending-specificity */
+
+  /* Grid margins don't collapse, so two stacked content sections show
+     50px (bottom) + 50px (top) = ~100px between them. On product hubs the gray
+     reps callout must butt close under the preceding content (source gap ~21px,
+     NOT 100px). Zero the preceding section's bottom margin and give the callout a
+     small 20px top margin so the total gap ≈ 20px. Insights unaffected. */
+  body.sidebar main:not(:has(> .section.sidebar-nav.breadcrumb-container)) > .section:has(+ .section.gray-callout) {
+    margin-bottom: 0;
+  }
+
+  body.sidebar main:not(:has(> .section.sidebar-nav.breadcrumb-container)) > .section.gray-callout {
+    margin-top: 20px;
+  }
+
+  /* Video (media-callout) section: grid margins don't collapse, so the preceding
+     content section's 50px bottom + this section's 50px top = 100px gap. Source is
+     ~46px (the video sits close under the intro). Zero this section's top margin so
+     the combined gap ≈ 50px, matching source. */
+  body.sidebar main > .section.video-container {
+    margin-top: 0;
+  }
+
+  /* Hero band: row 1, full bleed across all columns (the hero block paints its
+     own blue background and centers its own content). */
+  body.sidebar main > .section.hero-container {
+    grid-column: 1 / -1;
+    grid-row: 1;
+  }
+
+  /* Left section-navigation: nav column, starting at row 2. SPAN many rows so the
+     rail's full height (nav list + promo card, ~470px) distributes DOWN col 2 across
+     the content rows instead of inflating row 2 alone. Without the span, row 2 grows
+     to the tall rail's height and the short intro paragraph beside it (col 3, row 2)
+     leaves a large empty gap before the next col-3 section (the video) — see the
+     source, where content flows at its natural top with no gap. align-self:start keeps
+     the rail pinned to its natural height at the top of the span. */
+  body.sidebar main > .section.sidebar-nav {
+    grid-column: 2;
+    grid-row: 2 / span 999;
+    align-self: start;
+  }
+
+  /* Neutralize the global 1200px inner-centering inside the nav + content
+     sections so they fill their grid cells. Nav wrapper has no inset (its <ul>
+     carries the 20px left inset). */
+  body.sidebar main > .section.sidebar-nav > div {
+    max-width: none;
+    margin-inline: 0;
+    padding-inline: 0;
+  }
+
+  /* Main content wrapper: fill the grid cell but keep the source's 20px side inset
+     (source .rich-text padding: 0 20px), so text sits at 313/1020 within the
+     293/1040 column and the nav-to-content gap matches (~48px). Excludes the
+     full-width contact-split banner section (handled separately below). */
+  body.sidebar main > .section:not(.hero-container, .sidebar-nav, .custom-widget-container):not(:has(.banner.contact-split)) > div {
+    max-width: none;
+    margin-inline: 0;
+    padding-inline: 20px;
+  }
+
+  /* Main content: content column (col 3). Multiple content sections (e.g. an insights
+     article body + Featured Service block) FLOW VERTICALLY down column 3 rather than all
+     stacking in one cell — each takes the next auto row. The nav explicitly holds row 2 in
+     col 2, so col-3 content auto-fills rows 2, 3, 4… beside/after it. */
+  body.sidebar main > .section:not(.hero-container, .sidebar-nav, .custom-widget-container) {
+    grid-column: 3;
+  }
+
+  /* Full-width sections that break out of the content column and span the whole band on their
+     own row: the contact-split banner, the Follow-Us social ribbon, AND the resource-download
+     banner (Grace Essential Articles gray band) span all columns. (Without this, the section
+     inherits grid-column:3 = the 747px content column, so the banner's gray band is confined to
+     the narrow content column instead of running edge-to-edge like the source.) */
+  /* stylelint-disable no-descending-specificity -- these full-width breakout selectors intentionally
+     follow the earlier h5-disclaimer rule; reordering them would break the grid override cascade. */
+  body.sidebar main > .section:has(.banner.contact-split),
+  body.sidebar main > .section:has(.banner.resource-download),
+  body.sidebar main > .section:has(.banner.cta),
+  body.sidebar main > .section:has(.social.follow) {
+    grid-column: 1 / -1;
+  }
+  /* stylelint-enable no-descending-specificity */
+
+  /* Re-center the resource-download banner's own content within the full-width band and cap it
+     to the page container so the image + text don't stretch across the whole viewport
+     (matches source: full-bleed gray band, content centered in the 1280px container). */
+  body.sidebar main > .section:has(.banner.resource-download) > div {
+    max-width: 1280px;
+    margin-inline: auto;
+    padding-inline: 20px;
+  }
+
+  /* Restore the section gap AFTER a full-width banner.cta. The banner block's global CSS zeroes its
+     section margins (`margin: 0 !important` for the campaign full-bleed band), which also collapses
+     the space above the FOLLOWING section (e.g. "Latest Insights" jammed against the e-catalysts
+     banner). The later cards-container rule (`…breadcrumb-container) > .section.cards-container`)
+     also zeroes margin-top; qualify both section classes here so this exception outranks it.
+     Source keeps ~40px there — give the next section its 50px top margin back. */
+  /* stylelint-disable no-descending-specificity -- this exception is intentionally more specific
+     than the cards-container grid rules that follow so it outranks the margin-top:0 zeroing rule. */
+  body.sidebar main > .section.banner-container:has(.banner.cta) + .section.cards-container {
+    margin-top: var(--spacing-l); /* 50px */
+  }
+
+  /* Insights related-articles cards: DEFAULT (most pages, e.g. the ML reference + 4-ways +
+     chromatography article) render the cards in the nav+content band (cols 2–3) on PLAIN WHITE,
+     left edge aligned to the GRACE logo / rail (x=100). Only the rarer `.geo-hex` variant (source
+     `section.geoAndHex`, e.g. a-brewery-goes-green) makes the section full-bleed with the gray
+     hexagon band — see the geo-hex rules further below, which override grid-column + add the
+     decorative layers. */
+  body.sidebar main > .section.cards-container:has(.cards.featured-content) {
+    grid-column: 2 / 4;
+  }
+
+  /* Product BENEFIT grids (icon/title + bullet list, e.g. renewable-diesel "Improved Productivity /
+     Reduced Environmental Footprint / Safety and Handling") — source lays them 3-across (col-lg-4)
+     across the WIDE content area. Confined to the 707px content column (col 3) each card is only
+     ~203px, forcing heavy bullet wrapping. Span the nav+content+widget band (cols 2–4) so the three
+     cards get source-comparable width. Scoped to product-card sections that are NOT the homepage
+     4-up tile row (those live on landing pages, not the sidebar detail layout). */
+  body.sidebar main > .section.cards-container:has(.cards.product) {
+    grid-column: 2 / 4;
+  }
+  /* stylelint-enable no-descending-specificity */
+
+  /* A standalone CONTENT-IMAGE section (its only content is a picture/img — e.g. the
+     hydrogenation-catalysts RANEY flowchart diagram). Source renders these `col-lg-12 full-width`
+     across the whole content area, so confined to the 707px content column (col 3) the wide diagram
+     shrinks (renders ~156px tall). Span the nav+content band (cols 2–4) so the diagram gets its
+     source-comparable width. Scoped to a plain `.section` (no block container class) whose
+     default-content-wrapper holds only a picture. */
+  body.sidebar main > .section:not([class*="-container"]):has(> .default-content-wrapper > picture:only-child),
+  body.sidebar main > .section:not([class*="-container"]):has(> .default-content-wrapper > p:only-child > picture:only-child) {
+    /* span the FULL band (nav + content + widget gutter) so a wide diagram renders large, matching
+       the source's col-lg-12 full-width treatment. */
+    grid-column: 2 / 5;
+  }
+
+  /* let the diagram image fill that full-band width (the global picture max-width is fine, but ensure
+     it stretches to the band rather than capping at the content column). */
+  body.sidebar main > .section:not([class*="-container"]):has(> .default-content-wrapper > picture:only-child) > .default-content-wrapper,
+  body.sidebar main > .section:not([class*="-container"]):has(> .default-content-wrapper > p:only-child > picture:only-child) > .default-content-wrapper {
+    max-width: none;
+  }
+
+  body.sidebar main > .section:not([class*="-container"]):has(> .default-content-wrapper > picture:only-child) picture,
+  body.sidebar main > .section:not([class*="-container"]):has(> .default-content-wrapper > picture:only-child) picture img {
+    width: 100%;
+    height: auto;
+  }
+
+  /* Wide DATA TABLE (data-grid): the source renders these product-property tables
+     ~920px wide (full content article), but confined to the 707px content column
+     (col 3) the table's min-width forces horizontal overflow + scroll, cramping the
+     cells. Span the nav+content+widget band (cols 2–4) so the table gets its source
+     width and the boxes read full-size. The sticky widget rests far above these
+     tables (they sit well below the fold), so there is no collision. */
+  body.sidebar main > .section.table-container:has(.table.data-grid) {
+    grid-column: 2 / 4;
+  }
+
+  body.sidebar main > .section.table-container:has(.table.data-grid) > div {
+    max-width: none;
+  }
+
+  /* Three-column APPLICATION table (e.g. static-adsorbents "Silica Type / Product Grade /
+     Application / Grade Usage"): UNLIKE the wide data-grid, the source keeps this table INSIDE
+     the article/content column so its left edge lines up with the body copy above (the bullet
+     list) and the heading below ("Pharmaceutical Packaging"). Leaving it in the default content
+     cell (col 3) achieves that; we only widen the wrapper so the table fills the column and let
+     the columns wrap to fit (see table.css min-width override) instead of overflow-scrolling. */
+  body.sidebar main > .section.table-container:has(.table.three-column) > div {
+    max-width: none;
+  }
+
+  /* COMPARISON-MATRIX three-column table (herbal-medicine feature×product grid): UNLIKE the
+     application table, the source renders this wide striped matrix across the nav+content band
+     (~980px), not confined to the prose column. Span cols 2–4 so it gets its source width. Repeats
+     the :has() twice to out-specify the plain three-column rule above. */
+  body.sidebar main > .section.table-container:has(.table.three-column.comparison-matrix) {
+    grid-column: 2 / 4;
+  }
+
+  /* Featured PRODUCT-SELECTOR: source lays the white label tile + dark product
+     strip across the FULL content article (~973px, left edge aligned), not the
+     707px content column — confined to col 3 the tiles crush to ~148px and titles
+     wrap to 4 lines. Span the nav+content+widget band (cols 2–4) so the strip gets
+     source-comparable width and each tile is ~230–250px. Sits below the fold, so no
+     widget collision. */
+  body.sidebar main > .section.featured-container:has(.featured.product-selector) {
+    /* Span into the widget column so the strip can reach the source's ~973px width (label 223
+       + 3 tiles × 250). Cols 2–4 only gave 920px (tiles ~219). The widget rests far above this
+       block, so extending into its column doesn't collide. */
+    grid-column: 2 / 5;
+  }
+
+  body.sidebar main > .section.featured-container:has(.featured.product-selector) > div {
+    /* Source strip is exactly 973px wide (label 223 + 3 tiles × 250; spans x=40→1013 at 1280).
+       Cap the inner wrapper to 973px so the strip matches rather than stretching the full band. */
+    max-width: 973px;
+    margin-inline: 0;
+  }
+
+  /* Source: the dark product strip OVERFLOWS ~50% DOWN into the following gray "Latest
+     Insights" band — the strip's vertical centre lands exactly on the white→gray boundary
+     (top half on white, bottom half on gray). Reproduce by pulling the next section up under
+     the strip's lower half: the tile row is 160px tall, centred inside the 224px section (32px
+     transparent pad top+bottom), so its centre is 112px above the section bottom (32px pad +
+     80px half-tile). A -112px bottom margin moves the gray band up to that centre line; the
+     featured section is lifted above the gray fill so the tiles stay on top. Spacing ABOVE the
+     strip (from the last text section) is untouched. Desktop only — mobile stacks a carousel. */
+  body.sidebar main > .section.featured-container:has(.featured.product-selector) {
+    position: relative;
+    z-index: 2;
+    margin-bottom: -112px;
+  }
+
+  /* The gray band pulled up under the strip must still start its OWN content (heading + cards)
+     BELOW the overflowing strip — the source clears the strip's lower half (~80px) then adds its
+     usual ~31px gap before "Latest Insights". The gray section's default 40px top-pad would let
+     the strip's bottom half cover the heading, so bump the top pad to ~111px for the gray band
+     that immediately follows the overflowing product-selector. */
+  body.sidebar main > .section.featured-container:has(.featured.product-selector)
+    + .section.gray-band.cards-container {
+    padding-top: 111px;
+  }
+
+  /* Let the banner's own content re-center within the band (undo the nav/content
+     column's max-width:none reset for this full-width section). */
+  body.sidebar main > .section:has(.banner.contact-split) > div {
+    max-width: none;
+  }
+
+  /* Contact widget: the block self-floats — its OWN CSS makes it height:0 with a
+     100vw breakout and the panel absolutely positioned; its JS switches the panel
+     to fixed (top:106) on scroll. The block must stay in NORMAL grid flow (never
+     position:absolute) so its JS can read a stable document position for the
+     stick threshold. Pin it to the TOP of the hero row (grid-row 1, align-self
+     start, height 0) so its flow origin coincides with the hero band top. */
+  body.sidebar main > .custom-widget-container {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    align-self: start;
+    height: 0;
+    min-height: 0;
+    margin: 0;
+    z-index: 20;
+  }
+
+  /* Resting position (NON-stuck only): the widget-container's flow top coincides with
+     the hero band top. Source lands the panel ~173px below the hero top (measured at
+     1280px: hero 121→394, panel top 294), so its lower half straddles the hero's bottom
+     edge and hangs onto the white content band below — NOT tucked high inside the hero.
+     Offset the panel by that amount. Scoped to :not(.is-stuck) so it does NOT override
+     the block's stuck landing spot (fixed, top:106). The block JS switches to
+     .is-stuck once the panel's top reaches 106px on scroll. */
+  body.sidebar .custom-widget.contact-sticky:not(.is-stuck) .contact-sticky-desktop {
+    top: 173px;
+  }
+
+  /* INSIGHTS pages (breadcrumb-container marker) have NO hero band — the content
+     column starts at the article top. The source lands the Contact-Us green panel
+     ~100px BELOW the article/H1 top (measured at 1280px: H1 top 121, panel top 221),
+     not straddling a hero (there is none) and not tucked to the very top. The
+     product-hub 173px offset above was tuned for a 121→394 hero band and sits too
+     low here. Set the insights resting offset to 100px. Product hubs (no
+     breadcrumb-container) keep 173px; product-detail pages use body.contactus. */
+  body.sidebar:has(main > .section.sidebar-nav.breadcrumb-container) .custom-widget.contact-sticky:not(.is-stuck) .contact-sticky-desktop {
+    top: 100px;
+  }
+}
+
+/* =====================================================================
+   Insights ARTICLE (blog-detail) overrides — a sidebar page with no hero
+   band. Fixes: social icon color, feature dark card, top spacing, H1 lh.
+   These intentionally override earlier nav rules; disable the source-order
+   specificity lint for this override block. */
+/* stylelint-disable no-descending-specificity */
+
+/* FIX 1 + FIX 2: insights left-rail placement (desktop grid only). Scoped to the
+   insights rail via .breadcrumb-container so the compliance section-nav (whose <ul>
+   carries its own inset) is untouched.
+   FIX 1 — inset the rail 20px from the grid-column edge, matching source .col-lg-2
+   (padding-left:20px → content left 100px, not 80px).
+   FIX 2 — the source breadcrumb area is ~100px tall (padding-top:45px), dropping the
+   share block to top ~221px; match that lead space above the breadcrumb. */
+@media (width >= 900px) {
+  /* :has() specificity matches the mobile MF2 rule so the 20px grid inset wins at
+     desktop (the mobile rule aligns the rail to the 10px content edge). MF5: also
+     reset the mobile centering back to LEFT — on desktop the whole rail is
+     left-aligned at x=100 (breadcrumb, SHARE label, icons, POSTED/INDUSTRY). */
+  body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section.sidebar-nav.breadcrumb-container > div {
+    padding-left: 20px;
+    padding-right: 0;
+    text-align: left;
+  }
+
+  /* MF5: desktop restores the left-aligned SHARE label + icon row (flush at x=100).
+     The mobile-base centering rules appear LATER in source order with equal
+     specificity, so match the higher `:has()` specificity (like the > div rule
+     above) to ensure the desktop left-align wins. */
+  body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section.sidebar-nav.breadcrumb-container .social.share,
+  body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section.sidebar-nav.breadcrumb-container .social.share .social-share-label,
+  body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section.sidebar-nav.breadcrumb-container .social.share .social-share-list {
+    text-align: left;
+  }
+
+  body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section.sidebar-nav.breadcrumb-container .social.share .social-share-list {
+    justify-content: flex-start;
+  }
+
+  /* MF5: desktop restores the 173px left-aligned POSTED/INDUSTRY divider width. */
+  body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section.sidebar-nav.breadcrumb-container .post-meta dl {
+    max-width: 173px;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  /* DS1: breadcrumb box is ~100px tall on source — breadcrumb links at ~165px, block
+     bottom (where SHARE begins) at ~221px. 45px top + 33px nav + ~22px bottom = ~100px,
+     landing the SHARE label at 221px (was 245 with 45px bottom padding). */
+  body.sidebar main > .section.sidebar-nav.breadcrumb-container > .breadcrumb-wrapper {
+    padding-top: 45px;
+    padding-bottom: 22px;
+  }
+
+  /* D2c: SHARE starts flush below the breadcrumb (source has no extra gap). */
+  body.sidebar main > .section.sidebar-nav.breadcrumb-container > .social-wrapper {
+    padding-top: 0;
+  }
+
+  /* D2d: tighten SHARE->POSTED gap (source ~15px). */
+  body.sidebar main > .section.sidebar-nav.breadcrumb-container > .post-meta-wrapper {
+    padding-top: 0;
+  }
+}
+
+/* D2a: the social share list adds a left offset that pushes the first icon to
+   ~110px; source's first icon sits at 100px (flush with the rail inset). Remove it. */
+body.sidebar main > .section.sidebar-nav.breadcrumb-container .social.share {
+  margin-left: 0;
+  padding-left: 0;
+}
+
+body.sidebar main > .section.sidebar-nav.breadcrumb-container .social.share > div:first-child {
+  margin-left: 0;
+  padding-left: 0;
+}
+
+/* D1: the social share block lives in the left rail (.sidebar-nav). The nav's
+   `a { color:#000 }` rule (above) has higher specificity than the social block's
+   own white, so the currentColor SVG icons render black-on-black. Restore white
+   on the black circle (and green on hover) here. */
+body.sidebar main > .section.sidebar-nav .social.share .social-share-button {
+  color: #fff;
+}
+
+body.sidebar main > .section.sidebar-nav .social.share .social-share-button:hover,
+body.sidebar main > .section.sidebar-nav .social.share .social-share-button:focus {
+  color: var(--accent-color-hover, #27853c);
+}
+
+/* DS2: SHARE label matches source — 10px/1.0 (height 10px), not the inherited 1.7
+   (17px), which was nudging the icon row down. */
+body.sidebar main > .section.sidebar-nav .social.share .social-share-label {
+  line-height: 1;
+}
+
+/* DS3 / MF5 (mobile-first): the source CENTERS the SHARE label + icon row on mobile
+   and LEFT-aligns them at x=100 on desktop. Base = centered (icon row
+   justify-content:center, text-align:center); the >=900px block flips to flush-left. */
+body.sidebar main > .section.sidebar-nav .social.share .social-share-list {
+  justify-content: center;
+}
+
+body.sidebar main > .section.sidebar-nav.breadcrumb-container .social.share,
+body.sidebar main > .section.sidebar-nav.breadcrumb-container .social.share .social-share-label,
+body.sidebar main > .section.sidebar-nav.breadcrumb-container .social.share .social-share-list {
+  text-align: center;
+}
+
+/* SIDEBAR BUG 2: the base section-nav rule adds a 1px #d2d2d2 border-top to every
+   direct wrapper (correct for the compliance nav list, wrong here). The insights
+   rail must have NO line at the top, above SHARE, or on the post-meta wrapper — the
+   only dividers are the two before POSTED/INDUSTRY (on the <dt>s). Remove the
+   wrapper border-tops (and their 20px top pad) for the insights rail. */
+body.sidebar main > .section.sidebar-nav.breadcrumb-container > .breadcrumb-wrapper,
+body.sidebar main > .section.sidebar-nav.breadcrumb-container > .social-wrapper,
+body.sidebar main > .section.sidebar-nav.breadcrumb-container > .post-meta-wrapper {
+  border-top: 0;
+}
+
+/* D14: POSTED / INDUSTRY definition list — label above value, matching source. */
+body.sidebar main > .section.sidebar-nav dl {
+  margin: 20px 0 0;
+}
+
+/* MF5 (mobile-first): the source's mobile dividers above POSTED/INDUSTRY span the
+   FULL rail width (centered), not the 173px left-aligned desktop width. Override the
+   post-meta block's base max-width:173px so the mobile dividers are full-width. The
+   >=900px block above restores the 173px left-aligned divider for desktop. */
+body.sidebar main > .section.sidebar-nav.breadcrumb-container .post-meta dl {
+  max-width: none;
+}
+
+body.sidebar main > .section.sidebar-nav dt {
+  font-family: var(--heading-font-family);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+body.sidebar main > .section.sidebar-nav dd {
+  margin: 2px 0 16px;
+  font-size: 14px;
+}
+
+/* D5 / NEW-4: "Featured Service" label above the dark card. Source is a styled
+   <p class="subhead-large"> (a label, not a heading). The markdown round-trip strips
+   authored classes, so match it structurally: the last <p> in the content
+   default-content-wrapper that immediately precedes the Featured Service columns block.
+   Source: 20px / weight 300 / line-height 30px / margin-bottom 25px. */
+body.sidebar main .default-content-wrapper:has(+ .columns-wrapper) > p:last-child {
+  margin: 0 0 25px;
+  font-family: var(--heading-font-family);
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 30px;
+}
+
+/* Optional-subhead (source `<span class="optional-subhead">`): the intro line
+   between the H1 and the lead image. Markdown strips the authored class, so match
+   it STRUCTURALLY: the H1's immediately-following `<p>` that has NO image of its
+   own and is immediately followed by the lead image — either a bare `<picture>`
+   (the DM/Scene7 auto-block unwraps the markdown `<p>`) or a `<p>` wrapping the
+   image (native EDS). NOTE: `:has(+ p img)` — NOT `:has(+ p:has(img))`. A nested
+   `:has()` is INVALID CSS; the browser then drops the ENTIRE comma-group rule
+   (including its valid sibling), which previously left the subhead at 14px body
+   text. `+ p img` (descendant, not nested :has) expresses the same "next sibling
+   is a <p> containing an image" and parses fine. The `:has(> .breadcrumb-container)`
+   scope + this specificity out-rank the broadened body `p` rules (FIX 9 21px margin
+   + the >=900px 1.7 line-height), so it wins at every breakpoint without
+   `!important`. Source: 20px Roboto Slab / weight 300 / line-height 30px, 49px gap
+   to the image below. */
+body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section > .default-content-wrapper h1 + p:not(:has(img)):has(+ picture),
+body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section > .default-content-wrapper h1 + p:not(:has(img)):has(+ p img) {
+  margin: 0 0 49px;
+  font-family: var(--heading-font-family); /* Roboto Slab */
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 1.5; /* 20px x 1.5 = 30px, matches source */
+}
+
+/* FIX 3: lead media-callout hero image. Source renders it 707x397 (a fixed
+   16:9-ish ratio box, taller than the 1200x628 natural 707x370), with 25px space
+   above and 50px below. Match: force the source aspect ratio and add the vertical
+   rhythm. Reserve the fixed hero height on the hero WRAPPER so the box holds 208px
+   from the first layout frame (before the image decodes), preventing body-copy
+   reflow (CLS). Shapes matched: a `<p>` wrapping the img (native EDS image) OR a
+   bare `<picture>` — the DM/Scene7 auto-block unwraps the markdown `<p>` and
+   replaces the carrier anchor with a top-level `<picture>`. Each can sit either
+   directly after the H1, OR after an optional-subhead `<p>` (h1 + p + …). */
+body.sidebar main .default-content-wrapper h1 + p:has(img),
+body.sidebar main .default-content-wrapper h1 + picture,
+body.sidebar main .default-content-wrapper h1 + p + p:has(img),
+body.sidebar main .default-content-wrapper h1 + p + picture {
+  height: 208px;
+  margin: 25px 0 50px;
+  overflow: hidden;
+}
+
+/* The subhead already supplies the 49px lead gap above the image, so when the
+   image follows a subhead its own top margin collapses to 0 (keep the 50px below). */
+body.sidebar main .default-content-wrapper h1 + p + p:has(img),
+body.sidebar main .default-content-wrapper h1 + p + picture {
+  margin-top: 0;
+}
+
+/* Mobile base: source mobile hero is ~208px tall. Desktop (>=900px) overrides to 397px.
+   The <picture> wrapper must ALSO fill the reserved box so the image is stable. */
+body.sidebar main .default-content-wrapper h1 + p:has(img) picture,
+body.sidebar main .default-content-wrapper h1 + p:has(img) img,
+body.sidebar main .default-content-wrapper h1 + picture,
+body.sidebar main .default-content-wrapper h1 + picture img,
+body.sidebar main .default-content-wrapper h1 + p + p:has(img) picture,
+body.sidebar main .default-content-wrapper h1 + p + p:has(img) img,
+body.sidebar main .default-content-wrapper h1 + p + picture,
+body.sidebar main .default-content-wrapper h1 + p + picture img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (width >= 900px) {
+  body.sidebar main .default-content-wrapper h1 + p:has(img),
+  body.sidebar main .default-content-wrapper h1 + picture,
+  body.sidebar main .default-content-wrapper h1 + p + p:has(img),
+  body.sidebar main .default-content-wrapper h1 + p + picture {
+    height: 397px;
+  }
+}
+
+/* HERO CAPTION (source .media-callout .caption under the lead image, e.g. "Catalyst
+   Evaluation 2022"). The lead image carries a 50px bottom margin (FIX 3) so the next
+   body content clears it — but when a caption follows the image, that 50px wrongly
+   lands BETWEEN the image and its caption, floating the caption far below the image.
+   Source layout: caption sits 20px under the image, then 50px of rhythm to the next
+   content. So: (1) when a caption immediately follows the hero image, drop the image's
+   bottom margin to 20px; (2) style the caption itself (source: 12px italic gray, lh 18px)
+   and carry the 50px below it. Match the caption STRUCTURALLY — an italic <p> (sole child
+   <em>) right after the hero image (bare <picture> or <p><img>), with/without a preceding
+   optional-subhead <p>. Scoped with the same `main:has(> .breadcrumb-container)` prefix as
+   FIX 9 (+ the extra element chain) so it out-specifies FIX 9's `> p { margin-bottom }`. */
+body.sidebar main .default-content-wrapper h1 + p:has(img):has(+ p > em:only-child),
+body.sidebar main .default-content-wrapper h1 + picture:has(+ p > em:only-child),
+body.sidebar main .default-content-wrapper h1 + p + p:has(img):has(+ p > em:only-child),
+body.sidebar main .default-content-wrapper h1 + p + picture:has(+ p > em:only-child) {
+  margin-bottom: 20px;
+}
+
+body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section > .default-content-wrapper h1 + picture + p:has(> em:only-child),
+body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section > .default-content-wrapper h1 + p:has(img) + p:has(> em:only-child),
+body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section > .default-content-wrapper h1 + p + picture + p:has(> em:only-child),
+body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section > .default-content-wrapper h1 + p + p:has(img) + p:has(> em:only-child) {
+  margin: 0 0 50px;
+  font-size: 12px;
+  font-style: italic;
+  line-height: 1.5; /* 12px x 1.5 = 18px, matches source */
+  color: rgb(95 96 98);
+}
+
+/* Mid-content body images + captions (source .media-callout figures mid-article, e.g. the
+   80-years "Catalyst Evaluation 1964"/"Technical Service Team" pair). Markdown strips the
+   authored class, so match STRUCTURALLY: a mid-content figure is a `<picture>` FOLLOWED by a
+   caption `<p>` (paragraph whose only child is an <em>). CRITICAL: exclude the HERO image, which
+   is `h1 + picture` (also has a caption on some pages) — `:not(h1 + *)` isn't expressible, so use
+   `p + picture` / `h2 + picture` / `h3 + picture` (mid-content figures always follow a paragraph
+   or heading, never the H1 directly). The importer wraps consecutive paired figures in a
+   `Columns (media-figures)` block so they sit SIDE BY SIDE (styled in blocks/columns/columns.css);
+   this rule sizes STANDALONE single figures. Without sizing the bare <picture> collapses to
+   height 0. */
+body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section > .default-content-wrapper :is(p, h2, h3, ul, ol) + picture:has(+ p em) {
+  display: block;
+  width: 313px;
+  max-width: 100%;
+  margin: 25px 0 6px;
+}
+
+body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section > .default-content-wrapper :is(p, h2, h3, ul, ol) + picture:has(+ p em) img {
+  display: block;
+  width: 100%;
+
+  /* Reserve the source ~16:9 box (313x176) so the figure holds its height even before the
+     cross-origin Scene7 image decodes (prevents a 0-height collapse / layout shift). */
+  height: auto;
+  aspect-ratio: 313 / 176;
+  object-fit: cover;
+}
+
+/* Italic caption paragraph — a <p> whose sole child is <em>, sitting right after a mid-content
+   image (source: italic 12px, gray #5f6062). Match structurally since the class is stripped.
+   Excludes the hero caption by requiring the caption to follow a picture that itself follows
+   body content (mid-content), via the picture rule's specificity chain above. */
+body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section > .default-content-wrapper :is(p, h2, h3, ul, ol) + picture + p:has(> em:only-child) {
+  margin: 0 0 25px;
+  font-size: 12px;
+  font-style: italic;
+  line-height: 1.4;
+  color: rgb(95 96 98);
+}
+
+/* FIX 4: article section headings (H3) sit 20px above the following paragraph on
+   the source; the global heading margin is smaller. Scope to the insights content
+   column so other sidebar pages keep their own rhythm. */
+body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section > .default-content-wrapper h3 {
+  margin-bottom: 20px;
+}
+
+/* FIX 5: source body list items (2nd onward) have 7px top spacing between them. */
+body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section > .default-content-wrapper li + li {
+  margin-top: 7px;
+}
+
+/* D3: the article's download/whitepaper CTA. Source centers it in the content column
+   and the button is ~40px tall (padding ~13px 14px), not the 52px the global primary
+   button gives. Generalized (was hardcoded to the machine-learning-whitepaper URL):
+   the CTA is the promoted `a.button` in the article content column — an author
+   `<strong><a href>` that decorateButtons turns into a primary button. Scope by
+   STRUCTURE, not URL, so every insights article's CTA (marketing.grace.com, ebook.*,
+   etc.) is styled the same. The feature-card "Learn More" is a plain link inside
+   `.columns` (not an `a.button`), so it is not affected. */
+body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section > .default-content-wrapper .button-wrapper:has(> a.button) {
+  text-align: center;
+}
+
+body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section > .default-content-wrapper a.button {
+  padding: 13px 14px;
+}
+
+/* FIX 9: source article body paragraphs use a 21px bottom margin. */
+body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section > .default-content-wrapper > p {
+  margin-bottom: 21px;
+}
+
+/* D6: feature "slate" card — dark background rgb(30,30,30), white text
+   (source a.item.slate-bkgd). MOBILE-FIRST (base, <900px): match live's mobile card
+   — a single CENTERED column stacking title, body, then a visible "Learn More ›"
+   link (the sidebar layout is single-column below 900px, so the card stacks when the
+   page is narrow). The >=900px block below restores the desktop 2-column row:
+   heading (155px, centered) | body | trailing ">" chevron, ~115px tall. */
+body.sidebar main .columns.horizontal-teaser-featured > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  /* MF3: title near the top (28px), even spacing below (CTA gets extra top margin)
+     so the card reads ~310px like live — no large void above the title. */
+  padding: 28px 24px 40px;
+  background-color: rgb(30 30 30);
+  color: #fff;
+  text-align: center;
+}
+
+/* Two SEPARATE dark cards with a 40px white gap between them (source renders each
+   feature-set item as its own dark row, not one continuous block). */
+body.sidebar main .columns.horizontal-teaser-featured > div:not(:last-child) {
+  margin-bottom: 40px;
+}
+
+body.sidebar main .columns.horizontal-teaser-featured > div > div:first-child,
+body.sidebar main .columns.horizontal-teaser-featured > div > div:last-child {
+  padding: 0;
+}
+
+body.sidebar main .columns.horizontal-teaser-featured h3 {
+  margin: 0 0 16px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+body.sidebar main .columns.horizontal-teaser-featured p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 25.2px;
+}
+
+body.sidebar main .columns.horizontal-teaser-featured h3,
+body.sidebar main .columns.horizontal-teaser-featured p,
+body.sidebar main .columns.horizontal-teaser-featured a {
+  color: #fff;
+}
+
+/* Mobile: the "Learn More" CTA is VISIBLE and centered below the body (live shows
+   the .cta-mobile "Learn More >" link on mobile). A chevron follows the text. */
+body.sidebar main .columns.horizontal-teaser-featured p:last-child {
+  margin-top: 40px;
+}
+
+body.sidebar main .columns.horizontal-teaser-featured p:last-child a::after {
+  content: " ›";
+}
+
+/* Mobile: hide the desktop decorative row chevron (only the "Learn More >" shows). */
+body.sidebar main .columns.horizontal-teaser-featured > div::after {
+  display: none;
+}
+
+@media (width >= 900px) {
+  /* DESKTOP: restore the compact 2-column row — heading (155px, centered) | body |
+     trailing ">" chevron. The "Learn More" text is visually hidden here (the source
+     desktop card shows only the chevron affordance). */
+  body.sidebar main .columns.horizontal-teaser-featured > div {
+    flex-direction: row;
+    align-items: center;
+    min-height: 115px;
+    padding: 0 20px 0 0;
+    text-align: initial;
+  }
+
+  body.sidebar main .columns.horizontal-teaser-featured > div > div:first-child {
+    flex: 0 0 155px;
+    padding: 0 16px;
+    text-align: center;
+  }
+
+  body.sidebar main .columns.horizontal-teaser-featured > div > div:last-child {
+    flex: 1 1 auto;
+    padding-left: 30px;
+  }
+
+  body.sidebar main .columns.horizontal-teaser-featured h3 {
+    margin: 0;
+  }
+
+  /* desktop: visually hide the "Learn More" paragraph (kept in the a11y tree) */
+  body.sidebar main .columns.horizontal-teaser-featured p:last-child {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  /* desktop: show the far-right ">" chevron */
+  body.sidebar main .columns.horizontal-teaser-featured > div::after {
+    content: "›";
+    display: block;
+    flex: 0 0 auto;
+    margin-left: 16px;
+    padding-right: 12px;
+    font-size: 28px;
+    line-height: 1;
+    color: #fff;
+  }
+}
+
+@media (width >= 900px) {
+  /* D8/D9: align the article content column with the SHARE rail at the top of the
+     grid — both must start at the same y (live: 121px). The nav (col 2) sits in
+     grid-row 2 at the content-area top. The FIRST content section (the one right
+     after the nav, e.g. the insights columns-container) must share that row and
+     drop its top margin, otherwise the global 50px section margin pushes the H1
+     ~50px below the SHARE label. Pin it to grid-row 2, align-self:start, mt:0. */
+  /* INSIGHTS ONLY: zero the nav's top margin so it aligns with the SHARE rail at
+     the content-area top. Product hubs keep the nav's 50px top margin so it aligns
+     with the first content section (which also keeps 50px) — both start together
+     50px below the hero, matching source (article padding-top: 5rem). */
+  body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section.sidebar-nav {
+    margin-top: 0;
+  }
+
+  /* INSIGHTS ONLY (breadcrumb-container): the first content section shares row 2
+     with the SHARE rail and drops its top margin so the H1 aligns with the rail.
+     Product hubs (plain sidebar-nav, NO breadcrumb-container) must NOT zero this
+     margin — they keep the source's 50px hero→content gap (see the product-hub
+     rule below), so the content doesn't sit flush under the header. */
+  body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section.sidebar-nav + .section {
+    grid-row: 2;
+    align-self: start;
+    margin-top: 0;
+  }
+
+  /* PRODUCT HUBS (plain sidebar-nav, no breadcrumb): the nav + first content
+     section share row 2, but keep the 50px top gap below the hero band (source
+     article padding-top: 5rem = 50px). */
+  body.sidebar main:not(:has(> .section.sidebar-nav.breadcrumb-container)) > .section.sidebar-nav + .section {
+    grid-row: 2;
+    align-self: start;
+  }
+
+  /* INSIGHTS ONLY: pin the full-width trailing sections (geo-hex "Latest Insights"
+     band + the follow-us banner) to grid-row 3 — the row immediately after the
+     content row (row 2). Without this they auto-place AFTER the nav rail's
+     `2 / span 999` span, which reserves ~300px of phantom implicit rows and opens
+     a large empty gap between the Featured card and the Latest Insights band.
+     Scoped to the full-bleed sections (grid-column 1/-1) so the content column and
+     rail alignment are untouched. */
+  body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section.geo-hex {
+    grid-row: 3;
+  }
+
+  body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section.banner-container {
+    grid-row: 4;
+  }
+}
+
+/* M4: mobile content inset is 10px on the source (migrated inherits the global
+   20px). Tighten to 10px on mobile; the >=900px grid sets its own 20px inset. */
+body.sidebar main > .section.columns-container > div {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+@media (width >= 900px) {
+  body.sidebar main > .section.columns-container > div {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+/* M3: mobile line-heights (source mobile uses ~1.3 on h1/h3/body). Base = mobile;
+   the >=900px block below restores the desktop values. Scoped to the insights
+   content column plus the H1. */
+body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section > .default-content-wrapper h1,
+body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section > .default-content-wrapper h3,
+body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section > .default-content-wrapper p,
+body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section > .default-content-wrapper li {
+  line-height: 1.3;
+}
+
+/* D12: H1 line-height matches source (42px x 1.7 = 71.4px) — desktop only. Scoped
+   to match the mobile h1 override's specificity so it wins at >=900px. */
+@media (width >= 900px) {
+  body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section > .default-content-wrapper h1 {
+    line-height: 1.7;
+  }
+
+  /* restore desktop body/heading line-heights (source desktop: h3 ~29.9px @26px,
+     body ~23.8px @14px). */
+  body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section > .default-content-wrapper h3 {
+    line-height: 1.15;
+  }
+
+  body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section > .default-content-wrapper p,
+  body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section > .default-content-wrapper li {
+    line-height: 1.7;
+  }
+}
+
+/* D7: "Download the whitepaper" green primary CTA renders correctly via the global
+   primary-button style (green fill, black text, 14px/600, 18px 30px padding, radius 0),
+   an exact match to source .btn-primary-green — no override needed here. */
+
+/* FIX 6: the source feature-set block reserves vertical breathing room around the
+   dark card (~25px above the card / ~65px below), making the whole feature area
+   ~260px tall (label + card + padding). Add that padding to the columns-wrapper
+   holding the featured card. */
+body.sidebar main > .section.columns-container .columns-wrapper:has(.columns.horizontal-teaser-featured) {
+  padding-top: 25px;
+  padding-bottom: 65px;
+}
+
+/* FIX 7 / D5: the source separates the feature block from References with a 5px
+   BLUE divider (div.divider-line, background rgb(0,73,144)) plus ~90px of space.
+   Reproduce the blue rule as a thick top border above the References
+   default-content-wrapper (the content wrapper after the featured columns-wrapper).
+   EXCLUDE the case where that wrapper is a "Related Articles" heading (immediately
+   followed by a .cards-wrapper) — Related Articles has no blue divider on source. */
+body.sidebar main > .section.columns-container .columns-wrapper:has(.columns.horizontal-teaser-featured) + .default-content-wrapper:not(:has(+ .cards-wrapper)) {
+  margin-top: 45px;
+  border-top: 5px solid rgb(0 73 144);
+  padding-top: 45px;
+}
+
+/* A "Related Articles" heading wrapper (immediately followed by its .cards-wrapper) that
+   directly follows the Featured block: source leaves ~30px of space above the heading (no
+   blue divider). Add that gap; the border-exclusion above keeps it borderless. */
+body.sidebar main > .section.columns-container .columns-wrapper:has(.columns.horizontal-teaser-featured) + .default-content-wrapper:has(+ .cards-wrapper) {
+  margin-top: 30px;
+}
+
+/* Source leaves 50px between the centered "Related Articles" heading and the card image row;
+   the heading's own bottom margin was only 15px. Bump it to 50px (heading stays centered). */
+body.sidebar main > .section.columns-container .default-content-wrapper:has(+ .cards-wrapper) h2 {
+  margin-bottom: 50px;
+}
+
+/* ===== agriculture-cdmo-style pages: Equipment + Tyrone teaser + download buttons =====
+   These content-column pages use a `columns horizontal-teaser featured-products` block for a
+   single dark "facility" teaser card (Tyrone). That block's container carries the Latest-Insights
+   hexagon-band padding (110–210px) + gray fill + a min-height card, which on these plain content
+   pages shows as a huge empty gap above/below the card. Source renders it as a compact dark card
+   inline in the content flow. Neutralize the decorative band treatment for the featured-products
+   variant sitting in the sidebar content column. */
+body.sidebar main > .section.columns-container:has(.columns.horizontal-teaser.featured-products) {
+  background-color: transparent;
+  padding: 0;
+  margin-block: var(--spacing-m); /* ~20px, compact — source gap Optimum→Equipment is ~21px */
+}
+
+/* Grid section margins don't collapse: the plain content section above this teaser keeps its 50px
+   bottom margin, which stacks with this section's top margin → ~100px gap. Pull the teaser section
+   up with a negative top margin so Equipment sits ~20px under "Optimum manufacturing solutions"
+   (source gap ~21px). Negative margin is robust regardless of the preceding section's own margin. */
+body.sidebar main > .section.columns-container:has(.columns.horizontal-teaser.featured-products) {
+  margin-top: -30px;
+}
+
+body.sidebar main > .section.columns-container:has(.columns.horizontal-teaser.featured-products)::before,
+body.sidebar main > .section.columns-container:has(.columns.horizontal-teaser.featured-products)::after {
+  content: none;
+}
+
+/* the Equipment default-content-wrapper (H3 + list) sits right above the teaser card — no extra gap */
+body.sidebar main > .section.columns-container:has(.columns.horizontal-teaser.featured-products) .columns-wrapper {
+  padding: 0;
+  margin-top: var(--spacing-m);
+}
+
+/* A `columns 2-cols` (split-list) section — a single source list rendered as two text columns
+   (e.g. unipol-pp-process "Lowest CAPEX / Low emissions"). In the source this list flows directly
+   under its intro paragraph (~21px gap), but our importer emits it as its OWN section, so the 50px
+   top + 50px bottom section margins stack with the neighbours' 50px → ~100px gap above AND below.
+   Pull it tight: a small own margin plus a negative top margin that cancels the preceding section's
+   bottom margin, so it reads as part of the surrounding text flow (source gap ~21px). Negative top
+   is robust regardless of the preceding section's own margin — same technique as the teaser above. */
+body.sidebar main > .section.columns-container:has(.columns.columns-2-cols) {
+  margin-top: -30px;
+  margin-bottom: -30px; /* cancel most of the next section's 50px top margin → ~20px gap below */
+}
+
+/* …EXCEPT when this split-list section is the LAST content section before the
+   "Latest Insights" cards band: the -30px bottom pulled the band up so its heading
+   nearly touched the references/text above (e.g. the ML-in-PD-workflows article).
+   Restore the normal bottom margin in that case so Latest Insights keeps its gap. */
+body.sidebar main > .section.columns-container:has(.columns.columns-2-cols):has(+ .section.cards-container) {
+  margin-bottom: var(--spacing-l);
+}
+
+/* Download sell-sheet buttons: source lays the 3 primary CTAs SIDE BY SIDE (col-lg-4 each,
+   equal thirds). Our import emits them as consecutive `p.button-wrapper` (stacked, each sized to
+   its own text so only 2 fit per row). Constrain each to a third of the content column and let the
+   button fill its cell (text wraps) so all THREE sit in one row on desktop. Mobile stays stacked
+   full-width (source col-xs-12). */
+@media (width >= 900px) {
+  /* ONLY buttons that are part of a GROUP (adjacent to another download button) lay out as equal
+     thirds in a row (source col-lg-4). A STANDALONE button (no button-wrapper sibling, e.g. the
+     single "Download PERKASIL…" CTA on animal-feed) is NOT matched and keeps its natural
+     text-sized width. Group membership = "is followed by a button-wrapper" (all but last) OR
+     "is preceded by a button-wrapper" (all but first); the union covers every group member.
+     NOTE: two SEPARATE :has() on the same element is valid; :has() must NOT be nested inside :has(). */
+  body.sidebar main > .section > .default-content-wrapper > p.button-wrapper:has(> a.button.primary):has(+ p.button-wrapper),
+  body.sidebar main > .section > .default-content-wrapper > p.button-wrapper:has(> a.button.primary) + p.button-wrapper:has(> a.button.primary) {
+    display: inline-block;
+    width: calc((100% - 44px) / 3);
+    margin-top: 25px;
+    margin-right: 20px;
+    margin-bottom: 35px;
+    vertical-align: top;
+  }
+
+  /* the LAST button in the group (preceded by a button, NOT followed by one) drops its right margin
+     so 3 items + 2 gaps + inline-block whitespace fit the content column without wrapping the 3rd. */
+  body.sidebar main > .section > .default-content-wrapper > p.button-wrapper:has(> a.button.primary) + p.button-wrapper:has(> a.button.primary):not(:has(+ p.button-wrapper)) {
+    margin-right: 0;
+  }
+
+  /* the button fills its third; allow the label to WRAP (override the global nowrap+ellipsis that
+     truncated "Download hydrogenation sell sheet" → "Download hydrogenation…"), centered, with
+     trimmed horizontal padding. Scoped to grouped buttons only (same two selectors). */
+  body.sidebar main > .section > .default-content-wrapper > p.button-wrapper:has(> a.button.primary):has(+ p.button-wrapper) > a.button,
+  body.sidebar main > .section > .default-content-wrapper > p.button-wrapper:has(> a.button.primary) + p.button-wrapper:has(> a.button.primary) > a.button {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    padding-inline: 15px;
+    text-align: center;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+  }
+}
+
+/* stylelint-enable no-descending-specificity */
+
+/* FIX 8: related-content cards sit directly below the article on the source
+   (no extra top gap). Our cards-container carries the global 50px section margin
+   + 80px section padding (~130px). Zero it so the cards butt up under the article.
+   The insights-scoped selector matches MF4's specificity (0,6,2) and comes later,
+   so it wins at >=900px and keeps the desktop cards flush (MF4's mobile 20px
+   top padding must NOT leak up to the grid layout). */
+@media (width >= 900px) {
+  body.sidebar main > .section.cards-container:has(.cards.featured-content),
+  body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section.cards-container {
+    margin-top: 0;
+    padding-top: 0;
+  }
+
+  /* (The cards→banner zero-gap rule lives at mobile-base scope above so it applies at all
+     widths — no >=900px duplicate needed.) */
+}
+
+/* ===== geoAndHex variant (section style `geo-hex`) — SIDEBAR-SPECIFIC padding + grid re-inset =====
+   The geo-hex TREATMENT (full-bleed gray band + white hexagon top edge + geo-line network + the
+   ~80px heading→cards gap) is GLOBAL, in styles/lazy-styles.css, so every template renders it.
+   But the SECTION PADDING must be re-declared HERE at the sidebar selector's specificity (0,6,2):
+   insights pages ALSO match the mobile-rail rule
+   `body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section.cards-container
+   { padding-top: 20px }` (also 0,6,2) — which would otherwise beat the global padding (only 0,4,1)
+   and crush the hex clearance (heading jammed to the top). This rule (same 0,6,2, later in source)
+   wins, restoring the clearance. Products have no such rail rule, so the GLOBAL padding applies to
+   them directly. The desktop grid re-inset (widget-gutter columns) is genuinely sidebar-only. */
+/* Match the mobile-rail selector's shape (`main:has(> .section.sidebar-nav.breadcrumb-container)`)
+   so this is STRICTLY more specific than the `padding-top: 20px` rule — otherwise that rule wins
+   and crushes the hex clearance. */
+body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section.cards-container.geo-hex:has(.cards.featured-content) {
+  padding-top: 110px;
+  padding-bottom: 40px;
+}
+
+@media (width >= 900px) {
+  body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section.cards-container.geo-hex:has(.cards.featured-content) {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns:
+      minmax(20px, 1fr)
+      minmax(0, 213px)
+      minmax(0, 747px)
+      minmax(0, 320px)
+      minmax(20px, 1fr);
+    padding-top: 206px; /* source parity: heading sits 206px below the gray-band top */
+    padding-bottom: 140px;
+  }
+
+  body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section.cards-container.geo-hex:has(.cards.featured-content) > * {
+    grid-column: 2 / 4;
+  }
+}
+
+/* ===== gray-band section on SIDEBAR pages — full-bleed re-inset =====
+   A `gray-band` Section Metadata paints a light-gray fill (styles/lazy-styles.css). On body.sidebar
+   pages `main` is a grid, so by default the band only fills its grid CELL (cut off at the content-
+   column edges — the defect on the industries Latest-Insights / Broad-Catalyst bands). Span the
+   section across ALL columns so the fill bleeds edge-to-edge, then re-inset its content back into
+   the content column (cols 2–4) via a nested grid — same technique as the geo-hex rule above. */
+@media (width >= 900px) {
+  /* Full-bleed the gray band across all columns. The two selectors cover both shapes AND out-
+     specify the `.cards-container:has(.cards.featured-content) { grid-column: 2/4 }` rule above:
+     the featured/category variant repeats the `:has()` (specificity ≥ that rule), the plain variant
+     covers gray content boxes. */
+  /* CARD gray bands (Latest Insights featured-content / category grids) → FULL-BLEED edge-to-edge
+     (source 0–1280). Repeats the `:has()` so it out-specifies the
+     `.cards-container:has(.cards.featured-content) { grid-column: 2/4 }` rule above. */
+  body.sidebar main > .section.gray-band.cards-container:has(.cards.featured-content, .cards.category-grid) {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns:
+      minmax(20px, 1fr)
+      minmax(0, 213px)
+      minmax(0, 747px)
+      minmax(0, 320px)
+      minmax(20px, 1fr);
+    /* Source gray band insets its content ~40px top before the heading + ~50px bottom below the
+       last card row. Without this the heading jams to the top of the band (the "too close" defect).
+       Restore the vertical padding on the full-bleed band. */
+    padding-top: 40px;
+    padding-bottom: 50px;
+  }
+
+  /* Re-inset the card row into the nav+content band (cols 2–4) so the cards keep their width. */
+  body.sidebar main > .section.gray-band.cards-container:has(.cards.featured-content, .cards.category-grid) > * {
+    grid-column: 2 / 4;
+  }
+
+  /* NOTE: a category-grid gray band spans cols 2–4 (nav + content), left-aligned at the rail
+     (source x=20 → 940), via the `> *` rule above — matching both agriculture-cdmo "A Portfolio of
+     Solutions" AND pe-gas-phase "Catalysts for Gas Phase PE Processes" (both measured left:20→940
+     on source). An earlier `grid-column: 3 / 5` override wrongly shifted the content RIGHT into the
+     widget rail (233 → 1260) — the "shifted left/misaligned" defect — and has been removed. */
+
+  /* PLAIN gray content box (NO cards, e.g. the "How is gas phase polymerization…" FAQ panel): the
+     source CONFINES the gray fill to the 707px content column (233–940), NOT full-bleed. Keep it in
+     the content grid cell (col 3) so it reads as an inset gray panel, matching source. */
+  body.sidebar main > .section.gray-band:not(:has(.cards.featured-content, .cards.category-grid)) {
+    grid-column: 3;
+  }
+}
+
+/* The "Latest Insights from Grace" gray band is usually the LAST section before the footer. Its
+   50px section bottom-margin leaves a white strip between the gray fill and the footer; the source
+   band butts flush against the footer. Zero the bottom margin when the gray-band cards section is
+   the last main section. (Base + desktop — margin applies at all widths.) */
+body.sidebar main > .section.gray-band.cards-container:has(.cards.featured-content):last-of-type {
+  margin-bottom: 0;
+}

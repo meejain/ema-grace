@@ -350,7 +350,14 @@ const MATCHERS = {
     .filter((r) => r.querySelector('a.btn-primary[href*="jobs.grace.com"], .button a[href*="jobs.grace.com"]')
       && r.querySelector('.image, picture, img')
       && /\b\d{4,5}\b/.test(r.textContent || '') // ZIP/postal code
-      && /(street|road|rd\b|st\b|drive|avenue|ave\b|\+\d|tel[:.]?)/i.test(r.textContent || '')),
+      && /(street|road|rd\b|st\b|drive|avenue|ave\b|\+\d|tel[:.]?)/i.test(r.textContent || ''))
+    // The location page nests the real address+photo row (two `col-lg-6` halves: text | image)
+    // INSIDE the col-lg-3/col-lg-9 layout wrapper — and BOTH match the predicate above (the wrapper
+    // contains the jobs link + image + address transitively). querySelectorAll returns the wrapper
+    // FIRST, so buildTwoColumn would split it as [empty col-lg-3 nav | col-lg-9 everything] and the
+    // PHOTO (nested in the inner col-lg-6) is lost. Drop any matched row that CONTAINS another
+    // matched row — keep only the innermost two-half content rows.
+    .filter((r, _i, arr) => !arr.some((other) => other !== r && r.contains(other))),
   // app-promo: a .cmp-media-callout whose text side has a heading + intro paragraph + link
   // (the download promo) — distinguishes from a bare profile/CEO media-callout headshot.
   'columns-app-promo': (doc) => Array.from(doc.querySelectorAll('div.cmp-media-callout'))
@@ -600,7 +607,30 @@ function cardGridContainers(doc, itemSel, accept, minItems) {
   });
   if (items.length < (minItems || 2)) return [];
   const lca = lowestCommonAncestor(items);
-  return lca ? [lca] : [];
+  if (!lca) return [];
+  // GUARD against an over-broad LCA that would SWALLOW unrelated content. grace mixes these grids
+  // INTO a rich content column (col-lg-7) alongside headings, rich-text, accordions and tables
+  // (e.g. about-grace/community: 2 two-card rows scattered among 7 rich-text blocks + 4 accordions).
+  // The parser does element.replaceWith(block) on the returned container, so returning that whole
+  // column DESTROYS the surrounding content (5234 chars → a 4-card grid). If the LCA carries far
+  // more text than the grid items themselves, it is a content column, NOT a tight grid wrapper —
+  // fall back to the per-row/card-list wrappers that tightly contain the items instead.
+  const itemsText = items.reduce((n, it) => n + (it.textContent || '').replace(/\s+/g, ' ').trim().length, 0);
+  const lcaText = (lca.textContent || '').replace(/\s+/g, ' ').trim().length;
+  const isWideCol = /\bcol-lg-(7|8|9|10|12)\b/.test(lca.className);
+  if ((isWideCol || lcaText > itemsText * 1.6) && lcaText > itemsText + 400) {
+    // regroup the items by their nearest dedicated grid wrapper (a `.row`, `.card-list`, or
+    // `.cmp-card-list`); each such wrapper becomes its OWN container so only grid content is claimed
+    // and the sibling rich-text/accordions/tables are left in place for default-content preservation.
+    const wrappers = [];
+    const seen = new Set();
+    items.forEach((it) => {
+      const w = it.closest('.row, .card-list, .cmp-card-list') || it.parentElement;
+      if (w && !seen.has(w)) { seen.add(w); wrappers.push(w); }
+    });
+    return wrappers.length ? wrappers : [lca];
+  }
+  return [lca];
 }
 
 /**
@@ -721,6 +751,58 @@ function isIndustriesDetailPage(document, url) {
   const path = (() => { try { return new URL(url || '').pathname; } catch (e) { return ''; } })();
   if (!/\/industries\/.+/.test(path)) return false;
   return isSidebarPage(document);
+}
+
+/**
+ * about-grace SIDEBAR page: an `/about-grace/*` page with a left section-navigation rail. Measured
+ * live at 1280px, these render nav-rail (~280px) LEFT of content (~880px) — the SIDEBAR shape (nav
+ * left of content), NOT the contactus 2-col layout (which has no left rail; the section-nav only
+ * collapses to a mobile dropdown). Covers: this-is-grace, our-history, our-history/asbestos-trusts,
+ * the locations LANDING + all 20 location detail pages, environmental-health-and-safety, community,
+ * sustainability. Takes the SAME rich pipeline as industries-detail (buildDefaultPage + image hero
+ * via discovery + sectionizeFlatBody + geo-hex + the nav rail injected + `template: sidebar`).
+ *
+ * about-grace pages WITHOUT a section-nav (leadership-team landing, the /about-grace/ root, awards-
+ * and-recognition, all leadership bios) have NO left rail on live → they fall through to the plain
+ * default path (centered profile/cards + geo-hex Latest-Insights, all handled by catalog discovery).
+ */
+function isAboutGraceDetailPage(document, url) {
+  const path = (() => { try { return new URL(url || '').pathname; } catch (e) { return ''; } })();
+  if (!/\/about-grace\/.+/.test(path)) return false;
+  // The leadership BIOS (/about-grace/leadership-team/<name>/, depth 3) are NOT sidebar pages —
+  // they render as a centered profile-detail + Latest-Insights on the default path. Everything else
+  // under /about-grace/ (the section pages + the two landings + the location detail pages) IS a
+  // sidebar page on the source, sharing ONE family section-nav rail.
+  const isBio = /\/about-grace\/leadership-team\/[^/]+\/?$/.test(path);
+  if (isBio) return false;
+  // Every non-bio /about-grace/<child> page is a sidebar page. Do NOT rely solely on isSidebarPage()
+  // — several section pages (awards-and-recognition, community, EHS, sustainability, this-is-grace)
+  // ship their `.section-navigation` ONLY via client JS, so the STATIC HTML has no nav and
+  // isSidebarPage() returns false, dropping them to the wrong (full-width) layout. buildSidebarNav
+  // emits the canonical about-grace family nav for these, so route them all to the sidebar path.
+  return true;
+}
+
+/**
+ * A TEXT-ONLY about-grace sidebar page (e.g. our-history/asbestos-trusts): a sidebar page whose
+ * content column is essentially rich text — no image-columns, cards, table, or featured blocks. These
+ * must take the REBUILD-MAIN buildSidebarPage recipe (clean hero → nav → content → contact-banner
+ * sections), NOT buildDefaultPage's in-place flatten — the flatten can't sectionize a table-less page,
+ * so the hero+content merge into one section and the nav drops to the bottom. Image/card-rich section
+ * pages (this-is-grace, our-history, community…) stay on buildDefaultPage (their images/columns need it).
+ */
+function isAboutGraceTextSidebar(document, url) {
+  if (!isAboutGraceDetailPage(document, url)) return false;
+  const art = document.querySelector('article') || document.body;
+  // block-producing content in the body → NOT text-only (keep it on buildDefaultPage).
+  const hasBlocks = !!art.querySelector(
+    '.cmp-card-list, .cmp-card, .media-callout, .cmp-media-callout, .feature-set, .featured-blog-cmp, '
+    + '.accordion-comp, table, .cmp-image, [data-cmp-is="image"]',
+  );
+  // a standalone content image in the body also means rich (image-columns page).
+  const hasContentImg = Array.from(art.querySelectorAll('img, picture'))
+    .some((im) => !im.closest('header, footer, nav, .section-navigation'));
+  return !hasBlocks && !hasContentImg;
 }
 
 /**
@@ -873,6 +955,15 @@ function buildHeroBlock(document) {
  *  list) and indent the children (no per-item borders). Falls back to a flat <ul> when the source
  *  has no nesting (older/simple nav rails), so existing sidebar pages are unaffected. */
 function buildSidebarNav(document) {
+  // Is this an /about-grace/ page? Derive from the canonical/og:url meta (present pre-cleanup) or the
+  // authored breadcrumb — so the canonical about-grace nav fallback below can fire even when the
+  // source nav list is JS-hydrated/empty.
+  const canon = (document.querySelector('link[rel="canonical"]') || {}).href
+    || (document.querySelector('meta[property="og:url"]') || {}).content || '';
+  const crumbHrefs = Array.from(document.querySelectorAll('.cmp-breadcrumb a, nav[aria-label*="readcrumb" i] a'))
+    .map((a) => a.getAttribute('href') || '').join(' ');
+  const aboutGraceUrl = /\/about-grace(\/|$|\.html)/.test(canon) || /\/about-grace\//.test(crumbHrefs);
+
   // Prefer the real nav LIST container (the desktop <ul>), NOT `.col-lg-2 a` — the left column also
   // holds a resource card (e.g. "Iron Tolerance") whose link would otherwise leak into the nav.
   const sourceUl = document.querySelector(
@@ -932,6 +1023,33 @@ function buildSidebarNav(document) {
       ul.append(mkLi(info));
     });
   }
+  // ABOUT-GRACE canonical nav fallback. The about-grace section-nav is a FIXED family list, but on
+  // several pages (community, environmental-health-and-safety, sustainability, this-is-grace) the
+  // source nav <ul> is JS-hydrated — the STATIC HTML the importer sees has 0 (or a partial 3-4) of
+  // the links, so the extracted rail is empty/incomplete and the sidebar layout renders with a blank
+  // left column. When building an /about-grace/ page, ALWAYS emit the full canonical list (parent
+  // "About Grace" + its 8 children, verified from the fully-hydrated source) so every section page
+  // gets the identical, complete left rail like the source. Overwrites any partial extraction.
+  if (aboutGraceUrl) {
+    const AG_NAV = [
+      { text: 'Awards and Recognition', href: '/about-grace/awards-and-recognition/' },
+      { text: 'Community', href: '/about-grace/community/' },
+      { text: 'Environmental, Health & Safety', href: '/about-grace/environmental-health-and-safety/' },
+      { text: 'Leadership Team', href: '/about-grace/leadership-team/' },
+      { text: 'Locations', href: '/about-grace/locations/' },
+      { text: 'Our History', href: '/about-grace/our-history/' },
+      { text: 'Sustainability', href: '/about-grace/sustainability/' },
+      { text: 'This is Grace', href: '/about-grace/this-is-grace/' },
+    ];
+    const agUl = document.createElement('ul');
+    const parentLiEl = mkLi({ text: 'About Grace', href: '/about-grace/' });
+    const childUl = document.createElement('ul');
+    AG_NAV.forEach((ci) => childUl.append(mkLi(ci)));
+    parentLiEl.append(childUl);
+    agUl.append(parentLiEl);
+    ul.replaceChildren(...agUl.childNodes);
+  }
+
   if (!ul.children.length) return null;
 
   const section = document.createElement('div');
@@ -1027,12 +1145,30 @@ function buildSidebarPromoCard(document) {
  *  (kept as a LIVE reference by grace-dm-images.js), fall back to the DAM `data-asset` absolutized to
  *  grace.com. Idempotent: skips components that already contain an <img>/<picture>. */
 function materializeLazyImages(document) {
-  document.querySelectorAll('[data-cmp-is="image"], [data-cmp-src]').forEach((el) => {
+  document.querySelectorAll('[data-cmp-is="image"], [data-cmp-src], [data-eds-src]').forEach((el) => {
     // pick the component root (the element carrying the cmp attrs).
-    const root = el.hasAttribute('data-cmp-src') ? el : (el.querySelector('[data-cmp-src]') || el);
+    const root = el.hasAttribute('data-cmp-src') || el.hasAttribute('data-eds-src')
+      ? el : (el.querySelector('[data-cmp-src], [data-eds-src]') || el);
     if (root.closest('picture')) return;
+    // Prefer the onLoad-stashed hydrated URL (data-eds-src): some components (about-grace LOCATION
+    // photos) only expose their Scene7 src via client JS, captured into data-eds-src during onLoad.
+    if (root.hasAttribute('data-eds-src') && !root.querySelector('img')) {
+      const edsSrc = root.getAttribute('data-eds-src');
+      const img = document.createElement('img');
+      img.setAttribute('src', edsSrc);
+      const edsAlt = (root.getAttribute('data-eds-alt') || '').trim();
+      if (edsAlt) {
+        img.setAttribute('alt', edsAlt);
+      } else {
+        let base = '';
+        try { base = new URL(edsSrc).pathname.split('/').pop().replace(/\.[a-z0-9]+$/i, ''); } catch (e) { base = ''; }
+        img.setAttribute('alt', base.replace(/[-_]+/g, ' ').trim().replace(/\b\w/g, (c) => c.toUpperCase()));
+      }
+      (root.querySelector('.cmp-image') || root).appendChild(img);
+      return;
+    }
     // resolve the real Scene7/DAM src from the component attrs.
-    let src = root.getAttribute('data-cmp-src') || '';
+    let src = root.getAttribute('data-cmp-src') || root.getAttribute('data-eds-src') || '';
     // strip AEM responsive width template tokens so the URL resolves to a real asset.
     src = src.replace(/([?&])wid=(%7B|\{)[^&]*(%7D|\})/i, '$1').replace(/\{\.width\}/g, '')
       .replace(/[?&]$/, '');
@@ -1090,11 +1226,21 @@ function extractMainContent(document) {
   const mainCol = document.querySelector('article .col-lg-7')
     || (document.querySelector('article h2') && document.querySelector('article h2').closest('[class*="col-"]'));
   if (!mainCol) return [];
-  const rich = mainCol.querySelector('.rich-text') || mainCol;
-  return Array.from(rich.children).filter((el) => {
+  // The content column can hold MULTIPLE `.text`/`.rich-text` blocks (e.g. asbestos-trusts splits its
+  // article into 2 rich-text boxes: the intro + the "Background/Bankruptcy/…" sections). Grabbing only
+  // the FIRST `.rich-text` dropped ~85% of the copy. Gather children from EVERY outermost text box in
+  // document order; fall back to the column itself when it has no text boxes.
+  const keep = (el) => {
     if (/^(SCRIPT|STYLE|NOSCRIPT|LINK|IFRAME)$/.test(el.tagName)) return false;
-    return (el.textContent || '').trim().length > 0 || el.querySelector('img');
-  });
+    return (el.textContent || '').trim().length > 0 || el.querySelector('img, picture');
+  };
+  const boxes = Array.from(mainCol.querySelectorAll('.rich-text, .text'))
+    // outermost only (a .text wrapping a .rich-text would double-count)
+    .filter((tb, _i, arr) => !arr.some((o) => o !== tb && o.contains(tb)));
+  if (boxes.length) {
+    return boxes.flatMap((box) => Array.from(box.children).filter(keep));
+  }
+  return Array.from(mainCol.children).filter(keep);
 }
 
 /** "Want to talk to an expert?" contact-split banner above the footer (source
@@ -2234,6 +2380,14 @@ function buildDefaultPage(document, url, params) {
     pageMeta.push(['contactus', 'true']);
     const tagline = (params && params.contactWidgetTagline) || '';
     if (tagline) pageMeta.push(['contactus-tagline', tagline]);
+  } else if (params && params.forceTemplate) {
+    // A forced template WITHOUT a contact widget — the about-grace section-nav pages (this-is-grace,
+    // our-history, locations, EHS, community, sustainability). They render as `sidebar` (nav rail +
+    // content) but ship NO contact-us widget, so the hasCU branch above never fires. Emit the
+    // template row directly (NO `contactus` flag/tagline) so body.sidebar engages and the injected
+    // nav rail is placed in column 1. (Industries-detail pages DO have a widget → they take the
+    // hasCU branch and forceTemplate is honored there.)
+    pageMeta.push(['template', params.forceTemplate]);
   } else if (isIndustriesLanding) {
     // contactus layout WITHOUT the widget: constrained/left-aligned content column, no right rail.
     pageMeta.push(['template', 'contactus']);
@@ -2309,9 +2463,19 @@ function buildDefaultPage(document, url, params) {
   // compliance) keep their current single-section output. `hasCU` is the product-detail signal;
   // an industries LANDING page (hydroprocessing) also needs it so its ART intro + category grid +
   // insights each become their own section (and the gray-band tag can land on the grid).
-  if (hasCU || isIndustriesLanding) {
+  // A featured "Latest Insights" band (geo-hex OR plain gray) means the page has ≥2 distinct sections
+  // that MUST be isolated — otherwise the band's Section Metadata applies to the WHOLE merged section
+  // and the preceding content (e.g. a leadership BIO's profile-detail block) wrongly inherits the
+  // gray/hex background. Bios are default-path with no widget/forceTemplate, so add this signal.
+  const hasFeaturedBand = !!(params && (params.sourceFeaturedHasGeoHex || params.sourceFeaturedIsPlainGray));
+  if (hasCU || isIndustriesLanding || (params && params.forceTemplate === 'sidebar') || hasFeaturedBand) {
     // Pass gray-band/blue-border fingerprints so those banded content runs each become their OWN
     // section (the section style then applies only to them). Empty on non-industries pages → no-op.
+    // `forceTemplate === 'sidebar'` covers about-grace section-nav pages (no contact widget, so
+    // hasCU is false) — they still need per-block sections so the injected nav rail sits in its own
+    // top-level section and the stacked image-left/right columns don't share one grid section.
+    // `hasFeaturedBand` covers the leadership BIO pages (profile-detail + Latest-Insights geo-hex),
+    // so the geo-hex tag lands ONLY on the featured section and the profile block stays on white.
     const splitFps = [...(params.sourceGrayBands || []), ...(params.sourceBlueBorders || [])];
     sectionizeFlatBody(main, document, splitFps);
   }
@@ -2450,6 +2614,22 @@ function buildDefaultPage(document, url, params) {
     });
   }
 
+  // Breadcrumb for HERO-LESS default pages whose SOURCE showed a breadcrumb. Most default pages get
+  // their breadcrumb from the banner-hero (hero.js derives it from the URL). But the about-grace
+  // leadership BIO pages have NO hero — just a `columns profile-detail` — yet the source DOES show a
+  // breadcrumb (Home / About Grace / Leadership Team). Emit a standalone `breadcrumb` block as the
+  // FIRST section; blocks/breadcrumb/breadcrumb.js rebuilds the trail from the URL (dropping the
+  // current page), matching source. Gate: source had a breadcrumb, page has NO banner hero, and no
+  // hero block was emitted — so we never double up with the hero-derived breadcrumb.
+  const emittedHero = !!Array.from(main.querySelectorAll('table tr')).find((tr) => /hero\s*\(/i.test(tr.textContent || ''));
+  if (params && params.sourceHadBreadcrumb && !params.sourceHadBannerHero && !emittedHero) {
+    const crumbBlock = WebImporter.Blocks.createBlock(document, { name: 'Breadcrumb', cells: [['']] });
+    const crumbSection = document.createElement('div');
+    crumbSection.append(crumbBlock);
+    main.insertBefore(document.createElement('hr'), main.firstChild);
+    main.insertBefore(crumbSection, main.firstChild);
+  }
+
   main.appendChild(document.createElement('hr'));
   main.appendChild(buildMetadataBlock(document, pageMeta));
 
@@ -2528,6 +2708,56 @@ export default {
     // lazy-load JS is live in this context and rewrites a freshly-inserted <img src="scene7…"> into a
     // runtime `blob:` URL, which is useless once serialized. Materialization happens in transform()
     // instead — on the cleaned, STATIC DOM where no site JS runs — so the Scene7 src is preserved.
+    //
+    // 3. STASH hydrated image sources for transform(). Some `.cmp-image` components (e.g. the
+    // about-grace LOCATION-detail photo) inject their `data-cmp-src`/`data-asset` ONLY via client JS
+    // — the static server HTML has an empty `.image` shell. So transform()'s materializeLazyImages
+    // (which runs on the static DOM) never sees them and the image is LOST. Here, in the hydrated
+    // DOM, copy the resolved Scene7 URL + alt onto STABLE `data-eds-*` attrs that survive cleanup +
+    // serialization. We only COPY strings (no live <img> insertion → no blob: rewrite). transform's
+    // materializeLazyImages then builds the real <img> from data-eds-src.
+    //
+    // First WAIT (bounded) for the image components to hydrate their src — the `.cmp-image`
+    // shells appear in the DOM before their `data-cmp-src`/`<img>` is populated by grace's JS, and
+    // the earlier text-based hydration gate can fire before that. Poll until every in-article
+    // `.cmp-image` has a resolvable src (or the deadline hits), so the stash below never runs early.
+    const imgDeadline = Date.now() + 6000;
+    const imgReady = () => {
+      const comps = [...document.querySelectorAll('article .cmp-image, article [data-cmp-is="image"]')]
+        .filter((c) => !c.closest('header, footer, nav'));
+      if (!comps.length) return true;
+      return comps.every((c) => {
+        const r = c.hasAttribute('data-cmp-src') ? c : (c.querySelector('[data-cmp-src]') || c);
+        if (r.getAttribute('data-cmp-src')) return true;
+        const im = r.querySelector('img');
+        const cur = im && (im.getAttribute('src') || '');
+        return !!(cur && !/^blob:/i.test(cur));
+      });
+    };
+    // eslint-disable-next-line no-await-in-loop
+    while (!imgReady() && Date.now() < imgDeadline) { await new Promise((r) => { setTimeout(r, 300); }); }
+
+    document.querySelectorAll('[data-cmp-src], [data-cmp-is="image"], .cmp-image').forEach((el) => {
+      const root = el.hasAttribute('data-cmp-src') ? el : (el.querySelector('[data-cmp-src]') || el);
+      let src = root.getAttribute('data-cmp-src') || '';
+      if (!src) {
+        const im = root.querySelector('img');
+        const cur = im && (im.getAttribute('src') || '');
+        // a hydrated <img> with a real Scene7/DAM src (NOT a blob: placeholder) is also usable
+        if (cur && !/^blob:/i.test(cur) && (/\/is\/image\//.test(cur) || cur.includes('/content/dam/'))) src = cur;
+      }
+      if (!src) {
+        const asset = root.getAttribute('data-asset') || '';
+        if (asset.startsWith('/content/dam/')) src = `https://grace.com${asset}`;
+      }
+      if (!src) return;
+      // strip AEM responsive width template tokens so it resolves to a real asset.
+      src = src.replace(/([?&])wid=(%7B|\{)[^&]*(%7D|\})/i, '$1').replace(/\{\.width\}/g, '').replace(/[?&]$/, '');
+      root.setAttribute('data-eds-src', src);
+      const alt = (root.getAttribute('data-title') || root.getAttribute('alt')
+        || (root.querySelector('img') && root.querySelector('img').getAttribute('alt')) || '').replace(/<[^>]*>/g, '').trim();
+      if (alt) root.setAttribute('data-eds-alt', alt);
+    });
   },
   transform: (payload) => {
     const { document, url, params } = payload;
@@ -2567,9 +2797,17 @@ export default {
     // Most industries pages use plain `.light-gray-bkgd` (e.g. unipol-pp-process) — those must NOT
     // get hexagons. Only the few with an explicit `.geoAndHex` do.
     const featuredBlogEl = document.querySelector('.featured-blog-cmp');
-    params.sourceFeaturedHasGeoHex = !!(featuredBlogEl && featuredBlogEl.closest('.geoAndHex'));
+    // geoAndHex is the hexagon band. It is NOT always an ANCESTOR of the featured-blog — on the
+    // about-grace leadership BIO pages it is a zero-height decorative SIBLING element that draws the
+    // hex pattern behind the Latest-Insights band via CSS pseudo-elements. So treat "the page has a
+    // `.geoAndHex` element AND a featured-blog" as the geo-hex signal (covers both the ancestor case
+    // — industries — and the sibling case — bios). A page with a featured-blog in `.light-gray-bkgd`
+    // but NO `.geoAndHex` anywhere is the PLAIN-gray case (industries unipol) — stays gray-band.
+    const pageHasGeoAndHex = !!document.querySelector('.geoAndHex');
+    params.sourceFeaturedHasGeoHex = !!(featuredBlogEl
+      && (featuredBlogEl.closest('.geoAndHex') || pageHasGeoAndHex));
     params.sourceFeaturedIsPlainGray = !!(featuredBlogEl
-      && !featuredBlogEl.closest('.geoAndHex')
+      && !params.sourceFeaturedHasGeoHex
       && featuredBlogEl.closest('.light-gray-bkgd'));
 
     // Capture PLAIN default-content sections that the source paints with a background band, keyed by
@@ -2656,6 +2894,22 @@ export default {
       // Capture the nav (and remove it from the source) BEFORE the default pipeline runs, then
       // let buildDefaultPage build the body (image hero, order, geo-hex, contactus). It reads
       // params.forceTemplate/industriesNav to emit `template: sidebar` + inject the nav section.
+      params.forceTemplate = 'sidebar';
+      params.industriesNav = extractAndRemoveSidebarNav(document);
+      result = buildDefaultPage(document, url, params);
+    } else if (isAboutGraceTextSidebar(document, params.originalURL || url)) {
+      // TEXT-ONLY about-grace sidebar page (asbestos-trusts): rebuild main cleanly (hero → nav →
+      // content → contact-banner) via buildSidebarPage. buildDefaultPage's in-place flatten can't
+      // sectionize a table-less page, so the hero + content merge and the nav drops to the bottom.
+      result = buildSidebarPage(document, url, params);
+    } else if (isAboutGraceDetailPage(document, params.originalURL || url)) {
+      // about-grace section-nav pages (this-is-grace, our-history[/asbestos-trusts], locations
+      // landing + all location details, EHS, community, sustainability). Live layout = sidebar
+      // (nav-rail left of content), so take the SAME rich pipeline as industries-detail: build the
+      // body via buildDefaultPage (image hero via discovery, doc order via sectionizeFlatBody,
+      // geo-hex on Latest-Insights) with the nav rail injected + `template: sidebar`. Reuses the
+      // already-built columns-image-left/right, columns-history-item, columns-location-detail,
+      // cards-location-grid parsers (all originally tuned against these exact pages).
       params.forceTemplate = 'sidebar';
       params.industriesNav = extractAndRemoveSidebarNav(document);
       result = buildDefaultPage(document, url, params);

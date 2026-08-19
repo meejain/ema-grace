@@ -1,0 +1,16 @@
+{
+  "status": "success",
+  "url": "https://grace.com/about-grace/locations/east-chicago/",
+  "path": "about-grace/locations/east-chicago",
+  "timestamp": "2026-08-19T14:35:49.117Z",
+  "title": "East Chicago, IN, USA",
+  "pageType": "default",
+  "blocks": [
+    "columns-location-detail"
+  ],
+  "blocksLeftInPlace": [],
+  "pageMetadata": [
+    "template"
+  ],
+  "hasForm": false
+}

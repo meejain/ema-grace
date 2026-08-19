@@ -2,16 +2,14 @@
   "status": "success",
   "url": "https://grace.com/about-grace/leadership-team/anthony-yoo/",
   "path": "about-grace/leadership-team/anthony-yoo",
-  "timestamp": "2026-08-05T16:32:51.597Z",
+  "timestamp": "2026-08-19T14:09:03.395Z",
   "title": "Anthony Yoo",
   "pageType": "default",
   "blocks": [
-    "columns-profile-detail"
-  ],
-  "blocksLeftInPlace": [
-    "banner-cta",
+    "columns-profile-detail",
     "cards-featured-content"
   ],
+  "blocksLeftInPlace": [],
   "pageMetadata": [],
   "hasForm": false
 }

@@ -505,6 +505,14 @@ main > .section.hero-container {
   margin: 0;
 }
 
+/* Banner heroes (imported `.hero.banner` image bands, e.g. about-grace section landings) must not
+   sit flush against the fixed header — leave breathing room below the header before the first
+   block starts. Scoped to `.hero.banner` so the homepage's intentionally full-bleed `.hero`
+   (no `.banner`) is unaffected. */
+main > .section.hero-container:has(> .hero-wrapper > .hero.banner) {
+  margin-top: var(--spacing-l);
+}
+
 /* Default-path pages (e.g. newsroom press releases) put the hero banner AND the body content in
    ONE hero-container section, so the body content-wrapper that follows the hero-wrapper gets no
    top spacing and renders flush against the blue band, and its last paragraph butts against the
