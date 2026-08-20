@@ -2,20 +2,16 @@
   "status": "success",
   "url": "https://grace.com/about-grace/awards-and-recognition/",
   "path": "about-grace/awards-and-recognition",
-  "timestamp": "2026-08-19T22:34:32.824Z",
+  "timestamp": "2026-08-20T07:30:56.307Z",
   "title": "Awards and Recognition",
-  "pageType": "sidebar",
-  "pageMetadata": [
-    "template",
-    "contactus",
-    "contactus-tagline"
-  ],
-  "sidebarNav": true,
-  "contentNodes": 7,
-  "contactSplitBanner": false,
+  "pageType": "default",
   "blocks": [
+    "hero-banner",
     "cards-featured-content"
   ],
   "blocksLeftInPlace": [],
+  "pageMetadata": [
+    "breadcrumb"
+  ],
   "hasForm": false
 }

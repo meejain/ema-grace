@@ -1449,9 +1449,43 @@ var CustomImportScript = (() => {
 
   // tools/importer/parsers/cards-profile-grid.js
   var isProfile = (c) => c.querySelector(".media-callout") && c.querySelector("h3");
+  var imageOf3 = (item) => item.querySelector(".media-callout picture, .image picture, picture") || item.querySelector(".media-callout img, .image img, img") || null;
+  function nameToSlug(name) {
+    return (name || "").toLowerCase().replace(/[.,]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+  }
+  function bioHref(item, name) {
+    const a = Array.from(item.querySelectorAll("a[href]")).find((x) => /\/about-grace\/leadership-team\/[a-z]/i.test(x.getAttribute("href") || ""));
+    if (a) {
+      return (a.getAttribute("href") || "").replace(/^https?:\/\/[^/]+/, "").replace(/^\/content\/grace\/us\/en/, "").replace(/\.html$/, "").replace(/\/$/, "");
+    }
+    const slug = nameToSlug(name);
+    return slug ? `/about-grace/leadership-team/${slug}` : "";
+  }
   function parse19(element, { document }) {
-    const block = buildCardsFromColumns(element, document, "Cards (profile-grid)", ".col-lg-6", isProfile);
-    emitCards(element, block);
+    const items = Array.from(element.querySelectorAll(".col-lg-6")).filter(isProfile).filter((c, _i, arr) => !arr.some((o) => o !== c && c.contains(o)));
+    if (!items.length) return;
+    const cells = items.map((item) => {
+      const img = imageOf3(item);
+      const imageCell = img ? [img.cloneNode(true)] : [];
+      const content = [];
+      const h3 = item.querySelector("h3");
+      const h4 = item.querySelector("h4");
+      const name = h3 ? (h3.textContent || "").replace(/\s+/g, " ").trim() : "";
+      if (h3) content.push(h3.cloneNode(true));
+      if (h4) content.push(h4.cloneNode(true));
+      const href = bioHref(item, name);
+      if (href) {
+        const p = document.createElement("p");
+        const a = document.createElement("a");
+        a.setAttribute("href", href);
+        a.textContent = "Read more";
+        p.appendChild(a);
+        content.push(p);
+      }
+      return [imageCell, content];
+    });
+    const block = WebImporter.Blocks.createBlock(document, { name: "Cards (profile-grid)", cells });
+    element.replaceWith(block);
   }
 
   // tools/importer/parsers/cards-solution-grid.js
@@ -2340,6 +2374,7 @@ var CustomImportScript = (() => {
     const headingText = headingEl && (headingEl.textContent || "").replace(/\s+/g, " ").trim() || "Latest Insights from Grace";
     const ctaEl = scope.querySelector('a.all-articles-cta, a[href*="/insights"], a[href*="/blog"]');
     const ctaHref = ctaEl ? ctaEl.getAttribute("href") || "/insights" : "/insights";
+    const ctaText = ctaEl && (ctaEl.textContent || "").replace(/\s+/g, " ").trim() || "View all articles";
     const cells = items.map((item) => {
       var _a, _b;
       let img = item.querySelector(".image img, picture img, img");
@@ -2387,13 +2422,28 @@ var CustomImportScript = (() => {
     if (params && params.emitFeaturedHeading && block.parentNode) {
       const h2 = document.createElement("h2");
       h2.textContent = headingText;
+      block.parentNode.insertBefore(h2, block);
       const p = document.createElement("p");
       const a = document.createElement("a");
       a.href = ctaHref;
-      a.textContent = "View all articles";
-      p.append(a);
-      block.parentNode.insertBefore(h2, block);
-      block.parentNode.insertBefore(p, block);
+      a.textContent = ctaText || "View all articles";
+      let urlPath = "";
+      try {
+        urlPath = new URL(params.originalURL || "").pathname;
+      } catch (e) {
+        urlPath = "";
+      }
+      const ctaBelow = /\/about-grace\/(leadership-team|awards-and-recognition)\/?$/.test(urlPath);
+      if (ctaBelow) {
+        const strong = document.createElement("strong");
+        strong.append(a);
+        p.append(strong);
+        if (block.nextSibling) block.parentNode.insertBefore(p, block.nextSibling);
+        else block.parentNode.appendChild(p);
+      } else {
+        p.append(a);
+        block.parentNode.insertBefore(p, block);
+      }
     }
   }
 
@@ -3019,6 +3069,9 @@ var CustomImportScript = (() => {
     if (!/\/industries\/.+/.test(path)) return false;
     return isSidebarPage(document);
   }
+  function isAboutGracePlainLanding(path) {
+    return /\/about-grace\/(leadership-team|awards-and-recognition)\/?$/.test(path);
+  }
   function isAboutGraceDetailPage(document, url) {
     const path = (() => {
       try {
@@ -3030,6 +3083,7 @@ var CustomImportScript = (() => {
     if (!/\/about-grace\/.+/.test(path)) return false;
     const isBio = /\/about-grace\/leadership-team\/[^/]+\/?$/.test(path);
     if (isBio) return false;
+    if (isAboutGracePlainLanding(path)) return false;
     return true;
   }
   function isAboutGraceTextSidebar(document, url) {
@@ -4091,7 +4145,14 @@ var CustomImportScript = (() => {
     const { parsedNames: rendered, unparsed } = discoverAndParseBlocks(document, url, params);
     executeTransformers("afterTransform", main, { document, url, params });
     const pageMeta = [];
-    const hasCU = params && params.sourceHadContactWidget || hasContactWidget(document);
+    const bcPath = (() => {
+      try {
+        return new URL(params && params.originalURL || url || "").pathname;
+      } catch (e) {
+        return "";
+      }
+    })();
+    const hasCU = !isAboutGracePlainLanding(bcPath) && (params && params.sourceHadContactWidget || hasContactWidget(document));
     const isIndustriesLanding = !hasCU && !(params && params.industriesNav) && /\/industries\//.test(params && params.originalURL || url || "") && !!(params && params.sourceHadBannerHero);
     if (hasCU) {
       pageMeta.push(["template", params && params.forceTemplate || "contactus"]);

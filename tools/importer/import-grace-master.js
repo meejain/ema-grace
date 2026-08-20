@@ -773,20 +773,34 @@ function isIndustriesDetailPage(document, url) {
  * and-recognition, all leadership bios) have NO left rail on live → they fall through to the plain
  * default path (centered profile/cards + geo-hex Latest-Insights, all handled by catalog discovery).
  */
+/**
+ * PLAIN full-width about-grace landings — NO left section-nav and NO contact widget on the source;
+ * they render as a centered cards grid + Latest-Insights, exactly like the /about-grace/ root.
+ * Verified against LIVE grace.com: leadership-team ("Meet the Grace Leadership Team" profile grid)
+ * and awards-and-recognition have no `.section-navigation` in the static HTML and show no left rail
+ * or Contact-Us widget. They must take the plain default path — NOT the sidebar/contactus layout.
+ * (The section pages community/EHS/sustainability/this-is-grace/our-history + the locations landing
+ * DO carry the family section-nav and stay on the sidebar path.)
+ */
+function isAboutGracePlainLanding(path) {
+  return /\/about-grace\/(leadership-team|awards-and-recognition)\/?$/.test(path);
+}
+
 function isAboutGraceDetailPage(document, url) {
   const path = (() => { try { return new URL(url || '').pathname; } catch (e) { return ''; } })();
   if (!/\/about-grace\/.+/.test(path)) return false;
   // The leadership BIOS (/about-grace/leadership-team/<name>/, depth 3) are NOT sidebar pages —
-  // they render as a centered profile-detail + Latest-Insights on the default path. Everything else
-  // under /about-grace/ (the section pages + the two landings + the location detail pages) IS a
-  // sidebar page on the source, sharing ONE family section-nav rail.
+  // they render as a centered profile-detail + Latest-Insights on the default path.
   const isBio = /\/about-grace\/leadership-team\/[^/]+\/?$/.test(path);
   if (isBio) return false;
-  // Every non-bio /about-grace/<child> page is a sidebar page. Do NOT rely solely on isSidebarPage()
-  // — several section pages (awards-and-recognition, community, EHS, sustainability, this-is-grace)
-  // ship their `.section-navigation` ONLY via client JS, so the STATIC HTML has no nav and
-  // isSidebarPage() returns false, dropping them to the wrong (full-width) layout. buildSidebarNav
-  // emits the canonical about-grace family nav for these, so route them all to the sidebar path.
+  // The PLAIN landings (leadership-team, awards-and-recognition) render full-width on the source —
+  // no left nav, no contact widget — so they also take the plain default path, not the sidebar one.
+  if (isAboutGracePlainLanding(path)) return false;
+  // Every remaining non-bio /about-grace/<child> page is a sidebar page. Do NOT rely solely on
+  // isSidebarPage() — several section pages (community, EHS, sustainability, this-is-grace) ship
+  // their `.section-navigation` ONLY via client JS, so the STATIC HTML has no nav and isSidebarPage()
+  // returns false, dropping them to the wrong (full-width) layout. buildSidebarNav emits the
+  // canonical about-grace family nav for these, so route them all to the sidebar path.
   return true;
 }
 
@@ -2385,7 +2399,13 @@ function buildDefaultPage(document, url, params) {
   const pageMeta = [];
   // Contact-us widget presence + tagline are captured in params BEFORE cleanup removes the
   // widget (see transform()); fall back to a live query for any caller that didn't pre-capture.
-  const hasCU = (params && params.sourceHadContactWidget) || hasContactWidget(document);
+  // The PLAIN about-grace landings (leadership-team, awards-and-recognition) render full-width with
+  // NO Contact-Us widget on the source — but their `.contact-us-sticky` hydrates late (during the
+  // onLoad wait) and gets captured, wrongly emitting `contactus: true` + a right-rail layout. Suppress
+  // it for these paths so they match the source's plain centered layout.
+  const bcPath = (() => { try { return new URL((params && params.originalURL) || url || '').pathname; } catch (e) { return ''; } })();
+  const hasCU = !isAboutGracePlainLanding(bcPath)
+    && ((params && params.sourceHadContactWidget) || hasContactWidget(document));
   // An /industries/ LANDING page (banner hero, NO left section-nav, NO contact widget — e.g.
   // hydroprocessing) still uses the SAME constrained/left-aligned content layout as the contactus
   // template on the source (content column ~920px, not full-bleed centered). Give it the contactus

@@ -26,6 +26,9 @@ export default function parse(element, { document, params }) {
     || 'Latest Insights from Grace';
   const ctaEl = scope.querySelector('a.all-articles-cta, a[href*="/insights"], a[href*="/blog"]');
   const ctaHref = ctaEl ? (ctaEl.getAttribute('href') || '/insights') : '/insights';
+  // Prefer the source CTA's own visible label (e.g. "View all blog posts" on about-grace landings),
+  // falling back to "View all articles" (insights/industries default) when the source has no label.
+  const ctaText = (ctaEl && (ctaEl.textContent || '').replace(/\s+/g, ' ').trim()) || 'View all articles';
 
   const cells = items.map((item) => {
     // Image: real <img>, else the background-image URL on .image.
@@ -66,18 +69,37 @@ export default function parse(element, { document, params }) {
   const host = element.closest('.featured-blog-cmp') || cmp;
   host.replaceWith(block);
 
-  // Default/product path: emit the heading + "View all articles" as siblings before the block, in
-  // the SAME section, so cards.css featured-content header styling picks them up. (Insights path
-  // leaves params.emitFeaturedHeading unset — buildInsightsArticle emits its own copy.)
+  // Default/product path: emit the heading + "View all" link as siblings around the block, in the
+  // SAME section, so cards.css featured-content header styling picks them up. (Insights path leaves
+  // params.emitFeaturedHeading unset — buildInsightsArticle emits its own copy.)
   if (params && params.emitFeaturedHeading && block.parentNode) {
     const h2 = document.createElement('h2');
     h2.textContent = headingText;
+    block.parentNode.insertBefore(h2, block);
+
     const p = document.createElement('p');
     const a = document.createElement('a');
     a.href = ctaHref;
-    a.textContent = 'View all articles';
-    p.append(a);
-    block.parentNode.insertBefore(h2, block);
-    block.parentNode.insertBefore(p, block);
+    a.textContent = ctaText || 'View all articles';
+
+    // Button placement + style: on the about-grace LANDING pages (leadership-team,
+    // awards-and-recognition) the source renders the CTA as the site's standard GREEN PRIMARY BUTTON
+    // centered BELOW the cards. Emit it as `<strong><a>` so scripts.js decorateButtons() promotes it
+    // to `a.button.primary` — reusing the exact site button (fill + hover) rather than any bespoke
+    // styling. On insights/industries the CTA stays a plain text link on the heading row (before the
+    // block), matching those pages' source.
+    let urlPath = '';
+    try { urlPath = new URL(params.originalURL || '').pathname; } catch (e) { urlPath = ''; }
+    const ctaBelow = /\/about-grace\/(leadership-team|awards-and-recognition)\/?$/.test(urlPath);
+    if (ctaBelow) {
+      const strong = document.createElement('strong');
+      strong.append(a);
+      p.append(strong);
+      if (block.nextSibling) block.parentNode.insertBefore(p, block.nextSibling);
+      else block.parentNode.appendChild(p);
+    } else {
+      p.append(a);
+      block.parentNode.insertBefore(p, block);
+    }
   }
 }

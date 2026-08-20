@@ -390,8 +390,14 @@
   padding-bottom: var(--spacing-xl);
 }
 
-/* Section header row — mobile: stacked + centered (carousel layout) */
-.cards-container:has(.cards.featured-content) div:has(> h2):has(> p) {
+/* Section header row — mobile: stacked + centered (carousel layout).
+   Scope tightly to the "Latest Insights" header wrapper: a div whose <p> holds the "View all"
+   link to /insights or /blog, and which has NO list (so it can't match an unrelated body content
+   wrapper that merely happens to contain an <h2> + <p>, e.g. the awards-and-recognition page, whose
+   intro <h2> + award-year <ul>s share ONE .default-content-wrapper — flexing that scattered the
+   year headings across the row). */
+.cards-container:has(.cards.featured-content) div:has(> h2):has(> p a[href*="insight"]):not(:has(ul, ol)),
+.cards-container:has(.cards.featured-content) div:has(> h2):has(> p a[href*="blog"]):not(:has(ul, ol)) {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -451,6 +457,19 @@ body.sidebar main > .section.cards-container.geo-hex:has(.cards.featured-content
 
 .cards-container:has(.cards.featured-content) div:has(> h2) > p a:hover {
   color: var(--link-hover-color);
+}
+
+/* about-grace LEADERSHIP landing: the "Latest Insights from Grace" CTA renders as the site's
+   standard GREEN PRIMARY BUTTON centered BELOW the cards (source "View all blog posts" button),
+   NOT the right-aligned text link used on insights articles. The importer emits it as
+   `<strong><a>` AFTER the featured block, so scripts.js decorateButtons() promotes it to the exact
+   `a.button.primary` (fill + hover handled globally in styles.css) inside a `.button-wrapper`.
+   We only need to CENTER that trailing button-wrapper. Scoped to the section holding BOTH
+   profile-grid AND featured-content — i.e. only this landing. */
+.cards-container:has(.cards.profile-grid):has(.cards.featured-content) .button-wrapper:has(a.button[href*="insight"]),
+.cards-container:has(.cards.profile-grid):has(.cards.featured-content) .button-wrapper:has(a.button[href*="blog"]) {
+  margin-top: var(--spacing-l);
+  text-align: center;
 }
 
 /* Mobile: horizontal scroll-snap carousel — one full-width card per view */
@@ -1533,15 +1552,44 @@ body.sidebar main > .section.cards-container.geo-hex:has(.cards.featured-content
 
 /* ===================== Variant: profile-grid ===================== */
 
-/* Section sits on a light-grey band; cards are white tiles (source layout). */
-.cards-container:has(.cards.profile-grid) {
+/* Only the CARD GRID sits on the light-grey band; the section heading ("Meet the Grace Leadership
+   Team"), the hero, and the trailing "Latest Insights" band all stay on white — matching source,
+   where the grey band wraps ONLY the leadership tiles. On leadership-team the hero + heading + grid
+   + Latest-Insights share ONE section, so we must NOT grey the whole `.cards-container` (that floods
+   the heading + hero + Latest-Insights); grey the profile-grid's own wrapper instead. */
+.cards-wrapper:has(.cards.profile-grid) {
   background-color: #e6e7e8;
   padding: 45px 0;
+
+  /* Full-bleed grey band (source `.light-gray-bkgd` spans the viewport, left 0 / width 100vw), while
+     the tiles inside stay within the centred column. The wrapper is a section child that the global
+     `main > .section > div { max-width:1200px; margin:auto }` rule constrains, so we must override
+     BOTH max-width and the auto margins to break out to the viewport edges. */
+  width: 100vw;
+  max-width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
 }
 
-/* Section heading (e.g. "Meet the Grace Leadership Team") */
-.cards-container:has(.cards.profile-grid) h2 {
-  text-align: center;
+/* Re-centre the tile grid inside the full-bleed grey band to the 1200px column (matches source,
+   where the cards align to the centred content column, NOT the viewport edge). */
+.cards-wrapper:has(.cards.profile-grid) > .cards.profile-grid {
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: 10px;
+}
+
+@media (width >= 900px) {
+  .cards-wrapper:has(.cards.profile-grid) > .cards.profile-grid {
+    padding-inline: 32px;
+  }
+}
+
+/* Section heading (e.g. "Meet the Grace Leadership Team") — LEFT-aligned, on white, matching source
+   (the h2 sits flush-left above the card band, not centered). Scope to the wrapper that is NOT the
+   "Latest Insights" featured header (that one has its own centered treatment below). */
+.cards-container:has(.cards.profile-grid) .default-content-wrapper:has(> h2):not(:has(> p a[href*="insight"], > p a[href*="blog"])) > h2 {
+  text-align: left;
 }
 
 /* Card grid — mobile first: single column */
