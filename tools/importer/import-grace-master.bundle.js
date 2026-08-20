@@ -1296,7 +1296,7 @@ var CustomImportScript = (() => {
   function imageOf(item) {
     return item.querySelector(".image picture, .cmp-image picture, picture") || item.querySelector(".image img, .cmp-image img, img") || null;
   }
-  function contentFrom(item, document) {
+  function contentFrom(item, document, opts) {
     const textbox = item.querySelector(".text, .rich-text");
     const scope = textbox || item;
     const out = [];
@@ -1307,6 +1307,14 @@ var CustomImportScript = (() => {
       if (!(el.textContent || "").trim() && !el.querySelector("a")) return;
       out.push(el.cloneNode(true));
     });
+    if (textbox && opts && opts.includeSiblingCta) {
+      const ctaAnchor = Array.from(item.querySelectorAll(".button__section a[href], .button a[href], a.button[href]")).find((a) => (a.textContent || "").trim() && !textbox.contains(a));
+      if (ctaAnchor && !out.some((n) => n.querySelector && n.querySelector("a[href]"))) {
+        const p = document.createElement("p");
+        p.appendChild(ctaAnchor.cloneNode(true));
+        out.push(p);
+      }
+    }
     if (!out.length) {
       scope.querySelectorAll("h1,h2,h3,h4,h5,h6,p,ul,ol,a").forEach((el) => {
         if ((el.textContent || "").trim()) out.push(el.cloneNode(true));
@@ -1314,7 +1322,7 @@ var CustomImportScript = (() => {
     }
     return out;
   }
-  function buildCardsFromColumns(container, document, blockName, itemSelector, accept) {
+  function buildCardsFromColumns(container, document, blockName, itemSelector, accept, opts) {
     const items = Array.from(container.querySelectorAll(itemSelector)).filter((it) => {
       if (accept && !accept(it)) return false;
       return imageOf(it) || (it.textContent || "").trim();
@@ -1323,7 +1331,7 @@ var CustomImportScript = (() => {
     const cells = items.map((item) => {
       const img = imageOf(item);
       const imageCell = img ? [img.cloneNode(true)] : [];
-      const contentCell = contentFrom(item, document);
+      const contentCell = contentFrom(item, document, opts);
       return [imageCell, contentCell];
     });
     return WebImporter.Blocks.createBlock(document, { name: blockName, cells });
@@ -1347,10 +1355,89 @@ var CustomImportScript = (() => {
   }
 
   // tools/importer/parsers/cards-location-grid.js
-  var isLocation = (c) => /tel:/i.test(c.textContent || "") && !c.querySelector("h4, ul");
+  var imageOf2 = (item) => item.querySelector(".image picture, .cmp-image picture, picture") || item.querySelector(".image img, .cmp-image img, img") || null;
+  function titleOf(item) {
+    return Array.from(item.querySelectorAll("strong")).find((s) => (s.textContent || "").trim()) || null;
+  }
+  function addressParas(item, titleStrong) {
+    const scope = item.querySelector(".text, .rich-text") || item;
+    return Array.from(scope.querySelectorAll("p")).filter((p) => {
+      if (!(p.textContent || "").trim()) return false;
+      if (titleStrong && (titleStrong.contains(p) || p.contains(titleStrong))) return false;
+      return true;
+    });
+  }
+  function isCard(el) {
+    if (el.querySelector("h2, h4")) return false;
+    const t = titleOf(el);
+    if (!t) return false;
+    return addressParas(el, t).length > 0;
+  }
+  function cardCells(item, document) {
+    const img = imageOf2(item);
+    const imageCell = img ? [img.cloneNode(true)] : [];
+    const title = titleOf(item);
+    const content = [];
+    if (title) {
+      const p = document.createElement("p");
+      p.appendChild(title.cloneNode(true));
+      content.push(p);
+    }
+    addressParas(item, title).forEach((p) => content.push(p.cloneNode(true)));
+    return [imageCell, content];
+  }
   function parse17(element, { document }) {
-    const block = buildCardsFromColumns(element, document, "Cards (location-grid)", ".col-lg-4", isLocation);
-    emitCards(element, block);
+    const cardSel = ".col-lg-4, .col-lg-12";
+    const cards = Array.from(element.querySelectorAll(cardSel)).filter(isCard).filter((c, _i, arr) => !arr.some((o) => o !== c && c.contains(o)));
+    if (!cards.length) return;
+    const cardSet = new Set(cards);
+    const headings = Array.from(element.querySelectorAll("h2, h4")).filter((h) => (h.textContent || "").trim());
+    const ordered = [];
+    const pushIf = (node, type) => {
+      if (node) ordered.push({ node, type });
+    };
+    cards.forEach((c) => pushIf(c, "card"));
+    headings.forEach((h) => {
+      if (![...cardSet].some((c) => c.contains(h))) pushIf(h, "other");
+    });
+    ordered.sort((a, b) => {
+      if (a.node === b.node) return 0;
+      return a.node.compareDocumentPosition(b.node) & 4 ? -1 : 1;
+    });
+    const frag = document.createDocumentFragment();
+    let run = [];
+    const flush = () => {
+      if (!run.length) return;
+      const cells = run.map((c) => cardCells(c, document));
+      frag.appendChild(WebImporter.Blocks.createBlock(document, { name: "Cards (location-grid)", cells }));
+      run = [];
+    };
+    ordered.forEach(({ node, type }) => {
+      if (type === "card") {
+        run.push(node);
+        return;
+      }
+      flush();
+      if (/^H4$/.test(node.tagName) && /legend/i.test(node.textContent || "")) {
+        const embed = node.closest(".embed, .cmp-embed") || node.parentElement;
+        const h4 = document.createElement("h4");
+        h4.textContent = (node.textContent || "").trim();
+        frag.appendChild(h4);
+        Array.from(embed.querySelectorAll("strong")).forEach((s) => {
+          const label = (s.textContent || "").replace(/\s+/g, " ").trim();
+          if (!label) return;
+          const p = document.createElement("p");
+          const strong = document.createElement("strong");
+          strong.textContent = label;
+          p.appendChild(strong);
+          frag.appendChild(p);
+        });
+      } else {
+        frag.appendChild(node.cloneNode(true));
+      }
+    });
+    flush();
+    element.replaceWith(frag);
   }
 
   // tools/importer/parsers/cards-contact-options.js
@@ -2655,11 +2742,15 @@ var CustomImportScript = (() => {
       },
       3
     ),
-    // location-grid: .col-lg-4 with image + a "Tel:" address (phone signature), no <h4>/<ul>.
+    // location-grid: .col-lg-4 location cards — a city-name <strong> heading (linked to the detail
+    // page for plant sites, plain text for sales offices) + an address `<p>`. Do NOT require a "Tel:"
+    // line or an image: ~9 sales-office tiles (Beijing, Tokyo, Antwerp, Sohar, …) have neither, and
+    // requiring them dropped those tiles entirely. Exclude contact-options (has <h4>+<ul>) and
+    // section-header cards (bare h2). The parser re-selects the same cards inside the LCA container.
     "cards-location-grid": (doc) => cardGridContainers(
       doc,
       ".col-lg-4",
-      (c) => hasImageAndText(c) && /tel:/i.test(c.textContent || "") && !c.querySelector("h4, ul"),
+      (c) => !c.querySelector("h2, h4, ul") && Array.from(c.querySelectorAll("strong")).some((s) => (s.textContent || "").trim()) && Array.from((c.querySelector(".text, .rich-text") || c).querySelectorAll("p")).some((p) => (p.textContent || "").trim()),
       3
     ),
     // contact-options: .col-lg-4 with <h4> + <ul> of options (no phone address).
@@ -3014,6 +3105,10 @@ var CustomImportScript = (() => {
           return;
         }
         if (href.startsWith("/")) {
+          if (/^\/content\/dam\//.test(href.split(/[?#]/)[0])) {
+            a.setAttribute("href", `https://grace.com${href}`);
+            return;
+          }
           let path = href.replace(/^\/content\/grace\/us\/en/, "").replace(/\.html$/, "");
           if (path.length > 1) path = path.replace(/\/$/, "");
           a.setAttribute("href", collapsePathHyphens(path) || "/");
@@ -3085,7 +3180,9 @@ var CustomImportScript = (() => {
         ul.append(mkLi(info));
       });
     }
-    if (aboutGraceUrl) {
+    const extractedParent = ul.querySelector(":scope > li > ul");
+    const hasRichSubTree = extractedParent && extractedParent.querySelectorAll(":scope > li").length >= 5;
+    if (aboutGraceUrl && !hasRichSubTree) {
       const AG_NAV = [
         { text: "Awards and Recognition", href: "/about-grace/awards-and-recognition/" },
         { text: "Community", href: "/about-grace/community/" },
@@ -4145,7 +4242,16 @@ var CustomImportScript = (() => {
     }
     const emittedHero = !!Array.from(main.querySelectorAll("table tr")).find((tr) => /hero\s*\(/i.test(tr.textContent || ""));
     if (params && params.sourceHadBreadcrumb && !params.sourceHadBannerHero && !emittedHero) {
-      const crumbBlock = WebImporter.Blocks.createBlock(document, { name: "Breadcrumb", cells: [[""]] });
+      let bcUrlPath = "";
+      try {
+        bcUrlPath = new URL(params.originalURL || url).pathname;
+      } catch (e) {
+        bcUrlPath = "";
+      }
+      const isLocationDetail = /\/about-grace\/locations\/[^/]+\/?$/.test(bcUrlPath.replace(/\.html$/, ""));
+      const leafLabel = isLocationDetail ? (params.sourceLastCrumb || document.title || "").trim() : "";
+      const crumbCells = leafLabel ? [["leaf"], [leafLabel]] : [[""]];
+      const crumbBlock = WebImporter.Blocks.createBlock(document, { name: "Breadcrumb", cells: crumbCells });
       const crumbSection = document.createElement("div");
       crumbSection.append(crumbBlock);
       main.insertBefore(document.createElement("hr"), main.firstChild);

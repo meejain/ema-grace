@@ -380,9 +380,16 @@ const MATCHERS = {
       if (rt.querySelector('img, picture, ul, ol, a')) return false;
       return (p.textContent || '').trim().length < 220;
     }, 3),
-  // location-grid: .col-lg-4 with image + a "Tel:" address (phone signature), no <h4>/<ul>.
+  // location-grid: .col-lg-4 location cards — a city-name <strong> heading (linked to the detail
+  // page for plant sites, plain text for sales offices) + an address `<p>`. Do NOT require a "Tel:"
+  // line or an image: ~9 sales-office tiles (Beijing, Tokyo, Antwerp, Sohar, …) have neither, and
+  // requiring them dropped those tiles entirely. Exclude contact-options (has <h4>+<ul>) and
+  // section-header cards (bare h2). The parser re-selects the same cards inside the LCA container.
   'cards-location-grid': (doc) => cardGridContainers(doc, '.col-lg-4',
-    (c) => hasImageAndText(c) && /tel:/i.test(c.textContent || '') && !c.querySelector('h4, ul'), 3),
+    (c) => !c.querySelector('h2, h4, ul')
+      && Array.from(c.querySelectorAll('strong')).some((s) => (s.textContent || '').trim())
+      && Array.from((c.querySelector('.text, .rich-text') || c).querySelectorAll('p'))
+        .some((p) => (p.textContent || '').trim()), 3),
   // contact-options: .col-lg-4 with <h4> + <ul> of options (no phone address).
   'cards-contact-options': (doc) => cardGridContainers(doc, '.col-lg-4',
     (c) => hasImageAndText(c) && !!c.querySelector('h4') && !!c.querySelector('ul'), 2),
@@ -913,6 +920,17 @@ function rewriteInternalLinks(main) {
         return;
       }
       if (href.startsWith('/')) {
+        // DAM assets (…/content/dam/…, e.g. corporate PDFs like the GRI/EHS-policy
+        // downloads) are NOT part of the EDS site tree. A root-relative DAM path left
+        // as-is is treated by the markdown round-trip as an internal doc link and gets
+        // slugified — spaces→hyphens, lowercased, and the `.pdf` extension collapsed to
+        // `-pdf` — so the download 404s (the "DA slug trap"). Promote it to an ABSOLUTE
+        // grace.com URL so it round-trips as an external link and resolves to the real
+        // file. Match the absolute-URL branch above which already early-returns for DAM.
+        if (/^\/content\/dam\//.test(href.split(/[?#]/)[0])) {
+          a.setAttribute('href', `https://grace.com${href}`);
+          return;
+        }
         let path = href.replace(/^\/content\/grace\/us\/en/, '').replace(/\.html$/, '');
         if (path.length > 1) path = path.replace(/\/$/, '');
         a.setAttribute('href', collapsePathHyphens(path) || '/');
@@ -1027,10 +1045,19 @@ function buildSidebarNav(document) {
   // several pages (community, environmental-health-and-safety, sustainability, this-is-grace) the
   // source nav <ul> is JS-hydrated — the STATIC HTML the importer sees has 0 (or a partial 3-4) of
   // the links, so the extracted rail is empty/incomplete and the sidebar layout renders with a blank
-  // left column. When building an /about-grace/ page, ALWAYS emit the full canonical list (parent
+  // left column. When building an /about-grace/ page, emit the full canonical list (parent
   // "About Grace" + its 8 children, verified from the fully-hydrated source) so every section page
   // gets the identical, complete left rail like the source. Overwrites any partial extraction.
-  if (aboutGraceUrl) {
+  //
+  // EXCEPTION — the LOCATION DETAIL pages (/about-grace/locations/<city>/) carry their OWN richer
+  // sibling-nav in static HTML: a parent "Locations" <li> with a nested <ul> of all ~23 city links
+  // (NOT the 8-item About Grace family menu). The source shows THAT sub-tree, not the family menu,
+  // so when the extraction already produced a parent <li> with a substantial nested child list
+  // (≥5 children), keep it and SKIP the canonical overwrite.
+  const extractedParent = ul.querySelector(':scope > li > ul');
+  const hasRichSubTree = extractedParent
+    && extractedParent.querySelectorAll(':scope > li').length >= 5;
+  if (aboutGraceUrl && !hasRichSubTree) {
     const AG_NAV = [
       { text: 'Awards and Recognition', href: '/about-grace/awards-and-recognition/' },
       { text: 'Community', href: '/about-grace/community/' },
@@ -2623,7 +2650,18 @@ function buildDefaultPage(document, url, params) {
   // hero block was emitted — so we never double up with the hero-derived breadcrumb.
   const emittedHero = !!Array.from(main.querySelectorAll('table tr')).find((tr) => /hero\s*\(/i.test(tr.textContent || ''));
   if (params && params.sourceHadBreadcrumb && !params.sourceHadBannerHero && !emittedHero) {
-    const crumbBlock = WebImporter.Blocks.createBlock(document, { name: 'Breadcrumb', cells: [['']] });
+    // LOCATION DETAIL pages (/about-grace/locations/<city>/) show the CURRENT page as a trailing
+    // leaf crumb (source: "Home / About Grace / Locations / Aiken, SC, USA"), UNLIKE the leadership
+    // BIO pages which drop the leaf ("Home / About Grace / Leadership Team"). Both emit this
+    // hero-less standalone breadcrumb, so pass a `leaf` cell to tell blocks/breadcrumb/breadcrumb.js
+    // to KEEP the current page for location details only. The leaf label is the SOURCE breadcrumb's
+    // last crumb (e.g. "Aiken, SC, USA"), captured pre-cleanup as params.sourceLastCrumb.
+    let bcUrlPath = '';
+    try { bcUrlPath = new URL(params.originalURL || url).pathname; } catch (e) { bcUrlPath = ''; }
+    const isLocationDetail = /\/about-grace\/locations\/[^/]+\/?$/.test(bcUrlPath.replace(/\.html$/, ''));
+    const leafLabel = isLocationDetail ? (params.sourceLastCrumb || document.title || '').trim() : '';
+    const crumbCells = leafLabel ? [['leaf'], [leafLabel]] : [['']];
+    const crumbBlock = WebImporter.Blocks.createBlock(document, { name: 'Breadcrumb', cells: crumbCells });
     const crumbSection = document.createElement('div');
     crumbSection.append(crumbBlock);
     main.insertBefore(document.createElement('hr'), main.firstChild);

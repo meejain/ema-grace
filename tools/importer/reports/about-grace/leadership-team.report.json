@@ -2,17 +2,21 @@
   "status": "success",
   "url": "https://grace.com/about-grace/leadership-team/",
   "path": "about-grace/leadership-team",
-  "timestamp": "2026-08-19T14:10:49.585Z",
+  "timestamp": "2026-08-19T22:37:12.185Z",
   "title": "Leadership Team",
-  "pageType": "default",
+  "pageType": "sidebar",
+  "pageMetadata": [
+    "template",
+    "contactus",
+    "contactus-tagline"
+  ],
+  "sidebarNav": true,
+  "contentNodes": 1,
+  "contactSplitBanner": false,
   "blocks": [
-    "hero-banner",
     "cards-profile-grid",
     "cards-featured-content"
   ],
   "blocksLeftInPlace": [],
-  "pageMetadata": [
-    "template"
-  ],
   "hasForm": false
 }

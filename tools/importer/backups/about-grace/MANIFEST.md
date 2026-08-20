@@ -3,7 +3,7 @@
 - **set:** about-grace (39 pages: 1 root card landing + 2 landings [leadership-team, locations] +
   5 section pages + 2 history [our-history, asbestos-trusts] + 9 leadership bios + 20 location details).
 - **bundle:** `import-grace-master.bundle.js` (frozen; the live bundle that produced this set).
-- **bundle size:** 201790 bytes.
+- **bundle size:** 206715 bytes (rev 2, 2026-08-19 parity pass; was 201790 at rev 1).
 - **bundle provenance:** working tree at snapshot (parent commit `2302375` "Update importer"; importer
   source + bundle + runtime CSS all uncommitted at snapshot time — the frozen bundle here IS the record
   for importer output; runtime CSS lives in the repo working tree, see RUNTIME below).
@@ -49,6 +49,53 @@ Dispatch order (first match wins), all keyed on path + source DOM:
   duplicated leadership-bio headshot).
 - **`parsers/cards-product.js`**: `rich` filter excludes `.h5` eyebrow ("PROMOTION") + `.h4.title`
   duplicate; raw-text fallback guarded by `anyStructured` (about-grace root cards now title-only).
+
+## REV 2 — page-by-page parity pass (2026-08-19): 4 defect fixes + prove-no-regression
+
+A full 39-page rendered-inventory audit vs LIVE grace.com surfaced 2 MAJOR + 2 real defects; all
+fixed, all 39 reimported with the rev-2 bundle (0 tiny/empty), regression re-proven. Fixes:
+
+IMPORTER (rebundled — needs reimport, done):
+- **DAM `.pdf` slug trap fix** (`rewriteInternalLinks`): a ROOT-RELATIVE `/content/dam/…foo.pdf`
+  link was slugified by the markdown round-trip (spaces→`-`, lowercased, `.pdf`→`-pdf`) → 404. Now
+  promoted to an ABSOLUTE `https://grace.com/content/dam/…` URL (like the already-handled absolute-URL
+  branch) so it round-trips as external and resolves. Fixes EHS "Download our Policy" + sustainability
+  "Download our current GRI report", and every other DAM download site-wide (brochures on
+  insights/industries etc.) — pure improvement.
+- **`parsers/cards-location-grid.js` rewritten**: (a) matcher no longer requires a `Tel:` line or an
+  image → the ~9 phone-less sales-office tiles (Beijing, Tokyo, Antwerp, Sohar, Manila, Mumbai,
+  Atyrau, Shanghai, New Delhi) are no longer dropped; (b) emits the `<strong>` city-name heading
+  (linked → detail page for plant sites, plain text for offices) as the card title — was lost; (c)
+  walks the container in document order, COALESCING card runs into blocks split by the region `<h2>`
+  headers ("Americas"/"Asia"/"Europe") and rebuilding the LEGEND (`<h4>` + 5 icon rows as clean text
+  `<p><strong>`) — the whole-column `replaceWith` previously destroyed the headers + Legend.
+- **`buildSidebarNav` — location-detail sibling nav** (`hasRichSubTree`): the canonical about-grace
+  8-item family menu no longer OVERWRITES a richer extracted sub-tree. Location detail pages carry
+  their own static-HTML nav (parent "Locations" + all ~23 sibling city links); when the extraction
+  already produced a parent `<li>` with ≥5 nested children, keep it. Section pages (empty/JS-hydrated
+  nav) still get the canonical family menu.
+- **Breadcrumb leaf for location details**: `buildDefaultPage` authors a `Breadcrumb` block with a
+  `leaf` row (label = `params.sourceLastCrumb`, e.g. "Aiken, SC, USA") ONLY for
+  `/about-grace/locations/<city>/` — those source breadcrumbs show the current page as a trailing
+  leaf; leadership bios (leaf-dropped) are unaffected.
+- **`parsers/_cards-utils.js` `contentFrom`**: added an OPT-IN `includeSiblingCta` param (default OFF)
+  that picks up a card's CTA link authored as a sibling of the `.text` box (`.button__section > a`).
+  **`parsers/cards-profile-grid.js`** opts in → restores the 9 leadership "Read more → bio" links.
+  Gated so insights/industries card variants keep byte-identical output (no regression).
+
+RUNTIME (blocks — NO reimport):
+- **`blocks/breadcrumb/breadcrumb.js`**: honors an authored two-row `leaf` block (marker row + label
+  row) → appends the current page as a trailing non-link crumb. Default behavior (leaf dropped)
+  unchanged when no `leaf` row present.
+
+Prove-no-regression: console-error sweep 0/165 insights + 0/38 about-grace; regression reimport of
+5 completed-family samples (insights ×2, products, newsroom, industries) → only deltas are the
+intended DAM-pdf-absolute fix + PRE-EXISTING stale-bundle drift (documented `horizontal-teaser-featured`
+token, `/media-da/`→absolute img, trailing-slash normalization — reproduced identically, not from this
+pass). Quality gate: lint 0 errors, breakpoint PASS, a11y PASS on aiken/leadership-team/sustainability.
+KNOWN-OPEN: the locations LANDING renders an empty `<title>` on the LOCAL dev server (it has no `<h1>`;
+source has none either — DA sets `<title>` from metadata Title="Locations" at publish). a11y
+`document-title` flags it locally only; resolves on publish.
 
 ## RUNTIME fixes (NOT in the bundle — in repo working tree, apply at render, NO reimport)
 - `blocks/cards/cards.css` — `.cards.product:not(.cta):has(> ul > li:nth-child(5)) > ul` → 3-up grid

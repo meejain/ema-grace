@@ -27,8 +27,16 @@ function imageOf(item) {
     || null;
 }
 
-/** Meaningful content nodes of an item's text side (headings/paragraphs/lists/links). */
-function contentFrom(item, document) {
+/**
+ * Meaningful content nodes of an item's text side (headings/paragraphs/lists/links).
+ * @param {Element} item the card item
+ * @param {Document} document
+ * @param {{includeSiblingCta?: boolean}} [opts] when includeSiblingCta is set, also pick up a CTA
+ *   link authored as a SIBLING of the text box (`.button__section > a` / `.button > a`) — e.g. the
+ *   leadership-team "Read more → bio" link, which lives OUTSIDE `.text`. Off by default so other card
+ *   variants (insights featured-content, industries grids) keep their exact prior output.
+ */
+function contentFrom(item, document, opts) {
   // Prefer an explicit text container; else take everything that isn't the image.
   const textbox = item.querySelector('.text, .rich-text');
   const scope = textbox || item;
@@ -40,6 +48,15 @@ function contentFrom(item, document) {
     if (!(el.textContent || '').trim() && !el.querySelector('a')) return;
     out.push(el.cloneNode(true));
   });
+  if (textbox && opts && opts.includeSiblingCta) {
+    const ctaAnchor = Array.from(item.querySelectorAll('.button__section a[href], .button a[href], a.button[href]'))
+      .find((a) => (a.textContent || '').trim() && !textbox.contains(a));
+    if (ctaAnchor && !out.some((n) => n.querySelector && n.querySelector('a[href]'))) {
+      const p = document.createElement('p');
+      p.appendChild(ctaAnchor.cloneNode(true));
+      out.push(p);
+    }
+  }
   if (!out.length) {
     // Fallback: clone any headings/paragraphs/links found anywhere in the item.
     scope.querySelectorAll('h1,h2,h3,h4,h5,h6,p,ul,ol,a').forEach((el) => {
@@ -57,9 +74,10 @@ function contentFrom(item, document) {
  * @param {string} blockName e.g. 'Cards (benefits-grid)'
  * @param {string} itemSelector e.g. '.col-lg-6' — the repeated card item
  * @param {(item:Element)=>boolean} [accept] optional extra filter per item
+ * @param {{includeSiblingCta?: boolean}} [opts] forwarded to contentFrom (e.g. profile-grid CTA)
  * @returns {Element|null} the created block (already NOT inserted), or null if no cards
  */
-export function buildCardsFromColumns(container, document, blockName, itemSelector, accept) {
+export function buildCardsFromColumns(container, document, blockName, itemSelector, accept, opts) {
   const items = Array.from(container.querySelectorAll(itemSelector)).filter((it) => {
     if (accept && !accept(it)) return false;
     return imageOf(it) || (it.textContent || '').trim();
@@ -69,7 +87,7 @@ export function buildCardsFromColumns(container, document, blockName, itemSelect
   const cells = items.map((item) => {
     const img = imageOf(item);
     const imageCell = img ? [img.cloneNode(true)] : [];
-    const contentCell = contentFrom(item, document);
+    const contentCell = contentFrom(item, document, opts);
     return [imageCell, contentCell];
   });
 

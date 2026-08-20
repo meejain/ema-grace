@@ -524,6 +524,28 @@ main > .section.hero-container > .hero-wrapper:has(.hero.banner) + .default-cont
   margin-bottom: var(--spacing-l);
 }
 
+/* about-grace root landing: the hero banner AND the cards grid share ONE section
+   (`.section.hero-container.cards-container`), so it stacks BOTH the banner-hero
+   header gap (margin-top:50) AND the `.cards.product` section padding (50 top/bottom)
+   — ~100px of dead space above the hero, and nothing separating the hero band from
+   the cards (they butt together). Source renders the hero directly under the header
+   with a single 50px gap down to the cards. Drop the cards padding-top here (the
+   hero-wrapper is the first child; the section margin-top already supplies the header
+   gap) and add the hero→cards gap on the cards-wrapper. Keep padding-bottom so the
+   cards don't butt the trailing logo/footer. Scoped to the combined hero+cards
+   section so standalone cards.product grids are unaffected. Also drop the
+   banner-hero header margin here: source renders THIS hero flush under the header
+   (header ends 120px, hero starts 121px), so the generic 50px header gap above
+   leaves an unwanted white band on top of the image band. */
+main > .section.hero-container.cards-container:has(> .hero-wrapper > .hero.banner) {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+main > .section.hero-container.cards-container > .hero-wrapper:has(.hero.banner) + .cards-wrapper {
+  margin-top: var(--spacing-l);
+}
+
 /* CLS guard (must live in the synchronously-loaded styles.css so it applies at
    first paint): the auto-built contact-sticky widget holds raw author rows that
    render IN-FLOW (~114px tall on mobile) until its block JS/CSS decorates it into
