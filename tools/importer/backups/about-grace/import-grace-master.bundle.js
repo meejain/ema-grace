@@ -2372,7 +2372,7 @@ var CustomImportScript = (() => {
     const scope = element.closest(".feature-blog") || cmp;
     const headingEl = scope.querySelector(".header .title h2, .header h2, .featured-blog-header h2") || Array.from(scope.querySelectorAll("h2")).find((h) => /insight/i.test(h.textContent || ""));
     const headingText = headingEl && (headingEl.textContent || "").replace(/\s+/g, " ").trim() || "Latest Insights from Grace";
-    const ctaEl = scope.querySelector('a.all-articles-cta, a[href*="/insights"], a[href*="/blog"]');
+    const ctaEl = scope.querySelector("a.view-allposts-cta") || scope.querySelector('a.all-articles-cta, a[href*="/insights"], a[href*="/blog"]');
     const ctaHref = ctaEl ? ctaEl.getAttribute("href") || "/insights" : "/insights";
     const ctaText = ctaEl && (ctaEl.textContent || "").replace(/\s+/g, " ").trim() || "View all articles";
     const cells = items.map((item) => {
@@ -4222,6 +4222,28 @@ var CustomImportScript = (() => {
       } else {
         main.insertBefore(hr, main.firstChild);
         main.insertBefore(navSection, main.firstChild);
+      }
+      const plantIdxSection = Array.from(main.children).find((c) => {
+        if (c.nodeType !== 1 || c === navSection) return false;
+        const firstStrong = c.querySelector("p:first-child > strong, strong");
+        return firstStrong && /Plant Sites\s*$/i.test((firstStrong.textContent || "").trim());
+      });
+      if (plantIdxSection) {
+        const metaDiv = Array.from(navSection.children).find((n) => n.nodeType === 1 && n.querySelector && n.querySelector(":scope > div > div")) || null;
+        const kids = Array.from(plantIdxSection.children);
+        const stopIdx = kids.findIndex((n) => /^H[1-6]$/.test(n.tagName) && /Locations Worldwide/i.test(n.textContent || ""));
+        const toMove = stopIdx >= 0 ? kids.slice(0, stopIdx) : kids;
+        toMove.forEach((node) => {
+          if (metaDiv) navSection.insertBefore(node, metaDiv);
+          else navSection.appendChild(node);
+        });
+        if (stopIdx < 0) {
+          const prev = plantIdxSection.previousSibling;
+          const next = plantIdxSection.nextSibling;
+          if (prev && prev.nodeName === "HR") prev.remove();
+          else if (next && next.nodeName === "HR") next.remove();
+          plantIdxSection.remove();
+        }
       }
     }
     if (params && (params.sourceFeaturedHasGeoHex || params.sourceFeaturedIsPlainGray)) {

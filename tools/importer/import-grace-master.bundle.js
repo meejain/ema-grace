@@ -2372,7 +2372,7 @@ var CustomImportScript = (() => {
     const scope = element.closest(".feature-blog") || cmp;
     const headingEl = scope.querySelector(".header .title h2, .header h2, .featured-blog-header h2") || Array.from(scope.querySelectorAll("h2")).find((h) => /insight/i.test(h.textContent || ""));
     const headingText = headingEl && (headingEl.textContent || "").replace(/\s+/g, " ").trim() || "Latest Insights from Grace";
-    const ctaEl = scope.querySelector('a.all-articles-cta, a[href*="/insights"], a[href*="/blog"]');
+    const ctaEl = scope.querySelector("a.view-allposts-cta") || scope.querySelector('a.all-articles-cta, a[href*="/insights"], a[href*="/blog"]');
     const ctaHref = ctaEl ? ctaEl.getAttribute("href") || "/insights" : "/insights";
     const ctaText = ctaEl && (ctaEl.textContent || "").replace(/\s+/g, " ").trim() || "View all articles";
     const cells = items.map((item) => {
@@ -2769,7 +2769,15 @@ var CustomImportScript = (() => {
     // location-detail: a .row pairing a jobs.grace.com "Join the team" CTA with an image AND a
     // postal-address signature (street + a Tel/ZIP). The address requirement stops it claiming
     // careers pages (e.g. ausbildung checklist) that merely link to jobs.grace.com.
-    "columns-location-detail": (doc) => Array.from(doc.querySelectorAll("section.none-bkgd .row, section .row")).filter((r) => r.querySelector('a.btn-primary[href*="jobs.grace.com"], .button a[href*="jobs.grace.com"]') && r.querySelector(".image, picture, img") && /\b\d{4,5}\b/.test(r.textContent || "") && /(street|road|rd\b|st\b|drive|avenue|ave\b|\+\d|tel[:.]?)/i.test(r.textContent || "")).filter((r, _i, arr) => !arr.some((other) => other !== r && r.contains(other))),
+    "columns-location-detail": (doc) => {
+      const detailRows = Array.from(doc.querySelectorAll("section.none-bkgd .row, section .row")).filter((r) => r.querySelector('a.btn-primary[href*="jobs.grace.com"], .button a[href*="jobs.grace.com"]') && r.querySelector(".image, picture, img") && /\b\d{4,5}\b/.test(r.textContent || "") && /(street|road|rd\b|st\b|drive|avenue|ave\b|\+\d|tel[:.]?)/i.test(r.textContent || "")).filter((r, _i, arr) => !arr.some((other) => other !== r && r.contains(other)));
+      const hqRows = Array.from(doc.querySelectorAll(".row.section-75-25")).filter((row) => {
+        const wide = row.querySelector(".col-lg-9");
+        if (!wide) return false;
+        return !!wide.querySelector(".image, .cmp-image, picture, img") && Array.from(wide.querySelectorAll("strong")).some((s) => (s.textContent || "").trim()) && /Headquarters|Tel[:.]?/i.test(wide.textContent || "");
+      });
+      return [...detailRows, ...hqRows];
+    },
     // app-promo: a .cmp-media-callout whose text side has a heading + intro paragraph + link
     // (the download promo) — distinguishes from a bare profile/CEO media-callout headshot.
     "columns-app-promo": (doc) => Array.from(doc.querySelectorAll("div.cmp-media-callout")).filter((mc) => mc.querySelector("h1, h2, h3, .subhead-small") && mc.querySelector("p") && mc.querySelector("a[href]") && mc.querySelector(".image, picture, img")),
@@ -2898,9 +2906,9 @@ var CustomImportScript = (() => {
       let isWideSplit = false;
       if (cols.length === 0) {
         const wideCols = Array.from(row.children).filter((c) => /col-lg-9|col-lg-8|col-lg-7|col-lg-3/.test(c.className));
-        const hasWideText = wideCols.some((c) => /col-lg-9|col-lg-8|col-lg-7/.test(c.className));
-        const hasNarrowImg = wideCols.some((c) => /col-lg-3/.test(c.className));
-        if (wideCols.length === 2 && hasWideText && hasNarrowImg) {
+        const hasWide = wideCols.some((c) => /col-lg-9|col-lg-8|col-lg-7/.test(c.className));
+        const hasNarrow = wideCols.some((c) => /col-lg-3/.test(c.className));
+        if (wideCols.length === 2 && hasWide && hasNarrow) {
           cols = wideCols;
           isWideSplit = true;
         }
@@ -4222,6 +4230,28 @@ var CustomImportScript = (() => {
       } else {
         main.insertBefore(hr, main.firstChild);
         main.insertBefore(navSection, main.firstChild);
+      }
+      const plantIdxSection = Array.from(main.children).find((c) => {
+        if (c.nodeType !== 1 || c === navSection) return false;
+        const firstStrong = c.querySelector("p:first-child > strong, strong");
+        return firstStrong && /Plant Sites\s*$/i.test((firstStrong.textContent || "").trim());
+      });
+      if (plantIdxSection) {
+        const metaDiv = Array.from(navSection.children).find((n) => n.nodeType === 1 && n.querySelector && n.querySelector(":scope > div > div")) || null;
+        const kids = Array.from(plantIdxSection.children);
+        const stopIdx = kids.findIndex((n) => /^H[1-6]$/.test(n.tagName) && /Locations Worldwide/i.test(n.textContent || ""));
+        const toMove = stopIdx >= 0 ? kids.slice(0, stopIdx) : kids;
+        toMove.forEach((node) => {
+          if (metaDiv) navSection.insertBefore(node, metaDiv);
+          else navSection.appendChild(node);
+        });
+        if (stopIdx < 0) {
+          const prev = plantIdxSection.previousSibling;
+          const next = plantIdxSection.nextSibling;
+          if (prev && prev.nodeName === "HR") prev.remove();
+          else if (next && next.nodeName === "HR") next.remove();
+          plantIdxSection.remove();
+        }
       }
     }
     if (params && (params.sourceFeaturedHasGeoHex || params.sourceFeaturedIsPlainGray)) {

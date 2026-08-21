@@ -346,18 +346,32 @@ const MATCHERS = {
   // location-detail: a .row pairing a jobs.grace.com "Join the team" CTA with an image AND a
   // postal-address signature (street + a Tel/ZIP). The address requirement stops it claiming
   // careers pages (e.g. ausbildung checklist) that merely link to jobs.grace.com.
-  'columns-location-detail': (doc) => Array.from(doc.querySelectorAll('section.none-bkgd .row, section .row'))
-    .filter((r) => r.querySelector('a.btn-primary[href*="jobs.grace.com"], .button a[href*="jobs.grace.com"]')
-      && r.querySelector('.image, picture, img')
-      && /\b\d{4,5}\b/.test(r.textContent || '') // ZIP/postal code
-      && /(street|road|rd\b|st\b|drive|avenue|ave\b|\+\d|tel[:.]?)/i.test(r.textContent || ''))
-    // The location page nests the real address+photo row (two `col-lg-6` halves: text | image)
-    // INSIDE the col-lg-3/col-lg-9 layout wrapper — and BOTH match the predicate above (the wrapper
-    // contains the jobs link + image + address transitively). querySelectorAll returns the wrapper
-    // FIRST, so buildTwoColumn would split it as [empty col-lg-3 nav | col-lg-9 everything] and the
-    // PHOTO (nested in the inner col-lg-6) is lost. Drop any matched row that CONTAINS another
-    // matched row — keep only the innermost two-half content rows.
-    .filter((r, _i, arr) => !arr.some((other) => other !== r && r.contains(other))),
+  'columns-location-detail': (doc) => {
+    const detailRows = Array.from(doc.querySelectorAll('section.none-bkgd .row, section .row'))
+      .filter((r) => r.querySelector('a.btn-primary[href*="jobs.grace.com"], .button a[href*="jobs.grace.com"]')
+        && r.querySelector('.image, picture, img')
+        && /\b\d{4,5}\b/.test(r.textContent || '') // ZIP/postal code
+        && /(street|road|rd\b|st\b|drive|avenue|ave\b|\+\d|tel[:.]?)/i.test(r.textContent || ''))
+      // The location page nests the real address+photo row (two `col-lg-6` halves: text | image)
+      // INSIDE the col-lg-3/col-lg-9 layout wrapper — and BOTH match the predicate above (the wrapper
+      // contains the jobs link + image + address transitively). querySelectorAll returns the wrapper
+      // FIRST, so buildTwoColumn would split it as [empty col-lg-3 nav | col-lg-9 everything] and the
+      // PHOTO (nested in the inner col-lg-6) is lost. Drop any matched row that CONTAINS another
+      // matched row — keep only the innermost two-half content rows.
+      .filter((r, _i, arr) => !arr.some((other) => other !== r && r.contains(other)));
+    // Locations LANDING "Worldwide Headquarters" featured card: a `.row.section-75-25` whose col-lg-9
+    // stacks the HQ photo + a `<strong>` location title + "Worldwide Headquarters"/address/"Tel:"
+    // (col-lg-3 empty). Not a jobs-CTA detail row and not a grid card — capture it here so it renders
+    // as a Columns (location-detail) image+text card under "Locations Worldwide" like the source.
+    const hqRows = Array.from(doc.querySelectorAll('.row.section-75-25')).filter((row) => {
+      const wide = row.querySelector('.col-lg-9');
+      if (!wide) return false;
+      return !!wide.querySelector('.image, .cmp-image, picture, img')
+        && Array.from(wide.querySelectorAll('strong')).some((s) => (s.textContent || '').trim())
+        && /Headquarters|Tel[:.]?/i.test(wide.textContent || '');
+    });
+    return [...detailRows, ...hqRows];
+  },
   // app-promo: a .cmp-media-callout whose text side has a heading + intro paragraph + link
   // (the download promo) — distinguishes from a bare profile/CEO media-callout headshot.
   'columns-app-promo': (doc) => Array.from(doc.querySelectorAll('div.cmp-media-callout'))
@@ -507,11 +521,14 @@ function rowsByColumnOrder(doc, firstKind) {
     let cols = Array.from(row.children).filter((c) => /col-lg-6/.test(c.className));
     let isWideSplit = false;
     if (cols.length === 0) {
+      // A two-column wide split: one wide col (lg-9/8/7) + one narrow col (lg-3), in EITHER order.
+      // Covers (a) text-left+logo-right intros (hydroprocessing) AND (b) the locations "Locations
+      // Worldwide" HQ card = wide IMAGE (col-lg-9) left + narrow address TEXT (col-lg-3) right.
       const wideCols = Array.from(row.children)
         .filter((c) => /col-lg-9|col-lg-8|col-lg-7|col-lg-3/.test(c.className));
-      const hasWideText = wideCols.some((c) => /col-lg-9|col-lg-8|col-lg-7/.test(c.className));
-      const hasNarrowImg = wideCols.some((c) => /col-lg-3/.test(c.className));
-      if (wideCols.length === 2 && hasWideText && hasNarrowImg) {
+      const hasWide = wideCols.some((c) => /col-lg-9|col-lg-8|col-lg-7/.test(c.className));
+      const hasNarrow = wideCols.some((c) => /col-lg-3/.test(c.className));
+      if (wideCols.length === 2 && hasWide && hasNarrow) {
         cols = wideCols;
         isWideSplit = true;
       }
@@ -2549,6 +2566,44 @@ function buildDefaultPage(document, url, params) {
     } else {
       main.insertBefore(hr, main.firstChild);
       main.insertBefore(navSection, main.firstChild);
+    }
+
+    // LOCATIONS landing: the "Americas/Asia/Europe Plant Sites" text index lives INSIDE the left
+    // section-nav rail on the source (below the About Grace nav), NOT as a separate content section.
+    // buildDefaultPage emits it as its own top-level section, which the sidebar grid then places in
+    // the right content column (col 3) above the card grids — wrong. Move that index's paragraphs
+    // INTO the nav section (before its Section Metadata) so it renders in the left rail like source.
+    const plantIdxSection = Array.from(main.children).find((c) => {
+      if (c.nodeType !== 1 || c === navSection) return false;
+      const firstStrong = c.querySelector('p:first-child > strong, strong');
+      return firstStrong && /Plant Sites\s*$/i.test((firstStrong.textContent || '').trim());
+    });
+    if (plantIdxSection) {
+      // navSection is the <div> holding [ <ul> nav, (promo card), Section-Metadata <div> ]. Insert
+      // the plant-index paragraphs before the Section-Metadata so they stay within the nav section.
+      const metaDiv = Array.from(navSection.children)
+        .find((n) => n.nodeType === 1 && n.querySelector && n.querySelector(':scope > div > div'))
+        || null;
+      // Move ONLY the plant-site index paragraphs into the rail. The section also contains the
+      // "Locations Worldwide" <h2> (and it heads the RIGHT content column in the source), so STOP at
+      // that heading — leave it + anything after it in the content section. Moving it too trapped it
+      // in the narrow left rail and left the content column with no "Locations Worldwide" title.
+      const kids = Array.from(plantIdxSection.children);
+      const stopIdx = kids.findIndex((n) => /^H[1-6]$/.test(n.tagName) && /Locations Worldwide/i.test(n.textContent || ''));
+      const toMove = stopIdx >= 0 ? kids.slice(0, stopIdx) : kids;
+      toMove.forEach((node) => {
+        if (metaDiv) navSection.insertBefore(node, metaDiv);
+        else navSection.appendChild(node);
+      });
+      // If nothing meaningful remains in the index section (no "Locations Worldwide" heading), drop
+      // it + an adjacent <hr>. Otherwise keep it (now starting at "Locations Worldwide") in col 3.
+      if (stopIdx < 0) {
+        const prev = plantIdxSection.previousSibling;
+        const next = plantIdxSection.nextSibling;
+        if (prev && prev.nodeName === 'HR') prev.remove();
+        else if (next && next.nodeName === 'HR') next.remove();
+        plantIdxSection.remove();
+      }
     }
   }
 

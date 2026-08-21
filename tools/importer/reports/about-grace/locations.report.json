@@ -2,11 +2,12 @@
   "status": "success",
   "url": "https://grace.com/about-grace/locations/",
   "path": "about-grace/locations",
-  "timestamp": "2026-08-19T22:46:09.331Z",
+  "timestamp": "2026-08-20T15:14:06.443Z",
   "title": "Locations",
   "pageType": "default",
   "blocks": [
-    "cards-location-grid"
+    "cards-location-grid",
+    "columns-location-detail"
   ],
   "blocksLeftInPlace": [],
   "pageMetadata": [

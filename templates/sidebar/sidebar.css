@@ -168,6 +168,87 @@ body.sidebar main > .section.sidebar-nav li {
   margin: 0 0 16px;
 }
 
+/* LOCATIONS rail: the curated links (Awards and Recognition, Leadership Team) and
+   the bottom "Our History" link live in <ul>s, while the plant-site index entries
+   are plain <p>/<p><a> siblings. The generic 20px <ul> left inset above pushes the
+   <ul> links to x=40 while the <p> links sit flush at the column edge (x=20),
+   leaving the two groups misaligned. The source aligns ALL rail items flush-left,
+   so drop the <ul> left inset for this rail (keep the right inset for wrapping).
+   Detected via the plant-site <p> region headers that only this rail carries as
+   direct wrapper children. */
+/* stylelint-disable-next-line no-descending-specificity -- intentionally overrides the
+   earlier generic sidebar-nav <ul> inset; the :has(> div > p) locations-rail signature is
+   what scopes it. */
+body.sidebar main > .section.sidebar-nav:has(> div > p) ul {
+  padding-left: 0;
+}
+
+/* ============================================================================
+   LOCATIONS PAGE THEME (body.locations) — this page is unique: its left rail
+   mixes a short curated link list (Awards, Leadership Team, Our History) with a
+   long plain-text PLANT INDEX (region headers + city links), and it has a
+   horizontal Legend at the foot of the content column. The generic product-hub
+   sidebar-nav rules above render EVERY rail link bold 900 / 12px / no-underline,
+   but on the source ONLY the curated links are bold — the plant-index city links
+   are regular Roboto 14px, underlined (they read as body links, not nav chrome).
+   Scope the corrections to body.locations so no other sidebar page is affected.
+   ========================================================================== */
+
+/* Plant-index links (the <p><a> city entries, direct children of the rail
+   wrapper) — source: Roboto 400, 14px, underlined black. Override the product-hub
+   bold/small/no-underline treatment. Curated links live in <ul><li> and keep the
+   bold 900 nav styling above. The product-hub rule
+   `main:not(:has(…breadcrumb-container)) > .section.sidebar-nav a { font-weight:900 }`
+   is highly specific, so match its prefix here to outrank it for the plant links. */
+body.locations main:not(:has(> .section.sidebar-nav.breadcrumb-container)) > .section.sidebar-nav > div > p > a {
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m); /* 14px */
+  font-weight: 400;
+  text-decoration: underline;
+}
+
+/* Region headers (the <p><strong>Americas / Asia / Europe … Plant Sites</strong></p>
+   group labels) need breathing room ABOVE them — the first one ("Americas Plant
+   Sites") otherwise butts flush against the Leadership Team divider border. Add a
+   top margin so each region label separates from the preceding group. */
+body.locations main > .section.sidebar-nav > div > p:has(> strong) {
+  margin-top: var(--spacing-s); /* 20px */
+}
+
+/* The region separators are authored as a long run of underscores
+   (`_________________`) in a <p>. That run is one unbreakable token wider than the
+   213px nav column, so it overflows into the content area (the "borders
+   overflowing into the right sections" artifact). Clip the rail wrapper to its
+   column so the underscore rule can't spill past the nav. */
+/* stylelint-disable-next-line no-descending-specificity -- intentionally follows the earlier
+   sidebar-nav > div rule; the body.locations prefix scopes this clip to the locations rail only. */
+body.locations main > .section.sidebar-nav > div {
+  overflow: hidden;
+}
+
+/* Legend: the source lays the five type-indicator items in a single horizontal
+   row beneath the "Legend" heading (not a vertical stack). Make the legend
+   wrapper a flex row that wraps, with the <h4> spanning the full width above the
+   items. Identify the legend section by its lone <h4> heading. */
+body.locations main > .section:has(> .default-content-wrapper > h4) > .default-content-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 22px;
+}
+
+/* stylelint-disable-next-line no-descending-specificity -- the locations Legend <h4> intentionally
+   follows the earlier generic sidebar-nav h4 rule; the body.locations + :has(h4) signature scopes it. */
+body.locations main > .section:has(> .default-content-wrapper > h4) > .default-content-wrapper > h4 {
+  flex-basis: 100%;
+  margin: 0;
+}
+
+body.locations main > .section:has(> .default-content-wrapper > h4) > .default-content-wrapper > p {
+  margin: 0;
+  white-space: nowrap;
+}
+
 /* PRODUCT HUBS (plain sidebar-nav, NOT the insights breadcrumb rail): the source
    section-navigation draws a thin gray divider ABOVE each item (border-top 1px
    #c4c4c4) with 12px vertical padding, so the links read as a bordered list
@@ -1654,4 +1735,29 @@ body.sidebar main:has(> .section.sidebar-nav.breadcrumb-container) > .section.ca
    the last main section. (Base + desktop — margin applies at all widths.) */
 body.sidebar main > .section.gray-band.cards-container:has(.cards.featured-content):last-of-type {
   margin-bottom: 0;
+}
+
+/* ============================================================================
+   LOCATIONS PAGE GRID PLACEMENT (body.locations)
+   This page has NO hero band and NO breadcrumb, so the desktop grid's row 1
+   (normally occupied by the full-bleed hero) is EMPTY. The generic rules pin the
+   nav rail and the first content section to grid-row 2 (they expect a hero in row
+   1). With row 1 empty, the auto-placed region grids (Americas / Asia / Europe /
+   Legend — grid-row: auto) backfill into that empty row 1, rendering ABOVE the nav
+   and "Locations Worldwide". Since there is no hero, pin the nav rail and the
+   first content section to grid-row 1 so all remaining sections flow BELOW them in
+   document order. Scoped to body.locations; other sidebar pages keep their hero in
+   row 1 untouched.
+   ========================================================================== */
+@media (width >= 900px) {
+  body.locations main > .section.sidebar-nav {
+    grid-row: 1 / span 999;
+  }
+
+  /* Match the `:not(:has(…breadcrumb-container))` prefix of the generic product-hub
+     rule (line ~1410) so this outranks its `grid-row: 2` and the first content
+     section ("Locations Worldwide") sits in row 1 instead of leaving row 1 empty. */
+  body.locations main:not(:has(> .section.sidebar-nav.breadcrumb-container)) > .section.sidebar-nav + .section {
+    grid-row: 1;
+  }
 }

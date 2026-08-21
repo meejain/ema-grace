@@ -1,0 +1,616 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - link "Vendors and Suppliers" [ref=e6] [cursor=pointer]:
+        - /url: /vendor-suppliers
+      - navigation [ref=e7]:
+        - img "Grace Logo" [ref=e11]
+        - generic [ref=e12]:
+          - list [ref=e14]:
+            - listitem [ref=e15]:
+              - paragraph [ref=e16]:
+                - link "Industries" [ref=e17] [cursor=pointer]:
+                  - /url: /industries
+            - listitem [ref=e18]:
+              - paragraph [ref=e19]:
+                - link "Products" [ref=e20] [cursor=pointer]:
+                  - /url: /products
+            - listitem [ref=e21]:
+              - paragraph [ref=e22]:
+                - link "Resources" [ref=e23] [cursor=pointer]:
+                  - /url: /resources
+            - listitem [ref=e24]:
+              - paragraph [ref=e25]:
+                - link "People and Careers" [ref=e26] [cursor=pointer]:
+                  - /url: /people-and-careers
+            - listitem [ref=e27]:
+              - paragraph [ref=e28]:
+                - link "About Grace" [ref=e29] [cursor=pointer]:
+                  - /url: /about-grace
+            - listitem [ref=e30]:
+              - paragraph [ref=e31]:
+                - link "Contact Us" [ref=e32] [cursor=pointer]:
+                  - /url: /contact-us
+            - listitem [ref=e33]:
+              - button "Search" [ref=e34] [cursor=pointer]:
+                - img [ref=e35] [cursor=pointer]
+          - text: › › › › ›
+  - main [ref=e37]:
+    - generic [ref=e39]:
+      - text: +
+      - list [ref=e40]:
+        - listitem [ref=e41]:
+          - link "Awards and Recognition" [ref=e42] [cursor=pointer]:
+            - /url: /about-grace/awards-and-recognition/
+        - listitem [ref=e43]:
+          - link "Leadership Team" [ref=e44] [cursor=pointer]:
+            - /url: /about-grace/leadership-team/
+      - paragraph [ref=e45]:
+        - strong [ref=e46]: Americas Plant Sites
+      - paragraph [ref=e47]:
+        - link "Aiken, SC, USA" [ref=e48] [cursor=pointer]:
+          - /url: /about-grace/locations/aiken
+      - paragraph [ref=e49]:
+        - link "Baton Rouge, LA, USA" [ref=e50] [cursor=pointer]:
+          - /url: /about-grace/locations/baton-rouge
+      - paragraph [ref=e51]:
+        - link "Chattanooga, TN, USA" [ref=e52] [cursor=pointer]:
+          - /url: /about-grace/locations/chattanooga
+      - paragraph [ref=e53]:
+        - link "Chicago, IL, USA" [ref=e54] [cursor=pointer]:
+          - /url: /about-grace/locations/chicago
+      - paragraph [ref=e55]:
+        - link "Columbia, MD, USA" [ref=e56] [cursor=pointer]:
+          - /url: /about-grace/locations/columbia
+      - paragraph [ref=e57]:
+        - link "Curtis Bay, MD, USA" [ref=e58] [cursor=pointer]:
+          - /url: /about-grace/locations/curtis-bay
+      - paragraph [ref=e59]:
+        - link "East Chicago, IN, USA" [ref=e60] [cursor=pointer]:
+          - /url: /about-grace/locations/east-chicago
+      - paragraph [ref=e61]:
+        - link "Hesperia, CA, USA" [ref=e62] [cursor=pointer]:
+          - /url: /about-grace/locations/hesperia
+      - paragraph [ref=e63]:
+        - link "Houston, TX, USA" [ref=e64] [cursor=pointer]:
+          - /url: /about-grace/locations/houston
+      - paragraph [ref=e65]:
+        - link "Lake Charles,, LA, USA" [ref=e66] [cursor=pointer]:
+          - /url: /about-grace/locations/lake-charles
+      - paragraph [ref=e67]:
+        - link "Norco, LA, USA" [ref=e68] [cursor=pointer]:
+          - /url: /about-grace/locations/norco
+      - paragraph [ref=e69]:
+        - link "Pasadena, TX, USA" [ref=e70] [cursor=pointer]:
+          - /url: /about-grace/locations/pasadena
+      - paragraph [ref=e71]:
+        - link "Sorocaba, São Paulo, Brazil" [ref=e72] [cursor=pointer]:
+          - /url: /about-grace/locations/sorocaba
+      - paragraph [ref=e73]:
+        - link "South Haven, MI, USA" [ref=e74] [cursor=pointer]:
+          - /url: /about-grace/locations/south-haven
+      - paragraph [ref=e75]:
+        - link "Tyrone, PA, USA" [ref=e76] [cursor=pointer]:
+          - /url: /about-grace/locations/tyrone
+      - paragraph [ref=e77]:
+        - link "Valleyfield, Québec, Canada" [ref=e78] [cursor=pointer]:
+          - /url: /about-grace/locations/valleyfield
+      - paragraph [ref=e79]: _________________________________________
+      - paragraph [ref=e80]:
+        - strong [ref=e81]: Asia Plant Sites
+      - paragraph [ref=e82]:
+        - link "Kuantan, Malaysia" [ref=e83] [cursor=pointer]:
+          - /url: /about-grace/locations/kuantan
+      - paragraph [ref=e84]:
+        - link "Yeosu, South Korea" [ref=e85] [cursor=pointer]:
+          - /url: /about-grace/locations/yeosu
+      - paragraph [ref=e86]: _________________________________________
+      - paragraph [ref=e87]:
+        - strong [ref=e88]: Europe and Middle East Plant Sites
+      - paragraph [ref=e89]:
+        - link "Düren, Germany" [ref=e90] [cursor=pointer]:
+          - /url: /about-grace/locations/duren
+      - paragraph [ref=e91]:
+        - link "Stenungsund, Sweden" [ref=e92] [cursor=pointer]:
+          - /url: /about-grace/locations/stenungsund
+      - paragraph [ref=e93]:
+        - link "Tarragona, Spain" [ref=e94] [cursor=pointer]:
+          - /url: /about-grace/locations/tarragona
+      - paragraph [ref=e95]:
+        - link "Worms, Germany" [ref=e96] [cursor=pointer]:
+          - /url: /about-grace/locations/worms
+      - list [ref=e97]:
+        - listitem [ref=e98]:
+          - link "Our History" [ref=e99] [cursor=pointer]:
+            - /url: /about-grace/our-history/
+    - generic [ref=e100]:
+      - heading "Locations Worldwide" [level=2] [ref=e102]
+      - list [ref=e105]:
+        - listitem [ref=e106]:
+          - img "Columbia Maryland Headquarters" [ref=e109]
+          - generic [ref=e110]:
+            - paragraph [ref=e111]:
+              - link "Columbia, MD, USA" [ref=e112] [cursor=pointer]:
+                - /url: /about-grace/locations/columbia
+            - paragraph [ref=e113]:
+              - text: Worldwide Headquarters
+              - text: 7500 Grace Drive
+              - text: Columbia, MD 21044
+            - paragraph [ref=e114]: "Tel: +1 410.531.4000"
+    - generic [ref=e115]:
+      - heading "Americas" [level=2] [ref=e117]
+      - list [ref=e120]:
+        - listitem [ref=e121]:
+          - img "Aiken, South Carolina" [ref=e124]
+          - generic [ref=e125]:
+            - paragraph [ref=e126]:
+              - link "Aiken, SC, USA" [ref=e127] [cursor=pointer]:
+                - /url: /about-grace/locations/aiken
+            - paragraph [ref=e128]:
+              - text: 213 Kaolin Road
+              - text: Rt. 1 North
+              - text: Aiken, SC 29807
+            - paragraph [ref=e129]: "Tel: +1 803.649.4111"
+        - listitem [ref=e130]:
+          - img "Location Business V2 800px" [ref=e133]
+          - generic [ref=e134]:
+            - paragraph [ref=e135]:
+              - strong [ref=e136]: Barrio de Santa Cruz, Mexico
+            - paragraph [ref=e137]:
+              - text: Paseo San Isidro No. 400 – 11
+              - text: Pte. Interior 221
+              - text: Barrio de Santa Cruz, Metepec, Mexico, 52140
+            - paragraph [ref=e138]: "Tel: +52 722.262.7530"
+        - listitem [ref=e139]:
+          - img "Baton Rouge, Louisiana" [ref=e142]
+          - generic [ref=e143]:
+            - paragraph [ref=e144]:
+              - link "Baton Rouge, LA, USA" [ref=e145] [cursor=pointer]:
+                - /url: /about-grace/locations/baton-rouge
+            - paragraph [ref=e146]:
+              - text: 1201 Gulf States Road
+              - text: Baton Rouge, LA 70805
+            - paragraph [ref=e147]: "Tel: +1 225.359.2001"
+        - listitem [ref=e148]:
+          - img "Chattanooga, Tennessee" [ref=e151]
+          - generic [ref=e152]:
+            - paragraph [ref=e153]:
+              - link "Chattanooga, TN, USA" [ref=e154] [cursor=pointer]:
+                - /url: /about-grace/locations/chattanooga
+            - paragraph [ref=e155]:
+              - text: 4000 North Hawthorne Street
+              - text: Chattanooga, TN 37406
+            - paragraph [ref=e156]: "Tel: +1 423.698.3461"
+        - listitem [ref=e157]:
+          - img "Location Chicago 71st 800px" [ref=e160]
+          - generic [ref=e161]:
+            - paragraph [ref=e162]:
+              - link "Chicago, IL, USA" [ref=e163] [cursor=pointer]:
+                - /url: /about-grace/locations/chicago
+            - paragraph [ref=e164]:
+              - text: 4099 W. 71st Street
+              - text: Chicago, IL 60629
+            - paragraph [ref=e165]: "Tel: +1 773.838.3200"
+        - listitem [ref=e166]:
+          - img "Columbia Maryland" [ref=e169]
+          - generic [ref=e170]:
+            - paragraph [ref=e171]:
+              - link "Columbia, MD, USA" [ref=e172] [cursor=pointer]:
+                - /url: /about-grace/locations/columbia
+            - paragraph [ref=e173]:
+              - text: 7500 Grace Drive
+              - text: Columbia, MD 21044
+            - paragraph [ref=e174]: "Tel: +1 410.531.4000"
+        - listitem [ref=e175]:
+          - img "Curtis Bay, Maryland Facility" [ref=e178]
+          - generic [ref=e179]:
+            - paragraph [ref=e180]:
+              - link "Curtis Bay, MD, USA" [ref=e181] [cursor=pointer]:
+                - /url: /about-grace/locations/curtis-bay
+            - paragraph [ref=e182]:
+              - text: 5500 Chemical Road
+              - text: Baltimore, MD 21226
+            - paragraph [ref=e183]: "Tel: +1 410.355.4900"
+        - listitem [ref=e184]:
+          - img "Location Business 800px" [ref=e187]
+          - generic [ref=e188]:
+            - paragraph [ref=e189]:
+              - strong [ref=e190]: Curtis Bay, MD, USA
+            - paragraph [ref=e191]:
+              - text: 6610 Cabot Dr.
+              - text: Baltimore, MD 21226
+            - paragraph [ref=e192]: "Tel: +1 410.355.4900"
+        - listitem [ref=e193]:
+          - img "East Chicago, Indiana" [ref=e196]
+          - generic [ref=e197]:
+            - paragraph [ref=e198]:
+              - link "East Chicago, IN, USA" [ref=e199] [cursor=pointer]:
+                - /url: /about-grace/locations/east-chicago
+            - paragraph [ref=e200]:
+              - text: 5215 Kennedy Avenue
+              - text: East Chicago, IN 46312
+            - paragraph [ref=e201]: "Tel: +1 219.391.4601"
+        - listitem [ref=e202]:
+          - img "Location Hesperia 800px" [ref=e205]
+          - generic [ref=e206]:
+            - paragraph [ref=e207]:
+              - link "Hesperia, CA, USA" [ref=e208] [cursor=pointer]:
+                - /url: /about-grace/locations/hesperia
+            - paragraph [ref=e209]:
+              - text: 17434 Mojave Street
+              - text: Hesperia, CA 92345
+            - paragraph [ref=e210]: "Tel: +1 760.244.6107"
+        - listitem [ref=e211]:
+          - img "Houston, Texas Office" [ref=e214]
+          - generic [ref=e215]:
+            - paragraph [ref=e216]:
+              - link "Houston, TX, USA" [ref=e217] [cursor=pointer]:
+                - /url: /about-grace/locations/houston
+            - paragraph [ref=e218]:
+              - text: Two Allen Center
+              - text: 1200 Smith Street, Suite 720
+              - text: Houston, TX 77002
+        - listitem [ref=e219]:
+          - img "Houston, Texas Warehouse" [ref=e222]
+          - generic [ref=e223]:
+            - paragraph [ref=e224]:
+              - strong [ref=e225]: Houston, TX, USA
+            - paragraph [ref=e226]:
+              - text: 4750 Blaffer St.
+              - text: Houston, TX 77026 USA
+            - paragraph [ref=e227]: "Tel: +1.713.675.6445"
+        - listitem [ref=e228]:
+          - img "Location Lake Charles 800px" [ref=e231]
+          - generic [ref=e232]:
+            - paragraph [ref=e233]:
+              - link "Lake Charles, LA, USA" [ref=e234] [cursor=pointer]:
+                - /url: /about-grace/locations/lake-charles
+            - paragraph [ref=e235]:
+              - text: 1800 Davison Road
+              - text: Sulphur, LA 70665
+            - paragraph [ref=e236]: "Tel: +1 337.583.2611"
+        - listitem [ref=e237]:
+          - img "Norco, Louisiana" [ref=e240]
+          - generic [ref=e241]:
+            - paragraph [ref=e242]:
+              - link "Norco, LA, USA" [ref=e243] [cursor=pointer]:
+                - /url: /about-grace/locations/norco
+            - paragraph [ref=e244]:
+              - text: 16122 River Road
+              - text: Norco, LA 70079
+            - paragraph [ref=e245]: "Tel: +1 985.725.4001"
+        - listitem [ref=e246]:
+          - img "Pasadena, Texas" [ref=e249]
+          - generic [ref=e250]:
+            - paragraph [ref=e251]:
+              - link "Pasadena, TX, USA" [ref=e252] [cursor=pointer]:
+                - /url: /about-grace/locations/pasadena
+            - paragraph [ref=e253]:
+              - text: 10001 Chemical Road
+              - text: Pasadena, TX 77507
+            - paragraph [ref=e254]: "Tel: +1 281.842.5260"
+        - listitem [ref=e255]:
+          - img "Location Sorocaba 800px" [ref=e258]
+          - generic [ref=e259]:
+            - paragraph [ref=e260]:
+              - link "Sorocaba, São Paulo, Brazil" [ref=e261] [cursor=pointer]:
+                - /url: /about-grace/locations/sorocaba
+            - paragraph [ref=e262]:
+              - text: W. R. GRACE BRASIL ICPQ LTDA
+              - text: Av. Paraná 4690
+              - text: Cajuru do Sul, Rua 2
+              - text: Sorocaba, São Paulo
+              - text: Brasil
+            - paragraph [ref=e263]: "Tel: +55 (15) 3141.4100"
+        - listitem [ref=e264]:
+          - img "South Haven, Michigan" [ref=e267]
+          - generic [ref=e268]:
+            - paragraph [ref=e269]:
+              - link "South Haven, MI, USA" [ref=e270] [cursor=pointer]:
+                - /url: /about-grace/locations/south-haven
+            - paragraph [ref=e271]:
+              - text: 1421 Kalamazoo St
+              - text: South Haven, MI 49090
+            - paragraph [ref=e272]: "Tel: +1 269.637.8474"
+        - listitem [ref=e273]:
+          - img "Tyrone, Pennsylvania Facility Aerial" [ref=e276]
+          - generic [ref=e277]:
+            - paragraph [ref=e278]:
+              - link "Tyrone, PA, USA" [ref=e279] [cursor=pointer]:
+                - /url: /about-grace/locations/tyrone
+            - paragraph [ref=e280]:
+              - text: 2858 Back Vail Rd.
+              - text: Tyrone, PA 16686
+            - paragraph [ref=e281]: "Tel: +1 814.684.4310"
+        - listitem [ref=e282]:
+          - img "Location Valleyfield 800px" [ref=e285]
+          - generic [ref=e286]:
+            - paragraph [ref=e287]:
+              - link "Valleyfield, Quebec, Canada" [ref=e288] [cursor=pointer]:
+                - /url: /about-grace/locations/valleyfield
+            - paragraph [ref=e289]:
+              - text: 42 rue Fabre
+              - text: Salaberry-de-Valleyfield, QC J6S 4K7
+              - text: Canada
+            - paragraph [ref=e290]: "Tel: +1 450.373.4224"
+    - generic [ref=e291]:
+      - heading "Asia" [level=2] [ref=e293]
+      - list [ref=e296]:
+        - listitem [ref=e297]:
+          - img "Location Business V2 800px" [ref=e300]
+          - generic [ref=e301]:
+            - paragraph [ref=e302]:
+              - strong [ref=e303]: Anyang-si, South Korea
+            - paragraph [ref=e304]:
+              - text: W. R. Grace Korea Inc.
+              - text: 14FL, G. Square Tower, Hogye-dong
+              - text: 180, Simin-daero, Dongan-gu,
+              - text: Anyang-si, Gyeonggi-do, 14073, South Korea
+            - paragraph [ref=e305]: "Tel: +82 31.340.8401"
+        - listitem [ref=e306]:
+          - img "Location Business 800px" [ref=e309]
+          - generic [ref=e310]:
+            - paragraph [ref=e311]:
+              - strong [ref=e312]: Atyrau, Kazakhstan
+            - paragraph [ref=e313]:
+              - text: Grace Kazakhstan Catalysts LLP
+              - text: 92 Auezov Str., Atyrau
+              - text: Atyrau Region 060001 Kazakhstan
+        - listitem [ref=e314]:
+          - img "Beijing, China" [ref=e317]
+          - generic [ref=e318]:
+            - paragraph [ref=e319]:
+              - strong [ref=e320]: Beijing, China
+            - paragraph [ref=e321]:
+              - text: 3503, Building A,
+              - text: No.8 Jianguomenwai Avenue
+              - text: Chaoyang District, Beijing
+              - text: People’s Republic of China, PO 100025
+        - listitem [ref=e322]:
+          - img "Chennai, India" [ref=e325]
+          - generic [ref=e326]:
+            - paragraph [ref=e327]:
+              - strong [ref=e328]: Chennai, India
+            - paragraph [ref=e329]:
+              - text: Grace Davison Chemicals India Pvt. Ltd.
+              - text: 2nd Floor (Part Mod 3) Block A
+              - text: Global Infocity Park, No. 40
+              - text: MGR Salai
+              - text: Kandanchavadi, Perungudi, Chennai – 600096, India
+        - listitem [ref=e330]:
+          - img "Location Business V2 800px" [ref=e333]
+          - generic [ref=e334]:
+            - paragraph [ref=e335]:
+              - strong [ref=e336]: Hyderabad, India
+            - paragraph [ref=e337]:
+              - text: Grace Davison Chemicals India Pvt. Ltd
+              - text: Suite 212, Bldg 450
+              - text: Neovantage Innovation Park
+              - text: Genome Valley, Hyderabad-500078
+        - listitem [ref=e338]:
+          - img "Hongkong Office Location" [ref=e341]
+          - generic [ref=e342]:
+            - paragraph [ref=e343]:
+              - strong [ref=e344]: Kowloon, Hong Kong
+            - paragraph [ref=e345]:
+              - text: 16/F, 700 Nathan Road
+              - text: Kowloon, Hong Kong
+        - listitem [ref=e346]:
+          - img "Kuantan Malaysia Grace Facility" [ref=e349]
+          - generic [ref=e350]:
+            - paragraph [ref=e351]:
+              - link "Kuantan, Malaysia" [ref=e352] [cursor=pointer]:
+                - /url: /about-grace/locations/kuantan
+            - paragraph [ref=e353]:
+              - text: W. R. Grace Specialty Chemicals
+              - text: Gebeng Industrial Area
+              - text: Lot 114, Jalan Gebeng 1/11
+              - text: 260 Kuantan, Pahang, Malaysia
+            - paragraph [ref=e354]: "Tel: +60 9 584.7788"
+        - listitem [ref=e355]:
+          - img "Manila, Philippines" [ref=e358]
+          - generic [ref=e359]:
+            - paragraph [ref=e360]:
+              - strong [ref=e361]: Manila, Philippines
+            - paragraph [ref=e362]:
+              - text: Grace Global Business Services Inc.
+              - text: 24th Floor Filinvest Axis Tower Two Building, Northgate
+              - text: Cyberzone, Filinvest City, Alabang Muntinlupa City, Philippines
+        - listitem [ref=e363]:
+          - img "Location Mumbai 800x450" [ref=e366]
+          - generic [ref=e367]:
+            - paragraph [ref=e368]:
+              - strong [ref=e369]: Mumbai, India
+            - paragraph [ref=e370]: Office No. 10, 11th Floor Remi Commercio Off. Veera Desai Road, Anheri (West)
+        - listitem [ref=e371]:
+          - img "Location Business 800px" [ref=e374]
+          - generic [ref=e375]:
+            - paragraph [ref=e376]:
+              - strong [ref=e377]: New Delhi, India
+            - paragraph [ref=e378]: 2 F Elegance / 294 CST Road (Regus-New Delhi Elegance)
+        - listitem [ref=e379]:
+          - img "Shanghai, China" [ref=e382]
+          - generic [ref=e383]:
+            - paragraph [ref=e384]:
+              - strong [ref=e385]: Shanghai, China
+            - paragraph [ref=e386]:
+              - text: Grace Trading Ltd.
+              - text: 1906, K.Wah Center, No. 1010
+              - text: Middle Huai Hai Road
+              - text: Xu Hui District, Shanghai
+              - text: People’s Republic of China, PO 200031
+            - paragraph [ref=e387]: Tel. +86 21 3325.8288
+        - listitem [ref=e388]:
+          - img "Singapore" [ref=e391]
+          - generic [ref=e392]:
+            - paragraph [ref=e393]:
+              - strong [ref=e394]: Singapore
+            - paragraph [ref=e395]:
+              - text: Grace Products (Singapore) Pte. Ltd.,
+              - text: 390 Orchard Road
+              - text: "#15-02/03 Palais Renaissance"
+              - text: Singapore 238871
+            - paragraph [ref=e396]: "Tel: +65 6331.4188"
+        - listitem [ref=e397]:
+          - img "Location Tokyo 800x450" [ref=e400]
+          - generic [ref=e401]:
+            - paragraph [ref=e402]:
+              - strong [ref=e403]: Tokyo, Japan
+            - paragraph [ref=e404]:
+              - text: Kouken New River Bld. 3F, 2-21-18 Shinkawa, Chuo-ku
+              - text: Tokyo, Japan
+        - listitem [ref=e405]:
+          - img "Location Yesou 800px" [ref=e408]
+          - generic [ref=e409]:
+            - paragraph [ref=e410]:
+              - link "Yeosu, South Korea" [ref=e411] [cursor=pointer]:
+                - /url: /about-grace/locations/yeosu
+            - paragraph [ref=e412]:
+              - text: W. R. Grace Korea, Ltd.
+              - text: 26, Jindalle-gil
+              - text: Yeosu-si
+              - text: Jeollanam-do South Korea 59614
+            - paragraph [ref=e413]: "Tel: +82 61.689.6502"
+    - generic [ref=e414]:
+      - heading "Europe and Middle East" [level=2] [ref=e416]
+      - list [ref=e419]:
+        - listitem [ref=e420]:
+          - img "Location Antwerpen 800px" [ref=e423]
+          - generic [ref=e424]:
+            - paragraph [ref=e425]:
+              - strong [ref=e426]: Antwerp, Belgium
+            - paragraph [ref=e427]:
+              - text: Grace GmbH Belgium
+              - text: Jan van Gentstraat 7
+              - text: Antwerpen Antwerp 2000
+              - text: Belgium
+        - listitem [ref=e428]:
+          - img "Dubai, UAE" [ref=e431]
+          - generic [ref=e432]:
+            - paragraph [ref=e433]:
+              - strong [ref=e434]: Dubai, UAE
+            - paragraph [ref=e435]:
+              - text: Emaar Business Park, The Greens
+              - text: Building 4, Office 310
+              - text: Dubai, UAE
+            - paragraph [ref=e436]: "Tel: +971 44.22.9553"
+        - listitem [ref=e437]:
+          - img "Location Duren 800px" [ref=e440]
+          - generic [ref=e441]:
+            - paragraph [ref=e442]:
+              - link "Düren, Germany" [ref=e443] [cursor=pointer]:
+                - /url: /about-grace/locations/duren
+            - paragraph [ref=e444]:
+              - text: Kreuzauer Str. 46
+              - text: Düren, 52355
+              - text: Germany
+            - paragraph [ref=e445]: "Tel: +49 02421.40370"
+        - listitem [ref=e446]:
+          - img "Location Poznan 800px" [ref=e449]
+          - generic [ref=e450]:
+            - paragraph [ref=e451]:
+              - strong [ref=e452]: Poznań, Poland
+            - paragraph [ref=e453]:
+              - text: Grace GmbH (Sp. z o.o.) Oddział w Polsce
+              - text: Grunwaldzka 186
+              - text: 60-166 Poznań, Poland
+            - paragraph [ref=e454]: "Tel: +48 22 307 71 38"
+        - listitem [ref=e455]:
+          - img "Location Business V2 800px" [ref=e458]
+          - generic [ref=e459]:
+            - paragraph [ref=e460]:
+              - strong [ref=e461]: Sohar, Oman
+            - paragraph [ref=e462]:
+              - text: Sohar University
+              - text: Building 2, Zone 1 and 2
+              - text: Sohar 311, Oman
+        - listitem [ref=e463]:
+          - img "Location Stenungsund 800px" [ref=e466]
+          - generic [ref=e467]:
+            - paragraph [ref=e468]:
+              - link "Stenungsund, Sweden" [ref=e469] [cursor=pointer]:
+                - /url: /about-grace/locations/stenungsund
+            - paragraph [ref=e470]:
+              - text: Industrivagen
+              - text: Stenungsund, 444 32
+              - text: Sweden
+              - text: "Tel: +46 303.3510.00"
+        - listitem [ref=e471]:
+          - img "Location Tarragona 800px" [ref=e474]
+          - generic [ref=e475]:
+            - paragraph [ref=e476]:
+              - link "Tarragona, Spain" [ref=e477] [cursor=pointer]:
+                - /url: /about-grace/locations/tarragona
+            - paragraph [ref=e478]:
+              - text: C-35, Carretera Nacional 340, km 1.156
+              - text: Tarragona, Spain, 43006
+            - paragraph [ref=e479]: "Tel: +34 977 38 9050"
+        - listitem [ref=e480]:
+          - img "Location Worms 800px" [ref=e483]
+          - generic [ref=e484]:
+            - paragraph [ref=e485]:
+              - link "Worms, Germany" [ref=e486] [cursor=pointer]:
+                - /url: /about-grace/locations/worms
+            - paragraph [ref=e487]:
+              - text: Grace GmbH
+              - text: In der Hollerhecke 1
+              - text: Worms, 67547
+              - text: Germany
+              - text: "Tel: +49 6241.40300"
+    - generic [ref=e489]:
+      - heading "Legend" [level=4] [ref=e490]
+      - paragraph [ref=e491]:
+        - strong [ref=e493]: Headquarters
+      - paragraph [ref=e494]:
+        - strong [ref=e496]: Manufacturing
+      - paragraph [ref=e497]:
+        - strong [ref=e499]: Business & Commercial Office
+      - paragraph [ref=e500]:
+        - strong [ref=e502]: Research / Technical Center
+      - paragraph [ref=e503]:
+        - strong [ref=e505]: Warehouse
+  - contentinfo [ref=e506]:
+    - generic [ref=e510]:
+      - paragraph [ref=e511]: © 2026 W. R. Grace & Co.-Conn. All rights reserved
+      - list [ref=e512]:
+        - listitem [ref=e513]:
+          - link "CAREERS" [ref=e514] [cursor=pointer]:
+            - /url: https://jobs.grace.com/?utm_campaign=footer&utm_medium=organic&utm_source=grace-website&utm_content=careers
+        - listitem [ref=e515]:
+          - link "COMPLIANCE" [ref=e516] [cursor=pointer]:
+            - /url: /compliance
+        - listitem [ref=e517]:
+          - link "CONTACT US" [ref=e518] [cursor=pointer]:
+            - /url: /contact-us
+        - listitem [ref=e519]:
+          - link "COOKIE POLICY" [ref=e520] [cursor=pointer]:
+            - /url: /cookie-policy
+        - listitem [ref=e521]:
+          - link "ETHICS HOTLINE" [ref=e522] [cursor=pointer]:
+            - /url: /ethics-hotline
+        - listitem [ref=e523]:
+          - link "LINKEDIN" [ref=e524] [cursor=pointer]:
+            - /url: https://www.linkedin.com/company/wr-grace/mycompany/
+        - listitem [ref=e525]:
+          - link "LOCATIONS" [ref=e526] [cursor=pointer]:
+            - /url: /about-grace/locations
+        - listitem [ref=e527]:
+          - link "LOGOS" [ref=e528] [cursor=pointer]:
+            - /url: /newsroom/logos-and-images
+        - listitem [ref=e529]:
+          - link "PRIVACY POLICY" [ref=e530] [cursor=pointer]:
+            - /url: /privacy-policy
+        - listitem [ref=e531]:
+          - link "PRODUCTS" [ref=e532] [cursor=pointer]:
+            - /url: /products
+        - listitem [ref=e533]:
+          - link "TERMS OF USE" [ref=e534] [cursor=pointer]:
+            - /url: /terms-of-use
+      - paragraph [ref=e535]:
+        - strong [ref=e536]: GRACE® is a registered trademark in the United States and/or other countries, of W. R. Grace & Co.-Conn.
+      - paragraph [ref=e537]:
+        - img "Standard Industries" [ref=e539]
+```

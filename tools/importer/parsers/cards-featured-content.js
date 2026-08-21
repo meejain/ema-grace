@@ -24,10 +24,14 @@ export default function parse(element, { document, params }) {
     || Array.from(scope.querySelectorAll('h2')).find((h) => /insight/i.test(h.textContent || ''));
   const headingText = (headingEl && (headingEl.textContent || '').replace(/\s+/g, ' ').trim())
     || 'Latest Insights from Grace';
-  const ctaEl = scope.querySelector('a.all-articles-cta, a[href*="/insights"], a[href*="/blog"]');
+  // Prefer the VISIBLE "View all blog posts" button (`a.view-allposts-cta`) over the hidden
+  // `a.all-articles-cta` ("View all articles") — the source renders the former as the green button
+  // on the landing pages. Fall back to any insights/blog link if neither class is present.
+  const ctaEl = scope.querySelector('a.view-allposts-cta')
+    || scope.querySelector('a.all-articles-cta, a[href*="/insights"], a[href*="/blog"]');
   const ctaHref = ctaEl ? (ctaEl.getAttribute('href') || '/insights') : '/insights';
-  // Prefer the source CTA's own visible label (e.g. "View all blog posts" on about-grace landings),
-  // falling back to "View all articles" (insights/industries default) when the source has no label.
+  // Use the source CTA's own visible label (e.g. "View all blog posts"), falling back to the
+  // "View all articles" default when the source has no label.
   const ctaText = (ctaEl && (ctaEl.textContent || '').replace(/\s+/g, ' ').trim()) || 'View all articles';
 
   const cells = items.map((item) => {
