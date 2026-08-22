@@ -57,6 +57,24 @@ ranker) → read that page's rendered DOM to derive the section→block contract
 Rule of thumb: **styling/decoration fix → runtime (no reimport). Structure/naming/selection fix →
 importer (rebundle + reimport).**
 
+**Is the bundle a STANDARD AEM importer script? — YES.** `import-grace-master.bundle.js` is a normal
+AEM Import Tool script, not anything proprietary. Its shape is the standard contract:
+`var CustomImportScript = (() => { … return { transform(...) {…} } })()`, built against the global
+`WebImporter` API (`WebImporter.Blocks.createBlock`, `WebImporter.rules.*`, etc.) that the AEM importer
+injects. `tools/importer/aem-import-bundle.sh` just wraps `aem-import-helper bundle` (esbuild) to INLINE
+the catalog (`catalog-data.js`) + all 50 parsers + 2 transformers into ONE self-contained file with no
+external `import`s. So a customer CAN drop this bundle straight into the AEM Import Tool
+(`https://aem-boilerplate.aem.live/tools/importer/`, or `aem-import-helper import`) and it will run — it
+is a superset of the boilerplate's `import.js`, just much larger. Caveats to state honestly when asked:
+(1) it's grace.com-SPECIFIC (selectors, page-type dispatch, Scene7/DM handling are tuned to grace.com's
+AEM markup — it won't meaningfully migrate a different site); (2) a chunk of final parity is RUNTIME
+(blocks/templates/scripts CSS+JS) + a handful of hand-edited `.plain.html`, which the bundle does NOT
+contain — running the bundle alone reproduces the importer OUTPUT, not the fully-decorated page; (3) it
+expects the standard `WebImporter` global + a headless browser (the excat runner injects both). It is
+NOT auto-generated per-run by an LLM skill: it is our ONE hand-maintained importer, versioned in git and
+frozen per-set under `backups/` (see §7). The excat *skill* provides the bundler + runner + `WebImporter`
+runtime; the importer LOGIC (dispatch, catalog, parsers) is ours.
+
 **Where content lives (why EDS `.aem.page` URLs 404 for migrated pages).** The generated
 `content/**/*.plain.html` is **git-ignored** — EDS does NOT serve content from the code repo. It
 serves from **Document Authoring (DA)**. So a migrated page renders at `localhost:3000` (local dev
@@ -316,10 +334,12 @@ migration fidelity, NOT that anything is published to DA (§0). Keep that distin
 - **Parity is fully manual.** The computed-style comparison vs live grace.com (§2) is by hand per
   page; there's no automated "diff migrated vs live measurements" pass.
 - **Stage 1 is per-family.** Signatures are hand-tuned to insights; each new family needs its own.
-- **3 of ~12 families proven (insights 165 + newsroom 28 + products 34 = 227/470).** The loop
-  generalized from insights (custom `buildInsightsArticle`) to newsroom + products (default path) —
-  but each new family still needs its own analysis + visual gate; don't assume the default path covers
-  everything.
+- **Families imported: insights 165 + newsroom 28 + products 34 + industries 102 + about-grace 39 +
+  vendor-suppliers 12 + people-and-careers 7 = 387/470.** Of these, insights/newsroom/products/industries
+  passed the §4a visual gate; about-grace + vendor-suppliers + people-and-careers are imported LOCAL-ONLY
+  and their §4a gate is still PENDING. The loop generalized from insights (custom `buildInsightsArticle`)
+  to the default path — but each new family still needs its own analysis + visual gate; don't assume the
+  default path covers everything.
 - **Late-hydration hub lists need a live-DOM fallback.** The onLoad wait can serialize a JS-hydrated
   hub before its product-nav list appears. The `/tmp/qa-src` cache is ALSO pre-hydration (missing
   nested sub-items), so the fallback is the LIVE source DOM (Playbook "Product hub / sidebar recipe"),
@@ -341,9 +361,9 @@ migration fidelity, NOT that anything is published to DA (§0). Keep that distin
 | about-grace | 39 | 39 ✅ | DONE (LOCAL-ONLY, 2026-08-19) — NOT yet published to DA (gated on client go-ahead). ONE master importer, 2 NEW dispatch predicates: `isAboutGraceDetailPage` (all `/about-grace/*` except bios → `buildDefaultPage` + `forceTemplate:sidebar` + canonical about-grace nav fallback, since source navs are JS-hydrated/empty in static HTML) and `isAboutGraceTextSidebar` (text-only history sub-page → `buildSidebarPage`). Clusters: root card landing (1) + landings (leadership-team, locations) + section pages (5) + history (our-history timeline, asbestos-trusts) + leadership bios (9, profile-detail) + location details (20). Blocks REUSE existing. Importer/parser fixes: canonical nav fallback, `extractMainContent` gathers all outermost text boxes, columns-location-detail selector+innermost-row filter (photo restored), columns-profile-detail text-first (auto-hero avoided), `_columns-utils` no double-emit headshot, cards-product drops `.h5`/`.h4.title` (no "PROMOTION"+dup title). RUNTIME CSS (repo, no reimport): cards 3-up section landings, banner-hero 50px header gap, bio alignment/breadcrumb-weight/spacing, sidebar image+no-widget rules. Parity 37 OK/2 false-pos; 39/39 imported, 0 tiny/empty; regression-proven vs newsroom/insights/industries. See `ABOUT-GRACE-ANALYSIS.md` + `backups/about-grace/MANIFEST.md`. REMAINING: a11y sweep on reps + DA publish. |
 | campaign | 17 | 2 | flat campaign/landing pages |
 | forms | 15 | 1 | DEFERRED → AEM Adaptive Forms pass |
-| vendor-suppliers | 12 | 0 | — |
+| vendor-suppliers | 12 | 12 ✅ | IMPORTED (LOCAL-ONLY, 2026-08-22) — validation pass PENDING (§4a not yet run). Richest remaining set (chosen by block count): sidebar template + accordion-heavy SAP-Ariba FAQ subtree. Surfaced + fixed TWO importer defects (see "Accordion + download-card fixes" recipe below): (1) accordion-theft in `extractMainContent` (FAQ answers were harvested as flat text → accordion emitted questions with BLANK answers); (2) `.cmp-card.small` PDF download cards dropped (no matcher; single-card LCA broke the parser). Both fixed + regression-proven (polypropylene-catalysts icon-grid byte-identical vs pre-fix bundle; asbestos-trusts identical). Frozen bundle 212593 bytes. See `backups/vendor-suppliers/MANIFEST.md`. KNOWN-OPEN: completeness 46–90% is mostly the noisy text-similarity heuristic counting empty AEM component shells + nav/footer boilerplate (real content verified present); a few pages still drop empty-shell media-callouts. NEXT: §4a visual-parity gate + a11y. |
 | compliance | 11 | 1 | sidebar template |
-| people-and-careers | 7 | 1 | — |
+| people-and-careers | 7 | 7 ✅ | IMPORTED (LOCAL-ONLY, 2026-08-22) — validation pass PENDING. Second-richest remaining set. Used the vendor-suppliers-era fixed bundle (NO new importer changes); the accordion fix generalized cleanly (germany-apprenticeships + benefits each emit ONE accordion block, 0 empty answers; their `cmp-card-list`s are empty shells in source → correctly nothing emitted). Frozen 212593 bytes. See `backups/people-and-careers/MANIFEST.md`. NEXT: §4a visual-parity gate + a11y. |
 | resources | 5 | 0 | — |
 | misc one-offs | ~10 | ~few | privacy/cookie/terms/search/404/etc. |
 
@@ -355,11 +375,18 @@ clusters incl. leadership bios, DONE 2026-08-19, LOCAL-ONLY — a11y sweep + DA 
 campaign → forms (Adaptive Forms pass — inventory + submission flow DONE, see `FORMS-INVENTORY.md`).
 Products set fully complete (28 detail + 6 hubs).
 
-**NEXT SET (this session, pending user pick):** remaining unmigrated families are **campaign** (17,
-2 done — flat landing pages), **vendor-suppliers** (12, 0), **compliance** (11, 1 — sidebar),
-**people-and-careers** (7, 1), **resources** (5, 0), **misc one-offs** (~10). Highest ROI = campaign
-(largest remaining) or people-and-careers/resources (small, likely reuse existing blocks). Also still
-open: the industries page-by-page validation batch 2 (NEXT 40 industries URLs) if resuming that track.
+**NEXT SET (pending user pick):** remaining unmigrated families are **campaign** (17, 2 done — flat
+landing pages), **compliance** (11, 1 — sidebar), **resources** (5, 0), **misc one-offs** (~10), plus
+**forms** (deferred → Adaptive Forms pass). ~~vendor-suppliers~~ ✅ and ~~people-and-careers~~ ✅ were
+imported 2026-08-22 (LOCAL-ONLY; their §4a visual-parity gate + a11y are still PENDING — the user asked
+to validate about-grace + vendor-suppliers next). Highest ROI on what's left = campaign (largest) or
+compliance. Also still open: the industries page-by-page validation batch 2 (NEXT 40 industries URLs)
+if resuming that track.
+
+**IMMEDIATE NEXT (user directive 2026-08-22):** VALIDATE the **about-grace (39)** and
+**vendor-suppliers (12)** sets — run the §4a visual-parity gate (3+ side-by-side samples per template
+cluster) + a11y, region-by-region, before considering either "done". Both are imported + LOCAL-ONLY;
+neither has passed §4a yet.
 
 **Newsroom template notes (reference for similar default-path families):** press releases take the
 **default path** (`buildDefaultPage`) — no new page-type needed; the whole body (dateline, quotes,
@@ -721,6 +748,39 @@ Full original analysis in `tools/importer/INDUSTRIES-ANALYSIS.md`. Summary (kept
 
 ---
 
+### Accordion + download-card fixes recipe — vendor-suppliers / people-and-careers (2026-08-22)
+
+Two importer defects surfaced by the vendor-suppliers set (accordion-heavy SAP-Ariba FAQ subtree).
+Both are in the SHARED importer, so they apply site-wide — regression-proven before freezing.
+
+1. **Accordion-theft in `extractMainContent` (sidebar path).** On `buildSidebarPage` pages, the content
+   column (`col-lg-7`) can hold a `.accordion-comp` whose `<dd>` answers are `.rich-text` boxes.
+   `extractMainContent` gathers ALL outermost `.rich-text`/`.text` boxes as flat content — so it stole
+   the accordion's answer boxes, and the `accordion-faq` parser then fired on the emptied shells → the
+   accordion rendered with N questions and BLANK answers, and the answer prose leaked out as loose
+   paragraphs. FIX: `extractMainContent` now skips any `.rich-text`/`.text` (and any child) inside
+   `.accordion-comp, .accordion, .cmp-card-list, .card-list` — those belong solely to their block parser.
+   Verify: FAQ pages emit ONE accordion block with **0 empty answer cells** (`grep -o '</div><div></div></div>'`).
+2. **`.cmp-card.small` PDF download cards dropped.** Download cards (image + `.cta` PDF link, e.g.
+   supplier-standards "General Quality Provisions") were claimed by NO matcher (`cards-icon-grid`
+   required `.generic`). FIX: the `cards-icon-grid` matcher + parser now also accept `.cmp-card.small`,
+   emit the CTA as a Call-to-Action LINK (Cards convention: image cell | linked-title cell), and — the
+   subtle part — handle the **single-card grid** where `cardGridContainers`' LCA is the card element
+   ITSELF: `element.querySelectorAll(CARD_SEL)` doesn't match the element, so the parser saw 0 cards and
+   silently emitted nothing (the report still logged the block as "parsed"). The parser now does
+   `element.matches(CARD_SEL) ? [element] : Array.from(element.querySelectorAll(CARD_SEL))`, and
+   `discoverAndParseBlocks` capture relies on the `<table>`-diff — so a 0-card early-return is invisible
+   unless you check the OUTPUT, not the report.
+   LESSON: "report says parsed" ≠ "block in output". A parser that early-returns still pushes its name to
+   `parsedNames`; only the `<table>`-diff (`rendered[]`) reflects reality. Verify the emitted `.plain.html`.
+
+**Completeness-% is NOT a fidelity gate here (reconfirmed).** vendor-suppliers pages sit at 46–90% yet
+their real content is present — the heuristic counts empty AEM component shells (`<div class="media-callout"></div>`
+with only a clientlib `<link>`) + nav/footer boilerplate that the clean output correctly omits. Grade by
+the §4b rendered-inventory diff, never by the runner's %.
+
+---
+
 ## 6. Operational commands (quick reference)
 
 - Rebundle: `bash /home/node/.excat-marketplaces/excat-marketplace/excat/skills/excat-content-import/scripts/aem-import-bundle.sh --importjs tools/importer/import-grace-master.js`
@@ -775,7 +835,17 @@ video-from-media-modal, featured-content + teaser headings — 34 URLs incl. 6 h
 · `backups/industries/` (working-tree bundle, 2026-08-13, with the Industries work: `isIndustriesDetailPage`
 dispatch + nav-rail injection + `forceTemplate:sidebar`, `isCategoryGrid` structural discriminator,
 category-grid title/heading preservation, `table-data-grid` 2-col match, `collapsePathHyphens` link fix,
-empty-section cleanup — 102 URLs. RUNTIME: `blocks/table/table.js` scroll-region `tabindex`).
+empty-section cleanup — 102 URLs. RUNTIME: `blocks/table/table.js` scroll-region `tabindex`)
+· `backups/about-grace/` (rev 3, 2026-08-21, 211218→212593 bytes after the vendor-suppliers fixes:
+`isAboutGraceDetailPage` + `isAboutGraceTextSidebar` dispatch, canonical nav fallback,
+`extractMainContent` all-text-boxes; dated snapshot `rev-2026-08-21/`; content-level parity fixes are
+NOT in the bundle — see its MANIFEST)
+· `backups/vendor-suppliers/` (2026-08-22, 212593 bytes — adds the accordion-theft fix in
+`extractMainContent` [skip `.accordion-comp/.accordion/.cmp-card-list/.card-list` subtrees] + the
+`.cmp-card.small` download-card fix in the `cards-icon-grid` matcher/parser incl. single-card-LCA
+handling; dated snapshot `rev-2026-08-21/`; 12 URLs)
+· `backups/people-and-careers/` (2026-08-22, 212593 bytes — SAME fixed bundle as vendor-suppliers, no
+new importer changes; dated snapshot `rev-2026-08-21/`; 7 URLs).
 Re-snapshot a set's folder whenever the shared bundle gains more fixes affecting that set. See
 `backups/README.md` and memory `importer-bundle-backups`, `product-detail-template`, `industries-migration`.
 

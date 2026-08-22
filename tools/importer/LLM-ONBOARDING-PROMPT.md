@@ -106,7 +106,23 @@ side-by-side screenshots before you claim done. Do not publish to DA without my 
   synthetic-silicas, were reconstructed by hand from the LIVE source DOM; see playbook "Product hub /
   sidebar recipe"), **INDUSTRIES (102) — COMPLETE, published to live 2026-08-14; a further sidebar
   page-by-page QA pass (rev 5-6, 2026-08-15) reimported the 78 left-nav pages + landed 9 more fixes,
-  local-only, awaiting client publish go-ahead.**
+  local-only, awaiting client publish go-ahead.** Imported since (LOCAL-ONLY, §4a gate PENDING):
+  about-grace (39, 2026-08-19), **vendor-suppliers (12, 2026-08-22)**, **people-and-careers (7,
+  2026-08-22)**. Total imported = 387/470.
+- **IS THE BUNDLE A STANDARD AEM IMPORTER SCRIPT? — YES.** `import-grace-master.bundle.js` is a normal
+  AEM Import Tool script (`var CustomImportScript = (() => {… transform(...) …})()` on the global
+  `WebImporter` API), just bundled self-contained (catalog + parsers + transformers inlined) by
+  `aem-import-bundle.sh` (= `aem-import-helper bundle`). A customer CAN run it in the AEM Import Tool and
+  it will work. Caveats: it's grace.com-SPECIFIC; a chunk of final parity is RUNTIME (blocks/templates/
+  scripts) + a few hand-edited `.plain.html` NOT in the bundle (bundle reproduces importer OUTPUT, not
+  the decorated page); needs the `WebImporter` global + headless browser (the excat runner injects both).
+  It is NOT auto-generated per run — it's our ONE hand-maintained importer, git-versioned + frozen per
+  set under `backups/`. See playbook §0.
+- **IMMEDIATE NEXT (user directive 2026-08-22): VALIDATE about-grace (39) + vendor-suppliers (12)** —
+  run the §4a visual-parity gate + a11y before calling either done. Both imported, LOCAL-ONLY, neither
+  has passed §4a. vendor-suppliers surfaced + fixed two shared-importer defects (accordion-theft in
+  `extractMainContent`; `.cmp-card.small` download cards) — see playbook "Accordion + download-card
+  fixes recipe"; both regression-proven, bundle at 212593 bytes.
 - **IN PROGRESS — INDUSTRIES page-by-page parity validation (2026-08-16/17), batch 1 of ~3 done.**
   Deep validation vs LIVE grace.com, family by family, for 100% visual + content parity. ~40 pages
   validated (refining-heavy) with fixes landed **LOCAL-ONLY** (localhost:3000) — NOT published. Live
@@ -180,8 +196,10 @@ side-by-side screenshots before you claim done. Do not publish to DA without my 
   imported 0 tiny/empty; regression-proven vs newsroom/insights/industries. Frozen bundle + urls +
   detail: `backups/about-grace/MANIFEST.md` + `ABOUT-GRACE-ANALYSIS.md`. REMAINING: a11y sweep on reps
   + DA publish. Product hubs must NOT be reimported (hand-reconstructed).
-- **NEXT UP → campaign** (17, largest remaining) / people-and-careers / resources / vendor-suppliers /
-  compliance, OR resume industries page-by-page batch 2 (NEXT 40 industries URLs). Then → forms. FORMS is
+- **NEXT UP → VALIDATE about-grace + vendor-suppliers first (user directive, §4a + a11y).** Then remaining
+  imports: **campaign** (17, largest remaining) / resources (5) / compliance (11), OR resume industries
+  page-by-page batch 2 (NEXT 40 industries URLs). (vendor-suppliers + people-and-careers now imported.)
+  Then → forms. FORMS is
   fully scoped: `tools/importer/FORMS-INVENTORY.md` (6 templates; 200 form pages; 191 = one shared
   gated modal) + `FORMS-URLS.txt` (every form URL). **FORMS ARE PARTLY BUILT — read FORMS-INVENTORY
   §G (implementation history) before touching forms.** Shipped so far: the shared **gated "Download"
