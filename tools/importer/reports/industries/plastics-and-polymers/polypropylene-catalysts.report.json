@@ -2,11 +2,12 @@
   "status": "success",
   "url": "https://grace.com/industries/plastics-and-polymers/polypropylene-catalysts/",
   "path": "industries/plastics-and-polymers/polypropylene-catalysts",
-  "timestamp": "2026-08-16T10:56:28.419Z",
+  "timestamp": "2026-08-21T20:43:02.156Z",
   "title": "Polypropylene Catalysts",
   "pageType": "default",
   "blocks": [
     "hero-banner",
+    "cards-icon-grid",
     "cards-icon-grid",
     "columns-horizontal-teaser-featured",
     "cards-category-grid",

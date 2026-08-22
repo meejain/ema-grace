@@ -1,0 +1,36 @@
+{
+  "status": "success",
+  "url": "https://grace.com/vendor-suppliers/sap-ariba-support/sap-ariba-faqs/sap-ariba-invoicing-faqs/",
+  "path": "vendor-suppliers/sap-ariba-support/sap-ariba-faqs/sap-ariba-invoicing-faqs",
+  "timestamp": "2026-08-21T20:49:28.598Z",
+  "title": "SAP Ariba® Invoicing FAQs",
+  "pageType": "sidebar",
+  "pageMetadata": [
+    "template",
+    "contactus",
+    "contactus-tagline"
+  ],
+  "sidebarNav": true,
+  "contentNodes": 0,
+  "contactSplitBanner": true,
+  "blocks": [
+    "accordion-faq",
+    "accordion-faq",
+    "accordion-faq",
+    "accordion-faq",
+    "accordion-faq",
+    "custom-widget-news-archive",
+    "accordion-faq",
+    "custom-widget-news-archive",
+    "accordion-faq",
+    "accordion-faq",
+    "accordion-faq",
+    "accordion-faq",
+    "accordion-faq",
+    "accordion-faq",
+    "accordion-faq",
+    "accordion-faq"
+  ],
+  "blocksLeftInPlace": [],
+  "hasForm": false
+}

@@ -3,10 +3,19 @@
 - **set:** about-grace (39 pages: 1 root card landing + 2 landings [leadership-team, locations] +
   5 section pages + 2 history [our-history, asbestos-trusts] + 9 leadership bios + 20 location details).
 - **bundle:** `import-grace-master.bundle.js` (frozen; the live bundle that produced this set).
-- **bundle size:** 206715 bytes (rev 2, 2026-08-19 parity pass; was 201790 at rev 1).
-- **bundle provenance:** working tree at snapshot (parent commit `2302375` "Update importer"; importer
-  source + bundle + runtime CSS all uncommitted at snapshot time — the frozen bundle here IS the record
-  for importer output; runtime CSS lives in the repo working tree, see RUNTIME below).
+- **bundle size:** 211218 bytes (rev 3, 2026-08-21 freeze — set complete after full visual-parity pass;
+  was 206715 at rev 2, 201790 at rev 1). Dated snapshot: `rev-2026-08-21/`.
+- **bundle provenance:** working tree at snapshot (parent commit `cefb9a0` "Add cards block, update
+  importer"; the frozen bundle here IS the record for importer output; runtime CSS lives in the repo
+  working tree, see RUNTIME below).
+- **post-import parity fixes (content-level, NOT in the bundle):** several `.plain.html` pages were
+  hand-corrected after import to match source and are intentionally NOT reproducible from the bundle:
+  locations (HQ `cards location-grid zoom`, curated rail, horizontal Legend, `theme:locations`, grid
+  row-1 pin), awards-and-recognition ("Latest Insights" split into own section for right-aligned CTA),
+  and sidebar-nav trims where the source has no 8-item family menu — community + EHS + sustainability
+  (nav removed; EHS/sustainability keep the Contact Us widget), our-history (trimmed to 4: Awards,
+  Leadership Team, Our History, This is Grace), this-is-grace (trimmed to 3: Awards, Leadership Team,
+  Our History). Location detail pages + asbestos-trusts keep their source navs unchanged.
 - **URL list:** `urls.txt` (39 — from grace.com `/about-grace/` subtree).
 
 ## Shape — ONE master importer, page-type dispatch (delta over industries bundle)

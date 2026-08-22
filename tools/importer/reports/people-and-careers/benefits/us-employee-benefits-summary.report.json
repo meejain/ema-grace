@@ -2,24 +2,21 @@
   "status": "success",
   "url": "https://grace.com/people-and-careers/benefits/us-employee-benefits-summary/",
   "path": "people-and-careers/benefits/us-employee-benefits-summary",
-  "timestamp": "2026-08-05T16:53:46.074Z",
+  "timestamp": "2026-08-21T21:02:51.285Z",
   "title": "U.S. Employee Benefits Summary",
   "pageType": "sidebar",
   "pageMetadata": [
     "template",
     "contactus",
-    "contactus-tagline",
-    "breadcrumb-title"
+    "contactus-tagline"
   ],
   "sidebarNav": true,
-  "contentNodes": 2,
+  "contentNodes": 1,
   "contactSplitBanner": false,
   "blocks": [
-    "accordion-nested"
+    "accordion-nested",
+    "table-data-grid"
   ],
-  "blocksLeftInPlace": [
-    "banner-cta",
-    "quote-cta"
-  ],
+  "blocksLeftInPlace": [],
   "hasForm": false
 }

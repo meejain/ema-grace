@@ -1,0 +1,19 @@
+{
+  "status": "success",
+  "url": "https://grace.com/vendor-suppliers/sap-ariba-support/sap-ariba-benefits/",
+  "path": "vendor-suppliers/sap-ariba-support/sap-ariba-benefits",
+  "timestamp": "2026-08-21T20:53:53.926Z",
+  "title": "SAP Ariba® Benefits",
+  "pageType": "sidebar",
+  "pageMetadata": [
+    "template",
+    "contactus",
+    "contactus-tagline"
+  ],
+  "sidebarNav": true,
+  "contentNodes": 1,
+  "contactSplitBanner": false,
+  "blocks": [],
+  "blocksLeftInPlace": [],
+  "hasForm": false
+}

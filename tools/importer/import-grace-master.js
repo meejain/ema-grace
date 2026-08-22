@@ -496,9 +496,15 @@ const MATCHERS = {
   },
   // icon-grid: small icon+label+desc cards (generic cmp-card). Return ONE container (LCA) so
   // the whole set → one block. Item = a generic card with an icon image + a .h4 title, no link.
+  // icon-grid ALSO absorbs "download cards": `.cmp-card.small` image+`.cta`-link cards (usually a
+  // PDF link, e.g. vendor-suppliers "General Quality Provisions"). They render as the same
+  // image-card grid; the parser emits the CTA as a link. Matching both `.generic` and `.small`
+  // here (rather than a separate block) reuses the existing catalog def + parser. minCount 1
+  // because these download grids are often a single PDF card.
   'cards-icon-grid': (doc) => cardGridContainers(
-    doc, 'a.cmp-card.generic, .cmp-card.generic',
-    (c) => c.querySelector('.h4, .title, p') && (c.querySelector('.image, picture, img')), 2,
+    doc, 'a.cmp-card.generic, .cmp-card.generic, a.cmp-card.small, .cmp-card.small',
+    (c) => (c.querySelector('.h4, .title, p, .cta') || (c.tagName === 'A' && c.getAttribute('href')))
+      && (c.querySelector('.image, picture, img')), 1,
   ),
 };
 
@@ -1290,11 +1296,19 @@ function extractMainContent(document) {
   // document order; fall back to the column itself when it has no text boxes.
   const keep = (el) => {
     if (/^(SCRIPT|STYLE|NOSCRIPT|LINK|IFRAME)$/.test(el.tagName)) return false;
+    // Skip anything that lives inside a block the catalog parses separately (accordion Q&A,
+    // card lists, tables…). Otherwise the block's inner `.rich-text` (e.g. an accordion `<dd>`
+    // answer) gets harvested here as flat content AND the block parser fires on the now-empty
+    // shell — producing duplicate/blank output (the SAP-Ariba FAQ accordions rendered with 14
+    // questions and empty answers because their answers were pulled into flat content here).
+    if (el.closest && el.closest('.accordion-comp, .accordion, .cmp-card-list, .card-list')) return false;
     return (el.textContent || '').trim().length > 0 || el.querySelector('img, picture');
   };
   const boxes = Array.from(mainCol.querySelectorAll('.rich-text, .text'))
-    // outermost only (a .text wrapping a .rich-text would double-count)
-    .filter((tb, _i, arr) => !arr.some((o) => o !== tb && o.contains(tb)));
+    // outermost only (a .text wrapping a .rich-text would double-count), and NOT the text boxes
+    // that belong to an accordion/card-list block — those are emitted by their own parser.
+    .filter((tb, _i, arr) => !arr.some((o) => o !== tb && o.contains(tb)))
+    .filter((tb) => !(tb.closest && tb.closest('.accordion-comp, .accordion, .cmp-card-list, .card-list')));
   if (boxes.length) {
     return boxes.flatMap((box) => Array.from(box.children).filter(keep));
   }

@@ -1,9 +1,9 @@
 {
   "status": "success",
-  "url": "https://grace.com/about-grace/our-history/asbestos-trusts/",
-  "path": "about-grace/our-history/asbestos-trusts",
-  "timestamp": "2026-08-21T17:50:22.600Z",
-  "title": "Asbestos Trusts",
+  "url": "https://grace.com/people-and-careers/internships/",
+  "path": "people-and-careers/internships",
+  "timestamp": "2026-08-21T21:00:46.453Z",
+  "title": "Internships",
   "pageType": "sidebar",
   "pageMetadata": [
     "template",
@@ -13,7 +13,9 @@
   "sidebarNav": true,
   "contentNodes": 2,
   "contactSplitBanner": false,
-  "blocks": [],
+  "blocks": [
+    "video-overlay"
+  ],
   "blocksLeftInPlace": [],
   "hasForm": false
 }

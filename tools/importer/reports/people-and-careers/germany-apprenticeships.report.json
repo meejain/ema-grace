@@ -1,0 +1,30 @@
+{
+  "status": "success",
+  "url": "https://grace.com/people-and-careers/germany-apprenticeships/",
+  "path": "people-and-careers/germany-apprenticeships",
+  "timestamp": "2026-08-21T20:59:52.865Z",
+  "title": "Germany Apprenticeships",
+  "pageType": "sidebar",
+  "pageMetadata": [
+    "template",
+    "contactus",
+    "contactus-tagline"
+  ],
+  "sidebarNav": true,
+  "contentNodes": 1,
+  "contactSplitBanner": false,
+  "blocks": [
+    "accordion-faq",
+    "columns-two-column-text",
+    "accordion-faq",
+    "columns-two-column-text",
+    "accordion-faq",
+    "columns-two-column-text",
+    "accordion-faq",
+    "columns-two-column-text",
+    "accordion-faq",
+    "columns-two-column-text"
+  ],
+  "blocksLeftInPlace": [],
+  "hasForm": false
+}

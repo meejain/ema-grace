@@ -1,0 +1,26 @@
+{
+  "status": "success",
+  "url": "https://grace.com/vendor-suppliers/sap-ariba-support/",
+  "path": "vendor-suppliers/sap-ariba-support",
+  "timestamp": "2026-08-21T20:47:41.865Z",
+  "title": "SAP Ariba® Support",
+  "pageType": "sidebar",
+  "pageMetadata": [
+    "template",
+    "contactus",
+    "contactus-tagline"
+  ],
+  "sidebarNav": true,
+  "contentNodes": 1,
+  "contactSplitBanner": false,
+  "blocks": [
+    "accordion-faq",
+    "table-two-column-content",
+    "accordion-faq",
+    "custom-widget-news-archive",
+    "custom-widget-news-archive",
+    "columns-app-promo"
+  ],
+  "blocksLeftInPlace": [],
+  "hasForm": false
+}

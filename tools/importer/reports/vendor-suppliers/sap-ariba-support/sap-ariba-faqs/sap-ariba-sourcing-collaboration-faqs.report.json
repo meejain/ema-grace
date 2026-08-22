@@ -1,0 +1,33 @@
+{
+  "status": "success",
+  "url": "https://grace.com/vendor-suppliers/sap-ariba-support/sap-ariba-faqs/sap-ariba-sourcing-collaboration-faqs/",
+  "path": "vendor-suppliers/sap-ariba-support/sap-ariba-faqs/sap-ariba-sourcing-collaboration-faqs",
+  "timestamp": "2026-08-21T20:50:21.710Z",
+  "title": "SAP Ariba® Sourcing and Collaboration FAQs",
+  "pageType": "sidebar",
+  "pageMetadata": [
+    "template",
+    "contactus",
+    "contactus-tagline"
+  ],
+  "sidebarNav": true,
+  "contentNodes": 0,
+  "contactSplitBanner": true,
+  "blocks": [
+    "accordion-faq",
+    "accordion-faq",
+    "custom-widget-news-archive",
+    "accordion-faq",
+    "custom-widget-news-archive",
+    "accordion-faq",
+    "accordion-faq",
+    "accordion-faq",
+    "accordion-faq",
+    "accordion-faq",
+    "accordion-faq",
+    "accordion-faq",
+    "custom-widget-news-archive"
+  ],
+  "blocksLeftInPlace": [],
+  "hasForm": false
+}

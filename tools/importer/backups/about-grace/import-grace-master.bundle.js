@@ -1198,7 +1198,8 @@ var CustomImportScript = (() => {
 
   // tools/importer/parsers/cards-icon-grid.js
   function parse13(element, { document }) {
-    const cards = Array.from(element.querySelectorAll("a.cmp-card.generic, .cmp-card.generic"));
+    const CARD_SEL = "a.cmp-card.generic, .cmp-card.generic, a.cmp-card.small, .cmp-card.small";
+    const cards = element.matches && element.matches(CARD_SEL) ? [element] : Array.from(element.querySelectorAll(CARD_SEL));
     if (!cards.length) return;
     const cells = cards.map((card) => {
       const img = card.querySelector(".image picture, .image img, picture, img");
@@ -1207,9 +1208,19 @@ var CustomImportScript = (() => {
       let titleText = "";
       const titleEl = card.querySelector(".h4.title, .h4, .title");
       if (titleEl) titleText = titleEl.textContent.trim();
+      const ctaEl = card.querySelector(".cta");
+      if (!titleText && ctaEl) titleText = (ctaEl.textContent || "").replace(/\s+/g, " ").trim();
       const paras = Array.from(card.querySelectorAll("p")).filter((p) => p.textContent.trim() && !/^promotion$/i.test(p.textContent.trim()));
       if (!titleText && paras.length) titleText = paras.shift().textContent.trim();
-      if (titleText) {
+      const cardHref = card.tagName === "A" ? card.getAttribute("href") || "" : "";
+      if (titleText && cardHref) {
+        const p = document.createElement("p");
+        const a = document.createElement("a");
+        a.setAttribute("href", cardHref);
+        a.textContent = titleText;
+        p.appendChild(a);
+        content.push(p);
+      } else if (titleText) {
         const h = document.createElement("h3");
         h.textContent = titleText;
         content.push(h);
@@ -2769,7 +2780,15 @@ var CustomImportScript = (() => {
     // location-detail: a .row pairing a jobs.grace.com "Join the team" CTA with an image AND a
     // postal-address signature (street + a Tel/ZIP). The address requirement stops it claiming
     // careers pages (e.g. ausbildung checklist) that merely link to jobs.grace.com.
-    "columns-location-detail": (doc) => Array.from(doc.querySelectorAll("section.none-bkgd .row, section .row")).filter((r) => r.querySelector('a.btn-primary[href*="jobs.grace.com"], .button a[href*="jobs.grace.com"]') && r.querySelector(".image, picture, img") && /\b\d{4,5}\b/.test(r.textContent || "") && /(street|road|rd\b|st\b|drive|avenue|ave\b|\+\d|tel[:.]?)/i.test(r.textContent || "")).filter((r, _i, arr) => !arr.some((other) => other !== r && r.contains(other))),
+    "columns-location-detail": (doc) => {
+      const detailRows = Array.from(doc.querySelectorAll("section.none-bkgd .row, section .row")).filter((r) => r.querySelector('a.btn-primary[href*="jobs.grace.com"], .button a[href*="jobs.grace.com"]') && r.querySelector(".image, picture, img") && /\b\d{4,5}\b/.test(r.textContent || "") && /(street|road|rd\b|st\b|drive|avenue|ave\b|\+\d|tel[:.]?)/i.test(r.textContent || "")).filter((r, _i, arr) => !arr.some((other) => other !== r && r.contains(other)));
+      const hqRows = Array.from(doc.querySelectorAll(".row.section-75-25")).filter((row) => {
+        const wide = row.querySelector(".col-lg-9");
+        if (!wide) return false;
+        return !!wide.querySelector(".image, .cmp-image, picture, img") && Array.from(wide.querySelectorAll("strong")).some((s) => (s.textContent || "").trim()) && /Headquarters|Tel[:.]?/i.test(wide.textContent || "");
+      });
+      return [...detailRows, ...hqRows];
+    },
     // app-promo: a .cmp-media-callout whose text side has a heading + intro paragraph + link
     // (the download promo) — distinguishes from a bare profile/CEO media-callout headshot.
     "columns-app-promo": (doc) => Array.from(doc.querySelectorAll("div.cmp-media-callout")).filter((mc) => mc.querySelector("h1, h2, h3, .subhead-small") && mc.querySelector("p") && mc.querySelector("a[href]") && mc.querySelector(".image, picture, img")),
@@ -2884,11 +2903,16 @@ var CustomImportScript = (() => {
     },
     // icon-grid: small icon+label+desc cards (generic cmp-card). Return ONE container (LCA) so
     // the whole set → one block. Item = a generic card with an icon image + a .h4 title, no link.
+    // icon-grid ALSO absorbs "download cards": `.cmp-card.small` image+`.cta`-link cards (usually a
+    // PDF link, e.g. vendor-suppliers "General Quality Provisions"). They render as the same
+    // image-card grid; the parser emits the CTA as a link. Matching both `.generic` and `.small`
+    // here (rather than a separate block) reuses the existing catalog def + parser. minCount 1
+    // because these download grids are often a single PDF card.
     "cards-icon-grid": (doc) => cardGridContainers(
       doc,
-      "a.cmp-card.generic, .cmp-card.generic",
-      (c) => c.querySelector(".h4, .title, p") && c.querySelector(".image, picture, img"),
-      2
+      "a.cmp-card.generic, .cmp-card.generic, a.cmp-card.small, .cmp-card.small",
+      (c) => (c.querySelector(".h4, .title, p, .cta") || c.tagName === "A" && c.getAttribute("href")) && c.querySelector(".image, picture, img"),
+      1
     )
   };
   function rowsByColumnOrder(doc, firstKind) {
@@ -2898,9 +2922,9 @@ var CustomImportScript = (() => {
       let isWideSplit = false;
       if (cols.length === 0) {
         const wideCols = Array.from(row.children).filter((c) => /col-lg-9|col-lg-8|col-lg-7|col-lg-3/.test(c.className));
-        const hasWideText = wideCols.some((c) => /col-lg-9|col-lg-8|col-lg-7/.test(c.className));
-        const hasNarrowImg = wideCols.some((c) => /col-lg-3/.test(c.className));
-        if (wideCols.length === 2 && hasWideText && hasNarrowImg) {
+        const hasWide = wideCols.some((c) => /col-lg-9|col-lg-8|col-lg-7/.test(c.className));
+        const hasNarrow = wideCols.some((c) => /col-lg-3/.test(c.className));
+        if (wideCols.length === 2 && hasWide && hasNarrow) {
           cols = wideCols;
           isWideSplit = true;
         }
@@ -3394,9 +3418,10 @@ var CustomImportScript = (() => {
     if (!mainCol) return [];
     const keep = (el) => {
       if (/^(SCRIPT|STYLE|NOSCRIPT|LINK|IFRAME)$/.test(el.tagName)) return false;
+      if (el.closest && el.closest(".accordion-comp, .accordion, .cmp-card-list, .card-list")) return false;
       return (el.textContent || "").trim().length > 0 || el.querySelector("img, picture");
     };
-    const boxes = Array.from(mainCol.querySelectorAll(".rich-text, .text")).filter((tb, _i, arr) => !arr.some((o) => o !== tb && o.contains(tb)));
+    const boxes = Array.from(mainCol.querySelectorAll(".rich-text, .text")).filter((tb, _i, arr) => !arr.some((o) => o !== tb && o.contains(tb))).filter((tb) => !(tb.closest && tb.closest(".accordion-comp, .accordion, .cmp-card-list, .card-list")));
     if (boxes.length) {
       return boxes.flatMap((box) => Array.from(box.children).filter(keep));
     }

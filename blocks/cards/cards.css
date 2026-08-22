@@ -611,8 +611,12 @@ body.sidebar main > .section.cards-container.geo-hex:has(.cards.featured-content
 /* Tablet+: carousel reverts to a static grid; header row goes back to
    left title + right link; dots are hidden. */
 @media (width >= 600px) {
-  /* Header row: title left, "View all articles" right */
-  .cards-container:has(.cards.featured-content) div:has(> h2):has(> p) {
+  /* Header row: title left, "View all articles" right. The selector MUST match the
+     specificity of the mobile base rule above (`div:has(> h2):has(> p a[href*="insight"])
+     :not(:has(ul, ol))`), otherwise that column-direction rule wins and the CTA stays
+     stacked+centered below the heading. Mirror its shape so the row layout applies. */
+  .cards-container:has(.cards.featured-content) div:has(> h2):has(> p a[href*="insight"]):not(:has(ul, ol)),
+  .cards-container:has(.cards.featured-content) div:has(> h2):has(> p a[href*="blog"]):not(:has(ul, ol)) {
     flex-flow: row wrap;
     align-items: baseline;
     justify-content: space-between;

@@ -1,0 +1,16 @@
+{
+  "status": "success",
+  "url": "https://grace.com/people-and-careers/",
+  "path": "people-and-careers",
+  "timestamp": "2026-08-21T20:58:05.873Z",
+  "title": "People and Careers",
+  "pageType": "default",
+  "blocks": [
+    "hero-banner",
+    "cards-product",
+    "cards-product"
+  ],
+  "blocksLeftInPlace": [],
+  "pageMetadata": [],
+  "hasForm": false
+}

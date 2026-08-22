@@ -1,0 +1,31 @@
+{
+  "status": "success",
+  "url": "https://grace.com/vendor-suppliers/sap-ariba-support/sap-ariba-faqs/sap-ariba-supplier-management-registration-faq/",
+  "path": "vendor-suppliers/sap-ariba-support/sap-ariba-faqs/sap-ariba-supplier-management-registration-faq",
+  "timestamp": "2026-08-21T20:51:15.514Z",
+  "title": "SAP Ariba® Supplier Management Registration FAQs",
+  "pageType": "sidebar",
+  "pageMetadata": [
+    "template",
+    "contactus",
+    "contactus-tagline"
+  ],
+  "sidebarNav": true,
+  "contentNodes": 0,
+  "contactSplitBanner": true,
+  "blocks": [
+    "accordion-faq",
+    "accordion-faq",
+    "accordion-faq",
+    "accordion-faq",
+    "accordion-faq",
+    "accordion-faq",
+    "custom-widget-news-archive",
+    "accordion-faq",
+    "custom-widget-news-archive",
+    "accordion-faq",
+    "custom-widget-news-archive"
+  ],
+  "blocksLeftInPlace": [],
+  "hasForm": false
+}
