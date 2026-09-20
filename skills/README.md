@@ -59,6 +59,14 @@ To create a new skill: read `writing-skills/SKILL.md` first, then copy the forma
 
 ---
 
+## Forms
+
+| Skill | Load when… |
+|-------|-----------|
+| [forms-enablement](forms-enablement/SKILL.md) | Standing up Adobe EDS Forms on a customer repo (DA doc-based and/or Universal Editor); authoring a form as a DA/Excel spreadsheet; converting a form screenshot/design into a copy-paste DA sheet; adding a new form's scoped CSS. Customer-specific grace history lives in `tools/importer/FORMS-INVENTORY.md` |
+
+---
+
 ## Debugging
 
 | Skill | Load when… |
